@@ -9,6 +9,13 @@ use DrdPlus\Cave\UnitBundle\Enum\Enum;
 abstract class Race extends Enum
 {
     /**
+     * Code for identification of a race
+     *
+     * @return string
+     */
+    abstract public function getCode();
+
+    /**
      * Get strength modifier
      *
      * @return integer

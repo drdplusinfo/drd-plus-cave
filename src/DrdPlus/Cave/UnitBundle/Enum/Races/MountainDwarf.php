@@ -6,6 +6,7 @@ namespace DrdPlus\Cave\UnitBundle\Enum\Races;
  */
 class MountainDwarf extends Race
 {
+    const CODE = 'mountain-dwarf';
     const LABEL = 'Horský Trpaslík';
     const STRENGTH_MODIFIER = +2;
     const AGILITY_MODIFIER = -1;
@@ -17,9 +18,17 @@ class MountainDwarf extends Race
     const SENSES_MODIFIER = -1;
 
     /**
+     * @return string
+     */
+    public function getCode()
+    {
+        return self::CODE;
+    }
+
+    /**
      * Get label
      *
-     * @return string 
+     * @return string
      */
     public function getLabel()
     {
@@ -29,7 +38,7 @@ class MountainDwarf extends Race
     /**
      * Get strength modifier
      *
-     * @return integer 
+     * @return integer
      */
     public function getStrengthModifier()
     {
@@ -39,7 +48,7 @@ class MountainDwarf extends Race
     /**
      * Get agility modifier
      *
-     * @return integer 
+     * @return integer
      */
     public function getAgilityModifier()
     {
@@ -49,7 +58,7 @@ class MountainDwarf extends Race
     /**
      * Get knack modifier
      *
-     * @return integer 
+     * @return integer
      */
     public function getKnackModifier()
     {
@@ -59,7 +68,7 @@ class MountainDwarf extends Race
     /**
      * Get will modifier
      *
-     * @return integer 
+     * @return integer
      */
     public function getWillModifier()
     {
@@ -69,7 +78,7 @@ class MountainDwarf extends Race
     /**
      * Get intelligence modifier
      *
-     * @return integer 
+     * @return integer
      */
     public function getIntelligenceModifier()
     {
@@ -79,7 +88,7 @@ class MountainDwarf extends Race
     /**
      * Get charisma modifier
      *
-     * @return integer 
+     * @return integer
      */
     public function getCharismaModifier()
     {
@@ -89,7 +98,7 @@ class MountainDwarf extends Race
     /**
      * Get resistance modifier
      *
-     * @return integer 
+     * @return integer
      */
     public function getResistanceModifier()
     {
@@ -99,7 +108,7 @@ class MountainDwarf extends Race
     /**
      * Get senses modifier
      *
-     * @return integer 
+     * @return integer
      */
     public function getSensesModifier()
     {

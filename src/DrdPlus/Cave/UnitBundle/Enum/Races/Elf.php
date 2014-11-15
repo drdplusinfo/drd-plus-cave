@@ -6,6 +6,7 @@ namespace DrdPlus\Cave\UnitBundle\Enum\Races;
  */
 class Elf extends Race
 {
+    const CODE = 'elf';
     const LABEL = 'Elf';
     const STRENGTH_MODIFIER = -1;
     const AGILITY_MODIFIER = +1;
@@ -15,6 +16,14 @@ class Elf extends Race
     const CHARISMA_MODIFIER = +1;
     const RESISTANCE_MODIFIER = -1;
     const SENSES_MODIFIER = 0;
+
+    /**
+     * @return string
+     */
+    public function getCode()
+    {
+        return self::CODE;
+    }
 
     /**
      * Get label

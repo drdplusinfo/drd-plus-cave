@@ -6,6 +6,7 @@ namespace DrdPlus\Cave\UnitBundle\Enum\Races;
  */
 class WildKroll extends Race
 {
+    const CODE = 'wild-kroll';
     const LABEL = 'Divoký Kroll';
     const STRENGTH_MODIFIER = +3;
     const AGILITY_MODIFIER = -1;
@@ -15,6 +16,14 @@ class WildKroll extends Race
     const CHARISMA_MODIFIER = -2;
     const RESISTANCE_MODIFIER = 0;
     const SENSES_MODIFIER = 0;
+
+    /**
+     * @return string
+     */
+    public function getCode()
+    {
+        return self::CODE;
+    }
 
     /**
      * Get label

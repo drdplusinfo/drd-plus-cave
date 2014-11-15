@@ -6,6 +6,7 @@ namespace DrdPlus\Cave\UnitBundle\Enum\Races;
  */
 class DarkElf extends Race
 {
+    const CODE = 'dark-elf';
     const LABEL = 'Temný Elf';
     const STRENGTH_MODIFIER = 0;
     const AGILITY_MODIFIER = 0;
@@ -15,6 +16,14 @@ class DarkElf extends Race
     const CHARISMA_MODIFIER = 0;
     const RESISTANCE_MODIFIER = 0;
     const SENSES_MODIFIER = 0;
+
+    /**
+     * @return string
+     */
+    public function getCode()
+    {
+        return self::CODE;
+    }
 
     /**
      * Get label

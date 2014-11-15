@@ -6,6 +6,7 @@ namespace DrdPlus\Cave\UnitBundle\Enum\Races;
  */
 class Dwarf extends Race
 {
+    const CODE = 'dwarf';
     const LABEL = 'Trpaslík';
     const STRENGTH_MODIFIER = +1;
     const AGILITY_MODIFIER = -1;
@@ -15,6 +16,14 @@ class Dwarf extends Race
     const CHARISMA_MODIFIER = -2;
     const RESISTANCE_MODIFIER = +1;
     const SENSES_MODIFIER = -1;
+
+    /**
+     * @return string
+     */
+    public function getCode()
+    {
+        return self::CODE;
+    }
 
     /**
      * Get label

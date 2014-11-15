@@ -6,6 +6,7 @@ namespace DrdPlus\Cave\UnitBundle\Enum\Races;
  */
 class Highlander extends Race
 {
+    const CODE = 'highlander';
     const LABEL = 'Horal';
     const STRENGTH_MODIFIER = +1;
     const AGILITY_MODIFIER = 0;
@@ -15,6 +16,14 @@ class Highlander extends Race
     const CHARISMA_MODIFIER = -1;
     const RESISTANCE_MODIFIER = 0;
     const SENSES_MODIFIER = 0;
+
+    /**
+     * @return string
+     */
+    public function getCode()
+    {
+        return self::CODE;
+    }
 
     /**
      * Get label

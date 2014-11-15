@@ -6,7 +6,21 @@ use Doctrine\ORM\Mapping as ORM;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Gender;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Professions\Profession;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Property;
+use DrdPlus\Cave\UnitBundle\Enum\Races\DarkElf;
+use DrdPlus\Cave\UnitBundle\Enum\Races\Dwarf;
+use DrdPlus\Cave\UnitBundle\Enum\Races\Elf;
+use DrdPlus\Cave\UnitBundle\Enum\Races\Goblin;
+use DrdPlus\Cave\UnitBundle\Enum\Races\GreenElf;
+use DrdPlus\Cave\UnitBundle\Enum\Races\Highlander;
+use DrdPlus\Cave\UnitBundle\Enum\Races\Hobbit;
+use DrdPlus\Cave\UnitBundle\Enum\Races\Human;
+use DrdPlus\Cave\UnitBundle\Enum\Races\Kroll;
+use DrdPlus\Cave\UnitBundle\Enum\Races\MountainDwarf;
+use DrdPlus\Cave\UnitBundle\Enum\Races\Orc;
 use DrdPlus\Cave\UnitBundle\Enum\Races\Race;
+use DrdPlus\Cave\UnitBundle\Enum\Races\Skurut;
+use DrdPlus\Cave\UnitBundle\Enum\Races\WildKroll;
+use DrdPlus\Cave\UnitBundle\Enum\Races\WoodDwarf;
 
 /**
  * Person
@@ -34,10 +48,15 @@ class Person
 
     /**
      * @var Race
-     *
-     * @OneToOne(targetEntity="Race")
      */
     private $race;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="raceCode", type="string", length=255)
+     */
+    private $raceCode;
 
     /**
      * @var Profession
@@ -129,16 +148,57 @@ class Person
     }
 
     /**
-     * Set race
+     * Set race code
      *
-     * @param Race $race
+     * @param string $raceCode
      * @return Person
      */
-    public function setRace(Race $race)
+    public function setRaceCode($raceCode)
     {
-        $this->race = $race;
+        $this->raceCode = $raceCode;
+        $this->race = $this->createRace($raceCode);
 
         return $this;
+    }
+
+    /**
+     * @param $raceCode
+     * @return Race
+     */
+    private function createRace($raceCode)
+    {
+        switch ($raceCode) {
+            case Orc::CODE :
+                return new Orc();
+            case DarkElf::CODE :
+                return new DarkElf();
+            case Dwarf::CODE :
+                return new Dwarf();
+            case Elf::CODE :
+                return new ELf();
+            case Goblin::CODE :
+                return new Goblin();
+            case GreenElf::CODE :
+                return new GreenElf();
+            case Highlander::CODE :
+                return new Highlander();
+            case Hobbit::CODE :
+                return new Hobbit();
+            case Human::CODE :
+                return new Human();
+            case Kroll::CODE :
+                return new Kroll();
+            case MountainDwarf::CODE :
+                return new MountainDwarf();
+            case Skurut::CODE :
+                return new Skurut();
+            case WildKroll::CODE :
+                return new WildKroll();
+            case WoodDwarf::CODE :
+                return new WoodDwarf();
+            default :
+                throw new \RuntimeException('Unknown race code ' . var_export($raceCode, true));
+        }
     }
 
     /**

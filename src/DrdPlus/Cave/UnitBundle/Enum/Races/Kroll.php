@@ -6,6 +6,7 @@ namespace DrdPlus\Cave\UnitBundle\Enum\Races;
  */
 class Kroll extends Race
 {
+    const CODE = 'kroll';
     const LABEL = 'Kroll';
     const STRENGTH_MODIFIER = +3;
     const AGILITY_MODIFIER = -2;
@@ -15,6 +16,14 @@ class Kroll extends Race
     const CHARISMA_MODIFIER = -1;
     const RESISTANCE_MODIFIER = 0;
     const SENSES_MODIFIER = 0;
+
+    /**
+     * @return string
+     */
+    public function getCode()
+    {
+        return self::CODE;
+    }
 
     /**
      * Get label

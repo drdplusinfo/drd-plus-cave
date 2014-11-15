@@ -6,6 +6,7 @@ namespace DrdPlus\Cave\UnitBundle\Enum\Races;
  */
 class Orc extends Race
 {
+    const CODE = 'orc';
     const LABEL = 'Skřet';
     const STRENGTH_MODIFIER = 0;
     const AGILITY_MODIFIER = +2;
@@ -15,6 +16,10 @@ class Orc extends Race
     const CHARISMA_MODIFIER = -2;
     const RESISTANCE_MODIFIER = 0;
     const SENSES_MODIFIER = +1;
+
+    public function getCode(){
+        return self::CODE;
+    }
 
     /**
      * Get label

@@ -6,6 +6,7 @@ namespace DrdPlus\Cave\UnitBundle\Enum\Races;
  */
 class Goblin extends Race
 {
+    const CODE = 'goblin';
     const LABEL = 'Goblin';
     const STRENGTH_MODIFIER = -1;
     const AGILITY_MODIFIER = +2;
@@ -15,6 +16,14 @@ class Goblin extends Race
     const CHARISMA_MODIFIER = -1;
     const RESISTANCE_MODIFIER = 0;
     const SENSES_MODIFIER = +1;
+
+    /**
+     * @return string
+     */
+    public function getCode()
+    {
+        return self::CODE;
+    }
 
     /**
      * Get label
