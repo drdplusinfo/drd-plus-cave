@@ -1,0 +1,33 @@
+security:
+    providers:
+        in_memory:
+            memory:
+                users:
+                    pj: { password: WeRuleTheMakers, roles: ['ROLE_ADMIN'] }
+    encoders:
+#        Symfony\Component\Security\Core\User\User: sha512
+        Symfony\Component\Security\Core\User\User: plaintext
+    firewalls:
+        secured_area:
+            pattern:   ^/
+            anonymous: ~
+            form_login:
+                login_path: login
+                check_path: login_check
+                csrf_provider: form.csrf_provider
+            remember_me:
+                key:      "%secret%"
+                lifetime: 31536000 # 365 days in seconds
+                path:     /
+                domain:   ~ # Defaults to the current domain from $_SERVER
+            logout:
+                path:   /logout
+                target: /login # after logout go to login page
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        default:
+            anonymous: ~
+    access_control:
+        - { path: ^/hello, roles: ROLE_ADMIN }

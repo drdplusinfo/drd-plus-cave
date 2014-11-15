@@ -1,0 +1,3 @@
+drd_plus_cave_unit_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: DrdPlusCaveUnitBundle:Default:index }

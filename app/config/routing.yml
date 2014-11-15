@@ -1,0 +1,8 @@
+drd_plus_cave_security:
+    resource: "@DrdPlusCaveSecurityBundle/Resources/config/routing.yml"
+    prefix:   /
+
+drd_plus_cave_character:
+    resource: "@DrdPlusCaveUnitBundle/Resources/config/routing.yml"
+    prefix:   /
+
