@@ -1,3 +1,1 @@
 services:
-    race_factory:
-        class:        DrdPlus\UnitBundle\Enum\Races\RaceFactory
