@@ -3,6 +3,7 @@ imports:
     - { resource: security.yml }
     - { resource: config-parts/services.yml }
     - { resource: config-parts/doctrine.yml }
+    - { resource: config-parts/doctrine_migrations.yml }
     - { resource: config-parts/swiftmailer.yml }
     - { resource: config-parts/assetic.yml }
     - { resource: config-parts/twig.yml }
