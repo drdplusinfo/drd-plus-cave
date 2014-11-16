@@ -1,6 +1,10 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Enum\Races;
 
+use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\ElfFemale;
+use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\Female;
+use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\Gender;
+
 /**
  * Elf
  */
@@ -18,6 +22,21 @@ class Elf extends Race
     const SENSES_MODIFIER = 0;
 
     /**
+     * @param string $genderCode
+     * @return Gender
+     * @throws \RuntimeException
+     */
+    protected function createGender($genderCode)
+    {
+        switch ($genderCode) {
+            case Female::CODE :
+                return new ElfFemale();
+            default :
+                return parent::createGender($genderCode);
+        }
+    }
+
+    /**
      * @return string
      */
     public function getCode()
@@ -28,7 +47,7 @@ class Elf extends Race
     /**
      * Get label
      *
-     * @return string 
+     * @return string
      */
     public function getLabel()
     {
@@ -38,7 +57,7 @@ class Elf extends Race
     /**
      * Get strength modifier
      *
-     * @return integer 
+     * @return integer
      */
     public function getStrengthModifier()
     {
@@ -48,7 +67,7 @@ class Elf extends Race
     /**
      * Get agility modifier
      *
-     * @return integer 
+     * @return integer
      */
     public function getAgilityModifier()
     {
@@ -58,7 +77,7 @@ class Elf extends Race
     /**
      * Get knack modifier
      *
-     * @return integer 
+     * @return integer
      */
     public function getKnackModifier()
     {
@@ -68,7 +87,7 @@ class Elf extends Race
     /**
      * Get will modifier
      *
-     * @return integer 
+     * @return integer
      */
     public function getWillModifier()
     {
@@ -78,7 +97,7 @@ class Elf extends Race
     /**
      * Get intelligence modifier
      *
-     * @return integer 
+     * @return integer
      */
     public function getIntelligenceModifier()
     {
@@ -88,7 +107,7 @@ class Elf extends Race
     /**
      * Get charisma modifier
      *
-     * @return integer 
+     * @return integer
      */
     public function getCharismaModifier()
     {
@@ -98,7 +117,7 @@ class Elf extends Race
     /**
      * Get resistance modifier
      *
-     * @return integer 
+     * @return integer
      */
     public function getResistanceModifier()
     {
@@ -108,7 +127,7 @@ class Elf extends Race
     /**
      * Get senses modifier
      *
-     * @return integer 
+     * @return integer
      */
     public function getSensesModifier()
     {

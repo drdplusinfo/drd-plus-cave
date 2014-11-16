@@ -2,12 +2,64 @@
 namespace DrdPlus\Cave\UnitBundle\Enum\Races;
 
 use DrdPlus\Cave\UnitBundle\Enum\Enum;
+use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\Female;
+use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\Gender;
+use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\Male;
 
 /**
  * Race
  */
 abstract class Race extends Enum
 {
+    /** @var string $genderCode */
+    private $genderCode;
+
+    /**
+     * @param string $genderCode
+     */
+    public function __construct($genderCode)
+    {
+        $this->genderCode = $genderCode;
+        $this->gender = $this->createGender($genderCode);
+    }
+
+    /**
+     * @param string $genderCode
+     * @return Gender
+     * @throws \RuntimeException
+     */
+    protected function createGender($genderCode)
+    {
+        switch($genderCode) {
+            case Male::CODE :
+                return new Male();
+            case Female::CODE :
+                return new Female();
+            default :
+                throw new \RuntimeException('Unknown gender code ' . var_export($genderCode, true));
+        }
+    }
+
+    /**
+     * Get gender code
+     *
+     * @return string
+     */
+    public function getGenderCode()
+    {
+        return $this->genderCode;
+    }
+
+    /**
+     * Get gender
+     *
+     * @return Gender
+     */
+    public function getGender()
+    {
+        return $this->gender;
+    }
+
     /**
      * Code for identification of a race
      *
@@ -82,6 +134,8 @@ abstract class Race extends Enum
     abstract public function hasNaturalRegeneration();
 
     /**
+     * (Races with "star")
+     *
      * @return true
      */
     abstract public function requiresDungeonMasterAgreement();

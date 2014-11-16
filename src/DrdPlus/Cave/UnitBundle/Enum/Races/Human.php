@@ -1,6 +1,10 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Enum\Races;
 
+use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\Female;
+use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\Gender;
+use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\HumanFemale;
+
 /**
  * Human
  */
@@ -16,6 +20,21 @@ class Human extends Race
     const CHARISMA_MODIFIER = 0;
     const RESISTANCE_MODIFIER = 0;
     const SENSES_MODIFIER = 0;
+
+    /**
+     * @param string $genderCode
+     * @return Gender
+     * @throws \RuntimeException
+     */
+    protected function createGender($genderCode)
+    {
+        switch ($genderCode) {
+            case Female::CODE :
+                return new HumanFemale();
+            default :
+                return parent::createGender($genderCode);
+        }
+    }
 
     /**
      * @return string

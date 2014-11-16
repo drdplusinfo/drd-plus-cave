@@ -1,6 +1,10 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Enum\Races;
 
+use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\Female;
+use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\Gender;
+use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\OrcFemale;
+
 /**
  * Orc
  */
@@ -17,14 +21,33 @@ class Orc extends Race
     const RESISTANCE_MODIFIER = 0;
     const SENSES_MODIFIER = +1;
 
-    public function getCode(){
+    /**
+     * @param string $genderCode
+     * @return Gender
+     * @throws \RuntimeException
+     */
+    protected function createGender($genderCode)
+    {
+        switch ($genderCode) {
+            case Female::CODE :
+                return new OrcFemale();
+            default :
+                return parent::createGender($genderCode);
+        }
+    }
+
+    /**
+     * @return string
+     */
+    public function getCode()
+    {
         return self::CODE;
     }
 
     /**
      * Get label
      *
-     * @return string 
+     * @return string
      */
     public function getLabel()
     {
@@ -34,7 +57,7 @@ class Orc extends Race
     /**
      * Get strength modifier
      *
-     * @return integer 
+     * @return integer
      */
     public function getStrengthModifier()
     {
@@ -44,7 +67,7 @@ class Orc extends Race
     /**
      * Get agility modifier
      *
-     * @return integer 
+     * @return integer
      */
     public function getAgilityModifier()
     {
@@ -54,7 +77,7 @@ class Orc extends Race
     /**
      * Get knack modifier
      *
-     * @return integer 
+     * @return integer
      */
     public function getKnackModifier()
     {
@@ -64,7 +87,7 @@ class Orc extends Race
     /**
      * Get will modifier
      *
-     * @return integer 
+     * @return integer
      */
     public function getWillModifier()
     {
@@ -74,7 +97,7 @@ class Orc extends Race
     /**
      * Get intelligence modifier
      *
-     * @return integer 
+     * @return integer
      */
     public function getIntelligenceModifier()
     {
@@ -84,7 +107,7 @@ class Orc extends Race
     /**
      * Get charisma modifier
      *
-     * @return integer 
+     * @return integer
      */
     public function getCharismaModifier()
     {
@@ -94,7 +117,7 @@ class Orc extends Race
     /**
      * Get resistance modifier
      *
-     * @return integer 
+     * @return integer
      */
     public function getResistanceModifier()
     {
@@ -104,7 +127,7 @@ class Orc extends Race
     /**
      * Get senses modifier
      *
-     * @return integer 
+     * @return integer
      */
     public function getSensesModifier()
     {

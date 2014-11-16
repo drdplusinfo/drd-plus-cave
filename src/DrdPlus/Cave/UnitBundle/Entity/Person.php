@@ -10,9 +10,6 @@ use DrdPlus\Cave\UnitBundle\Entity\Attributes\Professions\Theurgist;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Professions\Thief;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Professions\Wizard;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Property;
-use DrdPlus\Cave\UnitBundle\Enum\Genders\Gender;
-use DrdPlus\Cave\UnitBundle\Enum\Genders\Female;
-use DrdPlus\Cave\UnitBundle\Enum\Genders\Male;
 use DrdPlus\Cave\UnitBundle\Enum\Races\DarkElf;
 use DrdPlus\Cave\UnitBundle\Enum\Races\Dwarf;
 use DrdPlus\Cave\UnitBundle\Enum\Races\Elf;
@@ -54,28 +51,16 @@ class Person
     private $name;
 
     /**
-     * @var string
+     * @var array
      *
-     * @ORM\Column(name="raceCode", type="string", length=16)
+     * @ORM\Column(name="raceAndGenderCodes", type="simple_array")
      */
-    private $raceCode;
+    private $raceAndGenderCodes;
 
     /**
      * @var Race
      */
     private $race;
-
-    /**
-     * @var Gender
-     *
-     * @ORM\Column(name="genderCode", type="string", length=5)
-     */
-    private $genderCode;
-
-    /**
-     * @var Gender
-     */
-    private $gender;
 
     /**
      * @var Fighter
@@ -156,6 +141,11 @@ class Person
      */
     private $charisma;
 
+    public function __construct()
+    {
+        $this->raceAndGenderCodes = ['raceCode' => null, 'genderCode' => null];
+    }
+
     /**
      * Get id
      *
@@ -190,57 +180,84 @@ class Person
     }
 
     /**
-     * Set race code
-     *
      * @param string $raceCode
-     * @return Person
      */
     public function setRaceCode($raceCode)
     {
-        $this->raceCode = $raceCode;
-        $this->race = $this->createRace($raceCode);
+        $this->raceAndGenderCodes['raceCode'] = $raceCode;
+    }
+
+    /**
+     * @param string $genderCode
+     */
+    public function setGenderCode($genderCode)
+    {
+        $this->raceAndGenderCodes['genderCode'] = $genderCode;
+    }
+
+    /**
+     * Set race and gender codes
+     *
+     * @param string $raceAndGenderCodes
+     * @return Person
+     */
+    public function setRaceAndGenderCodes($raceAndGenderCodes)
+    {
+        $this->raceAndGenderCodes = $raceAndGenderCodes;
+        $this->race = $this->createRace($raceAndGenderCodes['raceCode'], $raceAndGenderCodes['genderCode']);
 
         return $this;
     }
 
     /**
-     * @param $raceCode
+     * @param string $raceCode
+     * @param string $genderCode
      * @return Race
      */
-    private function createRace($raceCode)
+    private function createRace($raceCode, $genderCode)
     {
         switch ($raceCode) {
             case Orc::CODE :
-                return new Orc();
+                return new Orc($genderCode);
             case DarkElf::CODE :
-                return new DarkElf();
+                return new DarkElf($genderCode);
             case Dwarf::CODE :
-                return new Dwarf();
+                return new Dwarf($genderCode);
             case Elf::CODE :
-                return new ELf();
+                return new Elf($genderCode);
             case Goblin::CODE :
-                return new Goblin();
+                return new Goblin($genderCode);
             case GreenElf::CODE :
-                return new GreenElf();
+                return new GreenElf($genderCode);
             case Highlander::CODE :
-                return new Highlander();
+                return new Highlander($genderCode);
             case Hobbit::CODE :
-                return new Hobbit();
+                return new Hobbit($genderCode);
             case Human::CODE :
-                return new Human();
+                return new Human($genderCode);
             case Kroll::CODE :
-                return new Kroll();
+                return new Kroll($genderCode);
             case MountainDwarf::CODE :
-                return new MountainDwarf();
+                return new MountainDwarf($genderCode);
             case Skurut::CODE :
-                return new Skurut();
+                return new Skurut($genderCode);
             case WildKroll::CODE :
-                return new WildKroll();
+                return new WildKroll($genderCode);
             case WoodDwarf::CODE :
-                return new WoodDwarf();
+                return new WoodDwarf($genderCode);
             default :
                 throw new \RuntimeException('Unknown race code ' . var_export($raceCode, true));
         }
+    }
+
+    /**
+     * Get race and gender codes
+     *
+     * @return array
+     */
+    public function getRaceAndGenderCodes()
+    {
+        return $this->raceAndGenderCodes;
     }
 
     /**
@@ -389,56 +406,6 @@ class Person
     public function getWizard()
     {
         return $this->wizard;
-    }
-
-    /**
-     * Set gender
-     *
-     * @param string $genderCode
-     * @return Person
-     */
-    public function setGenderCode($genderCode)
-    {
-        $this->genderCode = $genderCode;
-        $this->gender = $this->createGender($genderCode);
-
-        return $this;
-    }
-
-    /**
-     * @param $genderCode
-     * @return Gender
-     */
-    private function createGender($genderCode)
-    {
-        switch ($genderCode) {
-            case Male::CODE :
-                return new Male();
-            case Female::CODE :
-                return new Female();
-            default :
-                throw new \RuntimeException('Unexpected gender code ' . var_export($genderCode, true));
-        }
-    }
-
-    /**
-     * get gender
-     *
-     * @return string
-     */
-    public function getGenderCode()
-    {
-        return $this->genderCode;
-    }
-
-    /**
-     * Get gender
-     *
-     * @return Gender
-     */
-    public function getGender()
-    {
-        return $this->gender;
     }
 
     /**
