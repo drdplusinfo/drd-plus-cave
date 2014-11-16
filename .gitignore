@@ -9,5 +9,6 @@
 /vendor/
 /bin/
 /composer.phar
+.idea/workspace.xml
 
 tests/_output/*
