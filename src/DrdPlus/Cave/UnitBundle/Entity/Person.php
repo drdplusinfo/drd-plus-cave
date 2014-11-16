@@ -3,7 +3,6 @@
 namespace DrdPlus\Cave\UnitBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Gender;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Professions\Fighter;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Professions\Priest;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Professions\Ranger;
@@ -11,6 +10,9 @@ use DrdPlus\Cave\UnitBundle\Entity\Attributes\Professions\Theurgist;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Professions\Thief;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Professions\Wizard;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Property;
+use DrdPlus\Cave\UnitBundle\Enum\Genders\Gender;
+use DrdPlus\Cave\UnitBundle\Enum\Genders\Female;
+use DrdPlus\Cave\UnitBundle\Enum\Genders\Male;
 use DrdPlus\Cave\UnitBundle\Enum\Races\DarkElf;
 use DrdPlus\Cave\UnitBundle\Enum\Races\Dwarf;
 use DrdPlus\Cave\UnitBundle\Enum\Races\Elf;
@@ -52,16 +54,28 @@ class Person
     private $name;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="raceCode", type="string", length=16)
+     */
+    private $raceCode;
+
+    /**
      * @var Race
      */
     private $race;
 
     /**
-     * @var string
+     * @var Gender
      *
-     * @ORM\Column(name="raceCode", type="string", length=255)
+     * @ORM\Column(name="genderCode", type="string", length=5)
      */
-    private $raceCode;
+    private $genderCode;
+
+    /**
+     * @var Gender
+     */
+    private $gender;
 
     /**
      * @var Fighter
@@ -99,13 +113,6 @@ class Person
      * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Entity\Attributes\Professions\Wizard")
      */
     private $wizard;
-
-    /**
-     * @var Gender
-     *
-     * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Entity\Attributes\Gender")
-     */
-    private $gender;
 
     /**
      * @var Property
@@ -387,20 +394,47 @@ class Person
     /**
      * Set gender
      *
-     * @param Gender $gender
+     * @param string $genderCode
      * @return Person
      */
-    public function setGender(Gender $gender)
+    public function setGenderCode($genderCode)
     {
-        $this->gender = $gender;
+        $this->genderCode = $genderCode;
+        $this->gender = $this->createGender($genderCode);
 
         return $this;
     }
 
     /**
-     * Get gender
+     * @param $genderCode
+     * @return Gender
+     */
+    private function createGender($genderCode)
+    {
+        switch ($genderCode) {
+            case Male::CODE :
+                return new Male();
+            case Female::CODE :
+                return new Female();
+            default :
+                throw new \RuntimeException('Unexpected gender code ' . var_export($genderCode, true));
+        }
+    }
+
+    /**
+     * get gender
      *
      * @return string
+     */
+    public function getGenderCode()
+    {
+        return $this->genderCode;
+    }
+
+    /**
+     * Get gender
+     *
+     * @return Gender
      */
     public function getGender()
     {

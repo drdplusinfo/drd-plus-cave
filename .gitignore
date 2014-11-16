@@ -10,5 +10,6 @@
 /bin/
 /composer.phar
 .idea/workspace.xml
+.idea/dataSources.*
 
 tests/_output/*
