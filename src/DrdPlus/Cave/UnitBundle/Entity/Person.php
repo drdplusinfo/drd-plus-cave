@@ -4,7 +4,12 @@ namespace DrdPlus\Cave\UnitBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Gender;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Professions\Profession;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Professions\Fighter;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Professions\Priest;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Professions\Ranger;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Professions\Theurgist;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Professions\Thief;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Professions\Wizard;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Property;
 use DrdPlus\Cave\UnitBundle\Enum\Races\DarkElf;
 use DrdPlus\Cave\UnitBundle\Enum\Races\Dwarf;
@@ -26,7 +31,7 @@ use DrdPlus\Cave\UnitBundle\Enum\Races\WoodDwarf;
  * Person
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="DrdPlus\Cave\UnitBundle\Entity\PersonRepository")
+ * @ORM\Entity()
  */
 class Person
 {
@@ -59,58 +64,88 @@ class Person
     private $raceCode;
 
     /**
-     * @var Profession
+     * @var Fighter
      *
-     * @OneToOne(targetEntity="Profession")
+     * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Entity\Attributes\Professions\Fighter")
      */
-    private $profession;
+    private $fighter;
+    /**
+     * @var Priest
+     *
+     * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Entity\Attributes\Professions\Priest")
+     */
+    private $priest;
+    /**
+     * @var Ranger
+     *
+     * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Entity\Attributes\Professions\Ranger")
+     */
+    private $ranger;
+    /**
+     * @var Theurgist
+     *
+     * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Entity\Attributes\Professions\Theurgist")
+     */
+    private $theurgist;
+    /**
+     * @var Thief
+     *
+     * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Entity\Attributes\Professions\Thief")
+     */
+    private $thief;
+    /**
+     * @var Wizard
+     *
+     * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Entity\Attributes\Professions\Wizard")
+     */
+    private $wizard;
 
     /**
      * @var Gender
      *
-     * @OneToOne(targetEntity="Gender")
+     * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Entity\Attributes\Gender")
      */
     private $gender;
 
     /**
      * @var Property
      *
-     * @OneToOne(targetEntity="Property")
+     * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Entity\Attributes\Property")
      */
     private $strength;
 
     /**
      * @var Property
      *
-     * @OneToOne(targetEntity="Property")
+     * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Entity\Attributes\Property")
      */
     private $agility;
 
     /**
      * @var Property
      *
-     * @OneToOne(targetEntity="Property")
+     * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Entity\Attributes\Property")
      */
     private $knack;
 
     /**
      * @var Property
      *
-     * @OneToOne(targetEntity="Property")
+     * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Entity\Attributes\Property")
      */
     private $will;
 
     /**
      * @var Property
      *
-     * @OneToOne(targetEntity="Property")
+     * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Entity\Attributes\Property")
      */
     private $intelligence;
 
     /**
      * @var Property
      *
-     * @OneToOne(targetEntity="Property")
+     * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Entity\Attributes\Property")
      */
     private $charisma;
 
@@ -212,26 +247,141 @@ class Person
     }
 
     /**
-     * Set profession
+     * Set fighter
      *
-     * @param string $profession
+     * @param Fighter $fighter
      * @return Person
      */
-    public function setProfession($profession)
+    public function setFighter(Fighter $fighter)
     {
-        $this->profession = $profession;
+        $this->fighter = $fighter;
 
         return $this;
     }
 
     /**
-     * Get profession
+     * Get fighter
      *
-     * @return string
+     * @return Fighter|null
      */
-    public function getProfession()
+    public function getFighter()
     {
-        return $this->profession;
+        return $this->fighter;
+    }
+
+    /**
+     * Set priest
+     *
+     * @param Priest $priest
+     * @return Person
+     */
+    public function setPriest(Priest $priest)
+    {
+        $this->priest = $priest;
+
+        return $this;
+    }
+
+    /**
+     * Get priest
+     *
+     * @return Priest|null
+     */
+    public function getPriest()
+    {
+        return $this->priest;
+    }
+
+    /**
+     * Set ranger
+     *
+     * @param Ranger $ranger
+     * @return Person
+     */
+    public function setRanger(Ranger $ranger)
+    {
+        $this->ranger = $ranger;
+
+        return $this;
+    }
+
+    /**
+     * Get ranger
+     *
+     * @return Ranger|null
+     */
+    public function getRanger()
+    {
+        return $this->ranger;
+    }
+
+    /**
+     * Set theurgist
+     *
+     * @param Theurgist $theurgist
+     * @return Person
+     */
+    public function setTheurgist(Theurgist $theurgist)
+    {
+        $this->theurgist = $theurgist;
+
+        return $this;
+    }
+
+    /**
+     * Get theurgist
+     *
+     * @return Theurgist|null
+     */
+    public function getTheurgist()
+    {
+        return $this->theurgist;
+    }
+
+    /**
+     * Set thief
+     *
+     * @param Thief $thief
+     * @return Person
+     */
+    public function setThief(Thief $thief)
+    {
+        $this->thief = $thief;
+
+        return $this;
+    }
+
+    /**
+     * Get thief
+     *
+     * @return Thief|null
+     */
+    public function getThief()
+    {
+        return $this->thief;
+    }
+
+    /**
+     * Set wizard
+     *
+     * @param Wizard $wizard
+     * @return Person
+     */
+    public function setWizard($wizard)
+    {
+        $this->wizard = $wizard;
+
+        return $this;
+    }
+
+    /**
+     * Get wizard
+     *
+     * @return Wizard|null
+     */
+    public function getWizard()
+    {
+        return $this->wizard;
     }
 
     /**

@@ -13,7 +13,7 @@ use DrdPlus\Cave\UnitBundle\Entity\Attributes\Property;
  */
 class Ranger extends Profession
 {
-    const PROFESSION_NAME = 'Hraničář';
+    const LABEL = 'Hraničář';
 
     /**
      * @var integer
@@ -46,9 +46,9 @@ class Ranger extends Profession
      *
      * @return string
      */
-    public function getProfessionName()
+    public function getLabel()
     {
-        return self::PROFESSION_NAME;
+        return self::LABEL;
     }
 
     /**

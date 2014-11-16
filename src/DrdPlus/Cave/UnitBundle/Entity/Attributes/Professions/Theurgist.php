@@ -13,7 +13,7 @@ use DrdPlus\Cave\UnitBundle\Entity\Attributes\Property;
  */
 class Theurgist extends Profession
 {
-    const PROFESSION_NAME = 'Theurg';
+    const LABEL = 'Theurg';
 
     /**
      * @var integer
@@ -46,9 +46,9 @@ class Theurgist extends Profession
      *
      * @return string
      */
-    public function getProfessionName()
+    public function getLabel()
     {
-        return self::PROFESSION_NAME;
+        return self::LABEL;
     }
 
     /**

@@ -13,7 +13,7 @@ abstract class Profession
      *
      * @return string
      */
-    abstract public function getProfessionName();
+    abstract public function getLabel();
 
     /**
      * @return string[]
