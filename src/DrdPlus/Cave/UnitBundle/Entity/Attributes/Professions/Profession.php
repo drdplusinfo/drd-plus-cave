@@ -32,16 +32,16 @@ abstract class Profession
      *
      * @return integer
      */
-    public function getStrengthModifier()
+    public function getStrengthFirstLevelModifier()
     {
-        return $this->getPropertyModifier(Property::STRENGTH_CODE);
+        return $this->getPropertyFirstLevelModifier(Property::STRENGTH_CODE);
     }
 
     /**
      * @param string $propertyCode
      * @return int
      */
-    private function getPropertyModifier($propertyCode)
+    private function getPropertyFirstLevelModifier($propertyCode)
     {
         return $this->isMainProperty($propertyCode)
             ? +1
@@ -62,9 +62,9 @@ abstract class Profession
      *
      * @return integer
      */
-    public function getAgilityModifier()
+    public function getAgilityFirstLevelModifier()
     {
-        return $this->getPropertyModifier(Property::AGILITY_CODE);
+        return $this->getPropertyFirstLevelModifier(Property::AGILITY_CODE);
     }
 
     /**
@@ -72,9 +72,9 @@ abstract class Profession
      *
      * @return integer
      */
-    public function getKnackModifier()
+    public function getKnackFirstLevelModifier()
     {
-        return $this->getPropertyModifier(Property::KNACK_CODE);
+        return $this->getPropertyFirstLevelModifier(Property::KNACK_CODE);
     }
 
     /**
@@ -82,9 +82,9 @@ abstract class Profession
      *
      * @return integer
      */
-    public function getWillModifier()
+    public function getWillFirstLevelModifier()
     {
-        return $this->getPropertyModifier(Property::WILL_CODE);
+        return $this->getPropertyFirstLevelModifier(Property::WILL_CODE);
     }
 
     /**
@@ -92,9 +92,9 @@ abstract class Profession
      *
      * @return integer
      */
-    public function getIntelligenceModifier()
+    public function getIntelligenceFirstLevelModifier()
     {
-        return $this->getPropertyModifier(Property::INTELLIGENCE_CODE);
+        return $this->getPropertyFirstLevelModifier(Property::INTELLIGENCE_CODE);
     }
 
     /**
@@ -102,8 +102,8 @@ abstract class Profession
      *
      * @return integer
      */
-    public function getCharismaModifier()
+    public function getCharismaFirstLevelModifier()
     {
-        return $this->getPropertyModifier(Property::CHARISMA_CODE);
+        return $this->getPropertyFirstLevelModifier(Property::CHARISMA_CODE);
     }
 }
