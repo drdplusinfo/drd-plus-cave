@@ -1,6 +1,5 @@
 <?php
-
-namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Professions;
+namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\LevelOfProfession;
 
 use Doctrine\ORM\Mapping as ORM;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Property;
@@ -9,9 +8,9 @@ use DrdPlus\Cave\UnitBundle\Entity\Attributes\Property;
  * Thief
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity()
  */
-class Thief extends Profession
+class ThiefLevel extends ProfessionLevel
 {
     const LABEL = 'Zloděj';
 
@@ -27,9 +26,9 @@ class Thief extends Profession
     /**
      * @var integer
      *
-     * @ORM\Column(name="level", type="smallint")
+     * @ORM\Column(name="professionLevel", type="integer")
      */
-    private $level;
+    private $professionLevel;
 
     /**
      * Get id
@@ -39,6 +38,25 @@ class Thief extends Profession
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @param $professionLevel
+     * @return $this
+     */
+    public function setProfessionLevel($professionLevel)
+    {
+        $this->professionLevel = $professionLevel;
+
+        return $this;
+    }
+
+    /**
+     * @return integer
+     */
+    public function getProfessionLevel()
+    {
+        return $this->professionLevel;
     }
 
     /**
@@ -62,26 +80,4 @@ class Thief extends Profession
         ];
     }
 
-    /**
-     * Set level
-     *
-     * @param integer $level
-     * @return Thief
-     */
-    public function setLevel($level)
-    {
-        $this->level = $level;
-
-        return $this;
-    }
-
-    /**
-     * Get level
-     *
-     * @return integer
-     */
-    public function getLevel()
-    {
-        return $this->level;
-    }
 }

@@ -1,14 +1,19 @@
 <?php
+namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\LevelOfProfession;
 
-namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Professions;
-
+use Doctrine\ORM\Mapping as ORM;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Property;
 
 /**
- * Profession
+ * ProfessionLevel
  */
-abstract class Profession
+abstract class ProfessionLevel
 {
+
+    /**
+     * @return integer
+     */
+    abstract public function getProfessionLevel();
 
     /**
      * Get name of the profession
@@ -16,11 +21,6 @@ abstract class Profession
      * @return string
      */
     abstract public function getLabel();
-
-    /**
-     * @return int
-     */
-    abstract public function getLevel();
 
     /**
      * @return string[]

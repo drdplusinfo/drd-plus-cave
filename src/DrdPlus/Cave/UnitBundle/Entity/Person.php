@@ -3,12 +3,7 @@
 namespace DrdPlus\Cave\UnitBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Professions\Fighter;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Professions\Priest;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Professions\Ranger;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Professions\Theurgist;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Professions\Thief;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Professions\Wizard;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Level;
 use DrdPlus\Cave\UnitBundle\Enum\Races\DarkElf;
 use DrdPlus\Cave\UnitBundle\Enum\Races\Dwarf;
 use DrdPlus\Cave\UnitBundle\Enum\Races\Elf;
@@ -62,41 +57,11 @@ class Person
     private $race;
 
     /**
-     * @var Fighter
+     * @var Level[]
      *
-     * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Entity\Attributes\Professions\Fighter")
+     * @ORM\OneToMany(targetEntity="DrdPlus\Cave\UnitBundle\Entity\Attributes\Level", mappedBy="level")
      */
-    private $fighter;
-    /**
-     * @var Priest
-     *
-     * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Entity\Attributes\Professions\Priest")
-     */
-    private $priest;
-    /**
-     * @var Ranger
-     *
-     * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Entity\Attributes\Professions\Ranger")
-     */
-    private $ranger;
-    /**
-     * @var Theurgist
-     *
-     * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Entity\Attributes\Professions\Theurgist")
-     */
-    private $theurgist;
-    /**
-     * @var Thief
-     *
-     * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Entity\Attributes\Professions\Thief")
-     */
-    private $thief;
-    /**
-     * @var Wizard
-     *
-     * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Entity\Attributes\Professions\Wizard")
-     */
-    private $wizard;
+    private $levels;
 
     public function __construct()
     {
@@ -228,141 +193,26 @@ class Person
     }
 
     /**
-     * Set fighter
+     * Set levels
      *
-     * @param Fighter $fighter
-     * @return Person
+     * @param Level[] $levels
+     * @return $this
      */
-    public function setFighter(Fighter $fighter)
+    public function setLevels(array $levels)
     {
-        $this->fighter = $fighter;
+        $this->levels = $levels;
 
         return $this;
     }
 
     /**
-     * Get fighter
+     * Get levels
      *
-     * @return Fighter|null
+     * @return Level[]
      */
-    public function getFighter()
+    public function getLevels()
     {
-        return $this->fighter;
-    }
-
-    /**
-     * Set priest
-     *
-     * @param Priest $priest
-     * @return Person
-     */
-    public function setPriest(Priest $priest)
-    {
-        $this->priest = $priest;
-
-        return $this;
-    }
-
-    /**
-     * Get priest
-     *
-     * @return Priest|null
-     */
-    public function getPriest()
-    {
-        return $this->priest;
-    }
-
-    /**
-     * Set ranger
-     *
-     * @param Ranger $ranger
-     * @return Person
-     */
-    public function setRanger(Ranger $ranger)
-    {
-        $this->ranger = $ranger;
-
-        return $this;
-    }
-
-    /**
-     * Get ranger
-     *
-     * @return Ranger|null
-     */
-    public function getRanger()
-    {
-        return $this->ranger;
-    }
-
-    /**
-     * Set theurgist
-     *
-     * @param Theurgist $theurgist
-     * @return Person
-     */
-    public function setTheurgist(Theurgist $theurgist)
-    {
-        $this->theurgist = $theurgist;
-
-        return $this;
-    }
-
-    /**
-     * Get theurgist
-     *
-     * @return Theurgist|null
-     */
-    public function getTheurgist()
-    {
-        return $this->theurgist;
-    }
-
-    /**
-     * Set thief
-     *
-     * @param Thief $thief
-     * @return Person
-     */
-    public function setThief(Thief $thief)
-    {
-        $this->thief = $thief;
-
-        return $this;
-    }
-
-    /**
-     * Get thief
-     *
-     * @return Thief|null
-     */
-    public function getThief()
-    {
-        return $this->thief;
-    }
-
-    /**
-     * Set wizard
-     *
-     * @param Wizard $wizard
-     * @return Person
-     */
-    public function setWizard($wizard)
-    {
-        $this->wizard = $wizard;
-
-        return $this;
-    }
-
-    /**
-     * Get wizard
-     *
-     * @return Wizard|null
-     */
-    public function getWizard()
-    {
-        return $this->wizard;
+        return $this->levels;
     }
 
 }
