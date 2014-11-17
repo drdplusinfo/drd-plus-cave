@@ -57,8 +57,8 @@ class Thief extends Profession
     public function getMainPropertyCodes()
     {
         return [
-            Property::STRENGTH_SHORT_LABEL => Property::STRENGTH_LABEL,
-            Property::AGILITY_SHORT_LABEL => Property::AGILITY_LABEL,
+            Property::AGILITY_CODE,
+            Property::KNACK_CODE
         ];
     }
 

@@ -57,8 +57,8 @@ class Wizard extends Profession
     public function getMainPropertyCodes()
     {
         return [
-            Property::STRENGTH_SHORT_LABEL => Property::STRENGTH_LABEL,
-            Property::AGILITY_SHORT_LABEL => Property::AGILITY_LABEL,
+            Property::WILL_CODE,
+            Property::INTELLIGENCE_CODE
         ];
     }
 

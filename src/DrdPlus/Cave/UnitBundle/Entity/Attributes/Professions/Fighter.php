@@ -52,6 +52,17 @@ class Fighter extends Profession
     }
 
     /**
+     * @return string[]
+     */
+    public function getMainPropertyCodes()
+    {
+        return [
+            Property::STRENGTH_CODE,
+            Property::AGILITY_CODE
+        ];
+    }
+
+    /**
      * Set level
      *
      * @param integer $level
@@ -72,17 +83,6 @@ class Fighter extends Profession
     public function getLevel()
     {
         return $this->level;
-    }
-
-    /**
-     * @return string[]
-     */
-    public function getMainPropertyCodes()
-    {
-        return [
-            Property::STRENGTH_CODE,
-            Property::AGILITY_CODE
-        ];
     }
 
 }
