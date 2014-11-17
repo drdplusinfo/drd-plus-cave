@@ -436,8 +436,8 @@ class Person
      */
     public function setAgility(Property $agility)
     {
-        $agility->setName(Property::AGILITY_NAME);
-        $agility->setShortName(Property::AGILITY_SHORT_NAME);
+        $agility->setLabel(Property::AGILITY_LABEL);
+        $agility->setShortLabel(Property::AGILITY_SHORT_LABEL);
         $this->agility = $agility;
     }
 
@@ -454,8 +454,8 @@ class Person
      */
     public function setCharisma(Property $charisma)
     {
-        $charisma->setName(Property::CHARISMA_NAME);
-        $charisma->setShortName(Property::CHARISMA_SHORT_NAME);
+        $charisma->setLabel(Property::CHARISMA_LABEL);
+        $charisma->setShortLabel(Property::CHARISMA_SHORT_LABEL);
         $this->charisma = $charisma;
     }
 
@@ -472,8 +472,8 @@ class Person
      */
     public function setIntelligence(Property $intelligence)
     {
-        $intelligence->setName(Property::INTELLIGENCE_NAME);
-        $intelligence->setShortName(Property::INTELLIGENCE_SHORT_NAME);
+        $intelligence->setLabel(Property::INTELLIGENCE_LABEL);
+        $intelligence->setShortLabel(Property::INTELLIGENCE_SHORT_LABEL);
         $this->intelligence = $intelligence;
     }
 
@@ -490,8 +490,8 @@ class Person
      */
     public function setKnack(Property $knack)
     {
-        $knack->setName(Property::KNACK_NAME);
-        $knack->setShortName(Property::KNACK_SHORT_NAME);
+        $knack->setLabel(Property::KNACK_LABEL);
+        $knack->setShortLabel(Property::KNACK_SHORT_LABEL);
         $this->knack = $knack;
     }
 
@@ -508,8 +508,8 @@ class Person
      */
     public function setWill(Property $will)
     {
-        $will->setName(Property::WILL_NAME);
-        $will->setShortName(Property::WILL_SHORT_NAME);
+        $will->setLabel(Property::WILL_LABEL);
+        $will->setShortLabel(Property::WILL_SHORT_LABEL);
         $this->will = $will;
     }
 

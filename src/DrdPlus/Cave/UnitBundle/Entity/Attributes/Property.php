@@ -11,18 +11,24 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Property
 {
-    const STRENGTH_NAME = 'Síla';
-    const STRENGTH_SHORT_NAME = 'Sil';
-    const AGILITY_NAME = 'Obratnost';
-    const AGILITY_SHORT_NAME = 'Obr';
-    const KNACK_NAME = 'Zručnost';
-    const KNACK_SHORT_NAME = 'Zrč';
-    const CHARISMA_NAME = 'Charisma';
-    const CHARISMA_SHORT_NAME = 'Chr';
-    const WILL_NAME = 'Vůle';
-    const WILL_SHORT_NAME = 'Vol';
-    const INTELLIGENCE_NAME = 'Inteligence';
-    const INTELLIGENCE_SHORT_NAME = 'Int';
+    const STRENGTH_CODE = 'strength';
+    const STRENGTH_LABEL = 'Síla';
+    const STRENGTH_SHORT_LABEL = 'Sil';
+    const AGILITY_CODE = 'agility';
+    const AGILITY_LABEL = 'Obratnost';
+    const AGILITY_SHORT_LABEL = 'Obr';
+    const KNACK_CODE = 'knack';
+    const KNACK_LABEL = 'Zručnost';
+    const KNACK_SHORT_LABEL = 'Zrč';
+    const CHARISMA_CODE = 'charisma';
+    const CHARISMA_LABEL = 'Charisma';
+    const CHARISMA_SHORT_LABEL = 'Chr';
+    const WILL_CODE = 'will';
+    const WILL_LABEL = 'Vůle';
+    const WILL_SHORT_LABEL = 'Vol';
+    const INTELLIGENCE_CODE = 'intelligence';
+    const INTELLIGENCE_LABEL = 'Inteligence';
+    const INTELLIGENCE_SHORT_LABEL = 'Int';
 
     /**
      * @var integer
@@ -43,16 +49,23 @@ class Property
     /**
      * @var string
      *
-     * @ORM\Column(name="shortLabel", type="string", length=255)
+     * @ORM\Column(name="code", type="string", length=16)
      */
-    private $shortName;
+    private $code;
 
     /**
      * @var string
      *
      * @ORM\Column(name="label", type="string", length=255)
      */
-    private $name;
+    private $label;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="shortLabel", type="string", length=255)
+     */
+    private $shortLabel;
 
     /**
      * Get id
@@ -88,14 +101,39 @@ class Property
     }
 
     /**
+     * Set code
+     *
+     * @param string $code
+     * @return Property
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+
+        return $this;
+    }
+
+    /**
+     * Get code
+     *
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
      * Set name
      *
      * @param string $name
-     * @return string
+     * @return Property
      */
-    public function setName($name)
+    public function setLabel($name)
     {
-        return $this->name = $name;
+        $this->label = $name;
+
+        return $this;
     }
 
     /**
@@ -103,27 +141,29 @@ class Property
      *
      * @return string
      */
-    public function getName()
+    public function getLabel()
     {
-        return $this->name;
+        return $this->label;
     }
 
     /**
      * Set short name
      *
      * @param string $shortName
-     * @return string
+     * @return Property
      */
-    public function setShortName($shortName)
+    public function setShortLabel($shortName)
     {
-        $this->shortName = $shortName;
+        $this->shortLabel = $shortName;
+
+        return $this;
     }
 
     /**
      * @return string
      */
-    public function getShortName()
+    public function getShortLabel()
     {
-        return $this->shortName;
+        return $this->shortLabel;
     }
 }
