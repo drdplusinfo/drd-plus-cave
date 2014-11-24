@@ -9,7 +9,10 @@
 /vendor/
 /bin/
 /composer.phar
+
 .idea/workspace.xml
+.idea/deployment.xml
 .idea/dataSources.*
+.idea/symfony2.xml
 
 tests/_output/*
