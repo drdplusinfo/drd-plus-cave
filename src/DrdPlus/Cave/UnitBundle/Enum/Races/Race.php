@@ -1,142 +1,195 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Enum\Races;
 
-use DrdPlus\Cave\UnitBundle\Enum\Enum;
-use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\Female;
+use Doctrineum\Enum;
 use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\Gender;
-use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\Male;
 
 /**
  * Race
  */
 abstract class Race extends Enum
 {
-    /** @var string $genderCode */
-    private $genderCode;
 
-    /**
-     * @param string $genderCode
-     */
-    public function __construct($genderCode)
-    {
-        $this->genderCode = $genderCode;
-        $this->gender = $this->createGender($genderCode);
-    }
-
-    /**
-     * @param string $genderCode
-     * @return Gender
-     * @throws \RuntimeException
-     */
-    protected function createGender($genderCode)
-    {
-        switch($genderCode) {
-            case Male::CODE :
-                return new Male();
-            case Female::CODE :
-                return new Female();
-            default :
-                throw new \RuntimeException('Unknown gender code ' . var_export($genderCode, true));
-        }
-    }
-
-    /**
-     * Get gender code
-     *
-     * @return string
-     */
-    public function getGenderCode()
-    {
-        return $this->genderCode;
-    }
-
-    /**
-     * Get gender
-     *
-     * @return Gender
-     */
-    public function getGender()
-    {
-        return $this->gender;
-    }
-
-    /**
-     * Code for identification of a race
-     *
-     * @return string
-     */
-    abstract public function getCode();
+    /** overloaded parent value to get own namespace */
+    const INNER_NAMESPACE = __CLASS__;
 
     /**
      * Get strength modifier
+     * @param Gender $gender
      *
-     * @return integer
+     * @return int
      */
-    abstract public function getStrengthModifier();
+    public function getStrengthModifier(Gender $gender)
+    {
+        return $this->getBaseStrength() + $gender->getStrengthModifier();
+    }
+
+    /**
+     * @return int
+     */
+    abstract protected function getBaseStrength();
 
     /**
      * Get agility modifier
+     * @param Gender $gender
      *
-     * @return integer
+     * @return int
      */
-    abstract public function getAgilityModifier();
+    public function getAgilityModifier(Gender $gender)
+    {
+        return $this->getBaseAgility() + $gender->getAgilityModifier();
+    }
+
+    /**
+     * @return int
+     */
+    abstract protected function getBaseAgility();
 
     /**
      * Get knack modifier
+     * @param Gender $gender
      *
-     * @return integer
+     * @return int
      */
-    abstract public function getKnackModifier();
+    public function getKnackModifier(Gender $gender)
+    {
+        return $this->getBaseKnack() + $gender->getKnackModifier();
+    }
+
+    /**
+     * @return int
+     */
+    abstract protected function getBaseKnack();
 
     /**
      * Get will modifier
+     * @param Gender $gender
      *
-     * @return integer
+     * @return int
      */
-    abstract public function getWillModifier();
+    public function getWillModifier(Gender $gender)
+    {
+        return $this->getBaseWill() + $gender->getWillModifier();
+    }
+
+    /**
+     * @return int
+     */
+    abstract protected function getBaseWill();
 
     /**
      * Get intelligence modifier
+     * @param Gender $gender
      *
-     * @return integer
+     * @return int
      */
-    abstract public function getIntelligenceModifier();
+    public function getIntelligenceModifier(Gender $gender)
+    {
+        return $this->getBaseIntelligence() + $gender->getIntelligenceModifier();
+    }
+
+    /**
+     * @return int
+     */
+    abstract protected function getBaseIntelligence();
 
     /**
      * Get charisma modifier
+     * @param Gender $gender
      *
-     * @return integer
+     * @return int
      */
-    abstract public function getCharismaModifier();
+    public function getCharismaModifier(Gender $gender) {
+        return $this->getBaseCharisma() + $gender->getCharismaModifier();
+    }
+
+    /**
+     * @return int
+     */
+    abstract protected function getBaseCharisma();
 
     /**
      * Get stamina modifier
+     * @param Gender $gender
      *
-     * @return integer
+     * @return int
      */
-    abstract public function getResistanceModifier();
+    public function getResistanceModifier(Gender $gender) {
+        return $this->getBaseResistance() + $gender->getResistanceModifier();
+    }
+
+    /**
+     * @return int
+     */
+    abstract protected function getBaseResistance();
 
     /**
      * Get senses modifier
+     * @param Gender $gender
      *
-     * @return integer
+     * @return int
      */
-    abstract public function getSensesModifier();
+    public function getSensesModifier(Gender $gender) {
+        return $this->getBaseSenses() + $gender->getSensesModifier();
+    }
 
     /**
+     * @return int
+     */
+    abstract protected function getBaseSenses();
+
+    /**
+     * Can see heat like snakes do?
+     *
      * @return bool
      */
     abstract public function hasInfravision();
 
     /**
+     * Has bonus to regeneration by nature itself?
+     *
      * @return bool
      */
     abstract public function hasNaturalRegeneration();
 
     /**
+     * It is so special race so dungeon master agreement is needed to play it?
      * (Races with "star")
      *
      * @return true
      */
     abstract public function requiresDungeonMasterAgreement();
+
+    /**
+     * Call this method on specific race, not on this abstract class (it is prohibited by exception raising anyway)
+     * @see create
+     *
+     * @param string $raceCode
+     * @return Race|null
+     */
+    public static function get($raceCode)
+    {
+        parent::get($raceCode, self::INNER_NAMESPACE);
+    }
+
+    /**
+     * @param string $raceCode
+     * @return Race
+     */
+    protected static function create($raceCode)
+    {
+        $race = parent::create($raceCode);
+        /** @var $race Race */
+        if ($race->getRaceCode() !== $raceCode) {
+            // create() method, or get() respectively, has to be called on a specific race, not on this abstract one
+            throw new Exceptions\UnknownRaceCode('Unknown race code ' . var_export($raceCode, true) . '. Has been this method called from specific race class?');
+        }
+
+        return $raceCode;
+    }
+
+    /**
+     * @return string
+     */
+    abstract protected function getRaceCode();
 }

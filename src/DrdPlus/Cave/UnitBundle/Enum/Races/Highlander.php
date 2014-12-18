@@ -1,118 +1,182 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Enum\Races;
 
+use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\HighlanderGender;
+
 /**
  * Highlander
  */
 class Highlander extends Race
 {
     const CODE = 'highlander';
-    const LABEL = 'Horal';
-    const STRENGTH_MODIFIER = +1;
-    const AGILITY_MODIFIER = 0;
-    const KNACK_MODIFIER = 0;
-    const WILL_MODIFIER = +1;
-    const INTELLIGENCE_MODIFIER = -1;
-    const CHARISMA_MODIFIER = -1;
-    const RESISTANCE_MODIFIER = 0;
-    const SENSES_MODIFIER = 0;
+
+    const BASE_STRENGTH = +1;
+    const BASE_AGILITY = 0;
+    const BASE_KNACK = 0;
+    const BASE_WILL = +1;
+    const BASE_INTELLIGENCE = -1;
+    const BASE_CHARISMA = -1;
+    const BASE_RESISTANCE = 0;
+    const BASE_SENSES = 0;
 
     /**
      * @return string
      */
-    public function getCode()
+    protected function getRaceCode()
     {
         return self::CODE;
     }
 
     /**
-     * Get label
+     * Get strength modifier
      *
-     * @return string
+     * @param HighlanderGender $highlanderGender
+     * @return int
      */
-    public function getLabel()
+    public function getStrengthModifier(HighlanderGender $highlanderGender)
     {
-        return self::LABEL;
+        return parent::getStrengthModifier($highlanderGender);
     }
 
     /**
-     * Get strength modifier
-     *
-     * @return integer
+     * @return int
      */
-    public function getStrengthModifier()
+    protected function getBaseStrength()
     {
-        return self::STRENGTH_MODIFIER;
+        return self::BASE_STRENGTH;
     }
 
     /**
      * Get agility modifier
      *
-     * @return integer
+     * @param HighlanderGender $highlanderGender
+     * @return int
      */
-    public function getAgilityModifier()
+    public function getAgilityModifier(HighlanderGender $highlanderGender)
     {
-        return self::AGILITY_MODIFIER;
+        return parent::getAgilityModifier($highlanderGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseAgility()
+    {
+        return self::BASE_AGILITY;
     }
 
     /**
      * Get knack modifier
      *
-     * @return integer
+     * @param HighlanderGender $highlanderGender
+     * @return int
      */
-    public function getKnackModifier()
+    public function getKnackModifier(HighlanderGender $highlanderGender)
     {
-        return self::KNACK_MODIFIER;
+        return parent::getKnackModifier($highlanderGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseKnack()
+    {
+        return self::BASE_KNACK;
     }
 
     /**
      * Get will modifier
      *
-     * @return integer
+     * @param HighlanderGender $highlanderGender
+     * @return int
      */
-    public function getWillModifier()
+    public function getWillModifier(HighlanderGender $highlanderGender)
     {
-        return self::WILL_MODIFIER;
+        return parent::getWillModifier($highlanderGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseWill()
+    {
+        return self::BASE_WILL;
     }
 
     /**
      * Get intelligence modifier
      *
-     * @return integer
+     * @param HighlanderGender $highlanderGender
+     * @return int
      */
-    public function getIntelligenceModifier()
+    public function getIntelligenceModifier(HighlanderGender $highlanderGender)
     {
-        return self::INTELLIGENCE_MODIFIER;
+        return parent::getIntelligenceModifier($highlanderGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseIntelligence()
+    {
+        return self::BASE_INTELLIGENCE;
     }
 
     /**
      * Get charisma modifier
      *
-     * @return integer
+     * @param HighlanderGender $highlanderGender
+     * @return int
      */
-    public function getCharismaModifier()
+    public function getCharismaModifier(HighlanderGender $highlanderGender)
     {
-        return self::CHARISMA_MODIFIER;
+        return parent::getCharismaModifier($highlanderGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseCharisma()
+    {
+        return self::BASE_CHARISMA;
     }
 
     /**
      * Get resistance modifier
      *
-     * @return integer
+     * @param HighlanderGender $highlanderGender
+     * @return int
      */
-    public function getResistanceModifier()
+    public function getResistanceModifier(HighlanderGender $highlanderGender)
     {
-        return self::RESISTANCE_MODIFIER;
+        return parent::getResistanceModifier($highlanderGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseResistance()
+    {
+        return self::BASE_RESISTANCE;
     }
 
     /**
      * Get senses modifier
      *
-     * @return integer
+     * @param HighlanderGender $highlanderGender
+     * @return int
      */
-    public function getSensesModifier()
+    public function getSensesModifier(HighlanderGender $highlanderGender)
     {
-        return self::SENSES_MODIFIER;
+        return parent::getSensesModifier($highlanderGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseSenses()
+    {
+        return self::BASE_SENSES;
     }
 
     /**

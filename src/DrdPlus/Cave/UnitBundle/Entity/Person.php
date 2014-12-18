@@ -4,21 +4,7 @@ namespace DrdPlus\Cave\UnitBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Level;
-use DrdPlus\Cave\UnitBundle\Enum\Races\DarkElf;
-use DrdPlus\Cave\UnitBundle\Enum\Races\Dwarf;
-use DrdPlus\Cave\UnitBundle\Enum\Races\Elf;
-use DrdPlus\Cave\UnitBundle\Enum\Races\Goblin;
-use DrdPlus\Cave\UnitBundle\Enum\Races\GreenElf;
-use DrdPlus\Cave\UnitBundle\Enum\Races\Highlander;
-use DrdPlus\Cave\UnitBundle\Enum\Races\Hobbit;
-use DrdPlus\Cave\UnitBundle\Enum\Races\Human;
-use DrdPlus\Cave\UnitBundle\Enum\Races\Kroll;
-use DrdPlus\Cave\UnitBundle\Enum\Races\MountainDwarf;
-use DrdPlus\Cave\UnitBundle\Enum\Races\Orc;
 use DrdPlus\Cave\UnitBundle\Enum\Races\Race;
-use DrdPlus\Cave\UnitBundle\Enum\Races\Skurut;
-use DrdPlus\Cave\UnitBundle\Enum\Races\WildKroll;
-use DrdPlus\Cave\UnitBundle\Enum\Races\WoodDwarf;
 
 /**
  * Person
@@ -71,7 +57,7 @@ class Person
     /**
      * Get id
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -126,50 +112,8 @@ class Person
     public function setRaceAndGenderCodes($raceAndGenderCodes)
     {
         $this->raceAndGenderCodes = $raceAndGenderCodes;
-        $this->race = $this->createRace($raceAndGenderCodes['raceCode'], $raceAndGenderCodes['genderCode']);
 
         return $this;
-    }
-
-    /**
-     * @param string $raceCode
-     * @param string $genderCode
-     * @return Race
-     */
-    private function createRace($raceCode, $genderCode)
-    {
-        switch ($raceCode) {
-            case Orc::CODE :
-                return new Orc($genderCode);
-            case DarkElf::CODE :
-                return new DarkElf($genderCode);
-            case Dwarf::CODE :
-                return new Dwarf($genderCode);
-            case Elf::CODE :
-                return new Elf($genderCode);
-            case Goblin::CODE :
-                return new Goblin($genderCode);
-            case GreenElf::CODE :
-                return new GreenElf($genderCode);
-            case Highlander::CODE :
-                return new Highlander($genderCode);
-            case Hobbit::CODE :
-                return new Hobbit($genderCode);
-            case Human::CODE :
-                return new Human($genderCode);
-            case Kroll::CODE :
-                return new Kroll($genderCode);
-            case MountainDwarf::CODE :
-                return new MountainDwarf($genderCode);
-            case Skurut::CODE :
-                return new Skurut($genderCode);
-            case WildKroll::CODE :
-                return new WildKroll($genderCode);
-            case WoodDwarf::CODE :
-                return new WoodDwarf($genderCode);
-            default :
-                throw new \RuntimeException('Unknown race code ' . var_export($raceCode, true));
-        }
     }
 
     /**

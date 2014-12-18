@@ -32,7 +32,7 @@ class FighterLevel extends ProfessionLevel
     /**
      * Get id
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -51,7 +51,7 @@ class FighterLevel extends ProfessionLevel
     }
 
     /**
-     * @return integer
+     * @return int
      */
     public function getProfessionLevel()
     {

@@ -1,9 +1,7 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Enum\Races;
 
-use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\Female;
-use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\Gender;
-use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\OrcFemale;
+use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\OrcGender;
 
 /**
  * Orc
@@ -11,127 +9,174 @@ use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\OrcFemale;
 class Orc extends Race
 {
     const CODE = 'orc';
-    const LABEL = 'Skřet';
-    const STRENGTH_MODIFIER = 0;
-    const AGILITY_MODIFIER = +2;
-    const KNACK_MODIFIER = 0;
-    const WILL_MODIFIER = -1;
-    const INTELLIGENCE_MODIFIER = 0;
-    const CHARISMA_MODIFIER = -2;
-    const RESISTANCE_MODIFIER = 0;
-    const SENSES_MODIFIER = +1;
 
-    /**
-     * @param string $genderCode
-     * @return Gender
-     * @throws \RuntimeException
-     */
-    protected function createGender($genderCode)
-    {
-        switch ($genderCode) {
-            case Female::CODE :
-                return new OrcFemale();
-            default :
-                return parent::createGender($genderCode);
-        }
-    }
+    const BASE_STRENGTH = 0;
+    const BASE_AGILITY = +2;
+    const BASE_KNACK = 0;
+    const BASE_WILL = -1;
+    const BASE_INTELLIGENCE = 0;
+    const BASE_CHARISMA = -2;
+    const BASE_RESISTANCE = 0;
+    const BASE_SENSES = +1;
 
     /**
      * @return string
      */
-    public function getCode()
+    protected function getRaceCode()
     {
         return self::CODE;
     }
 
     /**
-     * Get label
+     * Get strength modifier
      *
-     * @return string
+     * @param OrcGender $orcGender
+     * @return int
      */
-    public function getLabel()
+    public function getStrengthModifier(OrcGender $orcGender)
     {
-        return self::LABEL;
+        return parent::getStrengthModifier($orcGender);
     }
 
     /**
-     * Get strength modifier
-     *
-     * @return integer
+     * @return int
      */
-    public function getStrengthModifier()
+    protected function getBaseStrength()
     {
-        return self::STRENGTH_MODIFIER;
+        return self::BASE_STRENGTH;
     }
 
     /**
      * Get agility modifier
      *
-     * @return integer
+     * @param OrcGender $orcGender
+     * @return int
      */
-    public function getAgilityModifier()
+    public function getAgilityModifier(OrcGender $orcGender)
     {
-        return self::AGILITY_MODIFIER;
+        return parent::getAgilityModifier($orcGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseAgility()
+    {
+        return self::BASE_AGILITY;
     }
 
     /**
      * Get knack modifier
      *
-     * @return integer
+     * @param OrcGender $orcGender
+     * @return int
      */
-    public function getKnackModifier()
+    public function getKnackModifier(OrcGender $orcGender)
     {
-        return self::KNACK_MODIFIER;
+        return parent::getKnackModifier($orcGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseKnack()
+    {
+        return self::BASE_KNACK;
     }
 
     /**
      * Get will modifier
      *
-     * @return integer
+     * @param OrcGender $orcGender
+     * @return int
      */
-    public function getWillModifier()
+    public function getWillModifier(OrcGender $orcGender)
     {
-        return self::WILL_MODIFIER;
+        return parent::getWillModifier($orcGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseWill()
+    {
+        return self::BASE_WILL;
     }
 
     /**
      * Get intelligence modifier
      *
-     * @return integer
+     * @param OrcGender $orcGender
+     * @return int
      */
-    public function getIntelligenceModifier()
+    public function getIntelligenceModifier(OrcGender $orcGender)
     {
-        return self::INTELLIGENCE_MODIFIER;
+        return parent::getIntelligenceModifier($orcGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseIntelligence()
+    {
+        return self::BASE_INTELLIGENCE;
     }
 
     /**
      * Get charisma modifier
      *
-     * @return integer
+     * @param OrcGender $orcGender
+     * @return int
      */
-    public function getCharismaModifier()
+    public function getCharismaModifier(OrcGender $orcGender)
     {
-        return self::CHARISMA_MODIFIER;
+        return parent::getCharismaModifier($orcGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseCharisma()
+    {
+        return self::BASE_CHARISMA;
     }
 
     /**
      * Get resistance modifier
      *
-     * @return integer
+     * @param OrcGender $orcGender
+     * @return int
      */
-    public function getResistanceModifier()
+    public function getResistanceModifier(OrcGender $orcGender)
     {
-        return self::RESISTANCE_MODIFIER;
+        return parent::getResistanceModifier($orcGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseResistance()
+    {
+        return self::BASE_RESISTANCE;
     }
 
     /**
      * Get senses modifier
      *
-     * @return integer
+     * @param OrcGender $orcGender
+     * @return int
      */
-    public function getSensesModifier()
+    public function getSensesModifier(OrcGender $orcGender)
     {
-        return self::SENSES_MODIFIER;
+        return parent::getSensesModifier($orcGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseSenses()
+    {
+        return self::BASE_SENSES;
     }
 
     /**

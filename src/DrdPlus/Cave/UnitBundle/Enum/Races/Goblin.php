@@ -1,118 +1,181 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Enum\Races;
 
+use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\GoblinGender;
+
 /**
  * Goblin
  */
 class Goblin extends Race
 {
     const CODE = 'goblin';
-    const LABEL = 'Goblin';
-    const STRENGTH_MODIFIER = -1;
-    const AGILITY_MODIFIER = +2;
-    const KNACK_MODIFIER = +1;
-    const WILL_MODIFIER = -2;
-    const INTELLIGENCE_MODIFIER = 0;
-    const CHARISMA_MODIFIER = -1;
-    const RESISTANCE_MODIFIER = 0;
-    const SENSES_MODIFIER = +1;
+
+    const BASE_STRENGTH = -1;
+    const BASE_AGILITY = +2;
+    const BASE_KNACK = +1;
+    const BASE_WILL = -2;
+    const BASE_INTELLIGENCE = 0;
+    const BASE_CHARISMA = -1;
+    const BASE_RESISTANCE = 0;
+    const BASE_SENSES = +1;
 
     /**
      * @return string
      */
-    public function getCode()
+    protected function getRaceCode()
     {
         return self::CODE;
     }
 
     /**
-     * Get label
+     * Get strength modifier
      *
-     * @return string 
+     * @param GoblinGender $goblinGender
+     * @return int
      */
-    public function getLabel()
+    public function getStrengthModifier(GoblinGender $goblinGender)
     {
-        return self::LABEL;
+        return parent::getStrengthModifier($goblinGender);
     }
 
     /**
-     * Get strength modifier
-     *
-     * @return integer 
+     * @return int
      */
-    public function getStrengthModifier()
-    {
-        return self::STRENGTH_MODIFIER;
+    protected function getBaseStrength() {
+        return self::BASE_STRENGTH;
     }
 
     /**
      * Get agility modifier
      *
-     * @return integer 
+     * @param GoblinGender $goblinGender
+     * @return int
      */
-    public function getAgilityModifier()
+    public function getAgilityModifier(GoblinGender $goblinGender)
     {
-        return self::AGILITY_MODIFIER;
+        return parent::getAgilityModifier($goblinGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseAgility()
+    {
+        return self::BASE_AGILITY;
     }
 
     /**
      * Get knack modifier
      *
-     * @return integer 
+     * @param GoblinGender $goblinGender
+     * @return int
      */
-    public function getKnackModifier()
+    public function getKnackModifier(GoblinGender $goblinGender)
     {
-        return self::KNACK_MODIFIER;
+        return parent::getKnackModifier($goblinGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseKnack()
+    {
+        return self::BASE_KNACK;
     }
 
     /**
      * Get will modifier
      *
-     * @return integer 
+     * @param GoblinGender $goblinGender
+     * @return int
      */
-    public function getWillModifier()
+    public function getWillModifier(GoblinGender $goblinGender)
     {
-        return self::WILL_MODIFIER;
+        return parent::getWillModifier($goblinGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseWill()
+    {
+        return self::BASE_WILL;
     }
 
     /**
      * Get intelligence modifier
      *
-     * @return integer 
+     * @param GoblinGender $goblinGender
+     * @return int
      */
-    public function getIntelligenceModifier()
+    public function getIntelligenceModifier(GoblinGender $goblinGender)
     {
-        return self::INTELLIGENCE_MODIFIER;
+        return parent::getIntelligenceModifier($goblinGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseIntelligence()
+    {
+        return self::BASE_INTELLIGENCE;
     }
 
     /**
      * Get charisma modifier
      *
-     * @return integer 
+     * @param GoblinGender $goblinGender
+     * @return int
      */
-    public function getCharismaModifier()
+    public function getCharismaModifier(GoblinGender $goblinGender)
     {
-        return self::CHARISMA_MODIFIER;
+        return parent::getCharismaModifier($goblinGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseCharisma()
+    {
+        return self::BASE_CHARISMA;
     }
 
     /**
      * Get resistance modifier
      *
-     * @return integer 
+     * @param GoblinGender $goblinGender
+     * @return int
      */
-    public function getResistanceModifier()
+    public function getResistanceModifier(GoblinGender $goblinGender)
     {
-        return self::RESISTANCE_MODIFIER;
+        return parent::getResistanceModifier($goblinGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseResistance()
+    {
+        return self::BASE_RESISTANCE;
     }
 
     /**
      * Get senses modifier
      *
-     * @return integer 
+     * @param GoblinGender $goblinGender
+     * @return int
      */
-    public function getSensesModifier()
+    public function getSensesModifier(GoblinGender $goblinGender)
     {
-        return self::SENSES_MODIFIER;
+        return parent::getSensesModifier($goblinGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseSenses()
+    {
+        return self::BASE_SENSES;
     }
 
     /**

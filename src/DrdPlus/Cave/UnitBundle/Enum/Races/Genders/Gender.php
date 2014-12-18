@@ -1,61 +1,158 @@
 <?php
-
 namespace DrdPlus\Cave\UnitBundle\Enum\Races\Genders;
 
-use DrdPlus\Cave\UnitBundle\Enum\Enum;
+use Doctrineum\Enum;
 
 /**
  * Gender
  */
 abstract class Gender extends Enum
 {
-    const FEMALE = 'žena';
+
+    /** overloaded parent value to get own namespace */
+    const INNER_NAMESPACE = __CLASS__;
+
+    const MALE_CODE = 'male';
+    const FEMALE_CODE = 'female';
+
+    /**
+     * Call this method on specific race, not on this abstract class (it is prohibited by exception raising anyway)
+     * @see create
+     *
+     * @param string $raceGenderCode
+     * @return Gender|null
+     */
+    public static function get($raceGenderCode)
+    {
+        parent::get($raceGenderCode, self::INNER_NAMESPACE);
+    }
+
+    /**
+     * @param string $raceGenderCode
+     * @return Gender
+     */
+    protected static function create($raceGenderCode)
+    {
+        $gender = parent::create($raceGenderCode);
+        /** @var $gender Gender */
+        if ($gender->getRaceGenderCode() !== $raceGenderCode) {
+            throw new Exceptions\UnknownGenderCode('Unknown gender code ' . var_export($raceGenderCode, true) . '. Has been this method called from specific gender class?');
+        }
+
+        return $raceGenderCode;
+    }
 
     /**
      * @return string
      */
-    abstract public function getCode();
+    protected function getRaceGenderCode()
+    {
+        return $this->getRaceCode() . '-' . $this->getGenderCode();
+    }
+
+    /**
+     * @return string
+     */
+    abstract protected function getRaceCode();
+
+    /**
+     * @return string
+     */
+    protected function getGenderCode()
+    {
+        return $this->isMale()
+            ? self::MALE_CODE
+            : self::FEMALE_CODE;
+    }
+
+    /**
+     * @return bool
+     */
+    abstract public function isMale();
+
+    /**
+     * @return bool
+     */
+    abstract public function isFemale();
 
     /**
      * Get strength modifier
      *
-     * @return integer
+     * @return int
      */
-    abstract public function getStrengthModifier();
+    public function getStrengthModifier()
+    {
+        return 0;
+    }
 
     /**
      * Get agility modifier
      *
-     * @return integer
+     * @return int
      */
-    abstract public function getAgilityModifier();
+    public function getAgilityModifier()
+    {
+        return 0;
+    }
 
     /**
      * Get knack modifier
      *
-     * @return integer
+     * @return int
      */
-    abstract public function getKnackModifier();
+    public function getKnackModifier()
+    {
+        return 0;
+    }
 
     /**
      * Get will modifier
      *
-     * @return integer
+     * @return int
      */
-    abstract public function getWillModifier();
+    public function getWillModifier()
+    {
+        return 0;
+    }
 
     /**
      * Get intelligence modifier
      *
-     * @return integer
+     * @return int
      */
-    abstract public function getIntelligenceModifier();
+    public function getIntelligenceModifier()
+    {
+        return 0;
+    }
 
     /**
      * Get charisma modifier
      *
-     * @return integer
+     * @return int
      */
-    abstract public function getCharismaModifier();
+    public function getCharismaModifier()
+    {
+        return 0;
+    }
+
+    /**
+     * Get resistance modifier
+     *
+     * @return int
+     */
+    public function getResistanceModifier()
+    {
+        return 0;
+    }
+
+    /**
+     * Get senses modifier
+     *
+     * @return int
+     */
+    public function getSensesModifier()
+    {
+        return 0;
+    }
 
 }

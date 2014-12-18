@@ -1,118 +1,181 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Enum\Races;
 
+use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\SkurutGender;
+
 /**
  * Skurut
  */
 class Skurut extends Race
 {
     const CODE = 'skurut';
-    const LABEL = 'Skurut';
-    const STRENGTH_MODIFIER = +1;
-    const AGILITY_MODIFIER = +1;
-    const KNACK_MODIFIER = -1;
-    const WILL_MODIFIER = 0;
-    const INTELLIGENCE_MODIFIER = 0;
-    const CHARISMA_MODIFIER = -2;
-    const RESISTANCE_MODIFIER = 0;
-    const SENSES_MODIFIER = +1;
+
+    const BASE_STRENGTH = +1;
+    const BASE_AGILITY = +1;
+    const BASE_KNACK = -1;
+    const BASE_WILL = 0;
+    const BASE_INTELLIGENCE = 0;
+    const BASE_CHARISMA = -2;
+    const BASE_RESISTANCE = 0;
+    const BASE_SENSES = +1;
 
     /**
      * @return string
      */
-    public function getCode()
+    protected function getRaceCode()
     {
         return self::CODE;
     }
-
-    /**
-     * Get label
-     *
-     * @return string
-     */
-    public function getLabel()
-    {
-        return self::LABEL;
-    }
-
     /**
      * Get strength modifier
      *
-     * @return integer
+     * @param SkurutGender $skurutGender
+     * @return int
      */
-    public function getStrengthModifier()
+    public function getStrengthModifier(SkurutGender $skurutGender)
     {
-        return self::STRENGTH_MODIFIER;
+        return parent::getStrengthModifier($skurutGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseStrength()
+    {
+        return self::BASE_STRENGTH;
     }
 
     /**
      * Get agility modifier
      *
-     * @return integer
+     * @param SkurutGender $skurutGender
+     * @return int
      */
-    public function getAgilityModifier()
+    public function getAgilityModifier(SkurutGender $skurutGender)
     {
-        return self::AGILITY_MODIFIER;
+        return parent::getAgilityModifier($skurutGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseAgility()
+    {
+        return self::BASE_AGILITY;
     }
 
     /**
      * Get knack modifier
      *
-     * @return integer
+     * @param SkurutGender $skurutGender
+     * @return int
      */
-    public function getKnackModifier()
+    public function getKnackModifier(SkurutGender $skurutGender)
     {
-        return self::KNACK_MODIFIER;
+        return parent::getKnackModifier($skurutGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseKnack()
+    {
+        return self::BASE_KNACK;
     }
 
     /**
      * Get will modifier
      *
-     * @return integer
+     * @param SkurutGender $skurutGender
+     * @return int
      */
-    public function getWillModifier()
+    public function getWillModifier(SkurutGender $skurutGender)
     {
-        return self::WILL_MODIFIER;
+        return parent::getWillModifier($skurutGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseWill()
+    {
+        return self::BASE_WILL;
     }
 
     /**
      * Get intelligence modifier
      *
-     * @return integer
+     * @param SkurutGender $skurutGender
+     * @return int
      */
-    public function getIntelligenceModifier()
+    public function getIntelligenceModifier(SkurutGender $skurutGender)
     {
-        return self::INTELLIGENCE_MODIFIER;
+        return parent::getIntelligenceModifier($skurutGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseIntelligence()
+    {
+        return self::BASE_INTELLIGENCE;
     }
 
     /**
      * Get charisma modifier
      *
-     * @return integer
+     * @param SkurutGender $skurutGender
+     * @return int
      */
-    public function getCharismaModifier()
+    public function getCharismaModifier(SkurutGender $skurutGender)
     {
-        return self::CHARISMA_MODIFIER;
+        return parent::getCharismaModifier($skurutGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseCharisma()
+    {
+        return self::BASE_CHARISMA;
     }
 
     /**
      * Get resistance modifier
      *
-     * @return integer
+     * @param SkurutGender $skurutGender
+     * @return int
      */
-    public function getResistanceModifier()
+    public function getResistanceModifier(SkurutGender $skurutGender)
     {
-        return self::RESISTANCE_MODIFIER;
+        return parent::getResistanceModifier($skurutGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseResistance()
+    {
+        return self::BASE_RESISTANCE;
     }
 
     /**
      * Get senses modifier
      *
-     * @return integer
+     * @param SkurutGender $skurutGender
+     * @return int
      */
-    public function getSensesModifier()
+    public function getSensesModifier(SkurutGender $skurutGender)
     {
-        return self::SENSES_MODIFIER;
+        return parent::getSensesModifier($skurutGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseSenses()
+    {
+        return self::BASE_SENSES;
     }
 
     /**

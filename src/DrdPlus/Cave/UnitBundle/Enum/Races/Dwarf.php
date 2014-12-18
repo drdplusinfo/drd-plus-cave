@@ -1,9 +1,7 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Enum\Races;
 
-use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\DwarfFemale;
-use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\Female;
-use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\Gender;
+use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\DwarfGender;
 
 /**
  * Dwarf
@@ -11,127 +9,172 @@ use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\Gender;
 class Dwarf extends Race
 {
     const CODE = 'dwarf';
-    const LABEL = 'Trpaslík';
-    const STRENGTH_MODIFIER = +1;
-    const AGILITY_MODIFIER = -1;
-    const KNACK_MODIFIER = 0;
-    const WILL_MODIFIER = +2;
-    const INTELLIGENCE_MODIFIER = -1;
-    const CHARISMA_MODIFIER = -2;
-    const RESISTANCE_MODIFIER = +1;
-    const SENSES_MODIFIER = -1;
 
-    /**
-     * @param string $genderCode
-     * @return Gender
-     * @throws \RuntimeException
-     */
-    protected function createGender($genderCode)
-    {
-        switch ($genderCode) {
-            case Female::CODE :
-                return new DwarfFemale();
-            default :
-                return parent::createGender($genderCode);
-        }
-    }
+    const BASE_STRENGTH = +1;
+    const BASE_AGILITY = -1;
+    const BASE_KNACK = 0;
+    const BASE_WILL = +2;
+    const BASE_INTELLIGENCE = -1;
+    const BASE_CHARISMA = -2;
+    const BASE_RESISTANCE = +1;
+    const BASE_SENSES = -1;
 
     /**
      * @return string
      */
-    public function getCode()
-    {
+    protected function getRaceCode() {
         return self::CODE;
-    }
-
-    /**
-     * Get label
-     *
-     * @return string
-     */
-    public function getLabel()
-    {
-        return self::LABEL;
     }
 
     /**
      * Get strength modifier
      *
-     * @return integer
+     * @param DwarfGender $dwarfGender
+     * @return int
      */
-    public function getStrengthModifier()
+    public function getStrengthModifier(DwarfGender $dwarfGender)
     {
-        return self::STRENGTH_MODIFIER;
+        return parent::getStrengthModifier($dwarfGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseStrength() {
+        return self::BASE_STRENGTH;
     }
 
     /**
      * Get agility modifier
      *
-     * @return integer
+     * @param DwarfGender $dwarfGender
+     * @return int
      */
-    public function getAgilityModifier()
+    public function getAgilityModifier(DwarfGender $dwarfGender)
     {
-        return self::AGILITY_MODIFIER;
+        return parent::getAgilityModifier($dwarfGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseAgility()
+    {
+        return self::BASE_AGILITY;
     }
 
     /**
      * Get knack modifier
      *
-     * @return integer
+     * @param DwarfGender $dwarfGender
+     * @return int
      */
-    public function getKnackModifier()
+    public function getKnackModifier(DwarfGender $dwarfGender)
     {
-        return self::KNACK_MODIFIER;
+        return parent::getKnackModifier($dwarfGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseKnack()
+    {
+        return self::BASE_KNACK;
     }
 
     /**
      * Get will modifier
      *
-     * @return integer
+     * @param DwarfGender $dwarfGender
+     * @return int
      */
-    public function getWillModifier()
+    public function getWillModifier(DwarfGender $dwarfGender)
     {
-        return self::WILL_MODIFIER;
+        return parent::getWillModifier($dwarfGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseWill()
+    {
+        return self::BASE_WILL;
     }
 
     /**
      * Get intelligence modifier
      *
-     * @return integer
+     * @param DwarfGender $dwarfGender
+     * @return int
      */
-    public function getIntelligenceModifier()
+    public function getIntelligenceModifier(DwarfGender $dwarfGender)
     {
-        return self::INTELLIGENCE_MODIFIER;
+        return parent::getIntelligenceModifier($dwarfGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseIntelligence()
+    {
+        return self::BASE_INTELLIGENCE;
     }
 
     /**
      * Get charisma modifier
      *
-     * @return integer
+     * @param DwarfGender $dwarfGender
+     * @return int
      */
-    public function getCharismaModifier()
+    public function getCharismaModifier(DwarfGender $dwarfGender)
     {
-        return self::CHARISMA_MODIFIER;
+        return parent::getCharismaModifier($dwarfGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseCharisma()
+    {
+        return self::BASE_CHARISMA;
     }
 
     /**
      * Get resistance modifier
      *
-     * @return integer
+     * @param DwarfGender $dwarfGender
+     * @return int
      */
-    public function getResistanceModifier()
+    public function getResistanceModifier(DwarfGender $dwarfGender)
     {
-        return self::RESISTANCE_MODIFIER;
+        return parent::getResistanceModifier($dwarfGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseResistance()
+    {
+        return self::BASE_RESISTANCE;
     }
 
     /**
      * Get senses modifier
      *
-     * @return integer
+     * @param DwarfGender $dwarfGender
+     * @return int
      */
-    public function getSensesModifier()
+    public function getSensesModifier(DwarfGender $dwarfGender)
     {
-        return self::SENSES_MODIFIER;
+        return parent::getSensesModifier($dwarfGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseSenses()
+    {
+        return self::BASE_SENSES;
     }
 
     /**

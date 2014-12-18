@@ -4,13 +4,15 @@ namespace DrdPlus\Cave\UnitBundle\Enum\Races\Genders;
 /**
  * HobbitFemale
  */
-class HobbitFemale extends Female
+class HobbitFemale extends HobbitGender
 {
+
+    use IsFemale;
 
     /**
      * Get strength modifier
      *
-     * @return integer
+     * @return int
      */
     public function getStrengthModifier()
     {
@@ -20,7 +22,7 @@ class HobbitFemale extends Female
     /**
      * Get agility modifier
      *
-     * @return integer
+     * @return int
      */
     public function getAgilityModifier()
     {
@@ -30,7 +32,7 @@ class HobbitFemale extends Female
     /**
      * Get knack modifier
      *
-     * @return integer
+     * @return int
      */
     public function getKnackModifier()
     {
@@ -40,7 +42,7 @@ class HobbitFemale extends Female
     /**
      * Get charisma modifier
      *
-     * @return integer
+     * @return int
      */
     public function getCharismaModifier()
     {

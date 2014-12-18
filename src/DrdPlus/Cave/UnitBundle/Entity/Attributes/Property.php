@@ -70,7 +70,7 @@ class Property
     /**
      * Get id
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -93,7 +93,7 @@ class Property
     /**
      * Get value
      *
-     * @return integer
+     * @return int
      */
     public function getValue()
     {

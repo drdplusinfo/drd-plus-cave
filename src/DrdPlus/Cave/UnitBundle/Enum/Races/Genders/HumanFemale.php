@@ -4,12 +4,15 @@ namespace DrdPlus\Cave\UnitBundle\Enum\Races\Genders;
 /**
  * HumanFemale
  */
-class HumanFemale extends Female
+class HumanFemale extends HumanGender
 {
+
+    use IsFemale;
+
     /**
      * Get strength modifier
      *
-     * @return integer
+     * @return int
      */
     public function getStrengthModifier()
     {
@@ -19,7 +22,7 @@ class HumanFemale extends Female
     /**
      * Get charisma modifier
      *
-     * @return integer
+     * @return int
      */
     public function getCharismaModifier()
     {

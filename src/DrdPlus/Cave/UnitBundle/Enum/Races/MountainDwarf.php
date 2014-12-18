@@ -1,118 +1,182 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Enum\Races;
 
+use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\MountainDwarfGender;
+
 /**
  * MountainDwarf
  */
 class MountainDwarf extends Race
 {
     const CODE = 'mountain-dwarf';
-    const LABEL = 'Horský Trpaslík';
-    const STRENGTH_MODIFIER = +2;
-    const AGILITY_MODIFIER = -1;
-    const KNACK_MODIFIER = 0;
-    const WILL_MODIFIER = +2;
-    const INTELLIGENCE_MODIFIER = -2;
-    const CHARISMA_MODIFIER = -2;
-    const RESISTANCE_MODIFIER = +1;
-    const SENSES_MODIFIER = -1;
+
+    const BASE_STRENGTH = +2;
+    const BASE_AGILITY = -1;
+    const BASE_KNACK = 0;
+    const BASE_WILL = +2;
+    const BASE_INTELLIGENCE = -2;
+    const BASE_CHARISMA = -2;
+    const BASE_RESISTANCE = +1;
+    const BASE_SENSES = -1;
 
     /**
      * @return string
      */
-    public function getCode()
+    protected function getRaceCode()
     {
         return self::CODE;
     }
 
     /**
-     * Get label
+     * Get strength modifier
      *
-     * @return string
+     * @param MountainDwarfGender $mountainDwarfGender
+     * @return int
      */
-    public function getLabel()
+    public function getStrengthModifier(MountainDwarfGender $mountainDwarfGender)
     {
-        return self::LABEL;
+        return parent::getStrengthModifier($mountainDwarfGender);
     }
 
     /**
-     * Get strength modifier
-     *
-     * @return integer
+     * @return int
      */
-    public function getStrengthModifier()
+    protected function getBaseStrength()
     {
-        return self::STRENGTH_MODIFIER;
+        return self::BASE_STRENGTH;
     }
 
     /**
      * Get agility modifier
      *
-     * @return integer
+     * @param MountainDwarfGender $mountainDwarfGender
+     * @return int
      */
-    public function getAgilityModifier()
+    public function getAgilityModifier(MountainDwarfGender $mountainDwarfGender)
     {
-        return self::AGILITY_MODIFIER;
+        return parent::getAgilityModifier($mountainDwarfGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseAgility()
+    {
+        return self::BASE_AGILITY;
     }
 
     /**
      * Get knack modifier
      *
-     * @return integer
+     * @param MountainDwarfGender $mountainDwarfGender
+     * @return int
      */
-    public function getKnackModifier()
+    public function getKnackModifier(MountainDwarfGender $mountainDwarfGender)
     {
-        return self::KNACK_MODIFIER;
+        return parent::getKnackModifier($mountainDwarfGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseKnack()
+    {
+        return self::BASE_KNACK;
     }
 
     /**
      * Get will modifier
      *
-     * @return integer
+     * @param MountainDwarfGender $mountainDwarfGender
+     * @return int
      */
-    public function getWillModifier()
+    public function getWillModifier(MountainDwarfGender $mountainDwarfGender)
     {
-        return self::WILL_MODIFIER;
+        return parent::getWillModifier($mountainDwarfGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseWill()
+    {
+        return self::BASE_WILL;
     }
 
     /**
      * Get intelligence modifier
      *
-     * @return integer
+     * @param MountainDwarfGender $mountainDwarfGender
+     * @return int
      */
-    public function getIntelligenceModifier()
+    public function getIntelligenceModifier(MountainDwarfGender $mountainDwarfGender)
     {
-        return self::INTELLIGENCE_MODIFIER;
+        return parent::getIntelligenceModifier($mountainDwarfGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseIntelligence()
+    {
+        return self::BASE_INTELLIGENCE;
     }
 
     /**
      * Get charisma modifier
      *
-     * @return integer
+     * @param MountainDwarfGender $mountainDwarfGender
+     * @return int
      */
-    public function getCharismaModifier()
+    public function getCharismaModifier(MountainDwarfGender $mountainDwarfGender)
     {
-        return self::CHARISMA_MODIFIER;
+        return parent::getCharismaModifier($mountainDwarfGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseCharisma()
+    {
+        return self::BASE_CHARISMA;
     }
 
     /**
      * Get resistance modifier
      *
-     * @return integer
+     * @param MountainDwarfGender $mountainDwarfGender
+     * @return int
      */
-    public function getResistanceModifier()
+    public function getResistanceModifier(MountainDwarfGender $mountainDwarfGender)
     {
-        return self::RESISTANCE_MODIFIER;
+        return parent::getResistanceModifier($mountainDwarfGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseResistance()
+    {
+        return self::BASE_RESISTANCE;
     }
 
     /**
      * Get senses modifier
      *
-     * @return integer
+     * @param MountainDwarfGender $mountainDwarfGender
+     * @return int
      */
-    public function getSensesModifier()
+    public function getSensesModifier(MountainDwarfGender $mountainDwarfGender)
     {
-        return self::SENSES_MODIFIER;
+        return parent::getSensesModifier($mountainDwarfGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseSenses()
+    {
+        return self::BASE_SENSES;
     }
 
     /**

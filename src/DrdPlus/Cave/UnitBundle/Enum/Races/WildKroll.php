@@ -1,118 +1,182 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Enum\Races;
 
+use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\WildKrollGender;
+
 /**
  * WildKroll
  */
 class WildKroll extends Race
 {
     const CODE = 'wild-kroll';
-    const LABEL = 'Divoký Kroll';
-    const STRENGTH_MODIFIER = +3;
-    const AGILITY_MODIFIER = -1;
-    const KNACK_MODIFIER = -2;
-    const WILL_MODIFIER = +2;
-    const INTELLIGENCE_MODIFIER = -3;
-    const CHARISMA_MODIFIER = -2;
-    const RESISTANCE_MODIFIER = 0;
-    const SENSES_MODIFIER = 0;
+
+    const BASE_STRENGTH = +3;
+    const BASE_AGILITY = -1;
+    const BASE_KNACK = -2;
+    const BASE_WILL = +2;
+    const BASE_INTELLIGENCE = -3;
+    const BASE_CHARISMA = -2;
+    const BASE_RESISTANCE = 0;
+    const BASE_SENSES = 0;
 
     /**
      * @return string
      */
-    public function getCode()
+    protected function getRaceCode()
     {
         return self::CODE;
     }
 
     /**
-     * Get label
+     * Get strength modifier
      *
-     * @return string
+     * @param WildKrollGender $wildKrollGender
+     * @return int
      */
-    public function getLabel()
+    public function getStrengthModifier(WildKrollGender $wildKrollGender)
     {
-        return self::LABEL;
+        return parent::getStrengthModifier($wildKrollGender);
     }
 
     /**
-     * Get strength modifier
-     *
-     * @return integer
+     * @return int
      */
-    public function getStrengthModifier()
+    protected function getBaseStrength()
     {
-        return self::STRENGTH_MODIFIER;
+        return self::BASE_STRENGTH;
     }
 
     /**
      * Get agility modifier
      *
-     * @return integer
+     * @param WildKrollGender $wildKrollGender
+     * @return int
      */
-    public function getAgilityModifier()
+    public function getAgilityModifier(WildKrollGender $wildKrollGender)
     {
-        return self::AGILITY_MODIFIER;
+        return parent::getAgilityModifier($wildKrollGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseAgility()
+    {
+        return self::BASE_AGILITY;
     }
 
     /**
      * Get knack modifier
      *
-     * @return integer
+     * @param WildKrollGender $wildKrollGender
+     * @return int
      */
-    public function getKnackModifier()
+    public function getKnackModifier(WildKrollGender $wildKrollGender)
     {
-        return self::KNACK_MODIFIER;
+        return parent::getKnackModifier($wildKrollGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseKnack()
+    {
+        return self::BASE_KNACK;
     }
 
     /**
      * Get will modifier
      *
-     * @return integer
+     * @param WildKrollGender $wildKrollGender
+     * @return int
      */
-    public function getWillModifier()
+    public function getWillModifier(WildKrollGender $wildKrollGender)
     {
-        return self::WILL_MODIFIER;
+        return parent::getWillModifier($wildKrollGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseWill()
+    {
+        return self::BASE_WILL;
     }
 
     /**
      * Get intelligence modifier
      *
-     * @return integer
+     * @param WildKrollGender $wildKrollGender
+     * @return int
      */
-    public function getIntelligenceModifier()
+    public function getIntelligenceModifier(WildKrollGender $wildKrollGender)
     {
-        return self::INTELLIGENCE_MODIFIER;
+        return parent::getIntelligenceModifier($wildKrollGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseIntelligence()
+    {
+        return self::BASE_INTELLIGENCE;
     }
 
     /**
      * Get charisma modifier
      *
-     * @return integer
+     * @param WildKrollGender $wildKrollGender
+     * @return int
      */
-    public function getCharismaModifier()
+    public function getCharismaModifier(WildKrollGender $wildKrollGender)
     {
-        return self::CHARISMA_MODIFIER;
+        return parent::getCharismaModifier($wildKrollGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseCharisma()
+    {
+        return self::BASE_CHARISMA;
     }
 
     /**
      * Get resistance modifier
      *
-     * @return integer
+     * @param WildKrollGender $wildKrollGender
+     * @return int
      */
-    public function getResistanceModifier()
+    public function getResistanceModifier(WildKrollGender $wildKrollGender)
     {
-        return self::RESISTANCE_MODIFIER;
+        return parent::getResistanceModifier($wildKrollGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseResistance()
+    {
+        return self::BASE_RESISTANCE;
     }
 
     /**
      * Get senses modifier
      *
-     * @return integer
+     * @param WildKrollGender $wildKrollGender
+     * @return int
      */
-    public function getSensesModifier()
+    public function getSensesModifier(WildKrollGender $wildKrollGender)
     {
-        return self::SENSES_MODIFIER;
+        return parent::getSensesModifier($wildKrollGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseSenses()
+    {
+        return self::BASE_SENSES;
     }
 
     /**

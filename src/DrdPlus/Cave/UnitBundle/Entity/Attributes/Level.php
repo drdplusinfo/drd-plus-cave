@@ -123,7 +123,7 @@ class Level
     /**
      * Get id
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -307,7 +307,7 @@ class Level
     /**
      * Get character level
      *
-     * @return integer
+     * @return int
      */
     public function getCharacterLevel()
     {

@@ -1,9 +1,7 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Enum\Races;
 
-use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\Female;
-use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\Gender;
-use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\HobbitFemale;
+use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\HobbitGender;
 
 /**
  * Hobbit
@@ -11,127 +9,174 @@ use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\HobbitFemale;
 class Hobbit extends Race
 {
     const CODE = 'hobbit';
-    const LABEL = 'Hobit';
-    const STRENGTH_MODIFIER = -3;
-    const AGILITY_MODIFIER = +1;
-    const KNACK_MODIFIER = +1;
-    const WILL_MODIFIER = 0;
-    const INTELLIGENCE_MODIFIER = -1;
-    const CHARISMA_MODIFIER = +2;
-    const RESISTANCE_MODIFIER = 0;
-    const SENSES_MODIFIER = 0;
 
-    /**
-     * @param string $genderCode
-     * @return Gender
-     * @throws \RuntimeException
-     */
-    protected function createGender($genderCode)
-    {
-        switch ($genderCode) {
-            case Female::CODE :
-                return new HobbitFemale();
-            default :
-                return parent::createGender($genderCode);
-        }
-    }
+    const BASE_STRENGTH = -3;
+    const BASE_AGILITY = +1;
+    const BASE_KNACK = +1;
+    const BASE_WILL = 0;
+    const BASE_INTELLIGENCE = -1;
+    const BASE_CHARISMA = +2;
+    const BASE_RESISTANCE = 0;
+    const BASE_SENSES = 0;
 
     /**
      * @return string
      */
-    public function getCode()
+    protected function getRaceCode()
     {
         return self::CODE;
     }
 
     /**
-     * Get label
+     * Get strength modifier
      *
-     * @return string
+     * @param HobbitGender $hobbitGender
+     * @return int
      */
-    public function getLabel()
+    public function getStrengthModifier(HobbitGender $hobbitGender)
     {
-        return self::LABEL;
+        return parent::getStrengthModifier($hobbitGender);
     }
 
     /**
-     * Get strength modifier
-     *
-     * @return integer
+     * @return int
      */
-    public function getStrengthModifier()
+    protected function getBaseStrength()
     {
-        return self::STRENGTH_MODIFIER;
+        return self::BASE_STRENGTH;
     }
 
     /**
      * Get agility modifier
      *
-     * @return integer
+     * @param HobbitGender $hobbitGender
+     * @return int
      */
-    public function getAgilityModifier()
+    public function getAgilityModifier(HobbitGender $hobbitGender)
     {
-        return self::AGILITY_MODIFIER;
+        return parent::getAgilityModifier($hobbitGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseAgility()
+    {
+        return self::BASE_AGILITY;
     }
 
     /**
      * Get knack modifier
      *
-     * @return integer
+     * @param HobbitGender $hobbitGender
+     * @return int
      */
-    public function getKnackModifier()
+    public function getKnackModifier(HobbitGender $hobbitGender)
     {
-        return self::KNACK_MODIFIER;
+        return parent::getKnackModifier($hobbitGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseKnack()
+    {
+        return self::BASE_KNACK;
     }
 
     /**
      * Get will modifier
      *
-     * @return integer
+     * @param HobbitGender $hobbitGender
+     * @return int
      */
-    public function getWillModifier()
+    public function getWillModifier(HobbitGender $hobbitGender)
     {
-        return self::WILL_MODIFIER;
+        return parent::getWillModifier($hobbitGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseWill()
+    {
+        return self::BASE_WILL;
     }
 
     /**
      * Get intelligence modifier
      *
-     * @return integer
+     * @param HobbitGender $hobbitGender
+     * @return int
      */
-    public function getIntelligenceModifier()
+    public function getIntelligenceModifier(HobbitGender $hobbitGender)
     {
-        return self::INTELLIGENCE_MODIFIER;
+        return parent::getIntelligenceModifier($hobbitGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseIntelligence()
+    {
+        return self::BASE_INTELLIGENCE;
     }
 
     /**
      * Get charisma modifier
      *
-     * @return integer
+     * @param HobbitGender $hobbitGender
+     * @return int
      */
-    public function getCharismaModifier()
+    public function getCharismaModifier(HobbitGender $hobbitGender)
     {
-        return self::CHARISMA_MODIFIER;
+        return parent::getCharismaModifier($hobbitGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseCharisma()
+    {
+        return self::BASE_CHARISMA;
     }
 
     /**
      * Get resistance modifier
      *
-     * @return integer
+     * @param HobbitGender $hobbitGender
+     * @return int
      */
-    public function getResistanceModifier()
+    public function getResistanceModifier(HobbitGender $hobbitGender)
     {
-        return self::RESISTANCE_MODIFIER;
+        return parent::getResistanceModifier($hobbitGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseResistance()
+    {
+        return self::BASE_RESISTANCE;
     }
 
     /**
      * Get senses modifier
      *
-     * @return integer
+     * @param HobbitGender $hobbitGender
+     * @return int
      */
-    public function getSensesModifier()
+    public function getSensesModifier(HobbitGender $hobbitGender)
     {
-        return self::SENSES_MODIFIER;
+        return parent::getSensesModifier($hobbitGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseSenses()
+    {
+        return self::BASE_SENSES;
     }
 
     /**

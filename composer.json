@@ -26,7 +26,7 @@
         "sensio/distribution-bundle": "~3.0",
         "sensio/framework-extra-bundle": "~3.0",
         "incenteev/composer-parameter-handler": "~2.0",
-        "jaroslavtyc/doctrineum": "1.0.*@alpha"
+        "jaroslavtyc/doctrineum": "1.*@alpha"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

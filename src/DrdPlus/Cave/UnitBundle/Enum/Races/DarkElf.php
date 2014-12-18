@@ -1,118 +1,181 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Enum\Races;
 
+use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\DarkElfGender;
+
 /**
  * DarkElf
  */
 class DarkElf extends Race
 {
     const CODE = 'dark-elf';
-    const LABEL = 'Temný Elf';
-    const STRENGTH_MODIFIER = 0;
-    const AGILITY_MODIFIER = 0;
-    const KNACK_MODIFIER = 0;
-    const WILL_MODIFIER = 0;
-    const INTELLIGENCE_MODIFIER = +1;
-    const CHARISMA_MODIFIER = 0;
-    const RESISTANCE_MODIFIER = 0;
-    const SENSES_MODIFIER = 0;
+
+    const BASE_STRENGTH = 0;
+    const BASE_AGILITY = 0;
+    const BASE_KNACK = 0;
+    const BASE_WILL = 0;
+    const BASE_INTELLIGENCE = +1;
+    const BASE_CHARISMA = 0;
+    const BASE_RESISTANCE = 0;
+    const BASE_SENSES = 0;
 
     /**
      * @return string
      */
-    public function getCode()
+    protected function getRaceCode()
     {
         return self::CODE;
     }
 
     /**
-     * Get label
+     * Get strength modifier
      *
-     * @return string 
+     * @param DarkElfGender $darkElfGender
+     * @return int
      */
-    public function getLabel()
+    public function getStrengthModifier(DarkElfGender $darkElfGender)
     {
-        return self::LABEL;
+        return parent::getStrengthModifier($darkElfGender);
     }
 
     /**
-     * Get strength modifier
-     *
-     * @return integer 
+     * @return int
      */
-    public function getStrengthModifier()
-    {
-        return self::STRENGTH_MODIFIER;
+    protected function getBaseStrength() {
+        return self::BASE_STRENGTH;
     }
 
     /**
      * Get agility modifier
      *
-     * @return integer 
+     * @param DarkElfGender $darkElfGender
+     * @return int
      */
-    public function getAgilityModifier()
+    public function getAgilityModifier(DarkElfGender $darkElfGender)
     {
-        return self::AGILITY_MODIFIER;
+        return parent::getAgilityModifier($darkElfGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseAgility()
+    {
+        return self::BASE_AGILITY;
     }
 
     /**
      * Get knack modifier
      *
-     * @return integer 
+     * @param DarkElfGender $darkElfGender
+     * @return int
      */
-    public function getKnackModifier()
+    public function getKnackModifier(DarkElfGender $darkElfGender)
     {
-        return self::KNACK_MODIFIER;
+        return parent::getKnackModifier($darkElfGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseKnack()
+    {
+        return self::BASE_KNACK;
     }
 
     /**
      * Get will modifier
      *
-     * @return integer 
+     * @param DarkElfGender $darkElfGender
+     * @return int
      */
-    public function getWillModifier()
+    public function getWillModifier(DarkElfGender $darkElfGender)
     {
-        return self::WILL_MODIFIER;
+        return parent::getWillModifier($darkElfGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseWill()
+    {
+        return self::BASE_WILL;
     }
 
     /**
      * Get intelligence modifier
      *
-     * @return integer 
+     * @param DarkElfGender $darkElfGender
+     * @return int
      */
-    public function getIntelligenceModifier()
+    public function getIntelligenceModifier(DarkElfGender $darkElfGender)
     {
-        return self::INTELLIGENCE_MODIFIER;
+        return parent::getIntelligenceModifier($darkElfGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseIntelligence()
+    {
+        return self::BASE_INTELLIGENCE;
     }
 
     /**
      * Get charisma modifier
      *
-     * @return integer 
+     * @param DarkElfGender $darkElfGender
+     * @return int
      */
-    public function getCharismaModifier()
+    public function getCharismaModifier(DarkElfGender $darkElfGender)
     {
-        return self::CHARISMA_MODIFIER;
+        return parent::getCharismaModifier($darkElfGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseCharisma()
+    {
+        return self::BASE_CHARISMA;
     }
 
     /**
      * Get resistance modifier
      *
-     * @return integer 
+     * @param DarkElfGender $darkElfGender
+     * @return int
      */
-    public function getResistanceModifier()
+    public function getResistanceModifier(DarkElfGender $darkElfGender)
     {
-        return self::RESISTANCE_MODIFIER;
+        return parent::getResistanceModifier($darkElfGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseResistance()
+    {
+        return self::BASE_RESISTANCE;
     }
 
     /**
      * Get senses modifier
      *
-     * @return integer 
+     * @param DarkElfGender $darkElfGender
+     * @return int
      */
-    public function getSensesModifier()
+    public function getSensesModifier(DarkElfGender $darkElfGender)
     {
-        return self::SENSES_MODIFIER;
+        return parent::getSensesModifier($darkElfGender);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getBaseSenses()
+    {
+        return self::BASE_SENSES;
     }
 
     /**

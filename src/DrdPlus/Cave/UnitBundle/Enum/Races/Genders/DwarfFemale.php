@@ -4,12 +4,14 @@ namespace DrdPlus\Cave\UnitBundle\Enum\Races\Genders;
 /**
  * DwarfFemale
  */
-class DwarfFemale extends Female
+class DwarfFemale extends DwarfGender
 {
+    use IsFemale;
+
     /**
      * Get knack modifier
      *
-     * @return integer
+     * @return int
      */
     public function getKnackModifier()
     {
@@ -19,7 +21,7 @@ class DwarfFemale extends Female
     /**
      * Get intelligence modifier
      *
-     * @return integer
+     * @return int
      */
     public function getIntelligenceModifier()
     {

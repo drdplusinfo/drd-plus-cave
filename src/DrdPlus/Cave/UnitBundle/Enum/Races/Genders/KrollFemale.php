@@ -4,13 +4,15 @@ namespace DrdPlus\Cave\UnitBundle\Enum\Races\Genders;
 /**
  * KrollFemale
  */
-class KrollFemale extends Female
+class KrollFemale extends KrollGender
 {
+
+    use IsFemale;
 
     /**
      * Get strength modifier
      *
-     * @return integer
+     * @return int
      */
     public function getStrengthModifier()
     {
@@ -20,7 +22,7 @@ class KrollFemale extends Female
     /**
      * Get agility modifier
      *
-     * @return integer
+     * @return int
      */
     public function getAgilityModifier()
     {
@@ -30,7 +32,7 @@ class KrollFemale extends Female
     /**
      * Get will modifier
      *
-     * @return integer
+     * @return int
      */
     public function getWillModifier()
     {
@@ -40,7 +42,7 @@ class KrollFemale extends Female
     /**
      * Get charisma modifier
      *
-     * @return integer
+     * @return int
      */
     public function getCharismaModifier()
     {

@@ -33,7 +33,7 @@ class TheurgistLevel extends ProfessionLevel
     /**
      * Get id
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -52,7 +52,7 @@ class TheurgistLevel extends ProfessionLevel
     }
 
     /**
-     * @return integer
+     * @return int
      */
     public function getProfessionLevel()
     {

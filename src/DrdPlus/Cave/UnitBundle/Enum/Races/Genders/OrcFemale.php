@@ -4,12 +4,14 @@ namespace DrdPlus\Cave\UnitBundle\Enum\Races\Genders;
 /**
  * OrcFemale
  */
-class OrcFemale extends Female
+class OrcFemale extends OrcGender
 {
+    use IsFemale;
+
     /**
      * Get strength modifier
      *
-     * @return integer
+     * @return int
      */
     public function getStrengthModifier()
     {
@@ -19,7 +21,7 @@ class OrcFemale extends Female
     /**
      * Get will modifier
      *
-     * @return integer
+     * @return int
      */
     public function getWillModifier()
     {

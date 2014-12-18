@@ -11,7 +11,7 @@ abstract class ProfessionLevel
 {
 
     /**
-     * @return integer
+     * @return int
      */
     abstract public function getProfessionLevel();
 
@@ -30,7 +30,7 @@ abstract class ProfessionLevel
     /**
      * Get strength modifier
      *
-     * @return integer
+     * @return int
      */
     public function getStrengthFirstLevelModifier()
     {
@@ -60,7 +60,7 @@ abstract class ProfessionLevel
     /**
      * Get agility modifier
      *
-     * @return integer
+     * @return int
      */
     public function getAgilityFirstLevelModifier()
     {
@@ -70,7 +70,7 @@ abstract class ProfessionLevel
     /**
      * Get knack modifier
      *
-     * @return integer
+     * @return int
      */
     public function getKnackFirstLevelModifier()
     {
@@ -80,7 +80,7 @@ abstract class ProfessionLevel
     /**
      * Get will modifier
      *
-     * @return integer
+     * @return int
      */
     public function getWillFirstLevelModifier()
     {
@@ -90,7 +90,7 @@ abstract class ProfessionLevel
     /**
      * Get intelligence modifier
      *
-     * @return integer
+     * @return int
      */
     public function getIntelligenceFirstLevelModifier()
     {
@@ -100,7 +100,7 @@ abstract class ProfessionLevel
     /**
      * Get charisma modifier
      *
-     * @return integer
+     * @return int
      */
     public function getCharismaFirstLevelModifier()
     {

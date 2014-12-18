@@ -4,12 +4,14 @@ namespace DrdPlus\Cave\UnitBundle\Enum\Races\Genders;
 /**
  * ElfFemale
  */
-class ElfFemale extends Female
+class ElfFemale extends ElfGender
 {
+    use IsFemale;
+
     /**
      * Get strength modifier
      *
-     * @return integer
+     * @return int
      */
     public function getStrengthModifier()
     {
@@ -19,7 +21,7 @@ class ElfFemale extends Female
     /**
      * Get knack modifier
      *
-     * @return integer
+     * @return int
      */
     public function getKnackModifier()
     {
@@ -29,7 +31,7 @@ class ElfFemale extends Female
     /**
      * Get intelligence modifier
      *
-     * @return integer
+     * @return int
      */
     public function getIntelligenceModifier()
     {
@@ -39,7 +41,7 @@ class ElfFemale extends Female
     /**
      * Get charisma modifier
      *
-     * @return integer
+     * @return int
      */
     public function getCharismaModifier()
     {
