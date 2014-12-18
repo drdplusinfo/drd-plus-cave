@@ -9,5 +9,44 @@ class WildKrollFemale extends WildKrollGender
 
     use IsFemale;
 
-    //TODO check modifiers
+    /**
+     * Get strength modifier
+     *
+     * @return int
+     */
+    public function getStrengthModifier()
+    {
+        return -1;
+    }
+
+    /**
+     * Get agility modifier
+     *
+     * @return int
+     */
+    public function getAgilityModifier()
+    {
+        return +1;
+    }
+
+    /**
+     * Get will modifier
+     *
+     * @return int
+     */
+    public function getWillModifier()
+    {
+        return -1;
+    }
+
+    /**
+     * Get charisma modifier
+     *
+     * @return int
+     */
+    public function getCharismaModifier()
+    {
+        return +1;
+    }
+
 }

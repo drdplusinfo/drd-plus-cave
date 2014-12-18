@@ -8,5 +8,24 @@ class MountainDwarfFemale extends MountainDwarfGender
 {
     use IsFemale;
 
-    // TODO check modifiers
+    /**
+     * Get knack modifier
+     *
+     * @return int
+     */
+    public function getKnackModifier()
+    {
+        return -1;
+    }
+
+    /**
+     * Get intelligence modifier
+     *
+     * @return int
+     */
+    public function getIntelligenceModifier()
+    {
+        return +1;
+    }
+
 }

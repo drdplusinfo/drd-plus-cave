@@ -8,6 +8,24 @@ class GoblinFemale extends GoblinGender
 {
     use IsFemale;
 
-    // TODO check the modifiers
+    /**
+     * Get strength modifier
+     *
+     * @return int
+     */
+    public function getStrengthModifier()
+    {
+        return -1;
+    }
+
+    /**
+     * Get will modifier
+     *
+     * @return int
+     */
+    public function getWillModifier()
+    {
+        return +1;
+    }
 
 }
