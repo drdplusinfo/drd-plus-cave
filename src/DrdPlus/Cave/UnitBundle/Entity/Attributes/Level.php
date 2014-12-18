@@ -21,7 +21,7 @@ class Level
     /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
@@ -31,6 +31,7 @@ class Level
      * @var Person
      *
      * @ORM\ManyToOne(targetEntity="DrdPlus\Cave\UnitBundle\Entity\Person", inversedBy="levels")
+     * @ORM\JoinColumn(referencedColumnName="id")
      */
     private $person;
 
@@ -74,7 +75,7 @@ class Level
     /**
      * @var integer
      *
-     * @ORM\Column(name="levelNumber", type="smallint")
+     * @ORM\Column(type="smallint")
      */
     private $characterLevel;
 

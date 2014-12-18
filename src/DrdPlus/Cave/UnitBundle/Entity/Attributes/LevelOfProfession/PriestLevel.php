@@ -17,7 +17,7 @@ class PriestLevel extends ProfessionLevel
     /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
@@ -26,7 +26,7 @@ class PriestLevel extends ProfessionLevel
     /**
      * @var integer
      *
-     * @ORM\Column(name="professionLevel", type="integer")
+     * @ORM\Column(type="integer")
      */
     private $professionLevel;
 

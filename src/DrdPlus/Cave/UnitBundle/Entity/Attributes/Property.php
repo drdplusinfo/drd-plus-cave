@@ -33,7 +33,7 @@ class Property
     /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
@@ -42,28 +42,28 @@ class Property
     /**
      * @var integer
      *
-     * @ORM\Column(name="value", type="integer")
+     * @ORM\Column(type="integer")
      */
     private $value;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="code", type="string", length=16)
+     * @ORM\Column(type="string", length=16)
      */
     private $code;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="label", type="string", length=255)
+     * @ORM\Column(type="string", length=255)
      */
     private $label;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="shortLabel", type="string", length=255)
+     * @ORM\Column(type="string", length=255)
      */
     private $shortLabel;
 

@@ -4,6 +4,7 @@ namespace DrdPlus\Cave\UnitBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Level;
+use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\Gender;
 use DrdPlus\Cave\UnitBundle\Enum\Races\Race;
 
 /**
@@ -17,7 +18,7 @@ class Person
     /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
@@ -26,33 +27,30 @@ class Person
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(type="string", length=255)
      */
     private $name;
 
     /**
      * @var array
      *
-     * @ORM\Column(name="raceAndGenderCodes", type="simple_array")
+     * @ORM\Column(type="gender")
      */
-    private $raceAndGenderCodes;
+    private $gender;
 
     /**
      * @var Race
+     *
+     * @ORM\Column(type="race")
      */
     private $race;
 
     /**
      * @var Level[]
      *
-     * @ORM\OneToMany(targetEntity="DrdPlus\Cave\UnitBundle\Entity\Attributes\Level", mappedBy="level")
+     * @ORM\OneToMany(targetEntity="DrdPlus\Cave\UnitBundle\Entity\Attributes\Level", mappedBy="person")
      */
     private $levels;
-
-    public function __construct()
-    {
-        $this->raceAndGenderCodes = ['raceCode' => null, 'genderCode' => null];
-    }
 
     /**
      * Get id
@@ -88,42 +86,11 @@ class Person
     }
 
     /**
-     * @param string $raceCode
+     * @param Race $race
      */
-    public function setRaceCode($raceCode)
+    public function setRace(Race $race)
     {
-        $this->raceAndGenderCodes['raceCode'] = $raceCode;
-    }
-
-    /**
-     * @param string $genderCode
-     */
-    public function setGenderCode($genderCode)
-    {
-        $this->raceAndGenderCodes['genderCode'] = $genderCode;
-    }
-
-    /**
-     * Set race and gender codes
-     *
-     * @param string $raceAndGenderCodes
-     * @return Person
-     */
-    public function setRaceAndGenderCodes($raceAndGenderCodes)
-    {
-        $this->raceAndGenderCodes = $raceAndGenderCodes;
-
-        return $this;
-    }
-
-    /**
-     * Get race and gender codes
-     *
-     * @return array
-     */
-    public function getRaceAndGenderCodes()
-    {
-        return $this->raceAndGenderCodes;
+        $this->race = $race;
     }
 
     /**
@@ -134,6 +101,24 @@ class Person
     public function getRace()
     {
         return $this->race;
+    }
+
+    /**
+     * @param Gender $gender
+     */
+    public function setGender(Gender $gender)
+    {
+        $this->gender = $gender;
+    }
+
+    /**
+     * Get gender
+     *
+     * @return Gender
+     */
+    public function getGender()
+    {
+        return $this->gender;
     }
 
     /**
