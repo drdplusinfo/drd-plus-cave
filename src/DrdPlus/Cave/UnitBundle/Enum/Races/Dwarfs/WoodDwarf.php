@@ -1,23 +1,23 @@
 <?php
-namespace DrdPlus\Cave\UnitBundle\Enum\Races;
+namespace DrdPlus\Cave\UnitBundle\Enum\Races\Dwarfs;
 
-use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\WildKrollGender;
+use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\WoodDwarfGender;
 
 /**
- * WildKroll
+ * WoodDwarf
  */
-class WildKroll extends Race
+class WoodDwarf extends Dwarf
 {
-    const CODE = 'wild-kroll';
+    const CODE = 'wood-dwarf';
 
-    const BASE_STRENGTH = +3;
+    const BASE_STRENGTH = +1;
     const BASE_AGILITY = -1;
-    const BASE_KNACK = -2;
-    const BASE_WILL = +2;
-    const BASE_INTELLIGENCE = -3;
-    const BASE_CHARISMA = -2;
-    const BASE_RESISTANCE = 0;
-    const BASE_SENSES = 0;
+    const BASE_KNACK = 0;
+    const BASE_WILL = +1;
+    const BASE_INTELLIGENCE = -1;
+    const BASE_CHARISMA = -1;
+    const BASE_RESISTANCE = +1;
+    const BASE_SENSES = -1;
 
     /**
      * @return string
@@ -30,12 +30,12 @@ class WildKroll extends Race
     /**
      * Get strength modifier
      *
-     * @param WildKrollGender $wildKrollGender
+     * @param WoodDwarfGender $woodDwarfGender
      * @return int
      */
-    public function getStrengthModifier(WildKrollGender $wildKrollGender)
+    public function getStrengthModifier(WoodDwarfGender $woodDwarfGender)
     {
-        return parent::getStrengthModifier($wildKrollGender);
+        return parent::getStrengthModifier($woodDwarfGender);
     }
 
     /**
@@ -49,12 +49,12 @@ class WildKroll extends Race
     /**
      * Get agility modifier
      *
-     * @param WildKrollGender $wildKrollGender
+     * @param WoodDwarfGender $woodDwarfGender
      * @return int
      */
-    public function getAgilityModifier(WildKrollGender $wildKrollGender)
+    public function getAgilityModifier(WoodDwarfGender $woodDwarfGender)
     {
-        return parent::getAgilityModifier($wildKrollGender);
+        return parent::getAgilityModifier($woodDwarfGender);
     }
 
     /**
@@ -68,12 +68,12 @@ class WildKroll extends Race
     /**
      * Get knack modifier
      *
-     * @param WildKrollGender $wildKrollGender
+     * @param WoodDwarfGender $woodDwarfGender
      * @return int
      */
-    public function getKnackModifier(WildKrollGender $wildKrollGender)
+    public function getKnackModifier(WoodDwarfGender $woodDwarfGender)
     {
-        return parent::getKnackModifier($wildKrollGender);
+        return parent::getKnackModifier($woodDwarfGender);
     }
 
     /**
@@ -87,12 +87,12 @@ class WildKroll extends Race
     /**
      * Get will modifier
      *
-     * @param WildKrollGender $wildKrollGender
+     * @param WoodDwarfGender $woodDwarfGender
      * @return int
      */
-    public function getWillModifier(WildKrollGender $wildKrollGender)
+    public function getWillModifier(WoodDwarfGender $woodDwarfGender)
     {
-        return parent::getWillModifier($wildKrollGender);
+        return parent::getWillModifier($woodDwarfGender);
     }
 
     /**
@@ -106,12 +106,12 @@ class WildKroll extends Race
     /**
      * Get intelligence modifier
      *
-     * @param WildKrollGender $wildKrollGender
+     * @param WoodDwarfGender $woodDwarfGender
      * @return int
      */
-    public function getIntelligenceModifier(WildKrollGender $wildKrollGender)
+    public function getIntelligenceModifier(WoodDwarfGender $woodDwarfGender)
     {
-        return parent::getIntelligenceModifier($wildKrollGender);
+        return parent::getIntelligenceModifier($woodDwarfGender);
     }
 
     /**
@@ -125,12 +125,12 @@ class WildKroll extends Race
     /**
      * Get charisma modifier
      *
-     * @param WildKrollGender $wildKrollGender
+     * @param WoodDwarfGender $woodDwarfGender
      * @return int
      */
-    public function getCharismaModifier(WildKrollGender $wildKrollGender)
+    public function getCharismaModifier(WoodDwarfGender $woodDwarfGender)
     {
-        return parent::getCharismaModifier($wildKrollGender);
+        return parent::getCharismaModifier($woodDwarfGender);
     }
 
     /**
@@ -144,12 +144,12 @@ class WildKroll extends Race
     /**
      * Get resistance modifier
      *
-     * @param WildKrollGender $wildKrollGender
+     * @param WoodDwarfGender $woodDwarfGender
      * @return int
      */
-    public function getResistanceModifier(WildKrollGender $wildKrollGender)
+    public function getResistanceModifier(WoodDwarfGender $woodDwarfGender)
     {
-        return parent::getResistanceModifier($wildKrollGender);
+        return parent::getResistanceModifier($woodDwarfGender);
     }
 
     /**
@@ -163,12 +163,12 @@ class WildKroll extends Race
     /**
      * Get senses modifier
      *
-     * @param WildKrollGender $wildKrollGender
+     * @param WoodDwarfGender $woodDwarfGender
      * @return int
      */
-    public function getSensesModifier(WildKrollGender $wildKrollGender)
+    public function getSensesModifier(WoodDwarfGender $woodDwarfGender)
     {
-        return parent::getSensesModifier($wildKrollGender);
+        return parent::getSensesModifier($woodDwarfGender);
     }
 
     /**
@@ -184,7 +184,7 @@ class WildKroll extends Race
      */
     public function hasInfravision()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -192,7 +192,7 @@ class WildKroll extends Race
      */
     public function hasNaturalRegeneration()
     {
-        return true;
+        return false;
     }
 
     /**
@@ -200,6 +200,6 @@ class WildKroll extends Race
      */
     public function requiresDungeonMasterAgreement()
     {
-        return true;
+        return false;
     }
 }

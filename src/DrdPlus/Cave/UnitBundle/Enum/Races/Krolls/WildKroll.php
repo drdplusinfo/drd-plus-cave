@@ -1,21 +1,21 @@
 <?php
-namespace DrdPlus\Cave\UnitBundle\Enum\Races;
+namespace DrdPlus\Cave\UnitBundle\Enum\Races\Krolls;
 
-use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\HumanGender;
+use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\WildKrollGender;
 
 /**
- * Human
+ * WildKroll
  */
-class Human extends Race
+class WildKroll extends Kroll
 {
-    const CODE = 'human';
+    const CODE = 'wild-kroll';
 
-    const BASE_STRENGTH = 0;
-    const BASE_AGILITY = 0;
-    const BASE_KNACK = 0;
-    const BASE_WILL = 0;
-    const BASE_INTELLIGENCE = 0;
-    const BASE_CHARISMA = 0;
+    const BASE_STRENGTH = +3;
+    const BASE_AGILITY = -1;
+    const BASE_KNACK = -2;
+    const BASE_WILL = +2;
+    const BASE_INTELLIGENCE = -3;
+    const BASE_CHARISMA = -2;
     const BASE_RESISTANCE = 0;
     const BASE_SENSES = 0;
 
@@ -30,30 +30,31 @@ class Human extends Race
     /**
      * Get strength modifier
      *
-     * @param HumanGender $humanGender
+     * @param WildKrollGender $wildKrollGender
      * @return int
      */
-    public function getStrengthModifier(HumanGender $humanGender)
+    public function getStrengthModifier(WildKrollGender $wildKrollGender)
     {
-        return parent::getStrengthModifier($humanGender);
+        return parent::getStrengthModifier($wildKrollGender);
     }
 
     /**
      * @return int
      */
-    protected function getBaseStrength() {
+    protected function getBaseStrength()
+    {
         return self::BASE_STRENGTH;
     }
 
     /**
      * Get agility modifier
      *
-     * @param HumanGender $humanGender
+     * @param WildKrollGender $wildKrollGender
      * @return int
      */
-    public function getAgilityModifier(HumanGender $humanGender)
+    public function getAgilityModifier(WildKrollGender $wildKrollGender)
     {
-        return parent::getAgilityModifier($humanGender);
+        return parent::getAgilityModifier($wildKrollGender);
     }
 
     /**
@@ -67,12 +68,12 @@ class Human extends Race
     /**
      * Get knack modifier
      *
-     * @param HumanGender $humanGender
+     * @param WildKrollGender $wildKrollGender
      * @return int
      */
-    public function getKnackModifier(HumanGender $humanGender)
+    public function getKnackModifier(WildKrollGender $wildKrollGender)
     {
-        return parent::getKnackModifier($humanGender);
+        return parent::getKnackModifier($wildKrollGender);
     }
 
     /**
@@ -86,12 +87,12 @@ class Human extends Race
     /**
      * Get will modifier
      *
-     * @param HumanGender $humanGender
+     * @param WildKrollGender $wildKrollGender
      * @return int
      */
-    public function getWillModifier(HumanGender $humanGender)
+    public function getWillModifier(WildKrollGender $wildKrollGender)
     {
-        return parent::getWillModifier($humanGender);
+        return parent::getWillModifier($wildKrollGender);
     }
 
     /**
@@ -105,12 +106,12 @@ class Human extends Race
     /**
      * Get intelligence modifier
      *
-     * @param HumanGender $humanGender
+     * @param WildKrollGender $wildKrollGender
      * @return int
      */
-    public function getIntelligenceModifier(HumanGender $humanGender)
+    public function getIntelligenceModifier(WildKrollGender $wildKrollGender)
     {
-        return parent::getIntelligenceModifier($humanGender);
+        return parent::getIntelligenceModifier($wildKrollGender);
     }
 
     /**
@@ -124,12 +125,12 @@ class Human extends Race
     /**
      * Get charisma modifier
      *
-     * @param HumanGender $humanGender
+     * @param WildKrollGender $wildKrollGender
      * @return int
      */
-    public function getCharismaModifier(HumanGender $humanGender)
+    public function getCharismaModifier(WildKrollGender $wildKrollGender)
     {
-        return parent::getCharismaModifier($humanGender);
+        return parent::getCharismaModifier($wildKrollGender);
     }
 
     /**
@@ -143,12 +144,12 @@ class Human extends Race
     /**
      * Get resistance modifier
      *
-     * @param HumanGender $humanGender
+     * @param WildKrollGender $wildKrollGender
      * @return int
      */
-    public function getResistanceModifier(HumanGender $humanGender)
+    public function getResistanceModifier(WildKrollGender $wildKrollGender)
     {
-        return parent::getResistanceModifier($humanGender);
+        return parent::getResistanceModifier($wildKrollGender);
     }
 
     /**
@@ -162,12 +163,12 @@ class Human extends Race
     /**
      * Get senses modifier
      *
-     * @param HumanGender $humanGender
+     * @param WildKrollGender $wildKrollGender
      * @return int
      */
-    public function getSensesModifier(HumanGender $humanGender)
+    public function getSensesModifier(WildKrollGender $wildKrollGender)
     {
-        return parent::getSensesModifier($humanGender);
+        return parent::getSensesModifier($wildKrollGender);
     }
 
     /**
@@ -191,7 +192,7 @@ class Human extends Race
      */
     public function hasNaturalRegeneration()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -199,6 +200,6 @@ class Human extends Race
      */
     public function requiresDungeonMasterAgreement()
     {
-        return false;
+        return true;
     }
 }

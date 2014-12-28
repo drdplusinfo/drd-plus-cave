@@ -1,21 +1,22 @@
 <?php
-namespace DrdPlus\Cave\UnitBundle\Enum\Races;
+namespace DrdPlus\Cave\UnitBundle\Enum\Races\Hobbits;
 
-use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\DarkElfGender;
+use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\HobbitGender;
+use DrdPlus\Cave\UnitBundle\Enum\Races\Race;
 
 /**
- * DarkElf
+ * CommonHobbit
  */
-class DarkElf extends Race
+class CommonHobbit extends Race
 {
-    const CODE = 'dark-elf';
+    const CODE = 'common-hobbit';
 
-    const BASE_STRENGTH = 0;
-    const BASE_AGILITY = 0;
-    const BASE_KNACK = 0;
+    const BASE_STRENGTH = -3;
+    const BASE_AGILITY = +1;
+    const BASE_KNACK = +1;
     const BASE_WILL = 0;
-    const BASE_INTELLIGENCE = +1;
-    const BASE_CHARISMA = 0;
+    const BASE_INTELLIGENCE = -1;
+    const BASE_CHARISMA = +2;
     const BASE_RESISTANCE = 0;
     const BASE_SENSES = 0;
 
@@ -30,30 +31,31 @@ class DarkElf extends Race
     /**
      * Get strength modifier
      *
-     * @param DarkElfGender $darkElfGender
+     * @param HobbitGender $hobbitGender
      * @return int
      */
-    public function getStrengthModifier(DarkElfGender $darkElfGender)
+    public function getStrengthModifier(HobbitGender $hobbitGender)
     {
-        return parent::getStrengthModifier($darkElfGender);
+        return parent::getStrengthModifier($hobbitGender);
     }
 
     /**
      * @return int
      */
-    protected function getBaseStrength() {
+    protected function getBaseStrength()
+    {
         return self::BASE_STRENGTH;
     }
 
     /**
      * Get agility modifier
      *
-     * @param DarkElfGender $darkElfGender
+     * @param HobbitGender $hobbitGender
      * @return int
      */
-    public function getAgilityModifier(DarkElfGender $darkElfGender)
+    public function getAgilityModifier(HobbitGender $hobbitGender)
     {
-        return parent::getAgilityModifier($darkElfGender);
+        return parent::getAgilityModifier($hobbitGender);
     }
 
     /**
@@ -67,12 +69,12 @@ class DarkElf extends Race
     /**
      * Get knack modifier
      *
-     * @param DarkElfGender $darkElfGender
+     * @param HobbitGender $hobbitGender
      * @return int
      */
-    public function getKnackModifier(DarkElfGender $darkElfGender)
+    public function getKnackModifier(HobbitGender $hobbitGender)
     {
-        return parent::getKnackModifier($darkElfGender);
+        return parent::getKnackModifier($hobbitGender);
     }
 
     /**
@@ -86,12 +88,12 @@ class DarkElf extends Race
     /**
      * Get will modifier
      *
-     * @param DarkElfGender $darkElfGender
+     * @param HobbitGender $hobbitGender
      * @return int
      */
-    public function getWillModifier(DarkElfGender $darkElfGender)
+    public function getWillModifier(HobbitGender $hobbitGender)
     {
-        return parent::getWillModifier($darkElfGender);
+        return parent::getWillModifier($hobbitGender);
     }
 
     /**
@@ -105,12 +107,12 @@ class DarkElf extends Race
     /**
      * Get intelligence modifier
      *
-     * @param DarkElfGender $darkElfGender
+     * @param HobbitGender $hobbitGender
      * @return int
      */
-    public function getIntelligenceModifier(DarkElfGender $darkElfGender)
+    public function getIntelligenceModifier(HobbitGender $hobbitGender)
     {
-        return parent::getIntelligenceModifier($darkElfGender);
+        return parent::getIntelligenceModifier($hobbitGender);
     }
 
     /**
@@ -124,12 +126,12 @@ class DarkElf extends Race
     /**
      * Get charisma modifier
      *
-     * @param DarkElfGender $darkElfGender
+     * @param HobbitGender $hobbitGender
      * @return int
      */
-    public function getCharismaModifier(DarkElfGender $darkElfGender)
+    public function getCharismaModifier(HobbitGender $hobbitGender)
     {
-        return parent::getCharismaModifier($darkElfGender);
+        return parent::getCharismaModifier($hobbitGender);
     }
 
     /**
@@ -143,12 +145,12 @@ class DarkElf extends Race
     /**
      * Get resistance modifier
      *
-     * @param DarkElfGender $darkElfGender
+     * @param HobbitGender $hobbitGender
      * @return int
      */
-    public function getResistanceModifier(DarkElfGender $darkElfGender)
+    public function getResistanceModifier(HobbitGender $hobbitGender)
     {
-        return parent::getResistanceModifier($darkElfGender);
+        return parent::getResistanceModifier($hobbitGender);
     }
 
     /**
@@ -162,12 +164,12 @@ class DarkElf extends Race
     /**
      * Get senses modifier
      *
-     * @param DarkElfGender $darkElfGender
+     * @param HobbitGender $hobbitGender
      * @return int
      */
-    public function getSensesModifier(DarkElfGender $darkElfGender)
+    public function getSensesModifier(HobbitGender $hobbitGender)
     {
-        return parent::getSensesModifier($darkElfGender);
+        return parent::getSensesModifier($hobbitGender);
     }
 
     /**
@@ -183,7 +185,7 @@ class DarkElf extends Race
      */
     public function hasInfravision()
     {
-        return true;
+        return false;
     }
 
     /**
@@ -199,6 +201,6 @@ class DarkElf extends Race
      */
     public function requiresDungeonMasterAgreement()
     {
-        return true;
+        return false;
     }
 }

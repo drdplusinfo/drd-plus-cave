@@ -1,22 +1,22 @@
 <?php
-namespace DrdPlus\Cave\UnitBundle\Enum\Races;
+namespace DrdPlus\Cave\UnitBundle\Enum\Races\Elfs;
 
-use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\GreenElfGender;
+use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\DarkElfGender;
 
 /**
- * GreenElf
+ * DarkElf
  */
-class GreenElf extends Race
+class DarkElf extends Elf
 {
-    const CODE = 'green-elf';
+    const CODE = 'dark-elf';
 
-    const BASE_STRENGTH = -1;
-    const BASE_AGILITY = 1;
+    const BASE_STRENGTH = 0;
+    const BASE_AGILITY = 0;
     const BASE_KNACK = 0;
-    const BASE_WILL = -1;
-    const BASE_INTELLIGENCE = 1;
-    const BASE_CHARISMA = 1;
-    const BASE_RESISTANCE = -1;
+    const BASE_WILL = 0;
+    const BASE_INTELLIGENCE = +1;
+    const BASE_CHARISMA = 0;
+    const BASE_RESISTANCE = 0;
     const BASE_SENSES = 0;
 
     /**
@@ -30,31 +30,30 @@ class GreenElf extends Race
     /**
      * Get strength modifier
      *
-     * @param GreenElfGender $greenElfGender
+     * @param DarkElfGender $darkElfGender
      * @return int
      */
-    public function getStrengthModifier(GreenElfGender $greenElfGender)
+    public function getStrengthModifier(DarkElfGender $darkElfGender)
     {
-        return parent::getStrengthModifier($greenElfGender);
+        return parent::getStrengthModifier($darkElfGender);
     }
 
     /**
      * @return int
      */
-    protected function getBaseStrength()
-    {
+    protected function getBaseStrength() {
         return self::BASE_STRENGTH;
     }
 
     /**
      * Get agility modifier
      *
-     * @param GreenElfGender $greenElfGender
+     * @param DarkElfGender $darkElfGender
      * @return int
      */
-    public function getAgilityModifier(GreenElfGender $greenElfGender)
+    public function getAgilityModifier(DarkElfGender $darkElfGender)
     {
-        return parent::getAgilityModifier($greenElfGender);
+        return parent::getAgilityModifier($darkElfGender);
     }
 
     /**
@@ -68,12 +67,12 @@ class GreenElf extends Race
     /**
      * Get knack modifier
      *
-     * @param GreenElfGender $greenElfGender
+     * @param DarkElfGender $darkElfGender
      * @return int
      */
-    public function getKnackModifier(GreenElfGender $greenElfGender)
+    public function getKnackModifier(DarkElfGender $darkElfGender)
     {
-        return parent::getKnackModifier($greenElfGender);
+        return parent::getKnackModifier($darkElfGender);
     }
 
     /**
@@ -87,12 +86,12 @@ class GreenElf extends Race
     /**
      * Get will modifier
      *
-     * @param GreenElfGender $greenElfGender
+     * @param DarkElfGender $darkElfGender
      * @return int
      */
-    public function getWillModifier(GreenElfGender $greenElfGender)
+    public function getWillModifier(DarkElfGender $darkElfGender)
     {
-        return parent::getWillModifier($greenElfGender);
+        return parent::getWillModifier($darkElfGender);
     }
 
     /**
@@ -106,12 +105,12 @@ class GreenElf extends Race
     /**
      * Get intelligence modifier
      *
-     * @param GreenElfGender $greenElfGender
+     * @param DarkElfGender $darkElfGender
      * @return int
      */
-    public function getIntelligenceModifier(GreenElfGender $greenElfGender)
+    public function getIntelligenceModifier(DarkElfGender $darkElfGender)
     {
-        return parent::getIntelligenceModifier($greenElfGender);
+        return parent::getIntelligenceModifier($darkElfGender);
     }
 
     /**
@@ -125,12 +124,12 @@ class GreenElf extends Race
     /**
      * Get charisma modifier
      *
-     * @param GreenElfGender $greenElfGender
+     * @param DarkElfGender $darkElfGender
      * @return int
      */
-    public function getCharismaModifier(GreenElfGender $greenElfGender)
+    public function getCharismaModifier(DarkElfGender $darkElfGender)
     {
-        return parent::getCharismaModifier($greenElfGender);
+        return parent::getCharismaModifier($darkElfGender);
     }
 
     /**
@@ -144,12 +143,12 @@ class GreenElf extends Race
     /**
      * Get resistance modifier
      *
-     * @param GreenElfGender $greenElfGender
+     * @param DarkElfGender $darkElfGender
      * @return int
      */
-    public function getResistanceModifier(GreenElfGender $greenElfGender)
+    public function getResistanceModifier(DarkElfGender $darkElfGender)
     {
-        return parent::getResistanceModifier($greenElfGender);
+        return parent::getResistanceModifier($darkElfGender);
     }
 
     /**
@@ -163,12 +162,12 @@ class GreenElf extends Race
     /**
      * Get senses modifier
      *
-     * @param GreenElfGender $greenElfGender
+     * @param DarkElfGender $darkElfGender
      * @return int
      */
-    public function getSensesModifier(GreenElfGender $greenElfGender)
+    public function getSensesModifier(DarkElfGender $darkElfGender)
     {
-        return parent::getSensesModifier($greenElfGender);
+        return parent::getSensesModifier($darkElfGender);
     }
 
     /**
@@ -184,7 +183,7 @@ class GreenElf extends Race
      */
     public function hasInfravision()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -200,6 +199,6 @@ class GreenElf extends Race
      */
     public function requiresDungeonMasterAgreement()
     {
-        return false;
+        return true;
     }
 }

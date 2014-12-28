@@ -1,40 +1,31 @@
 <?php
-namespace DrdPlus\Cave\UnitBundle\Enum\Races;
+namespace DrdPlus\Cave\UnitBundle\Enum\Races\Orcs;
 
-use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\SkurutGender;
+use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\OrcGender;
 
 /**
- * Skurut
+ * Orc
  */
-class Skurut extends Race
+abstract class Orc extends Race
 {
-    const CODE = 'skurut';
-
-    const BASE_STRENGTH = +1;
-    const BASE_AGILITY = +1;
-    const BASE_KNACK = -1;
-    const BASE_WILL = 0;
+    const BASE_STRENGTH = 0;
+    const BASE_AGILITY = +2;
+    const BASE_KNACK = 0;
+    const BASE_WILL = -1;
     const BASE_INTELLIGENCE = 0;
     const BASE_CHARISMA = -2;
     const BASE_RESISTANCE = 0;
     const BASE_SENSES = +1;
 
     /**
-     * @return string
-     */
-    protected function getRaceCode()
-    {
-        return self::CODE;
-    }
-    /**
      * Get strength modifier
      *
-     * @param SkurutGender $skurutGender
+     * @param OrcGender $orcGender
      * @return int
      */
-    public function getStrengthModifier(SkurutGender $skurutGender)
+    public function getStrengthModifier(OrcGender $orcGender)
     {
-        return parent::getStrengthModifier($skurutGender);
+        return parent::getStrengthModifier($orcGender);
     }
 
     /**
@@ -48,12 +39,12 @@ class Skurut extends Race
     /**
      * Get agility modifier
      *
-     * @param SkurutGender $skurutGender
+     * @param OrcGender $orcGender
      * @return int
      */
-    public function getAgilityModifier(SkurutGender $skurutGender)
+    public function getAgilityModifier(OrcGender $orcGender)
     {
-        return parent::getAgilityModifier($skurutGender);
+        return parent::getAgilityModifier($orcGender);
     }
 
     /**
@@ -67,12 +58,12 @@ class Skurut extends Race
     /**
      * Get knack modifier
      *
-     * @param SkurutGender $skurutGender
+     * @param OrcGender $orcGender
      * @return int
      */
-    public function getKnackModifier(SkurutGender $skurutGender)
+    public function getKnackModifier(OrcGender $orcGender)
     {
-        return parent::getKnackModifier($skurutGender);
+        return parent::getKnackModifier($orcGender);
     }
 
     /**
@@ -86,12 +77,12 @@ class Skurut extends Race
     /**
      * Get will modifier
      *
-     * @param SkurutGender $skurutGender
+     * @param OrcGender $orcGender
      * @return int
      */
-    public function getWillModifier(SkurutGender $skurutGender)
+    public function getWillModifier(OrcGender $orcGender)
     {
-        return parent::getWillModifier($skurutGender);
+        return parent::getWillModifier($orcGender);
     }
 
     /**
@@ -105,12 +96,12 @@ class Skurut extends Race
     /**
      * Get intelligence modifier
      *
-     * @param SkurutGender $skurutGender
+     * @param OrcGender $orcGender
      * @return int
      */
-    public function getIntelligenceModifier(SkurutGender $skurutGender)
+    public function getIntelligenceModifier(OrcGender $orcGender)
     {
-        return parent::getIntelligenceModifier($skurutGender);
+        return parent::getIntelligenceModifier($orcGender);
     }
 
     /**
@@ -124,12 +115,12 @@ class Skurut extends Race
     /**
      * Get charisma modifier
      *
-     * @param SkurutGender $skurutGender
+     * @param OrcGender $orcGender
      * @return int
      */
-    public function getCharismaModifier(SkurutGender $skurutGender)
+    public function getCharismaModifier(OrcGender $orcGender)
     {
-        return parent::getCharismaModifier($skurutGender);
+        return parent::getCharismaModifier($orcGender);
     }
 
     /**
@@ -143,12 +134,12 @@ class Skurut extends Race
     /**
      * Get resistance modifier
      *
-     * @param SkurutGender $skurutGender
+     * @param OrcGender $orcGender
      * @return int
      */
-    public function getResistanceModifier(SkurutGender $skurutGender)
+    public function getResistanceModifier(OrcGender $orcGender)
     {
-        return parent::getResistanceModifier($skurutGender);
+        return parent::getResistanceModifier($orcGender);
     }
 
     /**
@@ -162,12 +153,12 @@ class Skurut extends Race
     /**
      * Get senses modifier
      *
-     * @param SkurutGender $skurutGender
+     * @param OrcGender $orcGender
      * @return int
      */
-    public function getSensesModifier(SkurutGender $skurutGender)
+    public function getSensesModifier(OrcGender $orcGender)
     {
-        return parent::getSensesModifier($skurutGender);
+        return parent::getSensesModifier($orcGender);
     }
 
     /**

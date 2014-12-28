@@ -1,12 +1,12 @@
 <?php
-namespace DrdPlus\Cave\UnitBundle\Enum\Races;
+namespace DrdPlus\Cave\UnitBundle\Enum\Races\Orcs;
 
 use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\GoblinGender;
 
 /**
  * Goblin
  */
-class Goblin extends Race
+class Goblin extends Orc
 {
     const CODE = 'goblin';
 

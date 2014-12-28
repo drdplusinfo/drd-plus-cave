@@ -1,41 +1,32 @@
 <?php
-namespace DrdPlus\Cave\UnitBundle\Enum\Races;
+namespace DrdPlus\Cave\UnitBundle\Enum\Races\Elfs;
 
-use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\HighlanderGender;
+use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\ElfGender;
+use DrdPlus\Cave\UnitBundle\Enum\Races\Race;
 
 /**
- * Highlander
+ * Elf
  */
-class Highlander extends Race
+abstract class Elf extends Race
 {
-    const CODE = 'highlander';
-
-    const BASE_STRENGTH = +1;
-    const BASE_AGILITY = 0;
-    const BASE_KNACK = 0;
-    const BASE_WILL = +1;
-    const BASE_INTELLIGENCE = -1;
-    const BASE_CHARISMA = -1;
-    const BASE_RESISTANCE = 0;
+    const BASE_STRENGTH = -1;
+    const BASE_AGILITY = +1;
+    const BASE_KNACK = +1;
+    const BASE_WILL = -2;
+    const BASE_INTELLIGENCE = +1;
+    const BASE_CHARISMA = +1;
+    const BASE_RESISTANCE = -1;
     const BASE_SENSES = 0;
-
-    /**
-     * @return string
-     */
-    protected function getRaceCode()
-    {
-        return self::CODE;
-    }
 
     /**
      * Get strength modifier
      *
-     * @param HighlanderGender $highlanderGender
+     * @param ElfGender $elfGender
      * @return int
      */
-    public function getStrengthModifier(HighlanderGender $highlanderGender)
+    public function getStrengthModifier(ElfGender $elfGender)
     {
-        return parent::getStrengthModifier($highlanderGender);
+        return parent::getStrengthModifier($elfGender);
     }
 
     /**
@@ -49,12 +40,12 @@ class Highlander extends Race
     /**
      * Get agility modifier
      *
-     * @param HighlanderGender $highlanderGender
+     * @param ElfGender $elfGender
      * @return int
      */
-    public function getAgilityModifier(HighlanderGender $highlanderGender)
+    public function getAgilityModifier(ElfGender $elfGender)
     {
-        return parent::getAgilityModifier($highlanderGender);
+        return parent::getAgilityModifier($elfGender);
     }
 
     /**
@@ -68,12 +59,12 @@ class Highlander extends Race
     /**
      * Get knack modifier
      *
-     * @param HighlanderGender $highlanderGender
+     * @param ElfGender $elfGender
      * @return int
      */
-    public function getKnackModifier(HighlanderGender $highlanderGender)
+    public function getKnackModifier(ElfGender $elfGender)
     {
-        return parent::getKnackModifier($highlanderGender);
+        return parent::getKnackModifier($elfGender);
     }
 
     /**
@@ -87,12 +78,12 @@ class Highlander extends Race
     /**
      * Get will modifier
      *
-     * @param HighlanderGender $highlanderGender
+     * @param ElfGender $elfGender
      * @return int
      */
-    public function getWillModifier(HighlanderGender $highlanderGender)
+    public function getWillModifier(ElfGender $elfGender)
     {
-        return parent::getWillModifier($highlanderGender);
+        return parent::getWillModifier($elfGender);
     }
 
     /**
@@ -106,12 +97,12 @@ class Highlander extends Race
     /**
      * Get intelligence modifier
      *
-     * @param HighlanderGender $highlanderGender
+     * @param ElfGender $elfGender
      * @return int
      */
-    public function getIntelligenceModifier(HighlanderGender $highlanderGender)
+    public function getIntelligenceModifier(ElfGender $elfGender)
     {
-        return parent::getIntelligenceModifier($highlanderGender);
+        return parent::getIntelligenceModifier($elfGender);
     }
 
     /**
@@ -125,12 +116,12 @@ class Highlander extends Race
     /**
      * Get charisma modifier
      *
-     * @param HighlanderGender $highlanderGender
+     * @param ElfGender $elfGender
      * @return int
      */
-    public function getCharismaModifier(HighlanderGender $highlanderGender)
+    public function getCharismaModifier(ElfGender $elfGender)
     {
-        return parent::getCharismaModifier($highlanderGender);
+        return parent::getCharismaModifier($elfGender);
     }
 
     /**
@@ -144,12 +135,12 @@ class Highlander extends Race
     /**
      * Get resistance modifier
      *
-     * @param HighlanderGender $highlanderGender
+     * @param ElfGender $elfGender
      * @return int
      */
-    public function getResistanceModifier(HighlanderGender $highlanderGender)
+    public function getResistanceModifier(ElfGender $elfGender)
     {
-        return parent::getResistanceModifier($highlanderGender);
+        return parent::getResistanceModifier($elfGender);
     }
 
     /**
@@ -163,12 +154,12 @@ class Highlander extends Race
     /**
      * Get senses modifier
      *
-     * @param HighlanderGender $highlanderGender
+     * @param ElfGender $elfGender
      * @return int
      */
-    public function getSensesModifier(HighlanderGender $highlanderGender)
+    public function getSensesModifier(ElfGender $elfGender)
     {
-        return parent::getSensesModifier($highlanderGender);
+        return parent::getSensesModifier($elfGender);
     }
 
     /**

@@ -1,23 +1,23 @@
 <?php
-namespace DrdPlus\Cave\UnitBundle\Enum\Races;
+namespace DrdPlus\Cave\UnitBundle\Enum\Races\Dwarfs;
 
-use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\HobbitGender;
+use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\MountainDwarfGender;
 
 /**
- * Hobbit
+ * MountainDwarf
  */
-class Hobbit extends Race
+class MountainDwarf extends Dwarf
 {
-    const CODE = 'hobbit';
+    const CODE = 'mountain-dwarf';
 
-    const BASE_STRENGTH = -3;
-    const BASE_AGILITY = +1;
-    const BASE_KNACK = +1;
-    const BASE_WILL = 0;
-    const BASE_INTELLIGENCE = -1;
-    const BASE_CHARISMA = +2;
-    const BASE_RESISTANCE = 0;
-    const BASE_SENSES = 0;
+    const BASE_STRENGTH = +2;
+    const BASE_AGILITY = -1;
+    const BASE_KNACK = 0;
+    const BASE_WILL = +2;
+    const BASE_INTELLIGENCE = -2;
+    const BASE_CHARISMA = -2;
+    const BASE_RESISTANCE = +1;
+    const BASE_SENSES = -1;
 
     /**
      * @return string
@@ -30,12 +30,12 @@ class Hobbit extends Race
     /**
      * Get strength modifier
      *
-     * @param HobbitGender $hobbitGender
+     * @param MountainDwarfGender $mountainDwarfGender
      * @return int
      */
-    public function getStrengthModifier(HobbitGender $hobbitGender)
+    public function getStrengthModifier(MountainDwarfGender $mountainDwarfGender)
     {
-        return parent::getStrengthModifier($hobbitGender);
+        return parent::getStrengthModifier($mountainDwarfGender);
     }
 
     /**
@@ -49,12 +49,12 @@ class Hobbit extends Race
     /**
      * Get agility modifier
      *
-     * @param HobbitGender $hobbitGender
+     * @param MountainDwarfGender $mountainDwarfGender
      * @return int
      */
-    public function getAgilityModifier(HobbitGender $hobbitGender)
+    public function getAgilityModifier(MountainDwarfGender $mountainDwarfGender)
     {
-        return parent::getAgilityModifier($hobbitGender);
+        return parent::getAgilityModifier($mountainDwarfGender);
     }
 
     /**
@@ -68,12 +68,12 @@ class Hobbit extends Race
     /**
      * Get knack modifier
      *
-     * @param HobbitGender $hobbitGender
+     * @param MountainDwarfGender $mountainDwarfGender
      * @return int
      */
-    public function getKnackModifier(HobbitGender $hobbitGender)
+    public function getKnackModifier(MountainDwarfGender $mountainDwarfGender)
     {
-        return parent::getKnackModifier($hobbitGender);
+        return parent::getKnackModifier($mountainDwarfGender);
     }
 
     /**
@@ -87,12 +87,12 @@ class Hobbit extends Race
     /**
      * Get will modifier
      *
-     * @param HobbitGender $hobbitGender
+     * @param MountainDwarfGender $mountainDwarfGender
      * @return int
      */
-    public function getWillModifier(HobbitGender $hobbitGender)
+    public function getWillModifier(MountainDwarfGender $mountainDwarfGender)
     {
-        return parent::getWillModifier($hobbitGender);
+        return parent::getWillModifier($mountainDwarfGender);
     }
 
     /**
@@ -106,12 +106,12 @@ class Hobbit extends Race
     /**
      * Get intelligence modifier
      *
-     * @param HobbitGender $hobbitGender
+     * @param MountainDwarfGender $mountainDwarfGender
      * @return int
      */
-    public function getIntelligenceModifier(HobbitGender $hobbitGender)
+    public function getIntelligenceModifier(MountainDwarfGender $mountainDwarfGender)
     {
-        return parent::getIntelligenceModifier($hobbitGender);
+        return parent::getIntelligenceModifier($mountainDwarfGender);
     }
 
     /**
@@ -125,12 +125,12 @@ class Hobbit extends Race
     /**
      * Get charisma modifier
      *
-     * @param HobbitGender $hobbitGender
+     * @param MountainDwarfGender $mountainDwarfGender
      * @return int
      */
-    public function getCharismaModifier(HobbitGender $hobbitGender)
+    public function getCharismaModifier(MountainDwarfGender $mountainDwarfGender)
     {
-        return parent::getCharismaModifier($hobbitGender);
+        return parent::getCharismaModifier($mountainDwarfGender);
     }
 
     /**
@@ -144,12 +144,12 @@ class Hobbit extends Race
     /**
      * Get resistance modifier
      *
-     * @param HobbitGender $hobbitGender
+     * @param MountainDwarfGender $mountainDwarfGender
      * @return int
      */
-    public function getResistanceModifier(HobbitGender $hobbitGender)
+    public function getResistanceModifier(MountainDwarfGender $mountainDwarfGender)
     {
-        return parent::getResistanceModifier($hobbitGender);
+        return parent::getResistanceModifier($mountainDwarfGender);
     }
 
     /**
@@ -163,12 +163,12 @@ class Hobbit extends Race
     /**
      * Get senses modifier
      *
-     * @param HobbitGender $hobbitGender
+     * @param MountainDwarfGender $mountainDwarfGender
      * @return int
      */
-    public function getSensesModifier(HobbitGender $hobbitGender)
+    public function getSensesModifier(MountainDwarfGender $mountainDwarfGender)
     {
-        return parent::getSensesModifier($hobbitGender);
+        return parent::getSensesModifier($mountainDwarfGender);
     }
 
     /**
@@ -184,7 +184,7 @@ class Hobbit extends Race
      */
     public function hasInfravision()
     {
-        return false;
+        return true;
     }
 
     /**

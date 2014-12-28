@@ -1,23 +1,23 @@
 <?php
-namespace DrdPlus\Cave\UnitBundle\Enum\Races;
+namespace DrdPlus\Cave\UnitBundle\Enum\Races\Humans;
 
-use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\OrcGender;
+use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\HighlanderGender;
 
 /**
- * Orc
+ * Highlander
  */
-class Orc extends Race
+class Highlander extends Human
 {
-    const CODE = 'orc';
+    const CODE = 'highlander';
 
-    const BASE_STRENGTH = 0;
-    const BASE_AGILITY = +2;
+    const BASE_STRENGTH = +1;
+    const BASE_AGILITY = 0;
     const BASE_KNACK = 0;
-    const BASE_WILL = -1;
-    const BASE_INTELLIGENCE = 0;
-    const BASE_CHARISMA = -2;
+    const BASE_WILL = +1;
+    const BASE_INTELLIGENCE = -1;
+    const BASE_CHARISMA = -1;
     const BASE_RESISTANCE = 0;
-    const BASE_SENSES = +1;
+    const BASE_SENSES = 0;
 
     /**
      * @return string
@@ -30,12 +30,12 @@ class Orc extends Race
     /**
      * Get strength modifier
      *
-     * @param OrcGender $orcGender
+     * @param HighlanderGender $highlanderGender
      * @return int
      */
-    public function getStrengthModifier(OrcGender $orcGender)
+    public function getStrengthModifier(HighlanderGender $highlanderGender)
     {
-        return parent::getStrengthModifier($orcGender);
+        return parent::getStrengthModifier($highlanderGender);
     }
 
     /**
@@ -49,12 +49,12 @@ class Orc extends Race
     /**
      * Get agility modifier
      *
-     * @param OrcGender $orcGender
+     * @param HighlanderGender $highlanderGender
      * @return int
      */
-    public function getAgilityModifier(OrcGender $orcGender)
+    public function getAgilityModifier(HighlanderGender $highlanderGender)
     {
-        return parent::getAgilityModifier($orcGender);
+        return parent::getAgilityModifier($highlanderGender);
     }
 
     /**
@@ -68,12 +68,12 @@ class Orc extends Race
     /**
      * Get knack modifier
      *
-     * @param OrcGender $orcGender
+     * @param HighlanderGender $highlanderGender
      * @return int
      */
-    public function getKnackModifier(OrcGender $orcGender)
+    public function getKnackModifier(HighlanderGender $highlanderGender)
     {
-        return parent::getKnackModifier($orcGender);
+        return parent::getKnackModifier($highlanderGender);
     }
 
     /**
@@ -87,12 +87,12 @@ class Orc extends Race
     /**
      * Get will modifier
      *
-     * @param OrcGender $orcGender
+     * @param HighlanderGender $highlanderGender
      * @return int
      */
-    public function getWillModifier(OrcGender $orcGender)
+    public function getWillModifier(HighlanderGender $highlanderGender)
     {
-        return parent::getWillModifier($orcGender);
+        return parent::getWillModifier($highlanderGender);
     }
 
     /**
@@ -106,12 +106,12 @@ class Orc extends Race
     /**
      * Get intelligence modifier
      *
-     * @param OrcGender $orcGender
+     * @param HighlanderGender $highlanderGender
      * @return int
      */
-    public function getIntelligenceModifier(OrcGender $orcGender)
+    public function getIntelligenceModifier(HighlanderGender $highlanderGender)
     {
-        return parent::getIntelligenceModifier($orcGender);
+        return parent::getIntelligenceModifier($highlanderGender);
     }
 
     /**
@@ -125,12 +125,12 @@ class Orc extends Race
     /**
      * Get charisma modifier
      *
-     * @param OrcGender $orcGender
+     * @param HighlanderGender $highlanderGender
      * @return int
      */
-    public function getCharismaModifier(OrcGender $orcGender)
+    public function getCharismaModifier(HighlanderGender $highlanderGender)
     {
-        return parent::getCharismaModifier($orcGender);
+        return parent::getCharismaModifier($highlanderGender);
     }
 
     /**
@@ -144,12 +144,12 @@ class Orc extends Race
     /**
      * Get resistance modifier
      *
-     * @param OrcGender $orcGender
+     * @param HighlanderGender $highlanderGender
      * @return int
      */
-    public function getResistanceModifier(OrcGender $orcGender)
+    public function getResistanceModifier(HighlanderGender $highlanderGender)
     {
-        return parent::getResistanceModifier($orcGender);
+        return parent::getResistanceModifier($highlanderGender);
     }
 
     /**
@@ -163,12 +163,12 @@ class Orc extends Race
     /**
      * Get senses modifier
      *
-     * @param OrcGender $orcGender
+     * @param HighlanderGender $highlanderGender
      * @return int
      */
-    public function getSensesModifier(OrcGender $orcGender)
+    public function getSensesModifier(HighlanderGender $highlanderGender)
     {
-        return parent::getSensesModifier($orcGender);
+        return parent::getSensesModifier($highlanderGender);
     }
 
     /**
@@ -184,7 +184,7 @@ class Orc extends Race
      */
     public function hasInfravision()
     {
-        return true;
+        return false;
     }
 
     /**
@@ -200,6 +200,6 @@ class Orc extends Race
      */
     public function requiresDungeonMasterAgreement()
     {
-        return true;
+        return false;
     }
 }

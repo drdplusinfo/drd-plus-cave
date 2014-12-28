@@ -1,60 +1,50 @@
 <?php
-namespace DrdPlus\Cave\UnitBundle\Enum\Races;
+namespace DrdPlus\Cave\UnitBundle\Enum\Races\Dwarfs;
 
-use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\KrollGender;
+use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\DwarfGender;
+use DrdPlus\Cave\UnitBundle\Enum\Races\Race;
 
 /**
- * Kroll
+ * Dwarf
  */
-class Kroll extends Race
+abstract class Dwarf extends Race
 {
-    const CODE = 'kroll';
-
-    const BASE_STRENGTH = +3;
-    const BASE_AGILITY = -2;
-    const BASE_KNACK = -1;
-    const BASE_WILL = +1;
-    const BASE_INTELLIGENCE = -3;
-    const BASE_CHARISMA = -1;
-    const BASE_RESISTANCE = 0;
-    const BASE_SENSES = 0;
-
-    /**
-     * @return string
-     */
-    protected function getRaceCode()
-    {
-        return self::CODE;
-    }
+    const BASE_STRENGTH = +1;
+    const BASE_AGILITY = -1;
+    const BASE_KNACK = 0;
+    const BASE_WILL = +2;
+    const BASE_INTELLIGENCE = -1;
+    const BASE_CHARISMA = -2;
+    const BASE_RESISTANCE = +1;
+    const BASE_SENSES = -1;
 
     /**
      * Get strength modifier
      *
-     * @param KrollGender $krollGender
+     * @param DwarfGender $dwarfGender
      * @return int
      */
-    public function getStrengthModifier(KrollGender $krollGender)
+    public function getStrengthModifier(DwarfGender $dwarfGender)
     {
-        return parent::getStrengthModifier($krollGender);
+        return parent::getStrengthModifier($dwarfGender);
     }
 
     /**
      * @return int
      */
-    protected function getBaseStrength()
-    {
+    protected function getBaseStrength() {
         return self::BASE_STRENGTH;
     }
 
     /**
      * Get agility modifier
      *
-     * @param KrollGender $krollGender
+     * @param DwarfGender $dwarfGender
      * @return int
      */
-    public function getAgilityModifier(KrollGender $krollGender)
+    public function getAgilityModifier(DwarfGender $dwarfGender)
     {
-        return parent::getAgilityModifier($krollGender);
+        return parent::getAgilityModifier($dwarfGender);
     }
 
     /**
@@ -68,12 +58,12 @@ class Kroll extends Race
     /**
      * Get knack modifier
      *
-     * @param KrollGender $krollGender
+     * @param DwarfGender $dwarfGender
      * @return int
      */
-    public function getKnackModifier(KrollGender $krollGender)
+    public function getKnackModifier(DwarfGender $dwarfGender)
     {
-        return parent::getKnackModifier($krollGender);
+        return parent::getKnackModifier($dwarfGender);
     }
 
     /**
@@ -87,12 +77,12 @@ class Kroll extends Race
     /**
      * Get will modifier
      *
-     * @param KrollGender $krollGender
+     * @param DwarfGender $dwarfGender
      * @return int
      */
-    public function getWillModifier(KrollGender $krollGender)
+    public function getWillModifier(DwarfGender $dwarfGender)
     {
-        return parent::getWillModifier($krollGender);
+        return parent::getWillModifier($dwarfGender);
     }
 
     /**
@@ -106,12 +96,12 @@ class Kroll extends Race
     /**
      * Get intelligence modifier
      *
-     * @param KrollGender $krollGender
+     * @param DwarfGender $dwarfGender
      * @return int
      */
-    public function getIntelligenceModifier(KrollGender $krollGender)
+    public function getIntelligenceModifier(DwarfGender $dwarfGender)
     {
-        return parent::getIntelligenceModifier($krollGender);
+        return parent::getIntelligenceModifier($dwarfGender);
     }
 
     /**
@@ -125,12 +115,12 @@ class Kroll extends Race
     /**
      * Get charisma modifier
      *
-     * @param KrollGender $krollGender
+     * @param DwarfGender $dwarfGender
      * @return int
      */
-    public function getCharismaModifier(KrollGender $krollGender)
+    public function getCharismaModifier(DwarfGender $dwarfGender)
     {
-        return parent::getCharismaModifier($krollGender);
+        return parent::getCharismaModifier($dwarfGender);
     }
 
     /**
@@ -144,12 +134,12 @@ class Kroll extends Race
     /**
      * Get resistance modifier
      *
-     * @param KrollGender $krollGender
+     * @param DwarfGender $dwarfGender
      * @return int
      */
-    public function getResistanceModifier(KrollGender $krollGender)
+    public function getResistanceModifier(DwarfGender $dwarfGender)
     {
-        return parent::getResistanceModifier($krollGender);
+        return parent::getResistanceModifier($dwarfGender);
     }
 
     /**
@@ -163,12 +153,12 @@ class Kroll extends Race
     /**
      * Get senses modifier
      *
-     * @param KrollGender $krollGender
+     * @param DwarfGender $dwarfGender
      * @return int
      */
-    public function getSensesModifier(KrollGender $krollGender)
+    public function getSensesModifier(DwarfGender $dwarfGender)
     {
-        return parent::getSensesModifier($krollGender);
+        return parent::getSensesModifier($dwarfGender);
     }
 
     /**
@@ -184,7 +174,7 @@ class Kroll extends Race
      */
     public function hasInfravision()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -192,7 +182,7 @@ class Kroll extends Race
      */
     public function hasNaturalRegeneration()
     {
-        return true;
+        return false;
     }
 
     /**

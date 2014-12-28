@@ -1,23 +1,23 @@
 <?php
-namespace DrdPlus\Cave\UnitBundle\Enum\Races;
+namespace DrdPlus\Cave\UnitBundle\Enum\Races\Elfs;
 
-use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\MountainDwarfGender;
+use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\GreenElfGender;
 
 /**
- * MountainDwarf
+ * GreenElf
  */
-class MountainDwarf extends Race
+class GreenElf extends Elf
 {
-    const CODE = 'mountain-dwarf';
+    const CODE = 'green-elf';
 
-    const BASE_STRENGTH = +2;
-    const BASE_AGILITY = -1;
+    const BASE_STRENGTH = -1;
+    const BASE_AGILITY = 1;
     const BASE_KNACK = 0;
-    const BASE_WILL = +2;
-    const BASE_INTELLIGENCE = -2;
-    const BASE_CHARISMA = -2;
-    const BASE_RESISTANCE = +1;
-    const BASE_SENSES = -1;
+    const BASE_WILL = -1;
+    const BASE_INTELLIGENCE = 1;
+    const BASE_CHARISMA = 1;
+    const BASE_RESISTANCE = -1;
+    const BASE_SENSES = 0;
 
     /**
      * @return string
@@ -30,12 +30,12 @@ class MountainDwarf extends Race
     /**
      * Get strength modifier
      *
-     * @param MountainDwarfGender $mountainDwarfGender
+     * @param GreenElfGender $greenElfGender
      * @return int
      */
-    public function getStrengthModifier(MountainDwarfGender $mountainDwarfGender)
+    public function getStrengthModifier(GreenElfGender $greenElfGender)
     {
-        return parent::getStrengthModifier($mountainDwarfGender);
+        return parent::getStrengthModifier($greenElfGender);
     }
 
     /**
@@ -49,12 +49,12 @@ class MountainDwarf extends Race
     /**
      * Get agility modifier
      *
-     * @param MountainDwarfGender $mountainDwarfGender
+     * @param GreenElfGender $greenElfGender
      * @return int
      */
-    public function getAgilityModifier(MountainDwarfGender $mountainDwarfGender)
+    public function getAgilityModifier(GreenElfGender $greenElfGender)
     {
-        return parent::getAgilityModifier($mountainDwarfGender);
+        return parent::getAgilityModifier($greenElfGender);
     }
 
     /**
@@ -68,12 +68,12 @@ class MountainDwarf extends Race
     /**
      * Get knack modifier
      *
-     * @param MountainDwarfGender $mountainDwarfGender
+     * @param GreenElfGender $greenElfGender
      * @return int
      */
-    public function getKnackModifier(MountainDwarfGender $mountainDwarfGender)
+    public function getKnackModifier(GreenElfGender $greenElfGender)
     {
-        return parent::getKnackModifier($mountainDwarfGender);
+        return parent::getKnackModifier($greenElfGender);
     }
 
     /**
@@ -87,12 +87,12 @@ class MountainDwarf extends Race
     /**
      * Get will modifier
      *
-     * @param MountainDwarfGender $mountainDwarfGender
+     * @param GreenElfGender $greenElfGender
      * @return int
      */
-    public function getWillModifier(MountainDwarfGender $mountainDwarfGender)
+    public function getWillModifier(GreenElfGender $greenElfGender)
     {
-        return parent::getWillModifier($mountainDwarfGender);
+        return parent::getWillModifier($greenElfGender);
     }
 
     /**
@@ -106,12 +106,12 @@ class MountainDwarf extends Race
     /**
      * Get intelligence modifier
      *
-     * @param MountainDwarfGender $mountainDwarfGender
+     * @param GreenElfGender $greenElfGender
      * @return int
      */
-    public function getIntelligenceModifier(MountainDwarfGender $mountainDwarfGender)
+    public function getIntelligenceModifier(GreenElfGender $greenElfGender)
     {
-        return parent::getIntelligenceModifier($mountainDwarfGender);
+        return parent::getIntelligenceModifier($greenElfGender);
     }
 
     /**
@@ -125,12 +125,12 @@ class MountainDwarf extends Race
     /**
      * Get charisma modifier
      *
-     * @param MountainDwarfGender $mountainDwarfGender
+     * @param GreenElfGender $greenElfGender
      * @return int
      */
-    public function getCharismaModifier(MountainDwarfGender $mountainDwarfGender)
+    public function getCharismaModifier(GreenElfGender $greenElfGender)
     {
-        return parent::getCharismaModifier($mountainDwarfGender);
+        return parent::getCharismaModifier($greenElfGender);
     }
 
     /**
@@ -144,12 +144,12 @@ class MountainDwarf extends Race
     /**
      * Get resistance modifier
      *
-     * @param MountainDwarfGender $mountainDwarfGender
+     * @param GreenElfGender $greenElfGender
      * @return int
      */
-    public function getResistanceModifier(MountainDwarfGender $mountainDwarfGender)
+    public function getResistanceModifier(GreenElfGender $greenElfGender)
     {
-        return parent::getResistanceModifier($mountainDwarfGender);
+        return parent::getResistanceModifier($greenElfGender);
     }
 
     /**
@@ -163,12 +163,12 @@ class MountainDwarf extends Race
     /**
      * Get senses modifier
      *
-     * @param MountainDwarfGender $mountainDwarfGender
+     * @param GreenElfGender $greenElfGender
      * @return int
      */
-    public function getSensesModifier(MountainDwarfGender $mountainDwarfGender)
+    public function getSensesModifier(GreenElfGender $greenElfGender)
     {
-        return parent::getSensesModifier($mountainDwarfGender);
+        return parent::getSensesModifier($greenElfGender);
     }
 
     /**
@@ -184,7 +184,7 @@ class MountainDwarf extends Race
      */
     public function hasInfravision()
     {
-        return true;
+        return false;
     }
 
     /**

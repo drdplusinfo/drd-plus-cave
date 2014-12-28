@@ -1,60 +1,50 @@
 <?php
-namespace DrdPlus\Cave\UnitBundle\Enum\Races;
+namespace DrdPlus\Cave\UnitBundle\Enum\Races\Humans;
 
-use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\ElfGender;
+use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\HumanGender;
+use DrdPlus\Cave\UnitBundle\Enum\Races\Race;
 
 /**
- * Elf
+ * Human
  */
-class Elf extends Race
+abstract class Human extends Race
 {
-    const CODE = 'elf';
-
-    const BASE_STRENGTH = -1;
-    const BASE_AGILITY = +1;
-    const BASE_KNACK = +1;
-    const BASE_WILL = -2;
-    const BASE_INTELLIGENCE = +1;
-    const BASE_CHARISMA = +1;
-    const BASE_RESISTANCE = -1;
+    const BASE_STRENGTH = 0;
+    const BASE_AGILITY = 0;
+    const BASE_KNACK = 0;
+    const BASE_WILL = 0;
+    const BASE_INTELLIGENCE = 0;
+    const BASE_CHARISMA = 0;
+    const BASE_RESISTANCE = 0;
     const BASE_SENSES = 0;
-
-    /**
-     * @return string
-     */
-    protected function getRaceCode()
-    {
-        return self::CODE;
-    }
 
     /**
      * Get strength modifier
      *
-     * @param ElfGender $elfGender
+     * @param HumanGender $humanGender
      * @return int
      */
-    public function getStrengthModifier(ElfGender $elfGender)
+    public function getStrengthModifier(HumanGender $humanGender)
     {
-        return parent::getStrengthModifier($elfGender);
+        return parent::getStrengthModifier($humanGender);
     }
 
     /**
      * @return int
      */
-    protected function getBaseStrength()
-    {
+    protected function getBaseStrength() {
         return self::BASE_STRENGTH;
     }
 
     /**
      * Get agility modifier
      *
-     * @param ElfGender $elfGender
+     * @param HumanGender $humanGender
      * @return int
      */
-    public function getAgilityModifier(ElfGender $elfGender)
+    public function getAgilityModifier(HumanGender $humanGender)
     {
-        return parent::getAgilityModifier($elfGender);
+        return parent::getAgilityModifier($humanGender);
     }
 
     /**
@@ -68,12 +58,12 @@ class Elf extends Race
     /**
      * Get knack modifier
      *
-     * @param ElfGender $elfGender
+     * @param HumanGender $humanGender
      * @return int
      */
-    public function getKnackModifier(ElfGender $elfGender)
+    public function getKnackModifier(HumanGender $humanGender)
     {
-        return parent::getKnackModifier($elfGender);
+        return parent::getKnackModifier($humanGender);
     }
 
     /**
@@ -87,12 +77,12 @@ class Elf extends Race
     /**
      * Get will modifier
      *
-     * @param ElfGender $elfGender
+     * @param HumanGender $humanGender
      * @return int
      */
-    public function getWillModifier(ElfGender $elfGender)
+    public function getWillModifier(HumanGender $humanGender)
     {
-        return parent::getWillModifier($elfGender);
+        return parent::getWillModifier($humanGender);
     }
 
     /**
@@ -106,12 +96,12 @@ class Elf extends Race
     /**
      * Get intelligence modifier
      *
-     * @param ElfGender $elfGender
+     * @param HumanGender $humanGender
      * @return int
      */
-    public function getIntelligenceModifier(ElfGender $elfGender)
+    public function getIntelligenceModifier(HumanGender $humanGender)
     {
-        return parent::getIntelligenceModifier($elfGender);
+        return parent::getIntelligenceModifier($humanGender);
     }
 
     /**
@@ -125,12 +115,12 @@ class Elf extends Race
     /**
      * Get charisma modifier
      *
-     * @param ElfGender $elfGender
+     * @param HumanGender $humanGender
      * @return int
      */
-    public function getCharismaModifier(ElfGender $elfGender)
+    public function getCharismaModifier(HumanGender $humanGender)
     {
-        return parent::getCharismaModifier($elfGender);
+        return parent::getCharismaModifier($humanGender);
     }
 
     /**
@@ -144,12 +134,12 @@ class Elf extends Race
     /**
      * Get resistance modifier
      *
-     * @param ElfGender $elfGender
+     * @param HumanGender $humanGender
      * @return int
      */
-    public function getResistanceModifier(ElfGender $elfGender)
+    public function getResistanceModifier(HumanGender $humanGender)
     {
-        return parent::getResistanceModifier($elfGender);
+        return parent::getResistanceModifier($humanGender);
     }
 
     /**
@@ -163,12 +153,12 @@ class Elf extends Race
     /**
      * Get senses modifier
      *
-     * @param ElfGender $elfGender
+     * @param HumanGender $humanGender
      * @return int
      */
-    public function getSensesModifier(ElfGender $elfGender)
+    public function getSensesModifier(HumanGender $humanGender)
     {
-        return parent::getSensesModifier($elfGender);
+        return parent::getSensesModifier($humanGender);
     }
 
     /**

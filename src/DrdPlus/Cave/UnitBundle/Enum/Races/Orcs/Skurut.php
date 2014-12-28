@@ -1,23 +1,23 @@
 <?php
-namespace DrdPlus\Cave\UnitBundle\Enum\Races;
+namespace DrdPlus\Cave\UnitBundle\Enum\Races\Orcs;
 
-use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\WoodDwarfGender;
+use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\SkurutGender;
 
 /**
- * WoodDwarf
+ * Skurut
  */
-class WoodDwarf extends Race
+class Skurut extends Orc
 {
-    const CODE = 'wood-dwarf';
+    const CODE = 'skurut';
 
     const BASE_STRENGTH = +1;
-    const BASE_AGILITY = -1;
-    const BASE_KNACK = 0;
-    const BASE_WILL = +1;
-    const BASE_INTELLIGENCE = -1;
-    const BASE_CHARISMA = -1;
-    const BASE_RESISTANCE = +1;
-    const BASE_SENSES = -1;
+    const BASE_AGILITY = +1;
+    const BASE_KNACK = -1;
+    const BASE_WILL = 0;
+    const BASE_INTELLIGENCE = 0;
+    const BASE_CHARISMA = -2;
+    const BASE_RESISTANCE = 0;
+    const BASE_SENSES = +1;
 
     /**
      * @return string
@@ -26,16 +26,15 @@ class WoodDwarf extends Race
     {
         return self::CODE;
     }
-
     /**
      * Get strength modifier
      *
-     * @param WoodDwarfGender $woodDwarfGender
+     * @param SkurutGender $skurutGender
      * @return int
      */
-    public function getStrengthModifier(WoodDwarfGender $woodDwarfGender)
+    public function getStrengthModifier(SkurutGender $skurutGender)
     {
-        return parent::getStrengthModifier($woodDwarfGender);
+        return parent::getStrengthModifier($skurutGender);
     }
 
     /**
@@ -49,12 +48,12 @@ class WoodDwarf extends Race
     /**
      * Get agility modifier
      *
-     * @param WoodDwarfGender $woodDwarfGender
+     * @param SkurutGender $skurutGender
      * @return int
      */
-    public function getAgilityModifier(WoodDwarfGender $woodDwarfGender)
+    public function getAgilityModifier(SkurutGender $skurutGender)
     {
-        return parent::getAgilityModifier($woodDwarfGender);
+        return parent::getAgilityModifier($skurutGender);
     }
 
     /**
@@ -68,12 +67,12 @@ class WoodDwarf extends Race
     /**
      * Get knack modifier
      *
-     * @param WoodDwarfGender $woodDwarfGender
+     * @param SkurutGender $skurutGender
      * @return int
      */
-    public function getKnackModifier(WoodDwarfGender $woodDwarfGender)
+    public function getKnackModifier(SkurutGender $skurutGender)
     {
-        return parent::getKnackModifier($woodDwarfGender);
+        return parent::getKnackModifier($skurutGender);
     }
 
     /**
@@ -87,12 +86,12 @@ class WoodDwarf extends Race
     /**
      * Get will modifier
      *
-     * @param WoodDwarfGender $woodDwarfGender
+     * @param SkurutGender $skurutGender
      * @return int
      */
-    public function getWillModifier(WoodDwarfGender $woodDwarfGender)
+    public function getWillModifier(SkurutGender $skurutGender)
     {
-        return parent::getWillModifier($woodDwarfGender);
+        return parent::getWillModifier($skurutGender);
     }
 
     /**
@@ -106,12 +105,12 @@ class WoodDwarf extends Race
     /**
      * Get intelligence modifier
      *
-     * @param WoodDwarfGender $woodDwarfGender
+     * @param SkurutGender $skurutGender
      * @return int
      */
-    public function getIntelligenceModifier(WoodDwarfGender $woodDwarfGender)
+    public function getIntelligenceModifier(SkurutGender $skurutGender)
     {
-        return parent::getIntelligenceModifier($woodDwarfGender);
+        return parent::getIntelligenceModifier($skurutGender);
     }
 
     /**
@@ -125,12 +124,12 @@ class WoodDwarf extends Race
     /**
      * Get charisma modifier
      *
-     * @param WoodDwarfGender $woodDwarfGender
+     * @param SkurutGender $skurutGender
      * @return int
      */
-    public function getCharismaModifier(WoodDwarfGender $woodDwarfGender)
+    public function getCharismaModifier(SkurutGender $skurutGender)
     {
-        return parent::getCharismaModifier($woodDwarfGender);
+        return parent::getCharismaModifier($skurutGender);
     }
 
     /**
@@ -144,12 +143,12 @@ class WoodDwarf extends Race
     /**
      * Get resistance modifier
      *
-     * @param WoodDwarfGender $woodDwarfGender
+     * @param SkurutGender $skurutGender
      * @return int
      */
-    public function getResistanceModifier(WoodDwarfGender $woodDwarfGender)
+    public function getResistanceModifier(SkurutGender $skurutGender)
     {
-        return parent::getResistanceModifier($woodDwarfGender);
+        return parent::getResistanceModifier($skurutGender);
     }
 
     /**
@@ -163,12 +162,12 @@ class WoodDwarf extends Race
     /**
      * Get senses modifier
      *
-     * @param WoodDwarfGender $woodDwarfGender
+     * @param SkurutGender $skurutGender
      * @return int
      */
-    public function getSensesModifier(WoodDwarfGender $woodDwarfGender)
+    public function getSensesModifier(SkurutGender $skurutGender)
     {
-        return parent::getSensesModifier($woodDwarfGender);
+        return parent::getSensesModifier($skurutGender);
     }
 
     /**
@@ -200,6 +199,6 @@ class WoodDwarf extends Race
      */
     public function requiresDungeonMasterAgreement()
     {
-        return false;
+        return true;
     }
 }
