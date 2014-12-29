@@ -1,7 +1,7 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Enum\Races\Humans;
 
-use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\HighlanderGender;
+use DrdPlus\Cave\UnitBundle\Enum\Races\Humans\Genders\HighlanderGender;
 
 /**
  * Highlander

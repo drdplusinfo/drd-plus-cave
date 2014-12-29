@@ -4,7 +4,7 @@ namespace DrdPlus\Cave\UnitBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Level;
-use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\Gender;
+use DrdPlus\Cave\UnitBundle\Enum\Races\Gender;
 use DrdPlus\Cave\UnitBundle\Enum\Races\Race;
 
 /**

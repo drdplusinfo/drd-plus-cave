@@ -1,7 +1,7 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Enum\Races\Krolls;
 
-use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\WildKrollGender;
+use DrdPlus\Cave\UnitBundle\Enum\Races\Krolls\Genders\WildKrollGender;
 
 /**
  * WildKroll

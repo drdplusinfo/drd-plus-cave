@@ -1,7 +1,7 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Enum\Races\Orcs;
 
-use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\GoblinGender;
+use DrdPlus\Cave\UnitBundle\Enum\Races\Orcs\Genders\GoblinGender;
 
 /**
  * Goblin

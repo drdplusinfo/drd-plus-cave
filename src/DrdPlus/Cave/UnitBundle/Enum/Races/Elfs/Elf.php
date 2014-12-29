@@ -1,7 +1,7 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Enum\Races\Elfs;
 
-use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\ElfGender;
+use DrdPlus\Cave\UnitBundle\Enum\Races\Elfs\Genders\ElfGender;
 use DrdPlus\Cave\UnitBundle\Enum\Races\Race;
 
 /**

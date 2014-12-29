@@ -2,7 +2,6 @@
 namespace DrdPlus\Cave\UnitBundle\Enum\Races;
 
 use Doctrineum\Enum;
-use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\Gender;
 
 /**
  * Race

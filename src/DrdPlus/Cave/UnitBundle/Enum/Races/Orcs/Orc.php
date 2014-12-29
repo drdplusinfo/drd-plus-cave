@@ -1,7 +1,8 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Enum\Races\Orcs;
 
-use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\OrcGender;
+use DrdPlus\Cave\UnitBundle\Enum\Races\Orcs\Genders\OrcGender;
+use DrdPlus\Cave\UnitBundle\Enum\Races\Race;
 
 /**
  * Orc

@@ -1,7 +1,7 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Enum\Races\Hobbits;
 
-use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\HobbitGender;
+use DrdPlus\Cave\UnitBundle\Enum\Races\Hobbits\Genders\HobbitGender;
 use DrdPlus\Cave\UnitBundle\Enum\Races\Race;
 
 /**

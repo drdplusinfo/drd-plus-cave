@@ -1,7 +1,7 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Enum\Races\Orcs;
 
-use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\SkurutGender;
+use DrdPlus\Cave\UnitBundle\Enum\Races\Orcs\Genders\SkurutGender;
 
 /**
  * Skurut

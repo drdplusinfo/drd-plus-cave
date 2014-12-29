@@ -1,7 +1,7 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Enum\Races\Dwarfs;
 
-use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\WoodDwarfGender;
+use DrdPlus\Cave\UnitBundle\Enum\Races\Dwarfs\Genders\WoodDwarfGender;
 
 /**
  * WoodDwarf
