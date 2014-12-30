@@ -1,15 +1,17 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Enum\Races\Krolls\Genders;
 
-use DrdPlus\Cave\UnitBundle\Enum\Races\Krolls\CommonKroll;
+abstract class CommonKrollGender extends KrollGender
+{
 
-abstract class CommonKrollGender extends KrollGender {
+    const CODE = 'common-kroll';
 
     /**
      * @return string
      */
-    protected function getSubRaceCode() {
-        return CommonKroll::CODE;
+    protected function getSubRaceCode()
+    {
+        return self::CODE;
     }
 
 }

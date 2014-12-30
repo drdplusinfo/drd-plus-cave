@@ -1,16 +1,16 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Enum\Races\Krolls\Genders;
 
-use DrdPlus\Cave\UnitBundle\Enum\Races\Krolls\WildKroll;
+abstract class WildKrollGender extends KrollGender
+{
 
-abstract class WildKrollGender extends KrollGender {
+    const CODE = 'wild-kroll';
 
     /**
      * @return string
      */
     protected function getSubRaceCode()
     {
-        return WildKroll::CODE;
+        return self::CODE;
     }
-
 }

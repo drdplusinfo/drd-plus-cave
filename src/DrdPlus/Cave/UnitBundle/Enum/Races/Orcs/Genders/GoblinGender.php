@@ -1,16 +1,17 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Enum\Races\Orcs\Genders;
 
-use DrdPlus\Cave\UnitBundle\Enum\Races\Orcs\Goblin;
+abstract class GoblinGender extends OrcGender
+{
 
-abstract class GoblinGender extends OrcGender {
+    const CODE = 'goblin';
 
     /**
      * @return string
      */
     protected function getSubRaceCode()
     {
-        return Goblin::CODE;
+        return self::CODE;
     }
 
 }

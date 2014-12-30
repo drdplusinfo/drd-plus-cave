@@ -1,16 +1,17 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Enum\Races\Humans\Genders;
 
-use DrdPlus\Cave\UnitBundle\Enum\Races\Humans\CommonHuman;
+abstract class CommonHumanGender extends HumanGender
+{
 
-abstract class CommonHumanGender extends HumanGender {
+    const CODE = 'common-human';
 
     /**
      * @return string
      */
     protected function getSubRaceCode()
     {
-        return CommonHuman::CODE;
+        return self::CODE;
     }
 
 }

@@ -1,17 +1,16 @@
 <?php
-namespace DrdPlus\Cave\UnitBundle\Enum\Races\Genders;
-
-use DrdPlus\Cave\UnitBundle\Enum\Races\Dwarfs\Genders\DwarfGender;
-use DrdPlus\Cave\UnitBundle\Enum\Races\Dwarfs\MountainDwarf;
+namespace DrdPlus\Cave\UnitBundle\Enum\Races\Dwarfs\Genders;
 
 abstract class MountainDwarfGender extends DwarfGender {
+
+    const CODE = 'mountain-dwarf';
 
     /**
      * @return string
      */
     protected function getSubRaceCode()
     {
-        return MountainDwarf::CODE;
+        return self::CODE;
     }
 
 }

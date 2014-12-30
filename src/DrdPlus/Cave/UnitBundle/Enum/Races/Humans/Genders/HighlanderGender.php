@@ -1,16 +1,17 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Enum\Races\Humans\Genders;
 
-use DrdPlus\Cave\UnitBundle\Enum\Races\Humans\Highlander;
+abstract class HighlanderGender extends HumanGender
+{
 
-abstract class HighlanderGender extends HumanGender {
+    const CODE = 'highlander';
 
     /**
      * @return string
      */
     protected function getSubRaceCode()
     {
-        return Highlander::CODE;
+        return self::CODE;
     }
 
 }

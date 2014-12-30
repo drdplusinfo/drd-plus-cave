@@ -1,16 +1,17 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Enum\Races\Dwarfs\Genders;
 
-use DrdPlus\Cave\UnitBundle\Enum\Races\Dwarfs\CommonDwarf;
+abstract class CommonDwarfGender extends DwarfGender
+{
 
-abstract class CommonDwarfGender extends DwarfGender {
+    const CODE = 'common-dwarf';
 
     /**
      * @return string
      */
     protected function getSubRaceCode()
     {
-        return CommonDwarf::CODE;
+        return self::CODE;
     }
 
 }
