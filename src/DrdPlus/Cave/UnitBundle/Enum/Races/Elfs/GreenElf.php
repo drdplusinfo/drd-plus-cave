@@ -22,7 +22,7 @@ class GreenElf extends Elf
     /**
      * @return string
      */
-    protected function getRaceCode()
+    protected function getSubRaceCode()
     {
         return self::CODE;
     }

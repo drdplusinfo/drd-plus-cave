@@ -11,18 +11,14 @@ class Highlander extends Human
     const CODE = 'highlander';
 
     const BASE_STRENGTH = +1;
-    const BASE_AGILITY = 0;
-    const BASE_KNACK = 0;
     const BASE_WILL = +1;
     const BASE_INTELLIGENCE = -1;
     const BASE_CHARISMA = -1;
-    const BASE_RESISTANCE = 0;
-    const BASE_SENSES = 0;
 
     /**
      * @return string
      */
-    protected function getRaceCode()
+    protected function getSubRaceCode()
     {
         return self::CODE;
     }
@@ -58,14 +54,6 @@ class Highlander extends Human
     }
 
     /**
-     * @return int
-     */
-    protected function getBaseAgility()
-    {
-        return self::BASE_AGILITY;
-    }
-
-    /**
      * Get knack modifier
      *
      * @param HighlanderGender $highlanderGender
@@ -74,14 +62,6 @@ class Highlander extends Human
     public function getKnackModifier(HighlanderGender $highlanderGender)
     {
         return parent::getKnackModifier($highlanderGender);
-    }
-
-    /**
-     * @return int
-     */
-    protected function getBaseKnack()
-    {
-        return self::BASE_KNACK;
     }
 
     /**
@@ -153,14 +133,6 @@ class Highlander extends Human
     }
 
     /**
-     * @return int
-     */
-    protected function getBaseResistance()
-    {
-        return self::BASE_RESISTANCE;
-    }
-
-    /**
      * Get senses modifier
      *
      * @param HighlanderGender $highlanderGender
@@ -169,37 +141,5 @@ class Highlander extends Human
     public function getSensesModifier(HighlanderGender $highlanderGender)
     {
         return parent::getSensesModifier($highlanderGender);
-    }
-
-    /**
-     * @return int
-     */
-    protected function getBaseSenses()
-    {
-        return self::BASE_SENSES;
-    }
-
-    /**
-     * @return bool
-     */
-    public function hasInfravision()
-    {
-        return false;
-    }
-
-    /**
-     * @return bool
-     */
-    public function hasNaturalRegeneration()
-    {
-        return false;
-    }
-
-    /**
-     * @return bool
-     */
-    public function requiresDungeonMasterAgreement()
-    {
-        return false;
     }
 }

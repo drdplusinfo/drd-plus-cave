@@ -3,12 +3,12 @@ namespace DrdPlus\Cave\UnitBundle\Enum\Races\Dwarfs;
 
 class CommonDwarf extends Dwarf
 {
-    const CODE = 'dwarf';
+    const CODE = 'common-dwarf';
 
     /**
      * @return string
      */
-    protected function getRaceCode()
+    protected function getSubRaceCode()
     {
         return self::CODE;
     }

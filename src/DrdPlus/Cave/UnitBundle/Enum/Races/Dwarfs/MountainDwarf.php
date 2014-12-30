@@ -22,7 +22,7 @@ class MountainDwarf extends Dwarf
     /**
      * @return string
      */
-    protected function getRaceCode()
+    protected function getSubRaceCode()
     {
         return self::CODE;
     }

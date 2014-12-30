@@ -19,6 +19,19 @@ abstract class Elf extends Race
     const BASE_SENSES = 0;
 
     /**
+     * @return string
+     */
+    protected function getRaceCode()
+    {
+        return $this->getSubRaceCode();
+    }
+
+    /**
+     * @return string
+     */
+    abstract protected function getSubRaceCode();
+
+    /**
      * Get strength modifier
      *
      * @param ElfGender $elfGender

@@ -19,6 +19,19 @@ abstract class Dwarf extends Race
     const BASE_SENSES = -1;
 
     /**
+     * @return string
+     */
+    protected function getRaceCode()
+    {
+        return $this->getSubRaceCode();
+    }
+
+    /**
+     * @return string
+     */
+    abstract protected function getSubRaceCode();
+
+    /**
      * Get strength modifier
      *
      * @param DwarfGender $dwarfGender
