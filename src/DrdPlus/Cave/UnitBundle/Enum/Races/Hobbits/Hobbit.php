@@ -5,11 +5,11 @@ use DrdPlus\Cave\UnitBundle\Enum\Races\Hobbits\Genders\HobbitGender;
 use DrdPlus\Cave\UnitBundle\Enum\Races\Race;
 
 /**
- * CommonHobbit
+ * Hobbit
  */
-class CommonHobbit extends Race
+class Hobbit extends Race
 {
-    const CODE = 'common-hobbit';
+    const CODE = 'hobbit';
 
     const BASE_STRENGTH = -3;
     const BASE_AGILITY = +1;

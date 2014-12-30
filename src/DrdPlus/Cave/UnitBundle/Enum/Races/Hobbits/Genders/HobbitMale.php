@@ -4,9 +4,9 @@ namespace DrdPlus\Cave\UnitBundle\Enum\Races\Hobbits\Genders;
 use DrdPlus\Cave\UnitBundle\Enum\Races\IsMale;
 
 /**
- * CommonHobbitMale
+ * HobbitMale
  */
-class CommonHobbitMale extends CommonHobbitGender
+class HobbitMale extends HobbitGender
 {
     use IsMale;
 }
