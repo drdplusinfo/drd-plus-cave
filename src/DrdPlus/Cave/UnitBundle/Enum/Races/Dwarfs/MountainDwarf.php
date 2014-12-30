@@ -1,7 +1,7 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Enum\Races\Dwarfs;
 
-use DrdPlus\Cave\UnitBundle\Enum\Races\Genders\MountainDwarfGender;
+use DrdPlus\Cave\UnitBundle\Enum\Races\Dwarfs\Genders\MountainDwarfGender;
 
 /**
  * MountainDwarf
