@@ -11,6 +11,48 @@ abstract class ProfessionLevel
 {
 
     /**
+     * @var Property
+     *
+     * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Entity\Attributes\Property")
+     */
+    private $strengthIncrement;
+
+    /**
+     * @var Property
+     *
+     * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Entity\Attributes\Property")
+     */
+    private $agilityIncrement;
+
+    /**
+     * @var Property
+     *
+     * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Entity\Attributes\Property")
+     */
+    private $knackIncrement;
+
+    /**
+     * @var Property
+     *
+     * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Entity\Attributes\Property")
+     */
+    private $willIncrement;
+
+    /**
+     * @var Property
+     *
+     * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Entity\Attributes\Property")
+     */
+    private $intelligenceIncrement;
+
+    /**
+     * @var Property
+     *
+     * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Entity\Attributes\Property")
+     */
+    private $charismaIncrement;
+
+    /**
      * @return int
      */
     abstract public function getProfessionLevel();
@@ -99,4 +141,153 @@ abstract class ProfessionLevel
     {
         return $this->getPropertyFirstLevelModifier(Property::CHARISMA_CODE);
     }
+
+    /**
+     * Set strength increment
+     *
+     * @param Property $strengthIncrement
+     * @return $this
+     */
+    public function setStrengthIncrement(Property $strengthIncrement)
+    {
+        $strengthIncrement->setLabel(Property::STRENGTH_LABEL);
+        $strengthIncrement->setShortLabel(Property::STRENGTH_SHORT_LABEL);
+        $this->strengthIncrement = $strengthIncrement;
+
+        return $this;
+    }
+
+    /**
+     * Get strength increment
+     *
+     * @return Property
+     */
+    public function getStrengthIncrement()
+    {
+        return $this->strengthIncrement;
+    }
+
+    /**
+     * Set agility increment
+     *
+     * @param Property $agilityIncrement
+     * @return $this
+     */
+    public function setAgilityIncrement(Property $agilityIncrement)
+    {
+        $agilityIncrement->setLabel(Property::AGILITY_LABEL);
+        $agilityIncrement->setShortLabel(Property::AGILITY_SHORT_LABEL);
+        $this->agilityIncrement = $agilityIncrement;
+
+        return $this;
+    }
+
+    /**
+     * Get agility increment
+     *
+     * @return Property
+     */
+    public function getAgilityIncrement()
+    {
+        return $this->agilityIncrement;
+    }
+
+    /**
+     * Set charisma increment
+     *
+     * @param Property $charismaIncrement
+     * @return self
+     */
+    public function setCharismaIncrement(Property $charismaIncrement)
+    {
+        $charismaIncrement->setLabel(Property::CHARISMA_LABEL);
+        $charismaIncrement->setShortLabel(Property::CHARISMA_SHORT_LABEL);
+        $this->charismaIncrement = $charismaIncrement;
+
+        return $this;
+    }
+
+    /**
+     * Get charisma increment
+     *
+     * @return Property
+     */
+    public function getCharismaIncrement()
+    {
+        return $this->charismaIncrement;
+    }
+
+    /**
+     * Set intelligence increment
+     *
+     * @param Property $intelligenceIncrement
+     * @return self
+     */
+    public function setIntelligenceIncrement(Property $intelligenceIncrement)
+    {
+        $intelligenceIncrement->setLabel(Property::INTELLIGENCE_LABEL);
+        $intelligenceIncrement->setShortLabel(Property::INTELLIGENCE_SHORT_LABEL);
+        $this->intelligenceIncrement = $intelligenceIncrement;
+
+        return $this;
+    }
+
+    /**
+     * Get intelligence increment
+     *
+     * @return Property
+     */
+    public function getIntelligenceIncrement()
+    {
+        return $this->intelligenceIncrement;
+    }
+
+    /**
+     * @param Property $knackIncrement
+     * @return self
+     */
+    public function setKnackIncrement(Property $knackIncrement)
+    {
+        $knackIncrement->setLabel(Property::KNACK_LABEL);
+        $knackIncrement->setShortLabel(Property::KNACK_SHORT_LABEL);
+        $this->knackIncrement = $knackIncrement;
+
+        return $this;
+    }
+
+    /**
+     * Get knack increment
+     *
+     * @return Property
+     */
+    public function getKnackIncrement()
+    {
+        return $this->knackIncrement;
+    }
+
+    /**
+     * Set will increment
+     *
+     * @param Property $will
+     * @return self
+     */
+    public function setWillIncrement(Property $will)
+    {
+        $will->setLabel(Property::WILL_LABEL);
+        $will->setShortLabel(Property::WILL_SHORT_LABEL);
+        $this->willIncrement = $will;
+
+        return $this;
+    }
+
+    /**
+     * Get will increment
+     *
+     * @return Property
+     */
+    public function getWillIncrement()
+    {
+        return $this->willIncrement;
+    }
+
 }
