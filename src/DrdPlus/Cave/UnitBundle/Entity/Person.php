@@ -1,8 +1,8 @@
 <?php
-
 namespace DrdPlus\Cave\UnitBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\InitialProperties;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Level;
 use DrdPlus\Cave\UnitBundle\Enum\Races\Gender;
 use DrdPlus\Cave\UnitBundle\Enum\Races\Race;
@@ -44,6 +44,13 @@ class Person
      * @ORM\Column(type="race")
      */
     private $race;
+
+    /**
+     * @var InitialProperties
+     *
+     * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Entity\Attributes\InitialProperties")
+     */
+    private $initialProperties;
 
     /**
      * @var Level[]
@@ -144,4 +151,19 @@ class Person
         return $this->levels;
     }
 
+    /**
+     * @return InitialProperties
+     */
+    public function getInitialProperties()
+    {
+        return $this->initialProperties;
+    }
+
+    /**
+     * @param InitialProperties $initialProperties
+     */
+    public function setInitialProperties(InitialProperties $initialProperties)
+    {
+        $this->initialProperties = $initialProperties;
+    }
 }

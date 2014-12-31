@@ -41,30 +41,35 @@ class Level
      * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Entity\Attributes\LevelOfProfession\FighterLevel")
      */
     private $fighterLevel;
+
     /**
      * @var PriestLevel
      *
      * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Entity\Attributes\LevelOfProfession\PriestLevel")
      */
     private $priestLevel;
+
     /**
      * @var RangerLevel
      *
      * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Entity\Attributes\LevelOfProfession\RangerLevel")
      */
     private $rangerLevel;
+
     /**
      * @var TheurgistLevel
      *
      * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Entity\Attributes\LevelOfProfession\TheurgistLevel")
      */
     private $theurgistLevel;
+
     /**
      * @var ThiefLevel
      *
      * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Entity\Attributes\LevelOfProfession\ThiefLevel")
      */
     private $thiefLevel;
+
     /**
      * @var WizardLevel
      *
