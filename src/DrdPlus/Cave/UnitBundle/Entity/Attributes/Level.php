@@ -78,13 +78,6 @@ class Level
     private $wizardLevel;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(type="smallint")
-     */
-    private $characterLevel;
-
-    /**
      * Get id
      *
      * @return int
@@ -255,18 +248,7 @@ class Level
         return $this->person;
     }
 
-    /**
-     * Set character level
-     *
-     * @param integer $characterLevel
-     * @return $this
-     */
-    public function setCharacterLevel($characterLevel)
-    {
-        $this->characterLevel = $characterLevel;
 
-        return $this;
-    }
 
     /**
      * Get character level
@@ -275,7 +257,13 @@ class Level
      */
     public function getCharacterLevel()
     {
-        return $this->characterLevel;
+        return $this->getFighterLevel()->getProfessionLevel()
+            + $this->getRangerLevel()->getProfessionLevel()
+            + $this->getPriestLevel()->getProfessionLevel()
+            + $this->getRangerLevel()->getProfessionLevel()
+            + $this->getTheurgistLevel()->getProfessionLevel()
+            + $this->getThiefLevel()->getProfessionLevel()
+            + $this->getWizardLevel()->getProfessionLevel();
     }
 
 }
