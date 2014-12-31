@@ -16,13 +16,6 @@ abstract class ProfessionLevel
     abstract public function getProfessionLevel();
 
     /**
-     * Get name of the profession
-     *
-     * @return string
-     */
-    abstract public function getLabel();
-
-    /**
      * @return string[]
      */
     abstract public function getMainPropertyCodes();

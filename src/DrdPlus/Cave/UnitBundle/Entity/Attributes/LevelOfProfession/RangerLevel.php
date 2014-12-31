@@ -12,8 +12,6 @@ use DrdPlus\Cave\UnitBundle\Entity\Attributes\Property;
  */
 class RangerLevel extends ProfessionLevel
 {
-    const LABEL = 'Hraničář';
-
     /**
      * @var integer
      *
@@ -57,16 +55,6 @@ class RangerLevel extends ProfessionLevel
     public function getProfessionLevel()
     {
         return $this->professionLevel;
-    }
-
-    /**
-     * Get name of the profession
-     *
-     * @return string
-     */
-    public function getLabel()
-    {
-        return self::LABEL;
     }
 
     /**

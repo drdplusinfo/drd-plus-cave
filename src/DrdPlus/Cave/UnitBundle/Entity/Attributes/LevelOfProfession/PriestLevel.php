@@ -12,8 +12,6 @@ use DrdPlus\Cave\UnitBundle\Entity\Attributes\Property;
  */
 class PriestLevel extends ProfessionLevel
 {
-    const LABEL = 'Kněz';
-
     /**
      * @var integer
      *
@@ -57,16 +55,6 @@ class PriestLevel extends ProfessionLevel
     public function getProfessionLevel()
     {
         return $this->professionLevel;
-    }
-
-    /**
-     * Get name of the profession
-     *
-     * @return string
-     */
-    public function getLabel()
-    {
-        return self::LABEL;
     }
 
     /**

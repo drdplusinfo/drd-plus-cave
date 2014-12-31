@@ -12,8 +12,6 @@ use DrdPlus\Cave\UnitBundle\Entity\Attributes\Property;
  */
 class WizardLevel extends ProfessionLevel
 {
-    const LABEL = 'Čaroděj';
-
     /**
      * @var integer
      *
@@ -57,15 +55,6 @@ class WizardLevel extends ProfessionLevel
     public function getProfessionLevel()
     {
         return $this->professionLevel;
-    }
-    /**
-     * Get name of the profession
-     *
-     * @return string
-     */
-    public function getLabel()
-    {
-        return self::LABEL;
     }
 
     /**
