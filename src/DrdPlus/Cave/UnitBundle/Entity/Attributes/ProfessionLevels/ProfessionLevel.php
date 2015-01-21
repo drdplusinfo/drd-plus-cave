@@ -1,14 +1,41 @@
 <?php
-namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\LevelOfProfession;
+namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels;
 
 use Doctrine\ORM\Mapping as ORM;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Property;
+use Granam\StrictObject\StrictObject;
 
 /**
  * ProfessionLevel
  */
-abstract class ProfessionLevel
+abstract class ProfessionLevel extends StrictObject
 {
+
+    const PROPERTY_FIRST_LEVEL_MODIFIER = +1;
+
+    /**
+     * Have to be protected to allow Doctrine to access it on children
+     * @var integer
+     *
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(type="integer")
+     */
+    private $level;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(type="datetime")
+     */
+    private $levelUpAt;
 
     /**
      * @var Property
@@ -52,15 +79,61 @@ abstract class ProfessionLevel
      */
     private $charismaIncrement;
 
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getLevelUpAt()
+    {
+        return $this->levelUpAt;
+    }
+
+    /**
+     * @param \DateTime $levelUpAt
+     */
+    public function setLevelUpAt(\DateTime $levelUpAt)
+    {
+        $this->levelUpAt = $levelUpAt;
+    }
+
+    /**
+     * @param $level
+     * @return $this
+     */
+    public function setLevel($level)
+    {
+        $this->level = $level;
+
+        return $this;
+    }
+
     /**
      * @return int
      */
-    abstract public function getProfessionLevel();
+    public function getLevel()
+    {
+        return $this->level;
+    }
 
     /**
      * @return string[]
      */
     abstract public function getMainPropertyCodes();
+
+    /**
+     * @return string
+     */
+    abstract public function getProfessionCode();
 
     /**
      * Get strength modifier
@@ -79,7 +152,7 @@ abstract class ProfessionLevel
     private function getPropertyFirstLevelModifier($propertyCode)
     {
         return $this->isMainProperty($propertyCode)
-            ? +1
+            ? self::PROPERTY_FIRST_LEVEL_MODIFIER
             : 0;
     }
 
@@ -87,7 +160,7 @@ abstract class ProfessionLevel
      * @param string $propertyCode
      * @return bool
      */
-    private function isMainProperty($propertyCode)
+    public function isMainProperty($propertyCode)
     {
         return in_array($propertyCode, $this->getMainPropertyCodes());
     }
