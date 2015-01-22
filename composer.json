@@ -10,10 +10,6 @@
         {
             "type": "vcs",
             "url": "https://github.com/jaroslavtyc/doctrineum.git"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/jaroslavtyc/granam-strict-object.git"
         }
     ],
     "require": {
@@ -30,8 +26,7 @@
         "sensio/distribution-bundle": "~3.0",
         "sensio/framework-extra-bundle": "~3.0",
         "incenteev/composer-parameter-handler": "~2.0",
-        "jaroslavtyc/doctrineum": "~1.5",
-        "granam/strict-object": "~1.1"
+        "jaroslavtyc/doctrineum": "1.5.*@dev"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
