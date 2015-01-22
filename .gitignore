@@ -14,5 +14,7 @@
 .idea/deployment.xml
 .idea/dataSources.*
 .idea/symfony2.xml
+.idea/dictionaries/
+.idea/php.xml
 
 tests/_output/*
