@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2e3decc2cf433f99a80aa8c6e7e67a08",
+    "hash": "e50edbda4be0e1c49ee2b97920d02395",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -930,16 +930,16 @@
         },
         {
             "name": "jaroslavtyc/doctrineum",
-            "version": "1.5.4-beta",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/doctrineum.git",
-                "reference": "3ac163b42090a73fc485f88680ce1afab17acfff"
+                "reference": "66148ca45c31cd4918e7495637864be10a768a83"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/doctrineum/zipball/3ac163b42090a73fc485f88680ce1afab17acfff",
-                "reference": "3ac163b42090a73fc485f88680ce1afab17acfff",
+                "url": "https://api.github.com/repos/jaroslavtyc/doctrineum/zipball/66148ca45c31cd4918e7495637864be10a768a83",
+                "reference": "66148ca45c31cd4918e7495637864be10a768a83",
                 "shasum": ""
             },
             "require": {
@@ -962,10 +962,10 @@
             ],
             "description": "Enumeration type for Doctrine",
             "support": {
-                "source": "https://github.com/jaroslavtyc/doctrineum/tree/1.5",
+                "source": "https://github.com/jaroslavtyc/doctrineum/tree/2.0.0",
                 "issues": "https://github.com/jaroslavtyc/doctrineum/issues"
             },
-            "time": "2015-01-22 12:33:49"
+            "time": "2015-01-22 18:25:32"
         },
         {
             "name": "jdorn/sql-formatter",
@@ -1863,8 +1863,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "doctrine/migrations": 20,
-        "doctrine/doctrine-migrations-bundle": 20,
-        "jaroslavtyc/doctrineum": 10
+        "doctrine/doctrine-migrations-bundle": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
