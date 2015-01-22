@@ -10,10 +10,14 @@
         {
             "type": "vcs",
             "url": "https://github.com/jaroslavtyc/doctrineum.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/jaroslavtyc/granam-strict-object.git"
         }
     ],
     "require": {
-        "php": ">=5.3.3",
+        "php": ">=5.5.0",
         "symfony/symfony": "2.5.*",
         "doctrine/orm": "~2.2,>=2.2.3",
         "doctrine/doctrine-bundle": "~1.2",
@@ -26,7 +30,8 @@
         "sensio/distribution-bundle": "~3.0",
         "sensio/framework-extra-bundle": "~3.0",
         "incenteev/composer-parameter-handler": "~2.0",
-        "jaroslavtyc/doctrineum": "1.*@alpha"
+        "jaroslavtyc/doctrineum": "~1.5",
+        "granam/strict-object": "~1.1"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
