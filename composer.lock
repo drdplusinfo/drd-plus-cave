@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c5d83f38f8abed48090b8bc1732dc3dc",
+    "hash": "2e3decc2cf433f99a80aa8c6e7e67a08",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -930,7 +930,7 @@
         },
         {
             "name": "jaroslavtyc/doctrineum",
-            "version": "1.5.x-dev",
+            "version": "1.5.4-beta",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/doctrineum.git",
@@ -1864,7 +1864,7 @@
     "stability-flags": {
         "doctrine/migrations": 20,
         "doctrine/doctrine-migrations-bundle": 20,
-        "jaroslavtyc/doctrineum": 20
+        "jaroslavtyc/doctrineum": 10
     },
     "prefer-stable": false,
     "prefer-lowest": false,
