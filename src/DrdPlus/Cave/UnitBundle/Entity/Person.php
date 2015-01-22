@@ -3,9 +3,10 @@ namespace DrdPlus\Cave\UnitBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\InitialProperties;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Level;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels\ProfessionLevels;
 use DrdPlus\Cave\UnitBundle\Enum\Races\Gender;
 use DrdPlus\Cave\UnitBundle\Enum\Races\Race;
+use Granam\StrictObject\StrictObject;
 
 /**
  * Person
@@ -13,7 +14,7 @@ use DrdPlus\Cave\UnitBundle\Enum\Races\Race;
  * @ORM\Table()
  * @ORM\Entity()
  */
-class Person
+class Person extends StrictObject
 {
     /**
      * @var integer
@@ -32,7 +33,7 @@ class Person
     private $name;
 
     /**
-     * @var array
+     * @var Gender
      *
      * @ORM\Column(type="gender")
      */
@@ -53,14 +54,27 @@ class Person
     private $initialProperties;
 
     /**
-     * @var Level[]
+     * @var ProfessionLevels
      *
-     * @ORM\OneToMany(targetEntity="DrdPlus\Cave\UnitBundle\Entity\Attributes\Level", mappedBy="person")
+     * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels\ProfessionLevels")
      */
-    private $levels;
+    private $professionLevels;
+
+    public function __construct(
+        Gender $gender,
+        Race $race,
+        InitialProperties $initialProperties,
+        ProfessionLevels $professionLevels
+    )
+    {
+        $this->gender = $gender;
+        $this->race = $race;
+        $this->initialProperties = $initialProperties;
+        $this->professionLevels = $professionLevels;
+    }
 
     /**
-     * Get id
+     * Get ID
      *
      * @return int
      */
@@ -70,10 +84,8 @@ class Person
     }
 
     /**
-     * Set name
-     *
-     * @param string $name
-     * @return Person
+     * @param $name
+     * @return $this
      */
     public function setName($name)
     {
@@ -93,14 +105,6 @@ class Person
     }
 
     /**
-     * @param Race $race
-     */
-    public function setRace(Race $race)
-    {
-        $this->race = $race;
-    }
-
-    /**
      * Get race
      *
      * @return Race
@@ -108,14 +112,6 @@ class Person
     public function getRace()
     {
         return $this->race;
-    }
-
-    /**
-     * @param Gender $gender
-     */
-    public function setGender(Gender $gender)
-    {
-        $this->gender = $gender;
     }
 
     /**
@@ -129,26 +125,13 @@ class Person
     }
 
     /**
-     * Set levels
-     *
-     * @param Level[] $levels
-     * @return $this
-     */
-    public function setLevels(array $levels)
-    {
-        $this->levels = $levels;
-
-        return $this;
-    }
-
-    /**
      * Get levels
      *
-     * @return Level[]
+     * @return ProfessionLevels
      */
-    public function getLevels()
+    public function getProfessionLevels()
     {
-        return $this->levels;
+        return $this->professionLevels;
     }
 
     /**
@@ -157,13 +140,5 @@ class Person
     public function getInitialProperties()
     {
         return $this->initialProperties;
-    }
-
-    /**
-     * @param InitialProperties $initialProperties
-     */
-    public function setInitialProperties(InitialProperties $initialProperties)
-    {
-        $this->initialProperties = $initialProperties;
     }
 }
