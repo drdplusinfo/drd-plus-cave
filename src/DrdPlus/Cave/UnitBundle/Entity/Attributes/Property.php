@@ -2,6 +2,7 @@
 namespace DrdPlus\Cave\UnitBundle\Entity\Attributes;
 
 use Doctrine\ORM\Mapping as ORM;
+use Granam\StrictObject\StrictObject;
 
 /**
  * Property
@@ -9,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table()
  * @ORM\Entity
  */
-class Property
+class Property extends StrictObject
 {
     const STRENGTH_CODE = 'strength';
     const STRENGTH_LABEL = 'Síla';
