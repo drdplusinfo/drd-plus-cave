@@ -3,6 +3,7 @@ namespace DrdPlus\Cave\UnitBundle\Entity\Attributes;
 
 use Doctrine\ORM\Mapping as ORM;
 use DrdPlus\Cave\UnitBundle\Entity\Person;
+use Granam\StrictObject\StrictObject;
 
 /**
  * InitialProperties
@@ -10,11 +11,12 @@ use DrdPlus\Cave\UnitBundle\Entity\Person;
  * @ORM\Table()
  * @ORM\Entity()
  */
-class InitialProperties
+class InitialProperties extends StrictObject
 {
     const INITIAL_PROPERTY_INCREASE_LIMIT = 3;
 
     /**
+     * Value object, the ID is just for Doctrine linking
      * @var integer
      *
      * @ORM\Column(type="integer")
@@ -82,9 +84,13 @@ class InitialProperties
 
     /**
      * @param Person $person
+     * @throws Exceptions\PersonIsAlreadySet
      */
     public function setPerson($person)
     {
+        if ($this->person) {
+            throw new Exceptions\PersonIsAlreadySet('Initial properties of ID ' . $this->id . ' is linked with person of ID ' . $this->person->getId());
+        }
         $this->person = $person;
     }
 
@@ -99,13 +105,33 @@ class InitialProperties
     /**
      * @param int $initialStrength
      * @throws Exceptions\InitialPropertyValueExceeded
+     * @return $this
      */
     public function setInitialStrength($initialStrength)
     {
-        if ($initialStrength > $this->calculateMaximalInitialStrength()) {
-            throw new Exceptions\InitialPropertyValueExceeded('The initial strength can not exceed ' . $this->calculateMaximalInitialStrength());
+        $this->setUpProperty(Property::STRENGTH_CODE, $initialStrength);
+        return $this;
+    }
+
+    /**
+     * @param $personPropertyName
+     * @param $initialValue
+     * @throws Exceptions\InitialPropertyIsAlreadySet
+     * @throws Exceptions\InitialPropertyValueExceeded
+     */
+    private function setUpProperty($personPropertyName, $initialValue)
+    {
+        $classPropertyName = 'initial' . ucfirst($personPropertyName);
+        if (isset($this->$classPropertyName)) {
+            throw new Exceptions\InitialPropertyIsAlreadySet('The property ' . $classPropertyName . ' is already set');
         }
-        $this->initialStrength = $initialStrength;
+        // like calculateMaximalInitialStrength()
+        $initialCalculationMethod = 'calculateMaximalInitial' . ucfirst($personPropertyName);
+        if ($initialValue > $this->$initialCalculationMethod()) {
+            throw new Exceptions\InitialPropertyValueExceeded('The initial ' . $personPropertyName . ' can not exceed ' . $this->$initialCalculationMethod());
+        }
+
+        $this->$classPropertyName = $initialValue;
     }
 
     /**
@@ -113,7 +139,18 @@ class InitialProperties
      */
     public function calculateMaximalInitialStrength()
     {
-        return self::INITIAL_PROPERTY_INCREASE_LIMIT + $this->getPerson()->getRace()->getStrengthModifier($this->getPerson()->getGender());
+        return $this->calculateMaximalInitialProperty(Property::STRENGTH_CODE);
+    }
+
+    /**
+     * @param string $propertyName
+     * @return int
+     */
+    private function calculateMaximalInitialProperty($propertyName)
+    {
+        // like getStrengthModifier()
+        $propertyModifierGetter = 'get' . ucfirst($propertyName) . 'Modifier';
+        return self::INITIAL_PROPERTY_INCREASE_LIMIT + $this->getPerson()->getRace()->$propertyModifierGetter($this->getPerson()->getGender());
     }
 
     /**
@@ -127,13 +164,12 @@ class InitialProperties
     /**
      * @param int $initialAgility
      * @throws Exceptions\InitialPropertyValueExceeded
+     * @return $this
      */
     public function setInitialAgility($initialAgility)
     {
-        if ($initialAgility > $this->calculateMaximalInitialStrength()) {
-            throw new Exceptions\InitialPropertyValueExceeded('The initial agility can not exceed ' . $this->calculateMaximalInitialAgility());
-        }
-        $this->initialAgility = $initialAgility;
+        $this->setUpProperty(Property::AGILITY_CODE, $initialAgility);
+        return $this;
     }
 
     /**
@@ -141,7 +177,7 @@ class InitialProperties
      */
     public function calculateMaximalInitialAgility()
     {
-        return self::INITIAL_PROPERTY_INCREASE_LIMIT + $this->getPerson()->getRace()->getAgilityModifier($this->getPerson()->getGender());
+        return $this->calculateMaximalInitialProperty(Property::AGILITY_CODE);
     }
 
     /**
@@ -155,13 +191,12 @@ class InitialProperties
     /**
      * @param int $initialKnack
      * @throws Exceptions\InitialPropertyValueExceeded
+     * @return $this
      */
     public function setInitialKnack($initialKnack)
     {
-        if ($initialKnack > $this->calculateMaximalInitialKnack()) {
-            throw new Exceptions\InitialPropertyValueExceeded('The initial knack can not exceed ' . $this->calculateMaximalInitialKnack());
-        }
-        $this->initialKnack = $initialKnack;
+        $this->setUpProperty(Property::KNACK_CODE, $initialKnack);
+        return $this;
     }
 
     /**
@@ -169,7 +204,7 @@ class InitialProperties
      */
     public function calculateMaximalInitialKnack()
     {
-        return self::INITIAL_PROPERTY_INCREASE_LIMIT + $this->getPerson()->getRace()->getKnackModifier($this->getPerson()->getGender());
+        return $this->calculateMaximalInitialProperty(Property::KNACK_CODE);
     }
 
     /**
@@ -183,13 +218,12 @@ class InitialProperties
     /**
      * @param int $initialWill
      * @throws Exceptions\InitialPropertyValueExceeded
+     * @return $this
      */
     public function setInitialWill($initialWill)
     {
-        if ($initialWill > $this->calculateMaximalInitialWill()) {
-            throw new Exceptions\InitialPropertyValueExceeded('The initial will can not exceed ' . $this->calculateMaximalInitialWill());
-        }
-        $this->initialWill = $initialWill;
+        $this->setUpProperty(Property::WILL_CODE, $initialWill);
+        return $this;
     }
 
     /**
@@ -197,7 +231,7 @@ class InitialProperties
      */
     public function calculateMaximalInitialWill()
     {
-        return self::INITIAL_PROPERTY_INCREASE_LIMIT + $this->getPerson()->getRace()->getWillModifier($this->getPerson()->getGender());
+        return $this->calculateMaximalInitialProperty(Property::WILL_CODE);
     }
 
     /**
@@ -211,13 +245,12 @@ class InitialProperties
     /**
      * @param int $initialIntelligence
      * @throws Exceptions\InitialPropertyValueExceeded
+     * @return $this
      */
     public function setInitialIntelligence($initialIntelligence)
     {
-        if ($initialIntelligence > $this->calculateMaximalInitialIntelligence()) {
-            throw new Exceptions\InitialPropertyValueExceeded('The initial intelligence can not exceed ' . $this->calculateMaximalInitialIntelligence());
-        }
-        $this->initialIntelligence = $initialIntelligence;
+        $this->setUpProperty(Property::INTELLIGENCE_CODE, $initialIntelligence);
+        return $this;
     }
 
     /**
@@ -225,7 +258,7 @@ class InitialProperties
      */
     public function calculateMaximalInitialIntelligence()
     {
-        return self::INITIAL_PROPERTY_INCREASE_LIMIT + $this->getPerson()->getRace()->getIntelligenceModifier($this->getPerson()->getGender());
+        return $this->calculateMaximalInitialProperty(Property::INTELLIGENCE_CODE);
     }
 
     /**
@@ -239,13 +272,12 @@ class InitialProperties
     /**
      * @param int $initialCharisma
      * @throws Exceptions\InitialPropertyValueExceeded
+     * @return $this
      */
     public function setInitialCharisma($initialCharisma)
     {
-        if ($initialCharisma > $this->calculateMaximalInitialCharisma()) {
-            throw new Exceptions\InitialPropertyValueExceeded('The initial charisma can not exceed ' . $this->calculateMaximalInitialCharisma());
-        }
-        $this->initialCharisma = $initialCharisma;
+        $this->setUpProperty(Property::CHARISMA_CODE, $initialCharisma);
+        return $this;
     }
 
     /**
@@ -253,6 +285,6 @@ class InitialProperties
      */
     public function calculateMaximalInitialCharisma()
     {
-        return self::INITIAL_PROPERTY_INCREASE_LIMIT + $this->getPerson()->getRace()->getCharismaModifier($this->getPerson()->getGender());
+        return $this->calculateMaximalInitialProperty(Property::CHARISMA_CODE);
     }
 }
