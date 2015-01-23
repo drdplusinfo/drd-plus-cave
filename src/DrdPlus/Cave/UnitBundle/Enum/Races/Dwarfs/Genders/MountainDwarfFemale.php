@@ -1,14 +1,14 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Enum\Races\Dwarfs\Genders;
 
-use DrdPlus\Cave\UnitBundle\Enum\Races\IsFemale;
+use DrdPlus\Cave\UnitBundle\Enum\Races\IsFemaleTrait;
 
 /**
  * MountainDwarfFemale
  */
 class MountainDwarfFemale extends MountainDwarfGender
 {
-    use IsFemale;
+    use IsFemaleTrait;
 
     /**
      * Get knack modifier

@@ -1,7 +1,7 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Enum\Races\Krolls\Genders;
 
-use DrdPlus\Cave\UnitBundle\Enum\Races\IsFemale;
+use DrdPlus\Cave\UnitBundle\Enum\Races\IsFemaleTrait;
 
 /**
  * CommonKrollFemale
@@ -9,7 +9,7 @@ use DrdPlus\Cave\UnitBundle\Enum\Races\IsFemale;
 class CommonKrollFemale extends CommonKrollGender
 {
 
-    use IsFemale;
+    use IsFemaleTrait;
 
     /**
      * Get strength modifier

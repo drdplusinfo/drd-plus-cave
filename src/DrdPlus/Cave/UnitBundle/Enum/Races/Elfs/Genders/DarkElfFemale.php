@@ -1,12 +1,12 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Enum\Races\Elfs\Genders;
 
-use DrdPlus\Cave\UnitBundle\Enum\Races\IsFemale;
+use DrdPlus\Cave\UnitBundle\Enum\Races\IsFemaleTrait;
 
 class DarkElfFemale extends DarkElfGender
 {
 
-    use IsFemale;
+    use IsFemaleTrait;
 
     /**
      * Get strength modifier

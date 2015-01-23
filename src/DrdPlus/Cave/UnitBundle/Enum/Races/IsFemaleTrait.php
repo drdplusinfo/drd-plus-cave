@@ -1,7 +1,7 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Enum\Races;
 
-trait IsFemale
+trait IsFemaleTrait
 {
     /**
      * @return bool

@@ -1,14 +1,14 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Enum\Races\Humans\Genders;
 
-use DrdPlus\Cave\UnitBundle\Enum\Races\IsFemale;
+use DrdPlus\Cave\UnitBundle\Enum\Races\IsFemaleTrait;
 
 /**
  * HighlanderFemale
  */
 class HighlanderFemale extends HighlanderGender
 {
-    use IsFemale;
+    use IsFemaleTrait;
 
     /**
      * Get strength modifier

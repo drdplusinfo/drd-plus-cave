@@ -1,7 +1,7 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Enum\Races\Hobbits\Genders;
 
-use DrdPlus\Cave\UnitBundle\Enum\Races\IsFemale;
+use DrdPlus\Cave\UnitBundle\Enum\Races\IsFemaleTrait;
 
 /**
  * HobbitFemale
@@ -9,7 +9,7 @@ use DrdPlus\Cave\UnitBundle\Enum\Races\IsFemale;
 class HobbitFemale extends HobbitGender
 {
 
-    use IsFemale;
+    use IsFemaleTrait;
 
     /**
      * Get strength modifier

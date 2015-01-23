@@ -1,14 +1,14 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Enum\Races\Elfs\Genders;
 
-use DrdPlus\Cave\UnitBundle\Enum\Races\IsFemale;
+use DrdPlus\Cave\UnitBundle\Enum\Races\IsFemaleTrait;
 
 /**
  * CommonElfFemale
  */
 class CommonElfFemale extends CommonElfGender
 {
-    use IsFemale;
+    use IsFemaleTrait;
 
     /**
      * Get strength modifier

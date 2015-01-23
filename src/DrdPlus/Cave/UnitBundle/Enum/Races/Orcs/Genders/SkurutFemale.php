@@ -1,7 +1,7 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Enum\Races\Orcs\Genders;
 
-use DrdPlus\Cave\UnitBundle\Enum\Races\IsFemale;
+use DrdPlus\Cave\UnitBundle\Enum\Races\IsFemaleTrait;
 
 /**
  * SkurutFemale
@@ -9,7 +9,7 @@ use DrdPlus\Cave\UnitBundle\Enum\Races\IsFemale;
 class SkurutFemale extends SkurutGender
 {
 
-    use IsFemale;
+    use IsFemaleTrait;
 
     /**
      * Get strength modifier

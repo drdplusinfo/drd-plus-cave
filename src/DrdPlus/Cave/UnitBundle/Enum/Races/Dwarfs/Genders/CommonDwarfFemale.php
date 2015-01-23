@@ -1,14 +1,14 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Enum\Races\Dwarfs\Genders;
 
-use DrdPlus\Cave\UnitBundle\Enum\Races\IsFemale;
+use DrdPlus\Cave\UnitBundle\Enum\Races\IsFemaleTrait;
 
 /**
  * CommonDwarfFemale
  */
 class CommonDwarfFemale extends CommonDwarfGender
 {
-    use IsFemale;
+    use IsFemaleTrait;
 
     /**
      * Get knack modifier
