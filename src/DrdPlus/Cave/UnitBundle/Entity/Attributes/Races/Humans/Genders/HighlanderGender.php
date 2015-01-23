@@ -1,0 +1,17 @@
+<?php
+namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Humans\Genders;
+
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Humans\Highlander;
+
+abstract class HighlanderGender extends HumanGender
+{
+
+    /**
+     * @return string
+     */
+    public function getSubRaceCode()
+    {
+        return Highlander::SUBRACE_CODE;
+    }
+
+}
