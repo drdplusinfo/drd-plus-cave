@@ -2,6 +2,7 @@
 namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels;
 
 use Doctrine\ORM\Mapping as ORM;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Property;
 use DrdPlus\Cave\UnitBundle\Entity\Person;
 use Granam\StrictObject\StrictObject;
 
@@ -74,6 +75,18 @@ class ProfessionLevels extends StrictObject
      * @ORM\OneToMany(targetEntity="WizardLevel", mappedBy="professionLevels")
      */
     private $wizardLevels;
+
+    /**
+     * @param Person $person
+     * @throws Exceptions\PersonIsAlreadySet
+     */
+    public function setPerson(Person $person)
+    {
+        if ($this->person) {
+            throw new Exceptions\PersonIsAlreadySet('Profession levels of Doctrine ID ' . $this->id . ' is linked with person of ID ' . $this->person->getId());
+        }
+        $this->person = $person;
+    }
 
     /**
      * Get person
