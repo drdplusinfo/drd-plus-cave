@@ -86,7 +86,7 @@ class InitialProperties extends StrictObject
      * @param Person $person
      * @throws Exceptions\PersonIsAlreadySet
      */
-    public function setPerson($person)
+    public function setPerson(Person $person)
     {
         if ($this->person) {
             throw new Exceptions\PersonIsAlreadySet('Initial properties of ID ' . $this->id . ' is linked with person of ID ' . $this->person->getId());
