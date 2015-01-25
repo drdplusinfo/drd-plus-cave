@@ -4,8 +4,8 @@ namespace DrdPlus\Cave\UnitBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\InitialProperties;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels\ProfessionLevels;
-use DrdPlus\Cave\UnitBundle\Enum\Races\Gender;
-use DrdPlus\Cave\UnitBundle\Enum\Races\Race;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Gender;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Race;
 use Granam\StrictObject\StrictObject;
 
 /**
