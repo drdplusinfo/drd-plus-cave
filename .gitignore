@@ -16,5 +16,6 @@
 .idea/symfony2.xml
 .idea/dictionaries/
 .idea/php.xml
+.idea/misc.xml
 
 tests/_output/*
