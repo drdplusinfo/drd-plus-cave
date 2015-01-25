@@ -71,6 +71,7 @@ class Person extends StrictObject
         $this->race = $race;
         $this->initialProperties = $initialProperties;
         $this->professionLevels = $professionLevels;
+        $this->name = new \SplString('');
     }
 
     /**
@@ -84,10 +85,10 @@ class Person extends StrictObject
     }
 
     /**
-     * @param $name
+     * @param \SplString $name
      * @return $this
      */
-    public function setName($name)
+    public function setName(\SplString $name)
     {
         $this->name = $name;
 
@@ -95,7 +96,7 @@ class Person extends StrictObject
     }
 
     /**
-     * Get name
+     * Get \SplString
      *
      * @return string
      */
