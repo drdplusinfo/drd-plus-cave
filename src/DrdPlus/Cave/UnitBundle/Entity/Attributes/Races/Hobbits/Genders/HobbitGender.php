@@ -6,13 +6,20 @@ use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Hobbits\Hobbit;
 
 abstract class HobbitGender extends Gender
 {
-
     /**
      * @return string
      */
     public function getRaceCode()
     {
-        return Hobbit::CODE;
+        return Hobbit::RACE_CODE;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSubraceCode()
+    {
+        return Hobbit::SUBRACE_CODE;
     }
 
 }

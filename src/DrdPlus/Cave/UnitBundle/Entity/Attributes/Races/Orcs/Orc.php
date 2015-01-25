@@ -26,6 +26,8 @@ use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Race;
  */
 abstract class Orc extends Race
 {
+    const RACE_CODE = 'orc';
+
     const BASE_AGILITY = +2;
     const BASE_WILL = -1;
     const BASE_CHARISMA = -2;
@@ -36,13 +38,8 @@ abstract class Orc extends Race
      * @return string
      */
     public function getRaceCode(){
-        return $this->getSubraceCode();
+        return self::RACE_CODE;
     }
-
-    /**
-     * @return string
-     */
-    abstract protected function getSubraceCode();
 
     /**
      * @return bool

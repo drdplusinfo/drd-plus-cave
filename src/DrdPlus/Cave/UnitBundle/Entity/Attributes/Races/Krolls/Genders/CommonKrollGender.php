@@ -9,7 +9,7 @@ abstract class CommonKrollGender extends KrollGender
     /**
      * @return string
      */
-    public function getSubRaceCode()
+    public function getSubraceCode()
     {
         return CommonKroll::SUBRACE_CODE;
     }

@@ -18,35 +18,50 @@ abstract class Gender extends Enum
     /**
      * Call this method on specific race, not on this abstract class (it is prohibited by exception raising anyway)
      *
-     * @param string $raceGenderCode
+     * @param string $raceAndSubraceGenderCode
      * @param string $innerNamespace
      * @return Gender
      */
-    public static function get($raceGenderCode, $innerNamespace = self::INNER_NAMESPACE){
-        parent::get($raceGenderCode, $innerNamespace);
+    public static function get($raceAndSubraceGenderCode, $innerNamespace = self::INNER_NAMESPACE)
+    {
+        parent::get($raceAndSubraceGenderCode, $innerNamespace);
     }
 
     /**
-     * @param string $raceGenderCode
+     * @param string $raceAndSubraceGenderCode
+     * @throws Exceptions\UnknownGenderCode
      * @return Gender
      */
-    protected static function create($raceGenderCode)
+    protected static function create($raceAndSubraceGenderCode)
     {
-        $gender = parent::create($raceGenderCode);
+        $gender = parent::create($raceAndSubraceGenderCode);
         /** @var $gender Gender */
-        if ($gender->getRaceGenderCode() !== $raceGenderCode) {
-            throw new Exceptions\UnknownGenderCode('Unknown gender code ' . var_export($raceGenderCode, true) . '. Has been this method called from specific gender class?');
+        if ($gender->getRaceAndSubraceGenderCode() !== $raceAndSubraceGenderCode) {
+            throw new Exceptions\UnknownGenderCode(
+                'Unknown race and subrace gender code ' . var_export($raceAndSubraceGenderCode, true) . '. Has been this method called from specific gender class?'
+            );
         }
 
-        return $raceGenderCode;
+        return $gender;
     }
 
     /**
      * @return string
      */
-    protected function getRaceGenderCode()
+    protected function getRaceAndSubraceGenderCode()
     {
-        return $this->getRaceCode() . '-' . $this->getGenderCode();
+        return self::buildRaceAndSubraceGenderCode($this->getRaceCode(), $this->getSubraceCode(), $this->getGenderCode());
+    }
+
+    /**
+     * @param string $raceCode
+     * @param string $subraceCode
+     * @param string $genderCode
+     * @return string
+     */
+    public static function buildRaceAndSubraceGenderCode($raceCode, $subraceCode, $genderCode)
+    {
+        return "$raceCode-$subraceCode-$genderCode";
     }
 
     /**
@@ -57,11 +72,22 @@ abstract class Gender extends Enum
     /**
      * @return string
      */
+    abstract public function getSubraceCode();
+
+    /**
+     * @return string
+     */
     protected function getGenderCode()
     {
-        return $this->isMale()
-            ? self::MALE_CODE
-            : self::FEMALE_CODE;
+        if ($this->isMale()) {
+            return self::MALE_CODE;
+        }
+
+        if ($this->isFemale()) {
+            return self::FEMALE_CODE;
+        }
+
+        throw new Exceptions\UnknownGender('Expected male or female.');
     }
 
     /**

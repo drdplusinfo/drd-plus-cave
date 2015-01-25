@@ -26,13 +26,13 @@ use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Dwarfs\Genders\CommonDwarfGe
  */
 class CommonDwarf extends Dwarf
 {
-    const CODE = 'common-dwarf';
+    const SUBRACE_CODE = 'common-dwarf';
 
     /**
      * @return string
      */
     public function getSubRaceCode()
     {
-        return self::CODE;
+        return self::SUBRACE_CODE;
     }
 }

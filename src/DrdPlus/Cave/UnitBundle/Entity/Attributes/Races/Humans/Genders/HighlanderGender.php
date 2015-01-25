@@ -9,7 +9,7 @@ abstract class HighlanderGender extends HumanGender
     /**
      * @return string
      */
-    public function getSubRaceCode()
+    public function getSubraceCode()
     {
         return Highlander::SUBRACE_CODE;
     }

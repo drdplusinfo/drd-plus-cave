@@ -9,7 +9,7 @@ abstract class WildKrollGender extends KrollGender
     /**
      * @return string
      */
-    public function getSubRaceCode()
+    public function getSubraceCode()
     {
         return WildKroll::SUBRACE_CODE;
     }

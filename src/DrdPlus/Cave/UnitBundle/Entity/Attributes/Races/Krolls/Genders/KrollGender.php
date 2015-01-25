@@ -2,6 +2,7 @@
 namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Krolls\Genders;
 
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Gender;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Krolls\Kroll;
 
 abstract class KrollGender extends Gender {
 
@@ -10,13 +11,7 @@ abstract class KrollGender extends Gender {
      */
     public function getRaceCode()
     {
-        return $this->getSubRaceCode();
+        return Kroll::RACE_CODE;
     }
-
-    /**
-     * @return string
-     * TODO subrace and race code should be different and separated
-     */
-    abstract public function getSubRaceCode();
 
 }

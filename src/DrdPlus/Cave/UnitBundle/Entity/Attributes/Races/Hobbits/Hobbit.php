@@ -25,7 +25,8 @@ use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Race;
  */
 class Hobbit extends Race
 {
-    const CODE = 'hobbit';
+    const RACE_CODE = 'hobbit';
+    const SUBRACE_CODE = 'hobbit';
 
     const BASE_STRENGTH = -3;
     const BASE_AGILITY = +1;
@@ -38,7 +39,12 @@ class Hobbit extends Race
      */
     public function getRaceCode()
     {
-        return self::CODE;
+        return self::RACE_CODE;
+    }
+
+    public function getSubraceCode()
+    {
+        return self::SUBRACE_CODE;
     }
 
 }

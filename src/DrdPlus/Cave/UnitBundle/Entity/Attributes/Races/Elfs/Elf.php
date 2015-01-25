@@ -26,6 +26,8 @@ use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Race;
  */
 abstract class Elf extends Race
 {
+    const RACE_CODE = 'elf';
+
     const BASE_STRENGTH = -1;
     const BASE_AGILITY = +1;
     const BASE_KNACK = +1;
@@ -39,12 +41,7 @@ abstract class Elf extends Race
      */
     public function getRaceCode()
     {
-        return $this->getSubRaceCode();
+        return self::RACE_CODE;
     }
-
-    /**
-     * @return string
-     */
-    abstract public function getSubRaceCode();
 
 }

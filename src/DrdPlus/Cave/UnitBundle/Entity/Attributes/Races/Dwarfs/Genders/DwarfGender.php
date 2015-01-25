@@ -1,6 +1,7 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Dwarfs\Genders;
 
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Dwarfs\Dwarf;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Gender;
 
 abstract class DwarfGender extends Gender {
@@ -10,12 +11,7 @@ abstract class DwarfGender extends Gender {
      */
     public function getRaceCode()
     {
-        return $this->getSubRaceCode();
+        return Dwarf::RACE_CODE;
     }
-
-    /**
-     * @return string
-     */
-    abstract public function getSubRaceCode();
 
 }

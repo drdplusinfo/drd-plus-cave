@@ -11,11 +11,11 @@ class GenderEnumType extends EnumType
     /**
      * Overloaded parent method to implement own conversion
      *
-     * @param string $raceCode
+     * @param string $raceAndSubraceCode
      * @return Gender
      */
-    protected function convertToEnum($raceCode)
+    protected function convertToEnum($raceAndSubraceCode)
     {
-        return Gender::get($raceCode);
+        return Gender::get($raceAndSubraceCode);
     }
 }

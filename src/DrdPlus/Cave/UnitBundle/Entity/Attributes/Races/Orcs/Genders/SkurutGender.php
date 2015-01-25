@@ -9,7 +9,7 @@ abstract class SkurutGender extends OrcGender
     /**
      * @return string
      */
-    public function getSubRaceCode()
+    public function getSubraceCode()
     {
         return Skurut::SUBRACE_CODE;
     }

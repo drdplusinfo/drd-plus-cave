@@ -9,6 +9,8 @@ use Granam\StrictObject\StrictObject;
  *
  * @ORM\Table()
  * @ORM\Entity
+ *
+ * TODO rework this...
  */
 class Property extends StrictObject
 {

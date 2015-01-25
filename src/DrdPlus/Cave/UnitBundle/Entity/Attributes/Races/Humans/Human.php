@@ -26,18 +26,14 @@ use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Race;
  */
 abstract class Human extends Race
 {
+    const RACE_CODE = 'human';
 
     /**
      * @return string
      */
     public function getRaceCode()
     {
-        return $this->getSubRaceCode();
+        return self::RACE_CODE;
     }
-
-    /**
-     * @return string
-     */
-    abstract public function getSubRaceCode();
 
 }

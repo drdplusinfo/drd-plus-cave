@@ -26,6 +26,8 @@ use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Race;
  */
 abstract class Kroll extends Race
 {
+    const RACE_CODE = 'kroll';
+
     const BASE_STRENGTH = +3;
     const BASE_AGILITY = -2;
     const BASE_KNACK = -1;
@@ -38,13 +40,8 @@ abstract class Kroll extends Race
      */
     public function getRaceCode()
     {
-        return $this->getSubraceCode();
+        return self::RACE_CODE;
     }
-
-    /**
-     * @return string
-     */
-    abstract public function getSubraceCode();
 
     /**
      * @return bool

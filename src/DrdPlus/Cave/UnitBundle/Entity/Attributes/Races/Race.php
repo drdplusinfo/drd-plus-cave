@@ -24,13 +24,13 @@ abstract class Race extends Enum
     /**
      * Call this method on specific race, not on this abstract class (it is prohibited by exception raising anyway)
      * @see create
-     * @param string $raceCode
+     * @param string $raceAndSubraceCode
      * @param string $innerNamespace
      * @return Race
      */
-    public static function get($raceCode, $innerNamespace = self::INNER_NAMESPACE)
+    public static function get($raceAndSubraceCode, $innerNamespace = self::INNER_NAMESPACE)
     {
-        return parent::get($raceCode, $innerNamespace);
+        return parent::get($raceAndSubraceCode, $innerNamespace);
     }
 
     /**
@@ -49,6 +49,9 @@ abstract class Race extends Enum
     {
         if ($gender->getRaceCode() !== $this->getRaceCode()) {
             throw new \LogicException('Gender is not for race ' . $this->getRaceCode() . ', but for race ' . $gender->getRaceCode());
+        }
+        if ($gender->getSubraceCode() !== $this->getSubraceCode()) {
+            throw new \LogicException('Gender is not for subrace ' . $this->getSubraceCode() . ', but for subrace ' . $gender->getSubraceCode());
         }
     }
 
@@ -232,16 +235,16 @@ abstract class Race extends Enum
     }
 
     /**
-     * @param string $raceCode
+     * @param string $raceAndSubraceCode
      * @return Race
      */
-    protected static function create($raceCode)
+    protected static function create($raceAndSubraceCode)
     {
-        $race = parent::create($raceCode);
+        $race = parent::create($raceAndSubraceCode);
         /** @var $race Race */
-        if ($race->getRaceCode() !== $raceCode) {
+        if ($race->getRaceCode() !== $raceAndSubraceCode) {
             // create() method, or get() respectively, has to be called on a specific race, not on this abstract one
-            throw new Exceptions\UnknownRaceCode('Unknown race code ' . var_export($raceCode, true) . '. Has been this method called from specific race class?');
+            throw new Exceptions\UnknownRaceCode('Unknown race code ' . var_export($raceAndSubraceCode, true) . '. Has been this method called from specific race class?');
         }
 
         return $race;
@@ -251,4 +254,9 @@ abstract class Race extends Enum
      * @return string
      */
     abstract public function getRaceCode();
+
+    /**
+     * @return string
+     */
+    abstract public function getSubraceCode();
 }

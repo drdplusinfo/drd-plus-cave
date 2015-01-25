@@ -2,6 +2,7 @@
 namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Orcs\Genders;
 
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Gender;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Orcs\Orc;
 
 abstract class OrcGender extends Gender
 {
@@ -11,12 +12,7 @@ abstract class OrcGender extends Gender
      */
     public function getRaceCode()
     {
-        return $this->getSubRaceCode();
+        return Orc::RACE_CODE;
     }
-
-    /**
-     * @return string
-     */
-    abstract public function getSubRaceCode();
 
 }

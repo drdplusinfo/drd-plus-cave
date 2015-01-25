@@ -9,7 +9,7 @@ abstract class WoodDwarfGender extends DwarfGender
     /**
      * @return string
      */
-    public function getSubRaceCode()
+    public function getSubraceCode()
     {
         return WoodDwarf::SUBRACE_CODE;
     }

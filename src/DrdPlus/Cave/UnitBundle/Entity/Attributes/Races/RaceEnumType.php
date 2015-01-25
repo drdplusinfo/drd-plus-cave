@@ -11,15 +11,15 @@ class RaceEnumType extends EnumType
     /**
      * Overloaded parent method to implement own conversion
      *
-     * @param string $raceCode
+     * @param string $raceAndSubraceCode
      * @return Race|null
      */
-    protected function convertToEnum($raceCode)
+    protected function convertToEnum($raceAndSubraceCode)
     {
-        if (is_null($raceCode)) {
+        if (is_null($raceAndSubraceCode)) {
             return null;
         }
 
-        return Race::get($raceCode);
+        return Race::get($raceAndSubraceCode);
     }
 }

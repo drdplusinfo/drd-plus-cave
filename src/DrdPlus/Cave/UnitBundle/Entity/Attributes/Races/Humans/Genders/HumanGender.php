@@ -2,6 +2,7 @@
 namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Humans\Genders;
 
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Gender;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Humans\Human;
 
 abstract class HumanGender extends Gender {
 
@@ -10,12 +11,7 @@ abstract class HumanGender extends Gender {
      */
     public function getRaceCode()
     {
-        return $this->getSubRaceCode();
+        return Human::RACE_CODE;
     }
-
-    /**
-     * @return string
-     */
-    abstract public function getSubRaceCode();
 
 }
