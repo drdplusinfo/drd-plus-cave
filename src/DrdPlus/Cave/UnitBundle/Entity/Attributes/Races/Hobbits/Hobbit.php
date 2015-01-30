@@ -26,6 +26,7 @@ use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Race;
 class Hobbit extends Race
 {
     const RACE_CODE = 'hobbit';
+    // TODO make common hobbit to allow subraces to him
     const SUBRACE_CODE = 'hobbit';
 
     const BASE_STRENGTH = -3;
