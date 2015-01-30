@@ -26,7 +26,7 @@
         "sensio/distribution-bundle": "~3.0",
         "sensio/framework-extra-bundle": "~3.0",
         "incenteev/composer-parameter-handler": "~2.0",
-        "jaroslavtyc/doctrineum": "~2.0"
+        "jaroslavtyc/doctrineum": "~3.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",
@@ -62,9 +62,6 @@
         "symfony-web-dir": "web",
         "incenteev-parameters": {
             "file": "app/config/parameters.yml"
-        },
-        "branch-alias": {
-            "dev-master": "0.1.0-dev"
         }
     }
 }
