@@ -3,10 +3,11 @@ namespace DrdPlus\Cave\UnitBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\InitialProperties;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Name;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels\ProfessionLevels;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Gender;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Race;
-use Granam\StrictObject\StrictObject;
+use Granam\Strict\Object\StrictObject;
 
 /**
  * Person
@@ -26,9 +27,9 @@ class Person extends StrictObject
     private $id;
 
     /**
-     * @var string
+     * @var Name
      *
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="name")
      */
     private $name;
 
@@ -71,7 +72,7 @@ class Person extends StrictObject
         $this->race = $race;
         $this->initialProperties = $initialProperties;
         $this->professionLevels = $professionLevels;
-        $this->name = new \SplString('');
+        $this->name = Name::get('');
     }
 
     /**
@@ -85,10 +86,10 @@ class Person extends StrictObject
     }
 
     /**
-     * @param \SplString $name
+     * @param Name $name
      * @return $this
      */
-    public function setName(\SplString $name)
+    public function setName(Name $name)
     {
         $this->name = $name;
 
@@ -96,9 +97,9 @@ class Person extends StrictObject
     }
 
     /**
-     * Get \SplString
+     * Get name
      *
-     * @return string
+     * @return Name
      */
     public function getName()
     {

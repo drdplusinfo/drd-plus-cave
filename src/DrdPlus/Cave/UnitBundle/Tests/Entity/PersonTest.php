@@ -2,6 +2,7 @@
 namespace DrdPlus\Cave\UnitBundle\Tests\Entity;
 
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\InitialProperties;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Name;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels\ProfessionLevels;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Gender;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Race;
@@ -56,11 +57,11 @@ class PersonTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function default_name_is_empty_spl_string()
+    public function default_name_is_empty_name_enum()
     {
         $person = new Person($this->getGenderMock(), $this->getRaceMock(), $this->getInitialPropertiesMock(), $this->getProfessionLevelsMock());
         $defaultName = $person->getName();
-        $this->assertInstanceOf(\SplString::class, $defaultName);
+        $this->assertInstanceOf(Name::class, $defaultName);
         $this->assertSame('', (string)$defaultName);
     }
 
@@ -68,9 +69,9 @@ class PersonTest extends \PHPUnit_Framework_TestCase
     public function can_change_name()
     {
         $person = new Person($this->getGenderMock(), $this->getRaceMock(), $this->getInitialPropertiesMock(), $this->getProfessionLevelsMock());
-        $person->setName($name = new \SplString('foo'));
+        $person->setName($name = Name::get('foo'));
         $this->assertSame($name, $person->getName());
-        $person->setName($newName = new \SplString('bar'));
+        $person->setName($newName = Name::get('bar'));
         $this->assertSame($newName, $person->getName());
     }
 
