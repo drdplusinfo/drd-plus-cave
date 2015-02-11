@@ -3,7 +3,7 @@ namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels;
 
 use Doctrine\ORM\Mapping as ORM;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Property;
-use Granam\StrictObject\StrictObject;
+use Granam\Strict\Object\StrictObject;
 
 /**
  * ProfessionLevel

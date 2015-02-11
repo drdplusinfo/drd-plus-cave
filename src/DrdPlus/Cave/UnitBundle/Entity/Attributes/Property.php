@@ -2,7 +2,7 @@
 namespace DrdPlus\Cave\UnitBundle\Entity\Attributes;
 
 use Doctrine\ORM\Mapping as ORM;
-use Granam\StrictObject\StrictObject;
+use Granam\Strict\Object\StrictObject;
 
 /**
  * Property

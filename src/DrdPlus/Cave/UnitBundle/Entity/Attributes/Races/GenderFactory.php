@@ -43,7 +43,7 @@ use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Orcs\Genders\SkurutFemale;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Orcs\Genders\SkurutMale;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Orcs\Goblin;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Orcs\Skurut;
-use Granam\StrictObject\StrictObject;
+use Granam\Strict\Object\StrictObject;
 
 class GenderFactory extends StrictObject
 {
