@@ -877,15 +877,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/granam-strict-object.git",
-                "reference": "e3d92995ecff098b18760da0ecc39047bceb9636"
+                "reference": "6c21fbe03d70b501f46d4eb3189ca879a1d2b4d2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/granam-strict-object/zipball/e3d92995ecff098b18760da0ecc39047bceb9636",
-                "reference": "e3d92995ecff098b18760da0ecc39047bceb9636",
+                "url": "https://api.github.com/repos/jaroslavtyc/granam-strict-object/zipball/6c21fbe03d70b501f46d4eb3189ca879a1d2b4d2",
+                "reference": "6c21fbe03d70b501f46d4eb3189ca879a1d2b4d2",
                 "shasum": ""
             },
             "require": {
+                "granam/exception-hierarchy": "dev-master",
                 "php": ">=5.4.0"
             },
             "require-dev": {
@@ -915,10 +916,10 @@
                 "strict"
             ],
             "support": {
-                "source": "https://github.com/jaroslavtyc/granam-strict-object/tree/3.0.0",
+                "source": "https://github.com/jaroslavtyc/granam-strict-object/tree/master",
                 "issues": "https://github.com/jaroslavtyc/granam-strict-object/issues"
             },
-            "time": "2015-02-02 14:04:53"
+            "time": "2015-02-11 17:35:11"
         },
         {
             "name": "granam/strict-scalar",
@@ -1122,12 +1123,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/doctrineum-strict-string.git",
-                "reference": "e1e7b9a8e5fc46930be382297618763cdb7dc5c4"
+                "reference": "19365ff0a42d0504e166c2a1f4a04e402b9ea123"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/doctrineum-strict-string/zipball/e1e7b9a8e5fc46930be382297618763cdb7dc5c4",
-                "reference": "e1e7b9a8e5fc46930be382297618763cdb7dc5c4",
+                "url": "https://api.github.com/repos/jaroslavtyc/doctrineum-strict-string/zipball/19365ff0a42d0504e166c2a1f4a04e402b9ea123",
+                "reference": "19365ff0a42d0504e166c2a1f4a04e402b9ea123",
                 "shasum": ""
             },
             "require": {
@@ -1156,7 +1157,7 @@
                 "source": "https://github.com/jaroslavtyc/doctrineum-strict-string/tree/master",
                 "issues": "https://github.com/jaroslavtyc/doctrineum-strict-string/issues"
             },
-            "time": "2015-02-11 12:36:01"
+            "time": "2015-02-11 17:14:08"
         },
         {
             "name": "jdorn/sql-formatter",
