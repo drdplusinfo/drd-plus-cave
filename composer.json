@@ -10,6 +10,26 @@
         {
             "type": "vcs",
             "url": "https://github.com/jaroslavtyc/doctrineum.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/jaroslavtyc/doctrineum-strict-string.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/jaroslavtyc/granam-strict-string.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/jaroslavtyc/granam-strict-object.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/jaroslavtyc/granam-strict-scalar.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/jaroslavtyc/granam-exception-hierarchy.git"
         }
     ],
     "require": {
@@ -26,7 +46,12 @@
         "sensio/distribution-bundle": "~3.0",
         "sensio/framework-extra-bundle": "~3.0",
         "incenteev/composer-parameter-handler": "~2.0",
-        "jaroslavtyc/doctrineum": "~3.0"
+        "jaroslavtyc/doctrineum": "dev-master",
+        "jaroslavtyc/doctrineum-strict-string": "dev-master",
+        "granam/strict-object": "dev-master",
+        "granam/strict-string": "dev-master",
+        "granam/strict-scalar": "dev-master",
+        "granam/exception-hierarchy": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",
