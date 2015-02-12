@@ -36,4 +36,13 @@ class NameTest extends \PHPUnit_Framework_TestCase
         $this->assertNotSame($name, $strictStringEnum);
         $this->assertSame((string)$name, (string)$strictStringEnum);
     }
+
+    /** @test */
+    public function recognizes_if_is_empty()
+    {
+        $emptyName = Name::get('');
+        $this->assertTrue($emptyName->isEmpty());
+        $filledName = Name::get('foo');
+        $this->assertFalse($filledName->isEmpty());
+    }
 }

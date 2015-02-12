@@ -12,6 +12,14 @@ class Name extends StrictStringEnum
      */
     public static function get($nameString, $namespace = __CLASS__)
     {
-        return parent::get($nameString, $namespace);
+        return parent::get(trim($nameString), $namespace);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isEmpty()
+    {
+        return strlen($this->getValue()) === 0;
     }
 }
