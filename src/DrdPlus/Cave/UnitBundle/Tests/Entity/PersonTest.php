@@ -13,66 +13,110 @@ class PersonTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function can_create_instance()
     {
-        $instance = new Person($this->getGenderMock(), $this->getRaceMock(), $this->getInitialPropertiesMock(), $this->getProfessionLevelsMock());
+        $instance = new Person(
+            $this->getGenderMock(),
+            $this->getRaceMock(),
+            $this->getInitialPropertiesMock(),
+            $this->getProfessionLevelsMock(),
+            $this->getNameMock()
+        );
         $this->assertNotNull($instance);
     }
 
     /** @test */
     public function initial_id_is_null()
     {
-        $person = new Person($this->getGenderMock(), $this->getRaceMock(), $this->getInitialPropertiesMock(), $this->getProfessionLevelsMock());
+        $person = new Person(
+            $this->getGenderMock(),
+            $this->getRaceMock(),
+            $this->getInitialPropertiesMock(),
+            $this->getProfessionLevelsMock(),
+            $this->getNameMock()
+        );
         $this->assertNull($person->getId());
     }
 
     /** @test */
     public function returns_same_gender_as_got()
     {
-        $gender = $this->getGenderMock();
-        $person = new Person($gender, $this->getRaceMock(), $this->getInitialPropertiesMock(), $this->getProfessionLevelsMock());
+        $person = new Person(
+            $gender = $this->getGenderMock(),
+            $this->getRaceMock(),
+            $this->getInitialPropertiesMock(),
+            $this->getProfessionLevelsMock(),
+            $this->getNameMock()
+        );
         $this->assertSame($gender, $person->getGender());
     }
 
     /** @test */
     public function returns_same_race_as_got()
     {
-        $race = $this->getRaceMock();
-        $person = new Person($this->getGenderMock(), $race, $this->getInitialPropertiesMock(), $this->getProfessionLevelsMock());
+        $person = new Person(
+            $this->getGenderMock(),
+            $race = $this->getRaceMock(),
+            $this->getInitialPropertiesMock(),
+            $this->getProfessionLevelsMock(),
+            $this->getNameMock()
+        );
         $this->assertSame($race, $person->getRace());
     }
 
     /** @test */
     public function returns_same_initial_properties_as_got()
     {
-        $initialProperties = $this->getInitialPropertiesMock();
-        $person = new Person($this->getGenderMock(), $this->getRaceMock(), $initialProperties, $this->getProfessionLevelsMock());
+        $person = new Person(
+            $this->getGenderMock(),
+            $this->getRaceMock(),
+            $initialProperties = $this->getInitialPropertiesMock(),
+            $this->getProfessionLevelsMock(),
+            $this->getNameMock()
+        );
         $this->assertSame($initialProperties, $person->getInitialProperties());
     }
 
     /** @test */
     public function returns_same_profession_levels_as_got()
     {
-        $professionLevels = $this->getProfessionLevelsMock();
-        $person = new Person($this->getGenderMock(), $this->getRaceMock(), $this->getInitialPropertiesMock(), $professionLevels);
+        $person = new Person(
+            $this->getGenderMock(),
+            $this->getRaceMock(),
+            $this->getInitialPropertiesMock(),
+            $professionLevels = $this->getProfessionLevelsMock(),
+            $this->getNameMock()
+        );
         $this->assertSame($professionLevels, $person->getProfessionLevels());
     }
 
     /** @test */
-    public function default_name_is_empty_name_enum()
+    public function returns_same_name_as_got()
     {
-        $person = new Person($this->getGenderMock(), $this->getRaceMock(), $this->getInitialPropertiesMock(), $this->getProfessionLevelsMock());
-        $defaultName = $person->getName();
-        $this->assertInstanceOf(Name::class, $defaultName);
-        $this->assertSame('', (string)$defaultName);
+        $person = new Person(
+            $this->getGenderMock(),
+            $this->getRaceMock(),
+            $this->getInitialPropertiesMock(),
+            $this->getProfessionLevelsMock(),
+            $name = $this->getNameMock()
+        );
+        $this->assertSame($name, $person->getName());
     }
 
     /** @test */
     public function can_change_name()
     {
-        $person = new Person($this->getGenderMock(), $this->getRaceMock(), $this->getInitialPropertiesMock(), $this->getProfessionLevelsMock());
-        $person->setName($name = Name::get('foo'));
+        $person = new Person(
+            $this->getGenderMock(),
+            $this->getRaceMock(),
+            $this->getInitialPropertiesMock(),
+            $this->getProfessionLevelsMock(),
+            $this->getNameMock()
+        );
+        $person->setName($name = Name::get($nameString = 'foo'));
         $this->assertSame($name, $person->getName());
-        $person->setName($newName = Name::get('bar'));
+        $this->assertSame($nameString, (string)$person->getName());
+        $person->setName($newName = Name::get($newNameString = 'bar'));
         $this->assertSame($newName, $person->getName());
+        $this->assertSame($newNameString, (string)$person->getName());
     }
 
     /**
@@ -105,5 +149,13 @@ class PersonTest extends \PHPUnit_Framework_TestCase
     private function getProfessionLevelsMock()
     {
         return \Mockery::mock(ProfessionLevels::class);
+    }
+
+    /**
+     * @return Name
+     */
+    private function getNameMock()
+    {
+        return \Mockery::mock(Name::class);
     }
 }

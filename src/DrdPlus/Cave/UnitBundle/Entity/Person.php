@@ -65,14 +65,15 @@ class Person extends StrictObject
         Gender $gender,
         Race $race,
         InitialProperties $initialProperties,
-        ProfessionLevels $professionLevels
+        ProfessionLevels $professionLevels,
+        Name $name
     )
     {
         $this->gender = $gender;
         $this->race = $race;
         $this->initialProperties = $initialProperties;
         $this->professionLevels = $professionLevels;
-        $this->name = Name::get('');
+        $this->name = $name;
     }
 
     /**
