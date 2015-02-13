@@ -2,9 +2,9 @@
 namespace DrdPlus\Cave\UnitBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\InitialProperties;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Name;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels\ProfessionLevels;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\InitialProperties;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Gender;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Race;
 use Granam\Strict\Object\StrictObject;
@@ -50,7 +50,7 @@ class Person extends StrictObject
     /**
      * @var InitialProperties
      *
-     * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Entity\Attributes\InitialProperties")
+     * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\InitialProperties")
      */
     private $initialProperties;
 

@@ -2,6 +2,8 @@
 namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels;
 
 use Doctrine\ORM\Mapping as ORM;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Charisma;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Will;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Property;
 
 /**
@@ -28,8 +30,8 @@ class PriestLevel extends ProfessionLevel
     public function getMainPropertyCodes()
     {
         return [
-            Property::CHARISMA_CODE,
-            Property::WILL_CODE
+            Charisma::PROPERTY_CODE,
+            Will::PROPERTY_CODE
         ];
     }
 

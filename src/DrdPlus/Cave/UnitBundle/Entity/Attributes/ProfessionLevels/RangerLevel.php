@@ -2,6 +2,8 @@
 namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels;
 
 use Doctrine\ORM\Mapping as ORM;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Knack;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Strength;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Property;
 
 /**
@@ -28,8 +30,8 @@ class RangerLevel extends ProfessionLevel
     public function getMainPropertyCodes()
     {
         return [
-            Property::KNACK_CODE,
-            Property::STRENGTH_CODE
+            Knack::PROPERTY_CODE,
+            Strength::PROPERTY_CODE
         ];
     }
 

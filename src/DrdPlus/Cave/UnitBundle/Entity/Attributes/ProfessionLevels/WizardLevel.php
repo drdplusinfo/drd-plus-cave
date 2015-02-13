@@ -2,6 +2,8 @@
 namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels;
 
 use Doctrine\ORM\Mapping as ORM;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Intelligence;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Will;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Property;
 
 /**
@@ -28,8 +30,8 @@ class WizardLevel extends ProfessionLevel
     public function getMainPropertyCodes()
     {
         return [
-            Property::WILL_CODE,
-            Property::INTELLIGENCE_CODE
+            Will::PROPERTY_CODE,
+            Intelligence::PROPERTY_CODE
         ];
     }
 

@@ -2,6 +2,8 @@
 namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels;
 
 use Doctrine\ORM\Mapping as ORM;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Agility;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Strength;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Property;
 
 /**
@@ -28,8 +30,8 @@ class FighterLevel extends ProfessionLevel
     public function getMainPropertyCodes()
     {
         return [
-            Property::STRENGTH_CODE,
-            Property::AGILITY_CODE
+            Strength::PROPERTY_CODE,
+            Agility::PROPERTY_CODE
         ];
     }
 

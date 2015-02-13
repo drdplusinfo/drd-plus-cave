@@ -34,6 +34,26 @@ abstract class Race extends Enum
     }
 
     /**
+     * @param string $raceCode
+     * @param string $subraceCode
+     * @return Race
+     */
+    public static function getByRaceAndSubraceCodes($raceCode, $subraceCode)
+    {
+        return static::get(static::buildRaceAndSubraceCode($raceCode, $subraceCode));
+    }
+
+    /**
+     * @param string $raceCode
+     * @param string $subraceCode
+     * @return string
+     */
+    public static function buildRaceAndSubraceCode($raceCode, $subraceCode)
+    {
+        return "$raceCode-$subraceCode";
+    }
+
+    /**
      * Get strength modifier
      * @param Gender $gender
      *
@@ -242,12 +262,20 @@ abstract class Race extends Enum
     {
         $race = parent::create($raceAndSubraceCode);
         /** @var $race Race */
-        if ($race->getRaceCode() !== $raceAndSubraceCode) {
+        if ($race->getRaceAndSubraceCode() !== $raceAndSubraceCode) {
             // create() method, or get() respectively, has to be called on a specific race, not on this abstract one
-            throw new Exceptions\UnknownRaceCode('Unknown race code ' . var_export($raceAndSubraceCode, true) . '. Has been this method called from specific race class?');
+            throw new Exceptions\UnknownRaceCode('Unknown race-subrace code ' . var_export($raceAndSubraceCode, true) . '. Has been this method called from specific race class?');
         }
 
         return $race;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getRaceAndSubraceCode()
+    {
+        return self::buildRaceAndSubraceCode($this->getRaceCode(), $this->getSubraceCode());
     }
 
     /**
@@ -259,4 +287,5 @@ abstract class Race extends Enum
      * @return string
      */
     abstract public function getSubraceCode();
+
 }

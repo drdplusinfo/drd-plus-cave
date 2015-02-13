@@ -9,27 +9,31 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/jaroslavtyc/doctrineum.git"
+            "url": "/home/jaroslav/Dropbox/Projects/doctrineum"
         },
         {
             "type": "vcs",
-            "url": "https://github.com/jaroslavtyc/doctrineum-strict-string.git"
+            "url": "/home/jaroslav/Dropbox/Projects/doctrineum-integer"
         },
         {
             "type": "vcs",
-            "url": "https://github.com/jaroslavtyc/granam-strict-string.git"
+            "url": "/home/jaroslav/Dropbox/Projects/doctrineum-strict-string"
         },
         {
             "type": "vcs",
-            "url": "https://github.com/jaroslavtyc/granam-strict-object.git"
+            "url": "/home/jaroslav/Dropbox/Projects/granam/strict-string"
         },
         {
             "type": "vcs",
-            "url": "https://github.com/jaroslavtyc/granam-strict-scalar.git"
+            "url": "/home/jaroslav/Dropbox/Projects/granam/strict-object"
         },
         {
             "type": "vcs",
-            "url": "https://github.com/jaroslavtyc/granam-exception-hierarchy.git"
+            "url": "/home/jaroslav/Dropbox/Projects/granam/strict-scalar"
+        },
+        {
+            "type": "vcs",
+            "url": "/home/jaroslav/Dropbox/Projects/granam/exception-hierarchy"
         }
     ],
     "require": {
@@ -47,6 +51,7 @@
         "sensio/framework-extra-bundle": "~3.0",
         "incenteev/composer-parameter-handler": "~2.0",
         "jaroslavtyc/doctrineum": "dev-master",
+        "jaroslavtyc/doctrineum-integer": "dev-master",
         "jaroslavtyc/doctrineum-strict-string": "dev-master",
         "granam/strict-object": "dev-master",
         "granam/strict-string": "dev-master",

@@ -2,6 +2,8 @@
 namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels;
 
 use Doctrine\ORM\Mapping as ORM;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Agility;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Knack;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Property;
 
 /**
@@ -28,8 +30,8 @@ class ThiefLevel extends ProfessionLevel
     public function getMainPropertyCodes()
     {
         return [
-            Property::AGILITY_CODE,
-            Property::KNACK_CODE
+            Agility::PROPERTY_CODE,
+            Knack::PROPERTY_CODE
         ];
     }
 
