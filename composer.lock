@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3afb77c11e1dcda8a286f97b49e70af0",
+    "hash": "0bdf86a37b4296e8705c8e230e510693",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -523,12 +523,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineMigrationsBundle.git",
-                "reference": "81575a4316951125ce408c70f30547c77d98f78a"
+                "reference": "6a1bd731dbdd4ad952a3b246a8f38c9c12f52e62"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineMigrationsBundle/zipball/81575a4316951125ce408c70f30547c77d98f78a",
-                "reference": "81575a4316951125ce408c70f30547c77d98f78a",
+                "url": "https://api.github.com/repos/doctrine/DoctrineMigrationsBundle/zipball/6a1bd731dbdd4ad952a3b246a8f38c9c12f52e62",
+                "reference": "6a1bd731dbdd4ad952a3b246a8f38c9c12f52e62",
                 "shasum": ""
             },
             "require": {
@@ -573,7 +573,7 @@
                 "migrations",
                 "schema"
             ],
-            "time": "2014-08-17 07:53:47"
+            "time": "2015-02-16 13:24:46"
         },
         {
             "name": "doctrine/inflector",
@@ -832,14 +832,8 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/jaroslavtyc/granam-exception-hierarchy.git",
-                "reference": "4c7a0f66956c39bdfb6a3a96cfab77278dfd3e96"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/granam-exception-hierarchy/zipball/4c7a0f66956c39bdfb6a3a96cfab77278dfd3e96",
-                "reference": "4c7a0f66956c39bdfb6a3a96cfab77278dfd3e96",
-                "shasum": ""
+                "url": "/home/jaroslav/Dropbox/Projects/granam/exception-hierarchy",
+                "reference": "a083f48602a1114c7bc91e4715c8757bab3cd20e"
             },
             "require": {
                 "php": ">=5.3"
@@ -865,11 +859,7 @@
                 "php",
                 "runtime"
             ],
-            "support": {
-                "source": "https://github.com/jaroslavtyc/granam-exception-hierarchy/tree/master",
-                "issues": "https://github.com/jaroslavtyc/granam-exception-hierarchy/issues"
-            },
-            "time": "2015-02-11 07:19:54"
+            "time": "2015-02-17 08:30:45"
         },
         {
             "name": "granam/strict-object",
@@ -1083,14 +1073,8 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/jaroslavtyc/doctrineum.git",
-                "reference": "3815a5ff5013a4b8ebb84ef0c3d372af8fd5b0ad"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/doctrineum/zipball/3815a5ff5013a4b8ebb84ef0c3d372af8fd5b0ad",
-                "reference": "3815a5ff5013a4b8ebb84ef0c3d372af8fd5b0ad",
-                "shasum": ""
+                "url": "/home/jaroslav/Dropbox/Projects/doctrineum",
+                "reference": "d364f093e407a922ea4c5310cdfef3cec34038f5"
             },
             "require": {
                 "doctrine/dbal": "2.4.*",
@@ -1111,25 +1095,47 @@
                 "MIT"
             ],
             "description": "Enumeration type for Doctrine",
-            "support": {
-                "source": "https://github.com/jaroslavtyc/doctrineum/tree/master",
-                "issues": "https://github.com/jaroslavtyc/doctrineum/issues"
+            "time": "2015-02-11 07:09:17"
+        },
+        {
+            "name": "jaroslavtyc/doctrineum-integer",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "/home/jaroslav/Dropbox/Projects/doctrineum-integer",
+                "reference": "b6e25c1cadbb58e579ce260edea7437d7538bc23"
             },
-            "time": "2015-02-11 12:42:34"
+            "require": {
+                "granam/exception-hierarchy": "dev-master",
+                "granam/strict-object": "dev-master",
+                "granam/strict-scalar": "dev-master",
+                "granam/strict-string": "dev-master",
+                "jaroslavtyc/doctrineum": "dev-master",
+                "php": ">=5.5"
+            },
+            "require-dev": {
+                "mockery/mockery": "0.9.*",
+                "phpunit/phpunit": "~4.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Doctrineum\\": "Doctrineum/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Enumeration type for Doctrine - integers only",
+            "time": "2015-02-13 08:04:59"
         },
         {
             "name": "jaroslavtyc/doctrineum-strict-string",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/jaroslavtyc/doctrineum-strict-string.git",
-                "reference": "19365ff0a42d0504e166c2a1f4a04e402b9ea123"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/doctrineum-strict-string/zipball/19365ff0a42d0504e166c2a1f4a04e402b9ea123",
-                "reference": "19365ff0a42d0504e166c2a1f4a04e402b9ea123",
-                "shasum": ""
+                "url": "/home/jaroslav/Dropbox/Projects/doctrineum-strict-string",
+                "reference": "1616f48e7fa143f777feba5c11688b7ca6d85606"
             },
             "require": {
                 "granam/exception-hierarchy": "dev-master",
@@ -1153,11 +1159,7 @@
                 "MIT"
             ],
             "description": "Enumeration type for Doctrine - strings only",
-            "support": {
-                "source": "https://github.com/jaroslavtyc/doctrineum-strict-string/tree/master",
-                "issues": "https://github.com/jaroslavtyc/doctrineum-strict-string/issues"
-            },
-            "time": "2015-02-11 17:14:08"
+            "time": "2015-02-12 13:52:50"
         },
         {
             "name": "jdorn/sql-formatter",
@@ -3028,6 +3030,7 @@
         "doctrine/migrations": 20,
         "doctrine/doctrine-migrations-bundle": 20,
         "jaroslavtyc/doctrineum": 20,
+        "jaroslavtyc/doctrineum-integer": 20,
         "jaroslavtyc/doctrineum-strict-string": 20,
         "granam/strict-object": 20,
         "granam/strict-string": 20,

@@ -1,7 +1,7 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Entity\Attributes;
 
-use Doctrineum\StrictString\StrictStringEnum;
+use Doctrineum\Strict\String\StrictStringEnum;
 
 class Name extends StrictStringEnum
 {

@@ -2,7 +2,7 @@
 namespace DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes;
 
 use Doctrineum\Enum;
-use Doctrineum\StrictString\StrictStringEnum;
+use Doctrineum\Strict\String\StrictStringEnum;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Name;
 
 class NameTest extends \PHPUnit_Framework_TestCase

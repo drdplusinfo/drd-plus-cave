@@ -1,9 +1,9 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Tests\Entity;
 
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\InitialProperties;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Name;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels\ProfessionLevels;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\InitialProperties;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Gender;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Race;
 use DrdPlus\Cave\UnitBundle\Entity\Person;
