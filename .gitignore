@@ -10,12 +10,6 @@
 /bin/
 /composer.phar
 
-.idea/workspace.xml
-.idea/deployment.xml
-.idea/dataSources.*
-.idea/symfony2.xml
-.idea/dictionaries/
-.idea/php.xml
-.idea/misc.xml
+.idea
 
 tests/_output/*

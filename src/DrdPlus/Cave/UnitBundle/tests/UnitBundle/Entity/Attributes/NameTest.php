@@ -1,9 +1,8 @@
 <?php
-namespace DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes;
+namespace DrdPlus\Cave\UnitBundle\Entity\Attributes;
 
 use Doctrineum\Generic\Enum;
 use Doctrineum\Strict\String\StrictStringEnum;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Name;
 
 class NameTest extends \PHPUnit_Framework_TestCase
 {
