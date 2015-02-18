@@ -1,7 +1,7 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Races;
 
-use Doctrineum\EnumType;
+use Doctrineum\Generic\EnumType;
 
 class RaceEnumType extends EnumType
 {

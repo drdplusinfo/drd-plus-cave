@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0bdf86a37b4296e8705c8e230e510693",
+    "hash": "88bd0bb4559aa73ba0e6d645e1ef16e3",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1069,15 +1069,16 @@
             "time": "2013-12-07 10:10:39"
         },
         {
-            "name": "jaroslavtyc/doctrineum",
+            "name": "jaroslavtyc/doctrineum-generic",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "/home/jaroslav/Dropbox/Projects/doctrineum",
-                "reference": "d364f093e407a922ea4c5310cdfef3cec34038f5"
+                "url": "/home/jaroslav/Dropbox/Projects/doctrineum/generic",
+                "reference": "ebfa8a4d249eed9a0906f8d6567b1ad901ce5371"
             },
             "require": {
                 "doctrine/dbal": "2.4.*",
+                "granam/exception-hierarchy": "dev-master",
                 "granam/strict-object": "dev-master",
                 "php": ">=5.5"
             },
@@ -1095,22 +1096,22 @@
                 "MIT"
             ],
             "description": "Enumeration type for Doctrine",
-            "time": "2015-02-11 07:09:17"
+            "time": "2015-02-17 10:01:36"
         },
         {
             "name": "jaroslavtyc/doctrineum-integer",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "/home/jaroslav/Dropbox/Projects/doctrineum-integer",
-                "reference": "b6e25c1cadbb58e579ce260edea7437d7538bc23"
+                "url": "/home/jaroslav/Dropbox/Projects/doctrineum/integer",
+                "reference": "3e4d38726a92f79da90d100bcde0f1404182defe"
             },
             "require": {
                 "granam/exception-hierarchy": "dev-master",
                 "granam/strict-object": "dev-master",
                 "granam/strict-scalar": "dev-master",
                 "granam/strict-string": "dev-master",
-                "jaroslavtyc/doctrineum": "dev-master",
+                "jaroslavtyc/doctrineum-generic": "dev-master",
                 "php": ">=5.5"
             },
             "require-dev": {
@@ -1127,22 +1128,22 @@
                 "MIT"
             ],
             "description": "Enumeration type for Doctrine - integers only",
-            "time": "2015-02-13 08:04:59"
+            "time": "2015-02-17 10:11:14"
         },
         {
             "name": "jaroslavtyc/doctrineum-strict-string",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "/home/jaroslav/Dropbox/Projects/doctrineum-strict-string",
-                "reference": "1616f48e7fa143f777feba5c11688b7ca6d85606"
+                "url": "/home/jaroslav/Dropbox/Projects/doctrineum/strict-string",
+                "reference": "f2fc689299adfbceb264f8f842d521e9c2c9102f"
             },
             "require": {
                 "granam/exception-hierarchy": "dev-master",
                 "granam/strict-object": "dev-master",
                 "granam/strict-scalar": "dev-master",
                 "granam/strict-string": "dev-master",
-                "jaroslavtyc/doctrineum": "dev-master",
+                "jaroslavtyc/doctrineum-generic": "dev-master",
                 "php": ">=5.5"
             },
             "require-dev": {
@@ -1159,7 +1160,7 @@
                 "MIT"
             ],
             "description": "Enumeration type for Doctrine - strings only",
-            "time": "2015-02-12 13:52:50"
+            "time": "2015-02-17 10:14:51"
         },
         {
             "name": "jdorn/sql-formatter",
@@ -3029,7 +3030,7 @@
     "stability-flags": {
         "doctrine/migrations": 20,
         "doctrine/doctrine-migrations-bundle": 20,
-        "jaroslavtyc/doctrineum": 20,
+        "jaroslavtyc/doctrineum-generic": 20,
         "jaroslavtyc/doctrineum-integer": 20,
         "jaroslavtyc/doctrineum-strict-string": 20,
         "granam/strict-object": 20,

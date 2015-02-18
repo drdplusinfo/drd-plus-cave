@@ -1,7 +1,7 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Races;
 
-use Doctrineum\Enum;
+use Doctrineum\Generic\Enum;
 
 /**
  * Race

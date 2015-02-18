@@ -1,7 +1,7 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes;
 
-use Doctrineum\Enum;
+use Doctrineum\Generic\Enum;
 use Doctrineum\Strict\String\StrictStringEnum;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Name;
 

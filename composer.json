@@ -9,15 +9,15 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "/home/jaroslav/Dropbox/Projects/doctrineum"
+            "url": "/home/jaroslav/Dropbox/Projects/doctrineum/generic"
         },
         {
             "type": "vcs",
-            "url": "/home/jaroslav/Dropbox/Projects/doctrineum-integer"
+            "url": "/home/jaroslav/Dropbox/Projects/doctrineum/integer"
         },
         {
             "type": "vcs",
-            "url": "/home/jaroslav/Dropbox/Projects/doctrineum-strict-string"
+            "url": "/home/jaroslav/Dropbox/Projects/doctrineum/strict-string"
         },
         {
             "type": "vcs",
@@ -50,7 +50,7 @@
         "sensio/distribution-bundle": "~3.0",
         "sensio/framework-extra-bundle": "~3.0",
         "incenteev/composer-parameter-handler": "~2.0",
-        "jaroslavtyc/doctrineum": "dev-master",
+        "jaroslavtyc/doctrineum-generic": "dev-master",
         "jaroslavtyc/doctrineum-integer": "dev-master",
         "jaroslavtyc/doctrineum-strict-string": "dev-master",
         "granam/strict-object": "dev-master",
