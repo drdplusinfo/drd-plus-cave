@@ -16,7 +16,7 @@ class ExceptionTest extends \PHPUnit_Framework_TestCase
      * @test
      * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Exceptions\Exception
      */
-    public function extends_entity_exception_interface()
+    public function extends_parent_exception_interface()
     {
         throw new TestExceptionInterface();
     }
