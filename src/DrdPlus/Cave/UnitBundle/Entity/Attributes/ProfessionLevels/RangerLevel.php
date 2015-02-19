@@ -4,7 +4,6 @@ namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels;
 use Doctrine\ORM\Mapping as ORM;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Knack;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Strength;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Property;
 
 /**
  * Ranger
@@ -22,7 +21,7 @@ class RangerLevel extends ProfessionLevel
      *
      * @ORM\ManyToOne(targetEntity="ProfessionLevels", inversedBy="rangerLevels")
      */
-    private $professionLevels;
+    protected $professionLevels;
 
     /**
      * @return string[]

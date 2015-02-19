@@ -11,7 +11,7 @@ class Charisma extends Property
      */
     public function getPropertyCode()
     {
-        return self::CHARISMA_CODE;
+        return self::PROPERTY_CODE;
     }
 
 }

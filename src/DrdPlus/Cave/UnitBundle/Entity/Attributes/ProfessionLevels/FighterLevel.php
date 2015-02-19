@@ -4,7 +4,6 @@ namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels;
 use Doctrine\ORM\Mapping as ORM;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Agility;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Strength;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Property;
 
 /**
  * Fighter
@@ -22,7 +21,7 @@ class FighterLevel extends ProfessionLevel
      *
      * @ORM\ManyToOne(targetEntity="ProfessionLevels", inversedBy="fighterLevels")
      */
-    private $professionLevels;
+    protected $professionLevels;
 
     /**
      * @return string[]

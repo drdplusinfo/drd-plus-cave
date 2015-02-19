@@ -109,7 +109,7 @@ class InitialProperties extends StrictObject
      */
     public function setInitialStrength($initialStrength)
     {
-        $this->setUpProperty(Property::STRENGTH_CODE, $initialStrength);
+        $this->setUpProperty(Strength::PROPERTY_CODE, $initialStrength);
         return $this;
     }
 
@@ -139,7 +139,7 @@ class InitialProperties extends StrictObject
      */
     public function calculateMaximalInitialStrength()
     {
-        return $this->calculateMaximalInitialProperty(Property::STRENGTH_CODE);
+        return $this->calculateMaximalInitialProperty(Strength::PROPERTY_CODE);
     }
 
     /**
@@ -168,7 +168,7 @@ class InitialProperties extends StrictObject
      */
     public function setInitialAgility($initialAgility)
     {
-        $this->setUpProperty(Property::AGILITY_CODE, $initialAgility);
+        $this->setUpProperty(Agility::PROPERTY_CODE, $initialAgility);
         return $this;
     }
 
@@ -177,7 +177,7 @@ class InitialProperties extends StrictObject
      */
     public function calculateMaximalInitialAgility()
     {
-        return $this->calculateMaximalInitialProperty(Property::AGILITY_CODE);
+        return $this->calculateMaximalInitialProperty(Agility::PROPERTY_CODE);
     }
 
     /**
@@ -195,7 +195,7 @@ class InitialProperties extends StrictObject
      */
     public function setInitialKnack($initialKnack)
     {
-        $this->setUpProperty(Property::KNACK_CODE, $initialKnack);
+        $this->setUpProperty(Knack::PROPERTY_CODE, $initialKnack);
         return $this;
     }
 
@@ -204,7 +204,7 @@ class InitialProperties extends StrictObject
      */
     public function calculateMaximalInitialKnack()
     {
-        return $this->calculateMaximalInitialProperty(Property::KNACK_CODE);
+        return $this->calculateMaximalInitialProperty(Knack::PROPERTY_CODE);
     }
 
     /**
@@ -222,7 +222,7 @@ class InitialProperties extends StrictObject
      */
     public function setInitialWill($initialWill)
     {
-        $this->setUpProperty(Property::WILL_CODE, $initialWill);
+        $this->setUpProperty(Will::PROPERTY_CODE, $initialWill);
         return $this;
     }
 
@@ -231,7 +231,7 @@ class InitialProperties extends StrictObject
      */
     public function calculateMaximalInitialWill()
     {
-        return $this->calculateMaximalInitialProperty(Property::WILL_CODE);
+        return $this->calculateMaximalInitialProperty(Will::PROPERTY_CODE);
     }
 
     /**
@@ -249,7 +249,7 @@ class InitialProperties extends StrictObject
      */
     public function setInitialIntelligence($initialIntelligence)
     {
-        $this->setUpProperty(Property::INTELLIGENCE_CODE, $initialIntelligence);
+        $this->setUpProperty(Intelligence::PROPERTY_CODE, $initialIntelligence);
         return $this;
     }
 
@@ -258,7 +258,7 @@ class InitialProperties extends StrictObject
      */
     public function calculateMaximalInitialIntelligence()
     {
-        return $this->calculateMaximalInitialProperty(Property::INTELLIGENCE_CODE);
+        return $this->calculateMaximalInitialProperty(Intelligence::PROPERTY_CODE);
     }
 
     /**
@@ -276,7 +276,7 @@ class InitialProperties extends StrictObject
      */
     public function setInitialCharisma($initialCharisma)
     {
-        $this->setUpProperty(Property::CHARISMA_CODE, $initialCharisma);
+        $this->setUpProperty(Charisma::PROPERTY_CODE, $initialCharisma);
         return $this;
     }
 
@@ -285,6 +285,6 @@ class InitialProperties extends StrictObject
      */
     public function calculateMaximalInitialCharisma()
     {
-        return $this->calculateMaximalInitialProperty(Property::CHARISMA_CODE);
+        return $this->calculateMaximalInitialProperty(Charisma::PROPERTY_CODE);
     }
 }

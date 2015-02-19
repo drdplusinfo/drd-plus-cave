@@ -4,7 +4,6 @@ namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels;
 use Doctrine\ORM\Mapping as ORM;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Charisma;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Will;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Property;
 
 /**
  * Priest
@@ -22,7 +21,7 @@ class PriestLevel extends ProfessionLevel
      *
      * @ORM\ManyToOne(targetEntity="ProfessionLevels", inversedBy="priestLevels")
      */
-    private $professionLevels;
+    protected $professionLevels;
 
     /**
      * @return string[]

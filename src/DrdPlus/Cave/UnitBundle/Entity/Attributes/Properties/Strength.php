@@ -10,7 +10,7 @@ class Strength extends Property
      */
     public function getPropertyCode()
     {
-        return self::STRENGTH_CODE;
+        return self::PROPERTY_CODE;
     }
 
 }

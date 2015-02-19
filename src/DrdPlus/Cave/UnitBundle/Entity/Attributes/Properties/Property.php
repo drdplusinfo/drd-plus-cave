@@ -1,6 +1,8 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties;
 
+use Doctrineum\Integer\IntegerEnum;
+
 /**
  * class Gender
  */

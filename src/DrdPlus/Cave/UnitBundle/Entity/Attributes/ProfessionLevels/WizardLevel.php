@@ -4,7 +4,6 @@ namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels;
 use Doctrine\ORM\Mapping as ORM;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Intelligence;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Will;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Property;
 
 /**
  * Wizard
@@ -22,7 +21,7 @@ class WizardLevel extends ProfessionLevel
      *
      * @ORM\ManyToOne(targetEntity="ProfessionLevels", inversedBy="wizardLevels")
      */
-    private $professionLevels;
+    protected $professionLevels;
 
     /**
      * @return string[]

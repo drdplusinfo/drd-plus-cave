@@ -2,7 +2,13 @@
 namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels;
 
 use Doctrine\ORM\Mapping as ORM;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Property;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Agility;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Charisma;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Intelligence;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Knack;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Property;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Strength;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Will;
 use Granam\Strict\Object\StrictObject;
 
 /**
@@ -40,42 +46,42 @@ abstract class ProfessionLevel extends StrictObject
     /**
      * @var Property
      *
-     * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Entity\Attributes\Property")
+     * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Property")
      */
     private $strengthIncrement;
 
     /**
      * @var Property
      *
-     * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Entity\Attributes\Property")
+     * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Property")
      */
     private $agilityIncrement;
 
     /**
      * @var Property
      *
-     * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Entity\Attributes\Property")
+     * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Property")
      */
     private $knackIncrement;
 
     /**
      * @var Property
      *
-     * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Entity\Attributes\Property")
+     * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Property")
      */
     private $willIncrement;
 
     /**
      * @var Property
      *
-     * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Entity\Attributes\Property")
+     * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Property")
      */
     private $intelligenceIncrement;
 
     /**
      * @var Property
      *
-     * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Entity\Attributes\Property")
+     * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Property")
      */
     private $charismaIncrement;
 
@@ -142,7 +148,7 @@ abstract class ProfessionLevel extends StrictObject
      */
     public function getStrengthFirstLevelModifier()
     {
-        return $this->getPropertyFirstLevelModifier(Property::STRENGTH_CODE);
+        return $this->getPropertyFirstLevelModifier(Strength::PROPERTY_CODE);
     }
 
     /**
@@ -172,7 +178,7 @@ abstract class ProfessionLevel extends StrictObject
      */
     public function getAgilityFirstLevelModifier()
     {
-        return $this->getPropertyFirstLevelModifier(Property::AGILITY_CODE);
+        return $this->getPropertyFirstLevelModifier(Agility::PROPERTY_CODE);
     }
 
     /**
@@ -182,7 +188,7 @@ abstract class ProfessionLevel extends StrictObject
      */
     public function getKnackFirstLevelModifier()
     {
-        return $this->getPropertyFirstLevelModifier(Property::KNACK_CODE);
+        return $this->getPropertyFirstLevelModifier(Knack::PROPERTY_CODE);
     }
 
     /**
@@ -192,7 +198,7 @@ abstract class ProfessionLevel extends StrictObject
      */
     public function getWillFirstLevelModifier()
     {
-        return $this->getPropertyFirstLevelModifier(Property::WILL_CODE);
+        return $this->getPropertyFirstLevelModifier(Will::PROPERTY_CODE);
     }
 
     /**
@@ -202,7 +208,7 @@ abstract class ProfessionLevel extends StrictObject
      */
     public function getIntelligenceFirstLevelModifier()
     {
-        return $this->getPropertyFirstLevelModifier(Property::INTELLIGENCE_CODE);
+        return $this->getPropertyFirstLevelModifier(Intelligence::PROPERTY_CODE);
     }
 
     /**
@@ -212,19 +218,17 @@ abstract class ProfessionLevel extends StrictObject
      */
     public function getCharismaFirstLevelModifier()
     {
-        return $this->getPropertyFirstLevelModifier(Property::CHARISMA_CODE);
+        return $this->getPropertyFirstLevelModifier(Charisma::PROPERTY_CODE);
     }
 
     /**
      * Set strength increment
      *
-     * @param Property $strengthIncrement
+     * @param Strength $strengthIncrement
      * @return $this
      */
-    public function setStrengthIncrement(Property $strengthIncrement)
+    public function setStrengthIncrement(Strength $strengthIncrement)
     {
-        $strengthIncrement->setLabel(Property::STRENGTH_LABEL);
-        $strengthIncrement->setShortLabel(Property::STRENGTH_SHORT_LABEL);
         $this->strengthIncrement = $strengthIncrement;
 
         return $this;
@@ -233,7 +237,7 @@ abstract class ProfessionLevel extends StrictObject
     /**
      * Get strength increment
      *
-     * @return Property
+     * @return Strength
      */
     public function getStrengthIncrement()
     {
@@ -243,13 +247,11 @@ abstract class ProfessionLevel extends StrictObject
     /**
      * Set agility increment
      *
-     * @param Property $agilityIncrement
+     * @param Agility $agilityIncrement
      * @return $this
      */
-    public function setAgilityIncrement(Property $agilityIncrement)
+    public function setAgilityIncrement(Agility $agilityIncrement)
     {
-        $agilityIncrement->setLabel(Property::AGILITY_LABEL);
-        $agilityIncrement->setShortLabel(Property::AGILITY_SHORT_LABEL);
         $this->agilityIncrement = $agilityIncrement;
 
         return $this;
@@ -258,7 +260,7 @@ abstract class ProfessionLevel extends StrictObject
     /**
      * Get agility increment
      *
-     * @return Property
+     * @return Agility
      */
     public function getAgilityIncrement()
     {
@@ -268,13 +270,11 @@ abstract class ProfessionLevel extends StrictObject
     /**
      * Set charisma increment
      *
-     * @param Property $charismaIncrement
+     * @param Charisma $charismaIncrement
      * @return self
      */
-    public function setCharismaIncrement(Property $charismaIncrement)
+    public function setCharismaIncrement(Charisma $charismaIncrement)
     {
-        $charismaIncrement->setLabel(Property::CHARISMA_LABEL);
-        $charismaIncrement->setShortLabel(Property::CHARISMA_SHORT_LABEL);
         $this->charismaIncrement = $charismaIncrement;
 
         return $this;
@@ -283,7 +283,7 @@ abstract class ProfessionLevel extends StrictObject
     /**
      * Get charisma increment
      *
-     * @return Property
+     * @return Charisma
      */
     public function getCharismaIncrement()
     {
@@ -293,13 +293,11 @@ abstract class ProfessionLevel extends StrictObject
     /**
      * Set intelligence increment
      *
-     * @param Property $intelligenceIncrement
+     * @param Intelligence $intelligenceIncrement
      * @return self
      */
-    public function setIntelligenceIncrement(Property $intelligenceIncrement)
+    public function setIntelligenceIncrement(Intelligence $intelligenceIncrement)
     {
-        $intelligenceIncrement->setLabel(Property::INTELLIGENCE_LABEL);
-        $intelligenceIncrement->setShortLabel(Property::INTELLIGENCE_SHORT_LABEL);
         $this->intelligenceIncrement = $intelligenceIncrement;
 
         return $this;
@@ -308,7 +306,7 @@ abstract class ProfessionLevel extends StrictObject
     /**
      * Get intelligence increment
      *
-     * @return Property
+     * @return Intelligence
      */
     public function getIntelligenceIncrement()
     {
@@ -316,13 +314,11 @@ abstract class ProfessionLevel extends StrictObject
     }
 
     /**
-     * @param Property $knackIncrement
+     * @param Knack $knackIncrement
      * @return self
      */
-    public function setKnackIncrement(Property $knackIncrement)
+    public function setKnackIncrement(Knack $knackIncrement)
     {
-        $knackIncrement->setLabel(Property::KNACK_LABEL);
-        $knackIncrement->setShortLabel(Property::KNACK_SHORT_LABEL);
         $this->knackIncrement = $knackIncrement;
 
         return $this;
@@ -331,7 +327,7 @@ abstract class ProfessionLevel extends StrictObject
     /**
      * Get knack increment
      *
-     * @return Property
+     * @return Knack
      */
     public function getKnackIncrement()
     {
@@ -341,13 +337,11 @@ abstract class ProfessionLevel extends StrictObject
     /**
      * Set will increment
      *
-     * @param Property $will
+     * @param Will $will
      * @return self
      */
-    public function setWillIncrement(Property $will)
+    public function setWillIncrement(Will $will)
     {
-        $will->setLabel(Property::WILL_LABEL);
-        $will->setShortLabel(Property::WILL_SHORT_LABEL);
         $this->willIncrement = $will;
 
         return $this;
@@ -356,7 +350,7 @@ abstract class ProfessionLevel extends StrictObject
     /**
      * Get will increment
      *
-     * @return Property
+     * @return Will
      */
     public function getWillIncrement()
     {

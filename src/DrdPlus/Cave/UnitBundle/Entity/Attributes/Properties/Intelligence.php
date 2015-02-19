@@ -10,7 +10,7 @@ class Intelligence extends Property
      */
     public function getPropertyCode()
     {
-        return self::INTELLIGENCE_CODE;
+        return self::PROPERTY_CODE;
     }
 
 }

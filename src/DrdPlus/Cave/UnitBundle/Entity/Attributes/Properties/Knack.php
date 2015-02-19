@@ -11,7 +11,7 @@ class Knack extends Property
      */
     public function getPropertyCode()
     {
-        return self::KNACK_CODE;
+        return self::PROPERTY_CODE;
     }
 
 }

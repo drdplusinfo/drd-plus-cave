@@ -4,7 +4,6 @@ namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels;
 use Doctrine\ORM\Mapping as ORM;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Charisma;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Intelligence;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Property;
 
 /**
  * Theurgist
@@ -22,7 +21,7 @@ class TheurgistLevel extends ProfessionLevel
      *
      * @ORM\ManyToOne(targetEntity="ProfessionLevels", inversedBy="theurgistLevels")
      */
-    private $professionLevels;
+    protected $professionLevels;
 
     /**
      * @return string[]

@@ -10,7 +10,7 @@ class Agility extends Property
      */
     public function getPropertyCode()
     {
-        return self::AGILITY_CODE;
+        return self::PROPERTY_CODE;
     }
 
 }

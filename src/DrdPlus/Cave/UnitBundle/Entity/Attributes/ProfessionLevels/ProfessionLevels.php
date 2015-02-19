@@ -2,7 +2,12 @@
 namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels;
 
 use Doctrine\ORM\Mapping as ORM;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Property;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Agility;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Charisma;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Intelligence;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Knack;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Strength;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Will;
 use DrdPlus\Cave\UnitBundle\Entity\Person;
 use Granam\Strict\Object\StrictObject;
 
@@ -207,7 +212,7 @@ class ProfessionLevels extends StrictObject
      */
     public function getStrengthFirstLevelIncrement()
     {
-        return $this->getPropertyFirstLevelIncrement(Property::STRENGTH_CODE);
+        return $this->getPropertyFirstLevelIncrement(Strength::PROPERTY_CODE);
     }
 
     /**
@@ -228,7 +233,7 @@ class ProfessionLevels extends StrictObject
      */
     public function getAgilityFirstLevelIncrement()
     {
-        return $this->getPropertyFirstLevelIncrement(Property::AGILITY_CODE);
+        return $this->getPropertyFirstLevelIncrement(Agility::PROPERTY_CODE);
     }
 
     /**
@@ -238,7 +243,7 @@ class ProfessionLevels extends StrictObject
      */
     public function getKnackFirstLevelIncrement()
     {
-        return $this->getPropertyFirstLevelIncrement(Property::KNACK_CODE);
+        return $this->getPropertyFirstLevelIncrement(Knack::PROPERTY_CODE);
     }
 
     /**
@@ -248,7 +253,7 @@ class ProfessionLevels extends StrictObject
      */
     public function getWillFirstLevelIncrement()
     {
-        return $this->getPropertyFirstLevelIncrement(Property::WILL_CODE);
+        return $this->getPropertyFirstLevelIncrement(Will::PROPERTY_CODE);
     }
 
     /**
@@ -258,7 +263,7 @@ class ProfessionLevels extends StrictObject
      */
     public function getIntelligenceFirstLevelIncrement()
     {
-        return $this->getPropertyFirstLevelIncrement(Property::INTELLIGENCE_CODE);
+        return $this->getPropertyFirstLevelIncrement(Intelligence::PROPERTY_CODE);
     }
 
     /**
@@ -268,7 +273,7 @@ class ProfessionLevels extends StrictObject
      */
     public function getCharismaFirstLevelIncrement()
     {
-        return $this->getPropertyFirstLevelIncrement(Property::CHARISMA_CODE);
+        return $this->getPropertyFirstLevelIncrement(Charisma::PROPERTY_CODE);
     }
 
     /**
@@ -278,7 +283,7 @@ class ProfessionLevels extends StrictObject
      */
     public function getStrengthIncrementSummary()
     {
-        return $this->getPropertyIncrementSummary(Property::STRENGTH_CODE);
+        return $this->getPropertyIncrementSummary(Strength::PROPERTY_CODE);
     }
 
     /**
@@ -288,7 +293,7 @@ class ProfessionLevels extends StrictObject
      */
     public function getAgilityIncrementSummary()
     {
-        return $this->getPropertyIncrementSummary(Property::AGILITY_CODE);
+        return $this->getPropertyIncrementSummary(Agility::PROPERTY_CODE);
     }
 
     /**
@@ -298,7 +303,7 @@ class ProfessionLevels extends StrictObject
      */
     public function getKnackIncrementSummary()
     {
-        return $this->getPropertyIncrementSummary(Property::KNACK_CODE);
+        return $this->getPropertyIncrementSummary(Knack::PROPERTY_CODE);
     }
 
     /**
@@ -308,7 +313,7 @@ class ProfessionLevels extends StrictObject
      */
     public function getCharismaIncrementSummary()
     {
-        return $this->getPropertyIncrementSummary(Property::CHARISMA_CODE);
+        return $this->getPropertyIncrementSummary(Charisma::PROPERTY_CODE);
     }
 
     /**
@@ -318,7 +323,7 @@ class ProfessionLevels extends StrictObject
      */
     public function getWillIncrementSummary()
     {
-        return $this->getPropertyIncrementSummary(Property::WILL_CODE);
+        return $this->getPropertyIncrementSummary(Will::PROPERTY_CODE);
     }
 
     /**
@@ -328,7 +333,7 @@ class ProfessionLevels extends StrictObject
      */
     public function getIntelligenceIncrementSummary()
     {
-        return $this->getPropertyIncrementSummary(Property::INTELLIGENCE_CODE);
+        return $this->getPropertyIncrementSummary(Intelligence::PROPERTY_CODE);
     }
 
     /**
