@@ -1,7 +1,7 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Races;
 
-use Doctrineum\GEneric\Enum;
+use Doctrineum\Generic\Enum;
 
 /**
  * class Gender

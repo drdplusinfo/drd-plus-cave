@@ -33,44 +33,44 @@ class InitialProperties extends StrictObject
     private $person;
 
     /**
-     * @var int
+     * @var Strength
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="strength")
      */
     private $initialStrength;
 
     /**
-     * @var int
+     * @var Agility
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="agility")
      */
     private $initialAgility;
 
     /**
-     * @var int
+     * @var Knack
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="knack")
      */
     private $initialKnack;
 
     /**
-     * @var int
+     * @var Will
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="will")
      */
     private $initialWill;
 
     /**
-     * @var int
+     * @var Intelligence
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="intelligence")
      */
     private $initialIntelligence;
 
     /**
-     * @var int
+     * @var Charisma
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="charisma")
      */
     private $initialCharisma;
 
@@ -88,14 +88,14 @@ class InitialProperties extends StrictObject
      */
     public function setPerson(Person $person)
     {
-        if ($this->person) {
+        if ($this->person && $this->person->getId() !== $person->getId()) {
             throw new Exceptions\PersonIsAlreadySet('Initial properties of ID ' . $this->id . ' is linked with person of ID ' . $this->person->getId());
         }
         $this->person = $person;
     }
 
     /**
-     * @return int
+     * @return Strength
      */
     public function getInitialStrength()
     {
@@ -103,31 +103,32 @@ class InitialProperties extends StrictObject
     }
 
     /**
-     * @param int $initialStrength
+     * @param Strength $initialStrength
      * @throws Exceptions\InitialPropertyValueExceeded
      * @return $this
      */
-    public function setInitialStrength($initialStrength)
+    public function setInitialStrength(Strength $initialStrength)
     {
         $this->setUpProperty(Strength::PROPERTY_CODE, $initialStrength);
         return $this;
     }
 
     /**
-     * @param $personPropertyName
-     * @param $initialValue
+     * @param $personPropertyName "like strength"
+     * @param Property $initialValue
      * @throws Exceptions\InitialPropertyIsAlreadySet
      * @throws Exceptions\InitialPropertyValueExceeded
      */
-    private function setUpProperty($personPropertyName, $initialValue)
+    private function setUpProperty($personPropertyName, Property $initialValue)
     {
+        // like initialStrength()
         $classPropertyName = 'initial' . ucfirst($personPropertyName);
         if (isset($this->$classPropertyName)) {
             throw new Exceptions\InitialPropertyIsAlreadySet('The property ' . $classPropertyName . ' is already set');
         }
         // like calculateMaximalInitialStrength()
         $initialCalculationMethod = 'calculateMaximalInitial' . ucfirst($personPropertyName);
-        if ($initialValue > $this->$initialCalculationMethod()) {
+        if ($initialValue->getValue() > $this->$initialCalculationMethod()) {
             throw new Exceptions\InitialPropertyValueExceeded('The initial ' . $personPropertyName . ' can not exceed ' . $this->$initialCalculationMethod());
         }
 
@@ -154,7 +155,7 @@ class InitialProperties extends StrictObject
     }
 
     /**
-     * @return int
+     * @return Agility
      */
     public function getInitialAgility()
     {
@@ -162,11 +163,11 @@ class InitialProperties extends StrictObject
     }
 
     /**
-     * @param int $initialAgility
+     * @param Agility $initialAgility
      * @throws Exceptions\InitialPropertyValueExceeded
      * @return $this
      */
-    public function setInitialAgility($initialAgility)
+    public function setInitialAgility(Agility $initialAgility)
     {
         $this->setUpProperty(Agility::PROPERTY_CODE, $initialAgility);
         return $this;
@@ -181,7 +182,7 @@ class InitialProperties extends StrictObject
     }
 
     /**
-     * @return int
+     * @return Knack
      */
     public function getInitialKnack()
     {
@@ -189,11 +190,11 @@ class InitialProperties extends StrictObject
     }
 
     /**
-     * @param int $initialKnack
+     * @param Knack $initialKnack
      * @throws Exceptions\InitialPropertyValueExceeded
      * @return $this
      */
-    public function setInitialKnack($initialKnack)
+    public function setInitialKnack(Knack $initialKnack)
     {
         $this->setUpProperty(Knack::PROPERTY_CODE, $initialKnack);
         return $this;
@@ -208,7 +209,7 @@ class InitialProperties extends StrictObject
     }
 
     /**
-     * @return int
+     * @return Will
      */
     public function getInitialWill()
     {
@@ -216,11 +217,11 @@ class InitialProperties extends StrictObject
     }
 
     /**
-     * @param int $initialWill
+     * @param Will $initialWill
      * @throws Exceptions\InitialPropertyValueExceeded
      * @return $this
      */
-    public function setInitialWill($initialWill)
+    public function setInitialWill(Will $initialWill)
     {
         $this->setUpProperty(Will::PROPERTY_CODE, $initialWill);
         return $this;
@@ -235,7 +236,7 @@ class InitialProperties extends StrictObject
     }
 
     /**
-     * @return int
+     * @return Intelligence
      */
     public function getInitialIntelligence()
     {
@@ -243,11 +244,11 @@ class InitialProperties extends StrictObject
     }
 
     /**
-     * @param int $initialIntelligence
+     * @param Intelligence $initialIntelligence
      * @throws Exceptions\InitialPropertyValueExceeded
      * @return $this
      */
-    public function setInitialIntelligence($initialIntelligence)
+    public function setInitialIntelligence(Intelligence $initialIntelligence)
     {
         $this->setUpProperty(Intelligence::PROPERTY_CODE, $initialIntelligence);
         return $this;
@@ -262,7 +263,7 @@ class InitialProperties extends StrictObject
     }
 
     /**
-     * @return int
+     * @return Charisma
      */
     public function getInitialCharisma()
     {
@@ -270,11 +271,11 @@ class InitialProperties extends StrictObject
     }
 
     /**
-     * @param int $initialCharisma
+     * @param Charisma $initialCharisma
      * @throws Exceptions\InitialPropertyValueExceeded
      * @return $this
      */
-    public function setInitialCharisma($initialCharisma)
+    public function setInitialCharisma(Charisma $initialCharisma)
     {
         $this->setUpProperty(Charisma::PROPERTY_CODE, $initialCharisma);
         return $this;
