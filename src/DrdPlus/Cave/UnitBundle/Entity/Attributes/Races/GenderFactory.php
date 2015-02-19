@@ -1,48 +1,6 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Races;
 
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Dwarfs\CommonDwarf;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Dwarfs\Genders\CommonDwarfFemale;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Dwarfs\Genders\CommonDwarfMale;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Dwarfs\Genders\MountainDwarfFemale;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Dwarfs\Genders\MountainDwarfMale;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Dwarfs\Genders\WoodDwarfFemale;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Dwarfs\Genders\WoodDwarfMale;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Dwarfs\MountainDwarf;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Dwarfs\WoodDwarf;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Elfs\CommonElf;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Elfs\DarkElf;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Elfs\Genders\CommonElfFemale;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Elfs\Genders\CommonElfMale;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Elfs\Genders\DarkElfFemale;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Elfs\Genders\DarkElfMale;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Elfs\Genders\GreenElfFemale;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Elfs\Genders\GreenElfMale;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Elfs\GreenElf;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Hobbits\Genders\HobbitFemale;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Hobbits\Genders\HobbitMale;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Hobbits\Hobbit;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Humans\CommonHuman;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Humans\Genders\CommonHumanFemale;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Humans\Genders\CommonHumanMale;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Humans\Genders\HighlanderFemale;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Humans\Genders\HighlanderMale;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Humans\Highlander;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Krolls\CommonKroll;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Krolls\Genders\CommonKrollFemale;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Krolls\Genders\CommonKrollMale;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Krolls\Genders\WildKrollFemale;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Krolls\Genders\WildKrollMale;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Krolls\WildKroll;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Orcs\CommonOrc;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Orcs\Genders\CommonOrcFemale;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Orcs\Genders\CommonOrcMale;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Orcs\Genders\GoblinFemale;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Orcs\Genders\GoblinMale;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Orcs\Genders\SkurutFemale;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Orcs\Genders\SkurutMale;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Orcs\Goblin;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Orcs\Skurut;
 use Granam\Strict\Object\StrictObject;
 
 class GenderFactory extends StrictObject
@@ -60,226 +18,226 @@ class GenderFactory extends StrictObject
     }
 
     /**
-     * @return CommonHumanMale
+     * @return Humans\Genders\CommonHumanMale
      */
     public function getCommonHumanMale()
     {
-        return $this->getGender(CommonHuman::RACE_CODE, CommonHuman::SUBRACE_CODE, Gender::MALE_CODE);
+        return $this->getGender(Humans\CommonHuman::RACE_CODE, Humans\CommonHuman::SUBRACE_CODE, Gender::MALE_CODE);
     }
 
     /**
-     * @return CommonHumanFemale
+     * @return Humans\Genders\CommonHumanFemale
      */
     public function getCommonHumanFemale()
     {
-        return $this->getGender(CommonHuman::RACE_CODE, CommonHuman::SUBRACE_CODE, Gender::FEMALE_CODE);
+        return $this->getGender(Humans\CommonHuman::RACE_CODE, Humans\CommonHuman::SUBRACE_CODE, Gender::FEMALE_CODE);
     }
 
     /**
-     * @return HighlanderMale
+     * @return Humans\Genders\HighlanderMale
      */
     public function getHighlanderMale()
     {
-        return $this->getGender(Highlander::RACE_CODE, Highlander::SUBRACE_CODE, Gender::MALE_CODE);
+        return $this->getGender(Humans\Highlander::RACE_CODE, Humans\Highlander::SUBRACE_CODE, Gender::MALE_CODE);
     }
 
     /**
-     * @return HighlanderFemale
+     * @return Humans\Genders\HighlanderFemale
      */
     public function getHighlanderFemale()
     {
-        return $this->getGender(Highlander::RACE_CODE, Highlander::SUBRACE_CODE, Gender::FEMALE_CODE);
+        return $this->getGender(Humans\Highlander::RACE_CODE, Humans\Highlander::SUBRACE_CODE, Gender::FEMALE_CODE);
     }
 
     /**
-     * @return CommonDwarfMale
+     * @return Dwarfs\Genders\CommonDwarfMale
      */
     public function getCommonDwarfMale()
     {
-        return $this->getGender(CommonDwarf::RACE_CODE, CommonDwarf::SUBRACE_CODE, Gender::MALE_CODE);
+        return $this->getGender(Dwarfs\CommonDwarf::RACE_CODE, Dwarfs\CommonDwarf::SUBRACE_CODE, Gender::MALE_CODE);
     }
 
     /**
-     * @return CommonDwarfFemale
+     * @return Dwarfs\Genders\CommonDwarfFemale
      */
     public function getCommonDwarfFemale()
     {
-        return $this->getGender(CommonDwarf::RACE_CODE, CommonDwarf::SUBRACE_CODE, Gender::FEMALE_CODE);
+        return $this->getGender(Dwarfs\CommonDwarf::RACE_CODE, Dwarfs\CommonDwarf::SUBRACE_CODE, Gender::FEMALE_CODE);
     }
 
     /**
-     * @return MountainDwarfMale
+     * @return Dwarfs\Genders\MountainDwarfMale
      */
     public function getMountainDwarfMale()
     {
-        return $this->getGender(MountainDwarf::RACE_CODE, MountainDwarf::SUBRACE_CODE, Gender::MALE_CODE);
+        return $this->getGender(Dwarfs\MountainDwarf::RACE_CODE, Dwarfs\MountainDwarf::SUBRACE_CODE, Gender::MALE_CODE);
     }
 
     /**
-     * @return MountainDwarfFemale
+     * @return Dwarfs\Genders\MountainDwarfFemale
      */
     public function getMountainDwarfFemale()
     {
-        return $this->getGender(MountainDwarf::RACE_CODE, MountainDwarf::SUBRACE_CODE, Gender::FEMALE_CODE);
+        return $this->getGender(Dwarfs\MountainDwarf::RACE_CODE, Dwarfs\MountainDwarf::SUBRACE_CODE, Gender::FEMALE_CODE);
     }
 
     /**
-     * @return WoodDwarfMale
+     * @return Dwarfs\Genders\WoodDwarfMale
      */
     public function getWoodDwarfMale()
     {
-        return $this->getGender(WoodDwarf::RACE_CODE, WoodDwarf::SUBRACE_CODE, Gender::MALE_CODE);
+        return $this->getGender(Dwarfs\WoodDwarf::RACE_CODE, Dwarfs\WoodDwarf::SUBRACE_CODE, Gender::MALE_CODE);
     }
 
     /**
-     * @return WoodDwarfFemale
+     * @return Dwarfs\Genders\WoodDwarfFemale
      */
     public function getWoodDwarfFemale()
     {
-        return $this->getGender(WoodDwarf::RACE_CODE, WoodDwarf::SUBRACE_CODE, Gender::FEMALE_CODE);
+        return $this->getGender(Dwarfs\WoodDwarf::RACE_CODE, Dwarfs\WoodDwarf::SUBRACE_CODE, Gender::FEMALE_CODE);
     }
 
     /**
-     * @return CommonElfMale
+     * @return Elfs\Genders\CommonElfMale
      */
     public function getCommonElfMale()
     {
-        return $this->getGender(CommonElf::RACE_CODE, CommonElf::SUBRACE_CODE, Gender::MALE_CODE);
+        return $this->getGender(Elfs\CommonElf::RACE_CODE, Elfs\CommonElf::SUBRACE_CODE, Gender::MALE_CODE);
     }
 
     /**
-     * @return CommonElfFemale
+     * @return Elfs\Genders\CommonElfFemale
      */
     public function getCommonElfFemale()
     {
-        return $this->getGender(CommonElf::RACE_CODE, CommonElf::SUBRACE_CODE, Gender::FEMALE_CODE);
+        return $this->getGender(Elfs\CommonElf::RACE_CODE, Elfs\CommonElf::SUBRACE_CODE, Gender::FEMALE_CODE);
     }
 
     /**
-     * @return DarkElfMale
+     * @return Elfs\Genders\DarkElfMale
      */
     public function getDarkElfMale()
     {
-        return $this->getGender(DarkElf::RACE_CODE, DarkElf::SUBRACE_CODE, Gender::MALE_CODE);
+        return $this->getGender(Elfs\DarkElf::RACE_CODE, Elfs\DarkElf::SUBRACE_CODE, Gender::MALE_CODE);
     }
 
     /**
-     * @return DarkElfFemale
+     * @return Elfs\Genders\DarkElfFemale
      */
     public function getDarkElfFemale()
     {
-        return $this->getGender(DarkElf::RACE_CODE, DarkElf::SUBRACE_CODE, Gender::FEMALE_CODE);
+        return $this->getGender(Elfs\DarkElf::RACE_CODE, Elfs\DarkElf::SUBRACE_CODE, Gender::FEMALE_CODE);
     }
 
     /**
-     * @return GreenElfMale
+     * @return Elfs\Genders\GreenElfMale
      */
     public function getGreenElfMale()
     {
-        return $this->getGender(GreenElf::RACE_CODE, GreenElf::SUBRACE_CODE, Gender::MALE_CODE);
+        return $this->getGender(Elfs\GreenElf::RACE_CODE, Elfs\GreenElf::SUBRACE_CODE, Gender::MALE_CODE);
     }
 
     /**
-     * @return GreenElfFemale
+     * @return Elfs\Genders\GreenElfFemale
      */
     public function getGreenElfFemale()
     {
-        return $this->getGender(GreenElf::RACE_CODE, GreenElf::SUBRACE_CODE, Gender::FEMALE_CODE);
+        return $this->getGender(Elfs\GreenElf::RACE_CODE, Elfs\GreenElf::SUBRACE_CODE, Gender::FEMALE_CODE);
     }
 
     /**
-     * @return HobbitMale
+     * @return Hobbits\Genders\CommonHobbitMale
      */
-    public function getHobbitMale()
+    public function getCommonHobbitMale()
     {
-        return $this->getGender(Hobbit::RACE_CODE, Hobbit::SUBRACE_CODE, Gender::MALE_CODE);
+        return $this->getGender(Hobbits\CommonHobbit::RACE_CODE, Hobbits\CommonHobbit::SUBRACE_CODE, Gender::MALE_CODE);
     }
 
     /**
-     * @return HobbitFemale
+     * @return Hobbits\Genders\CommonHobbitFemale
      */
-    public function getHobbitFemale()
+    public function getCommonHobbitFemale()
     {
-        return $this->getGender(Hobbit::RACE_CODE, Hobbit::SUBRACE_CODE, Gender::FEMALE_CODE);
+        return $this->getGender(Hobbits\CommonHobbit::RACE_CODE, Hobbits\CommonHobbit::SUBRACE_CODE, Gender::FEMALE_CODE);
     }
 
     /**
-     * @return CommonKrollMale
+     * @return Krolls\Genders\CommonKrollMale
      */
     public function getCommonKrollMale()
     {
-        return $this->getGender(CommonKroll::RACE_CODE, CommonKroll::SUBRACE_CODE, Gender::MALE_CODE);
+        return $this->getGender(Krolls\CommonKroll::RACE_CODE, Krolls\CommonKroll::SUBRACE_CODE, Gender::MALE_CODE);
     }
 
     /**
-     * @return CommonKrollFemale
+     * @return Krolls\Genders\CommonKrollFemale
      */
     public function getCommonKrollFemale()
     {
-        return $this->getGender(CommonKroll::RACE_CODE, CommonKroll::SUBRACE_CODE, Gender::FEMALE_CODE);
+        return $this->getGender(Krolls\CommonKroll::RACE_CODE, Krolls\CommonKroll::SUBRACE_CODE, Gender::FEMALE_CODE);
     }
 
     /**
-     * @return WildKrollMale
+     * @return Krolls\Genders\WildKrollMale
      */
     public function getWildKrollMale()
     {
-        return $this->getGender(WildKroll::RACE_CODE, WildKroll::SUBRACE_CODE, Gender::MALE_CODE);
+        return $this->getGender(Krolls\WildKroll::RACE_CODE, Krolls\WildKroll::SUBRACE_CODE, Gender::MALE_CODE);
     }
 
     /**
-     * @return WildKrollFemale
+     * @return Krolls\Genders\WildKrollFemale
      */
     public function getWildKrollFemale()
     {
-        return $this->getGender(WildKroll::RACE_CODE, WildKroll::SUBRACE_CODE, Gender::FEMALE_CODE);
+        return $this->getGender(Krolls\WildKroll::RACE_CODE, Krolls\WildKroll::SUBRACE_CODE, Gender::FEMALE_CODE);
     }
 
     /**
-     * @return CommonOrcMale
+     * @return Orcs\Genders\CommonOrcMale
      */
     public function getCommonOrcMale()
     {
-        return $this->getGender(CommonOrc::RACE_CODE, CommonOrc::SUBRACE_CODE, Gender::MALE_CODE);
+        return $this->getGender(Orcs\CommonOrc::RACE_CODE, Orcs\CommonOrc::SUBRACE_CODE, Gender::MALE_CODE);
     }
 
     /**
-     * @return CommonOrcFemale
+     * @return Orcs\Genders\CommonOrcFemale
      */
     public function getCommonOrcFemale()
     {
-        return $this->getGender(CommonOrc::RACE_CODE, CommonOrc::SUBRACE_CODE, Gender::FEMALE_CODE);
+        return $this->getGender(Orcs\CommonOrc::RACE_CODE, Orcs\CommonOrc::SUBRACE_CODE, Gender::FEMALE_CODE);
     }
 
     /**
-     * @return GoblinMale
+     * @return Orcs\Genders\GoblinMale
      */
     public function getGoblinMale()
     {
-        return $this->getGender(Goblin::RACE_CODE, Goblin::SUBRACE_CODE, Gender::MALE_CODE);
+        return $this->getGender(Orcs\Goblin::RACE_CODE, Orcs\Goblin::SUBRACE_CODE, Gender::MALE_CODE);
     }
 
     /**
-     * @return GoblinFemale
+     * @return Orcs\Genders\GoblinFemale
      */
     public function getGoblinFemale()
     {
-        return $this->getGender(Goblin::RACE_CODE, Goblin::SUBRACE_CODE, Gender::FEMALE_CODE);
+        return $this->getGender(Orcs\Goblin::RACE_CODE, Orcs\Goblin::SUBRACE_CODE, Gender::FEMALE_CODE);
     }
 
     /**
-     * @return SkurutMale
+     * @return Orcs\Genders\SkurutMale
      */
     public function getSkurutMale()
     {
-        return $this->getGender(Skurut::RACE_CODE, Skurut::SUBRACE_CODE, Gender::MALE_CODE);
+        return $this->getGender(Orcs\Skurut::RACE_CODE, Orcs\Skurut::SUBRACE_CODE, Gender::MALE_CODE);
     }
 
     /**
-     * @return SkurutFemale
+     * @return Orcs\Genders\SkurutFemale
      */
     public function getSkurutFemale()
     {
-        return $this->getGender(Skurut::RACE_CODE, Skurut::SUBRACE_CODE, Gender::FEMALE_CODE);
+        return $this->getGender(Orcs\Skurut::RACE_CODE, Orcs\Skurut::SUBRACE_CODE, Gender::FEMALE_CODE);
     }
 }

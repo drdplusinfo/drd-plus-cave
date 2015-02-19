@@ -1,7 +1,6 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Hobbits;
 
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Race;
 
 /**
  * Hobbit
@@ -22,22 +21,13 @@ use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Race;
  * @method int getSensesModifier(Genders\HobbitGender $hobbitGender)
  * @see Race::getSensesModifier
  */
-abstract class Hobbit extends Race
+class CommonHobbit extends Hobbit
 {
-    const RACE_CODE = 'hobbit';
+    const SUBRACE_CODE = 'hobbit';
 
-    const BASE_STRENGTH = -3;
-    const BASE_AGILITY = +1;
-    const BASE_KNACK = +1;
-    const BASE_INTELLIGENCE = -1;
-    const BASE_CHARISMA = +2;
-
-    /**
-     * @return string
-     */
-    public function getRaceCode()
+    public function getSubraceCode()
     {
-        return self::RACE_CODE;
+        return self::SUBRACE_CODE;
     }
 
 }

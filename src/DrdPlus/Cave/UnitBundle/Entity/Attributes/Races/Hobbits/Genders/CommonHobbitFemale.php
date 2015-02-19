@@ -3,10 +3,7 @@ namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Hobbits\Genders;
 
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\IsFemaleTrait;
 
-/**
- * HobbitFemale
- */
-class HobbitFemale extends HobbitGender
+class CommonHobbitFemale extends CommonHobbitGender
 {
 
     use IsFemaleTrait;

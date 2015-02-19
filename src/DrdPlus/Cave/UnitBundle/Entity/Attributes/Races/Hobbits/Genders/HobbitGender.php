@@ -14,12 +14,4 @@ abstract class HobbitGender extends Gender
         return Hobbit::RACE_CODE;
     }
 
-    /**
-     * @return string
-     */
-    public function getSubraceCode()
-    {
-        return Hobbit::SUBRACE_CODE;
-    }
-
 }
