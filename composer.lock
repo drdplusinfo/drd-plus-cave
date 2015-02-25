@@ -702,12 +702,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/migrations.git",
-                "reference": "1ac14fac3ced533047d8feae8edc7c283d5b8a67"
+                "reference": "058a4635ac9b80a5b1997df28a754e64b1425a1d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/migrations/zipball/1ac14fac3ced533047d8feae8edc7c283d5b8a67",
-                "reference": "1ac14fac3ced533047d8feae8edc7c283d5b8a67",
+                "url": "https://api.github.com/repos/doctrine/migrations/zipball/058a4635ac9b80a5b1997df28a754e64b1425a1d",
+                "reference": "058a4635ac9b80a5b1997df28a754e64b1425a1d",
                 "shasum": ""
             },
             "require": {
@@ -752,7 +752,7 @@
                 "database",
                 "migrations"
             ],
-            "time": "2015-01-19 02:26:02"
+            "time": "2015-02-19 08:13:05"
         },
         {
             "name": "doctrine/orm",
@@ -866,14 +866,8 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/jaroslavtyc/granam-strict-object.git",
-                "reference": "6c21fbe03d70b501f46d4eb3189ca879a1d2b4d2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/granam-strict-object/zipball/6c21fbe03d70b501f46d4eb3189ca879a1d2b4d2",
-                "reference": "6c21fbe03d70b501f46d4eb3189ca879a1d2b4d2",
-                "shasum": ""
+                "url": "/home/jaroslav/Dropbox/Projects/granam/strict-object",
+                "reference": "798790a18f0ec7e26f5097ef179bb52c306590af"
             },
             "require": {
                 "granam/exception-hierarchy": "dev-master",
@@ -905,11 +899,7 @@
                 "php",
                 "strict"
             ],
-            "support": {
-                "source": "https://github.com/jaroslavtyc/granam-strict-object/tree/master",
-                "issues": "https://github.com/jaroslavtyc/granam-strict-object/issues"
-            },
-            "time": "2015-02-11 17:35:11"
+            "time": "2015-02-24 09:31:08"
         },
         {
             "name": "granam/strict-scalar",
@@ -1074,7 +1064,7 @@
             "source": {
                 "type": "git",
                 "url": "/home/jaroslav/Dropbox/Projects/doctrineum/generic",
-                "reference": "ebfa8a4d249eed9a0906f8d6567b1ad901ce5371"
+                "reference": "8e73c56a74f9d60c3d8c3260f3a3600334090126"
             },
             "require": {
                 "doctrine/dbal": "2.4.*",
@@ -1096,7 +1086,7 @@
                 "MIT"
             ],
             "description": "Enumeration type for Doctrine",
-            "time": "2015-02-17 10:01:36"
+            "time": "2015-02-24 11:39:46"
         },
         {
             "name": "jaroslavtyc/doctrineum-integer",
@@ -1104,13 +1094,11 @@
             "source": {
                 "type": "git",
                 "url": "/home/jaroslav/Dropbox/Projects/doctrineum/integer",
-                "reference": "3e4d38726a92f79da90d100bcde0f1404182defe"
+                "reference": "df74eb1ae976c6933819f225d2f2b700310b4297"
             },
             "require": {
                 "granam/exception-hierarchy": "dev-master",
                 "granam/strict-object": "dev-master",
-                "granam/strict-scalar": "dev-master",
-                "granam/strict-string": "dev-master",
                 "jaroslavtyc/doctrineum-generic": "dev-master",
                 "php": ">=5.5"
             },
@@ -1128,7 +1116,7 @@
                 "MIT"
             ],
             "description": "Enumeration type for Doctrine - integers only",
-            "time": "2015-02-17 10:11:14"
+            "time": "2015-02-24 20:22:59"
         },
         {
             "name": "jaroslavtyc/doctrineum-strict-string",

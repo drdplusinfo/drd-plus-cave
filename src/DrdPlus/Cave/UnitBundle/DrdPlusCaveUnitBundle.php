@@ -2,32 +2,39 @@
 
 namespace DrdPlus\Cave\UnitBundle;
 
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\NameEnumType;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\AgilityEnumType;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\CharismaEnumType;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\IntelligenceEnumType;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\KnackEnumType;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\StrengthEnumType;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\WillEnumType;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\RaceEnumType;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Name;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels\LevelValue;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Agility;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Charisma;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Intelligence;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Knack;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Strength;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Will;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Gender;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Race;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
-use Doctrine\DBAL\Types\Type;
-use \DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\GenderEnumType;
 
 class DrdPlusCaveUnitBundle extends Bundle
 {
     public function boot()
     {
-        Type::addType(RaceEnumType::TYPE, RaceEnumType::class);
-        Type::addType(GenderEnumType::TYPE, GenderEnumType::class);
+        $this->registerEnums();
+    }
 
-        Type::addType(NameEnumType::TYPE, NameEnumType::class);
+    private function registerEnums()
+    {
+        Name::registerSelf();
 
-        Type::addType(StrengthEnumType::TYPE, StrengthEnumType::class);
-        Type::addType(AgilityEnumType::TYPE, AgilityEnumType::class);
-        Type::addType(KnackEnumType::TYPE, KnackEnumType::class);
-        Type::addType(WillEnumType::TYPE, WillEnumType::class);
-        Type::addType(IntelligenceEnumType::TYPE, IntelligenceEnumType::class);
-        Type::addType(CharismaEnumType::TYPE, CharismaEnumType::class);
+        Gender::registerSelf();
+        Race::registerSelf();
+
+        Strength::registerSelf();
+        Agility::registerSelf();
+        Knack::registerSelf();
+        Will::registerSelf();
+        Intelligence::registerSelf();
+        Charisma::registerSelf();
+
+        LevelValue::registerSelf();
     }
 }

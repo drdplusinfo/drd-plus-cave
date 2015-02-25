@@ -176,8 +176,8 @@ class ProfessionLevels extends StrictObject
         // TODO resolve no levels at all
         $levels = $this->getLevels();
         usort($levels, function (ProfessionLevel $aLevel, ProfessionLevel $anotherLevel) {
-            $difference = $aLevel->getLevel() - $anotherLevel->getLevel();
-            if (!$difference) {
+            $difference = $aLevel->getLevelValue() - $anotherLevel->getLevelValue();
+            if ($difference === 0) {
                 throw new \LogicException('Two profession levels have the same level rank.');
             }
             return $difference > 0
@@ -199,7 +199,7 @@ class ProfessionLevels extends StrictObject
 
     private function checkLevelsRankUniqueness(ProfessionLevel $aLevel, ProfessionLevel $anotherLevel)
     {
-        $difference = $anotherLevel->getLevel() - $aLevel->getLevel();
+        $difference = $anotherLevel->getLevelValue() - $aLevel->getLevelValue();
         if (!$difference) {
             throw new \LogicException('Two profession levels have the same level rank.');
         }
@@ -378,7 +378,7 @@ class ProfessionLevels extends StrictObject
         return array_sum(
             array_map(
                 function (ProfessionLevel $professionLevel) {
-                    return $professionLevel->getLevel();
+                    return $professionLevel->getLevelValue();
                 },
                 $this->getLevels()
             )

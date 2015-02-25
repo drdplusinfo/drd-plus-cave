@@ -1,30 +1,29 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Races;
 
-use Doctrineum\Generic\Enum;
+use Doctrineum\Strict\String\SelfTypedStrictStringEnum;
 
 /**
  * class Gender
  */
-abstract class Gender extends Enum
+abstract class Gender extends SelfTypedStrictStringEnum
 {
-
-    /** overloaded parent value to get own namespace */
-    const INNER_NAMESPACE = __CLASS__;
 
     const MALE_CODE = 'male';
     const FEMALE_CODE = 'female';
 
     /**
-     * Call this method on specific race, not on this abstract class (it is prohibited by exception raising anyway)
+     * Call this method on specific race, not on this abstract class
+     * (it is prohibited by exception raising anyway),
+     * @see Gender::createByValue
      *
      * @param string $raceAndSubraceGenderCode
      * @param string $innerNamespace
      * @return Gender
      */
-    public static function get($raceAndSubraceGenderCode, $innerNamespace = self::INNER_NAMESPACE)
+    public static function getEnum($raceAndSubraceGenderCode, $innerNamespace = __CLASS__)
     {
-        parent::get($raceAndSubraceGenderCode, $innerNamespace);
+        parent::getEnum($raceAndSubraceGenderCode, $innerNamespace);
     }
 
     /**
@@ -32,9 +31,9 @@ abstract class Gender extends Enum
      * @throws Exceptions\UnknownGenderCode
      * @return Gender
      */
-    protected static function create($raceAndSubraceGenderCode)
+    protected static function createByValue($raceAndSubraceGenderCode)
     {
-        $gender = parent::create($raceAndSubraceGenderCode);
+        $gender = parent::createByValue($raceAndSubraceGenderCode);
         /** @var $gender Gender */
         if ($gender->getRaceAndSubraceGenderCode() !== $raceAndSubraceGenderCode) {
             throw new Exceptions\UnknownGenderCode(

@@ -21,15 +21,7 @@
         },
         {
             "type": "vcs",
-            "url": "/home/jaroslav/Dropbox/Projects/granam/strict-string"
-        },
-        {
-            "type": "vcs",
             "url": "/home/jaroslav/Dropbox/Projects/granam/strict-object"
-        },
-        {
-            "type": "vcs",
-            "url": "/home/jaroslav/Dropbox/Projects/granam/strict-scalar"
         },
         {
             "type": "vcs",
@@ -54,8 +46,6 @@
         "jaroslavtyc/doctrineum-integer": "dev-master",
         "jaroslavtyc/doctrineum-strict-string": "dev-master",
         "granam/strict-object": "dev-master",
-        "granam/strict-string": "dev-master",
-        "granam/strict-scalar": "dev-master",
         "granam/exception-hierarchy": "dev-master"
     },
     "require-dev": {

@@ -14,7 +14,7 @@ class GenderFactory extends StrictObject
      */
     public function getGender($raceCode, $subraceCode, $genderCode)
     {
-        return Gender::get(Gender::buildRaceAndSubraceGenderCode($raceCode, $subraceCode, $genderCode));
+        return Gender::getEnum(Gender::buildRaceAndSubraceGenderCode($raceCode, $subraceCode, $genderCode));
     }
 
     /**

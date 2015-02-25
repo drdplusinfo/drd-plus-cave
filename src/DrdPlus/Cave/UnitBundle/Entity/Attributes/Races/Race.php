@@ -1,16 +1,13 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Races;
 
-use Doctrineum\Generic\Enum;
+use Doctrineum\Strict\String\SelfTypedStrictStringEnum;
 
 /**
  * Race
  */
-abstract class Race extends Enum
+abstract class Race extends SelfTypedStrictStringEnum
 {
-
-    /** overloaded parent value to get own namespace */
-    const INNER_NAMESPACE = __CLASS__;
 
     const BASE_STRENGTH = 0;
     const BASE_AGILITY = 0;
@@ -23,14 +20,14 @@ abstract class Race extends Enum
 
     /**
      * Call this method on specific race, not on this abstract class (it is prohibited by exception raising anyway)
-     * @see create
+     * @see Race::createByValue
      * @param string $raceAndSubraceCode
      * @param string $innerNamespace
      * @return Race
      */
-    public static function get($raceAndSubraceCode, $innerNamespace = self::INNER_NAMESPACE)
+    public static function getEnum($raceAndSubraceCode, $innerNamespace = __CLASS__)
     {
-        return parent::get($raceAndSubraceCode, $innerNamespace);
+        return parent::getEnum($raceAndSubraceCode, $innerNamespace);
     }
 
     /**
@@ -40,7 +37,7 @@ abstract class Race extends Enum
      */
     public static function getByRaceAndSubraceCodes($raceCode, $subraceCode)
     {
-        return static::get(static::buildRaceAndSubraceCode($raceCode, $subraceCode));
+        return static::getEnum(static::buildRaceAndSubraceCode($raceCode, $subraceCode));
     }
 
     /**
@@ -258,9 +255,9 @@ abstract class Race extends Enum
      * @param string $raceAndSubraceCode
      * @return Race
      */
-    protected static function create($raceAndSubraceCode)
+    protected static function createByValue($raceAndSubraceCode)
     {
-        $race = parent::create($raceAndSubraceCode);
+        $race = parent::createByValue($raceAndSubraceCode);
         /** @var $race Race */
         if ($race->getRaceAndSubraceCode() !== $raceAndSubraceCode) {
             // create() method, or get() respectively, has to be called on a specific race, not on this abstract one

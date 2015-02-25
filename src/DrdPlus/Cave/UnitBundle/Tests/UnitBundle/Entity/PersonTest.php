@@ -110,10 +110,10 @@ class PersonTest extends \PHPUnit_Framework_TestCase
             $this->getProfessionLevelsMock(),
             $this->getNameMock()
         );
-        $person->setName($name = Name::get($nameString = 'foo'));
+        $person->setName($name = Name::getEnum($nameString = 'foo'));
         $this->assertSame($name, $person->getName());
         $this->assertSame($nameString, (string)$person->getName());
-        $person->setName($newName = Name::get($newNameString = 'bar'));
+        $person->setName($newName = Name::getEnum($newNameString = 'bar'));
         $this->assertSame($newName, $person->getName());
         $this->assertSame($newNameString, (string)$person->getName());
     }

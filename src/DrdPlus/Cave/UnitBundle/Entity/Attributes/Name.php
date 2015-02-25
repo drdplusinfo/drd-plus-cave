@@ -1,18 +1,18 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Entity\Attributes;
 
-use Doctrineum\Strict\String\StrictStringEnum;
+use Doctrineum\Strict\String\SelfTypedStrictStringEnum;
 
-class Name extends StrictStringEnum
+class Name extends SelfTypedStrictStringEnum
 {
     /**
      * @param string $nameString
      * @param string $namespace
      * @return Name
      */
-    public static function get($nameString, $namespace = __CLASS__)
+    public static function getEnum($nameString, $namespace = __CLASS__)
     {
-        return parent::get(trim($nameString), $namespace);
+        return parent::getEnum(trim($nameString), $namespace);
     }
 
     /**
@@ -20,6 +20,18 @@ class Name extends StrictStringEnum
      */
     public function isEmpty()
     {
-        return strlen($this->getValue()) === 0;
+        return strlen($this->getEnumValue()) === 0;
+    }
+
+    /**
+     * Gets the strongly recommended name of this type.
+     * Its used at @see \Doctrine\DBAL\Platforms\AbstractPlatform::getDoctrineTypeComment
+     * @see EnumType::getName for direct usage
+     *
+     * @return string
+     */
+    public static function getTypeName()
+    {
+        return 'name';
     }
 }

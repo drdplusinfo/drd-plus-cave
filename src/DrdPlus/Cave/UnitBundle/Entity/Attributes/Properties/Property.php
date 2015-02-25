@@ -1,12 +1,9 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties;
 
-use Doctrineum\Integer\IntegerEnum;
+use Doctrineum\Integer\IntegerSelfTypedEnum;
 
-/**
- * class Gender
- */
-abstract class Property extends IntegerEnum
+abstract class Property extends IntegerSelfTypedEnum
 {
 
     /**
@@ -16,9 +13,9 @@ abstract class Property extends IntegerEnum
      * @param string $innerNamespace
      * @return Property
      */
-    public static function get($propertyCode, $innerNamespace = __CLASS__)
+    public static function getEnum($propertyCode, $innerNamespace = __CLASS__)
     {
-        parent::get($propertyCode, $innerNamespace);
+        parent::getEnum($propertyCode, $innerNamespace);
     }
 
     /**
@@ -26,9 +23,9 @@ abstract class Property extends IntegerEnum
      * @throws Exceptions\UnknownPropertyCode
      * @return Property
      */
-    protected static function create($propertyCode)
+    protected static function createByValue($propertyCode)
     {
-        $property = parent::create($propertyCode);
+        $property = parent::createByValue($propertyCode);
         /** @var $property Property */
         if ($property->getPropertyCode() !== $propertyCode) {
             throw new Exceptions\UnknownPropertyCode(
