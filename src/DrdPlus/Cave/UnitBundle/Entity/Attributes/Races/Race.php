@@ -64,11 +64,11 @@ abstract class Race extends SelfTypedStrictStringEnum
 
     protected function checkGenderRace(Gender $gender)
     {
-        if ($gender->getRaceCode() !== $this->getRaceCode()) {
-            throw new \LogicException('Gender is not for race ' . $this->getRaceCode() . ', but for race ' . $gender->getRaceCode());
+        if ($gender::getRaceCode() !== static::getRaceCode()) {
+            throw new \LogicException('Gender is not for race ' . static::getRaceCode() . ', but for race ' . $gender::getRaceCode());
         }
-        if ($gender->getSubraceCode() !== $this->getSubraceCode()) {
-            throw new \LogicException('Gender is not for subrace ' . $this->getSubraceCode() . ', but for subrace ' . $gender->getSubraceCode());
+        if ($gender::getSubraceCode() !== static::getSubraceCode()) {
+            throw new \LogicException('Gender is not for subrace ' . static::getSubraceCode() . ', but for subrace ' . $gender::getSubraceCode());
         }
     }
 
@@ -272,17 +272,21 @@ abstract class Race extends SelfTypedStrictStringEnum
      */
     protected function getRaceAndSubraceCode()
     {
-        return self::buildRaceAndSubraceCode($this->getRaceCode(), $this->getSubraceCode());
+        return self::buildRaceAndSubraceCode(static::getRaceCode(), static::getSubraceCode());
     }
 
     /**
      * @return string
      */
-    abstract public function getRaceCode();
+    public static function getRaceCode() {
+        throw new Exceptions\MissingRaceCodeImplementation();
+    }
 
     /**
      * @return string
      */
-    abstract public function getSubraceCode();
+    public static function getSubraceCode() {
+        throw new Exceptions\MissingSubraceCodeImplementation();
+    }
 
 }

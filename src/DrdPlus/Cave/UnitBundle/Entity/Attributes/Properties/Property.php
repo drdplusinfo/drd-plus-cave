@@ -1,12 +1,13 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties;
 
-use Doctrineum\Integer\IntegerSelfTypedEnum;
+use Doctrineum\Integer\SelfTypedIntegerEnum;
 
-abstract class Property extends IntegerSelfTypedEnum
+abstract class Property extends SelfTypedIntegerEnum
 {
 
-    const PROPERTY_CODE = 'property';
+    const PROPERTY = 'property';
+    const PROPERTY_CODE = self::PROPERTY_CODE;
 
     /**
      * Call this method on specific property, not on this abstract class (it is prohibited by exception raising anyway)
@@ -48,9 +49,16 @@ abstract class Property extends IntegerSelfTypedEnum
         return $property;
     }
 
+    /**
+     * Gets the strongly recommended name of this type.
+     * Its used at @see \Doctrine\DBAL\Platforms\AbstractPlatform::getDoctrineTypeComment
+     * @see EnumType::getName for direct usage
+     *
+     * @return string
+     */
     public static function getTypeName()
     {
-        return static::PROPERTY_CODE;
+        return static::PROPERTY;
     }
 
     /**

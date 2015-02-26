@@ -27,6 +27,17 @@ abstract class Gender extends SelfTypedStrictStringEnum
     }
 
     /**
+     * Gets the strongly recommended name of this type.
+     * Its used at @see \Doctrine\DBAL\Platforms\AbstractPlatform::getDoctrineTypeComment
+     *
+     * @return string
+     */
+    public static function getTypeName()
+    {
+        return static::getRaceAndSubraceGenderCode();
+    }
+
+    /**
      * @param string $raceAndSubraceGenderCode
      * @throws Exceptions\UnknownGenderCode
      * @return Gender
@@ -49,7 +60,37 @@ abstract class Gender extends SelfTypedStrictStringEnum
      */
     protected function getRaceAndSubraceGenderCode()
     {
-        return self::buildRaceAndSubraceGenderCode($this->getRaceCode(), $this->getSubraceCode(), $this->getGenderCode());
+        return self::buildRaceAndSubraceGenderCode(static::getRaceCode(), static::getSubraceCode(), static::getGenderCode());
+    }
+
+    /**
+     * @return string
+     */
+    public static function getRaceCode() {
+        throw new Exceptions\MissingRaceCodeImplementation();
+    }
+
+    /**
+     * @return string
+     */
+    public static function getSubraceCode() {
+        throw new Exceptions\MissingSubraceCodeImplementation();
+    }
+
+    /**
+     * @return string
+     */
+    protected static function getGenderCode()
+    {
+        if (static::isMale()) {
+            return self::MALE_CODE;
+        }
+
+        if (static::isFemale()) {
+            return self::FEMALE_CODE;
+        }
+
+        throw new Exceptions\UnknownGender('Expected male or female.');
     }
 
     /**
@@ -64,40 +105,18 @@ abstract class Gender extends SelfTypedStrictStringEnum
     }
 
     /**
-     * @return string
+     * @return bool
      */
-    abstract public function getRaceCode();
-
-    /**
-     * @return string
-     */
-    abstract public function getSubraceCode();
-
-    /**
-     * @return string
-     */
-    protected function getGenderCode()
-    {
-        if ($this->isMale()) {
-            return self::MALE_CODE;
-        }
-
-        if ($this->isFemale()) {
-            return self::FEMALE_CODE;
-        }
-
-        throw new Exceptions\UnknownGender('Expected male or female.');
+    public static function isMale() {
+        throw new Exceptions\IsMaleDetectionNotImplemented();
     }
 
     /**
      * @return bool
      */
-    abstract public function isMale();
-
-    /**
-     * @return bool
-     */
-    abstract public function isFemale();
+    public static function isFemale() {
+        throw new Exceptions\IsFemaleDetectionNotImplemented();
+    }
 
     /**
      * Get strength modifier

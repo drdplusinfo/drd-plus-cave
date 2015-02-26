@@ -9,7 +9,7 @@ abstract class DwarfGender extends Gender {
     /**
      * @return string
      */
-    public function getRaceCode()
+    public static function getRaceCode()
     {
         return Dwarf::RACE_CODE;
     }

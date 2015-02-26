@@ -4,7 +4,8 @@ namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties;
 class Knack extends Property
 {
 
-    const PROPERTY_CODE = 'knack';
+    const KNACK = 'knack';
+    const PROPERTY_CODE = self::KNACK;
 
     /**
      * @return string

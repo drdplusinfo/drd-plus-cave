@@ -9,7 +9,7 @@ abstract class HobbitGender extends Gender
     /**
      * @return string
      */
-    public function getRaceCode()
+    public static function getRaceCode()
     {
         return Hobbit::RACE_CODE;
     }

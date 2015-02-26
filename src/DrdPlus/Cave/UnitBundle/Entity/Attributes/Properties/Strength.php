@@ -3,7 +3,8 @@ namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties;
 
 class Strength extends Property
 {
-    const PROPERTY_CODE = 'strength';
+    const STRENGTH = 'strength';
+    const PROPERTY_CODE = self::STRENGTH;
 
     /**
      * @return string

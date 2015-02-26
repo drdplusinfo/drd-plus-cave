@@ -4,7 +4,8 @@ namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties;
 class Charisma extends Property
 {
 
-    const PROPERTY_CODE = 'charisma';
+    const CHARISMA = 'charisma';
+    const PROPERTY_CODE = self::CHARISMA;
 
     /**
      * @return string

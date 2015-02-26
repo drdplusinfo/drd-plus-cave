@@ -9,7 +9,7 @@ abstract class CommonHumanGender extends HumanGender
     /**
      * @return string
      */
-    public function getSubraceCode()
+    public static function getSubraceCode()
     {
         return CommonHuman::SUBRACE_CODE;
     }

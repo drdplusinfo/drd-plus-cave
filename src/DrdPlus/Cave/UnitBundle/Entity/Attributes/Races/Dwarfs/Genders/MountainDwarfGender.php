@@ -8,7 +8,7 @@ abstract class MountainDwarfGender extends DwarfGender {
     /**
      * @return string
      */
-    public function getSubraceCode()
+    public static function getSubraceCode()
     {
         return MountainDwarf::SUBRACE_CODE;
     }

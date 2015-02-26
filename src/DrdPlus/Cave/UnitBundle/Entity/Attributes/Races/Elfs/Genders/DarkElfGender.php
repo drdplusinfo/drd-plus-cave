@@ -9,7 +9,7 @@ abstract class DarkElfGender extends ElfGender
     /**
      * @return string
      */
-    public function getSubraceCode()
+    public static function getSubraceCode()
     {
         return DarkElf::SUBRACE_CODE;
     }

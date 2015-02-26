@@ -8,7 +8,7 @@ abstract class CommonHobbitGender extends HobbitGender
     /**
      * @return string
      */
-    public function getSubraceCode()
+    public static function getSubraceCode()
     {
         return CommonHobbit::SUBRACE_CODE;
     }

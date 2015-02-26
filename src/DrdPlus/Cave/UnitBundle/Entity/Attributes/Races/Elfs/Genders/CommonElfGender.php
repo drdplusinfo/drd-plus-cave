@@ -9,7 +9,7 @@ abstract class CommonElfGender extends ElfGender
     /**
      * @return string
      */
-    public function getSubraceCode()
+    public static function getSubraceCode()
     {
         return CommonElf::SUBRACE_CODE;
     }

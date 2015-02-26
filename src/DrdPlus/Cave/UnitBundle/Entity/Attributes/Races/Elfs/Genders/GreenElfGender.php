@@ -8,7 +8,7 @@ abstract class GreenElfGender extends ElfGender {
     /**
      * @return string
      */
-    public function getSubraceCode()
+    public static function getSubraceCode()
     {
         return GreenElf::SUBRACE_CODE;
     }

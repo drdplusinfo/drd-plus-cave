@@ -5,6 +5,8 @@ use Doctrineum\Strict\String\SelfTypedStrictStringEnum;
 
 class Name extends SelfTypedStrictStringEnum
 {
+    const TYPE_NAME = 'name';
+
     /**
      * @param string $nameString
      * @param string $namespace
@@ -32,6 +34,6 @@ class Name extends SelfTypedStrictStringEnum
      */
     public static function getTypeName()
     {
-        return 'name';
+        return static::TYPE_NAME;
     }
 }

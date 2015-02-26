@@ -4,7 +4,8 @@ namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties;
 class Will extends Property
 {
 
-    const PROPERTY_CODE = 'will';
+    const WILL = 'will';
+    const PROPERTY_CODE = self::WILL;
 
     /**
      * @return string

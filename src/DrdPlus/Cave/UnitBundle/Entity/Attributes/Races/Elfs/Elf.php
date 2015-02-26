@@ -39,7 +39,7 @@ abstract class Elf extends Race
     /**
      * @return string
      */
-    public function getRaceCode()
+    public static function getRaceCode()
     {
         return self::RACE_CODE;
     }

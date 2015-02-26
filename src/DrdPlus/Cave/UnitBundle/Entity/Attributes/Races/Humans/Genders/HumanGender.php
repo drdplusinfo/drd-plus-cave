@@ -9,7 +9,7 @@ abstract class HumanGender extends Gender {
     /**
      * @return string
      */
-    public function getRaceCode()
+    public static function getRaceCode()
     {
         return Human::RACE_CODE;
     }

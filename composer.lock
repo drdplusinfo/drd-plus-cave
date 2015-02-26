@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "88bd0bb4559aa73ba0e6d645e1ef16e3",
+    "hash": "c16c065e33ed5e3374f98ee263f070d4",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -867,7 +867,7 @@
             "source": {
                 "type": "git",
                 "url": "/home/jaroslav/Dropbox/Projects/granam/strict-object",
-                "reference": "798790a18f0ec7e26f5097ef179bb52c306590af"
+                "reference": "0e0f5ca63ea44c2913e24f7ee79748620e0cf922"
             },
             "require": {
                 "granam/exception-hierarchy": "dev-master",
@@ -899,112 +899,7 @@
                 "php",
                 "strict"
             ],
-            "time": "2015-02-24 09:31:08"
-        },
-        {
-            "name": "granam/strict-scalar",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/jaroslavtyc/granam-strict-scalar.git",
-                "reference": "80e0110246b16ee644c2b5b2583fda82974be3e1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/granam-strict-scalar/zipball/80e0110246b16ee644c2b5b2583fda82974be3e1",
-                "reference": "80e0110246b16ee644c2b5b2583fda82974be3e1",
-                "shasum": ""
-            },
-            "require": {
-                "granam/exception-hierarchy": "dev-master",
-                "granam/strict-object": "dev-master",
-                "php": ">=5.5.0"
-            },
-            "require-dev": {
-                "mockery/mockery": "0.9.*",
-                "phpunit/phpunit": "~4.4"
-            },
-            "type": "project",
-            "autoload": {
-                "psr-4": {
-                    "Granam\\": "Granam/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jaroslav Týc",
-                    "homepage": "http://jaroslavtyc.com",
-                    "role": "Original author"
-                }
-            ],
-            "description": "Base for lightweight scalar-types containers with strict checks",
-            "homepage": "https://github.com/jaroslavtyc/granam-strict-scalar",
-            "keywords": [
-                "php",
-                "scalar",
-                "strict"
-            ],
-            "support": {
-                "source": "https://github.com/jaroslavtyc/granam-strict-scalar/tree/master",
-                "issues": "https://github.com/jaroslavtyc/granam-strict-scalar/issues"
-            },
-            "time": "2015-02-11 12:32:00"
-        },
-        {
-            "name": "granam/strict-string",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/jaroslavtyc/granam-strict-string.git",
-                "reference": "9abfb6e73b095ec110e452ddda39d7e8048c6044"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/granam-strict-string/zipball/9abfb6e73b095ec110e452ddda39d7e8048c6044",
-                "reference": "9abfb6e73b095ec110e452ddda39d7e8048c6044",
-                "shasum": ""
-            },
-            "require": {
-                "granam/exception-hierarchy": "dev-master",
-                "granam/strict-object": "dev-master",
-                "granam/strict-scalar": "dev-master",
-                "php": ">=5.5.0"
-            },
-            "require-dev": {
-                "mockery/mockery": "0.9.*",
-                "phpunit/phpunit": "~4.4"
-            },
-            "type": "project",
-            "autoload": {
-                "psr-4": {
-                    "Granam\\": "Granam/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jaroslav Týc",
-                    "homepage": "http://jaroslavtyc.com",
-                    "role": "Original author"
-                }
-            ],
-            "description": "Lightweight string container with strict checks",
-            "homepage": "https://github.com/jaroslavtyc/granam-strict-string",
-            "keywords": [
-                "php",
-                "strict",
-                "string"
-            ],
-            "support": {
-                "source": "https://github.com/jaroslavtyc/granam-strict-string/tree/master",
-                "issues": "https://github.com/jaroslavtyc/granam-strict-string/issues"
-            },
-            "time": "2015-02-11 12:34:05"
+            "time": "2015-02-26 14:02:10"
         },
         {
             "name": "incenteev/composer-parameter-handler",
@@ -1064,7 +959,7 @@
             "source": {
                 "type": "git",
                 "url": "/home/jaroslav/Dropbox/Projects/doctrineum/generic",
-                "reference": "8e73c56a74f9d60c3d8c3260f3a3600334090126"
+                "reference": "df3362788cfe94bea768ff13e623a5ab355e5d5e"
             },
             "require": {
                 "doctrine/dbal": "2.4.*",
@@ -1086,7 +981,7 @@
                 "MIT"
             ],
             "description": "Enumeration type for Doctrine",
-            "time": "2015-02-24 11:39:46"
+            "time": "2015-02-26 13:34:51"
         },
         {
             "name": "jaroslavtyc/doctrineum-integer",
@@ -1094,7 +989,7 @@
             "source": {
                 "type": "git",
                 "url": "/home/jaroslav/Dropbox/Projects/doctrineum/integer",
-                "reference": "df74eb1ae976c6933819f225d2f2b700310b4297"
+                "reference": "5c9088d42bc2831fe11a2266199f546880df5a82"
             },
             "require": {
                 "granam/exception-hierarchy": "dev-master",
@@ -1116,7 +1011,7 @@
                 "MIT"
             ],
             "description": "Enumeration type for Doctrine - integers only",
-            "time": "2015-02-24 20:22:59"
+            "time": "2015-02-26 14:06:14"
         },
         {
             "name": "jaroslavtyc/doctrineum-strict-string",
@@ -1124,13 +1019,11 @@
             "source": {
                 "type": "git",
                 "url": "/home/jaroslav/Dropbox/Projects/doctrineum/strict-string",
-                "reference": "f2fc689299adfbceb264f8f842d521e9c2c9102f"
+                "reference": "a2cc8abedef74afd5978475257021d51c0529cae"
             },
             "require": {
                 "granam/exception-hierarchy": "dev-master",
                 "granam/strict-object": "dev-master",
-                "granam/strict-scalar": "dev-master",
-                "granam/strict-string": "dev-master",
                 "jaroslavtyc/doctrineum-generic": "dev-master",
                 "php": ">=5.5"
             },
@@ -1148,7 +1041,7 @@
                 "MIT"
             ],
             "description": "Enumeration type for Doctrine - strings only",
-            "time": "2015-02-17 10:14:51"
+            "time": "2015-02-26 14:12:22"
         },
         {
             "name": "jdorn/sql-formatter",
@@ -3022,8 +2915,6 @@
         "jaroslavtyc/doctrineum-integer": 20,
         "jaroslavtyc/doctrineum-strict-string": 20,
         "granam/strict-object": 20,
-        "granam/strict-string": 20,
-        "granam/strict-scalar": 20,
         "granam/exception-hierarchy": 20
     },
     "prefer-stable": false,

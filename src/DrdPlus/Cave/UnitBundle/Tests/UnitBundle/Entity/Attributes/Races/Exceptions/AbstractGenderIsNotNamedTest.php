@@ -1,7 +1,7 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Exceptions;
 
-class UnknownRaceCodeTest extends \PHPUnit_Framework_TestCase
+class AbstractGenderIsNotNamedTest extends \PHPUnit_Framework_TestCase
 {
 
     /**

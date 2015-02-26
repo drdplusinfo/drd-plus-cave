@@ -4,12 +4,13 @@ namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Elfs\Genders;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Elfs\Elf;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Gender;
 
-abstract class ElfGender extends Gender {
+abstract class ElfGender extends Gender
+{
 
     /**
      * @return string
      */
-    public function getRaceCode()
+    public static function getRaceCode()
     {
         return Elf::RACE_CODE;
     }

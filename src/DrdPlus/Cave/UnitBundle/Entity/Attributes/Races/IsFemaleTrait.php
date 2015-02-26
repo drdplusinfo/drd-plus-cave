@@ -6,7 +6,7 @@ trait IsFemaleTrait
     /**
      * @return bool
      */
-    public function isMale()
+    public static function isMale()
     {
         return false;
     }
@@ -14,7 +14,7 @@ trait IsFemaleTrait
     /**
      * @return bool
      */
-    public function isFemale()
+    public static function isFemale()
     {
         return true;
     }

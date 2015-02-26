@@ -1,87 +1,90 @@
 {
-    "name": "jaroslavtyc/drd+cave",
-    "license": "MIT",
-    "type": "project",
-    "description": "Drd+ logic",
-    "autoload": {
-        "psr-0": { "": "src/", "SymfonyStandard": "app/" }
-    },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "/home/jaroslav/Dropbox/Projects/doctrineum/generic"
-        },
-        {
-            "type": "vcs",
-            "url": "/home/jaroslav/Dropbox/Projects/doctrineum/integer"
-        },
-        {
-            "type": "vcs",
-            "url": "/home/jaroslav/Dropbox/Projects/doctrineum/strict-string"
-        },
-        {
-            "type": "vcs",
-            "url": "/home/jaroslav/Dropbox/Projects/granam/strict-object"
-        },
-        {
-            "type": "vcs",
-            "url": "/home/jaroslav/Dropbox/Projects/granam/exception-hierarchy"
-        }
-    ],
-    "require": {
-        "php": ">=5.5.0",
-        "symfony/symfony": "2.5.*",
-        "doctrine/orm": "~2.2,>=2.2.3",
-        "doctrine/doctrine-bundle": "~1.2",
-        "doctrine/migrations": "1.0.*@dev",
-        "doctrine/doctrine-migrations-bundle": "2.1.*@dev",
-        "twig/extensions": "~1.0",
-        "symfony/assetic-bundle": "~2.3",
-        "symfony/swiftmailer-bundle": "~2.3",
-        "symfony/monolog-bundle": "~2.4",
-        "sensio/distribution-bundle": "~3.0",
-        "sensio/framework-extra-bundle": "~3.0",
-        "incenteev/composer-parameter-handler": "~2.0",
-        "jaroslavtyc/doctrineum-generic": "dev-master",
-        "jaroslavtyc/doctrineum-integer": "dev-master",
-        "jaroslavtyc/doctrineum-strict-string": "dev-master",
-        "granam/strict-object": "dev-master",
-        "granam/exception-hierarchy": "dev-master"
-    },
-    "require-dev": {
-        "sensio/generator-bundle": "~2.3",
-        "phpunit/phpunit": "~4.4",
-        "mockery/mockery": "0.9.*"
-    },
-    "scripts": {
-        "post-root-package-install": [
-            "SymfonyStandard\\Composer::hookRootPackageInstall"
-        ],
-        "post-install-cmd": [
-            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles"
-        ],
-        "post-update-cmd": [
-            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles"
-        ]
-    },
-    "config": {
-        "bin-dir": "bin"
-    },
-    "extra": {
-        "symfony-app-dir": "app",
-        "symfony-web-dir": "web",
-        "incenteev-parameters": {
-            "file": "app/config/parameters.yml"
-        }
+  "name": "jaroslavtyc/drd+cave",
+  "license": "MIT",
+  "type": "project",
+  "description": "Drd+ logic",
+  "autoload": {
+    "psr-0": {
+      "": "src/",
+      "SymfonyStandard": "app/"
     }
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "/home/jaroslav/Dropbox/Projects/doctrineum/generic"
+    },
+    {
+      "type": "vcs",
+      "url": "/home/jaroslav/Dropbox/Projects/doctrineum/integer"
+    },
+    {
+      "type": "vcs",
+      "url": "/home/jaroslav/Dropbox/Projects/doctrineum/strict-string"
+    },
+    {
+      "type": "vcs",
+      "url": "/home/jaroslav/Dropbox/Projects/granam/strict-object"
+    },
+    {
+      "type": "vcs",
+      "url": "/home/jaroslav/Dropbox/Projects/granam/exception-hierarchy"
+    }
+  ],
+  "require": {
+    "php": ">=5.5.0",
+    "symfony/symfony": "2.5.*",
+    "doctrine/orm": "~2.2,>=2.2.3",
+    "doctrine/doctrine-bundle": "~1.2",
+    "doctrine/migrations": "1.0.*@dev",
+    "doctrine/doctrine-migrations-bundle": "2.1.*@dev",
+    "twig/extensions": "~1.0",
+    "symfony/assetic-bundle": "~2.3",
+    "symfony/swiftmailer-bundle": "~2.3",
+    "symfony/monolog-bundle": "~2.4",
+    "sensio/distribution-bundle": "~3.0",
+    "sensio/framework-extra-bundle": "~3.0",
+    "incenteev/composer-parameter-handler": "~2.0",
+    "jaroslavtyc/doctrineum-generic": "dev-master",
+    "jaroslavtyc/doctrineum-integer": "dev-master",
+    "jaroslavtyc/doctrineum-strict-string": "dev-master",
+    "granam/strict-object": "dev-master",
+    "granam/exception-hierarchy": "dev-master"
+  },
+  "require-dev": {
+    "sensio/generator-bundle": "~2.3",
+    "phpunit/phpunit": "~4.4",
+    "mockery/mockery": "0.9.*"
+  },
+  "scripts": {
+    "post-root-package-install": [
+      "SymfonyStandard\\Composer::hookRootPackageInstall"
+    ],
+    "post-install-cmd": [
+      "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles"
+    ],
+    "post-update-cmd": [
+      "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles"
+    ]
+  },
+  "config": {
+    "bin-dir": "bin"
+  },
+  "extra": {
+    "symfony-app-dir": "app",
+    "symfony-web-dir": "web",
+    "incenteev-parameters": {
+      "file": "app/config/parameters.yml"
+    }
+  }
 }

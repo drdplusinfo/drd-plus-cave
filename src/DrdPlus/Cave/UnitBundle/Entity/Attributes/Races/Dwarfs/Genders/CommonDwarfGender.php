@@ -9,7 +9,7 @@ abstract class CommonDwarfGender extends DwarfGender
     /**
      * @return string
      */
-    public function getSubraceCode()
+    public static function getSubraceCode()
     {
         return CommonDwarf::SUBRACE_CODE;
     }

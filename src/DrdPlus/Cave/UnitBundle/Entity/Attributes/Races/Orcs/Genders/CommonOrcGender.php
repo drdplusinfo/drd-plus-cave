@@ -9,7 +9,7 @@ abstract class CommonOrcGender extends OrcGender
     /**
      * @return string
      */
-    public function getSubraceCode()
+    public static function getSubraceCode()
     {
         return CommonOrc::SUBRACE_CODE;
     }

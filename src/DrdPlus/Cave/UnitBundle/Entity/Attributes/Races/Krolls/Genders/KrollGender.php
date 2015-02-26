@@ -9,7 +9,7 @@ abstract class KrollGender extends Gender {
     /**
      * @return string
      */
-    public function getRaceCode()
+    public static function getRaceCode()
     {
         return Kroll::RACE_CODE;
     }

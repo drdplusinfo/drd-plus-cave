@@ -10,7 +10,7 @@ abstract class OrcGender extends Gender
     /**
      * @return string
      */
-    public function getRaceCode()
+    public static function getRaceCode()
     {
         return Orc::RACE_CODE;
     }

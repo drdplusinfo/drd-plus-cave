@@ -31,7 +31,7 @@ class CommonOrc extends Orc
     /**
      * @return string
      */
-    public function getSubraceCode()
+    public static function getSubraceCode()
     {
         return self::SUBRACE_CODE;
     }

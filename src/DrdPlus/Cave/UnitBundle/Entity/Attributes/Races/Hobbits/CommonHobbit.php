@@ -25,7 +25,7 @@ class CommonHobbit extends Hobbit
 {
     const SUBRACE_CODE = 'hobbit';
 
-    public function getSubraceCode()
+    public static function getSubraceCode()
     {
         return self::SUBRACE_CODE;
     }

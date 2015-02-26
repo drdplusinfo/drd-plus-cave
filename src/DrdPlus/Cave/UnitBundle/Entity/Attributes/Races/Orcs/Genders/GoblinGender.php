@@ -9,7 +9,7 @@ abstract class GoblinGender extends OrcGender
     /**
      * @return string
      */
-    public function getSubraceCode()
+    public static function getSubraceCode()
     {
         return Goblin::SUBRACE_CODE;
     }
