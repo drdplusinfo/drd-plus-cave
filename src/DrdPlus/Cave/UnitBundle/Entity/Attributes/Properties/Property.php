@@ -6,6 +6,8 @@ use Doctrineum\Integer\IntegerSelfTypedEnum;
 abstract class Property extends IntegerSelfTypedEnum
 {
 
+    const PROPERTY_CODE = 'property';
+
     /**
      * Call this method on specific property, not on this abstract class (it is prohibited by exception raising anyway)
      *
@@ -29,11 +31,26 @@ abstract class Property extends IntegerSelfTypedEnum
         /** @var $property Property */
         if ($property->getPropertyCode() !== $propertyCode) {
             throw new Exceptions\UnknownPropertyCode(
-                'Unknown property code ' . var_export($propertyCode, true) . '. Has been this method called from specific property class?'
+                'Given unexpected property code ' . var_export($propertyCode, true) . '. ' .
+                'Expected ' . var_export($property->getPropertyCode(), true) . '. ' .
+                'Has been this method ' . __METHOD__ . ' called from specific property class?'
+            );
+        }
+
+        if ($property->getPropertyCode() !== static::PROPERTY_CODE) {
+            throw new Exceptions\InconsistentPropertyCodes(
+                'The dynamic property code ' . var_export($property->getPropertyCode(), true) .
+                ' has to be same as static property code ' . var_export(static::PROPERTY_CODE, true) . '. ' .
+                'Has been this method ' . __METHOD__ . ' called from specific property class?'
             );
         }
 
         return $property;
+    }
+
+    public static function getTypeName()
+    {
+        return static::PROPERTY_CODE;
     }
 
     /**

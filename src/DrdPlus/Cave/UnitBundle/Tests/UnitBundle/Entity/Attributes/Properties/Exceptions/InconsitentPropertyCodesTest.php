@@ -1,7 +1,7 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Exceptions;
 
-class InconsistentPropertyCodesTest extends \PHPUnit_Framework_TestCase
+class UnknownPropertyCodeTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -10,7 +10,7 @@ class InconsistentPropertyCodesTest extends \PHPUnit_Framework_TestCase
      */
     public function is_native_logic_exception()
     {
-        throw new InconsistentPropertyCodes;
+        throw new UnknownPropertyCode;
     }
 
     /**
@@ -19,6 +19,6 @@ class InconsistentPropertyCodesTest extends \PHPUnit_Framework_TestCase
      */
     public function is_marked_by_local_logic_exception()
     {
-        throw new InconsistentPropertyCodes();
+        throw new UnknownPropertyCode();
     }
 }
