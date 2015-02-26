@@ -33,7 +33,7 @@ class WoodDwarf extends Dwarf
     /**
      * @return string
      */
-    public function getSubRaceCode()
+    public static function getSubRaceCode()
     {
         return self::SUBRACE_CODE;
     }
