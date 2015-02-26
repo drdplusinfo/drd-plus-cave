@@ -1,7 +1,7 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Exceptions;
 
-class UnknownRaceCodeTest extends \PHPUnit_Framework_TestCase
+class MissingSubraceCodeImplementationTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -10,7 +10,7 @@ class UnknownRaceCodeTest extends \PHPUnit_Framework_TestCase
      */
     public function is_native_logic_exception()
     {
-        throw new UnknownRaceCode();
+        throw new MissingSubraceCodeImplementation();
     }
 
     /**
@@ -19,6 +19,6 @@ class UnknownRaceCodeTest extends \PHPUnit_Framework_TestCase
      */
     public function is_marked_by_local_logic_exception()
     {
-        throw new UnknownRaceCode();
+        throw new MissingSubraceCodeImplementation();
     }
 }
