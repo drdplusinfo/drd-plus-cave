@@ -7,7 +7,7 @@ abstract class Property extends SelfTypedIntegerEnum
 {
 
     const PROPERTY = 'property';
-    const PROPERTY_CODE = self::PROPERTY_CODE;
+    const PROPERTY_CODE = self::PROPERTY;
 
     /**
      * Call this method on specific property, not on this abstract class (it is prohibited by exception raising anyway)
@@ -58,7 +58,7 @@ abstract class Property extends SelfTypedIntegerEnum
      */
     public static function getTypeName()
     {
-        return static::PROPERTY;
+        return static::PROPERTY_CODE;
     }
 
     /**

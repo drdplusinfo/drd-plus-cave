@@ -3,19 +3,18 @@ namespace DrdPlus\Cave\UnitBundle\Entity\Attributes;
 
 use Doctrineum\Strict\String\SelfTypedStrictStringEnum;
 
+/**
+ * @method static Name getEnum
+ */
 class Name extends SelfTypedStrictStringEnum
 {
-    const TYPE_NAME = 'name';
-
     /**
-     * @param string $nameString
-     * @param string $namespace
-     * @return Name
+     * Its not directly used this library - the exactly same value is generated and used by
+     * @see \Doctrineum\Scalar\SelfTypedEnum::getTypeName
+     *
+     * This constant exists to follow Doctrine type conventions.
      */
-    public static function getEnum($nameString, $namespace = __CLASS__)
-    {
-        return parent::getEnum(trim($nameString), $namespace);
-    }
+    const TYPE_NAME = 'name';
 
     /**
      * @return bool
@@ -25,15 +24,4 @@ class Name extends SelfTypedStrictStringEnum
         return strlen($this->getEnumValue()) === 0;
     }
 
-    /**
-     * Gets the strongly recommended name of this type.
-     * Its used at @see \Doctrine\DBAL\Platforms\AbstractPlatform::getDoctrineTypeComment
-     * @see EnumType::getName for direct usage
-     *
-     * @return string
-     */
-    public static function getTypeName()
-    {
-        return static::TYPE_NAME;
-    }
 }

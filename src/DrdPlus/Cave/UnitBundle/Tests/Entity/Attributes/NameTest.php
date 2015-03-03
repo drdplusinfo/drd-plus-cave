@@ -3,8 +3,7 @@ namespace DrdPlus\Cave\UnitBundle\Entity\Attributes;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\Type;
-use Doctrineum\Generic\Enum;
-use Doctrineum\Generic\EnumInterface;
+use Doctrineum\Scalar\EnumInterface;
 use Doctrineum\Strict\String\SelfTypedStrictStringEnum;
 use Doctrineum\Strict\String\StrictStringEnum;
 
@@ -64,6 +63,7 @@ class NameTest extends \PHPUnit_Framework_TestCase
         Name::addType('foo', Name::class);
         $enumType = Name::getType('foo');
         $this->assertInstanceOf(Name::class, $enumType);
+
         $platform = \Mockery::mock(AbstractPlatform::class);
         /** @var AbstractPlatform $platform */
         $phpValue = $enumType->convertToPHPValue('bar', $platform);

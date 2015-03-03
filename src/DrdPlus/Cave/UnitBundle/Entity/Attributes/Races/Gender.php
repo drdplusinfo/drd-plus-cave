@@ -5,26 +5,15 @@ use Doctrineum\Strict\String\SelfTypedStrictStringEnum;
 
 /**
  * class Gender
+ *
+ * @method static Gender getEnum(string $raceAndSubraceGenderCode)
+ * @see SelfTypedStrictStringEnum::getEnum
  */
 abstract class Gender extends SelfTypedStrictStringEnum
 {
 
     const MALE_CODE = 'male';
     const FEMALE_CODE = 'female';
-
-    /**
-     * Call this method on specific race, not on this abstract class
-     * (it is prohibited by exception raising anyway),
-     * @see Gender::createByValue
-     *
-     * @param string $raceAndSubraceGenderCode
-     * @param string $innerNamespace
-     * @return Gender
-     */
-    public static function getEnum($raceAndSubraceGenderCode, $innerNamespace = __CLASS__)
-    {
-        parent::getEnum($raceAndSubraceGenderCode, $innerNamespace);
-    }
 
     /**
      * Gets the strongly recommended name of this type.
@@ -46,7 +35,7 @@ abstract class Gender extends SelfTypedStrictStringEnum
     {
         $gender = parent::createByValue($raceAndSubraceGenderCode);
         /** @var $gender Gender */
-        if ($gender->getRaceAndSubraceGenderCode() !== $raceAndSubraceGenderCode) {
+        if ($gender::getRaceAndSubraceGenderCode() !== $raceAndSubraceGenderCode) {
             throw new Exceptions\UnknownGenderCode(
                 'Unknown race and subrace gender code ' . var_export($raceAndSubraceGenderCode, true) . '. Has been this method called from specific gender class?'
             );
@@ -58,7 +47,7 @@ abstract class Gender extends SelfTypedStrictStringEnum
     /**
      * @return string
      */
-    protected function getRaceAndSubraceGenderCode()
+    protected static function getRaceAndSubraceGenderCode()
     {
         return self::buildRaceAndSubraceGenderCode(static::getRaceCode(), static::getSubraceCode(), static::getGenderCode());
     }
@@ -67,14 +56,18 @@ abstract class Gender extends SelfTypedStrictStringEnum
      * @return string
      */
     public static function getRaceCode() {
-        throw new Exceptions\MissingRaceCodeImplementation();
+        throw new Exceptions\MissingRaceCodeImplementation(
+            'The gender class ' . static::class . ' has not implemented ' . __METHOD__ . ' method.'
+        );
     }
 
     /**
      * @return string
      */
     public static function getSubraceCode() {
-        throw new Exceptions\MissingSubraceCodeImplementation();
+        throw new Exceptions\MissingSubraceCodeImplementation(
+            'The gender class ' . static::class . ' has not implemented ' . __METHOD__ . ' method.'
+        );
     }
 
     /**

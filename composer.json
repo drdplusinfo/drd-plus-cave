@@ -12,7 +12,7 @@
   "repositories": [
     {
       "type": "vcs",
-      "url": "/home/jaroslav/Dropbox/Projects/doctrineum/generic"
+      "url": "/home/jaroslav/Dropbox/Projects/doctrineum/scalar"
     },
     {
       "type": "vcs",
@@ -45,9 +45,9 @@
     "sensio/distribution-bundle": "~3.0",
     "sensio/framework-extra-bundle": "~3.0",
     "incenteev/composer-parameter-handler": "~2.0",
-    "jaroslavtyc/doctrineum-generic": "dev-master",
-    "jaroslavtyc/doctrineum-integer": "dev-master",
-    "jaroslavtyc/doctrineum-strict-string": "dev-master",
+    "doctrineum/scalar": "dev-master",
+    "doctrineum/integer": "dev-master",
+    "doctrineum/strict-string": "dev-master",
     "granam/strict-object": "dev-master",
     "granam/exception-hierarchy": "dev-master"
   },

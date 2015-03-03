@@ -8,6 +8,7 @@ use Doctrineum\Strict\String\SelfTypedStrictStringEnum;
  */
 abstract class Race extends SelfTypedStrictStringEnum
 {
+    const TYPE_RACE = 'race';
 
     const BASE_STRENGTH = 0;
     const BASE_AGILITY = 0;
@@ -19,25 +20,69 @@ abstract class Race extends SelfTypedStrictStringEnum
     const BASE_SENSES = 0;
 
     /**
-     * Call this method on specific race, not on this abstract class (it is prohibited by exception raising anyway)
-     * @see Race::createByValue
      * @param string $raceAndSubraceCode
-     * @param string $innerNamespace
+     * @param string $namespace
      * @return Race
      */
-    public static function getEnum($raceAndSubraceCode, $innerNamespace = __CLASS__)
+    public static function getEnum($raceAndSubraceCode, $namespace = SelfTypedStrictStringEnum::CANNOT_BE_CHANGED_NAMESPACE)
     {
-        return parent::getEnum($raceAndSubraceCode, $innerNamespace);
+        if (static::class === __CLASS__) {
+            // TODO
+            throw new \LogicException();
+        }
+        return parent::getEnum($raceAndSubraceCode, $namespace);
+    }
+
+    public static function getTypeName()
+    {
+        if (static::class === __CLASS__) {
+            return parent::getTypeName();
+        }
+        return static::getRaceAndSubraceCode();
     }
 
     /**
-     * @param string $raceCode
-     * @param string $subraceCode
+     * All races can be annotated just as "race" type.
+     * The specific race will be build here, distinguished by the race and subrace code.
+     * Warning - each specific race has to be registered as a Doctrine type,
+     * @see Race::registerSelf()
+     *
+     * @param string $raceAndSubraceCode
      * @return Race
      */
-    public static function getByRaceAndSubraceCodes($raceCode, $subraceCode)
+    protected static function createByValue($raceAndSubraceCode)
     {
-        return static::getEnum(static::buildRaceAndSubraceCode($raceCode, $subraceCode));
+        static::registerSubraceIfNeeded($raceAndSubraceCode);
+        $race = parent::createByValue($raceAndSubraceCode);
+        /** @var $race Race */
+        if ($race::getRaceAndSubraceCode() !== $raceAndSubraceCode) {
+            // create() method, or get() respectively, has to be called on a specific race, not on this abstract one
+            throw new Exceptions\UnknownRaceCode(
+                'Unknown race-subrace code ' . var_export($raceAndSubraceCode, true) . '. ' .
+                'Called from sub-race ' . var_export($race::getRaceAndSubraceCode(), true) . '.'
+            );
+        }
+
+        return $race;
+    }
+
+    /**
+     * @param string $raceAndSubraceCode
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    protected static function registerSubraceIfNeeded($raceAndSubraceCode)
+    {
+        if (!static::hasType($raceAndSubraceCode)) {
+            static::addType($raceAndSubraceCode, static::class);
+        }
+    }
+
+    /**
+     * @return Race
+     */
+    public static function getIt()
+    {
+        return static::getEnum(static::getRaceAndSubraceCode());
     }
 
     /**
@@ -252,25 +297,9 @@ abstract class Race extends SelfTypedStrictStringEnum
     }
 
     /**
-     * @param string $raceAndSubraceCode
-     * @return Race
-     */
-    protected static function createByValue($raceAndSubraceCode)
-    {
-        $race = parent::createByValue($raceAndSubraceCode);
-        /** @var $race Race */
-        if ($race->getRaceAndSubraceCode() !== $raceAndSubraceCode) {
-            // create() method, or get() respectively, has to be called on a specific race, not on this abstract one
-            throw new Exceptions\UnknownRaceCode('Unknown race-subrace code ' . var_export($raceAndSubraceCode, true) . '. Has been this method called from specific race class?');
-        }
-
-        return $race;
-    }
-
-    /**
      * @return string
      */
-    protected function getRaceAndSubraceCode()
+    protected static function getRaceAndSubraceCode()
     {
         return self::buildRaceAndSubraceCode(static::getRaceCode(), static::getSubraceCode());
     }
@@ -278,15 +307,21 @@ abstract class Race extends SelfTypedStrictStringEnum
     /**
      * @return string
      */
-    public static function getRaceCode() {
-        throw new Exceptions\MissingRaceCodeImplementation();
+    public static function getRaceCode()
+    {
+        throw new Exceptions\MissingRaceCodeImplementation(
+            'The gender class ' . static::class . ' has not implemented ' . __METHOD__ . ' method.'
+        );
     }
 
     /**
      * @return string
      */
-    public static function getSubraceCode() {
-        throw new Exceptions\MissingSubraceCodeImplementation();
+    public static function getSubraceCode()
+    {
+        throw new Exceptions\MissingSubraceCodeImplementation(
+            'The gender class ' . static::class . ' has not implemented ' . __METHOD__ . ' method.'
+        );
     }
 
 }

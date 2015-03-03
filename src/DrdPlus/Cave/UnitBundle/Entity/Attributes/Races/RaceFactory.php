@@ -7,21 +7,11 @@ class RaceFactory extends StrictObject
 {
 
     /**
-     * @param string $raceCode
-     * @param string $subraceCode
-     * @return Race
-     */
-    public function getRace($raceCode, $subraceCode)
-    {
-        return Race::getEnum(Race::buildRaceAndSubraceCode($raceCode, $subraceCode));
-    }
-
-    /**
      * @return Humans\CommonHuman
      */
     public function getCommonHuman()
     {
-        return $this->getRace(Humans\CommonHuman::getRaceCode(), Humans\CommonHuman::getSubraceCode());
+        return Humans\CommonHuman::getIt();
     }
 
     /**
@@ -29,7 +19,7 @@ class RaceFactory extends StrictObject
      */
     public function getHighlander()
     {
-        return $this->getRace(Humans\Highlander::getRaceCode(), Humans\Highlander::getSubraceCode());
+        return Humans\Highlander::getIt();
     }
 
     /**
@@ -37,7 +27,7 @@ class RaceFactory extends StrictObject
      */
     public function getCommonDwarf()
     {
-        return $this->getRace(Dwarfs\CommonDwarf::getRaceCode(), Dwarfs\CommonDwarf::getSubraceCode());
+        return Dwarfs\CommonDwarf::getIt();
     }
 
     /**
@@ -45,7 +35,7 @@ class RaceFactory extends StrictObject
      */
     public function getMountainDwarf()
     {
-        return $this->getRace(Dwarfs\MountainDwarf::getRaceCode(), Dwarfs\MountainDwarf::getSubraceCode());
+        return Dwarfs\MountainDwarf::getIt();
     }
 
     /**
@@ -53,7 +43,7 @@ class RaceFactory extends StrictObject
      */
     public function getWoodDwarf()
     {
-        return $this->getRace(Dwarfs\WoodDwarf::getRaceCode(), Dwarfs\WoodDwarf::getSubraceCode());
+        return Dwarfs\WoodDwarf::getIt();
     }
 
     /**
@@ -61,7 +51,7 @@ class RaceFactory extends StrictObject
      */
     public function getCommonElf()
     {
-        return $this->getRace(Elfs\CommonElf::getRaceCode(), Elfs\CommonElf::getSubraceCode());
+        return Elfs\CommonElf::getIt();
     }
 
     /**
@@ -69,7 +59,7 @@ class RaceFactory extends StrictObject
      */
     public function getDarkElf()
     {
-        return $this->getRace(Elfs\DarkElf::getRaceCode(), Elfs\DarkElf::getSubraceCode());
+        return Elfs\DarkElf::getIt();
     }
 
     /**
@@ -77,7 +67,7 @@ class RaceFactory extends StrictObject
      */
     public function getGreenElf()
     {
-        return $this->getRace(Elfs\GreenElf::getRaceCode(), Elfs\GreenElf::getSubraceCode());
+        return Elfs\GreenElf::getIt();
     }
 
     /**
@@ -85,7 +75,7 @@ class RaceFactory extends StrictObject
      */
     public function getCommonHobbit()
     {
-        return $this->getRace(Hobbits\CommonHobbit::getRaceCode(), Hobbits\CommonHobbit::getSubraceCode());
+        return Hobbits\CommonHobbit::getIt();
     }
 
     /**
@@ -93,7 +83,7 @@ class RaceFactory extends StrictObject
      */
     public function getCommonKroll()
     {
-        return $this->getRace(Krolls\CommonKroll::getRaceCode(), Krolls\CommonKroll::getSubraceCode());
+        return Krolls\CommonKroll::getIt();
     }
 
     /**
@@ -101,7 +91,7 @@ class RaceFactory extends StrictObject
      */
     public function getWildKroll()
     {
-        return $this->getRace(Krolls\WildKroll::getRaceCode(), Krolls\WildKroll::getSubraceCode());
+        return Krolls\WildKroll::getIt();
     }
 
     /**
@@ -109,7 +99,7 @@ class RaceFactory extends StrictObject
      */
     public function getCommonOrc()
     {
-        return $this->getRace(Orcs\CommonOrc::getRaceCode(), Orcs\CommonOrc::getSubraceCode());
+        return Orcs\CommonOrc::getIt();
     }
 
     /**
@@ -117,7 +107,7 @@ class RaceFactory extends StrictObject
      */
     public function getGoblin()
     {
-        return $this->getRace(Orcs\Goblin::getRaceCode(), Orcs\Goblin::getSubraceCode());
+        return Orcs\Goblin::getIt();
     }
 
     /**
@@ -125,7 +115,7 @@ class RaceFactory extends StrictObject
      */
     public function getSkurut()
     {
-        return $this->getRace(Orcs\Skurut::getRaceCode(), Orcs\Skurut::getSubraceCode());
+        return Orcs\Skurut::getIt();
     }
 
 }
