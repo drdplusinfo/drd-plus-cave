@@ -90,7 +90,7 @@ abstract class Race extends SelfTypedStrictStringEnum
      * @param string $subraceCode
      * @return string
      */
-    public static function buildRaceAndSubraceCode($raceCode, $subraceCode)
+    private static function buildRaceAndSubraceCode($raceCode, $subraceCode)
     {
         return "$raceCode-$subraceCode";
     }
