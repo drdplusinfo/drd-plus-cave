@@ -34,6 +34,7 @@ abstract class Race extends SelfTypedStrictStringEnum
      */
     public static function getEnum($raceAndSubraceCode, $namespace = SelfTypedStrictStringEnum::CANNOT_BE_CHANGED_NAMESPACE)
     {
+        // TODO really we have to call it just from sub-classes? Isn't the Doctrine itself calling this method always on this class?
         if (static::class === __CLASS__) {
             throw new Exceptions\AbstractRaceCanNotBeCreated(
                 'Only specific sub-race enum can be created. Call the ' . __METHOD__ . ' on specific sub-race class'
