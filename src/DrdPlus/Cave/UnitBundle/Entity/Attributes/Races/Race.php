@@ -20,6 +20,14 @@ abstract class Race extends SelfTypedStrictStringEnum
     const BASE_SENSES = 0;
 
     /**
+     * @return Race
+     */
+    public static function getIt()
+    {
+        return static::getEnum(static::getRaceAndSubraceCode());
+    }
+
+    /**
      * @param string $raceAndSubraceCode
      * @param string $namespace
      * @return Race
@@ -27,8 +35,9 @@ abstract class Race extends SelfTypedStrictStringEnum
     public static function getEnum($raceAndSubraceCode, $namespace = SelfTypedStrictStringEnum::CANNOT_BE_CHANGED_NAMESPACE)
     {
         if (static::class === __CLASS__) {
-            // TODO
-            throw new \LogicException();
+            throw new Exceptions\AbstractRaceCanNotBeCreated(
+                'Only specific sub-race enum can be created. Call the ' . __METHOD__ . ' on specific sub-race class'
+            );
         }
         return parent::getEnum($raceAndSubraceCode, $namespace);
     }
@@ -75,14 +84,6 @@ abstract class Race extends SelfTypedStrictStringEnum
         if (!static::hasType($raceAndSubraceCode)) {
             static::addType($raceAndSubraceCode, static::class);
         }
-    }
-
-    /**
-     * @return Race
-     */
-    public static function getIt()
-    {
-        return static::getEnum(static::getRaceAndSubraceCode());
     }
 
     /**

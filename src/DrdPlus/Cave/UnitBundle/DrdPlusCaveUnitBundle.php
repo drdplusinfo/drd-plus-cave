@@ -10,6 +10,8 @@ use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Intelligence;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Knack;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Strength;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Will;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Gender;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Race;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class DrdPlusCaveUnitBundle extends Bundle
@@ -23,7 +25,10 @@ class DrdPlusCaveUnitBundle extends Bundle
     {
         Name::registerSelf();
 
-        // TODO register races and genders
+        Race::registerSelf();
+        Gender::registerSelf();
+
+        // TODO register genders
 
         Strength::registerSelf();
         Agility::registerSelf();
