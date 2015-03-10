@@ -700,12 +700,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/migrations.git",
-                "reference": "312fb5939d5b9dbd66e515374533933e7c5cc8a6"
+                "reference": "fca67c4a5a6f4334e8b6a57410f7b386b012ab01"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/migrations/zipball/312fb5939d5b9dbd66e515374533933e7c5cc8a6",
-                "reference": "312fb5939d5b9dbd66e515374533933e7c5cc8a6",
+                "url": "https://api.github.com/repos/doctrine/migrations/zipball/fca67c4a5a6f4334e8b6a57410f7b386b012ab01",
+                "reference": "fca67c4a5a6f4334e8b6a57410f7b386b012ab01",
                 "shasum": ""
             },
             "require": {
@@ -750,7 +750,7 @@
                 "database",
                 "migrations"
             ],
-            "time": "2015-03-02 18:28:52"
+            "time": "2015-03-06 20:53:13"
         },
         {
             "name": "doctrine/orm",
@@ -831,7 +831,7 @@
             "source": {
                 "type": "git",
                 "url": "/home/jaroslav/Dropbox/Projects/doctrineum/integer",
-                "reference": "954e0c17748a4c8b91fff7c92ac91f30cf142701"
+                "reference": "a576194eff83e369c22c79f8ee519d7947e51ac3"
             },
             "require": {
                 "doctrineum/scalar": "dev-master",
@@ -853,7 +853,7 @@
                 "MIT"
             ],
             "description": "Enumeration type for Doctrine - integers only",
-            "time": "2015-03-03 11:52:09"
+            "time": "2015-03-10 10:08:43"
         },
         {
             "name": "doctrineum/scalar",
@@ -861,7 +861,7 @@
             "source": {
                 "type": "git",
                 "url": "/home/jaroslav/Dropbox/Projects/doctrineum/scalar",
-                "reference": "e7eb30a2df46eefb4bf415d32de27039b75b0ed0"
+                "reference": "401767be20b21c5895da016c9d3db38bcaef33e1"
             },
             "require": {
                 "doctrine/dbal": "2.4.*",
@@ -883,7 +883,7 @@
                 "MIT"
             ],
             "description": "Enumeration type for Doctrine",
-            "time": "2015-03-03 10:56:54"
+            "time": "2015-03-10 12:21:33"
         },
         {
             "name": "doctrineum/strict-string",
@@ -891,7 +891,7 @@
             "source": {
                 "type": "git",
                 "url": "/home/jaroslav/Dropbox/Projects/doctrineum/strict-string",
-                "reference": "8bd26f061db3bf9789b05fe99b8f5a17b69587ac"
+                "reference": "49a89ca51a14b7adcccc20c8fb399d58c2b55cb2"
             },
             "require": {
                 "doctrineum/scalar": "dev-master",
@@ -913,7 +913,7 @@
                 "MIT"
             ],
             "description": "Enumeration type for Doctrine - strings only",
-            "time": "2015-03-03 12:05:55"
+            "time": "2015-03-10 10:06:34"
         },
         {
             "name": "granam/exception-hierarchy",
@@ -955,7 +955,7 @@
             "source": {
                 "type": "git",
                 "url": "/home/jaroslav/Dropbox/Projects/granam/strict-object",
-                "reference": "0e0f5ca63ea44c2913e24f7ee79748620e0cf922"
+                "reference": "aad088ca2105ade57383244a2d08e2e28128af16"
             },
             "require": {
                 "granam/exception-hierarchy": "dev-master",
@@ -987,7 +987,7 @@
                 "php",
                 "strict"
             ],
-            "time": "2015-02-26 14:02:10"
+            "time": "2015-03-08 21:15:32"
         },
         {
             "name": "incenteev/composer-parameter-handler",
@@ -1167,16 +1167,16 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "1.12.0",
+            "version": "1.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "1fbe8c2641f2b163addf49cc5e18f144bec6b19f"
+                "reference": "c41c218e239b50446fd883acb1ecfd4b770caeae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/1fbe8c2641f2b163addf49cc5e18f144bec6b19f",
-                "reference": "1fbe8c2641f2b163addf49cc5e18f144bec6b19f",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/c41c218e239b50446fd883acb1ecfd4b770caeae",
+                "reference": "c41c218e239b50446fd883acb1ecfd4b770caeae",
                 "shasum": ""
             },
             "require": {
@@ -1193,6 +1193,7 @@
                 "phpunit/phpunit": "~4.0",
                 "raven/raven": "~0.5",
                 "ruflin/elastica": "0.90.*",
+                "swiftmailer/swiftmailer": "~5.3",
                 "videlalvaro/php-amqplib": "~2.4"
             },
             "suggest": {
@@ -1209,7 +1210,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.12.x-dev"
+                    "dev-master": "1.13.x-dev"
                 }
             },
             "autoload": {
@@ -1235,7 +1236,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2014-12-29 21:29:35"
+            "time": "2015-03-05 01:12:12"
         },
         {
             "name": "psr/log",
