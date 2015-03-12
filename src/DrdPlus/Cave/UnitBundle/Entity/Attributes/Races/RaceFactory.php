@@ -5,6 +5,23 @@ use Granam\Strict\Object\StrictObject;
 
 class RaceFactory extends StrictObject
 {
+    public function __construct()
+    {
+        Humans\CommonHuman::registerSelf();
+        Humans\Highlander::registerSelf();
+        Dwarfs\CommonDwarf::registerSelf();
+        Dwarfs\MountainDwarf::registerSelf();
+        Dwarfs\WoodDwarf::registerSelf();
+        Elfs\CommonElf::registerSelf();
+        Elfs\DarkElf::registerSelf();
+        Elfs\GreenElf::registerSelf();
+        Hobbits\CommonHobbit::registerSelf();
+        Krolls\CommonKroll::registerSelf();
+        Krolls\WildKroll::registerSelf();
+        Orcs\CommonOrc::registerSelf();
+        Orcs\Goblin::registerSelf();
+        Orcs\Skurut::registerSelf();
+    }
 
     /**
      * @return Humans\CommonHuman

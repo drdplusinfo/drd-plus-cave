@@ -1,7 +1,7 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Exceptions;
 
-class UnknownGender extends UnknownGenderCode
+class UnknownGender extends \LogicException implements Logic
 {
 
 }

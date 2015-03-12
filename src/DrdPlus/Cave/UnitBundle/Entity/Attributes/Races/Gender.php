@@ -1,19 +1,44 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Races;
 
+use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrineum\Strict\String\SelfTypedStrictStringEnum;
 
 /**
- * class Gender
+ * @method static Gender getType(string $name),
+ * @see SelfTypedStrictStringEnum::getType or for original
+ * @see \Doctrine\DBAL\Types\Type::getType
  *
- * @method static Gender getEnum(string $raceAndSubraceGenderCode)
- * @see SelfTypedStrictStringEnum::getEnum
+ * @method Gender convertToPHPValue(string $value, AbstractPlatform $platform)
+ * @see SelfTypedStrictStringEnum::convertToPHPValue or for original
+ * @see EnumType::convertToPHPValue
+ *
+ * @method static Gender getEnum(mixed $value)
+ * @see SelfTypedStrictStringEnum::getEnum or for original
+ * @see EnumTrait::getEnum
  */
 abstract class Gender extends SelfTypedStrictStringEnum
 {
+    const TYPE_GENDER = 'gender';
 
     const MALE_CODE = 'male';
     const FEMALE_CODE = 'female';
+
+    /**
+     * @return Gender
+     */
+    public static function getIt()
+    {
+        return static::getEnum(static::getRaceSubraceAndGenderCode());
+    }
+
+    /**
+     * @param string $raceSubraceAndGenderCode
+     * @return Gender
+     */
+    public static function getGender($raceSubraceAndGenderCode){
+        return static::getEnum($raceSubraceAndGenderCode);
+    }
 
     /**
      * Gets the strongly recommended name of this type.
@@ -23,21 +48,44 @@ abstract class Gender extends SelfTypedStrictStringEnum
      */
     public static function getTypeName()
     {
-        return static::getRaceAndSubraceGenderCode();
+        if (static::class === __CLASS__) {
+            return parent::getTypeName();
+        }
+
+        return static::getRaceSubraceAndGenderCode();
     }
 
     /**
+     * @param string $enumValue
+     * @return string
+     */
+    protected static function getEnumClass($enumValue)
+    {
+        $class = parent::getEnumClass($enumValue);
+        if (static::class === $class) {
+            throw new Exceptions\AbstractRaceCanNotBeCreated('Call this factory method from specific race gender.');
+        }
+
+        return $class;
+    }
+
+    /**
+     * All genders can be annotated just as "gender" type.
+     * The specific gender will be build here, distinguished by the race, subrace and gender code.
+     *
      * @param string $raceAndSubraceGenderCode
-     * @throws Exceptions\UnknownGenderCode
+     * @throws Exceptions\UnexpectedGenderCode
      * @return Gender
      */
     protected static function createByValue($raceAndSubraceGenderCode)
     {
         $gender = parent::createByValue($raceAndSubraceGenderCode);
         /** @var $gender Gender */
-        if ($gender::getRaceAndSubraceGenderCode() !== $raceAndSubraceGenderCode) {
-            throw new Exceptions\UnknownGenderCode(
-                'Unknown race and subrace gender code ' . var_export($raceAndSubraceGenderCode, true) . '. Has been this method called from specific gender class?'
+        if ($gender::getRaceSubraceAndGenderCode() !== $raceAndSubraceGenderCode) {
+            throw new Exceptions\UnexpectedGenderCode(
+                'Unknown race, subrace and gender code ' . var_export($raceAndSubraceGenderCode, true) . '. ' .
+                'Got gender with race, subrace and gender code ' . var_export($gender::getRaceSubraceAndGenderCode(), true) . '. ' .
+                'Has been this method called from specific gender class?'
             );
         }
 
@@ -47,7 +95,7 @@ abstract class Gender extends SelfTypedStrictStringEnum
     /**
      * @return string
      */
-    protected static function getRaceAndSubraceGenderCode()
+    public static function getRaceSubraceAndGenderCode()
     {
         return self::buildRaceAndSubraceGenderCode(static::getRaceCode(), static::getSubraceCode(), static::getGenderCode());
     }

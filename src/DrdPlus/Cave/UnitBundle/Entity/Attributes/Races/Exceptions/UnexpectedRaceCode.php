@@ -1,6 +1,6 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Exceptions;
 
-class UnknownRaceCode extends \LogicException implements Logic {
+class UnexpectedRaceCode extends \LogicException implements Logic {
 
 }

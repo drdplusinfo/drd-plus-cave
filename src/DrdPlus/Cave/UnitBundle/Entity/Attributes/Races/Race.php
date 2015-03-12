@@ -29,18 +29,10 @@ abstract class Race extends SelfTypedStrictStringEnum
 
     /**
      * @param string $raceAndSubraceCode
-     * @param string $namespace
      * @return Race
      */
-    public static function getEnum($raceAndSubraceCode, $namespace = SelfTypedStrictStringEnum::CANNOT_BE_CHANGED_NAMESPACE)
-    {
-        // TODO really we have to call it just from sub-classes? Isn't the Doctrine itself calling this method always on this class?
-        if (static::class === __CLASS__) {
-            throw new Exceptions\AbstractRaceCanNotBeCreated(
-                'Only specific sub-race enum can be created. Call the ' . __METHOD__ . ' on specific sub-race class'
-            );
-        }
-        return parent::getEnum($raceAndSubraceCode, $namespace);
+    public static function getRace($raceAndSubraceCode){
+        return static::getEnum($raceAndSubraceCode);
     }
 
     public static function getTypeName()
@@ -62,12 +54,11 @@ abstract class Race extends SelfTypedStrictStringEnum
      */
     protected static function createByValue($raceAndSubraceCode)
     {
-        static::registerSubraceIfNeeded($raceAndSubraceCode);
         $race = parent::createByValue($raceAndSubraceCode);
         /** @var $race Race */
         if ($race::getRaceAndSubraceCode() !== $raceAndSubraceCode) {
             // create() method, or get() respectively, has to be called on a specific race, not on this abstract one
-            throw new Exceptions\UnknownRaceCode(
+            throw new Exceptions\UnexpectedRaceCode(
                 'Unknown race-subrace code ' . var_export($raceAndSubraceCode, true) . '. ' .
                 'Called from sub-race ' . var_export($race::getRaceAndSubraceCode(), true) . '.'
             );
@@ -78,13 +69,18 @@ abstract class Race extends SelfTypedStrictStringEnum
 
     /**
      * @param string $raceAndSubraceCode
-     * @throws \Doctrine\DBAL\DBALException
+     * @return string
      */
-    protected static function registerSubraceIfNeeded($raceAndSubraceCode)
+    protected static function getEnumClass($raceAndSubraceCode)
     {
-        if (!static::hasType($raceAndSubraceCode)) {
-            static::addType($raceAndSubraceCode, static::class);
+        $specificRaceClass = parent::getEnumClass($raceAndSubraceCode);
+        if ($specificRaceClass === __CLASS__) {
+            throw new Exceptions\AbstractRaceCanNotBeCreated(
+                "Given race and subrace code {$raceAndSubraceCode} is not paired with specific race class"
+            );
         }
+
+        return $specificRaceClass;
     }
 
     /**

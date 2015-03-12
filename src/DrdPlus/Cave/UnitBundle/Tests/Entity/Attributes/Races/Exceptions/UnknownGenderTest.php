@@ -6,10 +6,20 @@ class UnknownGenderTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Exceptions\UnknownGenderCode
+     * @expectedException \LogicException
      */
-    public function is_local_unknown_gender_code()
+    public function is_native_logic_exception()
     {
         throw new UnknownGender();
     }
+
+    /**
+     * @test
+     * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Exceptions\Logic
+     */
+    public function is_marked_by_local_logic_exception()
+    {
+        throw new UnknownGender();
+    }
+
 }

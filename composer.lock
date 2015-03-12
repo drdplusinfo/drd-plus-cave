@@ -700,12 +700,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/migrations.git",
-                "reference": "fca67c4a5a6f4334e8b6a57410f7b386b012ab01"
+                "reference": "efe104057657c5d62f714e00ae30fa2a51e688e3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/migrations/zipball/fca67c4a5a6f4334e8b6a57410f7b386b012ab01",
-                "reference": "fca67c4a5a6f4334e8b6a57410f7b386b012ab01",
+                "url": "https://api.github.com/repos/doctrine/migrations/zipball/efe104057657c5d62f714e00ae30fa2a51e688e3",
+                "reference": "efe104057657c5d62f714e00ae30fa2a51e688e3",
                 "shasum": ""
             },
             "require": {
@@ -750,7 +750,7 @@
                 "database",
                 "migrations"
             ],
-            "time": "2015-03-06 20:53:13"
+            "time": "2015-03-11 16:28:22"
         },
         {
             "name": "doctrine/orm",
@@ -831,7 +831,7 @@
             "source": {
                 "type": "git",
                 "url": "/home/jaroslav/Dropbox/Projects/doctrineum/integer",
-                "reference": "a576194eff83e369c22c79f8ee519d7947e51ac3"
+                "reference": "9c007017d7df9a85f807161ff92d8b95a14dee4e"
             },
             "require": {
                 "doctrineum/scalar": "dev-master",
@@ -853,7 +853,7 @@
                 "MIT"
             ],
             "description": "Enumeration type for Doctrine - integers only",
-            "time": "2015-03-10 10:08:43"
+            "time": "2015-03-12 13:02:49"
         },
         {
             "name": "doctrineum/scalar",
@@ -861,7 +861,7 @@
             "source": {
                 "type": "git",
                 "url": "/home/jaroslav/Dropbox/Projects/doctrineum/scalar",
-                "reference": "401767be20b21c5895da016c9d3db38bcaef33e1"
+                "reference": "7f77b462356672609b76a8d50bc6d8b437c98053"
             },
             "require": {
                 "doctrine/dbal": "2.4.*",
@@ -883,7 +883,7 @@
                 "MIT"
             ],
             "description": "Enumeration type for Doctrine",
-            "time": "2015-03-10 12:21:33"
+            "time": "2015-03-12 13:07:10"
         },
         {
             "name": "doctrineum/strict-string",
@@ -891,7 +891,7 @@
             "source": {
                 "type": "git",
                 "url": "/home/jaroslav/Dropbox/Projects/doctrineum/strict-string",
-                "reference": "49a89ca51a14b7adcccc20c8fb399d58c2b55cb2"
+                "reference": "24017c3eb522607b3725debedc4d76d42bcb9b23"
             },
             "require": {
                 "doctrineum/scalar": "dev-master",
@@ -913,7 +913,7 @@
                 "MIT"
             ],
             "description": "Enumeration type for Doctrine - strings only",
-            "time": "2015-03-10 10:06:34"
+            "time": "2015-03-12 13:00:00"
         },
         {
             "name": "granam/exception-hierarchy",
@@ -1167,16 +1167,16 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "1.13.0",
+            "version": "1.13.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "c41c218e239b50446fd883acb1ecfd4b770caeae"
+                "reference": "c31a2c4e8db5da8b46c74cf275d7f109c0f249ac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/c41c218e239b50446fd883acb1ecfd4b770caeae",
-                "reference": "c41c218e239b50446fd883acb1ecfd4b770caeae",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/c31a2c4e8db5da8b46c74cf275d7f109c0f249ac",
+                "reference": "c31a2c4e8db5da8b46c74cf275d7f109c0f249ac",
                 "shasum": ""
             },
             "require": {
@@ -1236,7 +1236,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2015-03-05 01:12:12"
+            "time": "2015-03-09 09:58:04"
         },
         {
             "name": "psr/log",
