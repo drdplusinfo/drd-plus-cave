@@ -27,14 +27,6 @@ class Race extends SelfTypedStrictStringEnum
         return static::getEnum(static::getRaceAndSubraceCode());
     }
 
-    /**
-     * @param string $raceAndSubraceCode
-     * @return Race
-     */
-    public static function getRace($raceAndSubraceCode){
-        return static::getEnum($raceAndSubraceCode);
-    }
-
     public static function getTypeName()
     {
         if (static::class === __CLASS__) {
@@ -75,7 +67,7 @@ class Race extends SelfTypedStrictStringEnum
     {
         $specificRaceClass = parent::getEnumClass($raceAndSubraceCode);
         if ($specificRaceClass === __CLASS__) {
-            throw new Exceptions\AbstractRaceCanNotBeCreated(
+            throw new Exceptions\GenericRaceCanNotBeCreated(
                 "Given race and subrace code {$raceAndSubraceCode} is not paired with specific race class"
             );
         }

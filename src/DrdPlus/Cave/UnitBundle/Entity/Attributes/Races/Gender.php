@@ -17,7 +17,7 @@ use Doctrineum\Strict\String\SelfTypedStrictStringEnum;
  * @see SelfTypedStrictStringEnum::getEnum or for original
  * @see EnumTrait::getEnum
  */
-abstract class Gender extends SelfTypedStrictStringEnum
+class Gender extends SelfTypedStrictStringEnum
 {
     const TYPE_GENDER = 'gender';
 
@@ -30,14 +30,6 @@ abstract class Gender extends SelfTypedStrictStringEnum
     public static function getIt()
     {
         return static::getEnum(static::getRaceSubraceAndGenderCode());
-    }
-
-    /**
-     * @param string $raceSubraceAndGenderCode
-     * @return Gender
-     */
-    public static function getGender($raceSubraceAndGenderCode){
-        return static::getEnum($raceSubraceAndGenderCode);
     }
 
     /**
@@ -62,8 +54,8 @@ abstract class Gender extends SelfTypedStrictStringEnum
     protected static function getEnumClass($enumValue)
     {
         $class = parent::getEnumClass($enumValue);
-        if (static::class === $class) {
-            throw new Exceptions\AbstractRaceCanNotBeCreated('Call this factory method from specific race gender.');
+        if ($class === __CLASS__) {
+            throw new Exceptions\GenericRaceCanNotBeCreated('Call this factory method from specific race gender.');
         }
 
         return $class;
@@ -95,7 +87,7 @@ abstract class Gender extends SelfTypedStrictStringEnum
     /**
      * @return string
      */
-    public static function getRaceSubraceAndGenderCode()
+    protected static function getRaceSubraceAndGenderCode()
     {
         return self::buildRaceAndSubraceGenderCode(static::getRaceCode(), static::getSubraceCode(), static::getGenderCode());
     }
@@ -123,6 +115,12 @@ abstract class Gender extends SelfTypedStrictStringEnum
      */
     protected static function getGenderCode()
     {
+        if (static::isMale() && static::isFemale()) {
+            throw new \LogicException(
+                'Gender ' . static::class . ' can not be male and female at once'
+            );
+        }
+
         if (static::isMale()) {
             return self::MALE_CODE;
         }
@@ -131,7 +129,7 @@ abstract class Gender extends SelfTypedStrictStringEnum
             return self::FEMALE_CODE;
         }
 
-        throw new Exceptions\UnknownGender('Expected male or female.');
+        throw new Exceptions\UnknownGender('Expected male or female of gender class ' . static::class);
     }
 
     /**

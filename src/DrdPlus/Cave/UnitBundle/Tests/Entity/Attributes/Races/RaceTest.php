@@ -28,7 +28,7 @@ class RaceTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Exceptions\AbstractRaceCanNotBeCreated
+     * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Exceptions\GenericRaceCanNotBeCreated
      */
     public function creating_race_enum_itself_cause_exception()
     {
@@ -51,8 +51,17 @@ class RaceTest extends \PHPUnit_Framework_TestCase
      */
     public function can_be_created_as_enum_type()
     {
-        $race = Type::getType(Race::getTypeName());
-        $this->assertInstanceOf(Race::class, $race);
+        $genericRace = Type::getType(Race::getTypeName());
+        $this->assertInstanceOf(Race::class, $genericRace);
+    }
+
+    /**
+     * @test
+     * @depends can_be_created_as_enum_type
+     */
+    public function type_name_of_generic_race_is_as_generic_enum_type()
+    {
+        $this->assertSame('race', race::getTypeName());
     }
 
     /**
@@ -68,7 +77,17 @@ class RaceTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @depends can_register_self
+     * @depends subrace_can_be_created
+     */
+    public function subrace_type_name_is_race_and_subrace_code()
+    {
+        $raceAndSubraceCode = TestSubrace::getRaceCode() . '-' . TestSubrace::getSubraceCode();
+        $this->assertSame($raceAndSubraceCode, TestSubrace::getTypeName());
+    }
+
+    /**
+     * @test
+     * @depends can_be_created_as_enum_type
      */
     public function race_returns_proper_subrace()
     {
