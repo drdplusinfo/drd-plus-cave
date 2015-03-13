@@ -24,11 +24,10 @@ class DrdPlusCaveUnitBundle extends Bundle
     private function registerEnums()
     {
         Name::registerSelf();
-
+        // only the generic race has to be registered, sub-races are registered automatically
         Race::registerSelf();
+        // only the generic gender has to be registered, sub-race genders are registered automatically
         Gender::registerSelf();
-
-        // TODO register genders
 
         Strength::registerSelf();
         Agility::registerSelf();
