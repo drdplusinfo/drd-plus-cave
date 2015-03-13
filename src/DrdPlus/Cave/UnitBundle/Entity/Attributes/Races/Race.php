@@ -27,11 +27,15 @@ class Race extends SelfTypedStrictStringEnum
         return static::getEnum(static::getRaceAndSubraceCode());
     }
 
+    /**
+     * @return string
+     */
     public static function getTypeName()
     {
         if (static::class === __CLASS__) {
             return parent::getTypeName();
         }
+
         return static::getRaceAndSubraceCode();
     }
 
@@ -42,6 +46,7 @@ class Race extends SelfTypedStrictStringEnum
      * @see Race::registerSelf()
      *
      * @param string $raceAndSubraceCode
+     *
      * @return Race
      */
     protected static function createByValue($raceAndSubraceCode)
@@ -51,8 +56,8 @@ class Race extends SelfTypedStrictStringEnum
         if ($race::getRaceAndSubraceCode() !== $raceAndSubraceCode) {
             // create() method, or get() respectively, has to be called on a specific race, not on this abstract one
             throw new Exceptions\UnexpectedRaceCode(
-                'Unknown race-subrace code ' . var_export($raceAndSubraceCode, true) . '. ' .
-                'Called from sub-race ' . var_export($race::getRaceAndSubraceCode(), true) . '.'
+                'Given race-subrace code ' . var_export($raceAndSubraceCode, true) .
+                ' results into sub-race ' . get_class($race) . ' with code ' . var_export($race::getRaceAndSubraceCode(), true) . '.'
             );
         }
 
@@ -61,6 +66,7 @@ class Race extends SelfTypedStrictStringEnum
 
     /**
      * @param string $raceAndSubraceCode
+     *
      * @return string
      */
     protected static function getEnumClass($raceAndSubraceCode)
@@ -78,6 +84,7 @@ class Race extends SelfTypedStrictStringEnum
     /**
      * @param string $raceCode
      * @param string $subraceCode
+     *
      * @return string
      */
     private static function buildRaceAndSubraceCode($raceCode, $subraceCode)
@@ -87,6 +94,7 @@ class Race extends SelfTypedStrictStringEnum
 
     /**
      * Get strength modifier
+     *
      * @param Gender $gender
      *
      * @return int
@@ -94,6 +102,7 @@ class Race extends SelfTypedStrictStringEnum
     public function getStrengthModifier(Gender $gender)
     {
         $this->checkGenderRace($gender);
+
         return $this->getBaseStrength() + $gender->getStrengthModifier();
     }
 
@@ -117,6 +126,7 @@ class Race extends SelfTypedStrictStringEnum
 
     /**
      * Get agility modifier
+     *
      * @param Gender $gender
      *
      * @return int
@@ -124,6 +134,7 @@ class Race extends SelfTypedStrictStringEnum
     public function getAgilityModifier(Gender $gender)
     {
         $this->checkGenderRace($gender);
+
         return $this->getBaseAgility() + $gender->getAgilityModifier();
     }
 
@@ -137,6 +148,7 @@ class Race extends SelfTypedStrictStringEnum
 
     /**
      * Get knack modifier
+     *
      * @param Gender $gender
      *
      * @return int
@@ -144,6 +156,7 @@ class Race extends SelfTypedStrictStringEnum
     public function getKnackModifier(Gender $gender)
     {
         $this->checkGenderRace($gender);
+
         return $this->getBaseKnack() + $gender->getKnackModifier();
     }
 
@@ -157,6 +170,7 @@ class Race extends SelfTypedStrictStringEnum
 
     /**
      * Get will modifier
+     *
      * @param Gender $gender
      *
      * @return int
@@ -164,6 +178,7 @@ class Race extends SelfTypedStrictStringEnum
     public function getWillModifier(Gender $gender)
     {
         $this->checkGenderRace($gender);
+
         return $this->getBaseWill() + $gender->getWillModifier();
     }
 
@@ -177,6 +192,7 @@ class Race extends SelfTypedStrictStringEnum
 
     /**
      * Get intelligence modifier
+     *
      * @param Gender $gender
      *
      * @return int
@@ -184,6 +200,7 @@ class Race extends SelfTypedStrictStringEnum
     public function getIntelligenceModifier(Gender $gender)
     {
         $this->checkGenderRace($gender);
+
         return $this->getBaseIntelligence() + $gender->getIntelligenceModifier();
     }
 
@@ -197,6 +214,7 @@ class Race extends SelfTypedStrictStringEnum
 
     /**
      * Get charisma modifier
+     *
      * @param Gender $gender
      *
      * @return int
@@ -204,6 +222,7 @@ class Race extends SelfTypedStrictStringEnum
     public function getCharismaModifier(Gender $gender)
     {
         $this->checkGenderRace($gender);
+
         return $this->getBaseCharisma() + $gender->getCharismaModifier();
     }
 
@@ -217,6 +236,7 @@ class Race extends SelfTypedStrictStringEnum
 
     /**
      * Get stamina modifier
+     *
      * @param Gender $gender
      *
      * @return int
@@ -224,6 +244,7 @@ class Race extends SelfTypedStrictStringEnum
     public function getResistanceModifier(Gender $gender)
     {
         $this->checkGenderRace($gender);
+
         return $this->getBaseResistance() + $gender->getResistanceModifier();
     }
 
@@ -237,6 +258,7 @@ class Race extends SelfTypedStrictStringEnum
 
     /**
      * Get senses modifier
+     *
      * @param Gender $gender
      *
      * @return int
@@ -244,6 +266,7 @@ class Race extends SelfTypedStrictStringEnum
     public function getSensesModifier(Gender $gender)
     {
         $this->checkGenderRace($gender);
+
         return $this->getBaseSenses() + $gender->getSensesModifier();
     }
 

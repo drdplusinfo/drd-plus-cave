@@ -89,7 +89,7 @@ class RaceTest extends \PHPUnit_Framework_TestCase
      * @test
      * @depends can_be_created_as_enum_type
      */
-    public function race_returns_proper_subrace()
+    public function returns_proper_subrace()
     {
         /** @var Race $genericRace */
         $genericRace = Type::getType(Race::getTypeName());
@@ -97,6 +97,20 @@ class RaceTest extends \PHPUnit_Framework_TestCase
         $this->assertRegExp($subTypeRegexp, TestSubrace::getTypeName());
         $subrace = $genericRace->convertToPHPValue(TestSubrace::getTypeName(), $this->getPlatform());
         $this->assertInstanceOf(TestSubrace::class, $subrace);
+    }
+
+    /**
+     * @test
+     * @depends can_be_created_as_enum_type
+     * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Exceptions\UnexpectedRaceCode
+     */
+    public function changed_subrace_code_throws_exception()
+    {
+        /** @var Race $genericRace */
+        $genericRace = Type::getType(Race::getTypeName());
+        $genericRace::addSubTypeEnum(TestSubraceWithInvalidCode::class, '~baz~');
+        TestSubraceWithInvalidCode::returnInvalidCode();
+        $genericRace->convertToPHPValue('bar_baz', $this->getPlatform());
     }
 
     /**
@@ -122,4 +136,37 @@ class TestSubrace extends Race
     {
         return 'bar';
     }
+}
+
+class TestSubraceWithInvalidCode extends Race
+{
+    private static $returnInvalidCode = false;
+
+    public static function getRaceCode()
+    {
+        return 'baz';
+    }
+
+    public static function getSubraceCode()
+    {
+        return 'qux';
+    }
+
+    public static function returnInvalidCode()
+    {
+        self::$returnInvalidCode = true;
+    }
+
+    /**
+     * @return string
+     */
+    public static function getRaceAndSubraceCode()
+    {
+        if (!self::$returnInvalidCode) {
+            return parent::getRaceAndSubraceCode();
+        }
+
+        return 'some invalid code';
+    }
+
 }
