@@ -61,7 +61,7 @@ class RaceTest extends \PHPUnit_Framework_TestCase
      */
     public function type_name_of_generic_race_is_as_generic_enum_type()
     {
-        $this->assertSame('race', race::getTypeName());
+        $this->assertSame('race', Race::getTypeName());
     }
 
     /**
