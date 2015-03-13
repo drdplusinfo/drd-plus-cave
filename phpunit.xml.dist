@@ -20,7 +20,7 @@
     </testsuites>
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true" addUncoveredFilesFromWhitelist="true">
-            <directory>./src/*/*/*/Tests</directory>
+            <directory>./src</directory>
         </whitelist>
     </filter>
 </phpunit>
