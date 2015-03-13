@@ -6,7 +6,7 @@ use Doctrineum\Strict\String\SelfTypedStrictStringEnum;
 /**
  * Race
  */
-abstract class Race extends SelfTypedStrictStringEnum
+class Race extends SelfTypedStrictStringEnum
 {
     const TYPE_RACE = 'race';
 
