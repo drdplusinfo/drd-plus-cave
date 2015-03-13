@@ -55,15 +55,6 @@ class GenderTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @depends can_be_created_as_enum_type
-     */
-    public function type_name_of_generic_gender_is_as_generic_enum_type()
-    {
-        $this->assertSame('gender', Gender::getTypeName());
-    }
-
-    /**
-     * @test
      * @depends can_register_self
      */
     public function subrace_gender_can_be_created()
