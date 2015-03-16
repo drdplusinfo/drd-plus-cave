@@ -6,7 +6,7 @@ namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Elfs;
  */
 class DarkElf extends Elf
 {
-    const SUBRACE_CODE = 'dark-elf';
+    const SUBRACE_CODE = 'dark_elf';
 
     const BASE_STRENGTH = 0;
     const BASE_AGILITY = 0;
