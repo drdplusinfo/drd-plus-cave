@@ -147,14 +147,14 @@ class Gender extends SelfTypedStrictStringEnum
      * @return bool
      */
     public static function isMale() {
-        throw new Exceptions\IsMaleDetectionNotImplemented();
+        throw new Exceptions\MaleDetectionNotImplemented();
     }
 
     /**
      * @return bool
      */
     public static function isFemale() {
-        throw new Exceptions\IsFemaleDetectionNotImplemented();
+        throw new Exceptions\FemaleDetectionNotImplemented();
     }
 
     /**

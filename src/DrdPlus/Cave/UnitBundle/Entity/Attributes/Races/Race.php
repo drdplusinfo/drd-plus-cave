@@ -30,6 +30,45 @@ class Race extends SelfTypedStrictStringEnum
     /**
      * @return string
      */
+    protected static function getRaceAndSubraceCode()
+    {
+        return self::buildRaceAndSubraceCode(static::getRaceCode(), static::getSubraceCode());
+    }
+
+    /**
+     * @return string
+     */
+    public static function getRaceCode()
+    {
+        throw new Exceptions\MissingRaceCodeImplementation(
+            'The gender class ' . static::class . ' has not implemented ' . __METHOD__ . ' method.'
+        );
+    }
+
+    /**
+     * @return string
+     */
+    public static function getSubraceCode()
+    {
+        throw new Exceptions\MissingSubraceCodeImplementation(
+            'The gender class ' . static::class . ' has not implemented ' . __METHOD__ . ' method.'
+        );
+    }
+
+    /**
+     * @param string $raceCode
+     * @param string $subraceCode
+     *
+     * @return string
+     */
+    private static function buildRaceAndSubraceCode($raceCode, $subraceCode)
+    {
+        return "$raceCode-$subraceCode";
+    }
+
+    /**
+     * @return string
+     */
     public static function getTypeName()
     {
         if (static::class === __CLASS__) {
@@ -82,17 +121,6 @@ class Race extends SelfTypedStrictStringEnum
     }
 
     /**
-     * @param string $raceCode
-     * @param string $subraceCode
-     *
-     * @return string
-     */
-    private static function buildRaceAndSubraceCode($raceCode, $subraceCode)
-    {
-        return "$raceCode-$subraceCode";
-    }
-
-    /**
      * Get strength modifier
      *
      * @param Gender $gender
@@ -109,10 +137,14 @@ class Race extends SelfTypedStrictStringEnum
     protected function checkGenderRace(Gender $gender)
     {
         if ($gender::getRaceCode() !== static::getRaceCode()) {
-            throw new \LogicException('Gender is not for race ' . static::getRaceCode() . ', but for race ' . $gender::getRaceCode());
+            throw new Exceptions\UnexpectedRace(
+                'Given gender of class ' . get_class($gender) . ' is not for race ' . static::getRaceCode() . ', but for race ' . $gender::getRaceCode()
+            );
         }
         if ($gender::getSubraceCode() !== static::getSubraceCode()) {
-            throw new \LogicException('Gender is not for subrace ' . static::getSubraceCode() . ', but for subrace ' . $gender::getSubraceCode());
+            throw new Exceptions\UnexpectedSubrace(
+                'Given gender of class ' . get_class($gender) . ' is not for subrace ' . static::getSubraceCode() . ', but for subrace ' . $gender::getSubraceCode()
+            );
         }
     }
 
@@ -308,33 +340,4 @@ class Race extends SelfTypedStrictStringEnum
     {
         return false;
     }
-
-    /**
-     * @return string
-     */
-    protected static function getRaceAndSubraceCode()
-    {
-        return self::buildRaceAndSubraceCode(static::getRaceCode(), static::getSubraceCode());
-    }
-
-    /**
-     * @return string
-     */
-    public static function getRaceCode()
-    {
-        throw new Exceptions\MissingRaceCodeImplementation(
-            'The gender class ' . static::class . ' has not implemented ' . __METHOD__ . ' method.'
-        );
-    }
-
-    /**
-     * @return string
-     */
-    public static function getSubraceCode()
-    {
-        throw new Exceptions\MissingSubraceCodeImplementation(
-            'The gender class ' . static::class . ' has not implemented ' . __METHOD__ . ' method.'
-        );
-    }
-
 }

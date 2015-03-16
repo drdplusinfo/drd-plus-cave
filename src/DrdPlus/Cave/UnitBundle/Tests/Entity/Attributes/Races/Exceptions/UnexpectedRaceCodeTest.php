@@ -6,18 +6,9 @@ class UnexpectedRaceCodeTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException \LogicException
+     * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Exceptions\UnexpectedRace
      */
-    public function is_native_logic_exception()
-    {
-        throw new UnexpectedRaceCode();
-    }
-
-    /**
-     * @test
-     * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Exceptions\Logic
-     */
-    public function is_marked_by_local_logic_exception()
+    public function is_unexpected_race_exception()
     {
         throw new UnexpectedRaceCode();
     }
