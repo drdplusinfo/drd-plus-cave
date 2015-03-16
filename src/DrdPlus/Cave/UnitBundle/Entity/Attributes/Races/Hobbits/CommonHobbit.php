@@ -23,7 +23,7 @@ namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Hobbits;
  */
 class CommonHobbit extends Hobbit
 {
-    const SUBRACE_CODE = 'hobbit';
+    const SUBRACE_CODE = 'common_hobbit';
 
     public static function getSubraceCode()
     {
