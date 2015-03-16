@@ -25,7 +25,7 @@ use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Krolls\Genders\WildKrollGend
  */
 class WildKroll extends Kroll
 {
-    const SUBRACE_CODE = 'wild-kroll';
+    const SUBRACE_CODE = 'wild_kroll';
 
     const BASE_AGILITY = -1;
     const BASE_KNACK = -2;
