@@ -3,9 +3,9 @@ namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Elfs;
 
 use Doctrine\DBAL\Types\Type;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Race;
-use DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\Races\Elfs\AbstractTestOfElf;
+use DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\Races\AbstractTestOfRace;
 
-class DarkElfTest extends AbstractTestOfElf
+class DarkElfTest extends AbstractTestOfRace
 {
 
     /**
