@@ -26,7 +26,7 @@ use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Krolls\Genders\CommonKrollGe
  */
 class CommonKroll extends Kroll
 {
-    const SUBRACE_CODE = 'common-kroll';
+    const SUBRACE_CODE = 'common_kroll';
 
     /**
      * @return string
