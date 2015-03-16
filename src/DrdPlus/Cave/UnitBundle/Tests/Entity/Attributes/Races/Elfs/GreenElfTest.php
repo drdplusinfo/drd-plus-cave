@@ -161,4 +161,14 @@ class GreenElfTest extends AbstractTestOfElf
         $this->assertSame(-1, $race->getResistanceModifier($this->getSubraceFemale()));
     }
 
+    /**
+     * @param Race $race
+     *
+     * @test
+     * @depends can_create_self
+     */
+    public function requires_dungeon_master_agreement(Race $race)
+    {
+        $this->assertFalse($race->requiresDungeonMasterAgreement());
+    }
 }

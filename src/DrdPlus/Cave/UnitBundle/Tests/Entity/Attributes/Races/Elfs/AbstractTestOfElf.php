@@ -29,14 +29,4 @@ abstract class AbstractTestOfElf extends AbstractTestOfRace
         return parent::can_create_self();
     }
 
-    /**
-     * @param Race $race
-     *
-     * @test
-     * @depends can_create_self
-     */
-    public function requires_dungeon_master_agreement(Race $race)
-    {
-        $this->assertFalse($race->requiresDungeonMasterAgreement());
-    }
 }
