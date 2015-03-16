@@ -6,6 +6,38 @@ use Granam\Strict\Object\StrictObject;
 class GenderFactory extends StrictObject
 {
 
+    public function __construct()
+    {
+        Humans\Genders\CommonHumanMale::registerSelf();
+        Humans\Genders\CommonHumanFemale::registerSelf();
+        Humans\Genders\HighlanderMale::registerSelf();
+        Humans\Genders\HighlanderFemale::registerSelf();
+        Dwarfs\Genders\CommonDwarfMale::registerSelf();
+        Dwarfs\Genders\CommonDwarfFemale::registerSelf();
+        Dwarfs\Genders\MountainDwarfMale::registerSelf();
+        Dwarfs\Genders\MountainDwarfFemale::registerSelf();
+        Dwarfs\Genders\WoodDwarfMale::registerSelf();
+        Dwarfs\Genders\WoodDwarfFemale::registerSelf();
+        Elfs\Genders\CommonElfMale::registerSelf();
+        Elfs\Genders\CommonElfFemale::registerSelf();
+        Elfs\Genders\DarkElfMale::registerSelf();
+        Elfs\Genders\DarkElfFemale::registerSelf();
+        Elfs\Genders\GreenElfMale::registerSelf();
+        Elfs\Genders\GreenElfFemale::registerSelf();
+        Hobbits\Genders\CommonHobbitMale::registerSelf();
+        Hobbits\Genders\CommonHobbitFemale::registerSelf();
+        Krolls\Genders\CommonKrollMale::registerSelf();
+        Krolls\Genders\CommonKrollFemale::registerSelf();
+        Krolls\Genders\WildKrollMale::registerSelf();
+        Krolls\Genders\WildKrollFemale::registerSelf();
+        Orcs\Genders\CommonOrcMale::registerSelf();
+        Orcs\Genders\CommonOrcFemale::registerSelf();
+        Orcs\Genders\GoblinMale::registerSelf();
+        Orcs\Genders\GoblinFemale::registerSelf();
+        Orcs\Genders\SkurutMale::registerSelf();
+        Orcs\Genders\SkurutFemale::registerSelf();
+    }
+
     /**
      * @return Humans\Genders\CommonHumanMale
      */
@@ -19,7 +51,7 @@ class GenderFactory extends StrictObject
      */
     public function getCommonHumanFemale()
     {
-        return $this->getGender(Humans\CommonHuman::RACE_CODE, Humans\CommonHuman::SUBRACE_CODE, Gender::FEMALE_CODE);
+        return Humans\Genders\CommonHumanFemale::getIt();
     }
 
     /**
@@ -27,7 +59,7 @@ class GenderFactory extends StrictObject
      */
     public function getHighlanderMale()
     {
-        return $this->getGender(Humans\Highlander::RACE_CODE, Humans\Highlander::SUBRACE_CODE, Gender::MALE_CODE);
+        return Humans\Genders\HighlanderMale::getIt();
     }
 
     /**
@@ -35,7 +67,7 @@ class GenderFactory extends StrictObject
      */
     public function getHighlanderFemale()
     {
-        return $this->getGender(Humans\Highlander::RACE_CODE, Humans\Highlander::SUBRACE_CODE, Gender::FEMALE_CODE);
+        return Humans\Genders\HighlanderFemale::getIt();
     }
 
     /**
@@ -43,7 +75,7 @@ class GenderFactory extends StrictObject
      */
     public function getCommonDwarfMale()
     {
-        return $this->getGender(Dwarfs\CommonDwarf::RACE_CODE, Dwarfs\CommonDwarf::SUBRACE_CODE, Gender::MALE_CODE);
+        return Dwarfs\Genders\CommonDwarfMale::getIt();
     }
 
     /**
@@ -51,7 +83,7 @@ class GenderFactory extends StrictObject
      */
     public function getCommonDwarfFemale()
     {
-        return $this->getGender(Dwarfs\CommonDwarf::RACE_CODE, Dwarfs\CommonDwarf::SUBRACE_CODE, Gender::FEMALE_CODE);
+        return Dwarfs\Genders\CommonDwarfFemale::getIt();
     }
 
     /**
@@ -59,7 +91,7 @@ class GenderFactory extends StrictObject
      */
     public function getMountainDwarfMale()
     {
-        return $this->getGender(Dwarfs\MountainDwarf::RACE_CODE, Dwarfs\MountainDwarf::SUBRACE_CODE, Gender::MALE_CODE);
+        return Dwarfs\Genders\MountainDwarfMale::getIt();
     }
 
     /**
@@ -67,7 +99,7 @@ class GenderFactory extends StrictObject
      */
     public function getMountainDwarfFemale()
     {
-        return $this->getGender(Dwarfs\MountainDwarf::RACE_CODE, Dwarfs\MountainDwarf::SUBRACE_CODE, Gender::FEMALE_CODE);
+        return Dwarfs\Genders\MountainDwarfFemale::getIt();
     }
 
     /**
@@ -75,7 +107,7 @@ class GenderFactory extends StrictObject
      */
     public function getWoodDwarfMale()
     {
-        return $this->getGender(Dwarfs\WoodDwarf::RACE_CODE, Dwarfs\WoodDwarf::SUBRACE_CODE, Gender::MALE_CODE);
+        return Dwarfs\Genders\WoodDwarfMale::getIt();
     }
 
     /**
@@ -83,7 +115,7 @@ class GenderFactory extends StrictObject
      */
     public function getWoodDwarfFemale()
     {
-        return $this->getGender(Dwarfs\WoodDwarf::RACE_CODE, Dwarfs\WoodDwarf::SUBRACE_CODE, Gender::FEMALE_CODE);
+        return Dwarfs\Genders\WoodDwarfFemale::getIt();
     }
 
     /**
@@ -91,7 +123,7 @@ class GenderFactory extends StrictObject
      */
     public function getCommonElfMale()
     {
-        return $this->getGender(Elfs\CommonElf::RACE_CODE, Elfs\CommonElf::SUBRACE_CODE, Gender::MALE_CODE);
+        return Elfs\Genders\CommonElfMale::getIt();
     }
 
     /**
@@ -99,7 +131,7 @@ class GenderFactory extends StrictObject
      */
     public function getCommonElfFemale()
     {
-        return $this->getGender(Elfs\CommonElf::RACE_CODE, Elfs\CommonElf::SUBRACE_CODE, Gender::FEMALE_CODE);
+        return Elfs\Genders\CommonElfFemale::getIt();
     }
 
     /**
@@ -107,7 +139,7 @@ class GenderFactory extends StrictObject
      */
     public function getDarkElfMale()
     {
-        return $this->getGender(Elfs\DarkElf::RACE_CODE, Elfs\DarkElf::SUBRACE_CODE, Gender::MALE_CODE);
+        return Elfs\Genders\DarkElfMale::getIt();
     }
 
     /**
@@ -115,7 +147,7 @@ class GenderFactory extends StrictObject
      */
     public function getDarkElfFemale()
     {
-        return $this->getGender(Elfs\DarkElf::RACE_CODE, Elfs\DarkElf::SUBRACE_CODE, Gender::FEMALE_CODE);
+        return Elfs\Genders\DarkElfFemale::getIt();
     }
 
     /**
@@ -123,7 +155,7 @@ class GenderFactory extends StrictObject
      */
     public function getGreenElfMale()
     {
-        return $this->getGender(Elfs\GreenElf::RACE_CODE, Elfs\GreenElf::SUBRACE_CODE, Gender::MALE_CODE);
+        return Elfs\Genders\GreenElfMale::getIt();
     }
 
     /**
@@ -131,7 +163,7 @@ class GenderFactory extends StrictObject
      */
     public function getGreenElfFemale()
     {
-        return $this->getGender(Elfs\GreenElf::RACE_CODE, Elfs\GreenElf::SUBRACE_CODE, Gender::FEMALE_CODE);
+        return Elfs\Genders\GreenElfFemale::getIt();
     }
 
     /**
@@ -139,7 +171,7 @@ class GenderFactory extends StrictObject
      */
     public function getCommonHobbitMale()
     {
-        return $this->getGender(Hobbits\CommonHobbit::RACE_CODE, Hobbits\CommonHobbit::SUBRACE_CODE, Gender::MALE_CODE);
+        return Hobbits\Genders\CommonHobbitMale::getIt();
     }
 
     /**
@@ -147,7 +179,7 @@ class GenderFactory extends StrictObject
      */
     public function getCommonHobbitFemale()
     {
-        return $this->getGender(Hobbits\CommonHobbit::RACE_CODE, Hobbits\CommonHobbit::SUBRACE_CODE, Gender::FEMALE_CODE);
+        return Hobbits\Genders\CommonHobbitFemale::getIt();
     }
 
     /**
@@ -155,7 +187,7 @@ class GenderFactory extends StrictObject
      */
     public function getCommonKrollMale()
     {
-        return $this->getGender(Krolls\CommonKroll::RACE_CODE, Krolls\CommonKroll::SUBRACE_CODE, Gender::MALE_CODE);
+        return Krolls\Genders\CommonKrollMale::getIt();
     }
 
     /**
@@ -163,7 +195,7 @@ class GenderFactory extends StrictObject
      */
     public function getCommonKrollFemale()
     {
-        return $this->getGender(Krolls\CommonKroll::RACE_CODE, Krolls\CommonKroll::SUBRACE_CODE, Gender::FEMALE_CODE);
+        return Krolls\Genders\CommonKrollFemale::getIt();
     }
 
     /**
@@ -171,7 +203,7 @@ class GenderFactory extends StrictObject
      */
     public function getWildKrollMale()
     {
-        return $this->getGender(Krolls\WildKroll::RACE_CODE, Krolls\WildKroll::SUBRACE_CODE, Gender::MALE_CODE);
+        return Krolls\Genders\WildKrollMale::getIt();
     }
 
     /**
@@ -179,7 +211,7 @@ class GenderFactory extends StrictObject
      */
     public function getWildKrollFemale()
     {
-        return $this->getGender(Krolls\WildKroll::RACE_CODE, Krolls\WildKroll::SUBRACE_CODE, Gender::FEMALE_CODE);
+        return Krolls\Genders\WildKrollFemale::getIt();
     }
 
     /**
@@ -187,7 +219,7 @@ class GenderFactory extends StrictObject
      */
     public function getCommonOrcMale()
     {
-        return $this->getGender(Orcs\CommonOrc::RACE_CODE, Orcs\CommonOrc::SUBRACE_CODE, Gender::MALE_CODE);
+        return Orcs\Genders\CommonOrcMale::getIt();
     }
 
     /**
@@ -195,7 +227,7 @@ class GenderFactory extends StrictObject
      */
     public function getCommonOrcFemale()
     {
-        return $this->getGender(Orcs\CommonOrc::RACE_CODE, Orcs\CommonOrc::SUBRACE_CODE, Gender::FEMALE_CODE);
+        return Orcs\Genders\CommonOrcFemale::getIt();
     }
 
     /**
@@ -203,7 +235,7 @@ class GenderFactory extends StrictObject
      */
     public function getGoblinMale()
     {
-        return $this->getGender(Orcs\Goblin::RACE_CODE, Orcs\Goblin::SUBRACE_CODE, Gender::MALE_CODE);
+        return Orcs\Genders\GoblinMale::getIt();
     }
 
     /**
@@ -211,7 +243,7 @@ class GenderFactory extends StrictObject
      */
     public function getGoblinFemale()
     {
-        return $this->getGender(Orcs\Goblin::RACE_CODE, Orcs\Goblin::SUBRACE_CODE, Gender::FEMALE_CODE);
+        return Orcs\Genders\GoblinFemale::getIt();
     }
 
     /**
@@ -219,7 +251,7 @@ class GenderFactory extends StrictObject
      */
     public function getSkurutMale()
     {
-        return $this->getGender(Orcs\Skurut::RACE_CODE, Orcs\Skurut::SUBRACE_CODE, Gender::MALE_CODE);
+        return Orcs\Genders\SkurutMale::getIt();
     }
 
     /**
@@ -227,6 +259,6 @@ class GenderFactory extends StrictObject
      */
     public function getSkurutFemale()
     {
-        return $this->getGender(Orcs\Skurut::RACE_CODE, Orcs\Skurut::SUBRACE_CODE, Gender::FEMALE_CODE);
+        return Orcs\Genders\SkurutFemale::getIt();
     }
 }
