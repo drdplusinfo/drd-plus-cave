@@ -25,7 +25,7 @@ use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Dwarfs\Genders\WoodDwarfGend
  */
 class WoodDwarf extends Dwarf
 {
-    const SUBRACE_CODE = 'wood-dwarf';
+    const SUBRACE_CODE = 'wood_dwarf';
 
     const BASE_WILL = +1;
     const BASE_CHARISMA = -1;
