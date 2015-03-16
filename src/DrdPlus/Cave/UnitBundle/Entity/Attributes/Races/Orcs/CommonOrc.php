@@ -26,7 +26,7 @@ use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Orcs\Genders\CommonOrcGender
  */
 class CommonOrc extends Orc
 {
-    const SUBRACE_CODE = 'common-orc';
+    const SUBRACE_CODE = 'common_orc';
 
     /**
      * @return string
