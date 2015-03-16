@@ -26,7 +26,7 @@ use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Humans\Genders\CommonHumanGe
  */
 class CommonHuman extends Human
 {
-    const SUBRACE_CODE = 'common-human';
+    const SUBRACE_CODE = 'common_human';
 
     /**
      * @return string
