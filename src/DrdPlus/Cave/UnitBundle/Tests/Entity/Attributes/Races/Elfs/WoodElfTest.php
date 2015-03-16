@@ -5,7 +5,7 @@ use Doctrine\DBAL\Types\Type;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Race;
 use DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\Races\Elfs\AbstractTestOfElf;
 
-class CommonElfTest extends AbstractTestOfElf
+class GreenElfTest extends AbstractTestOfElf
 {
 
     /**
@@ -79,20 +79,9 @@ class CommonElfTest extends AbstractTestOfElf
      * @test
      * @depends can_create_self
      */
-    public function gives_expected_male_knack_modifier(Race $race)
-    {
-        $this->assertSame(+1, $race->getKnackModifier($this->getSubraceMale()));
-    }
-
-    /**
-     * @param Race $race
-     *
-     * @test
-     * @depends can_create_self
-     */
     public function gives_expected_female_knack_modifier(Race $race)
     {
-        $this->assertSame(+2, $race->getKnackModifier($this->getSubraceFemale()));
+        $this->assertSame(+1, $race->getKnackModifier($this->getSubraceFemale()));
     }
 
     /**
@@ -103,7 +92,7 @@ class CommonElfTest extends AbstractTestOfElf
      */
     public function gives_expected_male_will_modifier(Race $race)
     {
-        $this->assertSame(-2, $race->getWillModifier($this->getSubraceMale()));
+        $this->assertSame(-1, $race->getWillModifier($this->getSubraceMale()));
     }
 
     /**
@@ -114,7 +103,7 @@ class CommonElfTest extends AbstractTestOfElf
      */
     public function gives_expected_female_will_modifier(Race $race)
     {
-        $this->assertSame(-2, $race->getWillModifier($this->getSubraceFemale()));
+        $this->assertSame(-1, $race->getWillModifier($this->getSubraceFemale()));
     }
 
     /**
