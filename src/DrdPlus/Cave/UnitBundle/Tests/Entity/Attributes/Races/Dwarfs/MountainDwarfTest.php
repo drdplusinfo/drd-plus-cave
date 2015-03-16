@@ -5,7 +5,7 @@ use Doctrine\DBAL\Types\Type;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Race;
 use DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\Races\Dwarfs\AbstractTestOfDwarf;
 
-class CommonDwarfTest extends AbstractTestOfDwarf
+class MountainDwarfTest extends AbstractTestOfDwarf
 {
 
     /**
@@ -37,7 +37,7 @@ class CommonDwarfTest extends AbstractTestOfDwarf
      */
     public function gives_expected_male_strength_modifier(Race $race)
     {
-        $this->assertSame(+1, $race->getStrengthModifier($this->getSubraceMale()));
+        $this->assertSame(+2, $race->getStrengthModifier($this->getSubraceMale()));
     }
 
     /**
@@ -48,7 +48,7 @@ class CommonDwarfTest extends AbstractTestOfDwarf
      */
     public function gives_expected_female_strength_modifier(Race $race)
     {
-        $this->assertSame(+1, $race->getStrengthModifier($this->getSubraceFemale()));
+        $this->assertSame(+2, $race->getStrengthModifier($this->getSubraceFemale()));
     }
 
     /**
@@ -114,7 +114,7 @@ class CommonDwarfTest extends AbstractTestOfDwarf
      */
     public function gives_expected_male_intelligence_modifier(Race $race)
     {
-        $this->assertSame(-1, $race->getIntelligenceModifier($this->getSubraceMale()));
+        $this->assertSame(-2, $race->getIntelligenceModifier($this->getSubraceMale()));
     }
 
     /**
@@ -125,7 +125,7 @@ class CommonDwarfTest extends AbstractTestOfDwarf
      */
     public function gives_expected_female_intelligence_modifier(Race $race)
     {
-        $this->assertSame(0, $race->getIntelligenceModifier($this->getSubraceFemale()));
+        $this->assertSame(-1, $race->getIntelligenceModifier($this->getSubraceFemale()));
     }
 
     /**

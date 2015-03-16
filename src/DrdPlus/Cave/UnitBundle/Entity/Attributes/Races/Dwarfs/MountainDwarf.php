@@ -25,7 +25,7 @@ use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Dwarfs\Genders\MountainDwarf
  */
 class MountainDwarf extends Dwarf
 {
-    const SUBRACE_CODE = 'mountain-dwarf';
+    const SUBRACE_CODE = 'mountain_dwarf';
 
     const BASE_STRENGTH = +2;
     const BASE_INTELLIGENCE = -2;
