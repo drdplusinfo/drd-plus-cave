@@ -110,7 +110,7 @@ class RaceTest extends \PHPUnit_Framework_TestCase
         $genericRace = Type::getType(Race::getTypeName());
         $genericRace::addSubTypeEnum(TestSubraceWithInvalidCode::class, '~baz~');
         TestSubraceWithInvalidCode::returnInvalidCode();
-        $genericRace->convertToPHPValue('bar_baz', $this->getPlatform());
+        $genericRace->convertToPHPValue('baz_qux', $this->getPlatform());
     }
 
     /**
@@ -155,6 +155,11 @@ class TestSubraceWithInvalidCode extends Race
     public static function returnInvalidCode()
     {
         self::$returnInvalidCode = true;
+    }
+
+    public static function getTypeName()
+    {
+        return parent::getRaceAndSubraceCode();
     }
 
     /**
