@@ -5,6 +5,7 @@ use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\Type;
 use DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\Races\Helpers\SubraceGender;
 use DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\Races\Helpers\SubraceGenderWithInvalidCode;
+use DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\Races\Helpers\SubraceGenderWithUnknownGenderDetection;
 use DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\Races\Helpers\SubraceGenderWithoutFemaleDetection;
 use DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\Races\Helpers\SubraceGenderWithoutMaleDetection;
 
@@ -131,6 +132,18 @@ class GenderTest extends \PHPUnit_Framework_TestCase
         $genericGender = Type::getType(Gender::getTypeName());
         $genericGender::addSubTypeEnum(SubraceGenderWithoutFemaleDetection::class, '~detection_of_female~');
         $genericGender->convertToPHPValue('detection_of_female', $this->getPlatform());
+    }
+
+    /**
+     * @test
+     * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Exceptions\UnknownGender
+     */
+    public function unknown_gender_detection_throws_exception()
+    {
+        /** @var Gender $genericGender */
+        $genericGender = Type::getType(Gender::getTypeName());
+        $genericGender::addSubTypeEnum(SubraceGenderWithUnknownGenderDetection::class, '~unknown_gender_detection~');
+        $genericGender->convertToPHPValue('unknown_gender_detection', $this->getPlatform());
     }
 
     /**
