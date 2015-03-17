@@ -36,6 +36,16 @@ abstract class AbstractTestOfRace extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @return string
+     */
+    protected function getSubraceBaseName()
+    {
+        $subraceClass = $this->getSubraceClass();
+
+        return preg_replace('~(\w+\\\)*(\w+)~', '$2', $subraceClass);
+    }
+
+    /**
      * @test
      * @depends subrace_code_is_as_expected
      */
@@ -46,17 +56,6 @@ abstract class AbstractTestOfRace extends \PHPUnit_Framework_TestCase
             $raceClass::getRaceCode() . '-' . $raceClass::getSubraceCode(),
             $raceClass::getTypeName()
         );
-    }
-
-
-    /**
-     * @return string
-     */
-    protected function getSubraceBaseName()
-    {
-        $subraceClass = $this->getSubraceClass();
-
-        return preg_replace('~(\w+\\\)*(\w+)~', '$2', $subraceClass);
     }
 
     /**
