@@ -116,7 +116,7 @@ class Gender extends SelfTypedStrictStringEnum
     protected static function getGenderCode()
     {
         if (static::isMale() && static::isFemale()) {
-            throw new \LogicException(
+            throw new Exceptions\AmbiguousGender(
                 'Gender ' . static::class . ' can not be male and female at once'
             );
         }

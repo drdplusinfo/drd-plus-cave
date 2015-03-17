@@ -3,12 +3,12 @@ namespace DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\Races\Helpers;
 
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Gender;
 
-class SubraceGenderWithUnknownGenderDetection extends Gender
+class SubraceGenderWithAmbiguousGenderDetection extends Gender
 {
 
     public static function getRaceCode()
     {
-        return 'unknown';
+        return 'ambiguous';
     }
 
     public static function getSubraceCode()
@@ -21,7 +21,7 @@ class SubraceGenderWithUnknownGenderDetection extends Gender
      */
     public static function isMale()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -29,7 +29,7 @@ class SubraceGenderWithUnknownGenderDetection extends Gender
      */
     public static function isFemale()
     {
-        return false;
+        return true;
     }
 
 }
