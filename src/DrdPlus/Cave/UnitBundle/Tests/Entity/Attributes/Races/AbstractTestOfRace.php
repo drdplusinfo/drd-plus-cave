@@ -101,6 +101,19 @@ abstract class AbstractTestOfRace extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @test
+     *
+     * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Exceptions\UnexpectedSubrace
+     */
+    public function using_gender_of_different_subrace_throws_exception()
+    {
+        SomeSubraceOfUnexpectedGenderSubrace::registerSelf();
+        $subrace = SomeSubraceOfUnexpectedGenderSubrace::getIt();
+        SomeGenderOfUnexpectedRace::registerSelf();
+        $subrace->getStrengthModifier(SomeGenderOfUnexpectedRace::getIt());
+    }
+
+    /**
      * @param Race $race
      *
      * @test
@@ -388,4 +401,19 @@ class SomeGenderOfUnexpectedRace extends Gender
         return false;
     }
 
+}
+
+class SomeSubraceOfUnexpectedGenderSubrace extends Race {
+    /**
+     * @return string
+     */
+    public static function getRaceCode()
+    {
+        return SomeGenderOfUnexpectedRace::getRaceCode();
+    }
+
+    public static function getSubraceCode()
+    {
+        return SomeGenderOfUnexpectedRace::getSubraceCode() . 'foo';
+    }
 }
