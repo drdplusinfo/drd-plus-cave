@@ -6,6 +6,7 @@ use Doctrine\DBAL\Types\Type;
 use DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\Races\Helpers\SubraceGender;
 use DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\Races\Helpers\SubraceGenderWithAmbiguousGenderDetection;
 use DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\Races\Helpers\SubraceGenderWithInvalidCode;
+use DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\Races\Helpers\SubraceGenderWithoutSubraceCode;
 use DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\Races\Helpers\SubraceGenderWithUnknownGenderDetection;
 use DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\Races\Helpers\SubraceGenderWithoutFemaleDetection;
 use DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\Races\Helpers\SubraceGenderWithoutMaleDetection;
@@ -95,6 +96,19 @@ class GenderTest extends \PHPUnit_Framework_TestCase
         $this->assertRegExp($subTypeRegexp, SubraceGender::getTypeName());
         $subrace = $genericGender->convertToPHPValue(SubraceGender::getTypeName(), $this->getPlatform());
         $this->assertInstanceOf(SubraceGender::class, $subrace);
+    }
+
+    /**
+     * @test
+     * @depends can_be_created_as_enum_type
+     * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Exceptions\MissingSubraceCodeImplementation
+     */
+    public function missing_subrace_code_throws_exception()
+    {
+        /** @var Gender $genericGender */
+        $genericGender = Type::getType(Gender::getTypeName());
+        $genericGender::addSubTypeEnum(SubraceGenderWithoutSubraceCode::class, '~without_subrace~');
+        $genericGender->convertToPHPValue('without_subrace', $this->getPlatform());
     }
 
     /**
