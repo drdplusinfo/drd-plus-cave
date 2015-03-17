@@ -9,37 +9,58 @@ use Doctrineum\Strict\String\StrictStringEnum;
 
 class NameTest extends \PHPUnit_Framework_TestCase
 {
-    protected function setUp()
+
+    /**
+     * @test
+     */
+    public function can_be_registered()
     {
-        if (Type::hasType(Name::getTypeName())) {
-            Type::overrideType(Name::getTypeName(), Name::class);
-        } else {
-            Name::registerSelf();
-        }
+        Name::registerSelf();
+        $this->assertTrue(Type::hasType(Name::getTypeName()));
     }
 
-    /** @test */
+    /**
+     * @return Name
+     *
+     * @test
+     * @depends can_be_registered
+     */
     public function can_be_created()
     {
         $instance = Name::getEnum('foo');
         $this->assertInstanceOf(Name::class, $instance);
+
+        return $instance;
     }
 
-    /** @test */
-    public function is_an_doctrineum_enum()
+    /**
+     * @param Name $name
+     *
+     * @test
+     * @depends can_be_created
+     */
+    public function is_a_doctrineum_enum(Name $name)
     {
-        $instance = Name::getEnum('foo');
-        $this->assertInstanceOf(EnumInterface::class, $instance);
+        $this->assertInstanceOf(EnumInterface::class, $name);
     }
 
-    /** @test */
-    public function is_an_doctrineum_self_typed_strict_string_enum()
+    /**
+     * @param Name $name
+     *
+     * @test
+     * @depends can_be_created
+     */
+    public function is_an_doctrineum_self_typed_strict_string_enum(Name $name)
     {
-        $instance = Name::getEnum('foo');
-        $this->assertInstanceOf(SelfTypedStrictStringEnum::class, $instance);
+        $this->assertInstanceOf(SelfTypedStrictStringEnum::class, $name);
     }
 
-    /** @test */
+    /**
+     * @return Name
+     *
+     * @test
+     * @depends can_be_registered
+     */
     public function works_in_separate_enum_namespace()
     {
         $name = Name::getEnum($string = 'foo');
@@ -48,7 +69,12 @@ class NameTest extends \PHPUnit_Framework_TestCase
         $this->assertSame((string)$name, (string)$strictStringEnum);
     }
 
-    /** @test */
+    /**
+     * @return Name
+     *
+     * @test
+     * @depends can_be_registered
+     */
     public function recognizes_if_is_empty()
     {
         $emptyName = Name::getEnum('');
@@ -57,7 +83,12 @@ class NameTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($filledName->isEmpty());
     }
 
-    /** @test */
+    /**
+     * @return Name
+     *
+     * @test
+     * @depends can_be_registered
+     */
     public function conversion_to_php_gives_name()
     {
         Name::addType('foo', Name::class);
