@@ -114,7 +114,7 @@ class GenderTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      * @depends can_be_created_as_enum_type
-     * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Exceptions\UnexpectedRaceCode
+     * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Exceptions\UnexpectedGenderCode
      */
     public function changed_code_throws_exception()
     {
