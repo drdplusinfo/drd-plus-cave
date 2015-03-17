@@ -92,6 +92,20 @@ class GenderTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @test
+     * @depends can_be_created_as_enum_type
+     * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Exceptions\UnexpectedRaceCode
+     */
+    public function changed_code_throws_exception()
+    {
+        /** @var Race $genericGender */
+        $genericGender = Type::getType(Gender::getTypeName());
+        $genericGender::addSubTypeEnum(TestSubraceGenderWithInvalidCode::class, '~baz~');
+        TestSubraceGenderWithInvalidCode::returnInvalidCode();
+        $genericGender->convertToPHPValue('bar_baz', $this->getPlatform());
+    }
+
+    /**
      * @return AbstractPlatform
      */
     protected function getPlatform()
@@ -136,4 +150,57 @@ class TestSubraceGender extends Gender
         return false;
     }
 
+}
+
+class TestSubraceGenderWithInvalidCode extends Gender
+{
+    private static $returnInvalidCode = false;
+
+    public static function getRaceCode()
+    {
+        return 'baz';
+    }
+
+    public static function getSubraceCode()
+    {
+        return 'qux';
+    }
+
+    public static function returnInvalidCode()
+    {
+        self::$returnInvalidCode = true;
+    }
+
+    public static function getTypeName()
+    {
+        return parent::getRaceSubraceAndGenderCode();
+    }
+
+    /**
+     * @return string
+     */
+    public static function getRaceSubraceAndGenderCode()
+    {
+        if (!self::$returnInvalidCode) {
+            return parent::getRaceSubraceAndGenderCode();
+        }
+
+        return 'some invalid code';
+    }
+
+    /**
+     * @return bool
+     */
+    public static function isMale()
+    {
+        return true;
+    }
+
+    /**
+     * @return bool
+     */
+    public static function isFemale()
+    {
+        return false;
+    }
 }

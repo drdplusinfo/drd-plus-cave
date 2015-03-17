@@ -53,12 +53,12 @@ class Gender extends SelfTypedStrictStringEnum
      */
     protected static function getEnumClass($enumValue)
     {
-        $class = parent::getEnumClass($enumValue);
-        if ($class === __CLASS__) {
+        $specificRaceGenderClass = parent::getEnumClass($enumValue);
+        if ($specificRaceGenderClass === __CLASS__) {
             throw new Exceptions\GenericRaceCanNotBeCreated('Call this factory method from specific race gender.');
         }
 
-        return $class;
+        return $specificRaceGenderClass;
     }
 
     /**
