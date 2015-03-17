@@ -3,6 +3,10 @@ namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Races;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\Type;
+use DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\Races\Helpers\SubraceGender;
+use DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\Races\Helpers\SubraceGenderWithInvalidCode;
+use DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\Races\Helpers\SubraceGenderWithoutFemaleDetection;
+use DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\Races\Helpers\SubraceGenderWithoutMaleDetection;
 
 class GenderTest extends \PHPUnit_Framework_TestCase
 {
@@ -59,9 +63,9 @@ class GenderTest extends \PHPUnit_Framework_TestCase
      */
     public function subrace_gender_can_be_created()
     {
-        TestSubraceGender::registerSelf();
-        $subraceGender = TestSubraceGender::getIt();
-        $this->assertInstanceOf(TestSubraceGender::class, $subraceGender);
+        SubraceGender::registerSelf();
+        $subraceGender = SubraceGender::getIt();
+        $this->assertInstanceOf(SubraceGender::class, $subraceGender);
     }
 
     /**
@@ -70,11 +74,11 @@ class GenderTest extends \PHPUnit_Framework_TestCase
      */
     public function subrace_gender_type_name_is_race_gender_code()
     {
-        $raceSubraceAndGenderCode = TestSubraceGender::getRaceCode() . '-' . TestSubraceGender::getSubraceCode() . '-' .
-            (TestSubraceGender::isMale()
+        $raceSubraceAndGenderCode = SubraceGender::getRaceCode() . '-' . SubraceGender::getSubraceCode() . '-' .
+            (SubraceGender::isMale()
                 ? 'male'
                 : 'female');
-        $this->assertSame($raceSubraceAndGenderCode, TestSubraceGender::getTypeName());
+        $this->assertSame($raceSubraceAndGenderCode, SubraceGender::getTypeName());
     }
 
     /**
@@ -85,10 +89,10 @@ class GenderTest extends \PHPUnit_Framework_TestCase
     {
         /** @var Gender $genericGender */
         $genericGender = Type::getType(Gender::getTypeName());
-        $genericGender::addSubTypeEnum(TestSubraceGender::class, $subTypeRegexp = '~^foo-bar-male$~');
-        $this->assertRegExp($subTypeRegexp, TestSubraceGender::getTypeName());
-        $subrace = $genericGender->convertToPHPValue(TestSubraceGender::getTypeName(), $this->getPlatform());
-        $this->assertInstanceOf(TestSubraceGender::class, $subrace);
+        $genericGender::addSubTypeEnum(SubraceGender::class, $subTypeRegexp = '~^foo-bar-male$~');
+        $this->assertRegExp($subTypeRegexp, SubraceGender::getTypeName());
+        $subrace = $genericGender->convertToPHPValue(SubraceGender::getTypeName(), $this->getPlatform());
+        $this->assertInstanceOf(SubraceGender::class, $subrace);
     }
 
     /**
@@ -98,11 +102,35 @@ class GenderTest extends \PHPUnit_Framework_TestCase
      */
     public function changed_code_throws_exception()
     {
-        /** @var Race $genericGender */
+        /** @var Gender $genericGender */
         $genericGender = Type::getType(Gender::getTypeName());
-        $genericGender::addSubTypeEnum(TestSubraceGenderWithInvalidCode::class, '~baz~');
-        TestSubraceGenderWithInvalidCode::returnInvalidCode();
+        $genericGender::addSubTypeEnum(SubraceGenderWithInvalidCode::class, '~baz~');
+        SubraceGenderWithInvalidCode::returnInvalidCode();
         $genericGender->convertToPHPValue('bar_baz', $this->getPlatform());
+    }
+
+    /**
+     * @test
+     * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Exceptions\MaleDetectionNotImplemented
+     */
+    public function missing_male_detection_throws_exception()
+    {
+        /** @var Gender $genericGender */
+        $genericGender = Type::getType(Gender::getTypeName());
+        $genericGender::addSubTypeEnum(SubraceGenderWithoutMaleDetection::class, '~male_detection~');
+        $genericGender->convertToPHPValue('male_detection', $this->getPlatform());
+    }
+
+    /**
+     * @test
+     * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Exceptions\FemaleDetectionNotImplemented
+     */
+    public function missing_female_detection_throws_exception()
+    {
+        /** @var Gender $genericGender */
+        $genericGender = Type::getType(Gender::getTypeName());
+        $genericGender::addSubTypeEnum(SubraceGenderWithoutFemaleDetection::class, '~detection_of_female~');
+        $genericGender->convertToPHPValue('detection_of_female', $this->getPlatform());
     }
 
     /**
@@ -113,94 +141,4 @@ class GenderTest extends \PHPUnit_Framework_TestCase
         return \Mockery::mock(AbstractPlatform::class);
     }
 
-}
-
-/** inner */
-class TestSubraceGender extends Gender
-{
-    /**
-     * @return string
-     */
-    public static function getRaceCode()
-    {
-        return 'foo';
-    }
-
-    /**
-     * @return string
-     */
-    public static function getSubraceCode()
-    {
-        return 'bar';
-    }
-
-    /**
-     * @return bool
-     */
-    public static function isMale()
-    {
-        return true;
-    }
-
-    /**
-     * @return bool
-     */
-    public static function isFemale()
-    {
-        return false;
-    }
-
-}
-
-class TestSubraceGenderWithInvalidCode extends Gender
-{
-    private static $returnInvalidCode = false;
-
-    public static function getRaceCode()
-    {
-        return 'baz';
-    }
-
-    public static function getSubraceCode()
-    {
-        return 'qux';
-    }
-
-    public static function returnInvalidCode()
-    {
-        self::$returnInvalidCode = true;
-    }
-
-    public static function getTypeName()
-    {
-        return parent::getRaceSubraceAndGenderCode();
-    }
-
-    /**
-     * @return string
-     */
-    public static function getRaceSubraceAndGenderCode()
-    {
-        if (!self::$returnInvalidCode) {
-            return parent::getRaceSubraceAndGenderCode();
-        }
-
-        return 'some invalid code';
-    }
-
-    /**
-     * @return bool
-     */
-    public static function isMale()
-    {
-        return true;
-    }
-
-    /**
-     * @return bool
-     */
-    public static function isFemale()
-    {
-        return false;
-    }
 }
