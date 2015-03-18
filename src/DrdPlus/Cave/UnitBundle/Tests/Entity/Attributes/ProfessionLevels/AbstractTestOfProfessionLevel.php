@@ -63,6 +63,93 @@ class AbstractTestOfProfessionLevel extends \PHPUnit_Framework_TestCase
      * @test
      * @depends can_create_instance
      */
+    public function has_not_set_id_on_creation(ProfessionLevel $professionLevel)
+    {
+        $this->assertNull($professionLevel->getId());
+    }
+
+    /**
+     * @test
+     * @depends can_create_instance
+     */
+    public function time_of_level_up_is_creation_time()
+    {
+        /** @var LevelValue $levelValue */
+        $levelValue = \Mockery::mock(LevelValue::class);
+        /** @var Strength $strengthIncrement */
+        $strengthIncrement = \Mockery::mock(Strength::class);
+        /** @var Agility $agilityIncrement */
+        $agilityIncrement = \Mockery::mock(Agility::class);
+        /** @var Knack $knackIncrement */
+        $knackIncrement = \Mockery::mock(Knack::class);
+        /** @var Intelligence $intelligenceIncrement */
+        $intelligenceIncrement = \Mockery::mock(Intelligence::class);
+        /** @var Charisma $charismaIncrement */
+        $charismaIncrement = \Mockery::mock(Charisma::class);
+        /** @var Will $willIncrement */
+        $willIncrement = \Mockery::mock(Will::class);
+        $professionLevelClass = $this->getProfessionLevelClass();
+        /** @var ProfessionLevel $professionLevel */
+        $professionLevel = new $professionLevelClass(
+            $levelValue,
+            $strengthIncrement,
+            $agilityIncrement,
+            $knackIncrement,
+            $intelligenceIncrement,
+            $charismaIncrement,
+            $willIncrement
+        );
+        $this->assertEquals(time(), $professionLevel->getLevelUpAt()->getTimestamp());
+    }
+
+    /**
+     * @test
+     * @depends can_create_instance
+     */
+    public function gives_given_parameters()
+    {
+        /** @var LevelValue $levelValue */
+        $levelValue = \Mockery::mock(LevelValue::class);
+        /** @var Strength $strengthIncrement */
+        $strengthIncrement = \Mockery::mock(Strength::class);
+        /** @var Agility $agilityIncrement */
+        $agilityIncrement = \Mockery::mock(Agility::class);
+        /** @var Knack $knackIncrement */
+        $knackIncrement = \Mockery::mock(Knack::class);
+        /** @var Intelligence $intelligenceIncrement */
+        $intelligenceIncrement = \Mockery::mock(Intelligence::class);
+        /** @var Charisma $charismaIncrement */
+        $charismaIncrement = \Mockery::mock(Charisma::class);
+        /** @var Will $willIncrement */
+        $willIncrement = \Mockery::mock(Will::class);
+        $professionLevelClass = $this->getProfessionLevelClass();
+        /** @var ProfessionLevel $professionLevel */
+        $professionLevel = new $professionLevelClass(
+            $levelValue,
+            $strengthIncrement,
+            $agilityIncrement,
+            $knackIncrement,
+            $intelligenceIncrement,
+            $charismaIncrement,
+            $willIncrement,
+            $levelUpAt = new \DateTimeImmutable()
+        );
+        $this->assertSame($levelValue, $professionLevel->getLevelValue());
+        $this->assertSame($strengthIncrement, $professionLevel->getStrengthIncrement());
+        $this->assertSame($agilityIncrement, $professionLevel->getAgilityIncrement());
+        $this->assertSame($knackIncrement, $professionLevel->getKnackIncrement());
+        $this->assertSame($intelligenceIncrement, $professionLevel->getIntelligenceIncrement());
+        $this->assertSame($charismaIncrement, $professionLevel->getCharismaIncrement());
+        $this->assertSame($willIncrement, $professionLevel->getWillIncrement());
+        $this->assertSame($levelUpAt, $professionLevel->getLevelUpAt());
+    }
+
+    /**
+     * @param ProfessionLevel $professionLevel
+     *
+     * @test
+     * @depends can_create_instance
+     */
     public function gives_proper_strength_first_level_modifier(ProfessionLevel $professionLevel)
     {
         $this->assertSame($this->getStrengthFirstLevelModifier(), $professionLevel->getStrengthFirstLevelModifier());
