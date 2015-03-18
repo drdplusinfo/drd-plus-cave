@@ -92,7 +92,9 @@ class InitialProperties extends StrictObject
         if (!$this->person) {
             $this->person = $person;
         } elseif ($this->person->getId() !== $person->getId()) {
-            throw new Exceptions\PersonIsAlreadySet('Initial properties of ID ' . $this->id . ' is linked with person of ID ' . $this->person->getId());
+            throw new Exceptions\PersonIsAlreadySet(
+                'Initial properties entity of ID ' . var_export($this->id, true) . ' is linked with person of ID ' . $this->person->getId()
+            );
         }
     }
 
@@ -130,7 +132,7 @@ class InitialProperties extends StrictObject
         $initialPropertyName = 'initial' . ucfirst($propertyName);
         if (isset($this->$initialPropertyName)) {
             throw new Exceptions\InitialPropertyIsAlreadySet(
-                'The property ' . $initialPropertyName . ' is already set by value ' . var_export($this->$initialPropertyName, true)
+                'The property ' . $initialPropertyName . ' is already set by value ' . var_export($this->$initialPropertyName->getEnumValue(), true)
             );
         }
 
