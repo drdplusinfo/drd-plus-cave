@@ -124,7 +124,7 @@ abstract class AbstractTestOfProperty extends \PHPUnit_Framework_TestCase
      * @test
      * @depends can_be_created
      */
-    public function conversion_to_php_gives_agility(Property $property)
+    public function conversion_to_php_gives_property(Property $property)
     {
         $platform = \Mockery::mock(AbstractPlatform::class);
         /** @var AbstractPlatform $platform */
