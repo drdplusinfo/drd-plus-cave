@@ -1,6 +1,7 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Agility;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Charisma;
@@ -81,8 +82,19 @@ class ProfessionLevels extends StrictObject
      */
     private $wizardLevels;
 
+    public function __construct()
+    {
+        $this->fighterLevels = new ArrayCollection();
+        $this->priestLevels = new ArrayCollection();
+        $this->rangerLevels = new ArrayCollection();
+        $this->theurgistLevels = new ArrayCollection();
+        $this->thiefLevels = new ArrayCollection();
+        $this->wizardLevels = new ArrayCollection();
+    }
+
     /**
      * @param Person $person
+     *
      * @throws Exceptions\PersonIsAlreadySet
      */
     public function setPerson(Person $person)
@@ -107,7 +119,7 @@ class ProfessionLevels extends StrictObject
     }
 
     /**
-     * @return FighterLevel[]
+     * @return FighterLevel[]|ArrayCollection
      */
     public function getFighterLevels()
     {
@@ -115,7 +127,7 @@ class ProfessionLevels extends StrictObject
     }
 
     /**
-     * @return PriestLevel[]
+     * @return PriestLevel[]|ArrayCollection
      */
     public function getPriestLevels()
     {
@@ -123,7 +135,7 @@ class ProfessionLevels extends StrictObject
     }
 
     /**
-     * @return PriestLevel[]
+     * @return PriestLevel[]|ArrayCollection
      */
     public function getRangerLevels()
     {
@@ -131,7 +143,7 @@ class ProfessionLevels extends StrictObject
     }
 
     /**
-     * @return TheurgistLevel[]
+     * @return TheurgistLevel[]|ArrayCollection
      */
     public function getTheurgistLevels()
     {
@@ -139,7 +151,7 @@ class ProfessionLevels extends StrictObject
     }
 
     /**
-     * @return ThiefLevel[]
+     * @return ThiefLevel[]|ArrayCollection
      */
     public function getThiefLevels()
     {
@@ -147,7 +159,7 @@ class ProfessionLevels extends StrictObject
     }
 
     /**
-     * @return WizardLevel[]
+     * @return WizardLevel[]|ArrayCollection
      */
     public function getWizardLevels()
     {
@@ -157,17 +169,17 @@ class ProfessionLevels extends StrictObject
     /**
      * All levels, achieved at any profession
      *
-     * @return ProfessionLevel[]
+     * @return ProfessionLevel[]|array
      */
     public function getLevels()
     {
         return array_merge(
-            $this->getFighterLevels(),
-            $this->getPriestLevels(),
-            $this->getRangerLevels(),
-            $this->getTheurgistLevels(),
-            $this->getThiefLevels(),
-            $this->getWizardLevels()
+            $this->getFighterLevels()->toArray(),
+            $this->getPriestLevels()->toArray(),
+            $this->getRangerLevels()->toArray(),
+            $this->getTheurgistLevels()->toArray(),
+            $this->getThiefLevels()->toArray(),
+            $this->getWizardLevels()->toArray()
         );
     }
 
@@ -176,28 +188,77 @@ class ProfessionLevels extends StrictObject
      */
     public function getFirstLevel()
     {
-        // TODO resolve no levels at all
         $levels = $this->getLevels();
-        usort($levels, function (ProfessionLevel $aLevel, ProfessionLevel $anotherLevel) {
-            $difference = $aLevel->getLevelValue() - $anotherLevel->getLevelValue();
-            if ($difference === 0) {
-                throw new \LogicException('Two profession levels have the same level rank.');
-            }
-            return $difference > 0
-                ? 1
-                : -1;
-        });
-        reset($levels);
+        if (count($levels) === 0) {
+            return false;
+        }
+
+        $sorted = $this->sortByLevelValue($levels);
+
         return current($levels);
     }
 
-    public function addLevel(ProfessionLevel $newLevel)
+    /**
+     * @param array|ProfessionLevel[] $professionLevels
+     *
+     * @return array
+     */
+    private function sortByLevelValue(array $professionLevels)
     {
-        // TODO check only specific profession levels
-        array_walk($this->getLevels(), function (ProfessionLevel $previousLevel) use ($newLevel) {
-            $this->checkLevelsRankUniqueness($newLevel, $previousLevel);
+        usort($professionLevels, function (ProfessionLevel $aLevel, ProfessionLevel $anotherLevel) {
+            $difference = $aLevel->getLevelValue() - $anotherLevel->getLevelValue();
+            if ($difference === 0) {
+                throw new \LogicException(
+                    'Two profession levels of IDs' .
+                    ' ' . var_dump($aLevel->getId(), true) . ', ' . var_export($anotherLevel->getId(), true)
+                    . ' have the same level rank.'
+                );
+            }
+
+            return $difference > 0
+                ? 1 // firstly given level is higher than second one
+                : -1; // opposite
         });
-        // TODO add to specific profession levels
+        reset($professionLevels);
+
+        return $professionLevels;
+    }
+
+    public function addFighterLevel(FighterLevel $nweFighterLevel)
+    {
+        $this->addLevel($nweFighterLevel);
+    }
+
+    /**
+     * @param ProfessionLevel $newLevel
+     */
+    private function addLevel(ProfessionLevel $newLevel)
+    {
+        $previousLevels = $this->getPreviousLevels($newLevel);
+        foreach ($previousLevels as $previousLevel) {
+            $this->checkLevelsRankUniqueness($newLevel, $previousLevel);
+        }
+
+        $previousLevels->add($newLevel);
+    }
+
+    /**
+     * @param ProfessionLevel $professionLevel
+     *
+     * @return ProfessionLevel[]|ArrayCollection
+     */
+    private function getPreviousLevels(ProfessionLevel $professionLevel)
+    {
+        // fighter = getFighterLevels
+        $getterName = 'get' . ucfirst($professionLevel->getProfessionCode()) . 's';
+
+        if (!method_exists($this, $getterName)) {
+            throw new \LogicException(
+                'Unknown profession ' . var_export($professionLevel->getProfessionCode())
+            );
+        }
+
+        return $this->$getterName();
     }
 
     private function checkLevelsRankUniqueness(ProfessionLevel $aLevel, ProfessionLevel $anotherLevel)
@@ -220,6 +281,7 @@ class ProfessionLevels extends StrictObject
 
     /**
      * @param string $propertyCode
+     *
      * @return int
      */
     private function getPropertyFirstLevelIncrement($propertyCode)
@@ -341,17 +403,20 @@ class ProfessionLevels extends StrictObject
 
     /**
      * @param string $propertyName
+     *
      * @return int
      */
     private function getPropertyIncrementSummary($propertyName)
     {
         // like getStrengthFirstLevelIncrement
         $propertyFirstLevelIncrementGetter = 'get' . ucfirst($propertyName) . 'FirstLevelIncrement';
+
         return $this->$propertyFirstLevelIncrementGetter() + $this->getByLevelsIncrementSummary($propertyName);
     }
 
     /**
      * @param string $propertyName
+     *
      * @return int
      */
     private function getByLevelsIncrementSummary($propertyName)
