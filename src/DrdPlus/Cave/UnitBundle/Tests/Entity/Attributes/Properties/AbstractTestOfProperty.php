@@ -27,7 +27,7 @@ abstract class AbstractTestOfProperty extends \PHPUnit_Framework_TestCase
     /**
      * @return string|Property
      */
-    protected function getPropertyClass()
+    private function getPropertyClass()
     {
         return preg_replace('~Test$~', '', static::class);
     }
@@ -35,7 +35,7 @@ abstract class AbstractTestOfProperty extends \PHPUnit_Framework_TestCase
     /**
      * @return string
      */
-    protected function getPropertyName()
+    private function getPropertyName()
     {
         $propertyBaseName = $this->getPropertyBaseName();
         $underScoredClassName = preg_replace('~(\w)([A-Z])~', '$1_$2', $propertyBaseName);
@@ -46,7 +46,7 @@ abstract class AbstractTestOfProperty extends \PHPUnit_Framework_TestCase
     /**
      * @return string
      */
-    protected function getPropertyBaseName()
+    private function getPropertyBaseName()
     {
         $propertyClass = $this->getPropertyClass();
 
