@@ -84,14 +84,16 @@ class InitialProperties extends StrictObject
 
     /**
      * @param Person $person
+     *
      * @throws Exceptions\PersonIsAlreadySet
      */
     public function setPerson(Person $person)
     {
-        if ($this->person && $this->person->getId() !== $person->getId()) {
+        if (!$this->person) {
+            $this->person = $person;
+        } elseif ($this->person->getId() !== $person->getId()) {
             throw new Exceptions\PersonIsAlreadySet('Initial properties of ID ' . $this->id . ' is linked with person of ID ' . $this->person->getId());
         }
-        $this->person = $person;
     }
 
     /**
@@ -104,35 +106,41 @@ class InitialProperties extends StrictObject
 
     /**
      * @param Strength $initialStrength
+     *
      * @throws Exceptions\InitialPropertyValueExceeded
      * @return $this
      */
     public function setInitialStrength(Strength $initialStrength)
     {
-        $this->setUpProperty(Strength::PROPERTY_CODE, $initialStrength);
+        $this->setUpProperty($initialStrength);
+
         return $this;
     }
 
     /**
-     * @param $personPropertyName "like strength"
      * @param Property $initialValue
+     *
      * @throws Exceptions\InitialPropertyIsAlreadySet
      * @throws Exceptions\InitialPropertyValueExceeded
      */
-    private function setUpProperty($personPropertyName, Property $initialValue)
+    private function setUpProperty(Property $initialValue)
     {
+        $propertyName = $initialValue->getTypeName();
         // like initialStrength()
-        $classPropertyName = 'initial' . ucfirst($personPropertyName);
-        if (isset($this->$classPropertyName)) {
-            throw new Exceptions\InitialPropertyIsAlreadySet('The property ' . $classPropertyName . ' is already set');
-        }
-        // like calculateMaximalInitialStrength()
-        $initialCalculationMethod = 'calculateMaximalInitial' . ucfirst($personPropertyName);
-        if ($initialValue->getValue() > $this->$initialCalculationMethod()) {
-            throw new Exceptions\InitialPropertyValueExceeded('The initial ' . $personPropertyName . ' can not exceed ' . $this->$initialCalculationMethod());
+        $initialPropertyName = 'initial' . ucfirst($propertyName);
+        if (isset($this->$initialPropertyName)) {
+            throw new Exceptions\InitialPropertyIsAlreadySet(
+                'The property ' . $initialPropertyName . ' is already set by value ' . var_export($this->$initialPropertyName, true)
+            );
         }
 
-        $this->$classPropertyName = $initialValue;
+        // like calculateMaximalInitialStrength()
+        $initialCalculationMethod = 'calculateMaximalInitial' . ucfirst($propertyName);
+        if ($initialValue->getEnumValue() > $this->$initialCalculationMethod()) {
+            throw new Exceptions\InitialPropertyValueExceeded('The initial ' . $propertyName . ' can not exceed ' . $this->$initialCalculationMethod());
+        }
+
+        $this->$initialPropertyName = $initialValue;
     }
 
     /**
@@ -140,18 +148,30 @@ class InitialProperties extends StrictObject
      */
     public function calculateMaximalInitialStrength()
     {
-        return $this->calculateMaximalInitialProperty(Strength::PROPERTY_CODE);
+        return $this->calculateMaximalInitialProperty(Strength::TYPE_STRENGTH);
     }
 
     /**
      * @param string $propertyName
+     *
      * @return int
      */
     private function calculateMaximalInitialProperty($propertyName)
     {
+        if (!$this->getPerson()) {
+            throw new Exceptions\PersonIsNotSet(
+                'To calculate initial properties a person is required'
+            );
+        }
+
         // like getStrengthModifier()
         $propertyModifierGetter = 'get' . ucfirst($propertyName) . 'Modifier';
-        return self::INITIAL_PROPERTY_INCREASE_LIMIT + $this->getPerson()->getRace()->$propertyModifierGetter($this->getPerson()->getGender());
+
+        return
+            self::INITIAL_PROPERTY_INCREASE_LIMIT
+            + $this->getPerson()->getRace()->$propertyModifierGetter(
+                $this->getPerson()->getGender()
+            );
     }
 
     /**
@@ -164,12 +184,14 @@ class InitialProperties extends StrictObject
 
     /**
      * @param Agility $initialAgility
+     *
      * @throws Exceptions\InitialPropertyValueExceeded
      * @return $this
      */
     public function setInitialAgility(Agility $initialAgility)
     {
-        $this->setUpProperty(Agility::PROPERTY_CODE, $initialAgility);
+        $this->setUpProperty($initialAgility);
+
         return $this;
     }
 
@@ -178,7 +200,7 @@ class InitialProperties extends StrictObject
      */
     public function calculateMaximalInitialAgility()
     {
-        return $this->calculateMaximalInitialProperty(Agility::PROPERTY_CODE);
+        return $this->calculateMaximalInitialProperty(Agility::TYPE_AGILITY);
     }
 
     /**
@@ -191,12 +213,14 @@ class InitialProperties extends StrictObject
 
     /**
      * @param Knack $initialKnack
+     *
      * @throws Exceptions\InitialPropertyValueExceeded
      * @return $this
      */
     public function setInitialKnack(Knack $initialKnack)
     {
-        $this->setUpProperty(Knack::PROPERTY_CODE, $initialKnack);
+        $this->setUpProperty($initialKnack);
+
         return $this;
     }
 
@@ -205,7 +229,7 @@ class InitialProperties extends StrictObject
      */
     public function calculateMaximalInitialKnack()
     {
-        return $this->calculateMaximalInitialProperty(Knack::PROPERTY_CODE);
+        return $this->calculateMaximalInitialProperty(Knack::TYPE_KNACK);
     }
 
     /**
@@ -218,12 +242,14 @@ class InitialProperties extends StrictObject
 
     /**
      * @param Will $initialWill
+     *
      * @throws Exceptions\InitialPropertyValueExceeded
      * @return $this
      */
     public function setInitialWill(Will $initialWill)
     {
-        $this->setUpProperty(Will::PROPERTY_CODE, $initialWill);
+        $this->setUpProperty($initialWill);
+
         return $this;
     }
 
@@ -232,7 +258,7 @@ class InitialProperties extends StrictObject
      */
     public function calculateMaximalInitialWill()
     {
-        return $this->calculateMaximalInitialProperty(Will::PROPERTY_CODE);
+        return $this->calculateMaximalInitialProperty(Will::TYPE_WILL);
     }
 
     /**
@@ -245,12 +271,14 @@ class InitialProperties extends StrictObject
 
     /**
      * @param Intelligence $initialIntelligence
+     *
      * @throws Exceptions\InitialPropertyValueExceeded
      * @return $this
      */
     public function setInitialIntelligence(Intelligence $initialIntelligence)
     {
-        $this->setUpProperty(Intelligence::PROPERTY_CODE, $initialIntelligence);
+        $this->setUpProperty($initialIntelligence);
+
         return $this;
     }
 
@@ -259,7 +287,7 @@ class InitialProperties extends StrictObject
      */
     public function calculateMaximalInitialIntelligence()
     {
-        return $this->calculateMaximalInitialProperty(Intelligence::PROPERTY_CODE);
+        return $this->calculateMaximalInitialProperty(Intelligence::TYPE_INTELLIGENCE);
     }
 
     /**
@@ -272,12 +300,14 @@ class InitialProperties extends StrictObject
 
     /**
      * @param Charisma $initialCharisma
+     *
      * @throws Exceptions\InitialPropertyValueExceeded
      * @return $this
      */
     public function setInitialCharisma(Charisma $initialCharisma)
     {
-        $this->setUpProperty(Charisma::PROPERTY_CODE, $initialCharisma);
+        $this->setUpProperty($initialCharisma);
+
         return $this;
     }
 
@@ -286,6 +316,6 @@ class InitialProperties extends StrictObject
      */
     public function calculateMaximalInitialCharisma()
     {
-        return $this->calculateMaximalInitialProperty(Charisma::PROPERTY_CODE);
+        return $this->calculateMaximalInitialProperty(Charisma::TYPE_CHARISMA);
     }
 }
