@@ -148,6 +148,7 @@ abstract class ProfessionLevel extends StrictObject
 
     /**
      * @param string $propertyCode
+     *
      * @return int
      */
     private function getPropertyFirstLevelModifier($propertyCode)
@@ -159,6 +160,7 @@ abstract class ProfessionLevel extends StrictObject
 
     /**
      * @param string $propertyCode
+     *
      * @return bool
      */
     public function isMainProperty($propertyCode)
@@ -276,4 +278,21 @@ abstract class ProfessionLevel extends StrictObject
         return $this->willIncrement;
     }
 
+    /**
+     * @return string
+     */
+    public function getProfessionCode()
+    {
+        $underScoredProfessionName = preg_replace('~(\w)([A-Z])~', '$1_$2', $this->getProfessionBaseName());
+
+        return strtolower($underScoredProfessionName);
+    }
+
+    /**
+     * @return string
+     */
+    private function getProfessionBaseName()
+    {
+        return preg_replace('~(\w+\\\)*(\w+)~', '$2', static::class);
+    }
 }
