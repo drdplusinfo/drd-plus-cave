@@ -87,10 +87,13 @@ class ProfessionLevels extends StrictObject
      */
     public function setPerson(Person $person)
     {
-        if ($this->person) {
-            throw new Exceptions\PersonIsAlreadySet('Profession levels of Doctrine ID ' . $this->id . ' is linked with person of ID ' . $this->person->getId());
+        if (!$this->person) {
+            $this->person = $person;
+        } elseif ($this->person->getId() !== $person->getId()) {
+            throw new Exceptions\PersonIsAlreadySet(
+                'Profession levels of Doctrine ID ' . $this->id . ' is linked with person of ID ' . $this->person->getId()
+            );
         }
-        $this->person = $person;
     }
 
     /**
@@ -212,7 +215,7 @@ class ProfessionLevels extends StrictObject
      */
     public function getStrengthFirstLevelIncrement()
     {
-        return $this->getPropertyFirstLevelIncrement(Strength::PROPERTY_CODE);
+        return $this->getPropertyFirstLevelIncrement(Strength::getTypeName());
     }
 
     /**
@@ -233,7 +236,7 @@ class ProfessionLevels extends StrictObject
      */
     public function getAgilityFirstLevelIncrement()
     {
-        return $this->getPropertyFirstLevelIncrement(Agility::PROPERTY_CODE);
+        return $this->getPropertyFirstLevelIncrement(Agility::getTypeName());
     }
 
     /**
@@ -243,7 +246,7 @@ class ProfessionLevels extends StrictObject
      */
     public function getKnackFirstLevelIncrement()
     {
-        return $this->getPropertyFirstLevelIncrement(Knack::PROPERTY_CODE);
+        return $this->getPropertyFirstLevelIncrement(Knack::getTypeName());
     }
 
     /**
@@ -253,7 +256,7 @@ class ProfessionLevels extends StrictObject
      */
     public function getWillFirstLevelIncrement()
     {
-        return $this->getPropertyFirstLevelIncrement(Will::PROPERTY_CODE);
+        return $this->getPropertyFirstLevelIncrement(Will::getTypeName());
     }
 
     /**
@@ -263,7 +266,7 @@ class ProfessionLevels extends StrictObject
      */
     public function getIntelligenceFirstLevelIncrement()
     {
-        return $this->getPropertyFirstLevelIncrement(Intelligence::PROPERTY_CODE);
+        return $this->getPropertyFirstLevelIncrement(Intelligence::getTypeName());
     }
 
     /**
@@ -273,7 +276,7 @@ class ProfessionLevels extends StrictObject
      */
     public function getCharismaFirstLevelIncrement()
     {
-        return $this->getPropertyFirstLevelIncrement(Charisma::PROPERTY_CODE);
+        return $this->getPropertyFirstLevelIncrement(Charisma::getTypeName());
     }
 
     /**
@@ -283,7 +286,7 @@ class ProfessionLevels extends StrictObject
      */
     public function getStrengthIncrementSummary()
     {
-        return $this->getPropertyIncrementSummary(Strength::PROPERTY_CODE);
+        return $this->getPropertyIncrementSummary(Strength::getTypeName());
     }
 
     /**
@@ -293,7 +296,7 @@ class ProfessionLevels extends StrictObject
      */
     public function getAgilityIncrementSummary()
     {
-        return $this->getPropertyIncrementSummary(Agility::PROPERTY_CODE);
+        return $this->getPropertyIncrementSummary(Agility::getTypeName());
     }
 
     /**
@@ -303,7 +306,7 @@ class ProfessionLevels extends StrictObject
      */
     public function getKnackIncrementSummary()
     {
-        return $this->getPropertyIncrementSummary(Knack::PROPERTY_CODE);
+        return $this->getPropertyIncrementSummary(Knack::getTypeName());
     }
 
     /**
@@ -313,7 +316,7 @@ class ProfessionLevels extends StrictObject
      */
     public function getCharismaIncrementSummary()
     {
-        return $this->getPropertyIncrementSummary(Charisma::PROPERTY_CODE);
+        return $this->getPropertyIncrementSummary(Charisma::getTypeName());
     }
 
     /**
@@ -323,7 +326,7 @@ class ProfessionLevels extends StrictObject
      */
     public function getWillIncrementSummary()
     {
-        return $this->getPropertyIncrementSummary(Will::PROPERTY_CODE);
+        return $this->getPropertyIncrementSummary(Will::getTypeName());
     }
 
     /**
@@ -333,7 +336,7 @@ class ProfessionLevels extends StrictObject
      */
     public function getIntelligenceIncrementSummary()
     {
-        return $this->getPropertyIncrementSummary(Intelligence::PROPERTY_CODE);
+        return $this->getPropertyIncrementSummary(Intelligence::getTypeName());
     }
 
     /**
