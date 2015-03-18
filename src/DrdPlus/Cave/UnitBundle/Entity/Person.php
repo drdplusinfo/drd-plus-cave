@@ -71,7 +71,9 @@ class Person extends StrictObject
     {
         $this->gender = $gender;
         $this->race = $race;
+        $initialProperties->setPerson($this);
         $this->initialProperties = $initialProperties;
+        $professionLevels->setPerson($this);
         $this->professionLevels = $professionLevels;
         $this->name = $name;
     }

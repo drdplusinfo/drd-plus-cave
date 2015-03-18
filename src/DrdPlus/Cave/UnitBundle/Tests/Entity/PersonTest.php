@@ -9,6 +9,11 @@ use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Race;
 
 class PersonTest extends \PHPUnit_Framework_TestCase
 {
+    protected function tearDown()
+    {
+        \Mockery::close();
+    }
+
     /** @test */
     public function can_create_instance()
     {
@@ -140,7 +145,12 @@ class PersonTest extends \PHPUnit_Framework_TestCase
      */
     private function getInitialPropertiesMock()
     {
-        return \Mockery::mock(InitialProperties::class);
+        $initialProperties = \Mockery::mock(InitialProperties::class);
+        $initialProperties->shouldReceive('setPerson')
+            ->with(\Mockery::type(Person::class))
+            ->atLeast()->once();
+
+        return $initialProperties;
     }
 
     /**
@@ -148,7 +158,12 @@ class PersonTest extends \PHPUnit_Framework_TestCase
      */
     private function getProfessionLevelsMock()
     {
-        return \Mockery::mock(ProfessionLevels::class);
+        $professionLevels = \Mockery::mock(ProfessionLevels::class);
+        $professionLevels->shouldReceive('setPerson')
+            ->with(\Mockery::type(Person::class))
+            ->atLeast()->once();
+
+        return $professionLevels;
     }
 
     /**
