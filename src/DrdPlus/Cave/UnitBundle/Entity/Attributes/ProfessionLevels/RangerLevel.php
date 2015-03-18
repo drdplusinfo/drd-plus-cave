@@ -13,8 +13,6 @@ use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Strength;
  */
 class RangerLevel extends ProfessionLevel
 {
-    const PROFESSION_CODE = 'ranger';
-
     /**
      * Inner link, used by Doctrine only
      * @var ProfessionLevels
@@ -29,16 +27,8 @@ class RangerLevel extends ProfessionLevel
     public function getMainPropertyCodes()
     {
         return [
-            Knack::PROPERTY_CODE,
-            Strength::PROPERTY_CODE
+            Knack::getTypeName(),
+            Strength::getTypeName()
         ];
-    }
-
-    /**
-     * @return string
-     */
-    public function getProfessionCode()
-    {
-        return self::PROFESSION_CODE;
     }
 }

@@ -13,8 +13,6 @@ use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Strength;
  */
 class FighterLevel extends ProfessionLevel
 {
-    const PROFESSION_CODE = 'fighter';
-
     /**
      * Inner link, used by Doctrine only
      * @var ProfessionLevels
@@ -29,16 +27,8 @@ class FighterLevel extends ProfessionLevel
     public function getMainPropertyCodes()
     {
         return [
-            Strength::PROPERTY_CODE,
-            Agility::PROPERTY_CODE
+            Strength::getTypeName(),
+            Agility::getTypeName()
         ];
-    }
-
-    /**
-     * @return string
-     */
-    public function getProfessionCode()
-    {
-        return self::PROFESSION_CODE;
     }
 }

@@ -13,8 +13,6 @@ use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Will;
  */
 class PriestLevel extends ProfessionLevel
 {
-    const PROFESSION_CODE = 'priest';
-
     /**
      * Inner link, used by Doctrine only
      * @var ProfessionLevels
@@ -29,16 +27,8 @@ class PriestLevel extends ProfessionLevel
     public function getMainPropertyCodes()
     {
         return [
-            Charisma::PROPERTY_CODE,
-            Will::PROPERTY_CODE
+            Charisma::getTypeName(),
+            Will::getTypeName()
         ];
-    }
-
-    /**
-     * @return string
-     */
-    public function getProfessionCode()
-    {
-        return self::PROFESSION_CODE;
     }
 }

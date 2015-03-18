@@ -13,8 +13,6 @@ use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Will;
  */
 class WizardLevel extends ProfessionLevel
 {
-    const PROFESSION_CODE = 'wizard';
-
     /**
      * Inner link, used by Doctrine only
      * @var ProfessionLevels
@@ -29,16 +27,8 @@ class WizardLevel extends ProfessionLevel
     public function getMainPropertyCodes()
     {
         return [
-            Will::PROPERTY_CODE,
-            Intelligence::PROPERTY_CODE
+            Will::getTypeName(),
+            Intelligence::getTypeName()
         ];
-    }
-
-    /**
-     * @return string
-     */
-    public function getProfessionCode()
-    {
-        return self::PROFESSION_CODE;
     }
 }

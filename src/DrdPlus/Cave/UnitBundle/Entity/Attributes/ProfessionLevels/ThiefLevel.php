@@ -13,8 +13,6 @@ use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Knack;
  */
 class ThiefLevel extends ProfessionLevel
 {
-    const PROFESSION_CODE = 'thief';
-
     /**
      * Inner link, used by Doctrine only
      * @var ProfessionLevels
@@ -29,16 +27,8 @@ class ThiefLevel extends ProfessionLevel
     public function getMainPropertyCodes()
     {
         return [
-            Agility::PROPERTY_CODE,
-            Knack::PROPERTY_CODE
+            Agility::getTypeName(),
+            Knack::getTypeName()
         ];
-    }
-
-    /**
-     * @return string
-     */
-    public function getProfessionCode()
-    {
-        return self::PROFESSION_CODE;
     }
 }

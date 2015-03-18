@@ -137,18 +137,13 @@ abstract class ProfessionLevel extends StrictObject
     abstract public function getMainPropertyCodes();
 
     /**
-     * @return string
-     */
-    abstract public function getProfessionCode();
-
-    /**
      * Get strength modifier
      *
      * @return int
      */
     public function getStrengthFirstLevelModifier()
     {
-        return $this->getPropertyFirstLevelModifier(Strength::PROPERTY_CODE);
+        return $this->getPropertyFirstLevelModifier(Strength::getTypeName());
     }
 
     /**
@@ -178,7 +173,7 @@ abstract class ProfessionLevel extends StrictObject
      */
     public function getAgilityFirstLevelModifier()
     {
-        return $this->getPropertyFirstLevelModifier(Agility::PROPERTY_CODE);
+        return $this->getPropertyFirstLevelModifier(Agility::getTypeName());
     }
 
     /**
@@ -188,7 +183,7 @@ abstract class ProfessionLevel extends StrictObject
      */
     public function getKnackFirstLevelModifier()
     {
-        return $this->getPropertyFirstLevelModifier(Knack::PROPERTY_CODE);
+        return $this->getPropertyFirstLevelModifier(Knack::getTypeName());
     }
 
     /**
@@ -198,7 +193,7 @@ abstract class ProfessionLevel extends StrictObject
      */
     public function getWillFirstLevelModifier()
     {
-        return $this->getPropertyFirstLevelModifier(Will::PROPERTY_CODE);
+        return $this->getPropertyFirstLevelModifier(Will::getTypeName());
     }
 
     /**
@@ -208,7 +203,7 @@ abstract class ProfessionLevel extends StrictObject
      */
     public function getIntelligenceFirstLevelModifier()
     {
-        return $this->getPropertyFirstLevelModifier(Intelligence::PROPERTY_CODE);
+        return $this->getPropertyFirstLevelModifier(Intelligence::getTypeName());
     }
 
     /**
@@ -218,7 +213,7 @@ abstract class ProfessionLevel extends StrictObject
      */
     public function getCharismaFirstLevelModifier()
     {
-        return $this->getPropertyFirstLevelModifier(Charisma::PROPERTY_CODE);
+        return $this->getPropertyFirstLevelModifier(Charisma::getTypeName());
     }
 
     /**
