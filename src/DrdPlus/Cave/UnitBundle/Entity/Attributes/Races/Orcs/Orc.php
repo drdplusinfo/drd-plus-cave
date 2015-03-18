@@ -32,7 +32,6 @@ abstract class Orc extends Race
     const BASE_WILL = -1;
     const BASE_CHARISMA = -2;
     const BASE_SENSES = +1;
-    // TODO check zero intelligence
 
     /**
      * @return string
