@@ -104,7 +104,7 @@ class RaceTest extends \PHPUnit_Framework_TestCase
      * @depends can_be_created_as_enum_type
      * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Exceptions\MissingSubraceCodeImplementation
      */
-    public function missing_subrace_code_throws_exception()
+    public function missing_subrace_code_cause_exception()
     {
         /** @var Race $genericRace */
         $genericRace = Type::getType(Race::getTypeName());
@@ -117,7 +117,7 @@ class RaceTest extends \PHPUnit_Framework_TestCase
      * @depends can_be_created_as_enum_type
      * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Exceptions\UnexpectedRaceCode
      */
-    public function changed_subrace_code_throws_exception()
+    public function changed_subrace_code_cause_exception()
     {
         /** @var Race $genericRace */
         $genericRace = Type::getType(Race::getTypeName());

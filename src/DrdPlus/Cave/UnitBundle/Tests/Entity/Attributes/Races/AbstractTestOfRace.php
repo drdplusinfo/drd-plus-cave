@@ -93,7 +93,7 @@ abstract class AbstractTestOfRace extends \PHPUnit_Framework_TestCase
      * @depends can_create_self
      * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Exceptions\UnexpectedRace
      */
-    public function using_gender_of_different_race_throws_exception(Race $race)
+    public function using_gender_of_different_race_cause_exception(Race $race)
     {
         SomeGenderOfUnexpectedRace::registerSelf();
         $race->getStrengthModifier(SomeGenderOfUnexpectedRace::getIt());
@@ -104,7 +104,7 @@ abstract class AbstractTestOfRace extends \PHPUnit_Framework_TestCase
      *
      * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Exceptions\UnexpectedSubrace
      */
-    public function using_gender_of_different_subrace_throws_exception()
+    public function using_gender_of_different_subrace_cause_exception()
     {
         SomeSubraceOfUnexpectedGenderSubrace::registerSelf();
         $subrace = SomeSubraceOfUnexpectedGenderSubrace::getIt();

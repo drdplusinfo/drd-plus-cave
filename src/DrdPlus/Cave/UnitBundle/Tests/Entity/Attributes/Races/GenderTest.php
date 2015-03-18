@@ -103,7 +103,7 @@ class GenderTest extends \PHPUnit_Framework_TestCase
      * @depends can_be_created_as_enum_type
      * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Exceptions\MissingSubraceCodeImplementation
      */
-    public function missing_subrace_code_throws_exception()
+    public function missing_subrace_code_cause_exception()
     {
         /** @var Gender $genericGender */
         $genericGender = Type::getType(Gender::getTypeName());
@@ -116,7 +116,7 @@ class GenderTest extends \PHPUnit_Framework_TestCase
      * @depends can_be_created_as_enum_type
      * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Exceptions\UnexpectedGenderCode
      */
-    public function changed_code_throws_exception()
+    public function changed_code_cause_exception()
     {
         /** @var Gender $genericGender */
         $genericGender = Type::getType(Gender::getTypeName());
@@ -129,7 +129,7 @@ class GenderTest extends \PHPUnit_Framework_TestCase
      * @test
      * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Exceptions\MaleDetectionNotImplemented
      */
-    public function missing_male_detection_throws_exception()
+    public function missing_male_detection_cause_exception()
     {
         /** @var Gender $genericGender */
         $genericGender = Type::getType(Gender::getTypeName());
@@ -141,7 +141,7 @@ class GenderTest extends \PHPUnit_Framework_TestCase
      * @test
      * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Exceptions\FemaleDetectionNotImplemented
      */
-    public function missing_female_detection_throws_exception()
+    public function missing_female_detection_cause_exception()
     {
         /** @var Gender $genericGender */
         $genericGender = Type::getType(Gender::getTypeName());
@@ -153,7 +153,7 @@ class GenderTest extends \PHPUnit_Framework_TestCase
      * @test
      * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Exceptions\UnknownGender
      */
-    public function unknown_gender_detection_throws_exception()
+    public function unknown_gender_detection_cause_exception()
     {
         /** @var Gender $genericGender */
         $genericGender = Type::getType(Gender::getTypeName());
@@ -165,7 +165,7 @@ class GenderTest extends \PHPUnit_Framework_TestCase
      * @test
      * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Exceptions\AmbiguousGender
      */
-    public function ambiguous_gender_detection_throws_exception()
+    public function ambiguous_gender_detection_cause_exception()
     {
         /** @var Gender $genericGender */
         $genericGender = Type::getType(Gender::getTypeName());
