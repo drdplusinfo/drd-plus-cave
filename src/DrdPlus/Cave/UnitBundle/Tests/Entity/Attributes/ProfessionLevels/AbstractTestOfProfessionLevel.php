@@ -103,6 +103,22 @@ class AbstractTestOfProfessionLevel extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @param ProfessionLevel $professionLevel
+     *
+     * @test
+     * @depends can_create_instance
+     */
+    public function gives_expected_profession_code(ProfessionLevel $professionLevel)
+    {
+        $class = $this->getProfessionLevelClass();
+        $baseName = preg_replace('~(\w+\\\)*(\w+)~', '$2', $class);
+        $underscored = preg_replace('~(\w)([A-Z])~', '$1_$2', $baseName);
+        $lowered = strtolower($underscored);
+
+        $this->assertSame($lowered, $professionLevel->getProfessionCode());
+    }
+
+    /**
      * @test
      * @depends can_create_instance
      */
