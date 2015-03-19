@@ -124,7 +124,7 @@ abstract class ProfessionLevel extends StrictObject
     }
 
     /**
-     * @return int
+     * @return LevelValue
      */
     public function getLevelValue()
     {
