@@ -2,6 +2,7 @@
 namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use DrdPlus\Cave\UnitBundle\Entity\Person;
 
 class ProfessionLevelsTest extends \PHPUnit_Framework_TestCase
 {
@@ -185,6 +186,7 @@ class ProfessionLevelsTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @param ProfessionLevels $professionLevels
+     * @return ProfessionLevels
      *
      * @test
      * @depends can_create_instance
@@ -192,6 +194,23 @@ class ProfessionLevelsTest extends \PHPUnit_Framework_TestCase
     public function new_levels_gives_null_as_person(ProfessionLevels $professionLevels)
     {
         $this->assertNull($professionLevels->getPerson());
+
+        return $professionLevels;
+    }
+
+    /**
+     * @param ProfessionLevels $professionLevels
+     *
+     * @test
+     * @depends new_levels_gives_null_as_person
+     */
+    public function person_can_be_set(ProfessionLevels $professionLevels)
+    {
+        $this->assertNull($professionLevels->getPerson());
+        /** @var Person $person */
+        $person = \Mockery::mock(Person::class);
+        $professionLevels->setPerson($person);
+        $this->assertSame($person, $professionLevels->getPerson());
     }
 
     /**
