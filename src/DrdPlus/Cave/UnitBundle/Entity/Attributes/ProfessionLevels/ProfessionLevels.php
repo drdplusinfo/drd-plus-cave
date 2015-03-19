@@ -111,7 +111,7 @@ class ProfessionLevels extends StrictObject
     /**
      * Get person
      *
-     * @return Person
+     * @return Person|null
      */
     public function getPerson()
     {
@@ -184,7 +184,7 @@ class ProfessionLevels extends StrictObject
     }
 
     /**
-     * @return ProfessionLevel
+     * @return ProfessionLevel|false
      */
     public function getFirstLevel()
     {
@@ -193,9 +193,24 @@ class ProfessionLevels extends StrictObject
             return false;
         }
 
-        $sorted = $this->sortByLevelValue($levels);
+        return $this->sortByLevelValue($levels)[0];
+    }
 
-        return current($levels);
+    /**
+     * Get current professions summary level
+     *
+     * @return int
+     */
+    public function getLevelsSummary()
+    {
+        return array_sum(
+            array_map(
+                function (ProfessionLevel $professionLevel) {
+                    return $professionLevel->getLevelValue();
+                },
+                $this->getLevels()
+            )
+        );
     }
 
     /**
@@ -219,7 +234,6 @@ class ProfessionLevels extends StrictObject
                 ? 1 // firstly given level is higher than second one
                 : -1; // opposite
         });
-        reset($professionLevels);
 
         return $professionLevels;
     }
@@ -352,6 +366,46 @@ class ProfessionLevels extends StrictObject
     }
 
     /**
+     * @param string $propertyName
+     *
+     * @return int
+     */
+    private function getPropertyIncrementSummary($propertyName)
+    {
+        // like getStrengthFirstLevelIncrement
+        $propertyFirstLevelIncrementGetter = 'get' . ucfirst($propertyName) . 'FirstLevelIncrement';
+
+        return $this->$propertyFirstLevelIncrementGetter() + $this->getLevelsPropertyIncrementSummary($propertyName);
+    }
+
+    /**
+     * @param string $propertyName
+     *
+     * @return int
+     */
+    private function getLevelsPropertyIncrementSummary($propertyName)
+    {
+        return array_sum($this->getLevelsPropertyIncrements($propertyName));
+    }
+
+    /**
+     * @param $propertyName
+     * @return array|int[]
+     */
+    private function getLevelsPropertyIncrements($propertyName)
+    {
+        // strength = getStrengthIncrement
+        $propertyIncrementGetter = 'get' . ucfirst($propertyName) . 'Increment';
+
+        return array_map(
+            function (ProfessionLevel $professionLevel) use ($propertyIncrementGetter) {
+                return $professionLevel->$propertyIncrementGetter();
+            },
+            $this->getLevels()
+        );
+    }
+
+    /**
      * Get agility increment
      *
      * @return int
@@ -369,16 +423,6 @@ class ProfessionLevels extends StrictObject
     public function getKnackIncrementSummary()
     {
         return $this->getPropertyIncrementSummary(Knack::getTypeName());
-    }
-
-    /**
-     * Get charisma increment
-     *
-     * @return int
-     */
-    public function getCharismaIncrementSummary()
-    {
-        return $this->getPropertyIncrementSummary(Charisma::getTypeName());
     }
 
     /**
@@ -402,54 +446,12 @@ class ProfessionLevels extends StrictObject
     }
 
     /**
-     * @param string $propertyName
+     * Get charisma increment
      *
      * @return int
      */
-    private function getPropertyIncrementSummary($propertyName)
+    public function getCharismaIncrementSummary()
     {
-        // like getStrengthFirstLevelIncrement
-        $propertyFirstLevelIncrementGetter = 'get' . ucfirst($propertyName) . 'FirstLevelIncrement';
-
-        return $this->$propertyFirstLevelIncrementGetter() + $this->getByLevelsIncrementSummary($propertyName);
-    }
-
-    /**
-     * @param string $propertyName
-     *
-     * @return int
-     */
-    private function getByLevelsIncrementSummary($propertyName)
-    {
-        $byLevelsIncrementSummary = 0;
-        // like getStrengthIncrement
-        $propertyIncrementGetter = 'get' . ucfirst($propertyName) . 'Increment';
-        $byLevelsIncrementSummary += array_sum(
-            array_map(
-                function (ProfessionLevel $professionLevel) use ($propertyIncrementGetter) {
-                    return $professionLevel->$propertyIncrementGetter();
-                },
-                $this->getLevels()
-            )
-        );
-
-        return $byLevelsIncrementSummary;
-    }
-
-    /**
-     * Get current professions summary level
-     *
-     * @return int
-     */
-    public function getProfessionLevelsSummary()
-    {
-        return array_sum(
-            array_map(
-                function (ProfessionLevel $professionLevel) {
-                    return $professionLevel->getLevelValue();
-                },
-                $this->getLevels()
-            )
-        );
+        return $this->getPropertyIncrementSummary(Charisma::getTypeName());
     }
 }
