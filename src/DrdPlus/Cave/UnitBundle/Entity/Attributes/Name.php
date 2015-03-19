@@ -24,4 +24,12 @@ class Name extends SelfTypedStrictStringEnum
         return strlen($this->getEnumValue()) === 0;
     }
 
+    /**
+     * @return string
+     */
+    public function getValue()
+    {
+        return $this->getEnumValue();
+    }
+
 }

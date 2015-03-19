@@ -193,7 +193,7 @@ class ProfessionLevels extends StrictObject
             return false;
         }
 
-        return $this->sortByLevelValue($levels)[0];
+        return $this->sortByLevelRank($levels)[0];
     }
 
     /**
@@ -206,7 +206,7 @@ class ProfessionLevels extends StrictObject
         return array_sum(
             array_map(
                 function (ProfessionLevel $professionLevel) {
-                    return $professionLevel->getLevelValue()->getEnumValue();
+                    return $professionLevel->getLevelValue()->getRank();
                 },
                 $this->getLevels()
             )
@@ -218,10 +218,10 @@ class ProfessionLevels extends StrictObject
      *
      * @return array
      */
-    private function sortByLevelValue(array $professionLevels)
+    private function sortByLevelRank(array $professionLevels)
     {
         usort($professionLevels, function (ProfessionLevel $aLevel, ProfessionLevel $anotherLevel) {
-            $difference = $aLevel->getLevelValue()->getEnumValue() - $anotherLevel->getLevelValue()->getEnumValue();
+            $difference = $aLevel->getLevelValue()->getRank() - $anotherLevel->getLevelValue()->getRank();
             if ($difference === 0) {
                 throw new \LogicException(
                     'Two profession levels of IDs' .
@@ -281,7 +281,7 @@ class ProfessionLevels extends StrictObject
 
     private function checkLevelsRankUniqueness(ProfessionLevel $aLevel, ProfessionLevel $anotherLevel)
     {
-        $difference = $anotherLevel->getLevelValue()->getEnumValue() - $aLevel->getLevelValue()->getEnumValue();
+        $difference = $anotherLevel->getLevelValue()->getRank() - $aLevel->getLevelValue()->getRank();
         if (!$difference) {
             throw new \LogicException('Two profession levels have the same level rank.');
         }
@@ -289,15 +289,15 @@ class ProfessionLevels extends StrictObject
 
     private function checkNewLevelSequence(ProfessionLevel $newLevel, ArrayCollection $previousProfessionLevels)
     {
-        if (!$newLevel->getLevelValue()->getEnumValue()) {
+        if (!$newLevel->getLevelValue()->getRank()) {
             throw new \LogicException(
                 'Missing level value of given level of profession ' . $newLevel->getProfessionCode() . ' with ID ' . var_export($newLevel->getId())
             );
         }
 
-        if ($newLevel->getLevelValue()->getEnumValue() !== ($previousProfessionLevels->count() + 1)) {
+        if ($newLevel->getLevelValue()->getRank() !== ($previousProfessionLevels->count() + 1)) {
             throw new \LogicException(
-                'Unexpected level of given profession level. Expected ' . ($previousProfessionLevels->count() + 1) . ', got ' . $newLevel->getLevelValue()->getEnumValue()
+                'Unexpected level of given profession level. Expected ' . ($previousProfessionLevels->count() + 1) . ', got ' . $newLevel->getLevelValue()->getRank()
             );
         }
     }

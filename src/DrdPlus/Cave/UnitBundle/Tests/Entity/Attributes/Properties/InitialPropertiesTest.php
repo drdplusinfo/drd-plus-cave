@@ -56,7 +56,7 @@ class InitialPropertiesTest extends \PHPUnit_Framework_TestCase
         $strength = \Mockery::mock(Strength::class);
         $strength->shouldReceive('getTypeName')
             ->andReturn('strength');
-        $strength->shouldReceive('getEnumValue')
+        $strength->shouldReceive('getValue')
             ->andReturn($initialStrengthValue = 2);
         $initialProperties = new InitialProperties();
         $initialProperties->setInitialStrength($strength);
@@ -149,7 +149,7 @@ class InitialPropertiesTest extends \PHPUnit_Framework_TestCase
         $strength = \Mockery::mock(Strength::class);
         $strength->shouldReceive('getTypeName')
             ->andReturn('strength');
-        $strength->shouldReceive('getEnumValue')
+        $strength->shouldReceive('getValue')
             ->andReturn($initialStrengthValue = 3 /* maximal initial strength (without race gender modifier) */);
 
         $initialProperties = $this->getInitialProperties();
@@ -163,7 +163,7 @@ class InitialPropertiesTest extends \PHPUnit_Framework_TestCase
             ->andReturn($genderStrengthModifier = 0);
 
         $initialProperties->setInitialStrength($strength);
-        $this->assertSame($initialStrengthValue, $initialProperties->getInitialStrength()->getEnumValue());
+        $this->assertSame($initialStrengthValue, $initialProperties->getInitialStrength()->getValue());
 
         return $initialProperties;
     }
@@ -179,7 +179,7 @@ class InitialPropertiesTest extends \PHPUnit_Framework_TestCase
         $strength = \Mockery::mock(Strength::class);
         $strength->shouldReceive('getTypeName')
             ->andReturn('strength');
-        $strength->shouldReceive('getEnumValue')
+        $strength->shouldReceive('getValue')
             ->andReturn($initialStrengthValue = 4 /* higher than maximal initial strength, including gender modifier for this case */);
 
         $initialProperties = $this->getInitialProperties();
@@ -193,7 +193,7 @@ class InitialPropertiesTest extends \PHPUnit_Framework_TestCase
             ->andReturn($genderStrengthModifier = 0);
 
         $initialProperties->setInitialStrength($strength);
-        $this->assertSame($initialStrengthValue, $initialProperties->getInitialStrength()->getEnumValue());
+        $this->assertSame($initialStrengthValue, $initialProperties->getInitialStrength()->getValue());
     }
 
     /**
@@ -246,7 +246,7 @@ class InitialPropertiesTest extends \PHPUnit_Framework_TestCase
         $agility = \Mockery::mock(Agility::class);
         $agility->shouldReceive('getTypeName')
             ->andReturn('agility');
-        $agility->shouldReceive('getEnumValue')
+        $agility->shouldReceive('getValue')
             ->andReturn($initialAgilityValue = 3 /* maximal initial agility (without race gender modifier) */);
 
         $initialProperties = $this->getInitialProperties();
@@ -260,7 +260,7 @@ class InitialPropertiesTest extends \PHPUnit_Framework_TestCase
             ->andReturn($genderAgilityModifier = 0);
 
         $initialProperties->setInitialAgility($agility);
-        $this->assertSame($initialAgilityValue, $initialProperties->getInitialAgility()->getEnumValue());
+        $this->assertSame($initialAgilityValue, $initialProperties->getInitialAgility()->getValue());
         
         return $initialProperties;
     }
@@ -276,7 +276,7 @@ class InitialPropertiesTest extends \PHPUnit_Framework_TestCase
         $agility = \Mockery::mock(Agility::class);
         $agility->shouldReceive('getTypeName')
             ->andReturn('agility');
-        $agility->shouldReceive('getEnumValue')
+        $agility->shouldReceive('getValue')
             ->andReturn($initialAgilityValue = 4 /* higher than maximal initial agility, including gender modifier for this case */);
 
         $initialProperties = $this->getInitialProperties();
@@ -290,7 +290,7 @@ class InitialPropertiesTest extends \PHPUnit_Framework_TestCase
             ->andReturn($genderAgilityModifier = 0);
 
         $initialProperties->setInitialAgility($agility);
-        $this->assertSame($initialAgilityValue, $initialProperties->getInitialAgility()->getEnumValue());
+        $this->assertSame($initialAgilityValue, $initialProperties->getInitialAgility()->getValue());
     }
 
     /**
@@ -343,7 +343,7 @@ class InitialPropertiesTest extends \PHPUnit_Framework_TestCase
         $knack = \Mockery::mock(Knack::class);
         $knack->shouldReceive('getTypeName')
             ->andReturn('knack');
-        $knack->shouldReceive('getEnumValue')
+        $knack->shouldReceive('getValue')
             ->andReturn($initialKnackValue = 3 /* maximal initial knack (without race gender modifier) */);
 
         $initialProperties = $this->getInitialProperties();
@@ -357,7 +357,7 @@ class InitialPropertiesTest extends \PHPUnit_Framework_TestCase
             ->andReturn($genderKnackModifier = 0);
 
         $initialProperties->setInitialKnack($knack);
-        $this->assertSame($initialKnackValue, $initialProperties->getInitialKnack()->getEnumValue());
+        $this->assertSame($initialKnackValue, $initialProperties->getInitialKnack()->getValue());
         
         return $initialProperties;
     }
@@ -373,7 +373,7 @@ class InitialPropertiesTest extends \PHPUnit_Framework_TestCase
         $knack = \Mockery::mock(Knack::class);
         $knack->shouldReceive('getTypeName')
             ->andReturn('knack');
-        $knack->shouldReceive('getEnumValue')
+        $knack->shouldReceive('getValue')
             ->andReturn($initialKnackValue = 4 /* higher than maximal initial knack, including gender modifier for this case */);
 
         $initialProperties = $this->getInitialProperties();
@@ -387,7 +387,7 @@ class InitialPropertiesTest extends \PHPUnit_Framework_TestCase
             ->andReturn($genderKnackModifier = 0);
 
         $initialProperties->setInitialKnack($knack);
-        $this->assertSame($initialKnackValue, $initialProperties->getInitialKnack()->getEnumValue());
+        $this->assertSame($initialKnackValue, $initialProperties->getInitialKnack()->getValue());
     }
 
     /**
@@ -440,7 +440,7 @@ class InitialPropertiesTest extends \PHPUnit_Framework_TestCase
         $will = \Mockery::mock(Will::class);
         $will->shouldReceive('getTypeName')
             ->andReturn('will');
-        $will->shouldReceive('getEnumValue')
+        $will->shouldReceive('getValue')
             ->andReturn($initialWillValue = 3 /* maximal initial will (without race gender modifier) */);
 
         $initialProperties = $this->getInitialProperties();
@@ -454,7 +454,7 @@ class InitialPropertiesTest extends \PHPUnit_Framework_TestCase
             ->andReturn($genderWillModifier = 0);
 
         $initialProperties->setInitialWill($will);
-        $this->assertSame($initialWillValue, $initialProperties->getInitialWill()->getEnumValue());
+        $this->assertSame($initialWillValue, $initialProperties->getInitialWill()->getValue());
 
         return $initialProperties;
     }
@@ -470,7 +470,7 @@ class InitialPropertiesTest extends \PHPUnit_Framework_TestCase
         $will = \Mockery::mock(Will::class);
         $will->shouldReceive('getTypeName')
             ->andReturn('will');
-        $will->shouldReceive('getEnumValue')
+        $will->shouldReceive('getValue')
             ->andReturn($initialWillValue = 4 /* higher than maximal initial will, including gender modifier for this case */);
 
         $initialProperties = $this->getInitialProperties();
@@ -484,7 +484,7 @@ class InitialPropertiesTest extends \PHPUnit_Framework_TestCase
             ->andReturn($genderWillModifier = 0);
 
         $initialProperties->setInitialWill($will);
-        $this->assertSame($initialWillValue, $initialProperties->getInitialWill()->getEnumValue());
+        $this->assertSame($initialWillValue, $initialProperties->getInitialWill()->getValue());
     }
 
     /**
@@ -537,7 +537,7 @@ class InitialPropertiesTest extends \PHPUnit_Framework_TestCase
         $intelligence = \Mockery::mock(Intelligence::class);
         $intelligence->shouldReceive('getTypeName')
             ->andReturn('intelligence');
-        $intelligence->shouldReceive('getEnumValue')
+        $intelligence->shouldReceive('getValue')
             ->andReturn($initialIntelligenceValue = 3 /* maximal initial intelligence (without race gender modifier) */);
 
         $initialProperties = $this->getInitialProperties();
@@ -551,7 +551,7 @@ class InitialPropertiesTest extends \PHPUnit_Framework_TestCase
             ->andReturn($genderIntelligenceModifier = 0);
 
         $initialProperties->setInitialIntelligence($intelligence);
-        $this->assertSame($initialIntelligenceValue, $initialProperties->getInitialIntelligence()->getEnumValue());
+        $this->assertSame($initialIntelligenceValue, $initialProperties->getInitialIntelligence()->getValue());
 
         return $initialProperties;
     }
@@ -567,7 +567,7 @@ class InitialPropertiesTest extends \PHPUnit_Framework_TestCase
         $intelligence = \Mockery::mock(Intelligence::class);
         $intelligence->shouldReceive('getTypeName')
             ->andReturn('intelligence');
-        $intelligence->shouldReceive('getEnumValue')
+        $intelligence->shouldReceive('getValue')
             ->andReturn($initialIntelligenceValue = 4 /* higher than maximal initial intelligence, including gender modifier for this case */);
 
         $initialProperties = $this->getInitialProperties();
@@ -581,7 +581,7 @@ class InitialPropertiesTest extends \PHPUnit_Framework_TestCase
             ->andReturn($genderIntelligenceModifier = 0);
 
         $initialProperties->setInitialIntelligence($intelligence);
-        $this->assertSame($initialIntelligenceValue, $initialProperties->getInitialIntelligence()->getEnumValue());
+        $this->assertSame($initialIntelligenceValue, $initialProperties->getInitialIntelligence()->getValue());
     }
 
     /**
@@ -634,7 +634,7 @@ class InitialPropertiesTest extends \PHPUnit_Framework_TestCase
         $charisma = \Mockery::mock(Charisma::class);
         $charisma->shouldReceive('getTypeName')
             ->andReturn('charisma');
-        $charisma->shouldReceive('getEnumValue')
+        $charisma->shouldReceive('getValue')
             ->andReturn($initialCharismaValue = 3 /* maximal initial charisma (without race gender modifier) */);
 
         $initialProperties = $this->getInitialProperties();
@@ -648,7 +648,7 @@ class InitialPropertiesTest extends \PHPUnit_Framework_TestCase
             ->andReturn($genderCharismaModifier = 0);
 
         $initialProperties->setInitialCharisma($charisma);
-        $this->assertSame($initialCharismaValue, $initialProperties->getInitialCharisma()->getEnumValue());
+        $this->assertSame($initialCharismaValue, $initialProperties->getInitialCharisma()->getValue());
 
         return $initialProperties;
     }
@@ -664,7 +664,7 @@ class InitialPropertiesTest extends \PHPUnit_Framework_TestCase
         $charisma = \Mockery::mock(Charisma::class);
         $charisma->shouldReceive('getTypeName')
             ->andReturn('charisma');
-        $charisma->shouldReceive('getEnumValue')
+        $charisma->shouldReceive('getValue')
             ->andReturn($initialCharismaValue = 4 /* higher than maximal initial charisma, including gender modifier for this case */);
 
         $initialProperties = $this->getInitialProperties();
@@ -678,7 +678,7 @@ class InitialPropertiesTest extends \PHPUnit_Framework_TestCase
             ->andReturn($genderCharismaModifier = 0);
 
         $initialProperties->setInitialCharisma($charisma);
-        $this->assertSame($initialCharismaValue, $initialProperties->getInitialCharisma()->getEnumValue());
+        $this->assertSame($initialCharismaValue, $initialProperties->getInitialCharisma()->getValue());
     }
 
     /**

@@ -30,4 +30,12 @@ abstract class Property extends SelfTypedIntegerEnum
         return parent::getTypeName();
     }
 
+    /**
+     * @return int
+     */
+    public function getValue()
+    {
+        return $this->getEnumValue();
+    }
+
 }

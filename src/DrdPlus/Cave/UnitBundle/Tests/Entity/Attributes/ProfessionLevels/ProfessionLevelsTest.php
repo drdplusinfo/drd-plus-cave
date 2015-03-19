@@ -286,7 +286,7 @@ class ProfessionLevelsTest extends \PHPUnit_Framework_TestCase
         $fighterLevel->shouldReceive('getLevelValue')
             ->atLeast()->once()
             ->andReturn($levelValue = \Mockery::mock(LevelValue::class));
-        $levelValue->shouldReceive('getEnumValue')
+        $levelValue->shouldReceive('getRank')
             ->atLeast()->once()
             ->andReturn($levelRank = 1);
         $professionLevels->addFighterLevel($fighterLevel);
@@ -333,7 +333,7 @@ class ProfessionLevelsTest extends \PHPUnit_Framework_TestCase
         $priestLevel->shouldReceive('getLevelValue')
             ->atLeast()->once()
             ->andReturn($levelValue = \Mockery::mock(LevelValue::class));
-        $levelValue->shouldReceive('getEnumValue')
+        $levelValue->shouldReceive('getRank')
             ->atLeast()->once()
             ->andReturn($levelRank = 1);
         $professionLevels->addPriestLevel($priestLevel);
@@ -380,7 +380,7 @@ class ProfessionLevelsTest extends \PHPUnit_Framework_TestCase
         $rangerLevel->shouldReceive('getLevelValue')
             ->atLeast()->once()
             ->andReturn($levelValue = \Mockery::mock(LevelValue::class));
-        $levelValue->shouldReceive('getEnumValue')
+        $levelValue->shouldReceive('getRank')
             ->atLeast()->once()
             ->andReturn($levelRank = 1);
         $professionLevels->addRangerLevel($rangerLevel);
@@ -426,7 +426,7 @@ class ProfessionLevelsTest extends \PHPUnit_Framework_TestCase
         $theurgistLevel->shouldReceive('getLevelValue')
             ->atLeast()->once()
             ->andReturn($levelValue = \Mockery::mock(LevelValue::class));
-        $levelValue->shouldReceive('getEnumValue')
+        $levelValue->shouldReceive('getRank')
             ->atLeast()->once()
             ->andReturn($levelRank = 1);
         $professionLevels->addTheurgistLevel($theurgistLevel);
@@ -472,7 +472,7 @@ class ProfessionLevelsTest extends \PHPUnit_Framework_TestCase
         $thiefLevel->shouldReceive('getLevelValue')
             ->atLeast()->once()
             ->andReturn($levelValue = \Mockery::mock(LevelValue::class));
-        $levelValue->shouldReceive('getEnumValue')
+        $levelValue->shouldReceive('getRank')
             ->atLeast()->once()
             ->andReturn($levelRank = 1);
         $professionLevels->addThiefLevel($thiefLevel);
@@ -518,7 +518,7 @@ class ProfessionLevelsTest extends \PHPUnit_Framework_TestCase
         $wizardLevel->shouldReceive('getLevelValue')
             ->atLeast()->once()
             ->andReturn($levelValue = \Mockery::mock(LevelValue::class));
-        $levelValue->shouldReceive('getEnumValue')
+        $levelValue->shouldReceive('getRank')
             ->atLeast()->once()
             ->andReturn($levelRank = 1);
         $professionLevels->addWizardLevel($wizardLevel);

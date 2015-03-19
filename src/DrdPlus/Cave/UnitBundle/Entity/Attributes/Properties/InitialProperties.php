@@ -132,13 +132,13 @@ class InitialProperties extends StrictObject
         $initialPropertyName = 'initial' . ucfirst($propertyName);
         if (isset($this->$initialPropertyName)) {
             throw new Exceptions\InitialPropertyIsAlreadySet(
-                'The property ' . $initialPropertyName . ' is already set by value ' . var_export($this->$initialPropertyName->getEnumValue(), true)
+                'The property ' . $initialPropertyName . ' is already set by value ' . var_export($this->$initialPropertyName->getValue(), true)
             );
         }
 
         // like calculateMaximalInitialStrength()
         $initialCalculationMethod = 'calculateMaximalInitial' . ucfirst($propertyName);
-        if ($initialValue->getEnumValue() > $this->$initialCalculationMethod()) {
+        if ($initialValue->getValue() > $this->$initialCalculationMethod()) {
             throw new Exceptions\InitialPropertyValueExceeded('The initial ' . $propertyName . ' can not exceed ' . $this->$initialCalculationMethod());
         }
 
