@@ -206,7 +206,7 @@ class ProfessionLevels extends StrictObject
         return array_sum(
             array_map(
                 function (ProfessionLevel $professionLevel) {
-                    return $professionLevel->getLevelValue();
+                    return $professionLevel->getLevelValue()->getEnumValue();
                 },
                 $this->getLevels()
             )
@@ -221,7 +221,7 @@ class ProfessionLevels extends StrictObject
     private function sortByLevelValue(array $professionLevels)
     {
         usort($professionLevels, function (ProfessionLevel $aLevel, ProfessionLevel $anotherLevel) {
-            $difference = $aLevel->getLevelValue() - $anotherLevel->getLevelValue();
+            $difference = $aLevel->getLevelValue()->getEnumValue() - $anotherLevel->getLevelValue()->getEnumValue();
             if ($difference === 0) {
                 throw new \LogicException(
                     'Two profession levels of IDs' .
@@ -238,9 +238,12 @@ class ProfessionLevels extends StrictObject
         return $professionLevels;
     }
 
-    public function addFighterLevel(FighterLevel $nweFighterLevel)
+    /**
+     * @param FighterLevel $newFighterLevel
+     */
+    public function addFighterLevel(FighterLevel $newFighterLevel)
     {
-        $this->addLevel($nweFighterLevel);
+        $this->addLevel($newFighterLevel);
     }
 
     /**
@@ -248,10 +251,11 @@ class ProfessionLevels extends StrictObject
      */
     private function addLevel(ProfessionLevel $newLevel)
     {
-        $previousLevels = $this->getPreviousLevels($newLevel);
+        $previousLevels = $this->getPreviousProfessionLevels($newLevel);
         foreach ($previousLevels as $previousLevel) {
             $this->checkLevelsRankUniqueness($newLevel, $previousLevel);
         }
+        $this->checkNewLevelSequence($newLevel, $previousLevels);
 
         $previousLevels->add($newLevel);
     }
@@ -261,10 +265,10 @@ class ProfessionLevels extends StrictObject
      *
      * @return ProfessionLevel[]|ArrayCollection
      */
-    private function getPreviousLevels(ProfessionLevel $professionLevel)
+    private function getPreviousProfessionLevels(ProfessionLevel $professionLevel)
     {
         // fighter = getFighterLevels
-        $getterName = 'get' . ucfirst($professionLevel->getProfessionCode()) . 's';
+        $getterName = 'get' . ucfirst($professionLevel->getProfessionCode()) . 'Levels';
 
         if (!method_exists($this, $getterName)) {
             throw new \LogicException(
@@ -277,10 +281,65 @@ class ProfessionLevels extends StrictObject
 
     private function checkLevelsRankUniqueness(ProfessionLevel $aLevel, ProfessionLevel $anotherLevel)
     {
-        $difference = $anotherLevel->getLevelValue() - $aLevel->getLevelValue();
+        $difference = $anotherLevel->getLevelValue()->getEnumValue() - $aLevel->getLevelValue()->getEnumValue();
         if (!$difference) {
             throw new \LogicException('Two profession levels have the same level rank.');
         }
+    }
+
+    private function checkNewLevelSequence(ProfessionLevel $newLevel, ArrayCollection $previousProfessionLevels)
+    {
+        if (!$newLevel->getLevelValue()->getEnumValue()) {
+            throw new \LogicException(
+                'Missing level value of given level of profession ' . $newLevel->getProfessionCode() . ' with ID ' . var_export($newLevel->getId())
+            );
+        }
+
+        if ($newLevel->getLevelValue()->getEnumValue() !== ($previousProfessionLevels->count() + 1)) {
+            throw new \LogicException(
+                'Unexpected level of given profession level. Expected ' . ($previousProfessionLevels->count() + 1) . ', got ' . $newLevel->getLevelValue()->getEnumValue()
+            );
+        }
+    }
+
+    /**
+     * @param PriestLevel $newPriestLevel
+     */
+    public function addPriestLevel(PriestLevel $newPriestLevel)
+    {
+        $this->addLevel($newPriestLevel);
+    }
+
+    /**
+     * @param RangerLevel $newRangerLevel
+     */
+    public function addRangerLevel(RangerLevel $newRangerLevel)
+    {
+        $this->addLevel($newRangerLevel);
+    }
+
+    /**
+     * @param TheurgistLevel $newTheurgistLevel
+     */
+    public function addTheurgistLevel(TheurgistLevel $newTheurgistLevel)
+    {
+        $this->addLevel($newTheurgistLevel);
+    }
+
+    /**
+     * @param ThiefLevel $newThiefLevel
+     */
+    public function addThiefLevel(ThiefLevel $newThiefLevel)
+    {
+        $this->addLevel($newThiefLevel);
+    }
+
+    /**
+     * @param WizardLevel $newWizardLevel
+     */
+    public function addWizardLevel(WizardLevel $newWizardLevel)
+    {
+        $this->addLevel($newWizardLevel);
     }
 
     /**
