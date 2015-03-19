@@ -100,4 +100,14 @@ class NameTest extends \PHPUnit_Framework_TestCase
         $phpValue = $enumType->convertToPHPValue('bar', $platform);
         $this->assertInstanceOf(Name::class, $phpValue);
     }
+
+    /**
+     * @test
+     * @depends can_be_registered
+     */
+    public function can_return_name_value_by_shortcut_getter()
+    {
+        $filledName = Name::getEnum($value = 'foo');
+        $this->assertSame($value, $filledName->getValue());
+    }
 }
