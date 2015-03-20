@@ -5,6 +5,7 @@ use DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\ProfessionLevels\Parts\Profe
 use DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\ProfessionLevels\Parts\ProfessionLevelsTestNewIsEmptyTrait;
 use DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\ProfessionLevels\Parts\ProfessionLevelsTestFirstLevelsTrait;
 use DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\ProfessionLevels\Parts\ProfessionLevelsTestMoreLevelsTrait;
+use DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\ProfessionLevels\Parts\ProfessionLevelsTestPersonCanBeSet;
 use DrdPlus\Cave\UnitBundle\Tests\TestWithMockery;
 
 class ProfessionLevelsTest extends TestWithMockery
@@ -28,6 +29,12 @@ class ProfessionLevelsTest extends TestWithMockery
      */
 
     use ProfessionLevelsTestNewIsEmptyTrait;
+
+    /*
+     * PERSON
+     */
+
+    use ProfessionLevelsTestPersonCanBeSet;
 
     /*
      * FIRST LEVELS
