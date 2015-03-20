@@ -1,7 +1,0 @@
-login:
-    path:   /login
-    defaults: { _controller: DrdPlusCaveSecurityBundle:Security:login }
-login_check:
-    path: /login_check # managed by Symfony internally, no controller needed
-logout:
-    path:   /logout # managed by Symfony internally, no controller needed

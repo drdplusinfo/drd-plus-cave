@@ -18,7 +18,6 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new DrdPlus\Cave\UnitBundle\DrdPlusCaveUnitBundle(),
-            new DrdPlus\Cave\SecurityBundle\DrdPlusCaveSecurityBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
