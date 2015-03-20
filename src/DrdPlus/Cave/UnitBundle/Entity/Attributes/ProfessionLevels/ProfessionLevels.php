@@ -235,6 +235,10 @@ class ProfessionLevels extends StrictObject
     private function addLevel(ProfessionLevel $newLevel)
     {
         $previousLevels = $this->getPreviousProfessionLevels($newLevel);
+        if (count($previousLevels) !== count($this->getLevels())) {
+            $this->throwMultiProfessionNotAllowed($newLevel);
+        }
+
         foreach ($previousLevels as $previousLevel) {
             $this->checkLevelsRankUniqueness($newLevel, $previousLevel);
         }
@@ -260,6 +264,26 @@ class ProfessionLevels extends StrictObject
         }
 
         return $this->$getterName();
+    }
+
+    /**
+     * @param ProfessionLevel $newLevel
+     * @throw \LogicException
+     */
+    private function throwMultiProfessionNotAllowed(ProfessionLevel $newLevel)
+    {
+        $setProfessionCode = array_map(
+            function (ProfessionLevel $level) {
+                return $level->getProfessionCode();
+            },
+            $this->getLevels()
+        )[0];
+
+        throw new \LogicException(
+            'Profession levels of ID ' . var_export($this->id, true) . ' are already set for profession' .
+            ' ' . $setProfessionCode . ', given  ' . $newLevel->getProfessionCode()
+            . ' . Multi-profession is not allowed.'
+        );
     }
 
     private function checkLevelsRankUniqueness(ProfessionLevel $aLevel, ProfessionLevel $anotherLevel)
