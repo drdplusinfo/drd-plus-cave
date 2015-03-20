@@ -1,7 +1,9 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Races;
 
-class GenderFactoryTest extends \PHPUnit_Framework_TestCase
+use DrdPlus\Cave\UnitBundle\Tests\TestWithMockery;
+
+class GenderFactoryTest extends TestWithMockery
 {
     /**
      * @test

@@ -9,8 +9,9 @@ use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Intelligence;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Knack;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Strength;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Will;
+use DrdPlus\Cave\UnitBundle\Tests\TestWithMockery;
 
-class AbstractTestOfProfessionLevel extends \PHPUnit_Framework_TestCase
+class AbstractTestOfProfessionLevel extends TestWithMockery
 {
 
     /**

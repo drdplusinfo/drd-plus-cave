@@ -10,8 +10,9 @@ use DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\Races\Helpers\SubraceGenderW
 use DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\Races\Helpers\SubraceGenderWithUnknownGenderDetection;
 use DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\Races\Helpers\SubraceGenderWithoutFemaleDetection;
 use DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\Races\Helpers\SubraceGenderWithoutMaleDetection;
+use DrdPlus\Cave\UnitBundle\Tests\TestWithMockery;
 
-class GenderTest extends \PHPUnit_Framework_TestCase
+class GenderTest extends TestWithMockery
 {
 
     /**

@@ -5,9 +5,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 use DrdPlus\Cave\UnitBundle\Entity\Person;
 use DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\ProfessionLevels\Parts\ProfessionLevelsTestFirstLevelsTrait;
 use DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\ProfessionLevels\Parts\ProfessionLevelsTestMoreLevelsTrait;
+use DrdPlus\Cave\UnitBundle\Tests\TestWithMockery;
 
-class ProfessionLevelsTest extends \PHPUnit_Framework_TestCase
+class ProfessionLevelsTest extends TestWithMockery
 {
+
     /**
      * @return ProfessionLevels
      *

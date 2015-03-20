@@ -4,8 +4,9 @@ namespace DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\Races;
 use Doctrine\DBAL\Types\Type;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Gender;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Race;
+use DrdPlus\Cave\UnitBundle\Tests\TestWithMockery;
 
-abstract class AbstractTestOfRace extends \PHPUnit_Framework_TestCase
+abstract class AbstractTestOfRace extends TestWithMockery
 {
     /**
      * @test

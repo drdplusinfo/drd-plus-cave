@@ -7,8 +7,9 @@ use Doctrineum\Integer\IntegerEnum;
 use Doctrineum\Integer\SelfTypedIntegerEnum;
 use Doctrineum\Scalar\EnumInterface;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Property;
+use DrdPlus\Cave\UnitBundle\Tests\TestWithMockery;
 
-abstract class AbstractTestOfProperty extends \PHPUnit_Framework_TestCase
+abstract class AbstractTestOfProperty extends TestWithMockery
 {
 
     /**
@@ -131,5 +132,17 @@ abstract class AbstractTestOfProperty extends \PHPUnit_Framework_TestCase
         $phpValue = $property->convertToPHPValue($value = 12345, $platform);
         $this->assertInstanceOf($this->getPropertyClass(), $phpValue);
         $this->assertEquals($value, $phpValue->__toString());
+    }
+
+    /**
+     * @test
+     * @depends can_be_created
+     */
+    public function can_give_value_by_shortcut_getter()
+    {
+        $propertyClass = $this->getPropertyClass();
+        /** @var Property $property */
+        $property = $propertyClass::getEnum($value = 123);
+        $this->assertSame($value, $property->getValue());
     }
 }

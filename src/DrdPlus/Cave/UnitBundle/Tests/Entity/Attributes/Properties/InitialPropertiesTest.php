@@ -11,15 +11,11 @@ use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Will;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Gender;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Race;
 use DrdPlus\Cave\UnitBundle\Entity\Person;
+use DrdPlus\Cave\UnitBundle\Tests\TestWithMockery;
 use Granam\Strict\Object\StrictObject;
 
-class InitialPropertiesTest extends \PHPUnit_Framework_TestCase
+class InitialPropertiesTest extends TestWithMockery
 {
-
-    protected function tearDown()
-    {
-        \Mockery::close();
-    }
 
     /**
      * @returns InitialProperties

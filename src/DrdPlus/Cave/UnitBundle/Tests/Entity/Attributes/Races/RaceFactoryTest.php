@@ -15,8 +15,9 @@ use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Krolls\WildKroll;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Orcs\CommonOrc;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Orcs\Goblin;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Orcs\Skurut;
+use DrdPlus\Cave\UnitBundle\Tests\TestWithMockery;
 
-class RaceFactoryTest extends \PHPUnit_Framework_TestCase
+class RaceFactoryTest extends TestWithMockery
 {
     /**
      * @test

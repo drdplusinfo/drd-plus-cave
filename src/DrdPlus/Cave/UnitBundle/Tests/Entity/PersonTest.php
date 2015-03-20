@@ -6,13 +6,10 @@ use DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels\ProfessionLevels;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\InitialProperties;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Gender;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Race;
+use DrdPlus\Cave\UnitBundle\Tests\TestWithMockery;
 
-class PersonTest extends \PHPUnit_Framework_TestCase
+class PersonTest extends TestWithMockery
 {
-    protected function tearDown()
-    {
-        \Mockery::close();
-    }
 
     /** @test */
     public function can_create_instance()

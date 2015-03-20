@@ -3,8 +3,9 @@ namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Races;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\Type;
+use DrdPlus\Cave\UnitBundle\Tests\TestWithMockery;
 
-class RaceTest extends \PHPUnit_Framework_TestCase
+class RaceTest extends TestWithMockery
 {
 
     /**
