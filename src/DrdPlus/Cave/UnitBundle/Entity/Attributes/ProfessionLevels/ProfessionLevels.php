@@ -210,7 +210,7 @@ class ProfessionLevels extends StrictObject
             if ($difference === 0) {
                 throw new \LogicException(
                     'Two profession levels of IDs' .
-                    ' ' . var_dump($aLevel->getId(), true) . ', ' . var_export($anotherLevel->getId(), true)
+                    ' ' . var_export($aLevel->getId(), true) . ', ' . var_export($anotherLevel->getId(), true)
                     . ' have the same level rank.'
                 );
             }
@@ -238,12 +238,13 @@ class ProfessionLevels extends StrictObject
     {
         $previousLevels = $this->getPreviousProfessionLevels($newLevel);
         if (count($previousLevels) !== count($this->getLevels())) {
-            $this->throwMultiProfessionNotAllowed($newLevel);
+            throw new \LogicException(
+                'Profession levels of ID ' . var_export($this->id, true) . ' are already set for profession' .
+                ' ' . $this->getAlreadySetProfessionCode() . ', given  ' . $newLevel->getProfessionCode()
+                . ' . Multi-profession is not allowed.'
+            );
         }
 
-        foreach ($previousLevels as $previousLevel) {
-            $this->checkLevelsRankUniqueness($newLevel, $previousLevel);
-        }
         $this->checkNewLevelSequence($newLevel, $previousLevels);
 
         $previousLevels->add($newLevel);
@@ -269,31 +270,16 @@ class ProfessionLevels extends StrictObject
     }
 
     /**
-     * @param ProfessionLevel $newLevel
-     * @throw \LogicException
+     * @return string
      */
-    private function throwMultiProfessionNotAllowed(ProfessionLevel $newLevel)
+    private function getAlreadySetProfessionCode()
     {
-        $setProfessionCode = array_map(
+        return array_map(
             function (ProfessionLevel $level) {
                 return $level->getProfessionCode();
             },
             $this->getLevels()
         )[0];
-
-        throw new \LogicException(
-            'Profession levels of ID ' . var_export($this->id, true) . ' are already set for profession' .
-            ' ' . $setProfessionCode . ', given  ' . $newLevel->getProfessionCode()
-            . ' . Multi-profession is not allowed.'
-        );
-    }
-
-    private function checkLevelsRankUniqueness(ProfessionLevel $aLevel, ProfessionLevel $anotherLevel)
-    {
-        $difference = $anotherLevel->getLevelValue()->getRank() - $aLevel->getLevelValue()->getRank();
-        if (!$difference) {
-            throw new \LogicException('Two profession levels have the same level rank.');
-        }
     }
 
     private function checkNewLevelSequence(ProfessionLevel $newLevel, ArrayCollection $previousProfessionLevels)

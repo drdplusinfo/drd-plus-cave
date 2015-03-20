@@ -89,8 +89,8 @@ trait ProfessionLevelsTestMoreLevelsTrait
     {
         /** @var ProfessionLevelsTest $this */
         $this->assertSame(2, count($professionLevels->getLevels()));
-        /** @var FighterLevel|\Mockery\MockInterface $anotherLevel */
 
+        /** @var FighterLevel|\Mockery\MockInterface $anotherLevel */
         $anotherLevel = \Mockery::mock(FighterLevel::class);
         $anotherLevel->shouldDeferMissing();
         $anotherLevel->shouldReceive('getProfessionCode')
@@ -101,6 +101,37 @@ trait ProfessionLevelsTestMoreLevelsTrait
             ->andReturn(4 /* skipped rank 3 */);
 
         $professionLevels->addFighterLevel($anotherLevel);
+    }
+
+    /**
+     * @param ProfessionLevels $professionLevels
+     *
+     * @test
+     * @depends more_fighter_levels_can_be_added
+     * @expectedException \LogicException
+     */
+    public function changed_fighter_level_during_usage_cause_exception(ProfessionLevels $professionLevels)
+    {
+        /** @var ProfessionLevelsTest $this */
+        $this->assertSame(2, count($professionLevels->getLevels()));
+        /** @var FighterLevel|\Mockery\MockInterface $anotherLevel */
+        $anotherLevel = \Mockery::mock(FighterLevel::class);
+        $anotherLevel->shouldDeferMissing();
+        $anotherLevel->shouldReceive('getProfessionCode')
+            ->andReturn('fighter');
+        $anotherLevel->shouldReceive('getLevelValue')
+            ->andReturn($anotherLevelValue = \Mockery::mock(LevelValue::class));
+        $rank = 3;
+        $anotherLevelValue->shouldReceive('getRank')
+            ->andReturnUsing($rankGetter = function () use(&$rank) {
+                return $rank;
+            });
+
+        $professionLevels->addFighterLevel($anotherLevel);
+        /** @noinspection PhpUnusedLocalVariableInspection */
+        $rank = 1; // changed rank to already occupied value
+
+        $professionLevels->getFirstLevel();
     }
 
     /**
