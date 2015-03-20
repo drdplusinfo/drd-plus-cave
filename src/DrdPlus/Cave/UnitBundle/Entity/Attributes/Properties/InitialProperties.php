@@ -91,9 +91,11 @@ class InitialProperties extends StrictObject
     {
         if (!$this->person) {
             $this->person = $person;
-        } elseif ($this->person->getId() !== $person->getId()) {
+        } elseif ($this->person !== $person) {
             throw new Exceptions\PersonIsAlreadySet(
-                'Initial properties entity of ID ' . var_export($this->id, true) . ' is linked with person of ID ' . $this->person->getId()
+                'Initial properties entity of ID ' . var_export($this->id, true)
+                . ' is linked with person of ID ' . var_export($this->person->getId(), true) . '.'
+                . ' Added person of ID (or different instance) ' . var_export($person->getId(), true) . '.'
             );
         }
     }

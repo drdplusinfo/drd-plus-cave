@@ -1,6 +1,7 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\Properties;
 
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels\ProfessionLevelsTest;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Agility;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Charisma;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\InitialProperties;
@@ -93,6 +94,28 @@ class InitialPropertiesTest extends TestWithMockery
         $newPerson->shouldReceive('getId')
             ->andReturn(2);
         $initialProperties->setPerson($newPerson);
+    }
+
+    /**
+     * @param InitialProperties $initialProperties
+     *
+     * @test
+     * @depends person_can_be_set
+     * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Exceptions\PersonIsAlreadySet
+     */
+    public function another_person_even_without_id_cause_exception(InitialProperties $initialProperties)
+    {
+        /** @var Person|\Mockery\MockInterface $previousPerson */
+        $previousPerson = $initialProperties->getPerson();
+        $previousPerson->shouldReceive('getId')
+            ->andReturnNull(); // no ID at all - not saved yet
+        /** @var ProfessionLevelsTest $this */
+        $this->assertInstanceOf(Person::class, $initialProperties->getPerson());
+        /** @var Person|\Mockery\MockInterface $anotherPerson */
+        $anotherPerson = \Mockery::mock(Person::class);
+        $anotherPerson->shouldReceive('getId')
+            ->andReturnNull(); // again not saved entity
+        $initialProperties->setPerson($anotherPerson);
     }
 
     /**
