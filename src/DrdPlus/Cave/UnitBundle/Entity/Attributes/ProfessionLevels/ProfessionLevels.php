@@ -101,9 +101,11 @@ class ProfessionLevels extends StrictObject
     {
         if (!$this->person) {
             $this->person = $person;
-        } elseif ($this->person->getId() !== $person->getId()) {
+        } elseif ($this->person !== $person) {
             throw new Exceptions\PersonIsAlreadySet(
-                'Profession levels of Doctrine ID ' . $this->id . ' is linked with person of ID ' . $this->person->getId()
+                'Profession levels of Doctrine ID ' . var_export($this->id, true)
+                . ' is linked with different person (or instance) of ID ' . var_export($this->person->getId(), true) . '.'
+                . ' Given person of ID ' . var_export($this->person->getId(), true) . '.'
             );
         }
     }
