@@ -197,23 +197,6 @@ class ProfessionLevels extends StrictObject
     }
 
     /**
-     * Get current professions summary level
-     *
-     * @return int
-     */
-    public function getLevelsSummary()
-    {
-        return array_sum(
-            array_map(
-                function (ProfessionLevel $professionLevel) {
-                    return $professionLevel->getLevelValue()->getRank();
-                },
-                $this->getLevels()
-            )
-        );
-    }
-
-    /**
      * @param array|ProfessionLevel[] $professionLevels
      *
      * @return array
@@ -272,7 +255,7 @@ class ProfessionLevels extends StrictObject
 
         if (!method_exists($this, $getterName)) {
             throw new \LogicException(
-                'Unknown profession ' . var_export($professionLevel->getProfessionCode())
+                'Unknown profession ' . var_export($professionLevel->getProfessionCode(), true)
             );
         }
 
