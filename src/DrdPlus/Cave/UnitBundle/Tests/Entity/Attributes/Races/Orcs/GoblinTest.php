@@ -37,7 +37,7 @@ class GoblinTest extends AbstractTestOfRace
      */
     public function gives_expected_male_strength_modifier(Race $race)
     {
-        $this->assertSame(-2, $race->getStrengthModifier($this->getSubraceFemale()));
+        $this->assertSame(-1, $race->getStrengthModifier($this->getSubraceMale()));
     }
 
     /**
@@ -81,7 +81,7 @@ class GoblinTest extends AbstractTestOfRace
      */
     public function gives_expected_male_knack_modifier(Race $race)
     {
-        $this->assertSame(1, $race->getKnackModifier($this->getSubraceFemale()));
+        $this->assertSame(1, $race->getKnackModifier($this->getSubraceMale()));
     }
 
     /**
@@ -114,7 +114,7 @@ class GoblinTest extends AbstractTestOfRace
      */
     public function gives_expected_female_charisma_modifier(Race $race)
     {
-        $this->assertSame(-1, $race->getCharismaModifier($this->getSubraceMale()));
+        $this->assertSame(-1, $race->getCharismaModifier($this->getSubraceFemale()));
     }
 
     /**
@@ -136,7 +136,7 @@ class GoblinTest extends AbstractTestOfRace
      */
     public function gives_expected_female_will_modifier(Race $race)
     {
-        $this->assertSame(-2, $race->getWillModifier($this->getSubraceMale()));
+        $this->assertSame(-1, $race->getWillModifier($this->getSubraceFemale()));
     }
 
     /**

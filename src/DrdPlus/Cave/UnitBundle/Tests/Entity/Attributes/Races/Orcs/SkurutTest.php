@@ -114,7 +114,7 @@ class SkurutTest extends AbstractTestOfRace
      */
     public function gives_expected_female_charisma_modifier(Race $race)
     {
-        $this->assertSame(-2, $race->getCharismaModifier($this->getSubraceMale()));
+        $this->assertSame(-2, $race->getCharismaModifier($this->getSubraceFemale()));
     }
 
     /**

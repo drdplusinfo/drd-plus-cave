@@ -35,17 +35,6 @@ class CommonOrcTest extends AbstractTestOfRace
      * @test
      * @depends can_create_self
      */
-    public function gives_expected_male_strength_modifier(Race $race)
-    {
-        $this->assertSame(-1, $race->getStrengthModifier($this->getSubraceFemale()));
-    }
-
-    /**
-     * @param Race $race
-     *
-     * @test
-     * @depends can_create_self
-     */
     public function gives_expected_female_strength_modifier(Race $race)
     {
         $this->assertSame(-1, $race->getStrengthModifier($this->getSubraceFemale()));
@@ -92,7 +81,7 @@ class CommonOrcTest extends AbstractTestOfRace
      */
     public function gives_expected_female_charisma_modifier(Race $race)
     {
-        $this->assertSame(-2, $race->getCharismaModifier($this->getSubraceMale()));
+        $this->assertSame(-2, $race->getCharismaModifier($this->getSubraceFemale()));
     }
 
     /**
