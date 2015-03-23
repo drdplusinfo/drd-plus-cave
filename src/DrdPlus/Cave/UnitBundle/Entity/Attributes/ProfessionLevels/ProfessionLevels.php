@@ -453,7 +453,7 @@ class ProfessionLevels extends StrictObject
 
         return array_map(
             function (ProfessionLevel $professionLevel) use ($propertyIncrementGetter) {
-                return $professionLevel->$propertyIncrementGetter();
+                return $professionLevel->$propertyIncrementGetter()->getValue();
             },
             $this->getLevels()
         );
