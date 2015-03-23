@@ -3,15 +3,9 @@ namespace DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\ProfessionLevels\Parts
 
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels\FighterLevel;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels\LevelValue;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels\PriestLevel;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels\ProfessionLevel;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels\ProfessionLevels;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels\ProfessionLevelsTest;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels\RangerLevel;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels\TheurgistLevel;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels\ThiefLevel;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels\WizardLevel;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Agility;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Strength;
 
 trait ProfessionLevelsTestMoreLevelsTrait
@@ -27,10 +21,18 @@ trait ProfessionLevelsTestMoreLevelsTrait
      */
     public function more_fighter_levels_can_be_added(ProfessionLevels $professionLevels)
     {
-        /** @var ProfessionLevelsTest $this */
+        return $this->moreLevelsCanBeAdded('fighter', $professionLevels);
+    }
+
+    private function moreLevelsCanBeAdded(
+        $professionName,
+        ProfessionLevels $professionLevels
+    )
+    {
+        /** @var ProfessionLevelsTest|ProfessionLevelsTestMoreLevelsTrait $this */
         /** @var FighterLevel|\Mockery\MockInterface $firstLevel */
         $firstLevel = $professionLevels->getFirstLevel();
-        $this->assertInstanceOf(FighterLevel::class, $firstLevel);
+        $this->assertInstanceOf($this->getMoreLevelsProfessionLevelClass($professionName), $firstLevel);
         $this->assertSame(1, count($professionLevels->getLevels()));
 
         /** @var LevelValue|\Mockery\MockInterface $firstLevelValue */
@@ -38,22 +40,30 @@ trait ProfessionLevelsTestMoreLevelsTrait
         $firstLevelValue->shouldReceive('getRank')
             ->andReturn(1);
         /** @var FighterLevel|\Mockery\MockInterface $anotherLevel */
-        $anotherLevel = \Mockery::mock(FighterLevel::class);
+        $anotherLevel = \Mockery::mock($this->getMoreLevelsProfessionLevelClass($professionName));
         $anotherLevel->shouldDeferMissing();
         $anotherLevel->shouldReceive('getProfessionCode')
-            ->andReturn('fighter');
+            ->andReturn($professionName);
         $anotherLevel->shouldReceive('getLevelValue')
             ->andReturn($anotherLevelValue = \Mockery::mock(LevelValue::class));
         $anotherLevelValue->shouldReceive('getRank')
             ->andReturn(2);
 
-        $professionLevels->addFighterLevel($anotherLevel);
+        $adder = 'add' . ucfirst($professionName) . 'Level';
+        $professionLevels->$adder($anotherLevel);
 
         $this->assertSame($firstLevel, $professionLevels->getFirstLevel());
-        $this->assertSame([$firstLevel, $anotherLevel], $professionLevels->getFighterLevels()->toArray());
+        $levelsGetter = 'get' . ucfirst($professionName) . 'Levels';
+        $this->assertSame([$firstLevel, $anotherLevel], $professionLevels->$levelsGetter()->toArray());
         $this->assertSame([$firstLevel, $anotherLevel], $professionLevels->getLevels());
 
         return $professionLevels;
+    }
+
+    private function getMoreLevelsProfessionLevelClass($professionName)
+    {
+        return '\DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels\\'
+        . ucfirst($professionName) . 'Level';
     }
 
     /**
@@ -64,17 +74,52 @@ trait ProfessionLevelsTestMoreLevelsTrait
      */
     public function fighter_has_strength_increment_summary_as_expected(ProfessionLevels $professionLevels)
     {
-        $strengthSummary = 0;
+        $this->professionHasPropertyIncrementSummaryAsExpected('fighter', 'strength', $professionLevels);
+    }
+
+    public function professionHasPropertyIncrementSummaryAsExpected(
+        $professionName,
+        $testedProperty,
+        ProfessionLevels $professionLevels
+    )
+    {
+        $propertySummary = 0;
         foreach ($professionLevels->getLevels() as $level) {
             /** @var ProfessionLevel|\Mockery\MockInterface $level */
-            $level->shouldReceive('getStrengthIncrement')
-                ->andReturn($strengthIncrement = \Mockery::mock(Strength::class));
-            $strengthIncrement->shouldReceive('getValue')
-                ->andReturn($strength = 123);
-            $strengthSummary += $strength;
+            $level->shouldReceive('get' . ucfirst($testedProperty) . 'Increment')
+                ->andReturn($propertyIncrement = \Mockery::mock(Strength::class));
+            $propertyIncrement->shouldReceive('getValue')
+                ->andReturn($property = 123);
+            $propertySummary += $property;
         }
-        /** @var ProfessionLevelsTest $this */
-        $this->assertSame(1 + $strengthSummary, $professionLevels->getStrengthIncrementSummary());
+        /** @var ProfessionLevelsTest|ProfessionLevelsTestMoreLevelsTrait $this */
+        $this->assertSame(
+            (in_array($testedProperty, $this->getMainPropertiesToProfession($professionName))
+                ? 1
+                : 0
+            )
+            + $propertySummary, $professionLevels->getStrengthIncrementSummary()
+        );
+    }
+
+    private function getMainPropertiesToProfession($professionName)
+    {
+        switch ($professionName) {
+            case 'fighter' :
+                return ['strength', 'agility'];
+            case 'priest' :
+                return ['will', 'charisma'];
+            case 'ranger' :
+                return ['strength', 'knack'];
+            case 'theurgist' :
+                return ['intelligence', 'charisma'];
+            case 'thief' :
+                return ['knack', 'agility'];
+            case 'wizard' :
+                return ['will', 'intelligence'];
+            default :
+                throw new \RuntimeException("Unknown profession name " . var_export($professionName, true));
+        }
     }
 
     /**
@@ -85,17 +130,7 @@ trait ProfessionLevelsTestMoreLevelsTrait
      */
     public function fighter_has_agility_increment_summary_as_expected(ProfessionLevels $professionLevels)
     {
-        $agilitySummary = 0;
-        foreach ($professionLevels->getLevels() as $level) {
-            /** @var ProfessionLevel|\Mockery\MockInterface $level */
-            $level->shouldReceive('getAgilityIncrement')
-                ->andReturn($agilityIncrement = \Mockery::mock(Agility::class));
-            $agilityIncrement->shouldReceive('getValue')
-                ->andReturn($agility = 123);
-            $agilitySummary += $agility;
-        }
-        /** @var ProfessionLevelsTest $this */
-        $this->assertSame(1 + $agilitySummary, $professionLevels->getAgilityIncrementSummary());
+        $this->professionHasPropertyIncrementSummaryAsExpected('fighter', 'agility', $professionLevels);
     }
 
     /**
@@ -107,20 +142,29 @@ trait ProfessionLevelsTestMoreLevelsTrait
      */
     public function adding_fighter_level_with_occupied_sequence_cause_exception(ProfessionLevels $professionLevels)
     {
-        /** @var ProfessionLevelsTest $this */
+        $this->addingLevelWithOccupiedSequenceCauseException('fighter', $professionLevels);
+    }
+
+    private function addingLevelWithOccupiedSequenceCauseException(
+        $professionName,
+        ProfessionLevels $professionLevels
+    )
+    {
+        /** @var ProfessionLevelsTest|ProfessionLevelsTestMoreLevelsTrait $this */
         $this->assertSame(2, count($professionLevels->getLevels()));
         /** @var FighterLevel|\Mockery\MockInterface $anotherLevel */
 
-        $anotherLevel = \Mockery::mock(FighterLevel::class);
+        $anotherLevel = \Mockery::mock($this->getMoreLevelsProfessionLevelClass($professionName));
         $anotherLevel->shouldDeferMissing();
         $anotherLevel->shouldReceive('getProfessionCode')
-            ->andReturn('fighter');
+            ->andReturn($professionName);
         $anotherLevel->shouldReceive('getLevelValue')
             ->andReturn($anotherLevelValue = \Mockery::mock(LevelValue::class));
         $anotherLevelValue->shouldReceive('getRank')
             ->andReturn(2 /* already occupied level tank */);
 
-        $professionLevels->addFighterLevel($anotherLevel);
+        $adder = 'add' . ucfirst($professionName) . 'Level';
+        $professionLevels->$adder($anotherLevel);
     }
 
     /**
@@ -132,20 +176,29 @@ trait ProfessionLevelsTestMoreLevelsTrait
      */
     public function adding_fighter_level_with_too_high_sequence_cause_exception(ProfessionLevels $professionLevels)
     {
-        /** @var ProfessionLevelsTest $this */
+        $this->addingLevelWithTooHighSequenceCauseException('fighter', $professionLevels);
+    }
+
+    private function addingLevelWithTooHighSequenceCauseException(
+        $professionName,
+        ProfessionLevels $professionLevels
+    )
+    {
+        /** @var ProfessionLevelsTest|ProfessionLevelsTestMoreLevelsTrait $this */
         $this->assertSame(2, count($professionLevels->getLevels()));
 
         /** @var FighterLevel|\Mockery\MockInterface $anotherLevel */
-        $anotherLevel = \Mockery::mock(FighterLevel::class);
+        $anotherLevel = \Mockery::mock($this->getMoreLevelsProfessionLevelClass($professionName));
         $anotherLevel->shouldDeferMissing();
         $anotherLevel->shouldReceive('getProfessionCode')
-            ->andReturn('fighter');
+            ->andReturn($professionName);
         $anotherLevel->shouldReceive('getLevelValue')
             ->andReturn($anotherLevelValue = \Mockery::mock(LevelValue::class));
         $anotherLevelValue->shouldReceive('getRank')
             ->andReturn(4 /* skipped rank 3 */);
 
-        $professionLevels->addFighterLevel($anotherLevel);
+        $adder = 'add' . ucfirst($professionName) . 'Level';
+        $professionLevels->$adder($anotherLevel);
     }
 
     /**
@@ -157,10 +210,18 @@ trait ProfessionLevelsTestMoreLevelsTrait
      */
     public function changed_fighter_level_during_usage_cause_exception(ProfessionLevels $professionLevels)
     {
-        /** @var ProfessionLevelsTest $this */
+        $this->changedLevelDuringUsageCauseException('fighter', $professionLevels);
+    }
+
+    private function changedLevelDuringUsageCauseException(
+        $professionName,
+        ProfessionLevels $professionLevels
+    )
+    {
+        /** @var ProfessionLevelsTest|ProfessionLevelsTestMoreLevelsTrait $this */
         $this->assertSame(2, count($professionLevels->getLevels()));
         /** @var FighterLevel|\Mockery\MockInterface $anotherLevel */
-        $anotherLevel = \Mockery::mock(FighterLevel::class);
+        $anotherLevel = \Mockery::mock($this->getMoreLevelsProfessionLevelClass($professionName));
         $anotherLevel->shouldDeferMissing();
         $anotherLevel->shouldReceive('getProfessionCode')
             ->andReturn('fighter');
@@ -172,7 +233,8 @@ trait ProfessionLevelsTestMoreLevelsTrait
                 return $rank;
             });
 
-        $professionLevels->addFighterLevel($anotherLevel);
+        $adder = 'add' . ucfirst($professionName) . 'Level';
+        $professionLevels->$adder($anotherLevel);
         /** @noinspection PhpUnusedLocalVariableInspection */
         $rank = 1; // changed rank to already occupied value
 
@@ -189,33 +251,7 @@ trait ProfessionLevelsTestMoreLevelsTrait
      */
     public function more_priest_levels_can_be_added(ProfessionLevels $professionLevels)
     {
-        /** @var ProfessionLevelsTest $this */
-        /** @var PriestLevel|\Mockery\MockInterface $firstLevel */
-        $firstLevel = $professionLevels->getFirstLevel();
-        $this->assertInstanceOf(PriestLevel::class, $firstLevel);
-        $this->assertSame(1, count($professionLevels->getLevels()));
-
-        /** @var LevelValue|\Mockery\MockInterface $firstLevelValue */
-        $firstLevelValue = $firstLevel->getLevelValue();
-        $firstLevelValue->shouldReceive('getRank')
-            ->andReturn(1);
-        /** @var PriestLevel|\Mockery\MockInterface $anotherLevel */
-        $anotherLevel = \Mockery::mock(PriestLevel::class);
-        $anotherLevel->shouldDeferMissing();
-        $anotherLevel->shouldReceive('getProfessionCode')
-            ->andReturn('priest');
-        $anotherLevel->shouldReceive('getLevelValue')
-            ->andReturn($anotherLevelValue = \Mockery::mock(LevelValue::class));
-        $anotherLevelValue->shouldReceive('getRank')
-            ->andReturn(2);
-
-        $professionLevels->addPriestLevel($anotherLevel);
-
-        $this->assertSame($firstLevel, $professionLevels->getFirstLevel());
-        $this->assertSame([$firstLevel, $anotherLevel], $professionLevels->getPriestLevels()->toArray());
-        $this->assertSame([$firstLevel, $anotherLevel], $professionLevels->getLevels());
-
-        return $professionLevels;
+        return $this->moreLevelsCanBeAdded('priest', $professionLevels);
     }
 
     /**
@@ -227,20 +263,7 @@ trait ProfessionLevelsTestMoreLevelsTrait
      */
     public function adding_priest_level_with_occupied_sequence_cause_exception(ProfessionLevels $professionLevels)
     {
-        /** @var ProfessionLevelsTest $this */
-        $this->assertSame(2, count($professionLevels->getLevels()));
-        /** @var PriestLevel|\Mockery\MockInterface $anotherLevel */
-
-        $anotherLevel = \Mockery::mock(PriestLevel::class);
-        $anotherLevel->shouldDeferMissing();
-        $anotherLevel->shouldReceive('getProfessionCode')
-            ->andReturn('priest');
-        $anotherLevel->shouldReceive('getLevelValue')
-            ->andReturn($anotherLevelValue = \Mockery::mock(LevelValue::class));
-        $anotherLevelValue->shouldReceive('getRank')
-            ->andReturn(2 /* already occupied level tank */);
-
-        $professionLevels->addPriestLevel($anotherLevel);
+        $this->addingLevelWithOccupiedSequenceCauseException('priest', $professionLevels);
     }
 
     /**
@@ -252,20 +275,7 @@ trait ProfessionLevelsTestMoreLevelsTrait
      */
     public function adding_priest_level_with_too_high_sequence_cause_exception(ProfessionLevels $professionLevels)
     {
-        /** @var ProfessionLevelsTest $this */
-        $this->assertSame(2, count($professionLevels->getLevels()));
-        /** @var PriestLevel|\Mockery\MockInterface $anotherLevel */
-
-        $anotherLevel = \Mockery::mock(PriestLevel::class);
-        $anotherLevel->shouldDeferMissing();
-        $anotherLevel->shouldReceive('getProfessionCode')
-            ->andReturn('priest');
-        $anotherLevel->shouldReceive('getLevelValue')
-            ->andReturn($anotherLevelValue = \Mockery::mock(LevelValue::class));
-        $anotherLevelValue->shouldReceive('getRank')
-            ->andReturn(4 /* skipped rank 3 */);
-
-        $professionLevels->addPriestLevel($anotherLevel);
+        $this->addingLevelWithTooHighSequenceCauseException('priest', $professionLevels);
     }
 
     /**
@@ -277,26 +287,7 @@ trait ProfessionLevelsTestMoreLevelsTrait
      */
     public function changed_priest_level_during_usage_cause_exception(ProfessionLevels $professionLevels)
     {
-        /** @var ProfessionLevelsTest $this */
-        $this->assertSame(2, count($professionLevels->getLevels()));
-        /** @var PriestLevel|\Mockery\MockInterface $anotherLevel */
-        $anotherLevel = \Mockery::mock(PriestLevel::class);
-        $anotherLevel->shouldDeferMissing();
-        $anotherLevel->shouldReceive('getProfessionCode')
-            ->andReturn('priest');
-        $anotherLevel->shouldReceive('getLevelValue')
-            ->andReturn($anotherLevelValue = \Mockery::mock(LevelValue::class));
-        $rank = 3;
-        $anotherLevelValue->shouldReceive('getRank')
-            ->andReturnUsing($rankGetter = function () use (&$rank) {
-                return $rank;
-            });
-
-        $professionLevels->addPriestLevel($anotherLevel);
-        /** @noinspection PhpUnusedLocalVariableInspection */
-        $rank = 1; // changed rank to already occupied value
-
-        $professionLevels->getFirstLevel();
+        $this->changedLevelDuringUsageCauseException('priest', $professionLevels);
     }
 
     /**
@@ -309,33 +300,7 @@ trait ProfessionLevelsTestMoreLevelsTrait
      */
     public function more_ranger_levels_can_be_added(ProfessionLevels $professionLevels)
     {
-        /** @var ProfessionLevelsTest $this */
-        /** @var RangerLevel|\Mockery\MockInterface $firstLevel */
-        $firstLevel = $professionLevels->getFirstLevel();
-        $this->assertInstanceOf(RangerLevel::class, $firstLevel);
-        $this->assertSame(1, count($professionLevels->getLevels()));
-
-        /** @var LevelValue|\Mockery\MockInterface $firstLevelValue */
-        $firstLevelValue = $firstLevel->getLevelValue();
-        $firstLevelValue->shouldReceive('getRank')
-            ->andReturn(1);
-        /** @var RangerLevel|\Mockery\MockInterface $anotherLevel */
-        $anotherLevel = \Mockery::mock(RangerLevel::class);
-        $anotherLevel->shouldDeferMissing();
-        $anotherLevel->shouldReceive('getProfessionCode')
-            ->andReturn('ranger');
-        $anotherLevel->shouldReceive('getLevelValue')
-            ->andReturn($anotherLevelValue = \Mockery::mock(LevelValue::class));
-        $anotherLevelValue->shouldReceive('getRank')
-            ->andReturn(2);
-
-        $professionLevels->addRangerLevel($anotherLevel);
-
-        $this->assertSame($firstLevel, $professionLevels->getFirstLevel());
-        $this->assertSame([$firstLevel, $anotherLevel], $professionLevels->getRangerLevels()->toArray());
-        $this->assertSame([$firstLevel, $anotherLevel], $professionLevels->getLevels());
-
-        return $professionLevels;
+        return $this->moreLevelsCanBeAdded('ranger', $professionLevels);
     }
 
     /**
@@ -347,20 +312,7 @@ trait ProfessionLevelsTestMoreLevelsTrait
      */
     public function adding_ranger_level_with_occupied_sequence_cause_exception(ProfessionLevels $professionLevels)
     {
-        /** @var ProfessionLevelsTest $this */
-        $this->assertSame(2, count($professionLevels->getLevels()));
-        /** @var RangerLevel|\Mockery\MockInterface $anotherLevel */
-
-        $anotherLevel = \Mockery::mock(RangerLevel::class);
-        $anotherLevel->shouldDeferMissing();
-        $anotherLevel->shouldReceive('getProfessionCode')
-            ->andReturn('ranger');
-        $anotherLevel->shouldReceive('getLevelValue')
-            ->andReturn($anotherLevelValue = \Mockery::mock(LevelValue::class));
-        $anotherLevelValue->shouldReceive('getRank')
-            ->andReturn(2 /* already occupied level tank */);
-
-        $professionLevels->addRangerLevel($anotherLevel);
+        $this->addingLevelWithOccupiedSequenceCauseException('ranger', $professionLevels);
     }
 
     /**
@@ -372,20 +324,7 @@ trait ProfessionLevelsTestMoreLevelsTrait
      */
     public function adding_ranger_level_with_too_high_sequence_cause_exception(ProfessionLevels $professionLevels)
     {
-        /** @var ProfessionLevelsTest $this */
-        $this->assertSame(2, count($professionLevels->getLevels()));
-        /** @var RangerLevel|\Mockery\MockInterface $anotherLevel */
-
-        $anotherLevel = \Mockery::mock(RangerLevel::class);
-        $anotherLevel->shouldDeferMissing();
-        $anotherLevel->shouldReceive('getProfessionCode')
-            ->andReturn('ranger');
-        $anotherLevel->shouldReceive('getLevelValue')
-            ->andReturn($anotherLevelValue = \Mockery::mock(LevelValue::class));
-        $anotherLevelValue->shouldReceive('getRank')
-            ->andReturn(4 /* skipped rank 3 */);
-
-        $professionLevels->addRangerLevel($anotherLevel);
+        $this->addingLevelWithTooHighSequenceCauseException('ranger', $professionLevels);
     }
 
     /**
@@ -397,26 +336,7 @@ trait ProfessionLevelsTestMoreLevelsTrait
      */
     public function changed_ranger_level_during_usage_cause_exception(ProfessionLevels $professionLevels)
     {
-        /** @var ProfessionLevelsTest $this */
-        $this->assertSame(2, count($professionLevels->getLevels()));
-        /** @var RangerLevel|\Mockery\MockInterface $anotherLevel */
-        $anotherLevel = \Mockery::mock(RangerLevel::class);
-        $anotherLevel->shouldDeferMissing();
-        $anotherLevel->shouldReceive('getProfessionCode')
-            ->andReturn('ranger');
-        $anotherLevel->shouldReceive('getLevelValue')
-            ->andReturn($anotherLevelValue = \Mockery::mock(LevelValue::class));
-        $rank = 3;
-        $anotherLevelValue->shouldReceive('getRank')
-            ->andReturnUsing($rankGetter = function () use (&$rank) {
-                return $rank;
-            });
-
-        $professionLevels->addRangerLevel($anotherLevel);
-        /** @noinspection PhpUnusedLocalVariableInspection */
-        $rank = 1; // changed rank to already occupied value
-
-        $professionLevels->getFirstLevel();
+        $this->changedLevelDuringUsageCauseException('ranger', $professionLevels);
     }
 
     /**
@@ -429,33 +349,7 @@ trait ProfessionLevelsTestMoreLevelsTrait
      */
     public function more_theurgist_levels_can_be_added(ProfessionLevels $professionLevels)
     {
-        /** @var ProfessionLevelsTest $this */
-        /** @var TheurgistLevel|\Mockery\MockInterface $firstLevel */
-        $firstLevel = $professionLevels->getFirstLevel();
-        $this->assertInstanceOf(TheurgistLevel::class, $firstLevel);
-        $this->assertSame(1, count($professionLevels->getLevels()));
-
-        /** @var LevelValue|\Mockery\MockInterface $firstLevelValue */
-        $firstLevelValue = $firstLevel->getLevelValue();
-        $firstLevelValue->shouldReceive('getRank')
-            ->andReturn(1);
-        /** @var TheurgistLevel|\Mockery\MockInterface $anotherLevel */
-        $anotherLevel = \Mockery::mock(TheurgistLevel::class);
-        $anotherLevel->shouldDeferMissing();
-        $anotherLevel->shouldReceive('getProfessionCode')
-            ->andReturn('theurgist');
-        $anotherLevel->shouldReceive('getLevelValue')
-            ->andReturn($anotherLevelValue = \Mockery::mock(LevelValue::class));
-        $anotherLevelValue->shouldReceive('getRank')
-            ->andReturn(2);
-
-        $professionLevels->addTheurgistLevel($anotherLevel);
-
-        $this->assertSame($firstLevel, $professionLevels->getFirstLevel());
-        $this->assertSame([$firstLevel, $anotherLevel], $professionLevels->getTheurgistLevels()->toArray());
-        $this->assertSame([$firstLevel, $anotherLevel], $professionLevels->getLevels());
-
-        return $professionLevels;
+        return $this->moreLevelsCanBeAdded('theurgist', $professionLevels);
     }
 
     /**
@@ -467,20 +361,7 @@ trait ProfessionLevelsTestMoreLevelsTrait
      */
     public function adding_theurgist_level_with_occupied_sequence_cause_exception(ProfessionLevels $professionLevels)
     {
-        /** @var ProfessionLevelsTest $this */
-        $this->assertSame(2, count($professionLevels->getLevels()));
-        /** @var TheurgistLevel|\Mockery\MockInterface $anotherLevel */
-
-        $anotherLevel = \Mockery::mock(TheurgistLevel::class);
-        $anotherLevel->shouldDeferMissing();
-        $anotherLevel->shouldReceive('getProfessionCode')
-            ->andReturn('theurgist');
-        $anotherLevel->shouldReceive('getLevelValue')
-            ->andReturn($anotherLevelValue = \Mockery::mock(LevelValue::class));
-        $anotherLevelValue->shouldReceive('getRank')
-            ->andReturn(2 /* already occupied level tank */);
-
-        $professionLevels->addTheurgistLevel($anotherLevel);
+        $this->addingLevelWithOccupiedSequenceCauseException('theurgist', $professionLevels);
     }
 
     /**
@@ -492,20 +373,7 @@ trait ProfessionLevelsTestMoreLevelsTrait
      */
     public function adding_theurgist_level_with_too_high_sequence_cause_exception(ProfessionLevels $professionLevels)
     {
-        /** @var ProfessionLevelsTest $this */
-        $this->assertSame(2, count($professionLevels->getLevels()));
-        /** @var TheurgistLevel|\Mockery\MockInterface $anotherLevel */
-
-        $anotherLevel = \Mockery::mock(TheurgistLevel::class);
-        $anotherLevel->shouldDeferMissing();
-        $anotherLevel->shouldReceive('getProfessionCode')
-            ->andReturn('theurgist');
-        $anotherLevel->shouldReceive('getLevelValue')
-            ->andReturn($anotherLevelValue = \Mockery::mock(LevelValue::class));
-        $anotherLevelValue->shouldReceive('getRank')
-            ->andReturn(4 /* skipped rank 3 */);
-
-        $professionLevels->addTheurgistLevel($anotherLevel);
+        $this->addingLevelWithTooHighSequenceCauseException('theurgist', $professionLevels);
     }
 
     /**
@@ -517,26 +385,7 @@ trait ProfessionLevelsTestMoreLevelsTrait
      */
     public function changed_theurgist_level_during_usage_cause_exception(ProfessionLevels $professionLevels)
     {
-        /** @var ProfessionLevelsTest $this */
-        $this->assertSame(2, count($professionLevels->getLevels()));
-        /** @var TheurgistLevel|\Mockery\MockInterface $anotherLevel */
-        $anotherLevel = \Mockery::mock(TheurgistLevel::class);
-        $anotherLevel->shouldDeferMissing();
-        $anotherLevel->shouldReceive('getProfessionCode')
-            ->andReturn('theurgist');
-        $anotherLevel->shouldReceive('getLevelValue')
-            ->andReturn($anotherLevelValue = \Mockery::mock(LevelValue::class));
-        $rank = 3;
-        $anotherLevelValue->shouldReceive('getRank')
-            ->andReturnUsing($rankGetter = function () use (&$rank) {
-                return $rank;
-            });
-
-        $professionLevels->addTheurgistLevel($anotherLevel);
-        /** @noinspection PhpUnusedLocalVariableInspection */
-        $rank = 1; // changed rank to already occupied value
-
-        $professionLevels->getFirstLevel();
+        $this->changedLevelDuringUsageCauseException('theurgist', $professionLevels);
     }
 
     /**
@@ -549,33 +398,7 @@ trait ProfessionLevelsTestMoreLevelsTrait
      */
     public function more_thief_levels_can_be_added(ProfessionLevels $professionLevels)
     {
-        /** @var ProfessionLevelsTest $this */
-        /** @var ThiefLevel|\Mockery\MockInterface $firstLevel */
-        $firstLevel = $professionLevels->getFirstLevel();
-        $this->assertInstanceOf(ThiefLevel::class, $firstLevel);
-        $this->assertSame(1, count($professionLevels->getLevels()));
-
-        /** @var LevelValue|\Mockery\MockInterface $firstLevelValue */
-        $firstLevelValue = $firstLevel->getLevelValue();
-        $firstLevelValue->shouldReceive('getRank')
-            ->andReturn(1);
-        /** @var ThiefLevel|\Mockery\MockInterface $anotherLevel */
-        $anotherLevel = \Mockery::mock(ThiefLevel::class);
-        $anotherLevel->shouldDeferMissing();
-        $anotherLevel->shouldReceive('getProfessionCode')
-            ->andReturn('thief');
-        $anotherLevel->shouldReceive('getLevelValue')
-            ->andReturn($anotherLevelValue = \Mockery::mock(LevelValue::class));
-        $anotherLevelValue->shouldReceive('getRank')
-            ->andReturn(2);
-
-        $professionLevels->addThiefLevel($anotherLevel);
-
-        $this->assertSame($firstLevel, $professionLevels->getFirstLevel());
-        $this->assertSame([$firstLevel, $anotherLevel], $professionLevels->getThiefLevels()->toArray());
-        $this->assertSame([$firstLevel, $anotherLevel], $professionLevels->getLevels());
-
-        return $professionLevels;
+        return $this->moreLevelsCanBeAdded('thief', $professionLevels);
     }
 
     /**
@@ -587,20 +410,7 @@ trait ProfessionLevelsTestMoreLevelsTrait
      */
     public function adding_thief_level_with_occupied_sequence_cause_exception(ProfessionLevels $professionLevels)
     {
-        /** @var ProfessionLevelsTest $this */
-        $this->assertSame(2, count($professionLevels->getLevels()));
-        /** @var ThiefLevel|\Mockery\MockInterface $anotherLevel */
-
-        $anotherLevel = \Mockery::mock(ThiefLevel::class);
-        $anotherLevel->shouldDeferMissing();
-        $anotherLevel->shouldReceive('getProfessionCode')
-            ->andReturn('thief');
-        $anotherLevel->shouldReceive('getLevelValue')
-            ->andReturn($anotherLevelValue = \Mockery::mock(LevelValue::class));
-        $anotherLevelValue->shouldReceive('getRank')
-            ->andReturn(2 /* already occupied level tank */);
-
-        $professionLevels->addThiefLevel($anotherLevel);
+        $this->addingLevelWithOccupiedSequenceCauseException('thief', $professionLevels);
     }
 
     /**
@@ -612,20 +422,7 @@ trait ProfessionLevelsTestMoreLevelsTrait
      */
     public function adding_thief_level_with_too_high_sequence_cause_exception(ProfessionLevels $professionLevels)
     {
-        /** @var ProfessionLevelsTest $this */
-        $this->assertSame(2, count($professionLevels->getLevels()));
-        /** @var ThiefLevel|\Mockery\MockInterface $anotherLevel */
-
-        $anotherLevel = \Mockery::mock(ThiefLevel::class);
-        $anotherLevel->shouldDeferMissing();
-        $anotherLevel->shouldReceive('getProfessionCode')
-            ->andReturn('thief');
-        $anotherLevel->shouldReceive('getLevelValue')
-            ->andReturn($anotherLevelValue = \Mockery::mock(LevelValue::class));
-        $anotherLevelValue->shouldReceive('getRank')
-            ->andReturn(4 /* skipped rank 3 */);
-
-        $professionLevels->addThiefLevel($anotherLevel);
+        $this->addingLevelWithTooHighSequenceCauseException('thief', $professionLevels);
     }
 
     /**
@@ -637,26 +434,7 @@ trait ProfessionLevelsTestMoreLevelsTrait
      */
     public function changed_thief_level_during_usage_cause_exception(ProfessionLevels $professionLevels)
     {
-        /** @var ProfessionLevelsTest $this */
-        $this->assertSame(2, count($professionLevels->getLevels()));
-        /** @var ThiefLevel|\Mockery\MockInterface $anotherLevel */
-        $anotherLevel = \Mockery::mock(ThiefLevel::class);
-        $anotherLevel->shouldDeferMissing();
-        $anotherLevel->shouldReceive('getProfessionCode')
-            ->andReturn('thief');
-        $anotherLevel->shouldReceive('getLevelValue')
-            ->andReturn($anotherLevelValue = \Mockery::mock(LevelValue::class));
-        $rank = 3;
-        $anotherLevelValue->shouldReceive('getRank')
-            ->andReturnUsing($rankGetter = function () use (&$rank) {
-                return $rank;
-            });
-
-        $professionLevels->addThiefLevel($anotherLevel);
-        /** @noinspection PhpUnusedLocalVariableInspection */
-        $rank = 1; // changed rank to already occupied value
-
-        $professionLevels->getFirstLevel();
+        $this->changedLevelDuringUsageCauseException('thief', $professionLevels);
     }
 
     /**
@@ -669,33 +447,7 @@ trait ProfessionLevelsTestMoreLevelsTrait
      */
     public function more_wizard_levels_can_be_added(ProfessionLevels $professionLevels)
     {
-        /** @var ProfessionLevelsTest $this */
-        /** @var WizardLevel|\Mockery\MockInterface $firstLevel */
-        $firstLevel = $professionLevels->getFirstLevel();
-        $this->assertInstanceOf(WizardLevel::class, $firstLevel);
-        $this->assertSame(1, count($professionLevels->getLevels()));
-
-        /** @var LevelValue|\Mockery\MockInterface $firstLevelValue */
-        $firstLevelValue = $firstLevel->getLevelValue();
-        $firstLevelValue->shouldReceive('getRank')
-            ->andReturn(1);
-        /** @var WizardLevel|\Mockery\MockInterface $anotherLevel */
-        $anotherLevel = \Mockery::mock(WizardLevel::class);
-        $anotherLevel->shouldDeferMissing();
-        $anotherLevel->shouldReceive('getProfessionCode')
-            ->andReturn('wizard');
-        $anotherLevel->shouldReceive('getLevelValue')
-            ->andReturn($anotherLevelValue = \Mockery::mock(LevelValue::class));
-        $anotherLevelValue->shouldReceive('getRank')
-            ->andReturn(2);
-
-        $professionLevels->addWizardLevel($anotherLevel);
-
-        $this->assertSame($firstLevel, $professionLevels->getFirstLevel());
-        $this->assertSame([$firstLevel, $anotherLevel], $professionLevels->getWizardLevels()->toArray());
-        $this->assertSame([$firstLevel, $anotherLevel], $professionLevels->getLevels());
-
-        return $professionLevels;
+        return $this->moreLevelsCanBeAdded('wizard', $professionLevels);
     }
 
     /**
@@ -707,20 +459,7 @@ trait ProfessionLevelsTestMoreLevelsTrait
      */
     public function adding_wizard_level_with_occupied_sequence_cause_exception(ProfessionLevels $professionLevels)
     {
-        /** @var ProfessionLevelsTest $this */
-        $this->assertSame(2, count($professionLevels->getLevels()));
-        /** @var WizardLevel|\Mockery\MockInterface $anotherLevel */
-
-        $anotherLevel = \Mockery::mock(WizardLevel::class);
-        $anotherLevel->shouldDeferMissing();
-        $anotherLevel->shouldReceive('getProfessionCode')
-            ->andReturn('wizard');
-        $anotherLevel->shouldReceive('getLevelValue')
-            ->andReturn($anotherLevelValue = \Mockery::mock(LevelValue::class));
-        $anotherLevelValue->shouldReceive('getRank')
-            ->andReturn(2 /* already occupied level tank */);
-
-        $professionLevels->addWizardLevel($anotherLevel);
+        $this->addingLevelWithOccupiedSequenceCauseException('wizard', $professionLevels);
     }
 
     /**
@@ -732,20 +471,7 @@ trait ProfessionLevelsTestMoreLevelsTrait
      */
     public function adding_wizard_level_with_too_high_sequence_cause_exception(ProfessionLevels $professionLevels)
     {
-        /** @var ProfessionLevelsTest $this */
-        $this->assertSame(2, count($professionLevels->getLevels()));
-        /** @var WizardLevel|\Mockery\MockInterface $anotherLevel */
-
-        $anotherLevel = \Mockery::mock(WizardLevel::class);
-        $anotherLevel->shouldDeferMissing();
-        $anotherLevel->shouldReceive('getProfessionCode')
-            ->andReturn('wizard');
-        $anotherLevel->shouldReceive('getLevelValue')
-            ->andReturn($anotherLevelValue = \Mockery::mock(LevelValue::class));
-        $anotherLevelValue->shouldReceive('getRank')
-            ->andReturn(4 /* skipped rank 3 */);
-
-        $professionLevels->addWizardLevel($anotherLevel);
+        $this->addingLevelWithTooHighSequenceCauseException('wizard', $professionLevels);
     }
 
     /**
@@ -757,26 +483,7 @@ trait ProfessionLevelsTestMoreLevelsTrait
      */
     public function changed_wizard_level_during_usage_cause_exception(ProfessionLevels $professionLevels)
     {
-        /** @var ProfessionLevelsTest $this */
-        $this->assertSame(2, count($professionLevels->getLevels()));
-        /** @var WizardLevel|\Mockery\MockInterface $anotherLevel */
-        $anotherLevel = \Mockery::mock(WizardLevel::class);
-        $anotherLevel->shouldDeferMissing();
-        $anotherLevel->shouldReceive('getProfessionCode')
-            ->andReturn('wizard');
-        $anotherLevel->shouldReceive('getLevelValue')
-            ->andReturn($anotherLevelValue = \Mockery::mock(LevelValue::class));
-        $rank = 3;
-        $anotherLevelValue->shouldReceive('getRank')
-            ->andReturnUsing($rankGetter = function () use (&$rank) {
-                return $rank;
-            });
-
-        $professionLevels->addWizardLevel($anotherLevel);
-        /** @noinspection PhpUnusedLocalVariableInspection */
-        $rank = 1; // changed rank to already occupied value
-
-        $professionLevels->getFirstLevel();
+        $this->changedLevelDuringUsageCauseException('wizard', $professionLevels);
     }
-    
+
 }
