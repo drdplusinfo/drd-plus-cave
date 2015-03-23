@@ -16,7 +16,7 @@ trait ProfessionLevelsTestFirstLevelsTrait
      */
     public function fighter_level_can_be_added()
     {
-        return $this->level_can_be_added('fighter');
+        return $this->levelCanBeAdded('fighter');
     }
 
     /**
@@ -24,12 +24,12 @@ trait ProfessionLevelsTestFirstLevelsTrait
      *
      * @return ProfessionLevels
      */
-    private function level_can_be_added($professionName)
+    private function levelCanBeAdded($professionName)
     {
         /** @var ProfessionLevelsTest|ProfessionLevelsTestFirstLevelsTrait $this */
         $professionLevels = new ProfessionLevels();
         /** @var \Mockery\MockInterface|ProfessionLevel $professionLevel */
-        $professionLevel = \Mockery::mock($this->getProfessionLevelClass($professionName));
+        $professionLevel = \Mockery::mock($this->getFirstLevelsProfessionLevelClass($professionName));
         $professionLevel->shouldReceive('getProfessionCode')
             ->andReturn($professionName);
         $professionLevel->shouldReceive('getLevelValue')
@@ -48,7 +48,7 @@ trait ProfessionLevelsTestFirstLevelsTrait
         return $professionLevels;
     }
 
-    private function getProfessionLevelClass($professionName)
+    private function getFirstLevelsProfessionLevelClass($professionName)
     {
         return '\DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels\\'
         . ucfirst($professionName) . 'Level';
@@ -62,19 +62,19 @@ trait ProfessionLevelsTestFirstLevelsTrait
      */
     public function fighter_at_first_level_has_strength_and_agility_increment(ProfessionLevels $professionLevels)
     {
-        $this->atFirstLevelHasIncrementOfMainProperties('fighter', ['strength', 'agility'], $professionLevels);
+        $this->atFirstLevelHasIncrementOfMainProperties('fighter', $professionLevels);
     }
 
     private function atFirstLevelHasIncrementOfMainProperties(
         $professionName,
-        array $mainProperties,
         ProfessionLevels $professionLevels
     )
     {
+        $mainProperties = $this->getFirstLevelsMainPropertiesToProfession($professionName);
         /** @var ProfessionLevelsTest|ProfessionLevelsTestFirstLevelsTrait $this */
         /** @var FighterLevel|\Mockery\MockInterface $professionLevel */
         $professionLevel = $professionLevels->getFirstLevel();
-        $this->assertInstanceOf($this->getProfessionLevelClass($professionName), $professionLevel);
+        $this->assertInstanceOf($this->getFirstLevelsProfessionLevelClass($professionName), $professionLevel);
         // non-mocked methods are propagated to originals
         $professionLevel->shouldDeferMissing();
         $this->assertSame(
@@ -103,13 +103,33 @@ trait ProfessionLevelsTestFirstLevelsTrait
         );
     }
 
+    private function getFirstLevelsMainPropertiesToProfession($professionName)
+    {
+        switch ($professionName) {
+            case 'fighter' :
+                return ['strength', 'agility'];
+            case 'priest' :
+                return ['will', 'charisma'];
+            case 'ranger' :
+                return ['strength', 'knack'];
+            case 'theurgist' :
+                return ['intelligence', 'charisma'];
+            case 'thief' :
+                return ['knack', 'agility'];
+            case 'wizard' :
+                return ['will', 'intelligence'];
+            default :
+                throw new \RuntimeException("Unknown profession name " . var_export($professionName, true));
+        }
+    }
+
     /**
      * @test
      * @depends can_create_instance
      */
     public function priest_level_can_be_added()
     {
-        return $this->level_can_be_added('priest');
+        return $this->levelCanBeAdded('priest');
     }
 
     /**
@@ -120,7 +140,7 @@ trait ProfessionLevelsTestFirstLevelsTrait
      */
     public function priest_at_first_level_has_will_and_charisma_increment(ProfessionLevels $professionLevels)
     {
-        $this->atFirstLevelHasIncrementOfMainProperties('priest', ['will', 'charisma'], $professionLevels);
+        $this->atFirstLevelHasIncrementOfMainProperties('priest', $professionLevels);
     }
 
     /**
@@ -129,7 +149,7 @@ trait ProfessionLevelsTestFirstLevelsTrait
      */
     public function ranger_level_can_be_added()
     {
-        return $this->level_can_be_added('ranger');
+        return $this->levelCanBeAdded('ranger');
     }
 
     /**
@@ -140,7 +160,7 @@ trait ProfessionLevelsTestFirstLevelsTrait
      */
     public function ranger_at_first_level_has_strength_and_knack_increment(ProfessionLevels $professionLevels)
     {
-        $this->atFirstLevelHasIncrementOfMainProperties('ranger', ['strength', 'knack'], $professionLevels);
+        $this->atFirstLevelHasIncrementOfMainProperties('ranger', $professionLevels);
     }
 
     /**
@@ -149,7 +169,7 @@ trait ProfessionLevelsTestFirstLevelsTrait
      */
     public function theurgist_level_can_be_added()
     {
-        return $this->level_can_be_added('theurgist');
+        return $this->levelCanBeAdded('theurgist');
     }
 
     /**
@@ -160,7 +180,7 @@ trait ProfessionLevelsTestFirstLevelsTrait
      */
     public function theurgist_at_first_level_has_intelligence_and_charisma_increment(ProfessionLevels $professionLevels)
     {
-        $this->atFirstLevelHasIncrementOfMainProperties('theurgist', ['intelligence', 'charisma'], $professionLevels);
+        $this->atFirstLevelHasIncrementOfMainProperties('theurgist', $professionLevels);
     }
 
     /**
@@ -169,7 +189,7 @@ trait ProfessionLevelsTestFirstLevelsTrait
      */
     public function thief_level_can_be_added()
     {
-        return $this->level_can_be_added('thief');
+        return $this->levelCanBeAdded('thief');
     }
 
     /**
@@ -180,7 +200,7 @@ trait ProfessionLevelsTestFirstLevelsTrait
      */
     public function thief_at_first_level_has_agility_and_knack_increment(ProfessionLevels $professionLevels)
     {
-        $this->atFirstLevelHasIncrementOfMainProperties('thief', ['agility', 'knack'], $professionLevels);
+        $this->atFirstLevelHasIncrementOfMainProperties('thief', $professionLevels);
     }
 
     /**
@@ -189,7 +209,7 @@ trait ProfessionLevelsTestFirstLevelsTrait
      */
     public function wizard_level_can_be_added()
     {
-        return $this->level_can_be_added('wizard');
+        return $this->levelCanBeAdded('wizard');
     }
 
     /**
@@ -200,7 +220,7 @@ trait ProfessionLevelsTestFirstLevelsTrait
      */
     public function wizard_at_first_level_has_will_and_intelligence_increment(ProfessionLevels $professionLevels)
     {
-        $this->atFirstLevelHasIncrementOfMainProperties('wizard', ['will', 'intelligence'], $professionLevels);
+        $this->atFirstLevelHasIncrementOfMainProperties('wizard', $professionLevels);
     }
 
 }
