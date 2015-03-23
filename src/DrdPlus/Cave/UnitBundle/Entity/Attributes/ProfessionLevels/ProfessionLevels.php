@@ -260,12 +260,6 @@ class ProfessionLevels extends StrictObject
         // fighter = getFighterLevels
         $getterName = 'get' . ucfirst($professionLevel->getProfessionCode()) . 'Levels';
 
-        if (!method_exists($this, $getterName)) {
-            throw new \LogicException(
-                'Unknown profession ' . var_export($professionLevel->getProfessionCode(), true)
-            );
-        }
-
         return $this->$getterName();
     }
 
@@ -286,7 +280,7 @@ class ProfessionLevels extends StrictObject
     {
         if (!$newLevel->getLevelValue()->getRank()) {
             throw new \LogicException(
-                'Missing level value of given level of profession ' . $newLevel->getProfessionCode() . ' with ID ' . var_export($newLevel->getId())
+                'Missing level value of given level of profession ' . $newLevel->getProfessionCode() . ' with ID ' . var_export($newLevel->getId(), true)
             );
         }
 

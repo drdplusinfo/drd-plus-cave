@@ -124,6 +124,43 @@ trait ProfessionLevelsTestFirstLevelsTrait
     }
 
     /**
+     * @param ProfessionLevels $professionLevels
+     *
+     * @test
+     * @depends fighter_level_can_be_added
+     * @expectedException \LogicException
+     */
+    public function fighter_missing_level_value_cause_exception(ProfessionLevels $professionLevels)
+    {
+        $this->missingLevelValueCauseException('fighter', $professionLevels);
+    }
+
+    /**
+     * @param string $professionName
+     * @param ProfessionLevels $professionLevels
+     *
+     * @return ProfessionLevels
+     */
+    private function missingLevelValueCauseException($professionName, ProfessionLevels $professionLevels)
+    {
+        /** @var ProfessionLevelsTest|ProfessionLevelsTestFirstLevelsTrait $this */
+        /** @var \Mockery\MockInterface|ProfessionLevel $professionLevel */
+        $professionLevel = \Mockery::mock($this->getFirstLevelsProfessionLevelClass($professionName));
+        $professionLevel->shouldReceive('getProfessionCode')
+            ->andReturn($professionName);
+        $professionLevel->shouldReceive('getLevelValue')
+            ->atLeast()->once()
+            ->andReturn($levelValue = \Mockery::mock(LevelValue::class));
+        $levelValue->shouldReceive('getRank')
+            ->atLeast()->once()
+            ->andReturn(0);
+        $professionLevel->shouldReceive('getId')
+            ->andReturn('foo');
+        $adder = 'add' . ucfirst($professionName) . 'Level';
+        $professionLevels->$adder($professionLevel);
+    }
+
+    /**
      * @test
      * @depends can_create_instance
      */
@@ -141,6 +178,18 @@ trait ProfessionLevelsTestFirstLevelsTrait
     public function priest_at_first_level_has_will_and_charisma_increment(ProfessionLevels $professionLevels)
     {
         $this->atFirstLevelHasIncrementOfMainProperties('priest', $professionLevels);
+    }
+
+    /**
+     * @param ProfessionLevels $professionLevels
+     *
+     * @test
+     * @depends priest_level_can_be_added
+     * @expectedException \LogicException
+     */
+    public function priest_missing_level_value_cause_exception(ProfessionLevels $professionLevels)
+    {
+        $this->missingLevelValueCauseException('priest', $professionLevels);
     }
 
     /**
@@ -164,6 +213,18 @@ trait ProfessionLevelsTestFirstLevelsTrait
     }
 
     /**
+     * @param ProfessionLevels $professionLevels
+     *
+     * @test
+     * @depends ranger_level_can_be_added
+     * @expectedException \LogicException
+     */
+    public function ranger_missing_level_value_cause_exception(ProfessionLevels $professionLevels)
+    {
+        $this->missingLevelValueCauseException('ranger', $professionLevels);
+    }
+
+    /**
      * @test
      * @depends can_create_instance
      */
@@ -181,6 +242,18 @@ trait ProfessionLevelsTestFirstLevelsTrait
     public function theurgist_at_first_level_has_intelligence_and_charisma_increment(ProfessionLevels $professionLevels)
     {
         $this->atFirstLevelHasIncrementOfMainProperties('theurgist', $professionLevels);
+    }
+
+    /**
+     * @param ProfessionLevels $professionLevels
+     *
+     * @test
+     * @depends theurgist_level_can_be_added
+     * @expectedException \LogicException
+     */
+    public function theurgist_missing_level_value_cause_exception(ProfessionLevels $professionLevels)
+    {
+        $this->missingLevelValueCauseException('theurgist', $professionLevels);
     }
 
     /**
@@ -204,6 +277,18 @@ trait ProfessionLevelsTestFirstLevelsTrait
     }
 
     /**
+     * @param ProfessionLevels $professionLevels
+     *
+     * @test
+     * @depends thief_level_can_be_added
+     * @expectedException \LogicException
+     */
+    public function thief_missing_level_value_cause_exception(ProfessionLevels $professionLevels)
+    {
+        $this->missingLevelValueCauseException('thief', $professionLevels);
+    }
+
+    /**
      * @test
      * @depends can_create_instance
      */
@@ -221,6 +306,18 @@ trait ProfessionLevelsTestFirstLevelsTrait
     public function wizard_at_first_level_has_will_and_intelligence_increment(ProfessionLevels $professionLevels)
     {
         $this->atFirstLevelHasIncrementOfMainProperties('wizard', $professionLevels);
+    }
+
+    /**
+     * @param ProfessionLevels $professionLevels
+     *
+     * @test
+     * @depends wizard_level_can_be_added
+     * @expectedException \LogicException
+     */
+    public function wizard_missing_level_value_cause_exception(ProfessionLevels $professionLevels)
+    {
+        $this->missingLevelValueCauseException('wizard', $professionLevels);
     }
 
 }
