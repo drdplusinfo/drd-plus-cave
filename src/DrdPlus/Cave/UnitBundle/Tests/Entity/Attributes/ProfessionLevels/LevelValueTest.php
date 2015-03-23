@@ -94,4 +94,16 @@ class LevelValueTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf(Levelvalue::class, $phpValue);
         $this->assertEquals($value, $phpValue->__toString());
     }
+
+    /**
+     * @test
+     *
+     * @depends works_in_separate_enum_namespace
+     */
+    public function gives_proper_value(){
+        $levelValue = LevelValue::getEnum($value = 12345);
+        $this->assertSame($value, $levelValue->getEnumValue());
+        $this->assertSame($value, $levelValue->getRank());
+        $this->assertSame("$value", $levelValue->__toString());
+    }
 }
