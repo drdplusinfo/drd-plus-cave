@@ -28,10 +28,18 @@ trait ProfessionLevelsTestMultiProfessionNotAllowed
      */
     public function other_professions_to_fighter_levels_cause_exception(ProfessionLevels $professionLevels)
     {
+        $this->otherProfessionsCauseException('fighter', $professionLevels);
+    }
+
+    private function otherProfessionsCauseException(
+        $professionName,
+        ProfessionLevels $professionLevels
+    )
+    {
         /** @var ProfessionLevelsTest|ProfessionLevelsTestMultiProfessionNotAllowed $this */
         /** @var FighterLevel|\Mockery\MockInterface $firstLevel */
         $firstLevel = $professionLevels->getFirstLevel();
-        $this->assertInstanceOf(FighterLevel::class, $firstLevel);
+        $this->assertInstanceOf($this->getMultiProfessionTestLevelClass($professionName), $firstLevel);
 
         $exception = new \Exception('No other professions than ' . $firstLevel->getProfessionCode() . '?');
         foreach ($this->getLevelsExcept($firstLevel) as $professionCode => $otherProfessionLevel) {
@@ -47,8 +55,15 @@ trait ProfessionLevelsTestMultiProfessionNotAllowed
         throw $exception;
     }
 
+    private function getMultiProfessionTestLevelClass($professionName)
+    {
+        return '\DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels\\'
+        . ucfirst($professionName) . 'Level';
+    }
+
     /**
      * @param ProfessionLevel $excludedProfession
+     *
      * @return \Mockery\MockInterface[]|ProfessionLevel[]
      */
     private function getLevelsExcept(ProfessionLevel $excludedProfession)
@@ -88,23 +103,7 @@ trait ProfessionLevelsTestMultiProfessionNotAllowed
      */
     public function other_professions_to_priest_levels_cause_exception(ProfessionLevels $professionLevels)
     {
-        /** @var ProfessionLevelsTest|ProfessionLevelsTestMultiProfessionNotAllowed $this */
-        /** @var PriestLevel|\Mockery\MockInterface $firstLevel */
-        $firstLevel = $professionLevels->getFirstLevel();
-        $this->assertInstanceOf(PriestLevel::class, $firstLevel);
-
-        $exception = new \Exception('No other professions than ' . $firstLevel->getProfessionCode() . '?');
-        foreach ($this->getLevelsExcept($firstLevel) as $professionCode => $otherProfessionLevel) {
-            $adder = 'add' . ucfirst($professionCode) . 'Level';
-            try {
-                $professionLevels->$adder($otherProfessionLevel);
-                $this->fail("Adding $professionCode to levels already set to {$firstLevel->getProfessionCode()} should throw exception.");
-            } catch (\LogicException $exception) {
-                $this->assertNotNull($exception);
-            }
-        }
-
-        throw $exception;
+        $this->otherProfessionsCauseException('priest', $professionLevels);
     }
 
     /**
@@ -116,23 +115,7 @@ trait ProfessionLevelsTestMultiProfessionNotAllowed
      */
     public function other_professions_to_ranger_levels_cause_exception(ProfessionLevels $professionLevels)
     {
-        /** @var ProfessionLevelsTest|ProfessionLevelsTestMultiProfessionNotAllowed $this */
-        /** @var RangerLevel|\Mockery\MockInterface $firstLevel */
-        $firstLevel = $professionLevels->getFirstLevel();
-        $this->assertInstanceOf(RangerLevel::class, $firstLevel);
-
-        $exception = new \Exception('No other professions than ' . $firstLevel->getProfessionCode() . '?');
-        foreach ($this->getLevelsExcept($firstLevel) as $professionCode => $otherProfessionLevel) {
-            $adder = 'add' . ucfirst($professionCode) . 'Level';
-            try {
-                $professionLevels->$adder($otherProfessionLevel);
-                $this->fail("Adding $professionCode to levels already set to {$firstLevel->getProfessionCode()} should throw exception.");
-            } catch (\LogicException $exception) {
-                $this->assertNotNull($exception);
-            }
-        }
-
-        throw $exception;
+        $this->otherProfessionsCauseException('ranger', $professionLevels);
     }
 
     /**
@@ -144,23 +127,7 @@ trait ProfessionLevelsTestMultiProfessionNotAllowed
      */
     public function other_professions_to_theurgist_levels_cause_exception(ProfessionLevels $professionLevels)
     {
-        /** @var ProfessionLevelsTest|ProfessionLevelsTestMultiProfessionNotAllowed $this */
-        /** @var TheurgistLevel|\Mockery\MockInterface $firstLevel */
-        $firstLevel = $professionLevels->getFirstLevel();
-        $this->assertInstanceOf(TheurgistLevel::class, $firstLevel);
-
-        $exception = new \Exception('No other professions than ' . $firstLevel->getProfessionCode() . '?');
-        foreach ($this->getLevelsExcept($firstLevel) as $professionCode => $otherProfessionLevel) {
-            $adder = 'add' . ucfirst($professionCode) . 'Level';
-            try {
-                $professionLevels->$adder($otherProfessionLevel);
-                $this->fail("Adding $professionCode to levels already set to {$firstLevel->getProfessionCode()} should throw exception.");
-            } catch (\LogicException $exception) {
-                $this->assertNotNull($exception);
-            }
-        }
-
-        throw $exception;
+        $this->otherProfessionsCauseException('theurgist', $professionLevels);
     }
 
     /**
@@ -172,23 +139,7 @@ trait ProfessionLevelsTestMultiProfessionNotAllowed
      */
     public function other_professions_to_thief_levels_cause_exception(ProfessionLevels $professionLevels)
     {
-        /** @var ProfessionLevelsTest|ProfessionLevelsTestMultiProfessionNotAllowed $this */
-        /** @var ThiefLevel|\Mockery\MockInterface $firstLevel */
-        $firstLevel = $professionLevels->getFirstLevel();
-        $this->assertInstanceOf(ThiefLevel::class, $firstLevel);
-
-        $exception = new \Exception('No other professions than ' . $firstLevel->getProfessionCode() . '?');
-        foreach ($this->getLevelsExcept($firstLevel) as $professionCode => $otherProfessionLevel) {
-            $adder = 'add' . ucfirst($professionCode) . 'Level';
-            try {
-                $professionLevels->$adder($otherProfessionLevel);
-                $this->fail("Adding $professionCode to levels already set to {$firstLevel->getProfessionCode()} should throw exception.");
-            } catch (\LogicException $exception) {
-                $this->assertNotNull($exception);
-            }
-        }
-
-        throw $exception;
+        $this->otherProfessionsCauseException('thief', $professionLevels);
     }
 
     /**
@@ -200,23 +151,7 @@ trait ProfessionLevelsTestMultiProfessionNotAllowed
      */
     public function other_professions_to_wizard_levels_cause_exception(ProfessionLevels $professionLevels)
     {
-        /** @var ProfessionLevelsTest|ProfessionLevelsTestMultiProfessionNotAllowed $this */
-        /** @var WizardLevel|\Mockery\MockInterface $firstLevel */
-        $firstLevel = $professionLevels->getFirstLevel();
-        $this->assertInstanceOf(WizardLevel::class, $firstLevel);
-
-        $exception = new \Exception('No other professions than ' . $firstLevel->getProfessionCode() . '?');
-        foreach ($this->getLevelsExcept($firstLevel) as $professionCode => $otherProfessionLevel) {
-            $adder = 'add' . ucfirst($professionCode) . 'Level';
-            try {
-                $professionLevels->$adder($otherProfessionLevel);
-                $this->fail("Adding $professionCode to levels already set to {$firstLevel->getProfessionCode()} should throw exception.");
-            } catch (\LogicException $exception) {
-                $this->assertNotNull($exception);
-            }
-        }
-
-        throw $exception;
+        $this->otherProfessionsCauseException('wizard', $professionLevels);
     }
 
 }
