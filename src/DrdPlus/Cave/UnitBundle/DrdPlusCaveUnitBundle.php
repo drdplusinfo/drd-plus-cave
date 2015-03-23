@@ -2,6 +2,7 @@
 
 namespace DrdPlus\Cave\UnitBundle;
 
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Exceptionalities\Exceptionality;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Name;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels\LevelValue;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Agility;
@@ -28,6 +29,8 @@ class DrdPlusCaveUnitBundle extends Bundle
         Race::registerSelf();
         // only the generic gender has to be registered, sub-race genders are registered automatically
         Gender::registerSelf();
+        // only the generic exceptionality has to be registered, specific exceptionalities are registered automatically
+        Exceptionality::registerSelf();
 
         Strength::registerSelf();
         Agility::registerSelf();

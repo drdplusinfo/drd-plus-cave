@@ -1,6 +1,7 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Entity;
 
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Exceptionalities\Exceptionality;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Name;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels\ProfessionLevels;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\InitialProperties;
@@ -15,8 +16,9 @@ class PersonTest extends TestWithMockery
     public function can_create_instance()
     {
         $instance = new Person(
-            $this->getGenderMock(),
             $this->getRaceMock(),
+            $this->getGenderMock(),
+            $this->getExceptionalityMock(),
             $this->getInitialPropertiesMock(),
             $this->getProfessionLevelsMock(),
             $this->getNameMock()
@@ -28,8 +30,9 @@ class PersonTest extends TestWithMockery
     public function initial_id_is_null()
     {
         $person = new Person(
-            $this->getGenderMock(),
             $this->getRaceMock(),
+            $this->getGenderMock(),
+            $this->getExceptionalityMock(),
             $this->getInitialPropertiesMock(),
             $this->getProfessionLevelsMock(),
             $this->getNameMock()
@@ -41,8 +44,9 @@ class PersonTest extends TestWithMockery
     public function returns_same_gender_as_got()
     {
         $person = new Person(
-            $gender = $this->getGenderMock(),
             $this->getRaceMock(),
+            $gender = $this->getGenderMock(),
+            $this->getExceptionalityMock(),
             $this->getInitialPropertiesMock(),
             $this->getProfessionLevelsMock(),
             $this->getNameMock()
@@ -54,8 +58,9 @@ class PersonTest extends TestWithMockery
     public function returns_same_race_as_got()
     {
         $person = new Person(
-            $this->getGenderMock(),
             $race = $this->getRaceMock(),
+            $this->getGenderMock(),
+            $this->getExceptionalityMock(),
             $this->getInitialPropertiesMock(),
             $this->getProfessionLevelsMock(),
             $this->getNameMock()
@@ -67,8 +72,9 @@ class PersonTest extends TestWithMockery
     public function returns_same_initial_properties_as_got()
     {
         $person = new Person(
-            $this->getGenderMock(),
             $this->getRaceMock(),
+            $this->getGenderMock(),
+            $this->getExceptionalityMock(),
             $initialProperties = $this->getInitialPropertiesMock(),
             $this->getProfessionLevelsMock(),
             $this->getNameMock()
@@ -80,8 +86,9 @@ class PersonTest extends TestWithMockery
     public function returns_same_profession_levels_as_got()
     {
         $person = new Person(
-            $this->getGenderMock(),
             $this->getRaceMock(),
+            $this->getGenderMock(),
+            $this->getExceptionalityMock(),
             $this->getInitialPropertiesMock(),
             $professionLevels = $this->getProfessionLevelsMock(),
             $this->getNameMock()
@@ -93,8 +100,9 @@ class PersonTest extends TestWithMockery
     public function returns_same_name_as_got()
     {
         $person = new Person(
-            $this->getGenderMock(),
             $this->getRaceMock(),
+            $this->getGenderMock(),
+            $this->getExceptionalityMock(),
             $this->getInitialPropertiesMock(),
             $this->getProfessionLevelsMock(),
             $name = $this->getNameMock()
@@ -106,8 +114,9 @@ class PersonTest extends TestWithMockery
     public function can_change_name()
     {
         $person = new Person(
-            $this->getGenderMock(),
             $this->getRaceMock(),
+            $this->getGenderMock(),
+            $this->getExceptionalityMock(),
             $this->getInitialPropertiesMock(),
             $this->getProfessionLevelsMock(),
             $this->getNameMock()
@@ -122,6 +131,14 @@ class PersonTest extends TestWithMockery
     }
 
     /**
+     * @return Race
+     */
+    private function getRaceMock()
+    {
+        return \Mockery::mock(Race::class);
+    }
+
+    /**
      * @return Gender
      */
     private function getGenderMock()
@@ -130,11 +147,11 @@ class PersonTest extends TestWithMockery
     }
 
     /**
-     * @return Race
+     * @return Exceptionality
      */
-    private function getRaceMock()
+    private function getExceptionalityMock()
     {
-        return \Mockery::mock(Race::class);
+        return \Mockery::mock(Exceptionality::class);
     }
 
     /**

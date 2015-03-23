@@ -5,6 +5,8 @@ use Doctrineum\Strict\String\SelfTypedStrictStringEnum;
 
 /**
  * Race
+ *
+ * The race itself can not be abstract due to its factory functionality
  */
 class Race extends SelfTypedStrictStringEnum
 {

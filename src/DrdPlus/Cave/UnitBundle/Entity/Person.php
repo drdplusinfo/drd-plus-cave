@@ -2,6 +2,7 @@
 namespace DrdPlus\Cave\UnitBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Exceptionalities\Exceptionality;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Name;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels\ProfessionLevels;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\InitialProperties;
@@ -34,6 +35,13 @@ class Person extends StrictObject
     private $name;
 
     /**
+     * @var Race
+     *
+     * @ORM\Column(type="race")
+     */
+    private $race;
+
+    /**
      * @var Gender
      *
      * @ORM\Column(type="gender")
@@ -41,11 +49,11 @@ class Person extends StrictObject
     private $gender;
 
     /**
-     * @var Race
+     * @var InitialProperties
      *
-     * @ORM\Column(type="race")
+     * @ORM\Column(type="exceptionality")
      */
-    private $race;
+    private $exceptionality;
 
     /**
      * @var InitialProperties
@@ -62,15 +70,17 @@ class Person extends StrictObject
     private $professionLevels;
 
     public function __construct(
-        Gender $gender,
         Race $race,
+        Gender $gender,
+        Exceptionality $exceptionality,
         InitialProperties $initialProperties,
         ProfessionLevels $professionLevels,
         Name $name
     )
     {
-        $this->gender = $gender;
         $this->race = $race;
+        $this->gender = $gender;
+        $this->exceptionality = $exceptionality;
         $initialProperties->setPerson($this);
         $this->initialProperties = $initialProperties;
         $professionLevels->setPerson($this);
@@ -130,6 +140,21 @@ class Person extends StrictObject
     }
 
     /**
+     * @return InitialProperties
+     */
+    public function getInitialProperties()
+    {
+        return $this->initialProperties;
+    }
+    /**
+     * @return Exceptionality
+     */
+    public function getExceptionality()
+    {
+        return $this->exceptionality;
+    }
+
+    /**
      * Get levels
      *
      * @return ProfessionLevels
@@ -139,11 +164,4 @@ class Person extends StrictObject
         return $this->professionLevels;
     }
 
-    /**
-     * @return InitialProperties
-     */
-    public function getInitialProperties()
-    {
-        return $this->initialProperties;
-    }
 }
