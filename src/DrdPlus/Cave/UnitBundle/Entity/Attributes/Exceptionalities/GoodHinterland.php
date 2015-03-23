@@ -7,7 +7,7 @@ class GoodHinterland extends Exceptionality
     /**
      * @return string
      */
-    public static function getType()
+    public static function getKind()
     {
         return 'good_hinterland';
     }
