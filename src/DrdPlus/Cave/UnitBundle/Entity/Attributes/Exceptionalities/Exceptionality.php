@@ -20,21 +20,13 @@ class Exceptionality extends SelfTypedStrictStringEnum
      */
     public static function getKind()
     {
-        throw new \LogicException(
-            'The exceptionality class ' . static::class . ' has not implemented ' . __METHOD__ . ' method.'
-        );
-    }
-
-    /**
-     * @return string
-     */
-    public static function getTypeName()
-    {
         if (static::class === __CLASS__) {
-            return parent::getTypeName();
+            throw new \LogicException(
+                'The base exceptionality class ' . __CLASS__ . ' has no kind. It is just a base for others.'
+            );
         }
 
-        return static::getKind();
+        return static::getTypeName();
     }
 
     /**
