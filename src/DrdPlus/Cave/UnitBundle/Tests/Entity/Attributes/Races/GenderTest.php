@@ -21,7 +21,7 @@ class GenderTest extends TestWithMockery
     public function can_register_self()
     {
         Gender::registerSelf();
-        $this->assertTrue(Gender::hasType(Gender::getTypeName()));
+        $this->assertTrue(Type::hasType(Gender::getTypeName()));
     }
 
     /**

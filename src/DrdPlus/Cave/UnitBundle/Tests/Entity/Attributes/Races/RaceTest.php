@@ -24,7 +24,7 @@ class RaceTest extends TestWithMockery
     public function can_register_self()
     {
         Race::registerSelf();
-        $this->assertTrue(Race::hasType(Race::getTypeName()));
+        $this->assertTrue(Type::hasType(Race::getTypeName()));
     }
 
     /**

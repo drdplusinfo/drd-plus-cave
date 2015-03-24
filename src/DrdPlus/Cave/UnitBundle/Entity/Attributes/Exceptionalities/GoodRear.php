@@ -1,7 +1,7 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Exceptionalities;
 
-class GoodHinterland extends Exceptionality
+class GoodRear extends Exceptionality
 {
 
     /**
@@ -9,6 +9,6 @@ class GoodHinterland extends Exceptionality
      */
     public static function getKind()
     {
-        return 'good_hinterland';
+        return 'good_rear';
     }
 }
