@@ -27,8 +27,14 @@ class NameTest extends \PHPUnit_Framework_TestCase
      */
     public function can_be_created()
     {
-        $instance = Name::getEnum('foo');
+        $instance = Name::getEnum($value = 'foo');
         $this->assertInstanceOf(Name::class, $instance);
+        $this->assertSame($value, $instance->getValue());
+        $sameInstance = Name::getIt($value);
+        $this->assertSame($sameInstance, $instance);
+        $differentInstance = Name::getIt('bar');
+        $this->assertInstanceOf(Name::class, $differentInstance);
+        $this->assertNotSame($instance, $differentInstance);
 
         return $instance;
     }
