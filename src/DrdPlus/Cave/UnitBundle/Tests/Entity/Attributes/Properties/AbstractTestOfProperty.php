@@ -19,7 +19,7 @@ abstract class AbstractTestOfProperty extends TestWithMockery
     {
         $propertyClass = $this->getPropertyClass();
         $propertyName = $this->getPropertyName();
-        $constantName = strtoupper("TYPE_$propertyName");
+        $constantName = strtoupper($propertyName);
         $this->assertTrue(defined("$propertyClass::$constantName"));
         $this->assertSame($propertyName, constant("$propertyClass::$constantName"));
         $this->assertSame($propertyName, $propertyClass::getTypeName());
