@@ -14,7 +14,7 @@ class LevelValueTest extends \PHPUnit_Framework_TestCase
      */
     public function type_is_as_expected()
     {
-        $this->assertSame('level_value', LevelValue::TYPE_LEVEL_VALUE);
+        $this->assertSame('level_value', LevelValue::LEVEL_VALUE);
         $this->assertSame('level_value', LevelValue::getTypeName());
     }
 
@@ -36,8 +36,14 @@ class LevelValueTest extends \PHPUnit_Framework_TestCase
      */
     public function can_be_created()
     {
-        $instance = LevelValue::getEnum(12345);
-        $this->assertNotNull(LevelValue::class, $instance);
+        $instance = LevelValue::getEnum($value = 12345);
+        $this->assertInstanceOf(LevelValue::class, $instance);
+        $this->assertSame($value, $instance->getEnumValue());
+        $sameInstance = LevelValue::getIt($value);
+        $this->assertSame($instance, $sameInstance);
+        $differentInstance = LevelValue::getIt($value + 1);
+        $this->assertInstanceOf(LevelValue::class, $instance);
+        $this->assertNotSame($instance, $differentInstance);
 
         return $instance;
     }

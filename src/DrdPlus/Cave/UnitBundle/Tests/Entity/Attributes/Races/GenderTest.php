@@ -30,7 +30,7 @@ class GenderTest extends TestWithMockery
     public function has_type_name_as_expected()
     {
         $this->assertSame('gender', Gender::getTypeName());
-        $this->assertSame(Gender::TYPE_GENDER, Gender::getTypeName());
+        $this->assertSame(Gender::GENDER, Gender::getTypeName());
     }
 
     /**

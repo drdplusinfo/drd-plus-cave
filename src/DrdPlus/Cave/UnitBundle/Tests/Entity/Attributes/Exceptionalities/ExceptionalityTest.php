@@ -14,7 +14,7 @@ class ExceptionalityTest extends TestWithMockery
     public function has_type_name_as_expected()
     {
         $this->assertSame('exceptionality', Exceptionality::getTypeName());
-        $this->assertSame('exceptionality', Exceptionality::TYPE_EXCEPTIONALITY);
+        $this->assertSame('exceptionality', Exceptionality::EXCEPTIONALITY);
     }
 
     /**

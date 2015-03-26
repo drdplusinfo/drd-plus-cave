@@ -14,7 +14,17 @@ class Name extends SelfTypedStrictStringEnum
      *
      * This constant exists to follow Doctrine type conventions.
      */
-    const TYPE_NAME = 'name';
+    const NAME = 'name';
+
+    /**
+     * @param string $name
+     *
+     * @return Name
+     */
+    public static function getIt($name)
+    {
+        return static::getEnum($name);
+    }
 
     /**
      * @return bool

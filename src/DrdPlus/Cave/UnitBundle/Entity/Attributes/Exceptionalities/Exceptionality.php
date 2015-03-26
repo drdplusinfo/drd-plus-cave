@@ -5,7 +5,7 @@ use Doctrineum\Strict\String\SelfTypedStrictStringEnum;
 
 class Exceptionality extends SelfTypedStrictStringEnum
 {
-    const TYPE_EXCEPTIONALITY = 'exceptionality';
+    const EXCEPTIONALITY = 'exceptionality';
 
     /**
      * @return Exceptionality

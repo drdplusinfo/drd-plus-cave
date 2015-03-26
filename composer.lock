@@ -700,12 +700,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/migrations.git",
-                "reference": "efe104057657c5d62f714e00ae30fa2a51e688e3"
+                "reference": "65978aa4e9ffca3bb632225ad8c6320077d80d85"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/migrations/zipball/efe104057657c5d62f714e00ae30fa2a51e688e3",
-                "reference": "efe104057657c5d62f714e00ae30fa2a51e688e3",
+                "url": "https://api.github.com/repos/doctrine/migrations/zipball/65978aa4e9ffca3bb632225ad8c6320077d80d85",
+                "reference": "65978aa4e9ffca3bb632225ad8c6320077d80d85",
                 "shasum": ""
             },
             "require": {
@@ -750,7 +750,7 @@
                 "database",
                 "migrations"
             ],
-            "time": "2015-03-11 16:28:22"
+            "time": "2015-03-23 09:47:20"
         },
         {
             "name": "doctrine/orm",
@@ -831,7 +831,7 @@
             "source": {
                 "type": "git",
                 "url": "/home/jaroslav/Dropbox/Projects/doctrineum/integer",
-                "reference": "9c007017d7df9a85f807161ff92d8b95a14dee4e"
+                "reference": "b8e45d4ab765c4fb63fab3f545f1dde8fdf29735"
             },
             "require": {
                 "doctrineum/scalar": "dev-master",
@@ -853,7 +853,7 @@
                 "MIT"
             ],
             "description": "Enumeration type for Doctrine - integers only",
-            "time": "2015-03-12 13:02:49"
+            "time": "2015-03-25 09:48:05"
         },
         {
             "name": "doctrineum/scalar",
@@ -861,7 +861,7 @@
             "source": {
                 "type": "git",
                 "url": "/home/jaroslav/Dropbox/Projects/doctrineum/scalar",
-                "reference": "7f77b462356672609b76a8d50bc6d8b437c98053"
+                "reference": "7769c79571773e4212ddd136fd4c6a77ac616336"
             },
             "require": {
                 "doctrine/dbal": "2.4.*",
@@ -882,8 +882,23 @@
             "license": [
                 "MIT"
             ],
-            "description": "Enumeration type for Doctrine",
-            "time": "2015-03-12 13:07:10"
+            "authors": [
+                {
+                    "name": "Jaroslav Týc",
+                    "email": "mail@jaroslavtyc.com",
+                    "homepage": "http://jaroslavtyc.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Enumeration type and value dependent sub-type for Doctrine",
+            "keywords": [
+                "Doctrine",
+                "enum",
+                "self-typed enum",
+                "sub-type",
+                "value-dependent enum"
+            ],
+            "time": "2015-03-25 10:51:33"
         },
         {
             "name": "doctrineum/strict-string",
@@ -891,7 +906,7 @@
             "source": {
                 "type": "git",
                 "url": "/home/jaroslav/Dropbox/Projects/doctrineum/strict-string",
-                "reference": "24017c3eb522607b3725debedc4d76d42bcb9b23"
+                "reference": "cb05ec6b3436e3f9d8c8d1f2e9e9983cecdbc88f"
             },
             "require": {
                 "doctrineum/scalar": "dev-master",
@@ -913,7 +928,7 @@
                 "MIT"
             ],
             "description": "Enumeration type for Doctrine - strings only",
-            "time": "2015-03-12 13:00:00"
+            "time": "2015-03-25 09:50:10"
         },
         {
             "name": "granam/exception-hierarchy",
@@ -955,7 +970,7 @@
             "source": {
                 "type": "git",
                 "url": "/home/jaroslav/Dropbox/Projects/granam/strict-object",
-                "reference": "aad088ca2105ade57383244a2d08e2e28128af16"
+                "reference": "6f6bce5494d4d69ead632c08c59ffc131d74affa"
             },
             "require": {
                 "granam/exception-hierarchy": "dev-master",
@@ -987,7 +1002,7 @@
                 "php",
                 "strict"
             ],
-            "time": "2015-03-08 21:15:32"
+            "time": "2015-03-12 16:50:42"
         },
         {
             "name": "incenteev/composer-parameter-handler",
@@ -1278,17 +1293,17 @@
         },
         {
             "name": "sensio/distribution-bundle",
-            "version": "v3.0.18",
+            "version": "v3.0.19",
             "target-dir": "Sensio/Bundle/DistributionBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioDistributionBundle.git",
-                "reference": "ac026149ffb1d3a5c893290d2d3ca8795013de08"
+                "reference": "c68d47e3bcdfca74d92ab9d9382e276adf451424"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/ac026149ffb1d3a5c893290d2d3ca8795013de08",
-                "reference": "ac026149ffb1d3a5c893290d2d3ca8795013de08",
+                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/c68d47e3bcdfca74d92ab9d9382e276adf451424",
+                "reference": "c68d47e3bcdfca74d92ab9d9382e276adf451424",
                 "shasum": ""
             },
             "require": {
@@ -1334,21 +1349,21 @@
                 "configuration",
                 "distribution"
             ],
-            "time": "2015-02-27 12:59:18"
+            "time": "2015-03-25 09:01:40"
         },
         {
             "name": "sensio/framework-extra-bundle",
-            "version": "v3.0.4",
+            "version": "v3.0.6",
             "target-dir": "Sensio/Bundle/FrameworkExtraBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioFrameworkExtraBundle.git",
-                "reference": "b3bc3e67c8b6b68b18d727012183520d35ee762a"
+                "reference": "1c3ed356bd1ff67cd71806efbb71511644035c85"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/b3bc3e67c8b6b68b18d727012183520d35ee762a",
-                "reference": "b3bc3e67c8b6b68b18d727012183520d35ee762a",
+                "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/1c3ed356bd1ff67cd71806efbb71511644035c85",
+                "reference": "1c3ed356bd1ff67cd71806efbb71511644035c85",
                 "shasum": ""
             },
             "require": {
@@ -1389,7 +1404,7 @@
                 "annotations",
                 "controllers"
             ],
-            "time": "2014-12-02 09:52:52"
+            "time": "2015-03-24 15:12:07"
         },
         {
             "name": "sensiolabs/security-checker",
@@ -1438,16 +1453,16 @@
         },
         {
             "name": "swiftmailer/swiftmailer",
-            "version": "v5.3.1",
+            "version": "v5.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "c5f963e7f9d6f6438fda4f22d5cc2db296ec621a"
+                "reference": "31454f258f10329ae7c48763eb898a75c39e0a9f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/c5f963e7f9d6f6438fda4f22d5cc2db296ec621a",
-                "reference": "c5f963e7f9d6f6438fda4f22d5cc2db296ec621a",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/31454f258f10329ae7c48763eb898a75c39e0a9f",
+                "reference": "31454f258f10329ae7c48763eb898a75c39e0a9f",
                 "shasum": ""
             },
             "require": {
@@ -1459,7 +1474,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "5.3-dev"
+                    "dev-master": "5.4-dev"
                 }
             },
             "autoload": {
@@ -1486,7 +1501,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2014-12-05 14:17:14"
+            "time": "2015-03-14 06:06:39"
         },
         {
             "name": "symfony/assetic-bundle",
@@ -2865,17 +2880,17 @@
         },
         {
             "name": "sensio/generator-bundle",
-            "version": "v2.5.2",
+            "version": "v2.5.3",
             "target-dir": "Sensio/Bundle/GeneratorBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioGeneratorBundle.git",
-                "reference": "4b09746520a826a7bf34a466ba31c7d8740fef7e"
+                "reference": "e50108c2133ee5c9c484555faed50c17a61221d3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioGeneratorBundle/zipball/4b09746520a826a7bf34a466ba31c7d8740fef7e",
-                "reference": "4b09746520a826a7bf34a466ba31c7d8740fef7e",
+                "url": "https://api.github.com/repos/sensiolabs/SensioGeneratorBundle/zipball/e50108c2133ee5c9c484555faed50c17a61221d3",
+                "reference": "e50108c2133ee5c9c484555faed50c17a61221d3",
                 "shasum": ""
             },
             "require": {
@@ -2909,7 +2924,7 @@
                 }
             ],
             "description": "This bundle generates code for you",
-            "time": "2015-02-11 07:21:23"
+            "time": "2015-03-17 06:36:52"
         }
     ],
     "aliases": [],

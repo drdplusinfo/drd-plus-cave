@@ -3,6 +3,9 @@ namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties;
 
 use Doctrineum\Integer\SelfTypedIntegerEnum;
 
+/**
+ * @method static Property getType()
+ */
 abstract class Property extends SelfTypedIntegerEnum
 {
 
@@ -28,6 +31,16 @@ abstract class Property extends SelfTypedIntegerEnum
         }
 
         return parent::getTypeName();
+    }
+
+    /**
+     * @param int $value
+     *
+     * @return Property
+     */
+    public static function getIt($value)
+    {
+        return static::getEnum($value);
     }
 
     /**

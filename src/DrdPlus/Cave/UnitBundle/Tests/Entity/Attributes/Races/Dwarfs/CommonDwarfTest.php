@@ -5,9 +5,6 @@ use Doctrine\DBAL\Types\Type;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Race;
 use DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\Races\AbstractTestOfRace;
 
-/**
- * @method Race can_create_self
- */
 class CommonDwarfTest extends AbstractTestOfRace
 {
 
@@ -19,6 +16,21 @@ class CommonDwarfTest extends AbstractTestOfRace
         $raceClass = $this->getSubraceClass();
         $raceClass::registerSelf();
         $this->assertTrue(Type::hasType($raceClass::getTypeName()));
+    }
+
+    /**
+     * @return Race
+     *
+     * @test
+     * @depends can_register_self
+     */
+    public function can_create_self()
+    {
+        $raceClass = $this->getSubraceClass();
+        $instance = $raceClass::getIt();
+        $this->assertInstanceOf($raceClass, $instance);
+
+        return $instance;
     }
 
     /**

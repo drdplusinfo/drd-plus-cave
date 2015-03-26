@@ -9,7 +9,16 @@ use Doctrineum\Integer\SelfTypedIntegerEnum;
  */
 class LevelValue extends SelfTypedIntegerEnum
 {
-    const TYPE_LEVEL_VALUE = 'level_value';
+    const LEVEL_VALUE = 'level_value';
+
+    /**
+     * @param int $value
+     * @return LevelValue
+     */
+    public static function getIt($value)
+    {
+        return static::getEnum($value);
+    }
 
     /**
      * @return int

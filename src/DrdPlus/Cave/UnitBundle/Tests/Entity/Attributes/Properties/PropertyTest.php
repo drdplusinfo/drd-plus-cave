@@ -39,8 +39,11 @@ class PropertyTest extends \PHPUnit_Framework_TestCase
      */
     public function specific_property_can_be_created()
     {
-        $someSpecificProperty = TestSomeSpecificProperty::getIt();
+        $someSpecificProperty = TestSomeSpecificProperty::getIt($value = 12345);
         $this->assertInstanceOf(TestSomeSpecificProperty::class, $someSpecificProperty);
+        $anotherInstance = TestSomeSpecificProperty::getIt($value + 1);
+        $this->assertInstanceOf(TestSomeSpecificProperty::class, $anotherInstance);
+        $this->assertNotSame($someSpecificProperty, $anotherInstance);
     }
 
     /**

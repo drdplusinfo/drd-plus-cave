@@ -14,7 +14,7 @@ class RaceTest extends TestWithMockery
     public function has_type_name_as_expected()
     {
         $this->assertSame('race', Race::getTypeName());
-        $this->assertSame(Race::TYPE_RACE, Race::getTypeName());
+        $this->assertSame(Race::RACE, Race::getTypeName());
     }
 
     /**

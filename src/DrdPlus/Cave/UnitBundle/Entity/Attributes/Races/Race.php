@@ -10,7 +10,7 @@ use Doctrineum\Strict\String\SelfTypedStrictStringEnum;
  */
 class Race extends SelfTypedStrictStringEnum
 {
-    const TYPE_RACE = 'race';
+    const RACE = 'race';
 
     const BASE_STRENGTH = 0;
     const BASE_AGILITY = 0;

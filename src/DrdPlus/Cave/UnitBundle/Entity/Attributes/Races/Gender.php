@@ -19,7 +19,7 @@ use Doctrineum\Strict\String\SelfTypedStrictStringEnum;
  */
 class Gender extends SelfTypedStrictStringEnum
 {
-    const TYPE_GENDER = 'gender';
+    const GENDER = 'gender';
 
     const MALE_CODE = 'male';
     const FEMALE_CODE = 'female';

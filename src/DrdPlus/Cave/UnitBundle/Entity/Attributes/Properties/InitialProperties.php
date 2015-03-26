@@ -152,7 +152,7 @@ class InitialProperties extends StrictObject
      */
     public function calculateMaximalInitialStrength()
     {
-        return $this->calculateMaximalInitialProperty(Strength::TYPE_STRENGTH);
+        return $this->calculateMaximalInitialProperty(Strength::STRENGTH);
     }
 
     /**
@@ -204,7 +204,7 @@ class InitialProperties extends StrictObject
      */
     public function calculateMaximalInitialAgility()
     {
-        return $this->calculateMaximalInitialProperty(Agility::TYPE_AGILITY);
+        return $this->calculateMaximalInitialProperty(Agility::AGILITY);
     }
 
     /**
@@ -233,7 +233,7 @@ class InitialProperties extends StrictObject
      */
     public function calculateMaximalInitialKnack()
     {
-        return $this->calculateMaximalInitialProperty(Knack::TYPE_KNACK);
+        return $this->calculateMaximalInitialProperty(Knack::KNACK);
     }
 
     /**
@@ -262,7 +262,7 @@ class InitialProperties extends StrictObject
      */
     public function calculateMaximalInitialWill()
     {
-        return $this->calculateMaximalInitialProperty(Will::TYPE_WILL);
+        return $this->calculateMaximalInitialProperty(Will::WILL);
     }
 
     /**
@@ -291,7 +291,7 @@ class InitialProperties extends StrictObject
      */
     public function calculateMaximalInitialIntelligence()
     {
-        return $this->calculateMaximalInitialProperty(Intelligence::TYPE_INTELLIGENCE);
+        return $this->calculateMaximalInitialProperty(Intelligence::INTELLIGENCE);
     }
 
     /**
@@ -320,6 +320,6 @@ class InitialProperties extends StrictObject
      */
     public function calculateMaximalInitialCharisma()
     {
-        return $this->calculateMaximalInitialProperty(Charisma::TYPE_CHARISMA);
+        return $this->calculateMaximalInitialProperty(Charisma::CHARISMA);
     }
 }
