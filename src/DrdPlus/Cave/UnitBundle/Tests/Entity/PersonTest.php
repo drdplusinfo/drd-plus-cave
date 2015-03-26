@@ -41,6 +41,20 @@ class PersonTest extends TestWithMockery
     }
 
     /** @test */
+    public function returns_same_race_as_got()
+    {
+        $person = new Person(
+            $race = $this->getRaceMock(),
+            $this->getGenderMock(),
+            $this->getExceptionalityMock(),
+            $this->getInitialPropertiesMock(),
+            $this->getProfessionLevelsMock(),
+            $this->getNameMock()
+        );
+        $this->assertSame($race, $person->getRace());
+    }
+
+    /** @test */
     public function returns_same_gender_as_got()
     {
         $person = new Person(
@@ -55,17 +69,17 @@ class PersonTest extends TestWithMockery
     }
 
     /** @test */
-    public function returns_same_race_as_got()
+    public function returns_same_exceptionality_as_got()
     {
         $person = new Person(
-            $race = $this->getRaceMock(),
+            $this->getRaceMock(),
             $this->getGenderMock(),
-            $this->getExceptionalityMock(),
+            $exceptionality = $this->getExceptionalityMock(),
             $this->getInitialPropertiesMock(),
             $this->getProfessionLevelsMock(),
             $this->getNameMock()
         );
-        $this->assertSame($race, $person->getRace());
+        $this->assertSame($exceptionality, $person->getExceptionality());
     }
 
     /** @test */
