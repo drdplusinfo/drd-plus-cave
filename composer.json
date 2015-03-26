@@ -12,23 +12,23 @@
   "repositories": [
     {
       "type": "vcs",
-      "url": "/home/jaroslav/Dropbox/Projects/doctrineum/scalar"
+      "url": "https://github.com/jaroslavtyc/doctrineum-scalar.git"
     },
     {
       "type": "vcs",
-      "url": "/home/jaroslav/Dropbox/Projects/doctrineum/integer"
+      "url": "https://github.com/jaroslavtyc/doctrineum-integer.git"
     },
     {
       "type": "vcs",
-      "url": "/home/jaroslav/Dropbox/Projects/doctrineum/strict-string"
+      "url": "https://github.com/jaroslavtyc/doctrineum-strict-string.git"
     },
     {
       "type": "vcs",
-      "url": "/home/jaroslav/Dropbox/Projects/granam/strict-object"
+      "url": "https://github.com/jaroslavtyc/granam-strict-object.git"
     },
     {
       "type": "vcs",
-      "url": "/home/jaroslav/Dropbox/Projects/granam/exception-hierarchy"
+      "url": "https://github.com/jaroslavtyc/granam-exception-hierarchy.git"
     }
   ],
   "require": {
@@ -54,7 +54,7 @@
   "require-dev": {
     "sensio/generator-bundle": "~2.3",
     "phpunit/phpunit": "~4.4",
-    "mockery/mockery": "0.9.*"
+    "mockery/mockery": ">=0.9"
   },
   "scripts": {
     "post-root-package-install": [

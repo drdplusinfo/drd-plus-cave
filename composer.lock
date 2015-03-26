@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6a5143e9d3fb2404b9abbc20e2850372",
+    "hash": "a3b9c1b251591efe2a1584b7327e8099",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -830,8 +830,14 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "/home/jaroslav/Dropbox/Projects/doctrineum/integer",
-                "reference": "b8e45d4ab765c4fb63fab3f545f1dde8fdf29735"
+                "url": "https://github.com/jaroslavtyc/doctrineum-integer.git",
+                "reference": "e669ae279b0f0fa5b72cddaa48994b0a26b583fd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jaroslavtyc/doctrineum-integer/zipball/e669ae279b0f0fa5b72cddaa48994b0a26b583fd",
+                "reference": "e669ae279b0f0fa5b72cddaa48994b0a26b583fd",
+                "shasum": ""
             },
             "require": {
                 "doctrineum/scalar": "dev-master",
@@ -853,15 +859,25 @@
                 "MIT"
             ],
             "description": "Enumeration type for Doctrine - integers only",
-            "time": "2015-03-25 09:48:05"
+            "support": {
+                "source": "https://github.com/jaroslavtyc/doctrineum-integer/tree/master",
+                "issues": "https://github.com/jaroslavtyc/doctrineum-integer/issues"
+            },
+            "time": "2015-03-26 07:56:50"
         },
         {
             "name": "doctrineum/scalar",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "/home/jaroslav/Dropbox/Projects/doctrineum/scalar",
-                "reference": "7769c79571773e4212ddd136fd4c6a77ac616336"
+                "url": "https://github.com/jaroslavtyc/doctrineum-scalar.git",
+                "reference": "516c93dba5a73c495f0270b68f44be5b5867c596"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jaroslavtyc/doctrineum-scalar/zipball/516c93dba5a73c495f0270b68f44be5b5867c596",
+                "reference": "516c93dba5a73c495f0270b68f44be5b5867c596",
+                "shasum": ""
             },
             "require": {
                 "doctrine/dbal": "2.4.*",
@@ -898,15 +914,25 @@
                 "sub-type",
                 "value-dependent enum"
             ],
-            "time": "2015-03-25 10:51:33"
+            "support": {
+                "source": "https://github.com/jaroslavtyc/doctrineum-scalar/tree/master",
+                "issues": "https://github.com/jaroslavtyc/doctrineum-scalar/issues"
+            },
+            "time": "2015-03-26 07:57:45"
         },
         {
             "name": "doctrineum/strict-string",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "/home/jaroslav/Dropbox/Projects/doctrineum/strict-string",
-                "reference": "cb05ec6b3436e3f9d8c8d1f2e9e9983cecdbc88f"
+                "url": "https://github.com/jaroslavtyc/doctrineum-strict-string.git",
+                "reference": "22c6da373bbb12af116ed45391c3932c4cce6813"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jaroslavtyc/doctrineum-strict-string/zipball/22c6da373bbb12af116ed45391c3932c4cce6813",
+                "reference": "22c6da373bbb12af116ed45391c3932c4cce6813",
+                "shasum": ""
             },
             "require": {
                 "doctrineum/scalar": "dev-master",
@@ -928,21 +954,31 @@
                 "MIT"
             ],
             "description": "Enumeration type for Doctrine - strings only",
-            "time": "2015-03-25 09:50:10"
+            "support": {
+                "source": "https://github.com/jaroslavtyc/doctrineum-strict-string/tree/master",
+                "issues": "https://github.com/jaroslavtyc/doctrineum-strict-string/issues"
+            },
+            "time": "2015-03-26 07:58:15"
         },
         {
             "name": "granam/exception-hierarchy",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "/home/jaroslav/Dropbox/Projects/granam/exception-hierarchy",
-                "reference": "a083f48602a1114c7bc91e4715c8757bab3cd20e"
+                "url": "https://github.com/jaroslavtyc/granam-exception-hierarchy.git",
+                "reference": "4e3b3ba22ed4ce99bdc981871d3d7314d7cb96b9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jaroslavtyc/granam-exception-hierarchy/zipball/4e3b3ba22ed4ce99bdc981871d3d7314d7cb96b9",
+                "reference": "4e3b3ba22ed4ce99bdc981871d3d7314d7cb96b9",
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3"
             },
             "require-dev": {
-                "mockery/mockery": "0.9.*",
+                "mockery/mockery": ">=0.9",
                 "phpunit/phpunit": "~4.4"
             },
             "type": "library",
@@ -962,19 +998,29 @@
                 "php",
                 "runtime"
             ],
-            "time": "2015-02-17 08:30:45"
+            "support": {
+                "source": "https://github.com/jaroslavtyc/granam-exception-hierarchy/tree/master",
+                "issues": "https://github.com/jaroslavtyc/granam-exception-hierarchy/issues"
+            },
+            "time": "2015-03-26 09:46:22"
         },
         {
             "name": "granam/strict-object",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "/home/jaroslav/Dropbox/Projects/granam/strict-object",
-                "reference": "6f6bce5494d4d69ead632c08c59ffc131d74affa"
+                "url": "https://github.com/jaroslavtyc/granam-strict-object.git",
+                "reference": "0f77984104932ee8f40f74d8cdb0335ff7889e76"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jaroslavtyc/granam-strict-object/zipball/0f77984104932ee8f40f74d8cdb0335ff7889e76",
+                "reference": "0f77984104932ee8f40f74d8cdb0335ff7889e76",
+                "shasum": ""
             },
             "require": {
                 "granam/exception-hierarchy": "dev-master",
-                "php": ">=5.4.0"
+                "php": ">=5.4"
             },
             "require-dev": {
                 "phpunit/phpunit": "~4.4"
@@ -1002,7 +1048,11 @@
                 "php",
                 "strict"
             ],
-            "time": "2015-03-12 16:50:42"
+            "support": {
+                "source": "https://github.com/jaroslavtyc/granam-strict-object/tree/master",
+                "issues": "https://github.com/jaroslavtyc/granam-strict-object/issues"
+            },
+            "time": "2015-03-26 09:42:40"
         },
         {
             "name": "incenteev/composer-parameter-handler",
