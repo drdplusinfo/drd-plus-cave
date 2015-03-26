@@ -1,6 +1,7 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Exceptionalities;
 
+use Doctrine\DBAL\Types\Type;
 use DrdPlus\Cave\UnitBundle\Tests\TestWithMockery;
 
 class ExceptionalityFactoryTest extends TestWithMockery
@@ -17,8 +18,36 @@ class ExceptionalityFactoryTest extends TestWithMockery
     }
 
     /**
+     * @test
+     * @depends can_be_created
+     */
+    public function good_rear_is_registered_after_factory_creation()
+    {
+        $this->assertTrue(Type::hasType(GoodRear::getTypeName()));
+    }
+
+    /**
+     * @test
+     * @depends can_be_created
+     */
+    public function combination_is_registered_after_factory_creation()
+    {
+        $this->assertTrue(Type::hasType(Combination::getTypeName()));
+    }
+
+    /**
+     * @test
+     * @depends can_be_created
+     */
+    public function exceptional_properties_type_is_registered_after_factory_creation()
+    {
+        $this->assertTrue(Type::hasType(ExceptionalProperties::getTypeName()));
+    }
+
+    /**
      * @depends can_be_created
      * @test
+     *
      * @param ExceptionalityFactory $factory
      */
     public function can_create_good_rear(ExceptionalityFactory $factory)
@@ -29,6 +58,7 @@ class ExceptionalityFactoryTest extends TestWithMockery
     /**
      * @depends can_be_created
      * @test
+     *
      * @param ExceptionalityFactory $factory
      */
     public function can_create_combination(ExceptionalityFactory $factory)
@@ -39,6 +69,7 @@ class ExceptionalityFactoryTest extends TestWithMockery
     /**
      * @depends can_be_created
      * @test
+     *
      * @param ExceptionalityFactory $factory
      */
     public function can_create_exceptional_properties(ExceptionalityFactory $factory)
