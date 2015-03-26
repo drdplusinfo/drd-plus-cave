@@ -80,9 +80,40 @@ abstract class AbstractTestOfRace extends TestWithMockery
         $raceClass = $this->getSubraceClass();
         $instance = $raceClass::getIt();
         $this->assertInstanceOf($raceClass, $instance);
+        $raceCode = $this->buildRaceCode();
+        $subraceCode = $this->buildSubraceCode();
+        $this->assertSame("$raceCode-$subraceCode", $instance->getTypeName());
+        $this->assertSame($raceCode, $instance->getRaceCode());
+        $this->assertSame($subraceCode, $instance->getSubraceCode());
 
         return $instance;
     }
+
+    /**
+     * @return string
+     */
+    protected function buildRaceCode()
+    {
+        $baseNamespace = $this->getSubraceBaseNamespace();
+        $singular = preg_replace('~s$~', '', $baseNamespace);
+
+        return strtolower($singular);
+    }
+
+    protected function getSubraceBaseNamespace()
+    {
+        $namespace = $this->getSubraceNamespace();
+
+        return preg_replace('~(\w+\\\)*(\w+)~', '$2', $namespace);
+    }
+
+    protected function getSubraceNamespace()
+    {
+        $subraceClass = $this->getSubraceClass();
+
+        return preg_replace('~\\\[\w]+$~', '', $subraceClass);
+    }
+
 
     // ATTRIBUTES TESTS
 
@@ -148,10 +179,7 @@ abstract class AbstractTestOfRace extends TestWithMockery
      */
     protected function getGenderNamespace()
     {
-        $subraceClass = $this->getSubraceClass();
-        $subraceNamespace = preg_replace('~\\\[\w]+$~', '', $subraceClass);
-
-        return $subraceNamespace . '\\Genders';
+        return $this->getSubraceNamespace() . '\\Genders';
     }
 
     /**
@@ -403,7 +431,8 @@ class SomeGenderOfUnexpectedRace extends Gender
 
 }
 
-class SomeSubraceOfUnexpectedGenderSubrace extends Race {
+class SomeSubraceOfUnexpectedGenderSubrace extends Race
+{
     /**
      * @return string
      */
