@@ -94,7 +94,7 @@ trait ProfessionLevelsTestMoreLevelsTrait
         }
         /** @var ProfessionLevelsTest|ProfessionLevelsTestMoreLevelsTrait $this */
         $this->assertSame(
-            (in_array($testedProperty, $this->getMoreLevelsMainPropertiesToProfession($professionName))
+            (in_array($testedProperty, $this->getMoreLevelsPrimaryPropertiesToProfession($professionName))
                 ? 1
                 : 0
             )
@@ -102,7 +102,7 @@ trait ProfessionLevelsTestMoreLevelsTrait
         );
     }
 
-    private function getMoreLevelsMainPropertiesToProfession($professionName)
+    private function getMoreLevelsPrimaryPropertiesToProfession($professionName)
     {
         switch ($professionName) {
             case 'fighter' :

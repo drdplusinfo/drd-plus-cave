@@ -24,7 +24,7 @@ class TheurgistLevel extends ProfessionLevel
     /**
      * @return string[]
      */
-    public function getMainPropertyCodes()
+    public function getPrimaryPropertyCodes()
     {
         return [
             Intelligence::getTypeName(),

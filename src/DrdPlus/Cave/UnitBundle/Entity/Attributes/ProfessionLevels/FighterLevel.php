@@ -24,7 +24,7 @@ class FighterLevel extends ProfessionLevel
     /**
      * @return string[]
      */
-    public function getMainPropertyCodes()
+    public function getPrimaryPropertyCodes()
     {
         return [
             Strength::getTypeName(),

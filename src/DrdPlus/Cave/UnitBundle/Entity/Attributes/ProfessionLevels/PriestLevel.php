@@ -24,7 +24,7 @@ class PriestLevel extends ProfessionLevel
     /**
      * @return string[]
      */
-    public function getMainPropertyCodes()
+    public function getPrimaryPropertyCodes()
     {
         return [
             Charisma::getTypeName(),

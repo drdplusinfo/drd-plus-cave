@@ -134,7 +134,7 @@ abstract class ProfessionLevel extends StrictObject
     /**
      * @return string[]
      */
-    abstract public function getMainPropertyCodes();
+    abstract public function getPrimaryPropertyCodes();
 
     /**
      * Get strength modifier
@@ -153,7 +153,7 @@ abstract class ProfessionLevel extends StrictObject
      */
     private function getPropertyFirstLevelModifier($propertyCode)
     {
-        return $this->isMainProperty($propertyCode)
+        return $this->isPrimaryProperty($propertyCode)
             ? self::PROPERTY_FIRST_LEVEL_MODIFIER
             : 0;
     }
@@ -163,9 +163,9 @@ abstract class ProfessionLevel extends StrictObject
      *
      * @return bool
      */
-    public function isMainProperty($propertyCode)
+    public function isPrimaryProperty($propertyCode)
     {
-        return in_array($propertyCode, $this->getMainPropertyCodes());
+        return in_array($propertyCode, $this->getPrimaryPropertyCodes());
     }
 
     /**

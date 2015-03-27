@@ -348,7 +348,7 @@ class ProfessionLevels extends StrictObject
      */
     private function getPropertyFirstLevelIncrement($propertyCode)
     {
-        return $this->getFirstLevel() && $this->getFirstLevel()->isMainProperty($propertyCode)
+        return $this->getFirstLevel() && $this->getFirstLevel()->isPrimaryProperty($propertyCode)
             ? self::PROPERTY_FIRST_LEVEL_INCREMENT
             : 0;
     }

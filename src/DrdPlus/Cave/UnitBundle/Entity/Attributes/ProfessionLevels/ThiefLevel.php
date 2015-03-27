@@ -24,7 +24,7 @@ class ThiefLevel extends ProfessionLevel
     /**
      * @return string[]
      */
-    public function getMainPropertyCodes()
+    public function getPrimaryPropertyCodes()
     {
         return [
             Agility::getTypeName(),
