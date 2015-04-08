@@ -143,6 +143,14 @@ class Gender extends SelfTypedStrictStringEnum
         return "$raceCode-$subraceCode-$genderCode";
     }
 
+    public static function registerSelfSubRaceGender()
+    {
+        return static::addSubTypeEnum(
+            static::class,
+            '~^' . static::getRaceSubraceAndGenderCode() . '$~'
+        );
+    }
+
     /**
      * @return bool
      */

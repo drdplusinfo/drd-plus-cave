@@ -8,34 +8,35 @@ class GenderFactory extends StrictObject
 
     public function __construct()
     {
-        Humans\Genders\CommonHumanMale::registerSelf();
-        Humans\Genders\CommonHumanFemale::registerSelf();
-        Humans\Genders\HighlanderMale::registerSelf();
-        Humans\Genders\HighlanderFemale::registerSelf();
-        Dwarfs\Genders\CommonDwarfMale::registerSelf();
-        Dwarfs\Genders\CommonDwarfFemale::registerSelf();
-        Dwarfs\Genders\MountainDwarfMale::registerSelf();
-        Dwarfs\Genders\MountainDwarfFemale::registerSelf();
-        Dwarfs\Genders\WoodDwarfMale::registerSelf();
-        Dwarfs\Genders\WoodDwarfFemale::registerSelf();
-        Elfs\Genders\CommonElfMale::registerSelf();
-        Elfs\Genders\CommonElfFemale::registerSelf();
-        Elfs\Genders\DarkElfMale::registerSelf();
-        Elfs\Genders\DarkElfFemale::registerSelf();
-        Elfs\Genders\GreenElfMale::registerSelf();
-        Elfs\Genders\GreenElfFemale::registerSelf();
-        Hobbits\Genders\CommonHobbitMale::registerSelf();
-        Hobbits\Genders\CommonHobbitFemale::registerSelf();
-        Krolls\Genders\CommonKrollMale::registerSelf();
-        Krolls\Genders\CommonKrollFemale::registerSelf();
-        Krolls\Genders\WildKrollMale::registerSelf();
-        Krolls\Genders\WildKrollFemale::registerSelf();
-        Orcs\Genders\CommonOrcMale::registerSelf();
-        Orcs\Genders\CommonOrcFemale::registerSelf();
-        Orcs\Genders\GoblinMale::registerSelf();
-        Orcs\Genders\GoblinFemale::registerSelf();
-        Orcs\Genders\SkurutMale::registerSelf();
-        Orcs\Genders\SkurutFemale::registerSelf();
+        Gender::registerSelf();
+        Humans\Genders\CommonHumanMale::registerSelfSubRaceGender();
+        Humans\Genders\CommonHumanFemale::registerSelfSubRaceGender();
+        Humans\Genders\HighlanderMale::registerSelfSubRaceGender();
+        Humans\Genders\HighlanderFemale::registerSelfSubRaceGender();
+        Dwarfs\Genders\CommonDwarfMale::registerSelfSubRaceGender();
+        Dwarfs\Genders\CommonDwarfFemale::registerSelfSubRaceGender();
+        Dwarfs\Genders\MountainDwarfMale::registerSelfSubRaceGender();
+        Dwarfs\Genders\MountainDwarfFemale::registerSelfSubRaceGender();
+        Dwarfs\Genders\WoodDwarfMale::registerSelfSubRaceGender();
+        Dwarfs\Genders\WoodDwarfFemale::registerSelfSubRaceGender();
+        Elfs\Genders\CommonElfMale::registerSelfSubRaceGender();
+        Elfs\Genders\CommonElfFemale::registerSelfSubRaceGender();
+        Elfs\Genders\DarkElfMale::registerSelfSubRaceGender();
+        Elfs\Genders\DarkElfFemale::registerSelfSubRaceGender();
+        Elfs\Genders\GreenElfMale::registerSelfSubRaceGender();
+        Elfs\Genders\GreenElfFemale::registerSelfSubRaceGender();
+        Hobbits\Genders\CommonHobbitMale::registerSelfSubRaceGender();
+        Hobbits\Genders\CommonHobbitFemale::registerSelfSubRaceGender();
+        Krolls\Genders\CommonKrollMale::registerSelfSubRaceGender();
+        Krolls\Genders\CommonKrollFemale::registerSelfSubRaceGender();
+        Krolls\Genders\WildKrollMale::registerSelfSubRaceGender();
+        Krolls\Genders\WildKrollFemale::registerSelfSubRaceGender();
+        Orcs\Genders\CommonOrcMale::registerSelfSubRaceGender();
+        Orcs\Genders\CommonOrcFemale::registerSelfSubRaceGender();
+        Orcs\Genders\GoblinMale::registerSelfSubRaceGender();
+        Orcs\Genders\GoblinFemale::registerSelfSubRaceGender();
+        Orcs\Genders\SkurutMale::registerSelfSubRaceGender();
+        Orcs\Genders\SkurutFemale::registerSelfSubRaceGender();
     }
 
     /**

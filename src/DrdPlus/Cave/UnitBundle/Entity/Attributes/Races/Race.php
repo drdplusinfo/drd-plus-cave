@@ -122,6 +122,14 @@ class Race extends SelfTypedStrictStringEnum
         return $specificRaceClass;
     }
 
+    public static function registerSelfSubRace()
+    {
+        return static::addSubTypeEnum(
+            static::class,
+            '~^' . static::getRaceAndSubraceCode() . '$~'
+        );
+    }
+
     /**
      * Get strength modifier
      *

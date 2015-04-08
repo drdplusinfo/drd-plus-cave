@@ -7,20 +7,21 @@ class RaceFactory extends StrictObject
 {
     public function __construct()
     {
-        Humans\CommonHuman::registerSelf();
-        Humans\Highlander::registerSelf();
-        Dwarfs\CommonDwarf::registerSelf();
-        Dwarfs\MountainDwarf::registerSelf();
-        Dwarfs\WoodDwarf::registerSelf();
-        Elfs\CommonElf::registerSelf();
-        Elfs\DarkElf::registerSelf();
-        Elfs\GreenElf::registerSelf();
-        Hobbits\CommonHobbit::registerSelf();
-        Krolls\CommonKroll::registerSelf();
-        Krolls\WildKroll::registerSelf();
-        Orcs\CommonOrc::registerSelf();
-        Orcs\Goblin::registerSelf();
-        Orcs\Skurut::registerSelf();
+        Race::registerSelf();
+        Humans\CommonHuman::registerSelfSubRace();
+        Humans\Highlander::registerSelfSubRace();
+        Dwarfs\CommonDwarf::registerSelfSubRace();
+        Dwarfs\MountainDwarf::registerSelfSubRace();
+        Dwarfs\WoodDwarf::registerSelfSubRace();
+        Elfs\CommonElf::registerSelfSubRace();
+        Elfs\DarkElf::registerSelfSubRace();
+        Elfs\GreenElf::registerSelfSubRace();
+        Hobbits\CommonHobbit::registerSelfSubRace();
+        Krolls\CommonKroll::registerSelfSubRace();
+        Krolls\WildKroll::registerSelfSubRace();
+        Orcs\CommonOrc::registerSelfSubRace();
+        Orcs\Goblin::registerSelfSubRace();
+        Orcs\Skurut::registerSelfSubRace();
     }
 
     /**
