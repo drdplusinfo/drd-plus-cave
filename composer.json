@@ -9,28 +9,6 @@
       "SymfonyStandard": "app/"
     }
   },
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "https://github.com/jaroslavtyc/doctrineum-scalar.git"
-    },
-    {
-      "type": "vcs",
-      "url": "https://github.com/jaroslavtyc/doctrineum-integer.git"
-    },
-    {
-      "type": "vcs",
-      "url": "https://github.com/jaroslavtyc/doctrineum-strict-string.git"
-    },
-    {
-      "type": "vcs",
-      "url": "https://github.com/jaroslavtyc/granam-strict-object.git"
-    },
-    {
-      "type": "vcs",
-      "url": "https://github.com/jaroslavtyc/granam-exception-hierarchy.git"
-    }
-  ],
   "require": {
     "php": ">=5.5.0",
     "symfony/symfony": "2.5.*",
