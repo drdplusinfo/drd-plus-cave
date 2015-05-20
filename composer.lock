@@ -826,12 +826,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/doctrineum-integer.git",
-                "reference": "e669ae279b0f0fa5b72cddaa48994b0a26b583fd"
+                "reference": "c18ce1debd8282e03f3c8412177c750d348e1711"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/doctrineum-integer/zipball/e669ae279b0f0fa5b72cddaa48994b0a26b583fd",
-                "reference": "e669ae279b0f0fa5b72cddaa48994b0a26b583fd",
+                "url": "https://api.github.com/repos/jaroslavtyc/doctrineum-integer/zipball/c18ce1debd8282e03f3c8412177c750d348e1711",
+                "reference": "c18ce1debd8282e03f3c8412177c750d348e1711",
                 "shasum": ""
             },
             "require": {
@@ -850,15 +850,12 @@
                     "Doctrineum\\": "Doctrineum/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
             "description": "Enumeration type for Doctrine - integers only",
-            "support": {
-                "source": "https://github.com/jaroslavtyc/doctrineum-integer/tree/master",
-                "issues": "https://github.com/jaroslavtyc/doctrineum-integer/issues"
-            },
-            "time": "2015-03-26 07:56:50"
+            "time": "2015-05-07 07:09:05"
         },
         {
             "name": "doctrineum/scalar",
@@ -866,12 +863,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/doctrineum-scalar.git",
-                "reference": "f976bbd38130bd23dc1a96105ad4fea9fdf5e0f8"
+                "reference": "4d705b735d659530bfaa5134c81d697db1b70c13"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/doctrineum-scalar/zipball/f976bbd38130bd23dc1a96105ad4fea9fdf5e0f8",
-                "reference": "f976bbd38130bd23dc1a96105ad4fea9fdf5e0f8",
+                "url": "https://api.github.com/repos/jaroslavtyc/doctrineum-scalar/zipball/4d705b735d659530bfaa5134c81d697db1b70c13",
+                "reference": "4d705b735d659530bfaa5134c81d697db1b70c13",
                 "shasum": ""
             },
             "require": {
@@ -890,6 +887,7 @@
                     "Doctrineum\\": "Doctrineum/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -903,17 +901,13 @@
             ],
             "description": "Enumeration type and value dependent sub-type for Doctrine",
             "keywords": [
-                "Doctrine",
+                "doctrine",
                 "enum",
                 "self-typed enum",
                 "sub-type",
                 "value-dependent enum"
             ],
-            "support": {
-                "source": "https://github.com/jaroslavtyc/doctrineum-scalar/tree/master",
-                "issues": "https://github.com/jaroslavtyc/doctrineum-scalar/issues"
-            },
-            "time": "2015-03-26 10:21:19"
+            "time": "2015-05-10 10:06:09"
         },
         {
             "name": "doctrineum/strict-string",
@@ -961,12 +955,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-dice-roll.git",
-                "reference": "9b752781dc795c61da983a344bd419797c4db799"
+                "reference": "a1dc34c75d3b5b151d168375be1bec410af760f0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-dice-roll/zipball/9b752781dc795c61da983a344bd419797c4db799",
-                "reference": "9b752781dc795c61da983a344bd419797c4db799",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-dice-roll/zipball/a1dc34c75d3b5b151d168375be1bec410af760f0",
+                "reference": "a1dc34c75d3b5b151d168375be1bec410af760f0",
                 "shasum": ""
             },
             "require": {
@@ -1010,7 +1004,7 @@
                 "php",
                 "roll"
             ],
-            "time": "2015-05-06 12:50:09"
+            "time": "2015-05-09 19:10:31"
         },
         {
             "name": "granam/exception-hierarchy",
