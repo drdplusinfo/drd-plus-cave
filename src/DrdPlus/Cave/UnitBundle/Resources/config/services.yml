@@ -1,4 +1,1 @@
 services:
-#    drd_plus_cave_character.example:
-#        class: DrdPlus\Cave\UnitBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
