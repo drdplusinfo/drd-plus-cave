@@ -8,8 +8,7 @@
 /build/
 /vendor/
 /bin/
-/composer.phar
-
 .idea
+composer.lock
 
 tests/_output/*

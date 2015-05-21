@@ -826,18 +826,20 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/doctrineum-integer.git",
-                "reference": "c18ce1debd8282e03f3c8412177c750d348e1711"
+                "reference": "2129493e7cddac414326a5ee168d57f973e9318c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/doctrineum-integer/zipball/c18ce1debd8282e03f3c8412177c750d348e1711",
-                "reference": "c18ce1debd8282e03f3c8412177c750d348e1711",
+                "url": "https://api.github.com/repos/jaroslavtyc/doctrineum-integer/zipball/2129493e7cddac414326a5ee168d57f973e9318c",
+                "reference": "2129493e7cddac414326a5ee168d57f973e9318c",
                 "shasum": ""
             },
             "require": {
                 "doctrineum/scalar": "dev-master",
                 "granam/exception-hierarchy": "dev-master",
+                "granam/strict-integer": "dev-master",
                 "granam/strict-object": "dev-master",
+                "granam/strict-scalar": "dev-master",
                 "php": ">=5.5"
             },
             "require-dev": {
@@ -855,7 +857,7 @@
                 "MIT"
             ],
             "description": "Enumeration type for Doctrine - integers only",
-            "time": "2015-05-07 07:09:05"
+            "time": "2015-05-21 11:45:53"
         },
         {
             "name": "doctrineum/scalar",
@@ -863,19 +865,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/doctrineum-scalar.git",
-                "reference": "4d705b735d659530bfaa5134c81d697db1b70c13"
+                "reference": "a7cd317bca2255b23c659a03e0f3e12095d6b59f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/doctrineum-scalar/zipball/4d705b735d659530bfaa5134c81d697db1b70c13",
-                "reference": "4d705b735d659530bfaa5134c81d697db1b70c13",
+                "url": "https://api.github.com/repos/jaroslavtyc/doctrineum-scalar/zipball/a7cd317bca2255b23c659a03e0f3e12095d6b59f",
+                "reference": "a7cd317bca2255b23c659a03e0f3e12095d6b59f",
                 "shasum": ""
             },
             "require": {
                 "doctrine/dbal": "2.4.*",
                 "granam/exception-hierarchy": "dev-master",
                 "granam/strict-object": "dev-master",
-                "php": ">=5.5"
+                "php": ">=5.4"
             },
             "require-dev": {
                 "mockery/mockery": "0.9.*",
@@ -907,7 +909,7 @@
                 "sub-type",
                 "value-dependent enum"
             ],
-            "time": "2015-05-10 10:06:09"
+            "time": "2015-05-21 10:49:13"
         },
         {
             "name": "doctrineum/strict-string",
@@ -939,14 +941,11 @@
                     "Doctrineum\\": "Doctrineum/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
             "description": "Enumeration type for Doctrine - strings only",
-            "support": {
-                "source": "https://github.com/jaroslavtyc/doctrineum-strict-string/tree/master",
-                "issues": "https://github.com/jaroslavtyc/doctrineum-strict-string/issues"
-            },
             "time": "2015-03-26 07:58:15"
         },
         {
@@ -1012,12 +1011,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/granam-exception-hierarchy.git",
-                "reference": "2e16a94e0da10a450cf03a16f2f6063be333b6fb"
+                "reference": "2910c990a39f3c5aa9149bb3349978840a91bd51"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/granam-exception-hierarchy/zipball/2e16a94e0da10a450cf03a16f2f6063be333b6fb",
-                "reference": "2e16a94e0da10a450cf03a16f2f6063be333b6fb",
+                "url": "https://api.github.com/repos/jaroslavtyc/granam-exception-hierarchy/zipball/2910c990a39f3c5aa9149bb3349978840a91bd51",
+                "reference": "2910c990a39f3c5aa9149bb3349978840a91bd51",
                 "shasum": ""
             },
             "require": {
@@ -1032,6 +1031,7 @@
                     "Granam\\": "Granam/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -1044,11 +1044,7 @@
                 "php",
                 "runtime"
             ],
-            "support": {
-                "source": "https://github.com/jaroslavtyc/granam-exception-hierarchy/tree/1.0.0",
-                "issues": "https://github.com/jaroslavtyc/granam-exception-hierarchy/issues"
-            },
-            "time": "2015-03-29 15:53:05"
+            "time": "2015-05-12 12:44:29"
         },
         {
             "name": "granam/strict-integer",
@@ -1056,19 +1052,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/granam-strict-integer.git",
-                "reference": "687688342990ef3aa057e2f4877a0a0e6faf574f"
+                "reference": "8547a306c13af89f790fe45425af6be00d3dfae9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/granam-strict-integer/zipball/687688342990ef3aa057e2f4877a0a0e6faf574f",
-                "reference": "687688342990ef3aa057e2f4877a0a0e6faf574f",
+                "url": "https://api.github.com/repos/jaroslavtyc/granam-strict-integer/zipball/8547a306c13af89f790fe45425af6be00d3dfae9",
+                "reference": "8547a306c13af89f790fe45425af6be00d3dfae9",
                 "shasum": ""
             },
             "require": {
                 "granam/exception-hierarchy": "dev-master",
                 "granam/strict-object": "dev-master",
                 "granam/strict-scalar": "dev-master",
-                "php": ">=5.5"
+                "php": ">=5.4"
             },
             "require-dev": {
                 "mockery/mockery": ">=0.9",
@@ -1098,7 +1094,7 @@
                 "php",
                 "strict"
             ],
-            "time": "2015-03-30 18:32:52"
+            "time": "2015-05-21 06:34:20"
         },
         {
             "name": "granam/strict-object",
@@ -1106,12 +1102,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/granam-strict-object.git",
-                "reference": "9bf6b24e6f8eedd48c94a4720c540740314ca78f"
+                "reference": "3a271c0acec46161787a321cd90c19c5bfd4a7db"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/granam-strict-object/zipball/9bf6b24e6f8eedd48c94a4720c540740314ca78f",
-                "reference": "9bf6b24e6f8eedd48c94a4720c540740314ca78f",
+                "url": "https://api.github.com/repos/jaroslavtyc/granam-strict-object/zipball/3a271c0acec46161787a321cd90c19c5bfd4a7db",
+                "reference": "3a271c0acec46161787a321cd90c19c5bfd4a7db",
                 "shasum": ""
             },
             "require": {
@@ -1128,6 +1124,7 @@
                     "Tests\\": "Tests/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -1145,11 +1142,7 @@
                 "php",
                 "strict"
             ],
-            "support": {
-                "source": "https://github.com/jaroslavtyc/granam-strict-object/tree/master",
-                "issues": "https://github.com/jaroslavtyc/granam-strict-object/issues"
-            },
-            "time": "2015-03-29 16:00:40"
+            "time": "2015-05-18 05:39:17"
         },
         {
             "name": "granam/strict-scalar",
@@ -1157,18 +1150,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/granam-strict-scalar.git",
-                "reference": "52c5dbab3749f259936239e0545ce5d483a4a150"
+                "reference": "59b7bcae39c8a8b5ac47206908a7ebca375566c9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/granam-strict-scalar/zipball/52c5dbab3749f259936239e0545ce5d483a4a150",
-                "reference": "52c5dbab3749f259936239e0545ce5d483a4a150",
+                "url": "https://api.github.com/repos/jaroslavtyc/granam-strict-scalar/zipball/59b7bcae39c8a8b5ac47206908a7ebca375566c9",
+                "reference": "59b7bcae39c8a8b5ac47206908a7ebca375566c9",
                 "shasum": ""
             },
             "require": {
                 "granam/exception-hierarchy": "dev-master",
                 "granam/strict-object": "dev-master",
-                "php": ">=5.5"
+                "php": ">=5.4"
             },
             "require-dev": {
                 "mockery/mockery": ">=0.9",
@@ -1198,7 +1191,7 @@
                 "scalar",
                 "strict"
             ],
-            "time": "2015-03-29 16:05:11"
+            "time": "2015-05-19 06:04:52"
         },
         {
             "name": "incenteev/composer-parameter-handler",
@@ -1489,17 +1482,17 @@
         },
         {
             "name": "sensio/distribution-bundle",
-            "version": "v3.0.22",
+            "version": "v3.0.24",
             "target-dir": "Sensio/Bundle/DistributionBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioDistributionBundle.git",
-                "reference": "0fe4ec86db57c232becb694e01cdabe3c4d9af7c"
+                "reference": "79b820aee1f1daeb2717fa9471ee19275cc1d638"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/0fe4ec86db57c232becb694e01cdabe3c4d9af7c",
-                "reference": "0fe4ec86db57c232becb694e01cdabe3c4d9af7c",
+                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/79b820aee1f1daeb2717fa9471ee19275cc1d638",
+                "reference": "79b820aee1f1daeb2717fa9471ee19275cc1d638",
                 "shasum": ""
             },
             "require": {
@@ -1545,7 +1538,7 @@
                 "configuration",
                 "distribution"
             ],
-            "time": "2015-05-02 16:23:08"
+            "time": "2015-05-16 12:57:08"
         },
         {
             "name": "sensio/framework-extra-bundle",
@@ -2160,16 +2153,16 @@
         },
         {
             "name": "hamcrest/hamcrest-php",
-            "version": "v1.2.1",
+            "version": "v1.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hamcrest/hamcrest-php.git",
-                "reference": "ac50c470531243944f977b8de75be0b684a9cb51"
+                "reference": "b37020aa976fa52d3de9aa904aa2522dc518f79c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hamcrest/hamcrest-php/zipball/ac50c470531243944f977b8de75be0b684a9cb51",
-                "reference": "ac50c470531243944f977b8de75be0b684a9cb51",
+                "url": "https://api.github.com/repos/hamcrest/hamcrest-php/zipball/b37020aa976fa52d3de9aa904aa2522dc518f79c",
+                "reference": "b37020aa976fa52d3de9aa904aa2522dc518f79c",
                 "shasum": ""
             },
             "require": {
@@ -2201,7 +2194,7 @@
             "keywords": [
                 "test"
             ],
-            "time": "2015-01-20 19:34:09"
+            "time": "2015-05-11 14:41:42"
         },
         {
             "name": "mockery/mockery",
