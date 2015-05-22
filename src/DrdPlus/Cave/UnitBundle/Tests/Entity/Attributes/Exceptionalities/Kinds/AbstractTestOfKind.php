@@ -1,12 +1,12 @@
 <?php
-namespace DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\Exceptionalities;
+namespace DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\Exceptionalities\Kinds;
 
 use Doctrine\DBAL\Types\Type;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Exceptionalities\Exceptionality;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Exceptionalities\Kinds\ExceptionalityKind;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Race;
 use DrdPlus\Cave\UnitBundle\Tests\TestWithMockery;
 
-abstract class AbstractTestOfExceptionality extends TestWithMockery
+abstract class AbstractTestOfKind extends TestWithMockery
 {
     /**
      * @test
@@ -39,7 +39,7 @@ abstract class AbstractTestOfExceptionality extends TestWithMockery
     }
 
     /**
-     * @return string|Exceptionality
+     * @return string|ExceptionalityKind
      */
     protected function getExceptionalityClass()
     {
