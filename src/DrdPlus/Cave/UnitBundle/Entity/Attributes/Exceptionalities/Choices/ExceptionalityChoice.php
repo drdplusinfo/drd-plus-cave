@@ -65,6 +65,9 @@ use Doctrineum\Strict\String\SelfTypedStrictStringEnum;
         return $specificExceptionalityClass;
     }
 
+    /**
+     * @return bool
+     */
     public static function registerSelfChoice()
     {
         return static::addSubTypeEnum(
