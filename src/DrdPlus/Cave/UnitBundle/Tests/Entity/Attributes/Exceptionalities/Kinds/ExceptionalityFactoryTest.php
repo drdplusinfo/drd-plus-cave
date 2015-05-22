@@ -2,6 +2,9 @@
 namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Exceptionalities;
 
 use Doctrine\DBAL\Types\Type;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Exceptionalities\Kinds\Combination;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Exceptionalities\Kinds\ExceptionalProperties;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Exceptionalities\Kinds\GoodRear;
 use DrdPlus\Cave\UnitBundle\Tests\TestWithMockery;
 
 class ExceptionalityFactoryTest extends TestWithMockery
