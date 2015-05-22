@@ -2,7 +2,8 @@
 
 namespace DrdPlus\Cave\UnitBundle;
 
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Exceptionalities\Exceptionality;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Exceptionalities\Choices\ExceptionalityChoice;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Exceptionalities\Kinds\ExceptionalityKind;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Name;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels\LevelValue;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Agility;
@@ -29,8 +30,10 @@ class DrdPlusCaveUnitBundle extends Bundle
         Race::registerSelf();
         // only the generic gender has to be registered, sub-race genders are registered automatically
         Gender::registerSelf();
-        // only the generic exceptionality has to be registered, specific exceptionalities are registered automatically
-        Exceptionality::registerSelf();
+        // only the generic choice has to be registered, specific choices are registered automatically
+        ExceptionalityChoice::registerSelf();
+        // only the generic kind has to be registered, specific kinds are registered automatically
+        ExceptionalityKind::registerSelf();
 
         Strength::registerSelf();
         Agility::registerSelf();
