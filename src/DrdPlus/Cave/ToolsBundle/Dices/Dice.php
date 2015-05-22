@@ -1,7 +1,6 @@
 <?php
 namespace DrdPlus\Cave\ToolsBundle\Dices;
 
-use Granam\Strict\Integer\StrictInteger;
 use Granam\Strict\Object\StrictObject;
 
 /**
@@ -42,7 +41,7 @@ class Dice extends StrictObject implements DiceInterface
     }
 
     /**
-     * @return StrictInteger
+     * @return int
      */
     public function getMaximum()
     {
