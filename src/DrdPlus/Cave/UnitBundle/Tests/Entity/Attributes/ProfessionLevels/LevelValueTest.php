@@ -92,12 +92,12 @@ class LevelValueTest extends \PHPUnit_Framework_TestCase
      * @test
      * @depends can_be_created
      */
-    public function conversion_to_php_gives_property(Levelvalue $levelValue)
+    public function conversion_to_php_gives_property(LevelValue $levelValue)
     {
         $platform = \Mockery::mock(AbstractPlatform::class);
         /** @var AbstractPlatform $platform */
         $phpValue = $levelValue->convertToPHPValue($value = 12345, $platform);
-        $this->assertInstanceOf(Levelvalue::class, $phpValue);
+        $this->assertInstanceOf(LevelValue::class, $phpValue);
         $this->assertEquals($value, $phpValue->__toString());
     }
 
