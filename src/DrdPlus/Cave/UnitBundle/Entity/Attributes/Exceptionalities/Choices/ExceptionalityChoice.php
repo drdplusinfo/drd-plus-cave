@@ -3,7 +3,7 @@ namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Exceptionalities\Choices;
 
 use Doctrineum\Strict\String\SelfTypedStrictStringEnum;
 
-class ExceptionalityChoice extends SelfTypedStrictStringEnum
+/* abstract */ class ExceptionalityChoice extends SelfTypedStrictStringEnum
 {
     const EXCEPTIONALITY_CHOICE = 'exceptionality_choice';
 
@@ -18,7 +18,7 @@ class ExceptionalityChoice extends SelfTypedStrictStringEnum
     /**
      * @return string
      */
-    public static function getChoice()
+    /* abstract */ public static function getChoice()
     {
         if (static::class === __CLASS__) {
             throw new \LogicException(
@@ -65,4 +65,11 @@ class ExceptionalityChoice extends SelfTypedStrictStringEnum
         return $specificExceptionalityClass;
     }
 
+    public static function registerSelfChoice()
+    {
+        return static::addSubTypeEnum(
+            static::class,
+            '~^' . static::getChoice() . '$~'
+        );
+    }
 }
