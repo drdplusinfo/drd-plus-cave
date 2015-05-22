@@ -34,13 +34,22 @@ class Exceptionality extends StrictObject
      */
     private $exceptionalityKind;
 
+    /**
+     * @var FortuneProperties
+     *
+     * @ORM\Column(type="fortune_properties")
+     */
+    private $fortuneProperties;
+
     public function __construct(
         ExceptionalityChoice $exceptionalityChoice,
-        ExceptionalityKind $exceptionalityKind
+        ExceptionalityKind $exceptionalityKind,
+        FortuneProperties $fortuneProperties
     )
     {
         $this->exceptionalityChoice = $exceptionalityChoice;
         $this->exceptionalityKind = $exceptionalityKind;
+        $this->fortuneProperties = $fortuneProperties;
     }
 
     /**
@@ -65,5 +74,13 @@ class Exceptionality extends StrictObject
     public function getExceptionalityKind()
     {
         return $this->exceptionalityKind;
+    }
+
+    /**
+     * @return FortuneProperties
+     */
+    public function getFortuneProperties()
+    {
+        return $this->fortuneProperties;
     }
 }
