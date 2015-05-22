@@ -52,7 +52,7 @@ class DiceRoll extends StrictObject
      */
     public function __construct(\Drd\DiceRoll\DiceRoll $diceRoll)
     {
-        $this->dice = new Dice($diceRoll->getDice());
+        $this->dice = DiceFactory::createDice($diceRoll->getDice());
         $this->evaluatedValue = $diceRoll->getEvaluatedValue()->getValue();
         $this->rolledNumber = $diceRoll->getRolledNumber()->getValue();
         $this->rollSequence = $diceRoll->getRollSequence()->getValue();
