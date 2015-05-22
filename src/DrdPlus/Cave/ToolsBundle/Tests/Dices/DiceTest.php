@@ -10,6 +10,14 @@ class DiceTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
+    public function has_a_local_dice_interface()
+    {
+        $this->assertTrue(is_a(Dice::class, \DrdPlus\Cave\ToolsBundle\Dices\DiceInterface::class, true));
+    }
+
+    /**
+     * @test
+     */
     public function can_be_created()
     {
         $drdDice = \Mockery::mock(DiceInterface::class);
