@@ -826,12 +826,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/doctrineum-integer.git",
-                "reference": "2129493e7cddac414326a5ee168d57f973e9318c"
+                "reference": "087238bde41fa2438b3f43cb3e060b2a29de12a4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/doctrineum-integer/zipball/2129493e7cddac414326a5ee168d57f973e9318c",
-                "reference": "2129493e7cddac414326a5ee168d57f973e9318c",
+                "url": "https://api.github.com/repos/jaroslavtyc/doctrineum-integer/zipball/087238bde41fa2438b3f43cb3e060b2a29de12a4",
+                "reference": "087238bde41fa2438b3f43cb3e060b2a29de12a4",
                 "shasum": ""
             },
             "require": {
@@ -857,7 +857,7 @@
                 "MIT"
             ],
             "description": "Enumeration type for Doctrine - integers only",
-            "time": "2015-05-21 11:45:53"
+            "time": "2015-05-22 06:13:19"
         },
         {
             "name": "doctrineum/scalar",
