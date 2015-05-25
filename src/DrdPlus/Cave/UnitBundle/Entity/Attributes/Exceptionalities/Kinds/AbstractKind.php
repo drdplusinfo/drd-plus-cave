@@ -1,6 +1,12 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Exceptionalities\Kinds;
 
+use DrdPlus\Cave\ToolsBundle\Dices\Roll;
+
+/**
+ * @method static AbstractKind getIt()
+ * @see ExceptionalityKind::getIt()
+ */
 abstract class AbstractKind extends ExceptionalityKind
 {
 
@@ -15,22 +21,22 @@ abstract class AbstractKind extends ExceptionalityKind
     abstract public function getSecondaryPropertiesBonusOnConservative();
 
     /**
-     * @param int $diceRoll
+     * @param Roll $roll
      *
      * @return int
      */
-    abstract public function getPrimaryPropertiesBonusOnFortune($diceRoll);
+    abstract public function getPrimaryPropertiesBonusOnFortune(Roll $roll);
 
     /**
-     * @param int $diceRoll
+     * @param Roll $roll
      *
      * @return int
      */
-    abstract public function getSecondaryPropertiesBonusOnFortune($diceRoll);
+    abstract public function getSecondaryPropertiesBonusOnFortune(Roll $roll);
 
     /**
      * @return int
      */
-    abstract public function upToSingleProperty();
+    abstract public function getUpToSingleProperty();
 
 }

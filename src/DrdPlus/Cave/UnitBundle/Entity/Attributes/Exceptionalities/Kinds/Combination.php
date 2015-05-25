@@ -1,6 +1,8 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Exceptionalities\Kinds;
 
+use DrdPlus\Cave\ToolsBundle\Dices\Roll;
+
 class Combination extends AbstractKind
 {
     /**
@@ -22,19 +24,19 @@ class Combination extends AbstractKind
     /**
      * @return int
      */
-    public function upToSingleProperty()
+    public function getUpToSingleProperty()
     {
         return 2;
     }
 
     /**
-     * @param int $diceRoll
+     * @param Roll $roll
      *
      * @return int
      */
-    public function getPrimaryPropertiesBonusOnFortune($diceRoll)
+    public function getPrimaryPropertiesBonusOnFortune(Roll $roll)
     {
-        switch ($diceRoll) {
+        switch ($roll->getRollSummary()) {
             case 1:
             case 2:
                 return 0;
@@ -46,20 +48,20 @@ class Combination extends AbstractKind
                 return 2;
             default:
                 throw new \RuntimeException(
-                    'Unexpected dice roll value ' . var_export($diceRoll, true)
+                    'Unexpected roll value ' . var_export($roll->getRollSummary(), true)
                 );
         }
     }
 
     /**
-     * @param int $diceRoll
+     * @param Roll $roll
      *
      * @return int
      */
-    public function getSecondaryPropertiesBonusOnFortune($diceRoll)
+    public function getSecondaryPropertiesBonusOnFortune(Roll $roll)
     {
         // combination has same secondary and primary properties bonus
-        return $this->getPrimaryPropertiesBonusOnFortune($diceRoll);
+        return $this->getPrimaryPropertiesBonusOnFortune($roll);
     }
 
 }
