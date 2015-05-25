@@ -1,6 +1,8 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Exceptionalities\Kinds;
 
+use DrdPlus\Cave\ToolsBundle\Dices\Roll;
+
 class ExceptionalProperties extends AbstractKind
 {
     /**
@@ -22,19 +24,19 @@ class ExceptionalProperties extends AbstractKind
     /**
      * @return int
      */
-    public function upToSingleProperty()
+    public function getUpToSingleProperty()
     {
         return 3;
     }
 
     /**
-     * @param int $diceRoll
+     * @param Roll $roll
      *
      * @return int
      */
-    public function getPrimaryPropertiesBonusOnFortune($diceRoll)
+    public function getPrimaryPropertiesBonusOnFortune(Roll $roll)
     {
-        switch ($diceRoll) {
+        switch ($roll->getRollSummary()) {
             case 1:
             case 2:
             case 3:
@@ -45,19 +47,19 @@ class ExceptionalProperties extends AbstractKind
                 return 2;
             default:
                 throw new \RuntimeException(
-                    'Unexpected dice roll value ' . var_export($diceRoll, true)
+                    'Unexpected dice roll value ' . var_export($roll->getRollSummary(), true)
                 );
         }
     }
 
     /**
-     * @param int $diceRoll
+     * @param Roll $roll
      *
      * @return int
      */
-    public function getSecondaryPropertiesBonusOnFortune($diceRoll)
+    public function getSecondaryPropertiesBonusOnFortune(Roll $roll)
     {
-        switch ($diceRoll) {
+        switch ($roll->getRollSummary()) {
             case 1:
                 return 0;
             case 2:
@@ -70,7 +72,7 @@ class ExceptionalProperties extends AbstractKind
                 return 3;
             default:
                 throw new \RuntimeException(
-                    'Unexpected dice roll value ' . var_export($diceRoll, true)
+                    'Unexpected roll value ' . var_export($roll->getRollSummary(), true)
                 );
         }
     }

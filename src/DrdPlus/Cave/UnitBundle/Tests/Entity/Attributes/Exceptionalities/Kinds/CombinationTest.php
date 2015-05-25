@@ -16,13 +16,13 @@ class CombinationTest extends AbstractTestOfKind
         return 4;
     }
 
-    protected function getUpToSingleProperty()
+    protected function getExpectedUpToSingleProperty()
     {
         return 2;
     }
 
     /**
-     * @param int
+     * @param int $value
      *
      * @return int
      */
@@ -39,6 +39,5 @@ class CombinationTest extends AbstractTestOfKind
     {
         return (int)round($value / 2) - 1;
     }
-
 
 }

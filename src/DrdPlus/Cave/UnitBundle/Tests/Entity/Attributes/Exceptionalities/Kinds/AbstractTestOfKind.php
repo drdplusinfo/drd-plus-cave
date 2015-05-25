@@ -168,11 +168,11 @@ abstract class AbstractTestOfKind extends TestWithMockery
      */
     public function gives_expected_up_to_single_property_limit(AbstractKind $abstractKind)
     {
-        $this->assertSame($this->getUpToSingleProperty(), $abstractKind->getUpToSingleProperty());
+        $this->assertSame($this->getExpectedUpToSingleProperty(), $abstractKind->getUpToSingleProperty());
     }
 
     /**
      * @return int
      */
-    abstract protected function getUpToSingleProperty();
+    abstract protected function getExpectedUpToSingleProperty();
 }

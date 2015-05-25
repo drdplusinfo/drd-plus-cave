@@ -1,6 +1,8 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Exceptionalities\Kinds;
 
+use DrdPlus\Cave\ToolsBundle\Dices\Roll;
+
 class GoodRear extends AbstractKind
 {
     /**
@@ -20,13 +22,21 @@ class GoodRear extends AbstractKind
     }
 
     /**
-     * @param int $diceRoll
+     * @return int
+     */
+    public function getUpToSingleProperty()
+    {
+        return 1;
+    }
+
+    /**
+     * @param Roll $roll
      *
      * @return int
      */
-    public function getPrimaryPropertiesBonusOnFortune($diceRoll)
+    public function getPrimaryPropertiesBonusOnFortune(Roll $roll)
     {
-        switch ($diceRoll) {
+        switch ($roll->getRollSummary()) {
             case 1:
             case 2:
             case 3:
@@ -37,28 +47,20 @@ class GoodRear extends AbstractKind
                 return 1;
             default:
                 throw new \RuntimeException(
-                    'Unexpected dice roll value ' . var_export($diceRoll, true)
+                    'Unexpected roll value ' . var_export($roll->getRollSummary(), true)
                 );
         }
     }
 
     /**
-     * @param int $diceRoll
+     * @param Roll $roll
      *
      * @return int
      */
-    public function getSecondaryPropertiesBonusOnFortune($diceRoll)
+    public function getSecondaryPropertiesBonusOnFortune(Roll $roll)
     {
         // secondary and primary properties got same bonus
-        return $this->getPrimaryPropertiesBonusOnFortune($diceRoll);
-    }
-
-    /**
-     * @return int
-     */
-    public function upToSingleProperty()
-    {
-        return 1;
+        return $this->getPrimaryPropertiesBonusOnFortune($roll);
     }
 
 }
