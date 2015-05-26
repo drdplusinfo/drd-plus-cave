@@ -40,26 +40,16 @@ class ExceptionalProperties extends AbstractFate
             case 1:
             case 2:
             case 3:
-                $bonus = 1;
-                break;
+                return 1;
             case 4:
             case 5:
             case 6:
-                $bonus = 2;
-                break;
+                return 2;
             default:
                 throw new \RuntimeException(
                     'Unexpected dice roll value ' . var_export($roll->getRollSummary(), true)
                 );
         }
-
-        if ($bonus > $this->getUpToSingleProperty()) {
-            throw new \LogicException(
-                "Property bonus on fortune should be at most {$this->getUpToSingleProperty()}, is $bonus"
-            );
-        }
-
-        return $bonus;
     }
 
     /**
@@ -71,32 +61,20 @@ class ExceptionalProperties extends AbstractFate
     {
         switch ($roll->getRollSummary()) {
             case 1:
-                $bonus = 0;
-                break;
+                return 0;
             case 2:
             case 3:
-                $bonus = 1;
-                break;
+                return 1;
             case 4:
             case 5:
-                $bonus = 2;
-                break;
+                return 2;
             case 6:
-                $bonus = 3;
-                break;
+                return 3;
             default:
                 throw new \RuntimeException(
                     'Unexpected roll value ' . var_export($roll->getRollSummary(), true)
                 );
         }
-
-        if ($bonus > $this->getUpToSingleProperty()) {
-            throw new \LogicException(
-                "Property bonus on fortune should be at most {$this->getUpToSingleProperty()}, is $bonus"
-            );
-        }
-
-        return $bonus;
     }
 
 }
