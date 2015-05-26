@@ -46,7 +46,7 @@ class ExceptionalityPropertiesFactory extends StrictObject
         }
 
         $strength = Strength::getIt($strengthValue);
-        $this->checkPropertyValue($strength, $fate, $profession);
+        $this->checkFortunePropertyValue($strength, $fate, $profession);
 
         return $strength;
     }
@@ -56,7 +56,7 @@ class ExceptionalityPropertiesFactory extends StrictObject
      * @param AbstractFate $fate
      * @param ProfessionLevel $profession
      */
-    private function checkPropertyValue(Property $property, AbstractFate $fate, ProfessionLevel $profession)
+    private function checkFortunePropertyValue(Property $property, AbstractFate $fate, ProfessionLevel $profession)
     {
         if ($property->getValue() > $fate->getUpToSingleProperty()) {
             throw new \LogicException(
@@ -74,7 +74,7 @@ class ExceptionalityPropertiesFactory extends StrictObject
         }
 
         $agility = Agility::getIt($agilityValue);
-        $this->checkPropertyValue($agility, $fate, $profession);
+        $this->checkFortunePropertyValue($agility, $fate, $profession);
 
         return $agility;
     }
@@ -88,7 +88,7 @@ class ExceptionalityPropertiesFactory extends StrictObject
         }
 
         $knack = Knack::getIt($knackValue);
-        $this->checkPropertyValue($knack, $fate, $profession);
+        $this->checkFortunePropertyValue($knack, $fate, $profession);
 
         return $knack;
     }
@@ -102,7 +102,7 @@ class ExceptionalityPropertiesFactory extends StrictObject
         }
 
         $will = Will::getIt($willValue);
-        $this->checkPropertyValue($will, $fate, $profession);
+        $this->checkFortunePropertyValue($will, $fate, $profession);
 
         return $will;
     }
@@ -127,105 +127,88 @@ class ExceptionalityPropertiesFactory extends StrictObject
         }
 
         $charisma = Charisma::getIt($charismaValue);
-        $this->checkPropertyValue($charisma, $fate, $profession);
+        $this->checkFortunePropertyValue($charisma, $fate, $profession);
 
         return $charisma;
     }
 
-    public function createChosenProperties(AbstractFate $fate, ProfessionLevel $profession)
+    public function createChosenProperties(
+        AbstractFate $fate,
+        ProfessionLevel $profession,
+        Strength $chosenStrength,
+        Agility $chosenAgility,
+        Knack $chosenKnack,
+        Will $chosenWill,
+        Intelligence $chosenIntelligence,
+        Charisma $chosenCharisma
+    )
     {
-        $strength = $this->createChosenStrength($profession, $fate);
-        $agility = $this->createChosenAgility($profession, $fate);
-        $knack = $this->createChosenKnack($profession, $fate);
-        $will = $this->createChosenWill($profession, $fate);
-        $intelligence = $this->createChosenIntelligence($profession, $fate);
-        $charisma = $this->createChosenCharisma($profession, $fate);
+        $this->checkChosenProperty($profession, $fate, $chosenStrength);
+        $this->checkChosenProperty($profession, $fate, $chosenAgility);
+        $this->checkChosenProperty($profession, $fate, $chosenKnack);
+        $this->checkChosenProperty($profession, $fate, $chosenWill);
+        $this->checkChosenProperty($profession, $fate, $chosenIntelligence);
+        $this->checkChosenProperty($profession, $fate, $chosenCharisma);
 
-        return new ChosenProperties($strength, $agility, $knack, $will, $intelligence, $charisma);
+        $this->checkChosenProperties($chosenStrength, $chosenAgility, $chosenKnack, $chosenWill, $chosenIntelligence, $chosenCharisma, $profession, $fate);
+
+        return new ChosenProperties($chosenStrength, $chosenAgility, $chosenKnack, $chosenWill, $chosenIntelligence, $chosenCharisma);
     }
 
-    private function createChosenStrength(ProfessionLevel $profession, AbstractFate $fate)
+    private function checkChosenProperty(ProfessionLevel $profession, AbstractFate $fate, Property $chosenProperty)
     {
-        if ($profession->isPrimaryProperty(Strength::STRENGTH)) {
-            $strengthValue = $fate->getPrimaryPropertiesBonusOnConservative();
+        if ($profession->isPrimaryProperty($chosenProperty->getName())) {
+            $maximalValue = $fate->getPrimaryPropertiesBonusOnConservative();
         } else {
-            $strengthValue = $fate->getSecondaryPropertiesBonusOnConservative();
+            $maximalValue = $fate->getSecondaryPropertiesBonusOnConservative();
         }
 
-        $strength = Strength::getIt($strengthValue);
-        $this->checkPropertyValue($strength, $fate, $profession);
-
-        return $strength;
+        $this->checkChosenPropertyValue($maximalValue, $chosenProperty, $fate, $profession);
     }
 
-    private function createChosenAgility(ProfessionLevel $profession, AbstractFate $fate)
+    private function checkChosenPropertyValue($maximalValue, Property $chosenProperty, AbstractFate $fate, ProfessionLevel $professionLevel)
     {
-        if ($profession->isPrimaryProperty(Agility::AGILITY)) {
-            $agilityValue = $fate->getPrimaryPropertiesBonusOnConservative();
-        } else {
-            $agilityValue = $fate->getSecondaryPropertiesBonusOnConservative();
+        if ($chosenProperty->getValue() > $maximalValue) {
+            throw new \LogicException(
+                "Required {$chosenProperty->getName()} of value {$chosenProperty->getValue()} is higher then allowed"
+                . " maximum $maximalValue for profession {$professionLevel->getProfessionCode()} and fate {$fate->getName()}"
+            );
         }
-
-        $agility = Agility::getIt($agilityValue);
-        $this->checkPropertyValue($agility, $fate, $profession);
-
-        return $agility;
     }
 
-    private function createChosenKnack(ProfessionLevel $profession, AbstractFate $fate)
+    private function checkChosenProperties(
+        Strength $strength,
+        Agility $agility,
+        Knack $knack,
+        Will $will,
+        Intelligence $intelligence,
+        Charisma $charisma,
+        ProfessionLevel $profession,
+        AbstractFate $fate
+    )
     {
-        if ($profession->isPrimaryProperty(Knack::KNACK)) {
-            $knackValue = $fate->getPrimaryPropertiesBonusOnConservative();
-        } else {
-            $knackValue = $fate->getSecondaryPropertiesBonusOnConservative();
+        $primaryPropertySum = 0;
+        $secondaryPropertySum = 0;
+        foreach ([$strength, $agility, $knack, $will, $intelligence, $charisma] as $property) {
+            /** @var Property $property */
+            if ($profession->isPrimaryProperty($property->getName())) {
+                $primaryPropertySum += $property->getValue();
+            } else {
+                $secondaryPropertySum += $property->getValue();
+            }
         }
 
-        $knack = Knack::getIt($knackValue);
-        $this->checkPropertyValue($knack, $fate, $profession);
-
-        return $knack;
-    }
-
-    private function createChosenWill(ProfessionLevel $profession, AbstractFate $fate)
-    {
-        if ($profession->isPrimaryProperty(Will::WILL)) {
-            $willValue = $fate->getPrimaryPropertiesBonusOnConservative();
-        } else {
-            $willValue = $fate->getSecondaryPropertiesBonusOnConservative();
+        if ($primaryPropertySum !== $fate->getPrimaryPropertiesBonusOnConservative()) {
+            throw new \LogicException(
+                "Expected sum of primary properties is {$fate->getPrimaryPropertiesBonusOnConservative()}, got $primaryPropertySum"
+            );
         }
 
-        $will = Will::getIt($willValue);
-        $this->checkPropertyValue($will, $fate, $profession);
-
-        return $will;
-    }
-
-    private function createChosenIntelligence(ProfessionLevel $profession, AbstractFate $fate)
-    {
-        if ($profession->isPrimaryProperty(Intelligence::INTELLIGENCE)) {
-            $intelligenceValue = $fate->getPrimaryPropertiesBonusOnConservative();
-        } else {
-            $intelligenceValue = $fate->getSecondaryPropertiesBonusOnConservative();
+        if ($secondaryPropertySum !== $fate->getSecondaryPropertiesBonusOnConservative()) {
+            throw new \LogicException(
+                "Expected sum of secondary properties is {$fate->getSecondaryPropertiesBonusOnConservative()}, got $secondaryPropertySum"
+            );
         }
-
-        $intelligence = Intelligence::getIt($intelligenceValue);
-        $this->checkPropertyValue($intelligence, $fate, $profession);
-
-        return $intelligence;
-    }
-
-    private function createChosenCharisma(ProfessionLevel $profession, AbstractFate $fate)
-    {
-        if ($profession->isPrimaryProperty(Charisma::CHARISMA)) {
-            $charismaValue = $fate->getPrimaryPropertiesBonusOnConservative();
-        } else {
-            $charismaValue = $fate->getSecondaryPropertiesBonusOnConservative();
-        }
-
-        $charisma = Charisma::getIt($charismaValue);
-        $this->checkPropertyValue($charisma, $fate, $profession);
-
-        return $charisma;
     }
 
 }
