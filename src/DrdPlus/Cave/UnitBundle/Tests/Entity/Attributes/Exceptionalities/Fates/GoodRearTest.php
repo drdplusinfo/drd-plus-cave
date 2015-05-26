@@ -1,24 +1,24 @@
 <?php
-namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Exceptionalities\Kinds;
+namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Exceptionalities\Fates;
 
-use DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\Exceptionalities\Kinds\AbstractTestOfKind;
+use DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\Exceptionalities\Fates\AbstractTestOfFate;
 
-class ExceptionalPropertiesTest extends AbstractTestOfKind
+class GoodRearTest extends AbstractTestOfFate
 {
 
     protected function getExpectedPrimaryPropertiesBonusOnConservative()
     {
-        return 3;
+        return 1;
     }
 
     protected function getExpectedSecondaryPropertiesBonusOnConservative()
     {
-        return 6;
+        return 2;
     }
 
     protected function getExpectedUpToSingleProperty()
     {
-        return 3;
+        return 1;
     }
 
     /**
@@ -28,7 +28,7 @@ class ExceptionalPropertiesTest extends AbstractTestOfKind
      */
     protected function getExpectedPrimaryPropertiesBonusOnFortune($value)
     {
-        return (int)ceil($value / 3);
+        return (int)floor($value / 4);
     }
 
     /**
@@ -37,6 +37,6 @@ class ExceptionalPropertiesTest extends AbstractTestOfKind
      */
     protected function getExpectedSecondaryPropertiesBonusOnFortune($value)
     {
-        return (int)floor($value / 2);
+        return (int)floor($value / 4);
     }
 }

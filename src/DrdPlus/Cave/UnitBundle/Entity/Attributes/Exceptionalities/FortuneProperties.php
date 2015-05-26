@@ -1,13 +1,16 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Exceptionalities;
 
+use DrdPlus\Cave\ToolsBundle\Dices\Roll;
+use Granam\Strict\Object\StrictObject;
+
 /**
  * FortuneProperties
  *
  * @ORM\Table()
  * @ORM\Entity()
  */
-class FortuneProperties
+class FortuneProperties extends StrictObject implements ExceptionalityProperties
 {
 
     /**
@@ -21,39 +24,60 @@ class FortuneProperties
 
     /**
      * @var Exceptionality|null
+     *
+     * @ORM\Column(type="exceptionality")
      */
     private $exceptionality;
 
     /**
-     * @var
+     * @var Roll
      */
-    private $strengthDiceRoll;
+    private $strengthRoll;
 
-    private $agilityDiceRoll;
+    /**
+     * @var Roll
+     */
+    private $agilityRoll;
 
-    private $knackDiceRoll;
 
-    private $willDiceRoll;
+    /**
+     * @var Roll
+     */
+    private $knackRoll;
 
-    private $intelligenceDiceRoll;
 
-    private $charismaDiceRoll;
+    /**
+     * @var Roll
+     */
+    private $willRoll;
+
+
+    /**
+     * @var Roll
+     */
+    private $intelligenceRoll;
+
+
+    /**
+     * @var Roll
+     */
+    private $charismaRoll;
 
     public function __construct(
-        $strengthDiceRoll,
-        $agilityDiceRoll,
-        $knackDiceRoll,
-        $willDiceRoll,
-        $intelligenceDiceRoll,
-        $charismaDiceRoll
+        Roll $strengthRoll,
+        Roll $agilityRoll,
+        Roll $knackRoll,
+        Roll $willRoll,
+        Roll $intelligenceRoll,
+        Roll $charismaRoll
     )
     {
-        $this->strengthDiceRoll = $strengthDiceRoll;
-        $this->agilityDiceRoll = $agilityDiceRoll;
-        $this->knackDiceRoll = $knackDiceRoll;
-        $this->willDiceRoll = $willDiceRoll;
-        $this->intelligenceDiceRoll = $intelligenceDiceRoll;
-        $this->charismaDiceRoll = $charismaDiceRoll;
+        $this->strengthRoll = $strengthRoll;
+        $this->agilityRoll = $agilityRoll;
+        $this->knackRoll = $knackRoll;
+        $this->willRoll = $willRoll;
+        $this->intelligenceRoll = $intelligenceRoll;
+        $this->charismaRoll = $charismaRoll;
     }
 
     /**
@@ -66,7 +90,7 @@ class FortuneProperties
 
     public function setExceptionality(Exceptionality $exceptionality)
     {
-        if ($exceptionality->getFortuneProperties()->getId() !== $this->getId()) {
+        if ($exceptionality->getExceptionalityProperties()->getId() !== $this->getId()) {
             throw new \LogicException;
         }
 
@@ -83,6 +107,54 @@ class FortuneProperties
     public function getExceptionality()
     {
         return $this->exceptionality;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStrengthModifier()
+    {
+        return $this->strengthRoll->getRollSummary();
+    }
+
+    /**
+     * @return int
+     */
+    public function getAgilityModifier()
+    {
+        return $this->agilityRoll->getRollSummary();
+    }
+
+    /**
+     * @return int
+     */
+    public function getKnackModifier()
+    {
+        return $this->knackRoll->getRollSummary();
+    }
+
+    /**
+     * @return int
+     */
+    public function getWillModifier()
+    {
+        return $this->willRoll->getRollSummary();
+    }
+
+    /**
+     * @return int
+     */
+    public function getIntelligenceModifier()
+    {
+        return $this->intelligenceRoll->getRollSummary();
+    }
+
+    /**
+     * @return int
+     */
+    public function getCharismaModifier()
+    {
+        return $this->charismaRoll->getRollSummary();
     }
 
 }

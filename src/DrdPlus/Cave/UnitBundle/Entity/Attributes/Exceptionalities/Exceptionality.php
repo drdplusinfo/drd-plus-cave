@@ -2,7 +2,7 @@
 namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Exceptionalities;
 
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Exceptionalities\Choices\ExceptionalityChoice;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Exceptionalities\Kinds\ExceptionalityKind;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Exceptionalities\Fates\ExceptionalityFate;
 use Granam\Strict\Object\StrictObject;
 
 /**
@@ -32,24 +32,24 @@ class Exceptionality extends StrictObject
      *
      * @ORM\Column(type="exceptionality_kind")
      */
-    private $exceptionalityKind;
+    private $exceptionalityFate;
 
     /**
      * @var FortuneProperties
      *
      * @ORM\Column(type="fortune_properties")
      */
-    private $fortuneProperties;
+    private $exceptionalityProperties;
 
     public function __construct(
         ExceptionalityChoice $exceptionalityChoice,
-        ExceptionalityKind $exceptionalityKind,
-        FortuneProperties $fortuneProperties
+        ExceptionalityFate $exceptionalityKind,
+        ExceptionalityProperties $exceptionalityProperties
     )
     {
         $this->exceptionalityChoice = $exceptionalityChoice;
-        $this->exceptionalityKind = $exceptionalityKind;
-        $this->fortuneProperties = $fortuneProperties;
+        $this->exceptionalityFate = $exceptionalityKind;
+        $this->exceptionalityProperties = $exceptionalityProperties;
     }
 
     /**
@@ -69,18 +69,19 @@ class Exceptionality extends StrictObject
     }
 
     /**
-     * @return ExceptionalityKind
+     * @return ExceptionalityFate
      */
-    public function getExceptionalityKind()
+    public function getExceptionalityFate()
     {
-        return $this->exceptionalityKind;
+        return $this->exceptionalityFate;
     }
 
     /**
-     * @return FortuneProperties
+     * @return ExceptionalityProperties
      */
-    public function getFortuneProperties()
+    public function getExceptionalityProperties()
     {
-        return $this->fortuneProperties;
+        return $this->exceptionalityProperties;
     }
+
 }

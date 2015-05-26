@@ -1,28 +1,28 @@
 <?php
-namespace DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\Exceptionalities\Kinds;
+namespace DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\Exceptionalities\Fates;
 
 use Doctrine\DBAL\Types\Type;
 use DrdPlus\Cave\ToolsBundle\Dices\Roll;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Exceptionalities\Kinds\AbstractKind;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Exceptionalities\Fates\AbstractFate;
 use DrdPlus\Cave\UnitBundle\Tests\TestWithMockery;
 
-abstract class AbstractTestOfKind extends TestWithMockery
+abstract class AbstractTestOfFate extends TestWithMockery
 {
     /**
      * @test
      */
     public function type_name_is_as_expected()
     {
-        $raceClass = $this->getKindClass();
-        $this->assertSame($this->buildExceptionalityName(), $raceClass::getTypeName());
+        $fateClass = $this->getFateClass();
+        $this->assertSame($this->buildSpecificFateName(), $fateClass::getTypeName());
     }
 
     /**
      * @return string
      */
-    protected function buildExceptionalityName()
+    protected function buildSpecificFateName()
     {
-        $baseName = $this->getExceptionalityBaseName();
+        $baseName = $this->getFateBaseName();
         $underScoredBaseName = preg_replace('~(\w)([A-Z])~', '$1_$2', $baseName);
 
         return strtolower($underScoredBaseName);
@@ -31,17 +31,17 @@ abstract class AbstractTestOfKind extends TestWithMockery
     /**
      * @return string
      */
-    protected function getExceptionalityBaseName()
+    protected function getFateBaseName()
     {
-        $subraceClass = $this->getKindClass();
+        $specificFateClass = $this->getFateClass();
 
-        return preg_replace('~(\w+\\\)*(\w+)~', '$2', $subraceClass);
+        return preg_replace('~(\w+\\\)*(\w+)~', '$2', $specificFateClass);
     }
 
     /**
-     * @return string|AbstractKind
+     * @return string|AbstractFate
      */
-    protected function getKindClass()
+    protected function getFateClass()
     {
         return preg_replace('~Test$~', '', static::class);
     }
@@ -51,39 +51,39 @@ abstract class AbstractTestOfKind extends TestWithMockery
      */
     public function can_register_self()
     {
-        $exceptionalityClass = $this->getKindClass();
-        $exceptionalityClass::registerSelf();
-        $this->assertTrue(Type::hasType($exceptionalityClass::getTypeName()));
+        $fateClass = $this->getFateClass();
+        $fateClass::registerSelf();
+        $this->assertTrue(Type::hasType($fateClass::getTypeName()));
     }
 
     /**
-     * @return AbstractKind
+     * @return AbstractFate
      *
      * @test
      * @depends can_register_self
      */
     public function can_create_self()
     {
-        $exceptionalityClass = $this->getKindClass();
+        $exceptionalityClass = $this->getFateClass();
         $instance = $exceptionalityClass::getIt();
         $this->assertInstanceOf($exceptionalityClass, $instance);
-        $expectedName = $this->buildExceptionalityName();
+        $expectedName = $this->buildSpecificFateName();
         $this->assertSame($expectedName, $instance->getTypeName());
         // as a self-typed single-value enum is the type name same as the enum value
         $this->assertSame($expectedName, $instance->getEnumValue());
         // kind is human shortcut for enum value
-        $this->assertSame($expectedName, $instance->getKind());
+        $this->assertSame($expectedName, $instance->getFateName());
 
         return $instance;
     }
 
     /**
-     * @param AbstractKind $kind
+     * @param AbstractFate $kind
      *
      * @test
      * @depends can_create_self
      */
-    public function gives_expected_primary_properties_bonus_on_conservative(AbstractKind $kind)
+    public function gives_expected_primary_properties_bonus_on_conservative(AbstractFate $kind)
     {
         $this->assertSame($this->getExpectedPrimaryPropertiesBonusOnConservative(), $kind->getPrimaryPropertiesBonusOnConservative());
     }
@@ -94,12 +94,12 @@ abstract class AbstractTestOfKind extends TestWithMockery
     abstract protected function getExpectedPrimaryPropertiesBonusOnConservative();
 
     /**
-     * @param AbstractKind $kind
+     * @param AbstractFate $kind
      *
      * @test
      * @depends can_create_self
      */
-    public function gives_expected_secondary_properties_bonus_on_conservative(AbstractKind $kind)
+    public function gives_expected_secondary_properties_bonus_on_conservative(AbstractFate $kind)
     {
         $this->assertSame($this->getExpectedSecondaryPropertiesBonusOnConservative(), $kind->getSecondaryPropertiesBonusOnConservative());
     }
@@ -110,12 +110,12 @@ abstract class AbstractTestOfKind extends TestWithMockery
     abstract protected function getExpectedSecondaryPropertiesBonusOnConservative();
 
     /**
-     * @param AbstractKind $kind
+     * @param AbstractFate $kind
      *
      * @test
      * @depends can_create_self
      */
-    public function gives_expected_primary_properties_bonus_on_fortune(AbstractKind $kind)
+    public function gives_expected_primary_properties_bonus_on_fortune(AbstractFate $kind)
     {
         foreach ([1, 2, 3, 4, 5, 6] as $value) {
             $roll = $this->mockery(Roll::class);
@@ -137,12 +137,12 @@ abstract class AbstractTestOfKind extends TestWithMockery
     abstract protected function getExpectedPrimaryPropertiesBonusOnFortune($value);
 
     /**
-     * @param AbstractKind $kind
+     * @param AbstractFate $kind
      *
      * @test
      * @depends can_create_self
      */
-    public function gives_expected_secondary_properties_bonus_on_fortune(AbstractKind $kind)
+    public function gives_expected_secondary_properties_bonus_on_fortune(AbstractFate $kind)
     {
         foreach ([1, 2, 3, 4, 5, 6] as $value) {
             $roll = $this->mockery(Roll::class);
@@ -164,9 +164,9 @@ abstract class AbstractTestOfKind extends TestWithMockery
     abstract protected function getExpectedSecondaryPropertiesBonusOnFortune($value);
 
     /**
-     * @param AbstractKind $abstractKind
+     * @param AbstractFate $abstractKind
      */
-    public function gives_expected_up_to_single_property_limit(AbstractKind $abstractKind)
+    public function gives_expected_up_to_single_property_limit(AbstractFate $abstractKind)
     {
         $this->assertSame($this->getExpectedUpToSingleProperty(), $abstractKind->getUpToSingleProperty());
     }

@@ -4,10 +4,10 @@ namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Exceptionalities;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Exceptionalities\Choices\ExceptionalityChoice;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Exceptionalities\Choices\Fortune;
 use DrdPlus\Cave\UnitBundle\Entity\Attributes\Exceptionalities\Choices\PlayerDecision;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Exceptionalities\Kinds\Combination;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Exceptionalities\Kinds\ExceptionalityKind;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Exceptionalities\Kinds\ExceptionalProperties;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Exceptionalities\Kinds\GoodRear;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Exceptionalities\Fates\Combination;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Exceptionalities\Fates\ExceptionalityFate;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Exceptionalities\Fates\ExceptionalProperties;
+use DrdPlus\Cave\UnitBundle\Entity\Attributes\Exceptionalities\Fates\GoodRear;
 use Granam\Strict\Object\StrictObject;
 
 class ExceptionalityFactory extends StrictObject
@@ -18,7 +18,7 @@ class ExceptionalityFactory extends StrictObject
      */
     public function __construct()
     {
-        ExceptionalityKind::registerSelf();
+        ExceptionalityFate::registerSelf();
         Combination::registerSelfKind();
         ExceptionalProperties::registerSelfKind();
         GoodRear::registerSelfKind();

@@ -1,9 +1,9 @@
 <?php
-namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Exceptionalities\Kinds;
+namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Exceptionalities\Fates;
 
 use DrdPlus\Cave\ToolsBundle\Dices\Roll;
 
-class ExceptionalProperties extends AbstractKind
+class ExceptionalProperties extends AbstractFate
 {
     /**
      * @return int

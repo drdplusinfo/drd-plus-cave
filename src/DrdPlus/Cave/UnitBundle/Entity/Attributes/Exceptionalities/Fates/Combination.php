@@ -1,22 +1,14 @@
 <?php
-namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Exceptionalities\Kinds;
+namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Exceptionalities\Fates;
 
 use DrdPlus\Cave\ToolsBundle\Dices\Roll;
 
-class GoodRear extends AbstractKind
+class Combination extends AbstractFate
 {
     /**
      * @return int
      */
     public function getPrimaryPropertiesBonusOnConservative()
-    {
-        return 1;
-    }
-
-    /**
-     * @return int
-     */
-    public function getSecondaryPropertiesBonusOnConservative()
     {
         return 2;
     }
@@ -24,9 +16,17 @@ class GoodRear extends AbstractKind
     /**
      * @return int
      */
+    public function getSecondaryPropertiesBonusOnConservative()
+    {
+        return 4;
+    }
+
+    /**
+     * @return int
+     */
     public function getUpToSingleProperty()
     {
-        return 1;
+        return 2;
     }
 
     /**
@@ -39,12 +39,13 @@ class GoodRear extends AbstractKind
         switch ($roll->getRollSummary()) {
             case 1:
             case 2:
-            case 3:
                 return 0;
+            case 3:
             case 4:
+                return 1;
             case 5:
             case 6:
-                return 1;
+                return 2;
             default:
                 throw new \RuntimeException(
                     'Unexpected roll value ' . var_export($roll->getRollSummary(), true)
@@ -59,7 +60,7 @@ class GoodRear extends AbstractKind
      */
     public function getSecondaryPropertiesBonusOnFortune(Roll $roll)
     {
-        // secondary and primary properties got same bonus
+        // combination has same secondary and primary properties bonus
         return $this->getPrimaryPropertiesBonusOnFortune($roll);
     }
 
