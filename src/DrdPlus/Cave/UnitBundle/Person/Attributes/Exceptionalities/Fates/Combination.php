@@ -8,7 +8,7 @@ class Combination extends AbstractFate
     /**
      * @return int
      */
-    public function getPrimaryPropertiesBonusOnConservative()
+    public function getPrimaryPropertiesBonusOnChoice()
     {
         return 2;
     }
@@ -16,7 +16,7 @@ class Combination extends AbstractFate
     /**
      * @return int
      */
-    public function getSecondaryPropertiesBonusOnConservative()
+    public function getSecondaryPropertiesBonusOnChoice()
     {
         return 4;
     }

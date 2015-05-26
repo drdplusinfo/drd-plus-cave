@@ -83,15 +83,15 @@ abstract class AbstractTestOfFate extends TestWithMockery
      * @test
      * @depends can_create_self
      */
-    public function gives_expected_primary_properties_bonus_on_conservative(AbstractFate $kind)
+    public function gives_expected_primary_properties_bonus_on_chosen(AbstractFate $kind)
     {
-        $this->assertSame($this->getExpectedPrimaryPropertiesBonusOnConservative(), $kind->getPrimaryPropertiesBonusOnConservative());
+        $this->assertSame($this->getExpectedPrimaryPropertiesBonusOnChoice(), $kind->getPrimaryPropertiesBonusOnChoice());
     }
 
     /**
      * @return int
      */
-    abstract protected function getExpectedPrimaryPropertiesBonusOnConservative();
+    abstract protected function getExpectedPrimaryPropertiesBonusOnChoice();
 
     /**
      * @param AbstractFate $kind
@@ -99,15 +99,15 @@ abstract class AbstractTestOfFate extends TestWithMockery
      * @test
      * @depends can_create_self
      */
-    public function gives_expected_secondary_properties_bonus_on_conservative(AbstractFate $kind)
+    public function gives_expected_secondary_properties_bonus_on_chosen(AbstractFate $kind)
     {
-        $this->assertSame($this->getExpectedSecondaryPropertiesBonusOnConservative(), $kind->getSecondaryPropertiesBonusOnConservative());
+        $this->assertSame($this->getExpectedSecondaryPropertiesBonusOnChoice(), $kind->getSecondaryPropertiesBonusOnChoice());
     }
 
     /**
      * @return int
      */
-    abstract protected function getExpectedSecondaryPropertiesBonusOnConservative();
+    abstract protected function getExpectedSecondaryPropertiesBonusOnChoice();
 
     /**
      * @param AbstractFate $kind

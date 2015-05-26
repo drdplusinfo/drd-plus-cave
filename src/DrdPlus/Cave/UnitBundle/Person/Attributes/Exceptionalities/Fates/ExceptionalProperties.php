@@ -8,7 +8,7 @@ class ExceptionalProperties extends AbstractFate
     /**
      * @return int
      */
-    public function getPrimaryPropertiesBonusOnConservative()
+    public function getPrimaryPropertiesBonusOnChoice()
     {
         return 3;
     }
@@ -16,7 +16,7 @@ class ExceptionalProperties extends AbstractFate
     /**
      * @return int
      */
-    public function getSecondaryPropertiesBonusOnConservative()
+    public function getSecondaryPropertiesBonusOnChoice()
     {
         return 6;
     }

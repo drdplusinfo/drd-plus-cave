@@ -6,12 +6,12 @@ use DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\Exceptionalities\Fates\Abstr
 class GoodRearTest extends AbstractTestOfFate
 {
 
-    protected function getExpectedPrimaryPropertiesBonusOnConservative()
+    protected function getExpectedPrimaryPropertiesBonusOnChoice()
     {
         return 1;
     }
 
-    protected function getExpectedSecondaryPropertiesBonusOnConservative()
+    protected function getExpectedSecondaryPropertiesBonusOnChoice()
     {
         return 2;
     }

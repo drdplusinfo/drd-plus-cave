@@ -9,12 +9,12 @@ abstract class AbstractFate extends ExceptionalityFate
     /**
      * @return int
      */
-    abstract public function getPrimaryPropertiesBonusOnConservative();
+    abstract public function getPrimaryPropertiesBonusOnChoice();
 
     /**
      * @return int
      */
-    abstract public function getSecondaryPropertiesBonusOnConservative();
+    abstract public function getSecondaryPropertiesBonusOnChoice();
 
     /**
      * @param Roll $roll
