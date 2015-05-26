@@ -1,5 +1,5 @@
 <?php
-namespace DrdPlus\Cave\UnitBundle\Entity\Exceptions;
+namespace DrdPlus\Cave\UnitBundle\Person\Exceptions;
 
 class ExceptionTest extends \PHPUnit_Framework_TestCase
 {

@@ -1,14 +1,14 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\ProfessionLevels;
 
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels\LevelValue;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels\ProfessionLevel;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Agility;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Charisma;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Intelligence;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Knack;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Strength;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Will;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\LevelValue;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\ProfessionLevel;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Agility;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Charisma;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Intelligence;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Knack;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Strength;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Will;
 use DrdPlus\Cave\UnitBundle\Tests\TestWithMockery;
 
 class AbstractTestOfProfessionLevel extends TestWithMockery

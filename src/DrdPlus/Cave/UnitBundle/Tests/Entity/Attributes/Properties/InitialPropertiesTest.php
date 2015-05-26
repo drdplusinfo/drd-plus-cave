@@ -1,17 +1,17 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\Properties;
 
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels\ProfessionLevelsTest;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Agility;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Charisma;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\InitialProperties;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Intelligence;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Knack;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Strength;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Will;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Gender;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Race;
-use DrdPlus\Cave\UnitBundle\Entity\Person;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\ProfessionLevelsTest;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Agility;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Charisma;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\InitialProperties;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Intelligence;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Knack;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Strength;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Will;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Gender;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Race;
+use DrdPlus\Cave\UnitBundle\Person\Person;
 use DrdPlus\Cave\UnitBundle\Tests\TestWithMockery;
 use Granam\Strict\Object\StrictObject;
 
@@ -45,7 +45,7 @@ class InitialPropertiesTest extends TestWithMockery
     /**
      * @test
      * @depends can_create_instance
-     * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Exceptions\PersonIsNotSet
+     * @expectedException \DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Exceptions\PersonIsNotSet
      */
     public function setting_property_before_person_cause_exception()
     {
@@ -81,7 +81,7 @@ class InitialPropertiesTest extends TestWithMockery
      *
      * @test
      * @depends person_can_be_set
-     * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Exceptions\PersonIsAlreadySet
+     * @expectedException \DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Exceptions\PersonIsAlreadySet
      */
     public function setting_another_person_cause_exception(InitialProperties $initialProperties)
     {
@@ -101,7 +101,7 @@ class InitialPropertiesTest extends TestWithMockery
      *
      * @test
      * @depends person_can_be_set
-     * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Exceptions\PersonIsAlreadySet
+     * @expectedException \DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Exceptions\PersonIsAlreadySet
      */
     public function another_person_even_without_id_cause_exception(InitialProperties $initialProperties)
     {
@@ -190,7 +190,7 @@ class InitialPropertiesTest extends TestWithMockery
     /**
      * @test
      * @depends initial_strength_can_be_set
-     * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Exceptions\InitialPropertyValueExceeded
+     * @expectedException \DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Exceptions\InitialPropertyValueExceeded
      */
     public function too_high_initial_strength_cause_exception()
     {
@@ -220,7 +220,7 @@ class InitialPropertiesTest extends TestWithMockery
      *
      * @test
      * @depends initial_strength_can_be_set
-     * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Exceptions\InitialPropertyIsAlreadySet
+     * @expectedException \DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Exceptions\InitialPropertyIsAlreadySet
      */
     public function setting_another_initial_strength_cause_exception(InitialProperties $initialProperties)
     {
@@ -287,7 +287,7 @@ class InitialPropertiesTest extends TestWithMockery
     /**
      * @test
      * @depends initial_agility_can_be_set
-     * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Exceptions\InitialPropertyValueExceeded
+     * @expectedException \DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Exceptions\InitialPropertyValueExceeded
      */
     public function too_high_initial_agility_cause_exception()
     {
@@ -317,7 +317,7 @@ class InitialPropertiesTest extends TestWithMockery
      *
      * @test
      * @depends initial_agility_can_be_set
-     * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Exceptions\InitialPropertyIsAlreadySet
+     * @expectedException \DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Exceptions\InitialPropertyIsAlreadySet
      */
     public function setting_another_initial_agility_cause_exception(InitialProperties $initialProperties)
     {
@@ -384,7 +384,7 @@ class InitialPropertiesTest extends TestWithMockery
     /**
      * @test
      * @depends initial_knack_can_be_set
-     * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Exceptions\InitialPropertyValueExceeded
+     * @expectedException \DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Exceptions\InitialPropertyValueExceeded
      */
     public function too_high_initial_knack_cause_exception()
     {
@@ -414,7 +414,7 @@ class InitialPropertiesTest extends TestWithMockery
      *
      * @test
      * @depends initial_knack_can_be_set
-     * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Exceptions\InitialPropertyIsAlreadySet
+     * @expectedException \DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Exceptions\InitialPropertyIsAlreadySet
      */
     public function setting_another_initial_knack_cause_exception(InitialProperties $initialProperties)
     {
@@ -481,7 +481,7 @@ class InitialPropertiesTest extends TestWithMockery
     /**
      * @test
      * @depends initial_will_can_be_set
-     * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Exceptions\InitialPropertyValueExceeded
+     * @expectedException \DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Exceptions\InitialPropertyValueExceeded
      */
     public function too_high_initial_will_cause_exception()
     {
@@ -511,7 +511,7 @@ class InitialPropertiesTest extends TestWithMockery
      *
      * @test
      * @depends initial_will_can_be_set
-     * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Exceptions\InitialPropertyIsAlreadySet
+     * @expectedException \DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Exceptions\InitialPropertyIsAlreadySet
      */
     public function setting_another_initial_will_cause_exception(InitialProperties $initialProperties)
     {
@@ -578,7 +578,7 @@ class InitialPropertiesTest extends TestWithMockery
     /**
      * @test
      * @depends initial_intelligence_can_be_set
-     * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Exceptions\InitialPropertyValueExceeded
+     * @expectedException \DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Exceptions\InitialPropertyValueExceeded
      */
     public function too_high_initial_intelligence_cause_exception()
     {
@@ -608,7 +608,7 @@ class InitialPropertiesTest extends TestWithMockery
      *
      * @test
      * @depends initial_intelligence_can_be_set
-     * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Exceptions\InitialPropertyIsAlreadySet
+     * @expectedException \DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Exceptions\InitialPropertyIsAlreadySet
      */
     public function setting_another_initial_intelligence_cause_exception(InitialProperties $initialProperties)
     {
@@ -675,7 +675,7 @@ class InitialPropertiesTest extends TestWithMockery
     /**
      * @test
      * @depends initial_charisma_can_be_set
-     * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Exceptions\InitialPropertyValueExceeded
+     * @expectedException \DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Exceptions\InitialPropertyValueExceeded
      */
     public function too_high_initial_charisma_cause_exception()
     {
@@ -705,7 +705,7 @@ class InitialPropertiesTest extends TestWithMockery
      *
      * @test
      * @depends initial_charisma_can_be_set
-     * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Exceptions\InitialPropertyIsAlreadySet
+     * @expectedException \DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Exceptions\InitialPropertyIsAlreadySet
      */
     public function setting_another_initial_charisma_cause_exception(InitialProperties $initialProperties)
     {

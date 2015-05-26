@@ -1,5 +1,5 @@
 <?php
-namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties;
+namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Properties;
 
 use DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\Properties\AbstractTestOfProperty;
 

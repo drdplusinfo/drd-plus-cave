@@ -1,5 +1,5 @@
 <?php
-namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Races;
+namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Races;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\Type;
@@ -35,7 +35,7 @@ class GenderTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Exceptions\GenericRaceCanNotBeCreated
+     * @expectedException \DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Exceptions\GenericRaceCanNotBeCreated
      */
     public function creating_gender_enum_itself_cause_exception()
     {
@@ -44,7 +44,7 @@ class GenderTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Exceptions\MissingRaceCodeImplementation
+     * @expectedException \DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Exceptions\MissingRaceCodeImplementation
      */
     public function creating_gender_enum_itself_by_shortcut_cause_exception()
     {
@@ -102,7 +102,7 @@ class GenderTest extends TestWithMockery
     /**
      * @test
      * @depends can_be_created_as_enum_type
-     * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Exceptions\MissingSubraceCodeImplementation
+     * @expectedException \DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Exceptions\MissingSubraceCodeImplementation
      */
     public function missing_subrace_code_cause_exception()
     {
@@ -115,7 +115,7 @@ class GenderTest extends TestWithMockery
     /**
      * @test
      * @depends can_be_created_as_enum_type
-     * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Exceptions\UnexpectedGenderCode
+     * @expectedException \DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Exceptions\UnexpectedGenderCode
      */
     public function changed_code_cause_exception()
     {
@@ -128,7 +128,7 @@ class GenderTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Exceptions\MaleDetectionNotImplemented
+     * @expectedException \DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Exceptions\MaleDetectionNotImplemented
      */
     public function missing_male_detection_cause_exception()
     {
@@ -140,7 +140,7 @@ class GenderTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Exceptions\FemaleDetectionNotImplemented
+     * @expectedException \DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Exceptions\FemaleDetectionNotImplemented
      */
     public function missing_female_detection_cause_exception()
     {
@@ -152,7 +152,7 @@ class GenderTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Exceptions\UnknownGender
+     * @expectedException \DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Exceptions\UnknownGender
      */
     public function unknown_gender_detection_cause_exception()
     {
@@ -164,7 +164,7 @@ class GenderTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Exceptions\AmbiguousGender
+     * @expectedException \DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Exceptions\AmbiguousGender
      */
     public function ambiguous_gender_detection_cause_exception()
     {

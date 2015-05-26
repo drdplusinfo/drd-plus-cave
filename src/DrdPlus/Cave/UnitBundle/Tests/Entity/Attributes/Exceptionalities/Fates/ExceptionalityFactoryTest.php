@@ -1,10 +1,10 @@
 <?php
-namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Exceptionalities;
+namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities;
 
 use Doctrine\DBAL\Types\Type;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Exceptionalities\Fates\Combination;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Exceptionalities\Fates\ExceptionalProperties;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Exceptionalities\Fates\GoodRear;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Fates\Combination;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Fates\ExceptionalProperties;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Fates\GoodRear;
 use DrdPlus\Cave\UnitBundle\Tests\TestWithMockery;
 
 class ExceptionalityFactoryTest extends TestWithMockery

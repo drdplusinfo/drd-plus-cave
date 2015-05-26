@@ -1,15 +1,15 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\ProfessionLevels\Parts;
 
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels\FighterLevel;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels\PriestLevel;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels\ProfessionLevel;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels\ProfessionLevels;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels\ProfessionLevelsTest;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels\RangerLevel;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels\TheurgistLevel;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels\ThiefLevel;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels\WizardLevel;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\FighterLevel;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\PriestLevel;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\ProfessionLevel;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\ProfessionLevels;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\ProfessionLevelsTest;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\RangerLevel;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\TheurgistLevel;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\ThiefLevel;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\WizardLevel;
 
 trait ProfessionLevelsTestMultiProfessionNotAllowed
 {
@@ -57,7 +57,7 @@ trait ProfessionLevelsTestMultiProfessionNotAllowed
 
     private function getMultiProfessionTestLevelClass($professionName)
     {
-        return '\DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels\\'
+        return '\DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\\'
         . ucfirst($professionName) . 'Level';
     }
 

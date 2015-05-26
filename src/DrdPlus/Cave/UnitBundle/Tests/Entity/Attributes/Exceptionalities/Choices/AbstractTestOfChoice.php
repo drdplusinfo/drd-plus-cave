@@ -2,8 +2,8 @@
 namespace DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\Exceptionalities\Choices;
 
 use Doctrine\DBAL\Types\Type;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Exceptionalities\Choices\ExceptionalityChoice;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Race;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Choices\ExceptionalityChoice;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Race;
 use DrdPlus\Cave\UnitBundle\Tests\TestWithMockery;
 
 abstract class AbstractTestOfChoice extends TestWithMockery

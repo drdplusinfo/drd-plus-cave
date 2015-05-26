@@ -1,5 +1,5 @@
 <?php
-namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Races;
+namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Races;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\Type;
@@ -29,7 +29,7 @@ class RaceTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Exceptions\GenericRaceCanNotBeCreated
+     * @expectedException \DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Exceptions\GenericRaceCanNotBeCreated
      */
     public function creating_race_enum_itself_cause_exception()
     {
@@ -38,7 +38,7 @@ class RaceTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Exceptions\MissingRaceCodeImplementation
+     * @expectedException \DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Exceptions\MissingRaceCodeImplementation
      */
     public function creating_race_enum_by_shortcut_cause_exception()
     {
@@ -103,7 +103,7 @@ class RaceTest extends TestWithMockery
     /**
      * @test
      * @depends can_be_created_as_enum_type
-     * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Exceptions\MissingSubraceCodeImplementation
+     * @expectedException \DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Exceptions\MissingSubraceCodeImplementation
      */
     public function missing_subrace_code_cause_exception()
     {
@@ -116,7 +116,7 @@ class RaceTest extends TestWithMockery
     /**
      * @test
      * @depends can_be_created_as_enum_type
-     * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Exceptions\UnexpectedRaceCode
+     * @expectedException \DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Exceptions\UnexpectedRaceCode
      */
     public function changed_subrace_code_cause_exception()
     {

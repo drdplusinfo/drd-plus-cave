@@ -1,12 +1,12 @@
 <?php
-namespace DrdPlus\Cave\UnitBundle\Entity;
+namespace DrdPlus\Cave\UnitBundle\Person;
 
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Exceptionalities\Exceptionality;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Name;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels\ProfessionLevels;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\InitialProperties;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Gender;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Race;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Exceptionality;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Name;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\ProfessionLevels;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\InitialProperties;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Gender;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Race;
 use DrdPlus\Cave\UnitBundle\Tests\TestWithMockery;
 
 class PersonTest extends TestWithMockery

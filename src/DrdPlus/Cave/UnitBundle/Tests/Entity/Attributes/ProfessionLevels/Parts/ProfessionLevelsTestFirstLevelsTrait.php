@@ -1,11 +1,11 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\ProfessionLevels\Parts;
 
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels\FighterLevel;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels\LevelValue;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels\ProfessionLevel;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels\ProfessionLevels;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels\ProfessionLevelsTest;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\FighterLevel;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\LevelValue;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\ProfessionLevel;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\ProfessionLevels;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\ProfessionLevelsTest;
 
 trait ProfessionLevelsTestFirstLevelsTrait
 {
@@ -50,7 +50,7 @@ trait ProfessionLevelsTestFirstLevelsTrait
 
     private function getFirstLevelsProfessionLevelClass($professionName)
     {
-        return '\DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels\\'
+        return '\DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\\'
         . ucfirst($professionName) . 'Level';
     }
 

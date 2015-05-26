@@ -1,5 +1,5 @@
 <?php
-namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels;
+namespace DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels;
 
 use DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\ProfessionLevels\Parts\ProfessionLevelsTestMultiProfessionNotAllowed;
 use DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\ProfessionLevels\Parts\ProfessionLevelsTestNewIsEmptyTrait;

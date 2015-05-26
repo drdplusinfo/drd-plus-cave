@@ -1,15 +1,15 @@
 <?php
-namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Races;
+namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Races;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Property;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Property;
 
 class PropertyTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
      * @test
-     * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Exceptions\AbstractPropertyDoesNotHaveTypeName
+     * @expectedException \DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Exceptions\AbstractPropertyDoesNotHaveTypeName
      */
     public function requesting_property_name_on_abstract_property_cause_exception()
     {
@@ -18,7 +18,7 @@ class PropertyTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Exceptions\CanNotRegisterAbstractProperty
+     * @expectedException \DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Exceptions\CanNotRegisterAbstractProperty
      */
     public function registering_abstract_property_by_itself_cause_exception()
     {

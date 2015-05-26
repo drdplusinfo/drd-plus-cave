@@ -1,5 +1,5 @@
 <?php
-namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Races;
+namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Races;
 
 use DrdPlus\Cave\UnitBundle\Tests\TestWithMockery;
 

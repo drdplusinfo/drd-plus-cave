@@ -3,7 +3,7 @@ namespace DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\Exceptionalities\Fates
 
 use Doctrine\DBAL\Types\Type;
 use DrdPlus\Cave\ToolsBundle\Dices\Roll;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Exceptionalities\Fates\AbstractFate;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Fates\AbstractFate;
 use DrdPlus\Cave\UnitBundle\Tests\TestWithMockery;
 
 abstract class AbstractTestOfFate extends TestWithMockery

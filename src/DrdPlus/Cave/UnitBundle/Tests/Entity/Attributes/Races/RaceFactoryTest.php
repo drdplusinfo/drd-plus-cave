@@ -1,20 +1,20 @@
 <?php
-namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Races;
+namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Races;
 
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Dwarfs\CommonDwarf;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Dwarfs\MountainDwarf;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Dwarfs\WoodDwarf;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Elfs\CommonElf;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Elfs\DarkElf;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Elfs\GreenElf;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Hobbits\CommonHobbit;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Humans\CommonHuman;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Humans\Highlander;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Krolls\CommonKroll;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Krolls\WildKroll;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Orcs\CommonOrc;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Orcs\Goblin;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Orcs\Skurut;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Dwarfs\CommonDwarf;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Dwarfs\MountainDwarf;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Dwarfs\WoodDwarf;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Elfs\CommonElf;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Elfs\DarkElf;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Elfs\GreenElf;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Hobbits\CommonHobbit;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Humans\CommonHuman;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Humans\Highlander;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Krolls\CommonKroll;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Krolls\WildKroll;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Orcs\CommonOrc;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Orcs\Goblin;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Orcs\Skurut;
 use DrdPlus\Cave\UnitBundle\Tests\TestWithMockery;
 
 class RaceFactoryTest extends TestWithMockery

@@ -1,9 +1,9 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\ProfessionLevels\Parts;
 
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels\ProfessionLevels;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels\ProfessionLevelsTest;
-use DrdPlus\Cave\UnitBundle\Entity\Person;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\ProfessionLevels;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\ProfessionLevelsTest;
+use DrdPlus\Cave\UnitBundle\Person\Person;
 
 trait ProfessionLevelsTestPersonCanBeSet
 {
@@ -71,7 +71,7 @@ trait ProfessionLevelsTestPersonCanBeSet
      *
      * @test
      * @depends person_can_be_set
-     * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels\Exceptions\PersonIsAlreadySet
+     * @expectedException \DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\Exceptions\PersonIsAlreadySet
      */
     public function another_person_cause_exception(ProfessionLevels $professionLevels)
     {
@@ -93,7 +93,7 @@ trait ProfessionLevelsTestPersonCanBeSet
      *
      * @test
      * @depends person_can_be_set
-     * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\ProfessionLevels\Exceptions\PersonIsAlreadySet
+     * @expectedException \DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\Exceptions\PersonIsAlreadySet
      */
     public function another_person_even_without_id_cause_exception(ProfessionLevels $professionLevels)
     {

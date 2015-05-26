@@ -1,5 +1,5 @@
 <?php
-namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Exceptionalities\Fates;
+namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Fates;
 
 use DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\Exceptionalities\Fates\AbstractTestOfFate;
 

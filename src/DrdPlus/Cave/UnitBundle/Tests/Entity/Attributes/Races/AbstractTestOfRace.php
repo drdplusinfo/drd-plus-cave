@@ -2,8 +2,8 @@
 namespace DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\Races;
 
 use Doctrine\DBAL\Types\Type;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Gender;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Race;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Gender;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Race;
 use DrdPlus\Cave\UnitBundle\Tests\TestWithMockery;
 
 abstract class AbstractTestOfRace extends TestWithMockery
@@ -123,7 +123,7 @@ abstract class AbstractTestOfRace extends TestWithMockery
      * @test
      *
      * @depends can_create_self
-     * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Exceptions\UnexpectedRace
+     * @expectedException \DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Exceptions\UnexpectedRace
      */
     public function using_gender_of_different_race_cause_exception(Race $race)
     {
@@ -134,7 +134,7 @@ abstract class AbstractTestOfRace extends TestWithMockery
     /**
      * @test
      *
-     * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Exceptions\UnexpectedSubrace
+     * @expectedException \DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Exceptions\UnexpectedSubrace
      */
     public function using_gender_of_different_subrace_cause_exception()
     {

@@ -1,7 +1,7 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\Races\Helpers;
 
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Gender;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Gender;
 
 class SubraceGenderWithoutFemaleDetection extends Gender
 {

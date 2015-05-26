@@ -1,5 +1,5 @@
 <?php
-namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Exceptions;
+namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Exceptions;
 
 class MissingRaceCodeImplementationTest extends \PHPUnit_Framework_TestCase
 {
@@ -15,7 +15,7 @@ class MissingRaceCodeImplementationTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Exceptions\Logic
+     * @expectedException \DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Exceptions\Logic
      */
     public function is_marked_by_local_logic_exception()
     {

@@ -6,7 +6,7 @@ use Doctrine\DBAL\Types\Type;
 use Doctrineum\Integer\IntegerEnum;
 use Doctrineum\Integer\SelfTypedIntegerEnum;
 use Doctrineum\Scalar\EnumInterface;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Property;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Property;
 use DrdPlus\Cave\UnitBundle\Tests\TestWithMockery;
 
 abstract class AbstractTestOfProperty extends TestWithMockery

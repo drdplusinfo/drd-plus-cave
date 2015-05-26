@@ -1,8 +1,8 @@
 <?php
-namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Hobbits;
+namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Hobbits;
 
 use Doctrine\DBAL\Types\Type;
-use DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Race;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Race;
 use DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\Races\AbstractTestOfRace;
 
 class CommonHobbitTest extends AbstractTestOfRace

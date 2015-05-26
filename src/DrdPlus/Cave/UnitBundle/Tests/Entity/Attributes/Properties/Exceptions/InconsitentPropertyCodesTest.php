@@ -1,5 +1,5 @@
 <?php
-namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Exceptions;
+namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Exceptions;
 
 class UnknownPropertyCodeTest extends \PHPUnit_Framework_TestCase
 {
@@ -15,7 +15,7 @@ class UnknownPropertyCodeTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\Properties\Exceptions\Logic
+     * @expectedException \DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Exceptions\Logic
      */
     public function is_marked_by_local_logic_exception()
     {

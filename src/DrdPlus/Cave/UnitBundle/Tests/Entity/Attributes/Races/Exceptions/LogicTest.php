@@ -1,5 +1,5 @@
 <?php
-namespace DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Exceptions;
+namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Exceptions;
 
 class LogicTest extends \PHPUnit_Framework_TestCase
 {
@@ -14,7 +14,7 @@ class LogicTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Exceptions\Exception
+     * @expectedException \DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Exceptions\Exception
      */
     public function extends_local_exception_interface()
     {
@@ -23,7 +23,7 @@ class LogicTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\Exceptions\Logic
+     * @expectedException \DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptions\Logic
      */
     public function extends_parent_logic_interface()
     {
@@ -32,7 +32,7 @@ class LogicTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException \DrdPlus\Cave\UnitBundle\Entity\Attributes\Races\Exceptions\TestLogicInterface
+     * @expectedException \DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Exceptions\TestLogicInterface
      */
     public function is_not_runtime_exception_interface()
     {
