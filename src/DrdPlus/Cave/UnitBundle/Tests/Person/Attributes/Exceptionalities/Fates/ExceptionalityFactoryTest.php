@@ -2,6 +2,8 @@
 namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities;
 
 use Doctrine\DBAL\Types\Type;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Choices\Fortune;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Choices\PlayerDecision;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Fates\Combination;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Fates\ExceptionalProperties;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Fates\GoodRear;
@@ -53,7 +55,7 @@ class ExceptionalityFactoryTest extends TestWithMockery
      *
      * @param ExceptionalityFactory $factory
      */
-    public function can_create_good_rear(ExceptionalityFactory $factory)
+    public function can_give_good_rear(ExceptionalityFactory $factory)
     {
         $this->assertInstanceOf(GoodRear::class, $factory->getGoodRear());
     }
@@ -64,7 +66,7 @@ class ExceptionalityFactoryTest extends TestWithMockery
      *
      * @param ExceptionalityFactory $factory
      */
-    public function can_create_combination(ExceptionalityFactory $factory)
+    public function can_give_combination(ExceptionalityFactory $factory)
     {
         $this->assertInstanceOf(Combination::class, $factory->getCombination());
     }
@@ -75,8 +77,30 @@ class ExceptionalityFactoryTest extends TestWithMockery
      *
      * @param ExceptionalityFactory $factory
      */
-    public function can_create_exceptional_properties(ExceptionalityFactory $factory)
+    public function can_give_exceptional_properties(ExceptionalityFactory $factory)
     {
         $this->assertInstanceOf(ExceptionalProperties::class, $factory->getExceptionalProperties());
+    }
+
+    /**
+     * @depends can_be_created
+     * @test
+     *
+     * @param ExceptionalityFactory $factory
+     */
+    public function can_give_player_decision(ExceptionalityFactory $factory)
+    {
+        $this->assertInstanceOf(PlayerDecision::class, $factory->getPlayerDecision());
+    }
+    
+    /**
+     * @depends can_be_created
+     * @test
+     *
+     * @param ExceptionalityFactory $factory
+     */
+    public function can_give_fortune(ExceptionalityFactory $factory)
+    {
+        $this->assertInstanceOf(Fortune::class, $factory->getFortune());
     }
 }
