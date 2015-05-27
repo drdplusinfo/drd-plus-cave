@@ -65,8 +65,10 @@ use Doctrineum\Strict\String\SelfTypedStrictStringEnum;
         return $specificExceptionalityClass;
     }
 
-    public static function registerSelfKind()
+    public static function registerSpecificFate()
     {
+        self::registerSelf(); // registering the root, abstract fate
+
         return static::addSubTypeEnum(
             static::class,
             '~^' . static::getFateName() . '$~'

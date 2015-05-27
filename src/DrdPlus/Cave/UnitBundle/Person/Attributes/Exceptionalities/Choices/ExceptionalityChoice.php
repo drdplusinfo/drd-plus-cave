@@ -70,6 +70,8 @@ use Doctrineum\Strict\String\SelfTypedStrictStringEnum;
      */
     public static function registerSelfChoice()
     {
+        self::registerSelf(); // registering the root, abstract choice
+
         return static::addSubTypeEnum(
             static::class,
             '~^' . static::getChoice() . '$~'
