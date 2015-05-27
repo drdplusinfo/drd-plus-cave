@@ -19,56 +19,56 @@ abstract class ExceptionalityProperties extends StrictObject
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var Exceptionality|null
      *
      * @ORM\Column(type="exceptionality")
      */
-    private $exceptionality;
+    protected $exceptionality;
 
     /**
      * @var
      *
      * @ORM\Column(type="strength")
      */
-    private $strength;
+    protected $strength;
 
     /**
      * @var
      *
      * @ORM\Column(type="agility")
      */
-    private $agility;
+    protected $agility;
 
     /**
      * @var
      *
      * @ORM\Column(type="knack")
      */
-    private $knack;
+    protected $knack;
 
     /**
      * @var
      *
      * @ORM\Column(type="will")
      */
-    private $will;
+    protected $will;
 
     /**
      * @var
      *
      * @ORM\Column(type="intelligence")
      */
-    private $intelligence;
+    protected $intelligence;
 
     /**
      * @var
      *
      * @ORM\Column(type="charisma")
      */
-    private $charisma;
+    protected $charisma;
 
     public function __construct(
         Strength $strength,
@@ -107,9 +107,9 @@ abstract class ExceptionalityProperties extends StrictObject
             throw new \LogicException;
         }
 
-        if (!isset($this->exceptionality)) {
+        if (!$this->getExceptionality()) {
             $this->exceptionality = $exceptionality;
-        } elseif ($this->exceptionality->getId() !== $this->getId()) {
+        } elseif ($exceptionality->getId() !== $this->getExceptionality()->getId()) {
             throw new \LogicException;
         }
     }

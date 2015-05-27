@@ -200,4 +200,100 @@ abstract class AbstractTestOfExceptionalityProperties extends TestWithMockery
         /** @var Exceptionality $anotherExceptionality */
         $exceptionalityProperties->setExceptionality($anotherExceptionality);
     }
+
+    /**
+     * @test
+     * @depends adding_another_new_exceptionality_with_different_properties_cause_exception
+     * @expectedException \LogicException
+     */
+    public function adding_another_exceptionality_with_different_properties_cause_exception()
+    {
+        $className = $this->getClassName();
+        /** @var ExceptionalityProperties $exceptionalityProperties */
+        $exceptionalityProperties = new $className(
+            $strength = $this->getStrength(),
+            $agility = $this->getAgility(),
+            $knack = $this->getKnack(),
+            $will = $this->getWill(),
+            $intelligence = $this->getIntelligence(),
+            $charisma = $this->getCharisma()
+        );
+
+        $exceptionality = $this->mockery(Exceptionality::class);
+        $exceptionality->shouldReceive('getExceptionalityProperties')
+            ->andReturn($exceptionalityProperties);
+        $exceptionality->shouldReceive('getId')
+            ->andReturnNull();
+        /** @var Exceptionality $exceptionality */
+        $exceptionalityProperties->setExceptionality($exceptionality);
+        try {
+            $exceptionalityProperties->setExceptionality($exceptionality); // setting the same exceptionality should pass
+        } catch (\Exception $unwantedException) {
+            $this->fail(
+                'No exception should occurs on set of the same exceptionality: ' . $unwantedException->getMessage() . '; ' . $unwantedException->getTraceAsString()
+            );
+        }
+
+        $exceptionalityPropertiesReflection = new \ReflectionClass($exceptionalityProperties);
+        $idReflection = $exceptionalityPropertiesReflection->getProperty('id');
+        $idReflection->setAccessible(true);
+        $idReflection->setValue($exceptionalityProperties, 'foo'); // filling an ID
+
+        $anotherExceptionality = $this->mockery(Exceptionality::class);
+        $anotherExceptionality->shouldReceive('getExceptionalityProperties')
+            ->andReturn($anotherExceptionalityProperties = $this->mockery(ExceptionalityProperties::class));
+        $anotherExceptionalityProperties->shouldReceive('getId')
+            ->andReturn('bar'); // filling an ID
+
+        /** @var Exceptionality $anotherExceptionality */
+        $exceptionalityProperties->setExceptionality($anotherExceptionality);
+    }
+
+    /**
+     * @test
+     * @depends adding_another_new_exceptionality_with_different_properties_cause_exception
+     * @expectedException \LogicException
+     */
+    public function adding_different_exceptionality_cause_exception()
+    {
+        $className = $this->getClassName();
+        /** @var ExceptionalityProperties $exceptionalityProperties */
+        $exceptionalityProperties = new $className(
+            $strength = $this->getStrength(),
+            $agility = $this->getAgility(),
+            $knack = $this->getKnack(),
+            $will = $this->getWill(),
+            $intelligence = $this->getIntelligence(),
+            $charisma = $this->getCharisma()
+        );
+
+        $exceptionality = $this->mockery(Exceptionality::class);
+        $exceptionality->shouldReceive('getExceptionalityProperties')
+            ->andReturn($exceptionalityProperties);
+        $exceptionality->shouldReceive('getId')
+            ->andReturn('foo');
+        /** @var Exceptionality $exceptionality */
+        $exceptionalityProperties->setExceptionality($exceptionality);
+        try {
+            $exceptionalityProperties->setExceptionality($exceptionality); // setting the same exceptionality should pass
+        } catch (\Exception $unwantedException) {
+            $this->fail(
+                'No exception should occurs on set of the same exceptionality: ' . $unwantedException->getMessage() . '; ' . $unwantedException->getTraceAsString()
+            );
+        }
+
+        $exceptionalityPropertiesReflection = new \ReflectionClass($exceptionalityProperties);
+        $idReflection = $exceptionalityPropertiesReflection->getProperty('id');
+        $idReflection->setAccessible(true);
+        $idReflection->setValue($exceptionalityProperties, 'foo'); // filling an ID
+
+        $anotherExceptionality = $this->mockery(Exceptionality::class);
+        $anotherExceptionality->shouldReceive('getExceptionalityProperties')
+            ->andReturn($exceptionalityProperties);
+        $anotherExceptionality->shouldReceive('getId')
+            ->andReturn('bar');
+
+        /** @var Exceptionality $anotherExceptionality */
+        $exceptionalityProperties->setExceptionality($anotherExceptionality);
+    }
 }

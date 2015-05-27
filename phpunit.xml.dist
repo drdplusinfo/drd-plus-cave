@@ -19,7 +19,7 @@
         </testsuite>
     </testsuites>
     <filter>
-        <whitelist processUncoveredFilesFromWhitelist="true" addUncoveredFilesFromWhitelist="true">
+        <whitelist processUncoveredFilesFromWhitelist="false" addUncoveredFilesFromWhitelist="false">
             <directory>./src</directory>
             <exclude>
                 <directory>./src/*/*/*/Tests</directory>
