@@ -97,6 +97,12 @@ abstract class ExceptionalityProperties extends StrictObject
 
     public function setExceptionality(Exceptionality $exceptionality)
     {
+        if (is_null($this->getId()) && is_null($exceptionality->getExceptionalityProperties()->getId())
+            && $this !== $exceptionality->getExceptionalityProperties()
+        ) {
+            throw new \LogicException;
+        }
+
         if ($exceptionality->getExceptionalityProperties()->getId() !== $this->getId()) {
             throw new \LogicException;
         }
