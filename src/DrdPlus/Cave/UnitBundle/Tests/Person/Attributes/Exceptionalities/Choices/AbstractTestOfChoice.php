@@ -1,5 +1,5 @@
 <?php
-namespace DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\Exceptionalities\Choices;
+namespace DrdPlus\Cave\UnitBundle\Tests\Person\Attributes\Exceptionalities\Choices;
 
 use Doctrine\DBAL\Types\Type;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Choices\ExceptionalityChoice;

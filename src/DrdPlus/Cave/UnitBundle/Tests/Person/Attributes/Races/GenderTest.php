@@ -3,13 +3,13 @@ namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Races;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\Type;
-use DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\Races\Helpers\SubraceGender;
-use DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\Races\Helpers\SubraceGenderWithAmbiguousGenderDetection;
-use DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\Races\Helpers\SubraceGenderWithInvalidCode;
-use DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\Races\Helpers\SubraceGenderWithoutSubraceCode;
-use DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\Races\Helpers\SubraceGenderWithUnknownGenderDetection;
-use DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\Races\Helpers\SubraceGenderWithoutFemaleDetection;
-use DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\Races\Helpers\SubraceGenderWithoutMaleDetection;
+use DrdPlus\Cave\UnitBundle\Tests\Person\Attributes\Races\Helpers\SubraceGender;
+use DrdPlus\Cave\UnitBundle\Tests\Person\Attributes\Races\Helpers\SubraceGenderWithAmbiguousGenderDetection;
+use DrdPlus\Cave\UnitBundle\Tests\Person\Attributes\Races\Helpers\SubraceGenderWithInvalidCode;
+use DrdPlus\Cave\UnitBundle\Tests\Person\Attributes\Races\Helpers\SubraceGenderWithoutSubraceCode;
+use DrdPlus\Cave\UnitBundle\Tests\Person\Attributes\Races\Helpers\SubraceGenderWithUnknownGenderDetection;
+use DrdPlus\Cave\UnitBundle\Tests\Person\Attributes\Races\Helpers\SubraceGenderWithoutFemaleDetection;
+use DrdPlus\Cave\UnitBundle\Tests\Person\Attributes\Races\Helpers\SubraceGenderWithoutMaleDetection;
 use DrdPlus\Cave\UnitBundle\Tests\TestWithMockery;
 
 class GenderTest extends TestWithMockery

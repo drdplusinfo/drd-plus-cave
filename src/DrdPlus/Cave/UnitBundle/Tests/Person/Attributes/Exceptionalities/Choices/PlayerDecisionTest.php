@@ -1,7 +1,7 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Choices;
 
-use DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\Exceptionalities\Choices\AbstractTestOfChoice;
+use DrdPlus\Cave\UnitBundle\Tests\Person\Attributes\Exceptionalities\Choices\AbstractTestOfChoice;
 
 class PlayerDecisionTest extends AbstractTestOfChoice
 {

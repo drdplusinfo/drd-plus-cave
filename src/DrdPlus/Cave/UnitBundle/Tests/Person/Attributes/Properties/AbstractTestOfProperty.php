@@ -1,5 +1,5 @@
 <?php
-namespace DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\Properties;
+namespace DrdPlus\Cave\UnitBundle\Tests\Person\Attributes\Properties;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\Type;

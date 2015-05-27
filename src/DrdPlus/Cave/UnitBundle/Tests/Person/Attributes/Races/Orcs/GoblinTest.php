@@ -3,7 +3,7 @@ namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Orcs;
 
 use Doctrine\DBAL\Types\Type;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Race;
-use DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\Races\AbstractTestOfRace;
+use DrdPlus\Cave\UnitBundle\Tests\Person\Attributes\Races\AbstractTestOfRace;
 
 class GoblinTest extends AbstractTestOfRace
 {

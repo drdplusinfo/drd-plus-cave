@@ -1,5 +1,5 @@
 <?php
-namespace DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\ProfessionLevels;
+namespace DrdPlus\Cave\UnitBundle\Tests\Person\Attributes\ProfessionLevels;
 
 use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\LevelValue;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\ProfessionLevel;

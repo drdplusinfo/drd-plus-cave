@@ -1,5 +1,5 @@
 <?php
-namespace DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\Races;
+namespace DrdPlus\Cave\UnitBundle\Tests\Person\Attributes\Races;
 
 use Doctrine\DBAL\Types\Type;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Gender;

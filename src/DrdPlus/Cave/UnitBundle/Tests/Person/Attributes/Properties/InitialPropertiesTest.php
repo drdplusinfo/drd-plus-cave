@@ -1,5 +1,5 @@
 <?php
-namespace DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\Properties;
+namespace DrdPlus\Cave\UnitBundle\Tests\Person\Attributes\Properties;
 
 use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\ProfessionLevelsTest;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Agility;

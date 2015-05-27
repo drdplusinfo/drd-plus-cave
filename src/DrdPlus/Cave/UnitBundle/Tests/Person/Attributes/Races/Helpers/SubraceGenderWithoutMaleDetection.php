@@ -1,5 +1,5 @@
 <?php
-namespace DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\Races\Helpers;
+namespace DrdPlus\Cave\UnitBundle\Tests\Person\Attributes\Races\Helpers;
 
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Gender;
 

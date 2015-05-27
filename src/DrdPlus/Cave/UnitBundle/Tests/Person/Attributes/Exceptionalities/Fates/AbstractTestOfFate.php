@@ -1,5 +1,5 @@
 <?php
-namespace DrdPlus\Cave\UnitBundle\Tests\Entity\Attributes\Exceptionalities\Fates;
+namespace DrdPlus\Cave\UnitBundle\Tests\Person\Attributes\Exceptionalities\Fates;
 
 use Doctrine\DBAL\Types\Type;
 use DrdPlus\Cave\ToolsBundle\Dices\Roll;
