@@ -1,7 +1,6 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Tests\Person\Attributes\Properties;
 
-use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\ProfessionLevelsTest;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Agility;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Charisma;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\InitialProperties;
@@ -68,8 +67,11 @@ class InitialPropertiesTest extends TestWithMockery
     public function person_can_be_set()
     {
         $initialProperties = new InitialProperties();
-        /** @var Person $person */
+        /** @var Person|\Mockery\MockInterface $person */
         $person = \Mockery::mock(Person::class);
+        $person->shouldReceive('getInitialProperties')
+            ->atLeast()->once()
+            ->andReturn($initialProperties);
         $initialProperties->setPerson($person);
         $this->assertSame($person, $initialProperties->getPerson());
 
@@ -81,7 +83,7 @@ class InitialPropertiesTest extends TestWithMockery
      *
      * @test
      * @depends person_can_be_set
-     * @expectedException \DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Exceptions\PersonIsAlreadySet
+     * @expectedException \LogicException
      */
     public function setting_another_person_cause_exception(InitialProperties $initialProperties)
     {
@@ -93,6 +95,8 @@ class InitialPropertiesTest extends TestWithMockery
         $newPerson = \Mockery::mock(Person::class);
         $newPerson->shouldReceive('getId')
             ->andReturn(2);
+        $newPerson->shouldReceive('getInitialProperties')
+            ->andReturn($initialProperties);
         $initialProperties->setPerson($newPerson);
     }
 
@@ -101,7 +105,7 @@ class InitialPropertiesTest extends TestWithMockery
      *
      * @test
      * @depends person_can_be_set
-     * @expectedException \DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Exceptions\PersonIsAlreadySet
+     * @expectedException \LogicException
      */
     public function another_person_even_without_id_cause_exception(InitialProperties $initialProperties)
     {
@@ -109,12 +113,13 @@ class InitialPropertiesTest extends TestWithMockery
         $previousPerson = $initialProperties->getPerson();
         $previousPerson->shouldReceive('getId')
             ->andReturnNull(); // no ID at all - not saved yet
-        /** @var ProfessionLevelsTest $this */
         $this->assertInstanceOf(Person::class, $initialProperties->getPerson());
         /** @var Person|\Mockery\MockInterface $anotherPerson */
         $anotherPerson = \Mockery::mock(Person::class);
         $anotherPerson->shouldReceive('getId')
             ->andReturnNull(); // again not saved entity
+        $anotherPerson->shouldReceive('getInitialProperties')
+            ->andReturn($initialProperties);
         $initialProperties->setPerson($anotherPerson);
     }
 
@@ -151,6 +156,8 @@ class InitialPropertiesTest extends TestWithMockery
             ->andReturn(\Mockery::mock(Race::class));
         $person->shouldReceive('getGender')
             ->andReturn(\Mockery::mock(Gender::class));
+        $person->shouldReceive('getInitialProperties')
+            ->andReturn($initialProperties);
         $initialProperties->setPerson($person);
 
         return $initialProperties;

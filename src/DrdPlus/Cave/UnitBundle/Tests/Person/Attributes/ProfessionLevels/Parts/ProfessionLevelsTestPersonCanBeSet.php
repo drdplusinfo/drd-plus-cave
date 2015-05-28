@@ -36,8 +36,11 @@ trait ProfessionLevelsTestPersonCanBeSet
     {
         /** @var ProfessionLevelsTest $this */
         $this->assertNull($professionLevels->getPerson());
-        /** @var Person $person */
+        /** @var Person|\Mockery\MockInterface $person */
         $person = \Mockery::mock(Person::class);
+        $person->shouldReceive('getProfessionLevels')
+            ->atLeast()->once()
+            ->andReturn($professionLevels);
         $professionLevels->setPerson($person);
         $this->assertSame($person, $professionLevels->getPerson());
 
@@ -71,7 +74,7 @@ trait ProfessionLevelsTestPersonCanBeSet
      *
      * @test
      * @depends person_can_be_set
-     * @expectedException \DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\Exceptions\PersonIsAlreadySet
+     * @expectedException \LogicException
      */
     public function another_person_cause_exception(ProfessionLevels $professionLevels)
     {
@@ -85,6 +88,8 @@ trait ProfessionLevelsTestPersonCanBeSet
         $anotherPerson = \Mockery::mock(Person::class);
         $anotherPerson->shouldReceive('getId')
             ->andReturn(321);
+        $anotherPerson->shouldReceive('getProfessionLevels')
+            ->andReturn($professionLevels);
         $professionLevels->setPerson($anotherPerson);
     }
 
@@ -93,7 +98,7 @@ trait ProfessionLevelsTestPersonCanBeSet
      *
      * @test
      * @depends person_can_be_set
-     * @expectedException \DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\Exceptions\PersonIsAlreadySet
+     * @expectedException \LogicException
      */
     public function another_person_even_without_id_cause_exception(ProfessionLevels $professionLevels)
     {
@@ -107,6 +112,8 @@ trait ProfessionLevelsTestPersonCanBeSet
         $anotherPerson = \Mockery::mock(Person::class);
         $anotherPerson->shouldReceive('getId')
             ->andReturnNull(); // again not saved entity
+        $anotherPerson->shouldReceive('getProfessionLevels')
+            ->andReturn($professionLevels);
         $professionLevels->setPerson($anotherPerson);
     }
 

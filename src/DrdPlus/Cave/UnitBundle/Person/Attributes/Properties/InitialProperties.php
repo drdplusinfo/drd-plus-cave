@@ -23,7 +23,7 @@ class InitialProperties extends StrictObject
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var Person
@@ -83,20 +83,30 @@ class InitialProperties extends StrictObject
     }
 
     /**
-     * @param Person $person
-     *
-     * @throws Exceptions\PersonIsAlreadySet
+     * @return string
      */
+    public function getVoId()
+    {
+        return $this->getInitialStrength() . '-' . $this->getInitialAgility() . '-' . $this->getInitialKnack() . '-' . $this->getInitialWill()
+        . '-' . $this->getInitialIntelligence() . '-' . $this->getInitialCharisma();
+    }
+
     public function setPerson(Person $person)
     {
-        if (!$this->person) {
+        if (is_null($this->getVoId()) && is_null($person->getInitialProperties()->getVoId())
+            && $this !== $person->getInitialProperties()
+        ) {
+            throw new \LogicException;
+        }
+
+        if ($person->getInitialProperties()->getVoId() !== $this->getVoId()) {
+            throw new Exceptions\PersonIsAlreadySet();
+        }
+
+        if (!$this->getPerson()) {
             $this->person = $person;
-        } elseif ($this->person !== $person) {
-            throw new Exceptions\PersonIsAlreadySet(
-                'Initial properties entity of ID ' . var_export($this->id, true)
-                . ' is linked with person of ID ' . var_export($this->person->getId(), true) . '.'
-                . ' Added person of ID (or different instance) ' . var_export($person->getId(), true) . '.'
-            );
+        } elseif ($person->getId() !== $this->getPerson()->getId()) {
+            throw new \LogicException();
         }
     }
 

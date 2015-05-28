@@ -165,7 +165,12 @@ class PersonTest extends TestWithMockery
      */
     private function getExceptionalityMock()
     {
-        return \Mockery::mock(Exceptionality::class);
+        $exceptionality = \Mockery::mock(Exceptionality::class);
+        $exceptionality->shouldReceive('setPerson')
+            ->with(\Mockery::type(Person::class))
+            ->once();
+
+        return $exceptionality;
     }
 
     /**
@@ -176,7 +181,7 @@ class PersonTest extends TestWithMockery
         $initialProperties = \Mockery::mock(InitialProperties::class);
         $initialProperties->shouldReceive('setPerson')
             ->with(\Mockery::type(Person::class))
-            ->atLeast()->once();
+            ->once();
 
         return $initialProperties;
     }
@@ -189,7 +194,7 @@ class PersonTest extends TestWithMockery
         $professionLevels = \Mockery::mock(ProfessionLevels::class);
         $professionLevels->shouldReceive('setPerson')
             ->with(\Mockery::type(Person::class))
-            ->atLeast()->once();
+            ->once();
 
         return $professionLevels;
     }

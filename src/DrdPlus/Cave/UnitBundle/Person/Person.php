@@ -80,6 +80,7 @@ class Person extends StrictObject
     {
         $this->race = $race;
         $this->gender = $gender;
+        $exceptionality->setPerson($this);
         $this->exceptionality = $exceptionality;
         $initialProperties->setPerson($this);
         $this->initialProperties = $initialProperties;

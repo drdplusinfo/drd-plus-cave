@@ -23,15 +23,13 @@ class ProfessionLevels extends StrictObject
     const PROPERTY_FIRST_LEVEL_INCREMENT = +1;
 
     /**
-     * Value object, the ID is just for Doctrine linking
-     *
      * @var integer
      *
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var Person
@@ -92,22 +90,31 @@ class ProfessionLevels extends StrictObject
         $this->wizardLevels = new ArrayCollection();
     }
 
-    /**
-     * @param Person $person
-     *
-     * @throws Exceptions\PersonIsAlreadySet
-     */
     public function setPerson(Person $person)
     {
-        if (!$this->person) {
-            $this->person = $person;
-        } elseif ($this->person !== $person) {
-            throw new Exceptions\PersonIsAlreadySet(
-                'Profession levels of Doctrine ID ' . var_export($this->id, true)
-                . ' is linked with different person (or instance) of ID ' . var_export($this->person->getId(), true) . '.'
-                . ' Given person of ID ' . var_export($this->person->getId(), true) . '.'
-            );
+        if (is_null($this->getId()) && is_null($person->getProfessionLevels()->getId())
+            && $this !== $person->getProfessionLevels()
+        ) {
+            throw new \LogicException;
         }
+
+        if ($person->getProfessionLevels()->getId() !== $this->getId()) {
+            throw new Exceptions\PersonIsAlreadySet();
+        }
+
+        if (!$this->getPerson()) {
+            $this->person = $person;
+        } elseif ($person->getId() !== $this->getPerson()->getId()) {
+            throw new \LogicException();
+        }
+    }
+
+    /**
+     * @return int
+     */
+    protected function getId()
+    {
+        return $this->id;
     }
 
     /**
