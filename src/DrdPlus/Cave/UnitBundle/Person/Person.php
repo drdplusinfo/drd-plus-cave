@@ -70,28 +70,26 @@ class Person extends StrictObject
     private $professionLevels;
 
     public function __construct(
-        Race $race,
-        Gender $gender,
-        Exceptionality $exceptionality,
-        InitialProperties $initialProperties,
-        ProfessionLevels $professionLevels,
-        Name $name
+        Race $race, // enum
+        Gender $gender, // enum
+        Name $name, // enum
+        Exceptionality $exceptionality, // entity
+        InitialProperties $initialProperties, // entity
+        ProfessionLevels $professionLevels // entity
     )
     {
         $this->race = $race;
         $this->gender = $gender;
+        $this->name = $name;
         $exceptionality->setPerson($this);
         $this->exceptionality = $exceptionality;
         $initialProperties->setPerson($this);
         $this->initialProperties = $initialProperties;
         $professionLevels->setPerson($this);
         $this->professionLevels = $professionLevels;
-        $this->name = $name;
     }
 
     /**
-     * Get ID
-     *
      * @return int
      */
     public function getId()
@@ -100,6 +98,8 @@ class Person extends StrictObject
     }
 
     /**
+     * Name is an enum, therefore de facto a constant, therefore only way how to change the name is to replace it
+     *
      * @param Name $name
      * @return $this
      */
@@ -111,8 +111,6 @@ class Person extends StrictObject
     }
 
     /**
-     * Get name
-     *
      * @return Name
      */
     public function getName()
@@ -121,8 +119,6 @@ class Person extends StrictObject
     }
 
     /**
-     * Get race
-     *
      * @return Race
      */
     public function getRace()
@@ -131,8 +127,6 @@ class Person extends StrictObject
     }
 
     /**
-     * Get gender
-     *
      * @return Gender
      */
     public function getGender()
@@ -156,8 +150,6 @@ class Person extends StrictObject
     }
 
     /**
-     * Get levels
-     *
      * @return ProfessionLevels
      */
     public function getProfessionLevels()
