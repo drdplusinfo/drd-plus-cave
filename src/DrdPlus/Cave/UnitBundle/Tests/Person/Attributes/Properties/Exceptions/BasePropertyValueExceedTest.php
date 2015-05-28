@@ -1,7 +1,7 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Exceptions;
 
-class InitialPropertyIsAlreadySetTest extends \PHPUnit_Framework_TestCase
+class BasePropertyValueExceedTest extends \PHPUnit_Framework_TestCase
 {
 
     /**

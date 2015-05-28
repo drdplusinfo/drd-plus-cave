@@ -4,7 +4,7 @@ namespace DrdPlus\Cave\UnitBundle\Person;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Exceptionality;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Name;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\ProfessionLevels;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\InitialProperties;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\BaseProperties;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Gender;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Race;
 use DrdPlus\Cave\UnitBundle\Tests\TestWithMockery;
@@ -18,24 +18,24 @@ class PersonTest extends TestWithMockery
         $instance = new Person(
             $this->getRaceMock(),
             $this->getGenderMock(),
+            $this->getNameMock(),
             $this->getExceptionalityMock(),
-            $this->getInitialPropertiesMock(),
-            $this->getProfessionLevelsMock(),
-            $this->getNameMock()
+            $this->getBasePropertiesMock(),
+            $this->getProfessionLevelsMock()
         );
         $this->assertNotNull($instance);
     }
 
     /** @test */
-    public function initial_id_is_null()
+    public function base_id_is_null()
     {
         $person = new Person(
             $this->getRaceMock(),
             $this->getGenderMock(),
+            $this->getNameMock(),
             $this->getExceptionalityMock(),
-            $this->getInitialPropertiesMock(),
-            $this->getProfessionLevelsMock(),
-            $this->getNameMock()
+            $this->getBasePropertiesMock(),
+            $this->getProfessionLevelsMock()
         );
         $this->assertNull($person->getId());
     }
@@ -46,10 +46,10 @@ class PersonTest extends TestWithMockery
         $person = new Person(
             $race = $this->getRaceMock(),
             $this->getGenderMock(),
+            $this->getNameMock(),
             $this->getExceptionalityMock(),
-            $this->getInitialPropertiesMock(),
-            $this->getProfessionLevelsMock(),
-            $this->getNameMock()
+            $this->getBasePropertiesMock(),
+            $this->getProfessionLevelsMock()
         );
         $this->assertSame($race, $person->getRace());
     }
@@ -60,10 +60,10 @@ class PersonTest extends TestWithMockery
         $person = new Person(
             $this->getRaceMock(),
             $gender = $this->getGenderMock(),
+            $this->getNameMock(),
             $this->getExceptionalityMock(),
-            $this->getInitialPropertiesMock(),
-            $this->getProfessionLevelsMock(),
-            $this->getNameMock()
+            $this->getBasePropertiesMock(),
+            $this->getProfessionLevelsMock()
         );
         $this->assertSame($gender, $person->getGender());
     }
@@ -74,26 +74,26 @@ class PersonTest extends TestWithMockery
         $person = new Person(
             $this->getRaceMock(),
             $this->getGenderMock(),
+            $this->getNameMock(),
             $exceptionality = $this->getExceptionalityMock(),
-            $this->getInitialPropertiesMock(),
-            $this->getProfessionLevelsMock(),
-            $this->getNameMock()
+            $this->getBasePropertiesMock(),
+            $this->getProfessionLevelsMock()
         );
         $this->assertSame($exceptionality, $person->getExceptionality());
     }
 
     /** @test */
-    public function returns_same_initial_properties_as_got()
+    public function returns_same_base_properties_as_got()
     {
         $person = new Person(
             $this->getRaceMock(),
             $this->getGenderMock(),
+            $this->getNameMock(),
             $this->getExceptionalityMock(),
-            $initialProperties = $this->getInitialPropertiesMock(),
-            $this->getProfessionLevelsMock(),
-            $this->getNameMock()
+            $baseProperties = $this->getBasePropertiesMock(),
+            $this->getProfessionLevelsMock()
         );
-        $this->assertSame($initialProperties, $person->getInitialProperties());
+        $this->assertSame($baseProperties, $person->getBaseProperties());
     }
 
     /** @test */
@@ -102,10 +102,10 @@ class PersonTest extends TestWithMockery
         $person = new Person(
             $this->getRaceMock(),
             $this->getGenderMock(),
+            $this->getNameMock(),
             $this->getExceptionalityMock(),
-            $this->getInitialPropertiesMock(),
-            $professionLevels = $this->getProfessionLevelsMock(),
-            $this->getNameMock()
+            $this->getBasePropertiesMock(),
+            $professionLevels = $this->getProfessionLevelsMock()
         );
         $this->assertSame($professionLevels, $person->getProfessionLevels());
     }
@@ -116,10 +116,10 @@ class PersonTest extends TestWithMockery
         $person = new Person(
             $this->getRaceMock(),
             $this->getGenderMock(),
+            $name = $this->getNameMock(),
             $this->getExceptionalityMock(),
-            $this->getInitialPropertiesMock(),
-            $this->getProfessionLevelsMock(),
-            $name = $this->getNameMock()
+            $this->getBasePropertiesMock(),
+            $this->getProfessionLevelsMock()
         );
         $this->assertSame($name, $person->getName());
     }
@@ -130,10 +130,10 @@ class PersonTest extends TestWithMockery
         $person = new Person(
             $this->getRaceMock(),
             $this->getGenderMock(),
+            $this->getNameMock(),
             $this->getExceptionalityMock(),
-            $this->getInitialPropertiesMock(),
-            $this->getProfessionLevelsMock(),
-            $this->getNameMock()
+            $this->getBasePropertiesMock(),
+            $this->getProfessionLevelsMock()
         );
         Name::registerSelf();
         $person->setName($name = Name::getEnum($nameString = 'foo'));
@@ -174,16 +174,16 @@ class PersonTest extends TestWithMockery
     }
 
     /**
-     * @return InitialProperties
+     * @return BaseProperties
      */
-    private function getInitialPropertiesMock()
+    private function getBasePropertiesMock()
     {
-        $initialProperties = \Mockery::mock(InitialProperties::class);
-        $initialProperties->shouldReceive('setPerson')
+        $baseProperties = \Mockery::mock(BaseProperties::class);
+        $baseProperties->shouldReceive('setPerson')
             ->with(\Mockery::type(Person::class))
             ->once();
 
-        return $initialProperties;
+        return $baseProperties;
     }
 
     /**

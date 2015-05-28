@@ -5,7 +5,9 @@ use Doctrine\ORM\Mapping as ORM;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Exceptionality;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Name;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\ProfessionLevels;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\InitialProperties;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Derived\Toughness;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\BaseProperties;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Strength;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Gender;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Race;
 use Granam\Strict\Object\StrictObject;
@@ -49,18 +51,18 @@ class Person extends StrictObject
     private $gender;
 
     /**
-     * @var InitialProperties
+     * @var BaseProperties
      *
      * @ORM\Column(type="exceptionality")
      */
     private $exceptionality;
 
     /**
-     * @var InitialProperties
+     * @var BaseProperties
      *
-     * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\InitialProperties")
+     * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\BaseProperties")
      */
-    private $initialProperties;
+    private $baseProperties;
 
     /**
      * @var ProfessionLevels
@@ -69,12 +71,20 @@ class Person extends StrictObject
      */
     private $professionLevels;
 
+    /**
+     * @var Toughness
+     */
+    private $toughness;
+
+    /** @var  Strength */
+    private $currentStrength;
+
     public function __construct(
         Race $race, // enum
         Gender $gender, // enum
         Name $name, // enum
         Exceptionality $exceptionality, // entity
-        InitialProperties $initialProperties, // entity
+        BaseProperties $baseProperties, // entity
         ProfessionLevels $professionLevels // entity
     )
     {
@@ -83,8 +93,8 @@ class Person extends StrictObject
         $this->name = $name;
         $exceptionality->setPerson($this);
         $this->exceptionality = $exceptionality;
-        $initialProperties->setPerson($this);
-        $this->initialProperties = $initialProperties;
+        $baseProperties->setPerson($this);
+        $this->baseProperties = $baseProperties;
         $professionLevels->setPerson($this);
         $this->professionLevels = $professionLevels;
     }
@@ -101,6 +111,7 @@ class Person extends StrictObject
      * Name is an enum, therefore de facto a constant, therefore only way how to change the name is to replace it
      *
      * @param Name $name
+     *
      * @return $this
      */
     public function setName(Name $name)
@@ -135,12 +146,13 @@ class Person extends StrictObject
     }
 
     /**
-     * @return InitialProperties
+     * @return BaseProperties
      */
-    public function getInitialProperties()
+    public function getBaseProperties()
     {
-        return $this->initialProperties;
+        return $this->baseProperties;
     }
+
     /**
      * @return Exceptionality
      */
@@ -155,6 +167,50 @@ class Person extends StrictObject
     public function getProfessionLevels()
     {
         return $this->professionLevels;
+    }
+
+    /**
+     * @return Toughness
+     */
+    public function getToughness()
+    {
+        if (!isset($this->toughness)) {
+            $this->toughness = Toughness::getIt($this->calculateCurrentToughness());
+        }
+
+        return $this->toughness;
+    }
+
+    /**
+     * @return int
+     */
+    private function calculateCurrentToughness()
+    {
+        return $this->getCurrentStrength()->getValue();
+    }
+
+    /**
+     * @return Strength
+     */
+    public function getCurrentStrength()
+    {
+        if (!isset($this->currentStrength)) {
+            $this->currentStrength = Strength::getIt($this->calculateCurrentStrength());
+        }
+
+        return $this->currentStrength;
+    }
+
+    /**
+     * @return int
+     */
+    private function calculateCurrentStrength()
+    {
+        return
+            $this->getProfessionLevels()->getStrengthIncrementSummary()
+            + $this->getBaseProperties()->getBaseStrength()->getValue()
+            + $this->getExceptionality()->getExceptionalityProperties()->getStrength()->getValue()
+            + $this->getRace()->getStrengthModifier($this->getGender());
     }
 
 }
