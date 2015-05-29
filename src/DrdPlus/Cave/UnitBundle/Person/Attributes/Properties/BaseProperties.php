@@ -1,78 +1,173 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Properties;
 
-use Doctrine\ORM\Mapping as ORM;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Derived\DerivedProperty;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Derived\Endurance;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Derived\Toughness;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Race;
 use DrdPlus\Cave\UnitBundle\Person\Person;
 use Granam\Strict\Object\StrictObject;
 
-/**
- * BaseProperties
- *
- * @ORM\Table()
- * @ORM\Entity()
- */
 class BaseProperties extends StrictObject
 {
     const INITIAL_PROPERTY_INCREASE_LIMIT = 3;
 
     /**
-     * Value object, the ID is just for Doctrine linking
-     * @var integer
-     *
-     * @ORM\Column(type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    protected $id;
-
-    /**
      * @var Person
-     *
-     * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Person\Person")
      */
     private $person;
 
     /**
      * @var Strength
-     *
-     * @ORM\Column(type="strength")
      */
     private $baseStrength;
 
     /**
      * @var Agility
-     *
-     * @ORM\Column(type="agility")
      */
     private $baseAgility;
 
     /**
      * @var Knack
-     *
-     * @ORM\Column(type="knack")
      */
     private $baseKnack;
 
     /**
      * @var Will
-     *
-     * @ORM\Column(type="will")
      */
     private $baseWill;
 
     /**
      * @var Intelligence
-     *
-     * @ORM\Column(type="intelligence")
      */
     private $baseIntelligence;
 
     /**
      * @var Charisma
-     *
-     * @ORM\Column(type="charisma")
      */
     private $baseCharisma;
+
+    /**
+     * @var Toughness
+     */
+    private $baseToughness;
+
+    /**
+     * @var Endurance
+     */
+    private $baseEndurance;
+
+    public function __construct(Person $person)
+    {
+        $this->person = $person;
+        $this->setUpBaseProperty($this->createBaseStrength($person), $person);
+        $this->setUpBaseProperty($this->createBaseAgility($person), $person);
+        $this->setUpBaseProperty($this->createBaseKnack($person), $person);
+        $this->setUpBaseProperty($this->createBaseWill($person), $person);
+        $this->setUpBaseProperty($this->createBaseIntelligence($person), $person);
+        $this->setUpBaseProperty($this->createBaseCharisma($person), $person);
+        $this->setUpDerivedProperty($this->createBaseToughness($this->getBaseStrength(), $person->getRace()));
+        $this->setUpDerivedProperty($this->createBaseEndurance($this->getBaseStrength(), $this->getBaseWill()));
+        $this->setUpDerivedProperty($this->createBaseSpeed($this->getBaseStrength(), $this->getBaseAgility()), $this->getPerson());
+    }
+
+    private function createBaseStrength(Person $person)
+    {
+        return Strength::getIt($this->calculateBaseProperty(Strength::STRENGTH, $person));
+    }
+
+    private function calculateBaseProperty($propertyName, Person $person)
+    {
+        /** @var string|BaseProperty $propertyName */
+        $propertyName = ucfirst($propertyName);
+        $propertyModifierGetter = "get{$propertyName}Modifier";
+        $propertyGetter = "get{$propertyName}";
+        $propertyFirstLevelIncrementGetter = "get{$propertyName}FirstLevelIncrement";
+
+        return
+            $person->getRace()->$propertyModifierGetter($this->getPerson()->getGender())
+            + $person->getExceptionality()->getExceptionalityProperties()->$propertyGetter()->getValue()
+            + $person->getProfessionLevels()->$propertyFirstLevelIncrementGetter();
+    }
+
+    /**
+     * @param BaseProperty $baseProperty
+     * @param Person $person
+     *
+     * @throws Exceptions\BasePropertyIsAlreadySet
+     * @throws Exceptions\BasePropertyValueExceeded
+     */
+    private function setUpBaseProperty(BaseProperty $baseProperty, Person $person)
+    {
+        $propertyName = $baseProperty->getName();
+        // like baseStrength
+        $basePropertyName = 'base' . ucfirst($propertyName);
+        if (isset($this->$basePropertyName)) {
+            throw new Exceptions\BasePropertyIsAlreadySet(
+                'The property ' . $basePropertyName . ' is already set by value ' . var_export($this->$basePropertyName->getValue(), true)
+            );
+        }
+
+        if ($baseProperty->getValue() > $this->calculateMaximalBaseProperty($propertyName, $person)) {
+            throw new Exceptions\BasePropertyValueExceeded(
+                'The base ' . $propertyName . ' can not exceed ' . $this->calculateMaximalBaseProperty($propertyName, $person)
+            );
+        }
+
+        $this->$basePropertyName = $baseProperty;
+    }
+
+    /**
+     * @param string $propertyName
+     * @param Person $person
+     *
+     * @return int
+     */
+    private function calculateMaximalBaseProperty($propertyName, Person $person)
+    {
+        // like getStrengthModifier()
+        $propertyModifierGetter = 'get' . ucfirst($propertyName) . 'Modifier';
+
+        return self::INITIAL_PROPERTY_INCREASE_LIMIT + $person->getRace()->$propertyModifierGetter($person->getGender());
+    }
+
+    private function createBaseAgility(Person $person)
+    {
+        return Agility::getIt($this->calculateBaseProperty(Agility::AGILITY, $person));
+    }
+
+    private function createBaseKnack(Person $person)
+    {
+        return Knack::getIt($this->calculateBaseProperty(Knack::KNACK, $person));
+    }
+
+    private function createBaseWill(Person $person)
+    {
+        return Will::getIt($this->calculateBaseProperty(Will::WILL, $person));
+    }
+
+    private function createBaseIntelligence(Person $person)
+    {
+        return Intelligence::getIt($this->calculateBaseProperty(Intelligence::INTELLIGENCE, $person));
+    }
+
+    private function createBaseCharisma(Person $person)
+    {
+        return Charisma::getIt($this->calculateBaseProperty(Charisma::CHARISMA, $person));
+    }
+
+    private function createBaseToughness(Strength $baseStrength, Race $race)
+    {
+        return Toughness::getIt(
+            $baseStrength->getValue()
+            + $race->getToughnessModifier()
+        );
+    }
+
+    private function createBaseEndurance(Strength $baseStrength, Will $baseWill)
+    {
+        return Toughness::getIt(round($baseStrength->getValue() + $baseWill->getValue()));
+    }
 
     /**
      * @return Person
@@ -80,34 +175,6 @@ class BaseProperties extends StrictObject
     public function getPerson()
     {
         return $this->person;
-    }
-
-    /**
-     * @return string
-     */
-    public function getVoId()
-    {
-        return $this->getBaseStrength() . '-' . $this->getBaseAgility() . '-' . $this->getBaseKnack() . '-' . $this->getBaseWill()
-        . '-' . $this->getBaseIntelligence() . '-' . $this->getBaseCharisma();
-    }
-
-    public function setPerson(Person $person)
-    {
-        if (is_null($this->getVoId()) && is_null($person->getBaseProperties()->getVoId())
-            && $this !== $person->getBaseProperties()
-        ) {
-            throw new \LogicException;
-        }
-
-        if ($person->getBaseProperties()->getVoId() !== $this->getVoId()) {
-            throw new Exceptions\PersonIsAlreadySet();
-        }
-
-        if (!$this->getPerson()) {
-            $this->person = $person;
-        } elseif ($person->getId() !== $this->getPerson()->getId()) {
-            throw new \LogicException();
-        }
     }
 
     /**
@@ -119,73 +186,23 @@ class BaseProperties extends StrictObject
     }
 
     /**
-     * @param Strength $baseStrength
-     *
-     * @throws Exceptions\BasePropertyValueExceeded
-     * @return $this
-     */
-    public function setBaseStrength(Strength $baseStrength)
-    {
-        $this->setUpProperty($baseStrength);
-
-        return $this;
-    }
-
-    /**
-     * @param Property $baseValue
+     * @param DerivedProperty $derivedProperty
      *
      * @throws Exceptions\BasePropertyIsAlreadySet
      * @throws Exceptions\BasePropertyValueExceeded
      */
-    private function setUpProperty(Property $baseValue)
+    private function setUpDerivedProperty(DerivedProperty $derivedProperty)
     {
-        $propertyName = $baseValue->getTypeName();
-        // like baseStrength
-        $basePropertyName = 'base' . ucfirst($propertyName);
-        if (isset($this->$basePropertyName)) {
+        $propertyName = $derivedProperty->getName();
+        // like baseToughness
+        $derivedBasePropertyName = 'base' . ucfirst($propertyName);
+        if (isset($this->$derivedBasePropertyName)) {
             throw new Exceptions\BasePropertyIsAlreadySet(
-                'The property ' . $basePropertyName . ' is already set by value ' . var_export($this->$basePropertyName->getValue(), true)
+                'The property ' . $derivedBasePropertyName . ' is already set by value ' . var_export($this->$derivedBasePropertyName->getValue(), true)
             );
         }
 
-        // like calculateMaximalBaseStrength()
-        $baseCalculationMethod = 'calculateMaximalBase' . ucfirst($propertyName);
-        if ($baseValue->getValue() > $this->$baseCalculationMethod()) {
-            throw new Exceptions\BasePropertyValueExceeded('The base ' . $propertyName . ' can not exceed ' . $this->$baseCalculationMethod());
-        }
-
-        $this->$basePropertyName = $baseValue;
-    }
-
-    /**
-     * @return int
-     */
-    public function calculateMaximalBaseStrength()
-    {
-        return $this->calculateMaximalBaseProperty(Strength::STRENGTH);
-    }
-
-    /**
-     * @param string $propertyName
-     *
-     * @return int
-     */
-    private function calculateMaximalBaseProperty($propertyName)
-    {
-        if (!$this->getPerson()) {
-            throw new Exceptions\PersonIsNotSet(
-                'To calculate base properties a person is required'
-            );
-        }
-
-        // like getStrengthModifier()
-        $propertyModifierGetter = 'get' . ucfirst($propertyName) . 'Modifier';
-
-        return
-            self::INITIAL_PROPERTY_INCREASE_LIMIT
-            + $this->getPerson()->getRace()->$propertyModifierGetter(
-                $this->getPerson()->getGender()
-            );
+        $this->$derivedBasePropertyName = $derivedProperty;
     }
 
     /**
@@ -197,53 +214,11 @@ class BaseProperties extends StrictObject
     }
 
     /**
-     * @param Agility $baseAgility
-     *
-     * @throws Exceptions\BasePropertyValueExceeded
-     * @return $this
-     */
-    public function setBaseAgility(Agility $baseAgility)
-    {
-        $this->setUpProperty($baseAgility);
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function calculateMaximalBaseAgility()
-    {
-        return $this->calculateMaximalBaseProperty(Agility::AGILITY);
-    }
-
-    /**
      * @return Knack
      */
     public function getBaseKnack()
     {
         return $this->baseKnack;
-    }
-
-    /**
-     * @param Knack $baseKnack
-     *
-     * @throws Exceptions\BasePropertyValueExceeded
-     * @return $this
-     */
-    public function setBaseKnack(Knack $baseKnack)
-    {
-        $this->setUpProperty($baseKnack);
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function calculateMaximalBaseKnack()
-    {
-        return $this->calculateMaximalBaseProperty(Knack::KNACK);
     }
 
     /**
@@ -255,53 +230,11 @@ class BaseProperties extends StrictObject
     }
 
     /**
-     * @param Will $baseWill
-     *
-     * @throws Exceptions\BasePropertyValueExceeded
-     * @return $this
-     */
-    public function setBaseWill(Will $baseWill)
-    {
-        $this->setUpProperty($baseWill);
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function calculateMaximalBaseWill()
-    {
-        return $this->calculateMaximalBaseProperty(Will::WILL);
-    }
-
-    /**
      * @return Intelligence
      */
     public function getBaseIntelligence()
     {
         return $this->baseIntelligence;
-    }
-
-    /**
-     * @param Intelligence $baseIntelligence
-     *
-     * @throws Exceptions\BasePropertyValueExceeded
-     * @return $this
-     */
-    public function setBaseIntelligence(Intelligence $baseIntelligence)
-    {
-        $this->setUpProperty($baseIntelligence);
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function calculateMaximalBaseIntelligence()
-    {
-        return $this->calculateMaximalBaseProperty(Intelligence::INTELLIGENCE);
     }
 
     /**
@@ -313,23 +246,19 @@ class BaseProperties extends StrictObject
     }
 
     /**
-     * @param Charisma $baseCharisma
-     *
-     * @throws Exceptions\BasePropertyValueExceeded
-     * @return $this
+     * @return Toughness
      */
-    public function setBaseCharisma(Charisma $baseCharisma)
+    public function getBaseToughness()
     {
-        $this->setUpProperty($baseCharisma);
-
-        return $this;
+        return $this->baseToughness;
     }
 
     /**
-     * @return int
+     * @return Endurance
      */
-    public function calculateMaximalBaseCharisma()
+    public function getBaseEndurance()
     {
-        return $this->calculateMaximalBaseProperty(Charisma::CHARISMA);
+        return $this->baseEndurance;
     }
+
 }

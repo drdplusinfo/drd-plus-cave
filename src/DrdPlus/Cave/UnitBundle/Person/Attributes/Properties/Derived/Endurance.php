@@ -5,25 +5,25 @@ use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrineum\Integer\SelfTypedIntegerEnum;
 
 /**
- * @method static Toughness getType(int $value),
+ * @method static Endurance getType(int $value),
  * @see SelfTypedStrictStringEnum::getType or for original
  * @see \Doctrine\DBAL\Types\Type::getType
  *
- * @method Toughness convertToPHPValue(int $value, AbstractPlatform $platform)
+ * @method Endurance convertToPHPValue(int $value, AbstractPlatform $platform)
  * @see SelfTypedStrictStringEnum::convertToPHPValue or for original
  * @see EnumType::convertToPHPValue
  *
- * @method static Toughness getEnum(mixed $value)
+ * @method static Endurance getEnum(mixed $value)
  * @see SelfTypedStrictStringEnum::getEnum or for original
  * @see EnumTrait::getEnum
  */
-class Toughness extends SelfTypedIntegerEnum implements DerivedProperty
+class Endurance extends SelfTypedIntegerEnum implements DerivedProperty
 {
-    const TOUGHNESS = 'toughness';
+    const ENDURANCE = 'endurance';
 
     /**
      * @param int $value
-     * @return Toughness
+     * @return Endurance
      */
     public static function getIt($value)
     {

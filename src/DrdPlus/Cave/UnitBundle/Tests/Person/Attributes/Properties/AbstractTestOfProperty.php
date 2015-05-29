@@ -6,7 +6,7 @@ use Doctrine\DBAL\Types\Type;
 use Doctrineum\Integer\IntegerEnum;
 use Doctrineum\Integer\SelfTypedIntegerEnum;
 use Doctrineum\Scalar\EnumInterface;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Property;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\BaseProperty;
 use DrdPlus\Cave\UnitBundle\Tests\TestWithMockery;
 
 abstract class AbstractTestOfProperty extends TestWithMockery
@@ -26,7 +26,7 @@ abstract class AbstractTestOfProperty extends TestWithMockery
     }
 
     /**
-     * @return string|Property
+     * @return string|BaseProperty
      */
     private function getPropertyClass()
     {
@@ -66,7 +66,7 @@ abstract class AbstractTestOfProperty extends TestWithMockery
     }
 
     /**
-     * @return Property
+     * @return BaseProperty
      *
      * @test
      * @depends can_be_registered
@@ -81,23 +81,23 @@ abstract class AbstractTestOfProperty extends TestWithMockery
     }
 
     /**
-     * @param Property $property
+     * @param BaseProperty $property
      *
      * @test
      * @depends can_be_created
      */
-    public function is_a_doctrineum_enum(Property $property)
+    public function is_a_doctrineum_enum(BaseProperty $property)
     {
         $this->assertInstanceOf(EnumInterface::class, $property);
     }
 
     /**
-     * @param Property $property
+     * @param BaseProperty $property
      *
      * @test
      * @depends can_be_created
      */
-    public function is_an_doctrineum_self_typed_integer_enum(Property $property)
+    public function is_an_doctrineum_self_typed_integer_enum(BaseProperty $property)
     {
         $this->assertInstanceOf(SelfTypedIntegerEnum::class, $property);
     }
@@ -120,12 +120,12 @@ abstract class AbstractTestOfProperty extends TestWithMockery
     }
 
     /**
-     * @param Property $property
+     * @param BaseProperty $property
      *
      * @test
      * @depends can_be_created
      */
-    public function conversion_to_php_gives_property(Property $property)
+    public function conversion_to_php_gives_property(BaseProperty $property)
     {
         $platform = \Mockery::mock(AbstractPlatform::class);
         /** @var AbstractPlatform $platform */
@@ -141,7 +141,7 @@ abstract class AbstractTestOfProperty extends TestWithMockery
     public function can_give_value_by_shortcut_getter()
     {
         $propertyClass = $this->getPropertyClass();
-        /** @var Property $property */
+        /** @var BaseProperty $property */
         $property = $propertyClass::getEnum($value = 123);
         $this->assertSame($value, $property->getValue());
     }

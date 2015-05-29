@@ -5,7 +5,7 @@ namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Properties;
  * @method static Knack getIt(int $value)
  * @see Property::getIt
  */
-class Knack extends Property
+class Knack extends BaseProperty
 {
     const KNACK = 'knack';
 

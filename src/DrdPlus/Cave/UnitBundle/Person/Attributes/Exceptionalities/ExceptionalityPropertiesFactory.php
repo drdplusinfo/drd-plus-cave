@@ -8,7 +8,7 @@ use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Agility;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Charisma;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Intelligence;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Knack;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Property;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\BaseProperty;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Strength;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Will;
 use Granam\Strict\Object\StrictObject;
@@ -52,11 +52,11 @@ class ExceptionalityPropertiesFactory extends StrictObject
     }
 
     /**
-     * @param Property $property
+     * @param BaseProperty $property
      * @param AbstractFate $fate
      * @param ProfessionLevel $profession
      */
-    private function checkFortunePropertyValue(Property $property, AbstractFate $fate, ProfessionLevel $profession)
+    private function checkFortunePropertyValue(BaseProperty $property, AbstractFate $fate, ProfessionLevel $profession)
     {
         if ($property->getValue() > $fate->getUpToSingleProperty()) {
             throw new \LogicException(
@@ -155,7 +155,7 @@ class ExceptionalityPropertiesFactory extends StrictObject
         return new ChosenProperties($chosenStrength, $chosenAgility, $chosenKnack, $chosenWill, $chosenIntelligence, $chosenCharisma);
     }
 
-    private function checkChosenProperty(ProfessionLevel $profession, AbstractFate $fate, Property $chosenProperty)
+    private function checkChosenProperty(ProfessionLevel $profession, AbstractFate $fate, BaseProperty $chosenProperty)
     {
         if ($profession->isPrimaryProperty($chosenProperty->getName())) {
             $maximalValue = $fate->getPrimaryPropertiesBonusOnConservative();
@@ -166,7 +166,7 @@ class ExceptionalityPropertiesFactory extends StrictObject
         $this->checkChosenPropertyValue($maximalValue, $chosenProperty, $fate, $profession);
     }
 
-    private function checkChosenPropertyValue($maximalValue, Property $chosenProperty, AbstractFate $fate, ProfessionLevel $professionLevel)
+    private function checkChosenPropertyValue($maximalValue, BaseProperty $chosenProperty, AbstractFate $fate, ProfessionLevel $professionLevel)
     {
         if ($chosenProperty->getValue() > $maximalValue) {
             throw new \LogicException(
@@ -190,7 +190,7 @@ class ExceptionalityPropertiesFactory extends StrictObject
         $primaryPropertySum = 0;
         $secondaryPropertySum = 0;
         foreach ([$strength, $agility, $knack, $will, $intelligence, $charisma] as $property) {
-            /** @var Property $property */
+            /** @var BaseProperty $property */
             if ($profession->isPrimaryProperty($property->getName())) {
                 $primaryPropertySum += $property->getValue();
             } else {

@@ -186,7 +186,8 @@ class Person extends StrictObject
      */
     private function calculateCurrentToughness()
     {
-        return $this->getCurrentStrength()->getValue();
+        return $this->getCurrentStrength()->getValue()
+            + $this->getRace()->getToughnessModifier();
     }
 
     /**
@@ -207,10 +208,10 @@ class Person extends StrictObject
     private function calculateCurrentStrength()
     {
         return
-            $this->getProfessionLevels()->getStrengthIncrementSummary()
-            + $this->getBaseProperties()->getBaseStrength()->getValue()
+            $this->getBaseProperties()->getBaseStrength()->getValue()
+            + $this->getRace()->getStrengthModifier($this->getGender())
             + $this->getExceptionality()->getExceptionalityProperties()->getStrength()->getValue()
-            + $this->getRace()->getStrengthModifier($this->getGender());
+            + $this->getProfessionLevels()->getStrengthIncrementSummary();
     }
 
 }

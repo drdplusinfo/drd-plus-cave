@@ -1,9 +1,9 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Races;
 
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Property;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\BaseProperty;
 
-class PropertyTest extends \PHPUnit_Framework_TestCase
+class BasePropertyTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -12,7 +12,7 @@ class PropertyTest extends \PHPUnit_Framework_TestCase
      */
     public function requesting_property_name_on_abstract_property_cause_exception()
     {
-        Property::getTypeName();
+        BaseProperty::getTypeName();
     }
 
     /**
@@ -21,7 +21,7 @@ class PropertyTest extends \PHPUnit_Framework_TestCase
      */
     public function registering_abstract_property_by_itself_cause_exception()
     {
-        Property::registerSelf();
+        BaseProperty::registerSelf();
     }
 
     /**
@@ -29,7 +29,7 @@ class PropertyTest extends \PHPUnit_Framework_TestCase
      */
     public function specific_property_can_be_registered()
     {
-        TestSomeSpecificProperty::registerSelf();
+        TestSomeSpecificBaseProperty::registerSelf();
     }
 
     /**
@@ -38,10 +38,10 @@ class PropertyTest extends \PHPUnit_Framework_TestCase
      */
     public function specific_property_can_be_created()
     {
-        $someSpecificProperty = TestSomeSpecificProperty::getIt($value = 12345);
-        $this->assertInstanceOf(TestSomeSpecificProperty::class, $someSpecificProperty);
-        $anotherInstance = TestSomeSpecificProperty::getIt($value + 1);
-        $this->assertInstanceOf(TestSomeSpecificProperty::class, $anotherInstance);
+        $someSpecificProperty = TestSomeSpecificBaseProperty::getIt($value = 12345);
+        $this->assertInstanceOf(TestSomeSpecificBaseProperty::class, $someSpecificProperty);
+        $anotherInstance = TestSomeSpecificBaseProperty::getIt($value + 1);
+        $this->assertInstanceOf(TestSomeSpecificBaseProperty::class, $anotherInstance);
         $this->assertNotSame($someSpecificProperty, $anotherInstance);
     }
 
@@ -51,7 +51,7 @@ class PropertyTest extends \PHPUnit_Framework_TestCase
      */
     public function specific_property_can_give_its_value()
     {
-        $specificProperty = TestSomeSpecificProperty::getIt($value = 12345);
+        $specificProperty = TestSomeSpecificBaseProperty::getIt($value = 12345);
         $this->assertSame($value, $specificProperty->getValue());
     }
 
@@ -60,13 +60,13 @@ class PropertyTest extends \PHPUnit_Framework_TestCase
      */
     public function specific_property_type_name_is_automatically_property_name()
     {
-        $this->assertSame('test_some_specific_property', TestSomeSpecificProperty::getTypeName());
+        $this->assertSame('test_some_specific_base_property', TestSomeSpecificBaseProperty::getTypeName());
     }
 
 }
 
 /** inner */
-class TestSomeSpecificProperty extends Property
+class TestSomeSpecificBaseProperty extends BaseProperty
 {
 
 }

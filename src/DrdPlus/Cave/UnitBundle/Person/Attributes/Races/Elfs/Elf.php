@@ -35,6 +35,7 @@ abstract class Elf extends Race
     const BASE_INTELLIGENCE = +1;
     const BASE_CHARISMA = +1;
     const BASE_RESISTANCE = -1;
+    const BASE_TOUGHNESS = -1;
 
     /**
      * @return string
@@ -42,6 +43,14 @@ abstract class Elf extends Race
     public static function getRaceCode()
     {
         return self::RACE_CODE;
+    }
+
+    /**
+     * @return int
+     */
+    public function getToughnessModifier()
+    {
+        return self::BASE_TOUGHNESS;
     }
 
 }

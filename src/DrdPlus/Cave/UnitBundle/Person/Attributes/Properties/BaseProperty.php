@@ -4,9 +4,9 @@ namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Properties;
 use Doctrineum\Integer\SelfTypedIntegerEnum;
 
 /**
- * @method static Property getType()
+ * @method static BaseProperty getType()
  */
-abstract class Property extends SelfTypedIntegerEnum
+abstract class BaseProperty extends SelfTypedIntegerEnum
 {
 
     /**
@@ -36,7 +36,7 @@ abstract class Property extends SelfTypedIntegerEnum
     /**
      * @param int $value
      *
-     * @return Property
+     * @return BaseProperty
      */
     public static function getIt($value)
     {

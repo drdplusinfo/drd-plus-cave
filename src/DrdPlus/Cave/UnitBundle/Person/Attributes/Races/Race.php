@@ -20,6 +20,7 @@ class Race extends SelfTypedStrictStringEnum
     const BASE_CHARISMA = 0;
     const BASE_RESISTANCE = 0;
     const BASE_SENSES = 0;
+    const BASE_TOUGHNESS = 0;
 
     /**
      * @return Race
@@ -349,5 +350,10 @@ class Race extends SelfTypedStrictStringEnum
     public function requiresDungeonMasterAgreement()
     {
         return false;
+    }
+
+    public function getToughnessModifier()
+    {
+        return static::BASE_TOUGHNESS;
     }
 }

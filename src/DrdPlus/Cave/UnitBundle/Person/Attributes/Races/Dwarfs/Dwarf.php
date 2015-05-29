@@ -6,7 +6,7 @@ use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Race;
 
 /**
  * Dwarf
- * 
+ *
  * @method int getStrengthModifier(DwarfGender $dwarfGender),
  * @see Race::getStrengthModifier
  * @method int getAgilityModifier(DwarfGender $dwarfGender)
@@ -35,6 +35,7 @@ abstract class Dwarf extends Race
     const BASE_CHARISMA = -2;
     const BASE_RESISTANCE = +1;
     const BASE_SENSES = -1;
+    const BASE_TOUGHNESS = +1;
 
     /**
      * @return string
@@ -50,5 +51,13 @@ abstract class Dwarf extends Race
     public function hasInfravision()
     {
         return true;
+    }
+
+    /**
+     * @return int
+     */
+    public function getToughness()
+    {
+        return self::BASE_TOUGHNESS;
     }
 }
