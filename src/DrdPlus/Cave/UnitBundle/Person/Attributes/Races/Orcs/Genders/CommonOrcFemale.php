@@ -1,14 +1,14 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Orcs\Genders;
 
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\IsFemaleTrait;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\FemaleTrait;
 
 /**
  * CommonOrcFemale
  */
 class CommonOrcFemale extends CommonOrcGender
 {
-    use IsFemaleTrait;
+    use FemaleTrait;
 
     /**
      * Get strength modifier

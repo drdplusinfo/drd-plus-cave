@@ -4,11 +4,9 @@ namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Derived;
 interface DerivedProperty
 {
     /**
-     * @param int $value
-     *
-     * @return self
+     * @return int
      */
-    public static function getIt($value);
+    public function getValue();
 
     /**
      * @return string

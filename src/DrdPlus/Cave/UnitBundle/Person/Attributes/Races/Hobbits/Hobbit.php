@@ -32,12 +32,8 @@ abstract class Hobbit extends Race
     const BASE_INTELLIGENCE = -1;
     const BASE_CHARISMA = +2;
 
-    /**
-     * @return string
-     */
-    public static function getRaceCode()
+    public function getSalientSense()
     {
-        return self::RACE_CODE;
+        return self::SALIENT_TASTE;
     }
-
 }

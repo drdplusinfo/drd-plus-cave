@@ -32,11 +32,4 @@ class Skurut extends Orc
     const BASE_KNACK = -1;
     const BASE_WILL = 0;
 
-    /**
-     * @return string
-     */
-    public static function getSubraceCode()
-    {
-        return self::SUBRACE_CODE;
-    }
 }

@@ -30,12 +30,4 @@ class WoodDwarf extends Dwarf
     const BASE_WILL = +1;
     const BASE_CHARISMA = -1;
 
-    /**
-     * @return string
-     */
-    public static function getSubRaceCode()
-    {
-        return self::SUBRACE_CODE;
-    }
-
 }

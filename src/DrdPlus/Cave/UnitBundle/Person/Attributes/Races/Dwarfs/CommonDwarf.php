@@ -6,7 +6,7 @@ use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Dwarfs\Genders\CommonDwarfGe
 /**
  * Class CommonDwarf
  * @package DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Dwarfs
- * 
+ *
  * @method int getStrengthModifier(CommonDwarfGender $commonDwarfGender),
  * @see Race::getStrengthModifier
  * @method int getAgilityModifier(CommonDwarfGender $commonDwarfGender)
@@ -26,13 +26,7 @@ use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Dwarfs\Genders\CommonDwarfGe
  */
 class CommonDwarf extends Dwarf
 {
+
     const SUBRACE_CODE = 'common_dwarf';
 
-    /**
-     * @return string
-     */
-    public static function getSubRaceCode()
-    {
-        return self::SUBRACE_CODE;
-    }
 }

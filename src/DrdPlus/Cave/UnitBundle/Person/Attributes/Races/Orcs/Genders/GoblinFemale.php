@@ -1,14 +1,14 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Orcs\Genders;
 
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\IsFemaleTrait;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\FemaleTrait;
 
 /**
  * GoblinFemale
  */
 class GoblinFemale extends GoblinGender
 {
-    use IsFemaleTrait;
+    use FemaleTrait;
 
     /**
      * Get strength modifier

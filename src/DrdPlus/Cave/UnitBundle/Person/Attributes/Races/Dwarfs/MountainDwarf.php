@@ -30,11 +30,4 @@ class MountainDwarf extends Dwarf
     const BASE_STRENGTH = +2;
     const BASE_INTELLIGENCE = -2;
 
-    /**
-     * @return string
-     */
-    public static function getSubRaceCode()
-    {
-        return self::SUBRACE_CODE;
-    }
 }

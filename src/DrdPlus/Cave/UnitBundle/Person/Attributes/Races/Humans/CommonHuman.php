@@ -28,12 +28,4 @@ class CommonHuman extends Human
 {
     const SUBRACE_CODE = 'common_human';
 
-    /**
-     * @return string
-     */
-    public static function getSubRaceCode()
-    {
-        return self::SUBRACE_CODE;
-    }
-
 }

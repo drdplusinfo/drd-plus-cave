@@ -1,7 +1,7 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Races;
 
-trait IsMaleTrait
+trait MaleTrait
 {
     /**
      * @return bool

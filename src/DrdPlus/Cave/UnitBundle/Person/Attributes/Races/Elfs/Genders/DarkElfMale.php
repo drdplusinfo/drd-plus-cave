@@ -1,9 +1,9 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Elfs\Genders;
 
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\IsMaleTrait;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\MaleTrait;
 
 class DarkElfMale extends DarkElfGender
 {
-    use IsMaleTrait;
+    use MaleTrait;
 }

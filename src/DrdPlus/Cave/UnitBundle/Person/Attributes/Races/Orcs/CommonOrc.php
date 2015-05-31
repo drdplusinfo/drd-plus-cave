@@ -28,11 +28,4 @@ class CommonOrc extends Orc
 {
     const SUBRACE_CODE = 'common_orc';
 
-    /**
-     * @return string
-     */
-    public static function getSubraceCode()
-    {
-        return self::SUBRACE_CODE;
-    }
 }

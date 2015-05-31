@@ -1,14 +1,14 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Dwarfs\Genders;
 
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\IsFemaleTrait;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\FemaleTrait;
 
 /**
  * WoodDwarfFemale
  */
 class WoodDwarfFemale extends WoodDwarfGender
 {
-    use IsFemaleTrait;
+    use FemaleTrait;
 
     /**
      * Get knack modifier

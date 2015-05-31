@@ -11,16 +11,29 @@ use Doctrineum\Strict\String\SelfTypedStrictStringEnum;
 class Race extends SelfTypedStrictStringEnum
 {
     const RACE = 'race';
+    const RACE_CODE = 'race';
+    const SUBRACE_CODE = 'race';
 
-    const BASE_STRENGTH = 0;
-    const BASE_AGILITY = 0;
-    const BASE_KNACK = 0;
-    const BASE_WILL = 0;
-    const BASE_INTELLIGENCE = 0;
-    const BASE_CHARISMA = 0;
-    const BASE_RESISTANCE = 0;
-    const BASE_SENSES = 0;
-    const BASE_TOUGHNESS = 0;
+    const BASE_STRENGTH = +0;
+    const BASE_AGILITY = +0;
+    const BASE_KNACK = +0;
+    const BASE_WILL = +0;
+    const BASE_INTELLIGENCE = +0;
+    const BASE_CHARISMA = +0;
+    const BASE_RESISTANCE = +0;
+    const BASE_SENSES = +0;
+    const BASE_TOUGHNESS = +0;
+    const BASE_HEIGHT = +5; // TODO is it needed? 180 cm, see table of distance -> to bonus
+    const BASE_HEIGHT_IN_CM = 180.0;
+    const BASE_SIZE = +0;
+    const BASE_WEIGHT = +6; // 80 kg, see table of weight -> to bonus
+    const BASE_WEIGHT_IN_KG = 80.0;
+
+    const SALIENT_SIGHT = 'sight';
+    const SALIENT_TOUCH = 'touch';
+    const SALIENT_TASTE = 'taste';
+    const SALIENT_HEARING = 'hearing';
+    const SALIENT_SMELL = 'smell';
 
     /**
      * @return Race
@@ -43,9 +56,11 @@ class Race extends SelfTypedStrictStringEnum
      */
     public static function getRaceCode()
     {
-        throw new Exceptions\MissingRaceCodeImplementation(
-            'The gender class ' . static::class . ' has not implemented ' . __METHOD__ . ' method.'
-        );
+        if (__CLASS__ === static::class) {
+            throw new \LogicException('Call this method on specific race only.');
+        }
+
+        return static::RACE_CODE;
     }
 
     /**
@@ -53,9 +68,11 @@ class Race extends SelfTypedStrictStringEnum
      */
     public static function getSubraceCode()
     {
-        throw new Exceptions\MissingSubraceCodeImplementation(
-            'The gender class ' . static::class . ' has not implemented ' . __METHOD__ . ' method.'
-        );
+        if (__CLASS__ === static::class) {
+            throw new \LogicException('Call this method on specific race only.');
+        }
+
+        return static::SUBRACE_CODE;
     }
 
     /**
@@ -322,6 +339,55 @@ class Race extends SelfTypedStrictStringEnum
     }
 
     /**
+     * @return int
+     */
+    public function getToughnessModifier()
+    {
+        return static::BASE_TOUGHNESS;
+    }
+
+    /**
+     * @return float
+     */
+    public function getHeightInCm()
+    {
+        return static::BASE_HEIGHT_IN_CM;
+    }
+
+    /**
+     * @return int
+     */
+    public function getHeightModifier()
+    {
+        return static::BASE_HEIGHT;
+    }
+
+    /**
+     * @param Gender $gender
+     * @return int
+     */
+    public function getSizeModifier(Gender $gender)
+    {
+        return static::BASE_SIZE + $gender->getSizeModifier();
+    }
+
+    /**
+     * @return int
+     */
+    public function getWeightModifier()
+    {
+        return static::BASE_WEIGHT;
+    }
+
+    /**
+     * @return float
+     */
+    public function getWeightInKg()
+    {
+        return static::BASE_WEIGHT_IN_KG;
+    }
+
+    /**
      * Can see heat like snakes do?
      *
      * @return bool
@@ -352,8 +418,12 @@ class Race extends SelfTypedStrictStringEnum
         return false;
     }
 
-    public function getToughnessModifier()
+    /**
+     * @return false|string
+     */
+    public function getSalientSense()
     {
-        return static::BASE_TOUGHNESS;
+        return false;
     }
+
 }

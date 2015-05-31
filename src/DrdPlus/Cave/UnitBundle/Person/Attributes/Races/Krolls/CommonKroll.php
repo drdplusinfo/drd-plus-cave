@@ -28,11 +28,4 @@ class CommonKroll extends Kroll
 {
     const SUBRACE_CODE = 'common_kroll';
 
-    /**
-     * @return string
-     */
-    public static function getSubraceCode()
-    {
-        return self::SUBRACE_CODE;
-    }
 }

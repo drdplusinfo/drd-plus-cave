@@ -38,7 +38,7 @@ class RaceTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Exceptions\MissingRaceCodeImplementation
+     * @expectedException \LogicException
      */
     public function creating_race_enum_by_shortcut_cause_exception()
     {
@@ -103,7 +103,7 @@ class RaceTest extends TestWithMockery
     /**
      * @test
      * @depends can_be_created_as_enum_type
-     * @expectedException \DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Exceptions\MissingSubraceCodeImplementation
+     * @expectedException \DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Exceptions\UnexpectedRaceCode
      */
     public function missing_subrace_code_cause_exception()
     {

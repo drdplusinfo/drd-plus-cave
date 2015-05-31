@@ -28,12 +28,4 @@ abstract class Human extends Race
 {
     const RACE_CODE = 'human';
 
-    /**
-     * @return string
-     */
-    public static function getRaceCode()
-    {
-        return self::RACE_CODE;
-    }
-
 }

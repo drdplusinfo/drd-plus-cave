@@ -34,13 +34,6 @@ abstract class Orc extends Race
     const BASE_SENSES = +1;
 
     /**
-     * @return string
-     */
-    public static function getRaceCode(){
-        return self::RACE_CODE;
-    }
-
-    /**
      * @return bool
      */
     public function hasInfravision()
@@ -54,5 +47,10 @@ abstract class Orc extends Race
     public function requiresDungeonMasterAgreement()
     {
         return true;
+    }
+
+    public function getSalientSense()
+    {
+        return self::SALIENT_SMELL;
     }
 }

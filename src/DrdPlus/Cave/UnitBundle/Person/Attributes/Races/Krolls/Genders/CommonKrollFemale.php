@@ -1,7 +1,7 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Krolls\Genders;
 
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\IsFemaleTrait;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\FemaleTrait;
 
 /**
  * CommonKrollFemale
@@ -9,7 +9,7 @@ use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\IsFemaleTrait;
 class CommonKrollFemale extends CommonKrollGender
 {
 
-    use IsFemaleTrait;
+    use FemaleTrait;
 
     /**
      * Get strength modifier

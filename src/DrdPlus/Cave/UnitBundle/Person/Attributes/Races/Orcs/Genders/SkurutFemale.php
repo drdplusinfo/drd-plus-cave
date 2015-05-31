@@ -1,7 +1,7 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Orcs\Genders;
 
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\IsFemaleTrait;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\FemaleTrait;
 
 /**
  * SkurutFemale
@@ -9,7 +9,7 @@ use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\IsFemaleTrait;
 class SkurutFemale extends SkurutGender
 {
 
-    use IsFemaleTrait;
+    use FemaleTrait;
 
     /**
      * Get strength modifier

@@ -29,11 +29,4 @@ class Highlander extends Human
     const BASE_INTELLIGENCE = -1;
     const BASE_CHARISMA = -1;
 
-    /**
-     * @return string
-     */
-    public static function getSubRaceCode()
-    {
-        return self::SUBRACE_CODE;
-    }
 }

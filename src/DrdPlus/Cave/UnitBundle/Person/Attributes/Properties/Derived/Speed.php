@@ -3,12 +3,12 @@ namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Derived;
 
 use Granam\Strict\Integer\StrictInteger;
 
-class Toughness extends StrictInteger implements DerivedProperty
+class Speed extends StrictInteger implements DerivedProperty
 {
-    const TOUGHNESS = 'toughness';
+    const SPEED = 'speed';
 
     public function getName()
     {
-        return self::TOUGHNESS;
+        return self::SPEED;
     }
 }

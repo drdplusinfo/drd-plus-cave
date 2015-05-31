@@ -1,32 +1,17 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Derived;
 
-use Doctrine\DBAL\Platforms\AbstractPlatform;
-use Doctrineum\Integer\SelfTypedIntegerEnum;
+use Granam\Strict\Integer\StrictInteger;
 
-/**
- * @method static Endurance getType(int $value),
- * @see SelfTypedStrictStringEnum::getType or for original
- * @see \Doctrine\DBAL\Types\Type::getType
- *
- * @method Endurance convertToPHPValue(int $value, AbstractPlatform $platform)
- * @see SelfTypedStrictStringEnum::convertToPHPValue or for original
- * @see EnumType::convertToPHPValue
- *
- * @method static Endurance getEnum(mixed $value)
- * @see SelfTypedStrictStringEnum::getEnum or for original
- * @see EnumTrait::getEnum
- */
-class Endurance extends SelfTypedIntegerEnum implements DerivedProperty
+class Endurance extends StrictInteger implements DerivedProperty
 {
     const ENDURANCE = 'endurance';
 
     /**
-     * @param int $value
-     * @return Endurance
+     * @return string
      */
-    public static function getIt($value)
+    public function getName()
     {
-        return static::getEnum($value);
+        return self::ENDURANCE;
     }
 }

@@ -1,7 +1,7 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Races;
 
-trait IsFemaleTrait
+trait FemaleTrait
 {
     /**
      * @return bool
@@ -17,5 +17,15 @@ trait IsFemaleTrait
     public static function isFemale()
     {
         return true;
+    }
+
+    /**
+     * Every female is smaller then male, except dwarfs
+     *
+     * @return int
+     */
+    public function getSizeModifier()
+    {
+        return -1;
     }
 }

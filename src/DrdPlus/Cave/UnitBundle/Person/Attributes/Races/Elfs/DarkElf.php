@@ -16,14 +16,6 @@ class DarkElf extends Elf
     const BASE_RESISTANCE = 0;
 
     /**
-     * @return string
-     */
-    public static function getSubRaceCode()
-    {
-        return self::SUBRACE_CODE;
-    }
-
-    /**
      * @return bool
      */
     public function hasInfravision()

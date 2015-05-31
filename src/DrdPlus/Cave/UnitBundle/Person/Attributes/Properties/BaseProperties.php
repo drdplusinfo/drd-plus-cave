@@ -1,8 +1,12 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Properties;
 
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Body\BodyProperty;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Body\Size;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Derived\DerivedProperty;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Derived\Endurance;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Derived\Senses;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Derived\Speed;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Derived\Toughness;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Race;
 use DrdPlus\Cave\UnitBundle\Person\Person;
@@ -57,6 +61,16 @@ class BaseProperties extends StrictObject
      */
     private $baseEndurance;
 
+    /**
+     * @var Speed
+     */
+    private $baseSpeed;
+
+    /**
+     * @var Size
+     */
+    private $baseSize;
+
     public function __construct(Person $person)
     {
         $this->person = $person;
@@ -69,6 +83,8 @@ class BaseProperties extends StrictObject
         $this->setUpDerivedProperty($this->createBaseToughness($this->getBaseStrength(), $person->getRace()));
         $this->setUpDerivedProperty($this->createBaseEndurance($this->getBaseStrength(), $this->getBaseWill()));
         $this->setUpDerivedProperty($this->createBaseSpeed($this->getBaseStrength(), $this->getBaseAgility()), $this->getPerson());
+        $this->setUpDerivedProperty($this->createBaseSenses($this->getBaseKnack(), $this->getPerson()));
+        $this->setUpBodyProperty($this->createBaseSize($this->getBaseStrength(), $this->getPerson()));
     }
 
     private function createBaseStrength(Person $person)
@@ -158,7 +174,7 @@ class BaseProperties extends StrictObject
 
     private function createBaseToughness(Strength $baseStrength, Race $race)
     {
-        return Toughness::getIt(
+        return new Toughness(
             $baseStrength->getValue()
             + $race->getToughnessModifier()
         );
@@ -166,7 +182,63 @@ class BaseProperties extends StrictObject
 
     private function createBaseEndurance(Strength $baseStrength, Will $baseWill)
     {
-        return Toughness::getIt(round($baseStrength->getValue() + $baseWill->getValue()));
+        return new Endurance(round($baseStrength->getValue() + $baseWill->getValue()));
+    }
+
+    private function createBaseSpeed(Strength $baseStrength, Agility $baseAgility)
+    {
+        return new Speed($this->calculateBaseSpeed($baseStrength, $baseAgility));
+    }
+
+    private function calculateBaseSpeed(Strength $baseStrength, Agility $baseAgility)
+    {
+        return
+            round(($baseStrength->getValue() + $baseAgility->getValue()) / 2)
+            + $this->getSpeedBonusBySize($this->getBaseSize());
+    }
+
+    private function getSpeedBonusBySize(Size $baseSize)
+    {
+        if ($baseSize->getValue() > 0) {
+            // 1 - 3 = -1; 4 - 6 = 0; 7 - 9 = +1 ...
+            return ceil($baseSize->getValue() / 3) - 1;
+        }
+
+        // -2 - 0 = -2 ...
+        return floor(($baseSize->getValue() - 1) / 3) - 1;
+    }
+
+    private function createBaseSenses(Knack $knack, Person $person)
+    {
+        return new Senses($this->calculateBaseSenses($knack, $person));
+    }
+
+    private function calculateBaseSenses(Knack $knack, Person $person)
+    {
+        return $knack->getValue() + $person->getRace()->getSensesModifier($person->getGender());
+    }
+
+    /**
+     * @param Strength $baseStrength
+     * @param Person $person
+     *
+     * @return Body\Size
+     */
+    private function createBaseSize(Strength $baseStrength, Person $person)
+    {
+        return new Size($this->calculateBaseSize($baseStrength, $person));
+    }
+
+    private function calculateBaseSize(Strength $baseStrength, Person $person)
+    {
+        return
+            $person->getRace()->getSizeModifier($person->getGender())
+            + $this->getBaseSizeBonusByStrengthIncrement($baseStrength);
+    }
+
+    private function getBaseSizeBonusByStrengthIncrement(Strength $strength)
+    {
+        return 0; // TODO
     }
 
     /**
@@ -189,7 +261,6 @@ class BaseProperties extends StrictObject
      * @param DerivedProperty $derivedProperty
      *
      * @throws Exceptions\BasePropertyIsAlreadySet
-     * @throws Exceptions\BasePropertyValueExceeded
      */
     private function setUpDerivedProperty(DerivedProperty $derivedProperty)
     {
@@ -203,6 +274,25 @@ class BaseProperties extends StrictObject
         }
 
         $this->$derivedBasePropertyName = $derivedProperty;
+    }
+
+    /**
+     * @param BodyProperty $bodyProperty
+     *
+     * @throws Exceptions\BasePropertyIsAlreadySet
+     */
+    private function setUpBodyProperty(BodyProperty $bodyProperty)
+    {
+        $propertyName = $bodyProperty->getName();
+        // like baseToughness
+        $bodyBasePropertyName = 'base' . ucfirst($propertyName);
+        if (isset($this->$bodyBasePropertyName)) {
+            throw new Exceptions\BasePropertyIsAlreadySet(
+                'The property ' . $bodyBasePropertyName . ' is already set by value ' . var_export($this->$bodyBasePropertyName->getValue(), true)
+            );
+        }
+
+        $this->$bodyBasePropertyName = $bodyProperty;
     }
 
     /**
@@ -261,4 +351,16 @@ class BaseProperties extends StrictObject
         return $this->baseEndurance;
     }
 
+    /**
+     * @return Speed
+     */
+    public function getBaseSpeed()
+    {
+        return $this->baseSpeed;
+    }
+
+    public function getBaseSize()
+    {
+        return $this->baseSize;
+    }
 }

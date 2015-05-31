@@ -1,14 +1,14 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Dwarfs\Genders;
 
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\IsFemaleTrait;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\FemaleTrait;
 
 /**
  * MountainDwarfFemale
  */
 class MountainDwarfFemale extends MountainDwarfGender
 {
-    use IsFemaleTrait;
+    use FemaleTrait;
 
     /**
      * Get knack modifier

@@ -1,13 +1,13 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Elfs\Genders;
 
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\IsMaleTrait;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\MaleTrait;
 
 /**
  * CommonElfMale
  */
 class CommonElfMale extends CommonElfGender
 {
-    use IsMaleTrait;
+    use MaleTrait;
 
 }

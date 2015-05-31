@@ -17,12 +17,25 @@ use Doctrineum\Strict\String\SelfTypedStrictStringEnum;
  * @see SelfTypedStrictStringEnum::getEnum or for original
  * @see EnumTrait::getEnum
  */
+/* abstract */
+
 class Gender extends SelfTypedStrictStringEnum
 {
     const GENDER = 'gender';
 
     const MALE_CODE = 'male';
     const FEMALE_CODE = 'female';
+
+    const STRENGTH_MODIFIER = 0;
+    const AGILITY_MODIFIER = 0;
+    const KNACK_MODIFIER = 0;
+    const WILL_MODIFIER = 0;
+    const INTELLIGENCE_MODIFIER = 0;
+    const CHARISMA_MODIFIER = 0;
+
+    const RESISTANCE_MODIFIER = 0;
+    const SENSES_MODIFIER = 0;
+    const SIZE_MODIFIER = 0;
 
     /**
      * @return Gender
@@ -49,6 +62,7 @@ class Gender extends SelfTypedStrictStringEnum
 
     /**
      * @param string $enumValue
+     *
      * @return string
      */
     protected static function getEnumClass($enumValue)
@@ -66,6 +80,7 @@ class Gender extends SelfTypedStrictStringEnum
      * The specific gender will be build here, distinguished by the race, subrace and gender code.
      *
      * @param string $raceAndSubraceGenderCode
+     *
      * @throws Exceptions\UnexpectedGenderCode
      * @return Gender
      */
@@ -95,7 +110,9 @@ class Gender extends SelfTypedStrictStringEnum
     /**
      * @return string
      */
-    public static function getRaceCode() {
+    /* abstract */
+    public static function getRaceCode()
+    {
         throw new Exceptions\MissingRaceCodeImplementation(
             'The gender class ' . static::class . ' has not implemented ' . __METHOD__ . ' method.'
         );
@@ -104,7 +121,9 @@ class Gender extends SelfTypedStrictStringEnum
     /**
      * @return string
      */
-    public static function getSubraceCode() {
+    /* abstract */
+    public static function getSubraceCode()
+    {
         throw new Exceptions\MissingSubraceCodeImplementation(
             'The gender class ' . static::class . ' has not implemented ' . __METHOD__ . ' method.'
         );
@@ -136,6 +155,7 @@ class Gender extends SelfTypedStrictStringEnum
      * @param string $raceCode
      * @param string $subraceCode
      * @param string $genderCode
+     *
      * @return string
      */
     public static function buildRaceAndSubraceGenderCode($raceCode, $subraceCode, $genderCode)
@@ -154,14 +174,18 @@ class Gender extends SelfTypedStrictStringEnum
     /**
      * @return bool
      */
-    public static function isMale() {
+    /* abstract */
+    public static function isMale()
+    {
         throw new Exceptions\MaleDetectionNotImplemented();
     }
 
     /**
      * @return bool
      */
-    public static function isFemale() {
+    /* abstract */
+    public static function isFemale()
+    {
         throw new Exceptions\FemaleDetectionNotImplemented();
     }
 
@@ -172,7 +196,7 @@ class Gender extends SelfTypedStrictStringEnum
      */
     public function getStrengthModifier()
     {
-        return 0;
+        return static::STRENGTH_MODIFIER;
     }
 
     /**
@@ -182,7 +206,7 @@ class Gender extends SelfTypedStrictStringEnum
      */
     public function getAgilityModifier()
     {
-        return 0;
+        return static::AGILITY_MODIFIER;
     }
 
     /**
@@ -192,7 +216,7 @@ class Gender extends SelfTypedStrictStringEnum
      */
     public function getKnackModifier()
     {
-        return 0;
+        return static::KNACK_MODIFIER;
     }
 
     /**
@@ -202,7 +226,7 @@ class Gender extends SelfTypedStrictStringEnum
      */
     public function getWillModifier()
     {
-        return 0;
+        return static::WILL_MODIFIER;
     }
 
     /**
@@ -212,7 +236,7 @@ class Gender extends SelfTypedStrictStringEnum
      */
     public function getIntelligenceModifier()
     {
-        return 0;
+        return static::INTELLIGENCE_MODIFIER;
     }
 
     /**
@@ -222,7 +246,7 @@ class Gender extends SelfTypedStrictStringEnum
      */
     public function getCharismaModifier()
     {
-        return 0;
+        return static::CHARISMA_MODIFIER;
     }
 
     /**
@@ -232,7 +256,7 @@ class Gender extends SelfTypedStrictStringEnum
      */
     public function getResistanceModifier()
     {
-        return 0;
+        return static::RESISTANCE_MODIFIER;
     }
 
     /**
@@ -242,7 +266,15 @@ class Gender extends SelfTypedStrictStringEnum
      */
     public function getSensesModifier()
     {
-        return 0;
+        return static::SENSES_MODIFIER;
+    }
+
+    /**
+     * @return int
+     */
+    public function getSizeModifier()
+    {
+        return static::SIZE_MODIFIER;
     }
 
 }

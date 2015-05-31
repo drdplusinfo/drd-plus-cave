@@ -1,12 +1,12 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Hobbits\Genders;
 
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\IsFemaleTrait;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\FemaleTrait;
 
 class CommonHobbitFemale extends CommonHobbitGender
 {
 
-    use IsFemaleTrait;
+    use FemaleTrait;
 
     /**
      * Get strength modifier

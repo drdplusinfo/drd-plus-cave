@@ -1,7 +1,7 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Humans\Genders;
 
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\IsFemaleTrait;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\FemaleTrait;
 
 /**
  * CommonHumanFemale
@@ -9,7 +9,7 @@ use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\IsFemaleTrait;
 class CommonHumanFemale extends CommonHumanGender
 {
 
-    use IsFemaleTrait;
+    use FemaleTrait;
 
     /**
      * Get strength modifier

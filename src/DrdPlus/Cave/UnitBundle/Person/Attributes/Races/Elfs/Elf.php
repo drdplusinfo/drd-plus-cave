@@ -37,20 +37,8 @@ abstract class Elf extends Race
     const BASE_RESISTANCE = -1;
     const BASE_TOUGHNESS = -1;
 
-    /**
-     * @return string
-     */
-    public static function getRaceCode()
+    public function getSalientSense()
     {
-        return self::RACE_CODE;
+        return self::SALIENT_SIGHT;
     }
-
-    /**
-     * @return int
-     */
-    public function getToughnessModifier()
-    {
-        return self::BASE_TOUGHNESS;
-    }
-
 }

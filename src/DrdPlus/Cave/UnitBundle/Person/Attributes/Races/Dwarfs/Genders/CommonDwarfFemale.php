@@ -1,14 +1,14 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Dwarfs\Genders;
 
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\IsFemaleTrait;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\FemaleTrait;
 
 /**
  * CommonDwarfFemale
  */
 class CommonDwarfFemale extends CommonDwarfGender
 {
-    use IsFemaleTrait;
+    use FemaleTrait;
 
     /**
      * Get knack modifier
@@ -28,6 +28,11 @@ class CommonDwarfFemale extends CommonDwarfGender
     public function getIntelligenceModifier()
     {
         return +1;
+    }
+
+    public function getSizeModifier()
+    {
+        return +0;
     }
 
 }

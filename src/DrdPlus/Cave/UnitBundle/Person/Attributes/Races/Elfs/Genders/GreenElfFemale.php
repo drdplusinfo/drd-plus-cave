@@ -1,14 +1,14 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Elfs\Genders;
 
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\IsFemaleTrait;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\FemaleTrait;
 
 /**
  * GreenElfFemale
  */
 class GreenElfFemale extends GreenElfGender
 {
-    use IsFemaleTrait;
+    use FemaleTrait;
 
     /**
      * Get strength modifier

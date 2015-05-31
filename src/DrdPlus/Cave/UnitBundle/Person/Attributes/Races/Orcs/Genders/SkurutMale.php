@@ -1,12 +1,12 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Orcs\Genders;
 
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\IsMaleTrait;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\MaleTrait;
 
 /**
  * SkurutMale
  */
 class SkurutMale extends SkurutGender
 {
-    use IsMaleTrait;
+    use MaleTrait;
 }

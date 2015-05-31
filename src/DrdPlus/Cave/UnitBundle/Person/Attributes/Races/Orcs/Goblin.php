@@ -32,11 +32,4 @@ class Goblin extends Orc
     const BASE_WILL = -2;
     const BASE_CHARISMA = -1;
 
-    /**
-     * @return string
-     */
-    public static function getSubraceCode()
-    {
-        return self::SUBRACE_CODE;
-    }
 }

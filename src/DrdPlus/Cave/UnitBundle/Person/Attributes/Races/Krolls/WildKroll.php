@@ -33,14 +33,6 @@ class WildKroll extends Kroll
     const BASE_CHARISMA = -2;
 
     /**
-     * @return string
-     */
-    public static function getSubraceCode()
-    {
-        return self::SUBRACE_CODE;
-    }
-
-    /**
      * @return bool
      */
     public function requiresDungeonMasterAgreement()

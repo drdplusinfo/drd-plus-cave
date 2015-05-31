@@ -36,18 +36,15 @@ abstract class Kroll extends Race
     const BASE_CHARISMA = -1;
 
     /**
-     * @return string
-     */
-    public static function getRaceCode()
-    {
-        return self::RACE_CODE;
-    }
-
-    /**
      * @return bool
      */
     public function hasNaturalRegeneration()
     {
         return true;
+    }
+
+    public function getSalientSense()
+    {
+        return self::SALIENT_HEARING;
     }
 }
