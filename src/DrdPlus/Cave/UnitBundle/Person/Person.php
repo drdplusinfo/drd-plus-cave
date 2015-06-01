@@ -5,8 +5,12 @@ use Doctrine\ORM\Mapping as ORM;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Exceptionality;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Name;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\ProfessionLevels;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Derived\Toughness;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Agility;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\BaseProperties;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Charisma;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Derived\Toughness;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Intelligence;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Knack;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Strength;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Gender;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Race;
@@ -76,15 +80,11 @@ class Person extends StrictObject
      */
     private $toughness;
 
-    /** @var  Strength */
-    private $currentStrength;
-
     public function __construct(
         Race $race, // enum
         Gender $gender, // enum
         Name $name, // enum
         Exceptionality $exceptionality, // entity
-        BaseProperties $baseProperties, // entity
         ProfessionLevels $professionLevels // entity
     )
     {
@@ -93,10 +93,9 @@ class Person extends StrictObject
         $this->name = $name;
         $exceptionality->setPerson($this);
         $this->exceptionality = $exceptionality;
-        $baseProperties->setPerson($this);
-        $this->baseProperties = $baseProperties;
         $professionLevels->setPerson($this);
         $this->professionLevels = $professionLevels;
+        $this->baseProperties = new BaseProperties($this); // helper - value object
     }
 
     /**
@@ -187,7 +186,7 @@ class Person extends StrictObject
     private function calculateCurrentToughness()
     {
         return $this->getCurrentStrength()->getValue()
-            + $this->getRace()->getToughnessModifier();
+        + $this->getRace()->getToughnessModifier();
     }
 
     /**
@@ -195,23 +194,66 @@ class Person extends StrictObject
      */
     public function getCurrentStrength()
     {
-        if (!isset($this->currentStrength)) {
-            $this->currentStrength = Strength::getIt($this->calculateCurrentStrength());
-        }
-
-        return $this->currentStrength;
+        return Strength::getIt( $this->calculateCurrentProperty(Strength::STRENGTH));
     }
 
     /**
+     * @param $propertyName
      * @return int
      */
-    private function calculateCurrentStrength()
+    private function calculateCurrentProperty($propertyName)
     {
+        $getProperty = 'getBase' . ucfirst($propertyName);
+        $getPropertyModifier = 'get' . ucfirst($propertyName) . 'Modifier';
+        $getPropertyIncrementSummary = 'get' . ucfirst($propertyName) . 'IncrementSummary';
+
         return
-            $this->getBaseProperties()->getBaseStrength()->getValue()
-            + $this->getRace()->getStrengthModifier($this->getGender())
-            + $this->getExceptionality()->getExceptionalityProperties()->getStrength()->getValue()
-            + $this->getProfessionLevels()->getStrengthIncrementSummary();
+            $this->getBaseProperties()->$getProperty()->getValue()
+            + $this->getRace()->$getPropertyModifier($this->getGender())
+            + $this->getExceptionality()->getExceptionalityProperties()->$getProperty()->getValue()
+                // TODO check if first level is NOT counted
+            + $this->getProfessionLevels()->$getPropertyIncrementSummary();
+    }
+
+    /**
+     * @return Agility
+     */
+    public function getCurrentAgility()
+    {
+        return Agility::getIt($this->calculateCurrentProperty(Agility::AGILITY));
+    }
+
+    /**
+     * @return Knack
+     */
+    public function getCurrentKnack()
+    {
+        return Knack::getIt($this->calculateCurrentProperty(Knack::KNACK));
+    }
+
+    /**
+     * @return Intelligence
+     */
+    public function getCurrentIntelligence()
+    {
+        return Intelligence::getIt($this->calculateCurrentProperty(Intelligence::INTELLIGENCE));
+    }
+
+    /**
+     * @return Charisma
+     */
+    public function getCurrentCharisma()
+    {
+        return Charisma::getIt($this->calculateCurrentProperty(Charisma::CHARISMA));
+    }
+
+    /**
+     * @return Attributes\Properties\Body\Size
+     */
+    public function getSize()
+    {
+        // there is no other size modifier then the base size
+        return $this->getBaseProperties()->getBaseSize();
     }
 
 }
