@@ -143,7 +143,7 @@ abstract class ProfessionLevel extends StrictObject
      */
     public function getStrengthFirstLevelModifier()
     {
-        return $this->getPropertyFirstLevelModifier(Strength::getTypeName());
+        return $this->getPropertyFirstLevelModifier(Strength::STRENGTH);
     }
 
     /**
@@ -175,7 +175,7 @@ abstract class ProfessionLevel extends StrictObject
      */
     public function getAgilityFirstLevelModifier()
     {
-        return $this->getPropertyFirstLevelModifier(Agility::getTypeName());
+        return $this->getPropertyFirstLevelModifier(Agility::AGILITY);
     }
 
     /**
@@ -185,7 +185,7 @@ abstract class ProfessionLevel extends StrictObject
      */
     public function getKnackFirstLevelModifier()
     {
-        return $this->getPropertyFirstLevelModifier(Knack::getTypeName());
+        return $this->getPropertyFirstLevelModifier(Knack::KNACK);
     }
 
     /**
@@ -195,7 +195,7 @@ abstract class ProfessionLevel extends StrictObject
      */
     public function getWillFirstLevelModifier()
     {
-        return $this->getPropertyFirstLevelModifier(Will::getTypeName());
+        return $this->getPropertyFirstLevelModifier(Will::WILL);
     }
 
     /**
@@ -205,7 +205,7 @@ abstract class ProfessionLevel extends StrictObject
      */
     public function getIntelligenceFirstLevelModifier()
     {
-        return $this->getPropertyFirstLevelModifier(Intelligence::getTypeName());
+        return $this->getPropertyFirstLevelModifier(Intelligence::INTELLIGENCE);
     }
 
     /**
@@ -215,7 +215,7 @@ abstract class ProfessionLevel extends StrictObject
      */
     public function getCharismaFirstLevelModifier()
     {
-        return $this->getPropertyFirstLevelModifier(Charisma::getTypeName());
+        return $this->getPropertyFirstLevelModifier(Charisma::CHARISMA);
     }
 
     /**
