@@ -84,7 +84,7 @@ class BaseProperties extends StrictObject
         $this->setUpDerivedProperty($this->createBaseEndurance($this->getBaseStrength(), $this->getBaseWill()));
         $this->setUpDerivedProperty($this->createBaseSpeed($this->getBaseStrength(), $this->getBaseAgility()), $this->getPerson());
         $this->setUpDerivedProperty($this->createBaseSenses($this->getBaseKnack(), $this->getPerson()));
-        $this->setUpBodyProperty($this->createBaseSize($this->getBaseStrength(), $this->getPerson()));
+        $this->setUpBodyProperty($this->createBaseSize($this->getPerson()));
     }
 
     private function createBaseStrength(Person $person)
@@ -97,13 +97,25 @@ class BaseProperties extends StrictObject
         /** @var string|BaseProperty $propertyName */
         $propertyName = ucfirst($propertyName);
         $propertyModifierGetter = "get{$propertyName}Modifier";
-        $propertyGetter = "get{$propertyName}";
         $propertyFirstLevelIncrementGetter = "get{$propertyName}FirstLevelIncrement";
 
         return
             $person->getRace()->$propertyModifierGetter($this->getPerson()->getGender())
-            + $person->getExceptionality()->getExceptionalityProperties()->$propertyGetter()->getValue()
+            + $this->getExceptionalPropertyIncrement($propertyName, $person)->getValue()
             + $person->getProfessionLevels()->$propertyFirstLevelIncrementGetter();
+    }
+
+    /**
+     * @param $propertyName
+     * @param Person $person
+     *
+     * @return BaseProperty
+     */
+    private function getExceptionalPropertyIncrement($propertyName, Person $person)
+    {
+        $propertyGetter = "get{$propertyName}";
+
+        return $person->getExceptionality()->getExceptionalityProperties()->$propertyGetter();
     }
 
     /**
@@ -219,26 +231,44 @@ class BaseProperties extends StrictObject
     }
 
     /**
-     * @param Strength $baseStrength
      * @param Person $person
      *
      * @return Body\Size
      */
-    private function createBaseSize(Strength $baseStrength, Person $person)
+    private function createBaseSize(Person $person)
     {
-        return new Size($this->calculateBaseSize($baseStrength, $person));
+        return new Size($this->calculateBaseSize($person));
     }
 
-    private function calculateBaseSize(Strength $baseStrength, Person $person)
+    private function calculateBaseSize(Person $person)
     {
         return
             $person->getRace()->getSizeModifier($person->getGender())
-            + $this->getBaseSizeBonusByStrengthIncrement($baseStrength);
+            + $this->getBaseSizeBonusByStrengthIncrement($this->getExceptionalStrengthIncrement($person));
     }
 
-    private function getBaseSizeBonusByStrengthIncrement(Strength $strength)
+    private function getBaseSizeBonusByStrengthIncrement(Strength $baseStrengthIncrement)
     {
-        return 0; // TODO
+        if ($baseStrengthIncrement->getValue() === 0) {
+            return -1;
+        }
+        if ($baseStrengthIncrement->getValue() >= 2) {
+            return +1;
+        }
+        if ($baseStrengthIncrement->getValue() === 1) {
+            return 0;
+        }
+        throw new \LogicException('Base strength increment can not be lesser than zero. Given ' . $baseStrengthIncrement->getValue());
+    }
+
+    /**
+     * @param Person $person
+     *
+     * @return Strength
+     */
+    private function getExceptionalStrengthIncrement(Person $person)
+    {
+        return $this->getExceptionalPropertyIncrement(Strength::STRENGTH, $person);
     }
 
     /**
