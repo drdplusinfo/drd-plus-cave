@@ -3,7 +3,10 @@ namespace DrdPlus\Cave\UnitBundle\Person;
 
 use Doctrine\ORM\Mapping as ORM;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Exceptionality;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\GameCharacteristics\Combat\Attack;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\GameCharacteristics\Combat\Defense;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\GameCharacteristics\Combat\Fight;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\GameCharacteristics\Combat\Shooting;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Name;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\ProfessionLevels;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Agility;
@@ -82,6 +85,12 @@ class Person extends StrictObject
     /** @var Fight */
     private $fight;
 
+    /** @var Attack */
+    private $attack;
+
+    /** @var Shooting */
+    private $shooting;
+
     public function __construct(
         Race $race, // enum
         Gender $gender, // enum
@@ -98,8 +107,12 @@ class Person extends StrictObject
         $professionLevels->setPerson($this);
         $this->professionLevels = $professionLevels;
 
-        $this->baseProperties = new BaseProperties($this); // helper - value object
-        $this->fight = new Fight($this); // helper - every value is recalculated on each request
+        // helpers - every value is recalculated on each request
+        $this->baseProperties = new BaseProperties($this);
+        $this->fight = new Fight($this);
+        $this->attack = new Attack($this->getCurrentAgility());
+        $this->defense = new Defense($this->getCurrentAgility());
+        $this->shooting = new Shooting($this->getCurrentKnack());
     }
 
     /**
@@ -267,6 +280,30 @@ class Person extends StrictObject
     public function getFight()
     {
         return $this->fight;
+    }
+
+    /**
+     * @return Defense
+     */
+    public function getDefense()
+    {
+        return $this->defense;
+    }
+
+    /**
+     * @return Shooting
+     */
+    public function getShooting()
+    {
+        return $this->shooting;
+    }
+
+    /**
+     * @return Attack
+     */
+    public function getAttack()
+    {
+        return $this->attack;
     }
 
 }
