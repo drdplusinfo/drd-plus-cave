@@ -3,6 +3,7 @@ namespace DrdPlus\Cave\UnitBundle\Person;
 
 use Doctrine\ORM\Mapping as ORM;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Exceptionality;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\GameCharacteristics\Combat\Fight;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Name;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\ProfessionLevels;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Agility;
@@ -75,10 +76,11 @@ class Person extends StrictObject
      */
     private $professionLevels;
 
-    /**
-     * @var Toughness
-     */
+    /** @var Toughness */
     private $toughness;
+
+    /** @var Fight */
+    private $fight;
 
     public function __construct(
         Race $race, // enum
@@ -95,7 +97,9 @@ class Person extends StrictObject
         $this->exceptionality = $exceptionality;
         $professionLevels->setPerson($this);
         $this->professionLevels = $professionLevels;
+
         $this->baseProperties = new BaseProperties($this); // helper - value object
+        $this->fight = new Fight($this); // helper - every value is recalculated on each request
     }
 
     /**
@@ -194,11 +198,12 @@ class Person extends StrictObject
      */
     public function getCurrentStrength()
     {
-        return Strength::getIt( $this->calculateCurrentProperty(Strength::STRENGTH));
+        return Strength::getIt($this->calculateCurrentProperty(Strength::STRENGTH));
     }
 
     /**
      * @param $propertyName
+     *
      * @return int
      */
     private function calculateCurrentProperty($propertyName)
@@ -211,7 +216,7 @@ class Person extends StrictObject
             $this->getBaseProperties()->$getProperty()->getValue()
             + $this->getRace()->$getPropertyModifier($this->getGender())
             + $this->getExceptionality()->getExceptionalityProperties()->$getProperty()->getValue()
-                // TODO check if first level is NOT counted
+            // TODO check if first level is NOT counted
             + $this->getProfessionLevels()->$getPropertyIncrementSummary();
     }
 
@@ -254,6 +259,14 @@ class Person extends StrictObject
     {
         // there is no other size modifier then the base size
         return $this->getBaseProperties()->getBaseSize();
+    }
+
+    /**
+     * @return Fight
+     */
+    public function getFight()
+    {
+        return $this->fight;
     }
 
 }
