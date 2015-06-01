@@ -13,6 +13,7 @@ use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Strength;
  */
 class FighterLevel extends ProfessionLevel
 {
+    const FIGHTER = 'fighter';
     /**
      * Inner link, used by Doctrine only
      * @var ProfessionLevels

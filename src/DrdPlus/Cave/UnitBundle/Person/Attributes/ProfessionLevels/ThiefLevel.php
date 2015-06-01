@@ -13,6 +13,8 @@ use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Knack;
  */
 class ThiefLevel extends ProfessionLevel
 {
+    const THIEF = 'thief';
+
     /**
      * Inner link, used by Doctrine only
      * @var ProfessionLevels

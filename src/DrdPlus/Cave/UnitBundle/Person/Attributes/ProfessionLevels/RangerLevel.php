@@ -13,6 +13,8 @@ use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Strength;
  */
 class RangerLevel extends ProfessionLevel
 {
+    const RANGER = 'ranger';
+
     /**
      * Inner link, used by Doctrine only
      * @var ProfessionLevels

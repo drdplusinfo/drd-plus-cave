@@ -13,6 +13,7 @@ use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Will;
  */
 class PriestLevel extends ProfessionLevel
 {
+    const PRIEST = 'priest';
     /**
      * Inner link, used by Doctrine only
      * @var ProfessionLevels

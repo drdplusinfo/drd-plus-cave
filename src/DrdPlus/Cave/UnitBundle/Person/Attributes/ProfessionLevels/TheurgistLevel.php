@@ -13,6 +13,8 @@ use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Intelligence;
  */
 class TheurgistLevel extends ProfessionLevel
 {
+    const THEURGIST = 'theurgist';
+
     /**
      * Inner link, used by Doctrine only
      * @var ProfessionLevels
