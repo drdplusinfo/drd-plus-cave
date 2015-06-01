@@ -96,13 +96,13 @@ class BaseProperties extends StrictObject
     {
         /** @var string|BaseProperty $propertyName */
         $propertyName = ucfirst($propertyName);
-        $propertyModifierGetter = "get{$propertyName}Modifier";
-        $propertyFirstLevelIncrementGetter = "get{$propertyName}FirstLevelIncrement";
+        $getPropertyModifier = "get{$propertyName}Modifier";
+        $getPropertyFirstLevelIncrement = "get{$propertyName}FirstLevelIncrement";
 
         return
-            $person->getRace()->$propertyModifierGetter($this->getPerson()->getGender())
+            $person->getRace()->$getPropertyModifier($this->getPerson()->getGender())
             + $this->getExceptionalPropertyIncrement($propertyName, $person)->getValue()
-            + $person->getProfessionLevels()->$propertyFirstLevelIncrementGetter();
+            + $person->getProfessionLevels()->$getPropertyFirstLevelIncrement();
     }
 
     /**
@@ -213,7 +213,7 @@ class BaseProperties extends StrictObject
     {
         if ($baseSize->getValue() > 0) {
             // 1 - 3 = -1; 4 - 6 = 0; 7 - 9 = +1 ...
-            return ceil($baseSize->getValue() / 3) - 1;
+            return ceil($baseSize->getValue() / 3) - 2;
         }
 
         // -2 - 0 = -2 ...
@@ -244,31 +244,27 @@ class BaseProperties extends StrictObject
     {
         return
             $person->getRace()->getSizeModifier($person->getGender())
-            + $this->getBaseSizeBonusByStrengthIncrement($this->getExceptionalStrengthIncrement($person));
+            + $this->getBaseSizeBonusByStrengthIncrement($this->getStrengthIncrement($person));
     }
 
-    private function getBaseSizeBonusByStrengthIncrement(Strength $baseStrengthIncrement)
+    private function getBaseSizeBonusByStrengthIncrement($baseStrengthIncrement)
     {
-        if ($baseStrengthIncrement->getValue() === 0) {
+        if ($baseStrengthIncrement === 0) {
             return -1;
         }
-        if ($baseStrengthIncrement->getValue() >= 2) {
+        if ($baseStrengthIncrement >= 2) {
             return +1;
         }
-        if ($baseStrengthIncrement->getValue() === 1) {
+        if ($baseStrengthIncrement === 1) {
             return 0;
         }
-        throw new \LogicException('Base strength increment can not be lesser than zero. Given ' . $baseStrengthIncrement->getValue());
+        throw new \LogicException('Base strength increment can not be lesser than zero. Given ' . $baseStrengthIncrement);
     }
 
-    /**
-     * @param Person $person
-     *
-     * @return Strength
-     */
-    private function getExceptionalStrengthIncrement(Person $person)
+    private function getStrengthIncrement(Person $person)
     {
-        return $this->getExceptionalPropertyIncrement(Strength::STRENGTH, $person);
+        return $this->getExceptionalPropertyIncrement(Strength::STRENGTH, $person)->getValue()
+        + $person->getProfessionLevels()->getStrengthFirstLevelIncrement();
     }
 
     /**
