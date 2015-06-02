@@ -36,9 +36,9 @@ class Exceptionality extends StrictObject
     private $exceptionalityFate;
 
     /**
-     * @var FortuneProperties
+     * @var FortuneProperties|ChosenProperties
      *
-     * @ORM\Column(type="fortune_properties")
+     * @ORM\Column(type="exceptionality_properties")
      */
     private $exceptionalityProperties;
 

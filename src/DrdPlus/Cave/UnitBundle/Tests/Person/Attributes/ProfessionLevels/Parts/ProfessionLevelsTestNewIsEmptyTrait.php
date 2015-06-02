@@ -17,7 +17,7 @@ trait ProfessionLevelsTestNewIsEmptyTrait
     public function new_levels_gives_zero_first_level_strength_increment(ProfessionLevels $professionLevels)
     {
         /** @var ProfessionLevelsTest $this */
-        $this->assertSame(0, $professionLevels->getStrengthFirstLevelIncrement());
+        $this->assertSame(0, $professionLevels->getStrengthIncrementForFirstLevel());
     }
 
     /**
@@ -41,7 +41,7 @@ trait ProfessionLevelsTestNewIsEmptyTrait
     public function new_levels_gives_zero_first_level_agility_increment(ProfessionLevels $professionLevels)
     {
         /** @var ProfessionLevelsTest $this */
-        $this->assertSame(0, $professionLevels->getAgilityFirstLevelIncrement());
+        $this->assertSame(0, $professionLevels->getAgilityIncrementForFirstLevel());
     }
 
     /**
@@ -65,7 +65,7 @@ trait ProfessionLevelsTestNewIsEmptyTrait
     public function new_levels_gives_zero_first_level_knack_increment(ProfessionLevels $professionLevels)
     {
         /** @var ProfessionLevelsTest $this */
-        $this->assertSame(0, $professionLevels->getKnackFirstLevelIncrement());
+        $this->assertSame(0, $professionLevels->getKnackIncrementForFirstLevel());
     }
 
     /**
@@ -89,7 +89,7 @@ trait ProfessionLevelsTestNewIsEmptyTrait
     public function new_levels_gives_zero_first_level_will_increment(ProfessionLevels $professionLevels)
     {
         /** @var ProfessionLevelsTest $this */
-        $this->assertSame(0, $professionLevels->getWillFirstLevelIncrement());
+        $this->assertSame(0, $professionLevels->getWillIncrementForFirstLevel());
     }
 
     /**
@@ -113,7 +113,7 @@ trait ProfessionLevelsTestNewIsEmptyTrait
     public function new_levels_gives_zero_first_level_intelligence_increment(ProfessionLevels $professionLevels)
     {
         /** @var ProfessionLevelsTest $this */
-        $this->assertSame(0, $professionLevels->getIntelligenceFirstLevelIncrement());
+        $this->assertSame(0, $professionLevels->getIntelligenceIncrementForFirstLevel());
     }
 
     /**
@@ -137,7 +137,7 @@ trait ProfessionLevelsTestNewIsEmptyTrait
     public function new_levels_gives_zero_first_level_charisma_increment(ProfessionLevels $professionLevels)
     {
         /** @var ProfessionLevelsTest $this */
-        $this->assertSame(0, $professionLevels->getCharismaFirstLevelIncrement());
+        $this->assertSame(0, $professionLevels->getCharismaIncrementForFirstLevel());
     }
 
     /**

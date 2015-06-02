@@ -1,14 +1,12 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Derived;
 
-use Granam\Strict\Integer\StrictInteger;
-
-class Senses extends StrictInteger implements DerivedProperty
+class Senses extends DerivedProperty
 {
-    const SPEED = 'speed';
+    const SENSES = 'senses';
 
     public function getName()
     {
-        return self::SPEED;
+        return self::SENSES;
     }
 }

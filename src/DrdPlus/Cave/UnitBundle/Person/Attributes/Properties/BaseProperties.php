@@ -16,60 +16,41 @@ class BaseProperties extends StrictObject
 {
     const INITIAL_PROPERTY_INCREASE_LIMIT = 3;
 
-    /**
-     * @var Person
-     */
+    /** @var Person */
     private $person;
 
-    /**
-     * @var Strength
-     */
+    /** @var Strength */
     private $baseStrength;
 
-    /**
-     * @var Agility
-     */
+    /** @var Agility */
     private $baseAgility;
 
-    /**
-     * @var Knack
-     */
+    /** @var Knack */
     private $baseKnack;
 
-    /**
-     * @var Will
-     */
+    /** @var Will */
     private $baseWill;
 
-    /**
-     * @var Intelligence
-     */
+    /** @var Intelligence */
     private $baseIntelligence;
 
-    /**
-     * @var Charisma
-     */
+    /** @var Charisma */
     private $baseCharisma;
 
-    /**
-     * @var Toughness
-     */
+    /** @var Toughness */
     private $baseToughness;
 
-    /**
-     * @var Endurance
-     */
+    /** @var Endurance */
     private $baseEndurance;
 
-    /**
-     * @var Speed
-     */
+    /** @var Speed */
     private $baseSpeed;
 
-    /**
-     * @var Size
-     */
+    /** @var Size */
     private $baseSize;
+
+    /** @var Senses */
+    private $baseSenses;
 
     public function __construct(Person $person)
     {
@@ -80,11 +61,11 @@ class BaseProperties extends StrictObject
         $this->setUpBaseProperty($this->createBaseWill($person), $person);
         $this->setUpBaseProperty($this->createBaseIntelligence($person), $person);
         $this->setUpBaseProperty($this->createBaseCharisma($person), $person);
+        $this->setUpBodyProperty($this->createBaseSize($this->getPerson())); //strength required
         $this->setUpDerivedProperty($this->createBaseToughness($this->getBaseStrength(), $person->getRace()));
         $this->setUpDerivedProperty($this->createBaseEndurance($this->getBaseStrength(), $this->getBaseWill()));
         $this->setUpDerivedProperty($this->createBaseSpeed($this->getBaseStrength(), $this->getBaseAgility()), $this->getPerson());
         $this->setUpDerivedProperty($this->createBaseSenses($this->getBaseKnack(), $this->getPerson()));
-        $this->setUpBodyProperty($this->createBaseSize($this->getPerson()));
     }
 
     private function createBaseStrength(Person $person)
@@ -264,7 +245,7 @@ class BaseProperties extends StrictObject
     private function getStrengthIncrement(Person $person)
     {
         return $this->getExceptionalPropertyIncrement(Strength::STRENGTH, $person)->getValue()
-        + $person->getProfessionLevels()->getStrengthFirstLevelIncrement();
+        + $person->getProfessionLevels()->getStrengthIncrementForFirstLevel();
     }
 
     /**
@@ -385,8 +366,20 @@ class BaseProperties extends StrictObject
         return $this->baseSpeed;
     }
 
+    /**
+     * @return Size
+     */
     public function getBaseSize()
     {
         return $this->baseSize;
     }
+
+    /**
+     * @return Senses
+     */
+    public function getBaseSenses()
+    {
+        return $this->baseSenses;
+    }
+
 }

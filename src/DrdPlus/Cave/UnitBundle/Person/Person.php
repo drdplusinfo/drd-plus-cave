@@ -221,12 +221,13 @@ class Person extends StrictObject
      */
     private function calculateCurrentProperty($propertyName)
     {
-        $getProperty = 'getBase' . ucfirst($propertyName);
+        $getBaseProperty = 'getBase' . ucfirst($propertyName);
         $getPropertyModifier = 'get' . ucfirst($propertyName) . 'Modifier';
+        $getProperty = 'get' . ucfirst($propertyName);
         $getPropertyIncrementSummary = 'get' . ucfirst($propertyName) . 'IncrementSummary';
 
         return
-            $this->getBaseProperties()->$getProperty()->getValue()
+            $this->getBaseProperties()->$getBaseProperty()->getValue()
             + $this->getRace()->$getPropertyModifier($this->getGender())
             + $this->getExceptionality()->getExceptionalityProperties()->$getProperty()->getValue()
             // TODO check if first level is NOT counted

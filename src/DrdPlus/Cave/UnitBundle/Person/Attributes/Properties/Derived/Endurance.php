@@ -1,9 +1,7 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Derived;
 
-use Granam\Strict\Integer\StrictInteger;
-
-class Endurance extends StrictInteger implements DerivedProperty
+class Endurance extends DerivedProperty
 {
     const ENDURANCE = 'endurance';
 

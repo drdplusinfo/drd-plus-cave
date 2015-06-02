@@ -2,9 +2,15 @@
 namespace DrdPlus\Cave\UnitBundle\Person;
 
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Exceptionality;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\ExceptionalityProperties;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Name;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\ProfessionLevels;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\BaseProperties;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Agility;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Charisma;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Intelligence;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Knack;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Strength;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Will;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Gender;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Race;
 use DrdPlus\Cave\UnitBundle\Tests\TestWithMockery;
@@ -20,7 +26,6 @@ class PersonTest extends TestWithMockery
             $this->getGenderMock(),
             $this->getNameMock(),
             $this->getExceptionalityMock(),
-            $this->getBasePropertiesMock(),
             $this->getProfessionLevelsMock()
         );
         $this->assertNotNull($instance);
@@ -34,7 +39,6 @@ class PersonTest extends TestWithMockery
             $this->getGenderMock(),
             $this->getNameMock(),
             $this->getExceptionalityMock(),
-            $this->getBasePropertiesMock(),
             $this->getProfessionLevelsMock()
         );
         $this->assertNull($person->getId());
@@ -48,7 +52,6 @@ class PersonTest extends TestWithMockery
             $this->getGenderMock(),
             $this->getNameMock(),
             $this->getExceptionalityMock(),
-            $this->getBasePropertiesMock(),
             $this->getProfessionLevelsMock()
         );
         $this->assertSame($race, $person->getRace());
@@ -62,7 +65,6 @@ class PersonTest extends TestWithMockery
             $gender = $this->getGenderMock(),
             $this->getNameMock(),
             $this->getExceptionalityMock(),
-            $this->getBasePropertiesMock(),
             $this->getProfessionLevelsMock()
         );
         $this->assertSame($gender, $person->getGender());
@@ -76,24 +78,9 @@ class PersonTest extends TestWithMockery
             $this->getGenderMock(),
             $this->getNameMock(),
             $exceptionality = $this->getExceptionalityMock(),
-            $this->getBasePropertiesMock(),
             $this->getProfessionLevelsMock()
         );
         $this->assertSame($exceptionality, $person->getExceptionality());
-    }
-
-    /** @test */
-    public function returns_same_base_properties_as_got()
-    {
-        $person = new Person(
-            $this->getRaceMock(),
-            $this->getGenderMock(),
-            $this->getNameMock(),
-            $this->getExceptionalityMock(),
-            $baseProperties = $this->getBasePropertiesMock(),
-            $this->getProfessionLevelsMock()
-        );
-        $this->assertSame($baseProperties, $person->getBaseProperties());
     }
 
     /** @test */
@@ -104,7 +91,6 @@ class PersonTest extends TestWithMockery
             $this->getGenderMock(),
             $this->getNameMock(),
             $this->getExceptionalityMock(),
-            $this->getBasePropertiesMock(),
             $professionLevels = $this->getProfessionLevelsMock()
         );
         $this->assertSame($professionLevels, $person->getProfessionLevels());
@@ -118,7 +104,6 @@ class PersonTest extends TestWithMockery
             $this->getGenderMock(),
             $name = $this->getNameMock(),
             $this->getExceptionalityMock(),
-            $this->getBasePropertiesMock(),
             $this->getProfessionLevelsMock()
         );
         $this->assertSame($name, $person->getName());
@@ -132,7 +117,6 @@ class PersonTest extends TestWithMockery
             $this->getGenderMock(),
             $this->getNameMock(),
             $this->getExceptionalityMock(),
-            $this->getBasePropertiesMock(),
             $this->getProfessionLevelsMock()
         );
         Name::registerSelf();
@@ -149,7 +133,36 @@ class PersonTest extends TestWithMockery
      */
     private function getRaceMock()
     {
-        return \Mockery::mock(Race::class);
+        $race = \Mockery::mock(Race::class);
+        $race->shouldReceive('getStrengthModifier')
+            ->once()
+            ->andReturn(0);
+        $race->shouldReceive('getAgilityModifier')
+            ->once()
+            ->andReturn(0);
+        $race->shouldReceive('getKnackModifier')
+            ->once()
+            ->andReturn(0);
+        $race->shouldReceive('getWillModifier')
+            ->once()
+            ->andReturn(0);
+        $race->shouldReceive('getIntelligenceModifier')
+            ->once()
+            ->andReturn(0);
+        $race->shouldReceive('getCharismaModifier')
+            ->once()
+            ->andReturn(0);
+        $race->shouldReceive('getToughnessModifier')
+            ->once()
+            ->andReturn(0);
+        $race->shouldReceive('getSizeModifier')
+            ->once()
+            ->andReturn(0);
+        $race->shouldReceive('getSensesModifier')
+            ->once()
+            ->andReturn(0);
+
+        return $race;
     }
 
     /**
@@ -169,21 +182,41 @@ class PersonTest extends TestWithMockery
         $exceptionality->shouldReceive('setPerson')
             ->with(\Mockery::type(Person::class))
             ->once();
+        $exceptionality->shouldReceive('getExceptionalityProperties')
+            ->once()
+            ->andReturn($exceptionalityProperties = \Mockery::mock(ExceptionalityProperties::class));
+        $exceptionalityProperties->shouldReceive('getStrength')
+            ->once()
+            ->andReturn($strength = \Mockery::mock(Strength::class));
+        $strength->shouldReceive('getValue')
+            ->andReturn(0);
+        $exceptionalityProperties->shouldReceive('getAgility')
+            ->once()
+            ->andReturn($agility = \Mockery::mock(Agility::class));
+        $agility->shouldReceive('getValue')
+            ->andReturn(0);
+        $exceptionalityProperties->shouldReceive('getKnack')
+            ->once()
+            ->andReturn($knack = \Mockery::mock(Knack::class));
+        $knack->shouldReceive('getValue')
+            ->andReturn(0);
+        $exceptionalityProperties->shouldReceive('getWill')
+            ->once()
+            ->andReturn($will = \Mockery::mock(Will::class));
+        $will->shouldReceive('getValue')
+            ->andReturn(0);
+        $exceptionalityProperties->shouldReceive('getIntelligence')
+            ->once()
+            ->andReturn($intelligence = \Mockery::mock(Intelligence::class));
+        $intelligence->shouldReceive('getValue')
+            ->andReturn(0);
+        $exceptionalityProperties->shouldReceive('getCharisma')
+            ->once()
+            ->andReturn($charisma = \Mockery::mock(Charisma::class));
+        $charisma->shouldReceive('getValue')
+            ->andReturn(0);
 
         return $exceptionality;
-    }
-
-    /**
-     * @return BaseProperties
-     */
-    private function getBasePropertiesMock()
-    {
-        $baseProperties = \Mockery::mock(BaseProperties::class);
-        $baseProperties->shouldReceive('setPerson')
-            ->with(\Mockery::type(Person::class))
-            ->once();
-
-        return $baseProperties;
     }
 
     /**
@@ -195,6 +228,28 @@ class PersonTest extends TestWithMockery
         $professionLevels->shouldReceive('setPerson')
             ->with(\Mockery::type(Person::class))
             ->once();
+        $professionLevels->shouldReceive('getStrengthFirstLevelIncrement')
+            ->once()
+            ->andReturn(0);
+        $professionLevels->shouldReceive('getAgilityFirstLevelIncrement')
+            ->once()
+            ->andReturn(0);
+        $professionLevels->shouldReceive('getAgilityIncrementSummary')
+            ->once()
+            ->andReturn(0);
+        $professionLevels->shouldReceive('getKnackFirstLevelIncrement')
+            ->once()
+            ->andReturn(0);
+        $professionLevels->shouldReceive('getWillFirstLevelIncrement')
+            ->once()
+            ->andReturn(0);
+        $professionLevels->shouldReceive('getIntelligenceFirstLevelIncrement')
+            ->once()
+            ->andReturn(0);
+        $professionLevels->shouldReceive('getCharismaFirstLevelIncrement')
+            ->once()
+            ->andReturn(0);
+
 
         return $professionLevels;
     }

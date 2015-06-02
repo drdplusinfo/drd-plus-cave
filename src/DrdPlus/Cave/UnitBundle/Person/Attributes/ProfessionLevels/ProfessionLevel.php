@@ -153,9 +153,19 @@ abstract class ProfessionLevel extends StrictObject
      */
     private function getPropertyFirstLevelModifier($propertyCode)
     {
+        if (!$this->isFirstLevel()) {
+            return 0;
+        }
+
         return $this->isPrimaryProperty($propertyCode)
             ? self::PROPERTY_FIRST_LEVEL_MODIFIER
             : 0;
+    }
+
+    /** @return bool */
+    public function isFirstLevel()
+    {
+        return $this->getLevelValue()->getRank() === 1;
     }
 
     /**

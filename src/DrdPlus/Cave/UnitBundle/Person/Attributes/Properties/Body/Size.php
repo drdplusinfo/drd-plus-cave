@@ -5,13 +5,13 @@ use Granam\Strict\Integer\StrictInteger;
 
 class Size extends StrictInteger implements BodyProperty
 {
-    const HEIGHT = 'height';
+    const SIZE = 'size';
 
     /**
      * @return string
      */
     public function getName()
     {
-        return self::HEIGHT;
+        return self::SIZE;
     }
 }
