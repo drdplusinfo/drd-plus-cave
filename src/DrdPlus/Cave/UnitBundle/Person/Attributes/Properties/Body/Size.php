@@ -3,7 +3,7 @@ namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Body;
 
 use Granam\Strict\Integer\StrictInteger;
 
-class Size extends StrictInteger implements BodyProperty
+class Size extends StrictInteger
 {
     const SIZE = 'size';
 

@@ -3,7 +3,7 @@ namespace DrdPlus\Cave\UnitBundle\Tests\Person\Attributes\Properties;
 
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Agility;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Charisma;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\BaseProperties;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\PersonProperties;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Intelligence;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Knack;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Strength;
@@ -18,25 +18,25 @@ class BasePropertiesTest extends TestWithMockery
 {
 
     /**
-     * @returns BaseProperties
+     * @returns PersonProperties
      *
      * @test
      */
     public function can_create_instance()
     {
-        $instance = new BaseProperties();
+        $instance = new PersonProperties();
         $this->assertNotNull($instance);
 
         return $instance;
     }
 
     /**
-     * @param BaseProperties $baseProperties
+     * @param PersonProperties $baseProperties
      *
      * @test
      * @depends can_create_instance
      */
-    public function is_a_strict_object(BaseProperties $baseProperties)
+    public function is_a_strict_object(PersonProperties $baseProperties)
     {
         $this->assertInstanceOf(StrictObject::class, $baseProperties);
     }
@@ -54,19 +54,19 @@ class BasePropertiesTest extends TestWithMockery
             ->andReturn('strength');
         $strength->shouldReceive('getValue')
             ->andReturn($baseStrengthValue = 2);
-        $baseProperties = new BaseProperties();
+        $baseProperties = new PersonProperties();
         $baseProperties->setBaseStrength($strength);
     }
 
     /**
-     * @return BaseProperties
+     * @return PersonProperties
      *
      * @test
      * @depends setting_property_before_person_cause_exception
      */
     public function person_can_be_set()
     {
-        $baseProperties = new BaseProperties();
+        $baseProperties = new PersonProperties();
         /** @var Person|\Mockery\MockInterface $person */
         $person = \Mockery::mock(Person::class);
         $person->shouldReceive('getBaseProperties')
@@ -79,13 +79,13 @@ class BasePropertiesTest extends TestWithMockery
     }
 
     /**
-     * @param BaseProperties $baseProperties
+     * @param PersonProperties $baseProperties
      *
      * @test
      * @depends person_can_be_set
      * @expectedException \LogicException
      */
-    public function setting_another_person_cause_exception(BaseProperties $baseProperties)
+    public function setting_another_person_cause_exception(PersonProperties $baseProperties)
     {
         /** @var \Mockery\MockInterface $previousPerson */
         $previousPerson = $baseProperties->getPerson();
@@ -101,13 +101,13 @@ class BasePropertiesTest extends TestWithMockery
     }
 
     /**
-     * @param BaseProperties $baseProperties
+     * @param PersonProperties $baseProperties
      *
      * @test
      * @depends person_can_be_set
      * @expectedException \LogicException
      */
-    public function another_person_even_without_id_cause_exception(BaseProperties $baseProperties)
+    public function another_person_even_without_id_cause_exception(PersonProperties $baseProperties)
     {
         /** @var Person|\Mockery\MockInterface $previousPerson */
         $previousPerson = $baseProperties->getPerson();
@@ -145,11 +145,11 @@ class BasePropertiesTest extends TestWithMockery
     }
 
     /**
-     * @return BaseProperties
+     * @return PersonProperties
      */
     private function getBaseProperties()
     {
-        $baseProperties = new BaseProperties();
+        $baseProperties = new PersonProperties();
         /** @var \Mockery\MockInterface|Person $person */
         $person = \Mockery::mock(Person::class);
         $person->shouldReceive('getRace')
@@ -164,7 +164,7 @@ class BasePropertiesTest extends TestWithMockery
     }
 
     /**
-     * @return BaseProperties
+     * @return PersonProperties
      *
      * @test
      * @depends maximal_base_strength_can_be_calculated
@@ -189,7 +189,7 @@ class BasePropertiesTest extends TestWithMockery
             ->andReturn($genderStrengthModifier = 0);
 
         $baseProperties->setBaseStrength($strength);
-        $this->assertSame($baseStrengthValue, $baseProperties->getBaseStrength()->getValue());
+        $this->assertSame($baseStrengthValue, $baseProperties->getStrength()->getValue());
 
         return $baseProperties;
     }
@@ -219,17 +219,17 @@ class BasePropertiesTest extends TestWithMockery
             ->andReturn($genderStrengthModifier = 0);
 
         $baseProperties->setBaseStrength($strength);
-        $this->assertSame($baseStrengthValue, $baseProperties->getBaseStrength()->getValue());
+        $this->assertSame($baseStrengthValue, $baseProperties->getStrength()->getValue());
     }
 
     /**
-     * @param BaseProperties $baseProperties
+     * @param PersonProperties $baseProperties
      *
      * @test
      * @depends base_strength_can_be_set
-     * @expectedException \DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Exceptions\BasePropertyIsAlreadySet
+     * @expectedException \DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Exceptions\PropertyIsAlreadySet
      */
-    public function setting_another_base_strength_cause_exception(BaseProperties $baseProperties)
+    public function setting_another_base_strength_cause_exception(PersonProperties $baseProperties)
     {
         /** @var \Mockery\MockInterface|Strength $anotherStrength */
         $anotherStrength = \Mockery::mock(Strength::class);
@@ -261,7 +261,7 @@ class BasePropertiesTest extends TestWithMockery
     }
 
     /**
-     * @return BaseProperties
+     * @return PersonProperties
      * 
      * @test
      * @depends maximal_base_agility_can_be_calculated
@@ -286,7 +286,7 @@ class BasePropertiesTest extends TestWithMockery
             ->andReturn($genderAgilityModifier = 0);
 
         $baseProperties->setBaseAgility($agility);
-        $this->assertSame($baseAgilityValue, $baseProperties->getBaseAgility()->getValue());
+        $this->assertSame($baseAgilityValue, $baseProperties->getAgility()->getValue());
         
         return $baseProperties;
     }
@@ -316,17 +316,17 @@ class BasePropertiesTest extends TestWithMockery
             ->andReturn($genderAgilityModifier = 0);
 
         $baseProperties->setBaseAgility($agility);
-        $this->assertSame($baseAgilityValue, $baseProperties->getBaseAgility()->getValue());
+        $this->assertSame($baseAgilityValue, $baseProperties->getAgility()->getValue());
     }
 
     /**
-     * @param BaseProperties $baseProperties
+     * @param PersonProperties $baseProperties
      *
      * @test
      * @depends base_agility_can_be_set
-     * @expectedException \DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Exceptions\BasePropertyIsAlreadySet
+     * @expectedException \DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Exceptions\PropertyIsAlreadySet
      */
-    public function setting_another_base_agility_cause_exception(BaseProperties $baseProperties)
+    public function setting_another_base_agility_cause_exception(PersonProperties $baseProperties)
     {
         /** @var \Mockery\MockInterface|Agility $anotherAgility */
         $anotherAgility = \Mockery::mock(Agility::class);
@@ -358,7 +358,7 @@ class BasePropertiesTest extends TestWithMockery
     }
 
     /**
-     * @return BaseProperties
+     * @return PersonProperties
      * 
      * @test
      * @depends maximal_base_knack_can_be_calculated
@@ -383,7 +383,7 @@ class BasePropertiesTest extends TestWithMockery
             ->andReturn($genderKnackModifier = 0);
 
         $baseProperties->setBaseKnack($knack);
-        $this->assertSame($baseKnackValue, $baseProperties->getBaseKnack()->getValue());
+        $this->assertSame($baseKnackValue, $baseProperties->getKnack()->getValue());
         
         return $baseProperties;
     }
@@ -413,17 +413,17 @@ class BasePropertiesTest extends TestWithMockery
             ->andReturn($genderKnackModifier = 0);
 
         $baseProperties->setBaseKnack($knack);
-        $this->assertSame($baseKnackValue, $baseProperties->getBaseKnack()->getValue());
+        $this->assertSame($baseKnackValue, $baseProperties->getKnack()->getValue());
     }
 
     /**
-     * @param BaseProperties $baseProperties
+     * @param PersonProperties $baseProperties
      *
      * @test
      * @depends base_knack_can_be_set
-     * @expectedException \DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Exceptions\BasePropertyIsAlreadySet
+     * @expectedException \DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Exceptions\PropertyIsAlreadySet
      */
-    public function setting_another_base_knack_cause_exception(BaseProperties $baseProperties)
+    public function setting_another_base_knack_cause_exception(PersonProperties $baseProperties)
     {
         /** @var \Mockery\MockInterface|Knack $anotherKnack */
         $anotherKnack = \Mockery::mock(Knack::class);
@@ -455,7 +455,7 @@ class BasePropertiesTest extends TestWithMockery
     }
 
     /**
-     * @return BaseProperties
+     * @return PersonProperties
      *
      * @test
      * @depends maximal_base_will_can_be_calculated
@@ -480,7 +480,7 @@ class BasePropertiesTest extends TestWithMockery
             ->andReturn($genderWillModifier = 0);
 
         $baseProperties->setBaseWill($will);
-        $this->assertSame($baseWillValue, $baseProperties->getBaseWill()->getValue());
+        $this->assertSame($baseWillValue, $baseProperties->getWill()->getValue());
 
         return $baseProperties;
     }
@@ -510,17 +510,17 @@ class BasePropertiesTest extends TestWithMockery
             ->andReturn($genderWillModifier = 0);
 
         $baseProperties->setBaseWill($will);
-        $this->assertSame($baseWillValue, $baseProperties->getBaseWill()->getValue());
+        $this->assertSame($baseWillValue, $baseProperties->getWill()->getValue());
     }
 
     /**
-     * @param BaseProperties $baseProperties
+     * @param PersonProperties $baseProperties
      *
      * @test
      * @depends base_will_can_be_set
-     * @expectedException \DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Exceptions\BasePropertyIsAlreadySet
+     * @expectedException \DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Exceptions\PropertyIsAlreadySet
      */
-    public function setting_another_base_will_cause_exception(BaseProperties $baseProperties)
+    public function setting_another_base_will_cause_exception(PersonProperties $baseProperties)
     {
         /** @var \Mockery\MockInterface|Will $anotherWill */
         $anotherWill = \Mockery::mock(Will::class);
@@ -552,7 +552,7 @@ class BasePropertiesTest extends TestWithMockery
     }
 
     /**
-     * @return BaseProperties
+     * @return PersonProperties
      *
      * @test
      * @depends maximal_base_intelligence_can_be_calculated
@@ -577,7 +577,7 @@ class BasePropertiesTest extends TestWithMockery
             ->andReturn($genderIntelligenceModifier = 0);
 
         $baseProperties->setBaseIntelligence($intelligence);
-        $this->assertSame($baseIntelligenceValue, $baseProperties->getBaseIntelligence()->getValue());
+        $this->assertSame($baseIntelligenceValue, $baseProperties->getIntelligence()->getValue());
 
         return $baseProperties;
     }
@@ -607,17 +607,17 @@ class BasePropertiesTest extends TestWithMockery
             ->andReturn($genderIntelligenceModifier = 0);
 
         $baseProperties->setBaseIntelligence($intelligence);
-        $this->assertSame($baseIntelligenceValue, $baseProperties->getBaseIntelligence()->getValue());
+        $this->assertSame($baseIntelligenceValue, $baseProperties->getIntelligence()->getValue());
     }
 
     /**
-     * @param BaseProperties $baseProperties
+     * @param PersonProperties $baseProperties
      *
      * @test
      * @depends base_intelligence_can_be_set
-     * @expectedException \DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Exceptions\BasePropertyIsAlreadySet
+     * @expectedException \DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Exceptions\PropertyIsAlreadySet
      */
-    public function setting_another_base_intelligence_cause_exception(BaseProperties $baseProperties)
+    public function setting_another_base_intelligence_cause_exception(PersonProperties $baseProperties)
     {
         /** @var \Mockery\MockInterface|Intelligence $anotherIntelligence */
         $anotherIntelligence = \Mockery::mock(Intelligence::class);
@@ -649,7 +649,7 @@ class BasePropertiesTest extends TestWithMockery
     }
 
     /**
-     * @return BaseProperties
+     * @return PersonProperties
      *
      * @test
      * @depends maximal_base_charisma_can_be_calculated
@@ -674,7 +674,7 @@ class BasePropertiesTest extends TestWithMockery
             ->andReturn($genderCharismaModifier = 0);
 
         $baseProperties->setBaseCharisma($charisma);
-        $this->assertSame($baseCharismaValue, $baseProperties->getBaseCharisma()->getValue());
+        $this->assertSame($baseCharismaValue, $baseProperties->getCharisma()->getValue());
 
         return $baseProperties;
     }
@@ -704,17 +704,17 @@ class BasePropertiesTest extends TestWithMockery
             ->andReturn($genderCharismaModifier = 0);
 
         $baseProperties->setBaseCharisma($charisma);
-        $this->assertSame($baseCharismaValue, $baseProperties->getBaseCharisma()->getValue());
+        $this->assertSame($baseCharismaValue, $baseProperties->getCharisma()->getValue());
     }
 
     /**
-     * @param BaseProperties $baseProperties
+     * @param PersonProperties $baseProperties
      *
      * @test
      * @depends base_charisma_can_be_set
-     * @expectedException \DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Exceptions\BasePropertyIsAlreadySet
+     * @expectedException \DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Exceptions\PropertyIsAlreadySet
      */
-    public function setting_another_base_charisma_cause_exception(BaseProperties $baseProperties)
+    public function setting_another_base_charisma_cause_exception(PersonProperties $baseProperties)
     {
         /** @var \Mockery\MockInterface|Charisma $anotherCharisma */
         $anotherCharisma = \Mockery::mock(Charisma::class);

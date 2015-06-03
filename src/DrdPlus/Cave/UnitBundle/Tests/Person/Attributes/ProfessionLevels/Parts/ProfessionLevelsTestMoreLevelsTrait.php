@@ -37,7 +37,7 @@ trait ProfessionLevelsTestMoreLevelsTrait
 
         /** @var LevelValue|\Mockery\MockInterface $firstLevelValue */
         $firstLevelValue = $firstLevel->getLevelValue();
-        $firstLevelValue->shouldReceive('getRank')
+        $firstLevelValue->shouldReceive('getValue')
             ->andReturn(1);
         /** @var FighterLevel|\Mockery\MockInterface $anotherLevel */
         $anotherLevel = \Mockery::mock($this->getMoreLevelsProfessionLevelClass($professionName));
@@ -46,7 +46,7 @@ trait ProfessionLevelsTestMoreLevelsTrait
             ->andReturn($professionName);
         $anotherLevel->shouldReceive('getLevelValue')
             ->andReturn($anotherLevelValue = \Mockery::mock(LevelValue::class));
-        $anotherLevelValue->shouldReceive('getRank')
+        $anotherLevelValue->shouldReceive('getValue')
             ->andReturn(2);
 
         $adder = 'add' . ucfirst($professionName) . 'Level';
@@ -160,7 +160,7 @@ trait ProfessionLevelsTestMoreLevelsTrait
             ->andReturn($professionName);
         $anotherLevel->shouldReceive('getLevelValue')
             ->andReturn($anotherLevelValue = \Mockery::mock(LevelValue::class));
-        $anotherLevelValue->shouldReceive('getRank')
+        $anotherLevelValue->shouldReceive('getValue')
             ->andReturn(2 /* already occupied level tank */);
 
         $adder = 'add' . ucfirst($professionName) . 'Level';
@@ -194,7 +194,7 @@ trait ProfessionLevelsTestMoreLevelsTrait
             ->andReturn($professionName);
         $anotherLevel->shouldReceive('getLevelValue')
             ->andReturn($anotherLevelValue = \Mockery::mock(LevelValue::class));
-        $anotherLevelValue->shouldReceive('getRank')
+        $anotherLevelValue->shouldReceive('getValue')
             ->andReturn(4 /* skipped rank 3 */);
 
         $adder = 'add' . ucfirst($professionName) . 'Level';
@@ -228,7 +228,7 @@ trait ProfessionLevelsTestMoreLevelsTrait
         $anotherLevel->shouldReceive('getLevelValue')
             ->andReturn($anotherLevelValue = \Mockery::mock(LevelValue::class));
         $rank = 3;
-        $anotherLevelValue->shouldReceive('getRank')
+        $anotherLevelValue->shouldReceive('getValue')
             ->andReturnUsing($rankGetter = function () use (&$rank) {
                 return $rank;
             });

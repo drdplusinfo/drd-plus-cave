@@ -35,7 +35,7 @@ trait ProfessionLevelsTestFirstLevelsTrait
         $professionLevel->shouldReceive('getLevelValue')
             ->atLeast()->once()
             ->andReturn($levelValue = \Mockery::mock(LevelValue::class));
-        $levelValue->shouldReceive('getRank')
+        $levelValue->shouldReceive('getValue')
             ->atLeast()->once()
             ->andReturn(1);
         $adder = 'add' . ucfirst($professionName) . 'Level';
@@ -151,7 +151,7 @@ trait ProfessionLevelsTestFirstLevelsTrait
         $professionLevel->shouldReceive('getLevelValue')
             ->atLeast()->once()
             ->andReturn($levelValue = \Mockery::mock(LevelValue::class));
-        $levelValue->shouldReceive('getRank')
+        $levelValue->shouldReceive('getValue')
             ->atLeast()->once()
             ->andReturn(0);
         $professionLevel->shouldReceive('getId')

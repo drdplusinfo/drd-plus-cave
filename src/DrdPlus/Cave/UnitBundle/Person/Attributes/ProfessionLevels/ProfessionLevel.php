@@ -84,6 +84,9 @@ abstract class ProfessionLevel extends StrictObject
      */
     private $charismaIncrement;
 
+    /**
+     * TODO what about first level and these properties? should be the first level* getters static?
+     */
     public function __construct(
         LevelValue $levelValue,
         Strength $strengthIncrement,
@@ -165,7 +168,7 @@ abstract class ProfessionLevel extends StrictObject
     /** @return bool */
     public function isFirstLevel()
     {
-        return $this->getLevelValue()->getRank() === 1;
+        return $this->getLevelValue()->getValue() === 1;
     }
 
     /**

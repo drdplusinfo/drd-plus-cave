@@ -135,21 +135,27 @@ class PersonTest extends TestWithMockery
     {
         $race = \Mockery::mock(Race::class);
         $race->shouldReceive('getStrengthModifier')
+            ->atLeast()
             ->once()
             ->andReturn(0);
         $race->shouldReceive('getAgilityModifier')
+            ->atLeast()
             ->once()
             ->andReturn(0);
         $race->shouldReceive('getKnackModifier')
+            ->atLeast()
             ->once()
             ->andReturn(0);
         $race->shouldReceive('getWillModifier')
+            ->atLeast()
             ->once()
             ->andReturn(0);
         $race->shouldReceive('getIntelligenceModifier')
+            ->atLeast()
             ->once()
             ->andReturn(0);
         $race->shouldReceive('getCharismaModifier')
+            ->atLeast()
             ->once()
             ->andReturn(0);
         $race->shouldReceive('getToughnessModifier')
@@ -183,19 +189,23 @@ class PersonTest extends TestWithMockery
             ->with(\Mockery::type(Person::class))
             ->once();
         $exceptionality->shouldReceive('getExceptionalityProperties')
+            ->atLeast()
             ->once()
             ->andReturn($exceptionalityProperties = \Mockery::mock(ExceptionalityProperties::class));
         $exceptionalityProperties->shouldReceive('getStrength')
+            ->atLeast()
             ->once()
             ->andReturn($strength = \Mockery::mock(Strength::class));
         $strength->shouldReceive('getValue')
             ->andReturn(0);
         $exceptionalityProperties->shouldReceive('getAgility')
+            ->atLeast()
             ->once()
             ->andReturn($agility = \Mockery::mock(Agility::class));
         $agility->shouldReceive('getValue')
             ->andReturn(0);
         $exceptionalityProperties->shouldReceive('getKnack')
+            ->atLeast()
             ->once()
             ->andReturn($knack = \Mockery::mock(Knack::class));
         $knack->shouldReceive('getValue')
@@ -228,28 +238,36 @@ class PersonTest extends TestWithMockery
         $professionLevels->shouldReceive('setPerson')
             ->with(\Mockery::type(Person::class))
             ->once();
-        $professionLevels->shouldReceive('getStrengthFirstLevelIncrement')
+        $professionLevels->shouldReceive('getStrengthIncrementForFirstLevel')
+            ->atLeast()
             ->once()
             ->andReturn(0);
-        $professionLevels->shouldReceive('getAgilityFirstLevelIncrement')
+        $professionLevels->shouldReceive('getAgilityIncrementForFirstLevel')
             ->once()
             ->andReturn(0);
         $professionLevels->shouldReceive('getAgilityIncrementSummary')
+            ->atLeast()
             ->once()
             ->andReturn(0);
-        $professionLevels->shouldReceive('getKnackFirstLevelIncrement')
+        $professionLevels->shouldReceive('getKnackIncrementForFirstLevel')
             ->once()
             ->andReturn(0);
-        $professionLevels->shouldReceive('getWillFirstLevelIncrement')
+        $professionLevels->shouldReceive('getWillIncrementForFirstLevel')
             ->once()
             ->andReturn(0);
-        $professionLevels->shouldReceive('getIntelligenceFirstLevelIncrement')
+        $professionLevels->shouldReceive('getIntelligenceIncrementForFirstLevel')
             ->once()
             ->andReturn(0);
-        $professionLevels->shouldReceive('getCharismaFirstLevelIncrement')
+        $professionLevels->shouldReceive('getCharismaIncrementForFirstLevel')
             ->once()
             ->andReturn(0);
-
+        $professionLevels->shouldReceive('getLevels')
+            ->atLeast()
+            ->once()
+            ->andReturn([]);
+        $professionLevels->shouldReceive('getKnackIncrementSummary')
+            ->once()
+            ->andReturn(0);
 
         return $professionLevels;
     }

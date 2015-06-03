@@ -109,7 +109,7 @@ class LevelValueTest extends \PHPUnit_Framework_TestCase
     public function gives_proper_value(){
         $levelValue = LevelValue::getEnum($value = 12345);
         $this->assertSame($value, $levelValue->getEnumValue());
-        $this->assertSame($value, $levelValue->getRank());
+        $this->assertSame($value, $levelValue->getValue());
         $this->assertSame("$value", $levelValue->__toString());
     }
 }

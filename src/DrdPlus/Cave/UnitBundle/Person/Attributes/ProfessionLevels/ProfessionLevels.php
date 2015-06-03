@@ -214,7 +214,7 @@ class ProfessionLevels extends StrictObject
     private function sortByLevelRank(array $professionLevels)
     {
         usort($professionLevels, function (ProfessionLevel $aLevel, ProfessionLevel $anotherLevel) {
-            $difference = $aLevel->getLevelValue()->getRank() - $anotherLevel->getLevelValue()->getRank();
+            $difference = $aLevel->getLevelValue()->getValue() - $anotherLevel->getLevelValue()->getValue();
             if ($difference === 0) {
                 throw new \LogicException(
                     'Two profession levels of IDs' .
@@ -286,15 +286,15 @@ class ProfessionLevels extends StrictObject
 
     private function checkNewLevelSequence(ProfessionLevel $newLevel, ArrayCollection $previousProfessionLevels)
     {
-        if (!$newLevel->getLevelValue()->getRank()) {
+        if (!$newLevel->getLevelValue()->getValue()) {
             throw new \LogicException(
                 'Missing level value of given level of profession ' . $newLevel->getProfessionCode() . ' with ID ' . var_export($newLevel->getId(), true)
             );
         }
 
-        if ($newLevel->getLevelValue()->getRank() !== ($previousProfessionLevels->count() + 1)) {
+        if ($newLevel->getLevelValue()->getValue() !== ($previousProfessionLevels->count() + 1)) {
             throw new \LogicException(
-                'Unexpected level of given profession level. Expected ' . ($previousProfessionLevels->count() + 1) . ', got ' . $newLevel->getLevelValue()->getRank()
+                'Unexpected level of given profession level. Expected ' . ($previousProfessionLevels->count() + 1) . ', got ' . $newLevel->getLevelValue()->getValue()
             );
         }
     }
@@ -429,7 +429,7 @@ class ProfessionLevels extends StrictObject
     private function getPropertyIncrementSummary($propertyName)
     {
         // like getStrengthFirstLevelIncrement
-        $propertyFirstLevelIncrementGetter = 'get' . ucfirst($propertyName) . 'FirstLevelIncrement';
+        $propertyFirstLevelIncrementGetter = 'get' . ucfirst($propertyName) . 'IncrementForFirstLevel';
 
         return $this->$propertyFirstLevelIncrementGetter() + $this->getLevelsPropertyIncrementSummary($propertyName);
     }

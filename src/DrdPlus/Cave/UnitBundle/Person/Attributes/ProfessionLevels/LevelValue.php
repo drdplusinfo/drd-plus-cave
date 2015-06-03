@@ -23,7 +23,7 @@ class LevelValue extends SelfTypedIntegerEnum
     /**
      * @return int
      */
-    public function getRank()
+    public function getValue()
     {
         return $this->getEnumValue();
     }

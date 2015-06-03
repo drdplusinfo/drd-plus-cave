@@ -10,7 +10,7 @@ use DrdPlus\Cave\UnitBundle\Person\Attributes\GameCharacteristics\Combat\Shootin
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Name;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\ProfessionLevels;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Agility;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\BaseProperties;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\PersonProperties;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Charisma;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Derived\Toughness;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Intelligence;
@@ -59,14 +59,14 @@ class Person extends StrictObject
     private $gender;
 
     /**
-     * @var BaseProperties
+     * @var PersonProperties
      *
      * @ORM\Column(type="exceptionality")
      */
     private $exceptionality;
 
     /**
-     * @var BaseProperties
+     * @var PersonProperties
      *
      * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\BaseProperties")
      */
@@ -88,6 +88,9 @@ class Person extends StrictObject
     /** @var Attack */
     private $attack;
 
+    /** @var Defense */
+    private $defense;
+
     /** @var Shooting */
     private $shooting;
 
@@ -108,7 +111,7 @@ class Person extends StrictObject
         $this->professionLevels = $professionLevels;
 
         // helpers - every value is recalculated on each request
-        $this->baseProperties = new BaseProperties($this);
+        $this->baseProperties = new PersonProperties($this);
         $this->fight = new Fight($this);
         $this->attack = new Attack($this->getCurrentAgility());
         $this->defense = new Defense($this->getCurrentAgility());
@@ -162,7 +165,7 @@ class Person extends StrictObject
     }
 
     /**
-     * @return BaseProperties
+     * @return PersonProperties
      */
     public function getBaseProperties()
     {
@@ -221,13 +224,12 @@ class Person extends StrictObject
      */
     private function calculateCurrentProperty($propertyName)
     {
-        $getBaseProperty = 'getBase' . ucfirst($propertyName);
-        $getPropertyModifier = 'get' . ucfirst($propertyName) . 'Modifier';
         $getProperty = 'get' . ucfirst($propertyName);
+        $getPropertyModifier = 'get' . ucfirst($propertyName) . 'Modifier';
         $getPropertyIncrementSummary = 'get' . ucfirst($propertyName) . 'IncrementSummary';
 
         return
-            $this->getBaseProperties()->$getBaseProperty()->getValue()
+            $this->getBaseProperties()->$getProperty()->getValue()
             + $this->getRace()->$getPropertyModifier($this->getGender())
             + $this->getExceptionality()->getExceptionalityProperties()->$getProperty()->getValue()
             // TODO check if first level is NOT counted
@@ -272,7 +274,7 @@ class Person extends StrictObject
     public function getSize()
     {
         // there is no other size modifier then the base size
-        return $this->getBaseProperties()->getBaseSize();
+        return $this->getBaseProperties()->getSize();
     }
 
     /**

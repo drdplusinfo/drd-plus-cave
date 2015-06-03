@@ -21,8 +21,10 @@ class AbstractTestOfProfessionLevel extends TestWithMockery
      */
     public function can_create_instance()
     {
-        /** @var LevelValue $levelValue */
+        /** @var LevelValue|\Mockery\MockInterface $levelValue */
         $levelValue = \Mockery::mock(LevelValue::class);
+        $levelValue->shouldReceive('getValue')
+            ->andReturn(1);
         /** @var Strength $strengthIncrement */
         $strengthIncrement = \Mockery::mock(Strength::class);
         /** @var Agility $agilityIncrement */
