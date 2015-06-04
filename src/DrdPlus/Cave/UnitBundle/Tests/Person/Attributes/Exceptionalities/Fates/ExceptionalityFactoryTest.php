@@ -4,9 +4,9 @@ namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities;
 use Doctrine\DBAL\Types\Type;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Choices\Fortune;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Choices\PlayerDecision;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Fates\Combination;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Fates\ExceptionalProperties;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Fates\GoodRear;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Fates\FateOfCombination;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Fates\FateOfExceptionalProperties;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Fates\FateOfGoodRear;
 use DrdPlus\Cave\UnitBundle\Tests\TestWithMockery;
 
 class ExceptionalityFactoryTest extends TestWithMockery
@@ -28,7 +28,7 @@ class ExceptionalityFactoryTest extends TestWithMockery
      */
     public function good_rear_is_registered_after_factory_creation()
     {
-        $this->assertTrue(Type::hasType(GoodRear::getTypeName()));
+        $this->assertTrue(Type::hasType(FateOfGoodRear::getTypeName()));
     }
 
     /**
@@ -37,7 +37,7 @@ class ExceptionalityFactoryTest extends TestWithMockery
      */
     public function combination_is_registered_after_factory_creation()
     {
-        $this->assertTrue(Type::hasType(Combination::getTypeName()));
+        $this->assertTrue(Type::hasType(FateOfCombination::getTypeName()));
     }
 
     /**
@@ -46,7 +46,7 @@ class ExceptionalityFactoryTest extends TestWithMockery
      */
     public function exceptional_properties_type_is_registered_after_factory_creation()
     {
-        $this->assertTrue(Type::hasType(ExceptionalProperties::getTypeName()));
+        $this->assertTrue(Type::hasType(FateOfExceptionalProperties::getTypeName()));
     }
 
     /**
@@ -57,7 +57,7 @@ class ExceptionalityFactoryTest extends TestWithMockery
      */
     public function can_give_good_rear(ExceptionalityFactory $factory)
     {
-        $this->assertInstanceOf(GoodRear::class, $factory->getGoodRear());
+        $this->assertInstanceOf(FateOfGoodRear::class, $factory->getGoodRear());
     }
 
     /**
@@ -68,7 +68,7 @@ class ExceptionalityFactoryTest extends TestWithMockery
      */
     public function can_give_combination(ExceptionalityFactory $factory)
     {
-        $this->assertInstanceOf(Combination::class, $factory->getCombination());
+        $this->assertInstanceOf(FateOfCombination::class, $factory->getCombination());
     }
 
     /**
@@ -79,7 +79,7 @@ class ExceptionalityFactoryTest extends TestWithMockery
      */
     public function can_give_exceptional_properties(ExceptionalityFactory $factory)
     {
-        $this->assertInstanceOf(ExceptionalProperties::class, $factory->getExceptionalProperties());
+        $this->assertInstanceOf(FateOfExceptionalProperties::class, $factory->getExceptionalProperties());
     }
 
     /**

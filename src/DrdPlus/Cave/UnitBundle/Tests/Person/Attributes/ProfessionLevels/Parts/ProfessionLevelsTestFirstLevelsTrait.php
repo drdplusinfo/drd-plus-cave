@@ -79,27 +79,27 @@ trait ProfessionLevelsTestFirstLevelsTrait
         $professionLevel->shouldDeferMissing();
         $this->assertSame(
             in_array('strength', $primaryProperties) ? 1 : 0,
-            $professionLevels->getStrengthIncrementForFirstLevel()
+            $professionLevels->getStrengthModifierForFirstLevel()
         );
         $this->assertSame(
             in_array('agility', $primaryProperties) ? 1 : 0,
-            $professionLevels->getAgilityIncrementForFirstLevel()
+            $professionLevels->getAgilityModifierForFirstLevel()
         );
         $this->assertSame(
             in_array('knack', $primaryProperties) ? 1 : 0,
-            $professionLevels->getKnackIncrementForFirstLevel()
+            $professionLevels->getKnackModifierForFirstLevel()
         );
         $this->assertSame(
             in_array('will', $primaryProperties) ? 1 : 0,
-            $professionLevels->getWillIncrementForFirstLevel()
+            $professionLevels->getWillModifierForFirstLevel()
         );
         $this->assertSame(
             in_array('intelligence', $primaryProperties) ? 1 : 0,
-            $professionLevels->getIntelligenceIncrementForFirstLevel()
+            $professionLevels->getIntelligenceModifierForFirstLevel()
         );
         $this->assertSame(
             in_array('charisma', $primaryProperties) ? 1 : 0,
-            $professionLevels->getCharismaIncrementForFirstLevel()
+            $professionLevels->getCharismaModifierForFirstLevel()
         );
     }
 

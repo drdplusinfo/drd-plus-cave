@@ -74,10 +74,10 @@ trait ProfessionLevelsTestMoreLevelsTrait
      */
     public function fighter_has_strength_increment_summary_as_expected(ProfessionLevels $professionLevels)
     {
-        $this->professionHasPropertyIncrementSummaryAsExpected('fighter', 'strength', $professionLevels);
+        $this->professionHasPropertyModifierSummaryAsExpected('fighter', 'strength', $professionLevels);
     }
 
-    public function professionHasPropertyIncrementSummaryAsExpected(
+    private function professionHasPropertyModifierSummaryAsExpected(
         $professionName,
         $testedProperty,
         ProfessionLevels $professionLevels
@@ -98,7 +98,7 @@ trait ProfessionLevelsTestMoreLevelsTrait
                 ? 1
                 : 0
             )
-            + $propertySummary, $professionLevels->getStrengthIncrementSummary()
+            + $propertySummary, $professionLevels->getStrengthModifierSummary()
         );
     }
 
@@ -130,7 +130,7 @@ trait ProfessionLevelsTestMoreLevelsTrait
      */
     public function fighter_has_agility_increment_summary_as_expected(ProfessionLevels $professionLevels)
     {
-        $this->professionHasPropertyIncrementSummaryAsExpected('fighter', 'agility', $professionLevels);
+        $this->professionHasPropertyModifierSummaryAsExpected('fighter', 'agility', $professionLevels);
     }
 
     /**

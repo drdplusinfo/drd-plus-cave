@@ -3,9 +3,9 @@ namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities;
 
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Choices\Fortune;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Choices\PlayerDecision;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Fates\Combination;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Fates\ExceptionalProperties;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Fates\GoodRear;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Fates\FateOfCombination;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Fates\FateOfExceptionalProperties;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Fates\FateOfGoodRear;
 use Granam\Strict\Object\StrictObject;
 
 class ExceptionalityFactory extends StrictObject
@@ -16,9 +16,9 @@ class ExceptionalityFactory extends StrictObject
      */
     public function __construct()
     {
-        Combination::registerSpecificFate();
-        GoodRear::registerSpecificFate();
-        ExceptionalProperties::registerSpecificFate();
+        FateOfCombination::registerSpecificFate();
+        FateOfGoodRear::registerSpecificFate();
+        FateOfExceptionalProperties::registerSpecificFate();
 
         Fortune::registerSelfChoice();
         PlayerDecision::registerSelfChoice();
@@ -27,26 +27,26 @@ class ExceptionalityFactory extends StrictObject
     // FATES
 
     /**
-     * @return Combination
+     * @return FateOfCombination
      */
     public function getCombination()
     {
-        return Combination::getIt();
+        return FateOfCombination::getIt();
     }
     /**
-     * @return GoodRear
+     * @return FateOfGoodRear
      */
     public function getGoodRear()
     {
-        return GoodRear::getIt();
+        return FateOfGoodRear::getIt();
     }
 
     /**
-     * @return ExceptionalProperties
+     * @return FateOfExceptionalProperties
      */
     public function getExceptionalProperties()
     {
-        return ExceptionalProperties::getIt();
+        return FateOfExceptionalProperties::getIt();
     }
 
     // CHOICES

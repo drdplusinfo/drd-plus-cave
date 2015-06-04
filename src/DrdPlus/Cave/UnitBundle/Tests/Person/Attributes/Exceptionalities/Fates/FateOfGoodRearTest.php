@@ -3,22 +3,22 @@ namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Fates;
 
 use DrdPlus\Cave\UnitBundle\Tests\Person\Attributes\Exceptionalities\Fates\AbstractTestOfFate;
 
-class ExceptionalPropertiesTest extends AbstractTestOfFate
+class FateOfGoodRearTest extends AbstractTestOfFate
 {
 
     protected function getExpectedPrimaryPropertiesBonusOnChoice()
     {
-        return 3;
+        return 1;
     }
 
     protected function getExpectedSecondaryPropertiesBonusOnChoice()
     {
-        return 6;
+        return 2;
     }
 
     protected function getExpectedUpToSingleProperty()
     {
-        return 3;
+        return 1;
     }
 
     /**
@@ -28,7 +28,7 @@ class ExceptionalPropertiesTest extends AbstractTestOfFate
      */
     protected function getExpectedPrimaryPropertiesBonusOnFortune($value)
     {
-        return (int)ceil($value / 3);
+        return (int)floor($value / 4);
     }
 
     /**
@@ -37,6 +37,6 @@ class ExceptionalPropertiesTest extends AbstractTestOfFate
      */
     protected function getExpectedSecondaryPropertiesBonusOnFortune($value)
     {
-        return (int)floor($value / 2);
+        return (int)floor($value / 4);
     }
 }

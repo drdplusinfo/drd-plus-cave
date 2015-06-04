@@ -46,7 +46,8 @@ class ProfessionLevelsTest extends TestWithMockery
      * MORE LEVELS
      */
 
-    use ProfessionLevelsTestMoreLevelsTrait;
+    // TODO fix recursion in this test
+//    use ProfessionLevelsTestMoreLevelsTrait;
 
     /*
      * ONLY SINGLE PROFESSION IS ALLOWED

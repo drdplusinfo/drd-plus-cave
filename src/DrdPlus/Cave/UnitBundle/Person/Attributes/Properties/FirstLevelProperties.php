@@ -72,12 +72,12 @@ class FirstLevelProperties extends StrictObject
         /** @var string|BaseProperty $propertyName */
         $propertyName = ucfirst($propertyName);
         $getPropertyModifier = "get{$propertyName}Modifier";
-        $getPropertyFirstLevelIncrement = "get{$propertyName}IncrementForFirstLevel";
+        $getPropertyModifierForFirstLevel = "get{$propertyName}ModifierForFirstLevel";
 
         return
             $race->$getPropertyModifier($gender)
             + $this->getExceptionalPropertyIncrement($propertyName, $exceptionalityProperties)->getValue()
-            + $professionLevels->$getPropertyFirstLevelIncrement();
+            + $professionLevels->$getPropertyModifierForFirstLevel();
     }
 
     /**
@@ -88,9 +88,9 @@ class FirstLevelProperties extends StrictObject
      */
     private function getExceptionalPropertyIncrement($propertyName, ExceptionalityProperties $exceptionalityProperties)
     {
-        $propertyGetter = "get{$propertyName}";
+        $getProperty = "get{$propertyName}";
 
-        return $exceptionalityProperties->$propertyGetter();
+        return $exceptionalityProperties->$getProperty();
     }
 
     /**
@@ -114,7 +114,8 @@ class FirstLevelProperties extends StrictObject
 
         if ($firstLevelProperty->getValue() > $this->calculateMaximalBaseProperty($propertyName, $race, $gender)) {
             throw new Exceptions\BasePropertyValueExceeded(
-                'The firstLevel ' . $propertyName . ' can not exceed ' . $this->calculateMaximalBaseProperty($propertyName, $race, $gender)
+                'The firstLevel ' . $propertyName . ' can not exceed ' .
+                $this->calculateMaximalBaseProperty($propertyName, $race, $gender) . '. Got ' . $firstLevelProperty->getValue() . '.'
             );
         }
 
@@ -209,7 +210,7 @@ class FirstLevelProperties extends StrictObject
     {
         return // the race bonus is NOT count for incrementation, doesn't count to size respectively
             $this->getExceptionalPropertyIncrement(Strength::STRENGTH, $exceptionalityProperties)->getValue()
-            + $professionLevels->getStrengthIncrementForFirstLevel();
+            + $professionLevels->getStrengthModifierForFirstLevel();
     }
 
     /**

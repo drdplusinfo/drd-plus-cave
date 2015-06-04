@@ -3,14 +3,14 @@ namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Fates;
 
 use DrdPlus\Cave\ToolsBundle\Dices\Roll;
 
-class GoodRear extends AbstractFate
+class FateOfExceptionalProperties extends AbstractFate
 {
     /**
      * @return int
      */
     public function getPrimaryPropertiesBonusOnChoice()
     {
-        return 1;
+        return 3;
     }
 
     /**
@@ -18,7 +18,7 @@ class GoodRear extends AbstractFate
      */
     public function getSecondaryPropertiesBonusOnChoice()
     {
-        return 2;
+        return 6;
     }
 
     /**
@@ -26,7 +26,7 @@ class GoodRear extends AbstractFate
      */
     public function getUpToSingleProperty()
     {
-        return 1;
+        return 3;
     }
 
     /**
@@ -40,14 +40,14 @@ class GoodRear extends AbstractFate
             case 1:
             case 2:
             case 3:
-                return 0;
+                return 1;
             case 4:
             case 5:
             case 6:
-                return 1;
+                return 2;
             default:
                 throw new \RuntimeException(
-                    'Unexpected roll value ' . var_export($roll->getRollSummary(), true)
+                    'Unexpected dice roll value ' . var_export($roll->getRollSummary(), true)
                 );
         }
     }
@@ -59,8 +59,22 @@ class GoodRear extends AbstractFate
      */
     public function getSecondaryPropertiesBonusOnFortune(Roll $roll)
     {
-        // secondary and primary properties got same bonus
-        return $this->getPrimaryPropertiesBonusOnFortune($roll);
+        switch ($roll->getRollSummary()) {
+            case 1:
+                return 0;
+            case 2:
+            case 3:
+                return 1;
+            case 4:
+            case 5:
+                return 2;
+            case 6:
+                return 3;
+            default:
+                throw new \RuntimeException(
+                    'Unexpected roll value ' . var_export($roll->getRollSummary(), true)
+                );
+        }
     }
 
 }

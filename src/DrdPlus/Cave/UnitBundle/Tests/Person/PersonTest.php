@@ -238,34 +238,34 @@ class PersonTest extends TestWithMockery
         $professionLevels->shouldReceive('setPerson')
             ->with(\Mockery::type(Person::class))
             ->once();
-        $professionLevels->shouldReceive('getStrengthIncrementForFirstLevel')
+        $professionLevels->shouldReceive('getStrengthModifierForFirstLevel')
             ->atLeast()
             ->once()
             ->andReturn(0);
-        $professionLevels->shouldReceive('getAgilityIncrementForFirstLevel')
+        $professionLevels->shouldReceive('getAgilityModifierForFirstLevel')
             ->once()
             ->andReturn(0);
-        $professionLevels->shouldReceive('getAgilityIncrementSummary')
+        $professionLevels->shouldReceive('getAgilityModifierSummary')
             ->atLeast()
             ->once()
             ->andReturn(0);
-        $professionLevels->shouldReceive('getKnackIncrementForFirstLevel')
+        $professionLevels->shouldReceive('getKnackModifierForFirstLevel')
             ->once()
             ->andReturn(0);
-        $professionLevels->shouldReceive('getWillIncrementForFirstLevel')
+        $professionLevels->shouldReceive('getWillModifierForFirstLevel')
             ->once()
             ->andReturn(0);
-        $professionLevels->shouldReceive('getIntelligenceIncrementForFirstLevel')
+        $professionLevels->shouldReceive('getIntelligenceModifierForFirstLevel')
             ->once()
             ->andReturn(0);
-        $professionLevels->shouldReceive('getCharismaIncrementForFirstLevel')
+        $professionLevels->shouldReceive('getCharismaModifierForFirstLevel')
             ->once()
             ->andReturn(0);
         $professionLevels->shouldReceive('getLevels')
             ->atLeast()
             ->once()
             ->andReturn([]);
-        $professionLevels->shouldReceive('getKnackIncrementSummary')
+        $professionLevels->shouldReceive('getKnackModifierSummary')
             ->once()
             ->andReturn(0);
 

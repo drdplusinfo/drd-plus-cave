@@ -226,14 +226,14 @@ class Person extends StrictObject
     {
         $getProperty = 'get' . ucfirst($propertyName);
         $getPropertyModifier = 'get' . ucfirst($propertyName) . 'Modifier';
-        $getPropertyIncrementSummary = 'get' . ucfirst($propertyName) . 'IncrementSummary';
+        $getPropertyModifierSummary = 'get' . ucfirst($propertyName) . 'ModifierSummary';
 
         return
             $this->getBaseProperties()->$getProperty()->getValue()
             + $this->getRace()->$getPropertyModifier($this->getGender())
             + $this->getExceptionality()->getExceptionalityProperties()->$getProperty()->getValue()
             // TODO check if first level is NOT counted
-            + $this->getProfessionLevels()->$getPropertyIncrementSummary();
+            + $this->getProfessionLevels()->$getPropertyModifierSummary();
     }
 
     /**

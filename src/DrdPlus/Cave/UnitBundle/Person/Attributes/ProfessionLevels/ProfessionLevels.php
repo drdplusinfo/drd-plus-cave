@@ -21,7 +21,7 @@ use Granam\Strict\Object\StrictObject;
  */
 class ProfessionLevels extends StrictObject
 {
-    const PROPERTY_FIRST_LEVEL_INCREMENT = +1;
+    const PROPERTY_FIRST_LEVEL_MODIFIER = +1;
 
     /**
      * @var integer
@@ -344,9 +344,9 @@ class ProfessionLevels extends StrictObject
      *
      * @return int
      */
-    public function getStrengthIncrementForFirstLevel()
+    public function getStrengthModifierForFirstLevel()
     {
-        return $this->getPropertyIncrementForFirstLevel(Strength::STRENGTH);
+        return $this->getPropertyModifierForFirstLevel(Strength::STRENGTH);
     }
 
     /**
@@ -354,84 +354,71 @@ class ProfessionLevels extends StrictObject
      *
      * @return int
      */
-    private function getPropertyIncrementForFirstLevel($propertyCode)
+    private function getPropertyModifierForFirstLevel($propertyCode)
     {
         return $this->getFirstLevel() && $this->getFirstLevel()->isPrimaryProperty($propertyCode)
-            ? self::PROPERTY_FIRST_LEVEL_INCREMENT
+            ? self::PROPERTY_FIRST_LEVEL_MODIFIER
             : 0;
     }
 
     /**
-     * Get agility increment
+     * Get agility modifier
      *
      * @return int
      */
-    public function getAgilityIncrementForFirstLevel()
+    public function getAgilityModifierForFirstLevel()
     {
-        return $this->getPropertyIncrementForFirstLevel(Agility::AGILITY);
+        return $this->getPropertyModifierForFirstLevel(Agility::AGILITY);
     }
 
     /**
-     * Get knack increment
+     * Get knack modifier
      *
      * @return int
      */
-    public function getKnackIncrementForFirstLevel()
+    public function getKnackModifierForFirstLevel()
     {
-        return $this->getPropertyIncrementForFirstLevel(Knack::KNACK);
+        return $this->getPropertyModifierForFirstLevel(Knack::KNACK);
     }
 
     /**
-     * Get will increment
+     * Get will modifier
      *
      * @return int
      */
-    public function getWillIncrementForFirstLevel()
+    public function getWillModifierForFirstLevel()
     {
-        return $this->getPropertyIncrementForFirstLevel(Will::WILL);
+        return $this->getPropertyModifierForFirstLevel(Will::WILL);
     }
 
     /**
-     * Get intelligence increment
+     * Get intelligence modifier
      *
      * @return int
      */
-    public function getIntelligenceIncrementForFirstLevel()
+    public function getIntelligenceModifierForFirstLevel()
     {
-        return $this->getPropertyIncrementForFirstLevel(Intelligence::INTELLIGENCE);
+        return $this->getPropertyModifierForFirstLevel(Intelligence::INTELLIGENCE);
     }
 
     /**
-     * Get charisma increment
+     * Get charisma modifier
      *
      * @return int
      */
-    public function getCharismaIncrementForFirstLevel()
+    public function getCharismaModifierForFirstLevel()
     {
-        return $this->getPropertyIncrementForFirstLevel(Charisma::CHARISMA);
+        return $this->getPropertyModifierForFirstLevel(Charisma::CHARISMA);
     }
 
     /**
-     * Get strength increment
+     * Get strength modifier
      *
      * @return int
      */
-    public function getStrengthIncrementSummary()
+    public function getStrengthModifierSummary()
     {
-        return $this->getPropertyIncrementSummary(Strength::STRENGTH);
-    }
-
-    /**
-     * @param string $propertyName
-     *
-     * @return int
-     */
-    private function getPropertyIncrementSummary($propertyName)
-    {
-        // like getStrengthFirstLevelIncrement
-        $propertyFirstLevelIncrementGetter = 'get' . ucfirst($propertyName) . 'IncrementForFirstLevel';
-
-        return $this->$propertyFirstLevelIncrementGetter() + $this->getLevelsPropertyIncrementSummary($propertyName);
+        return $this->getPropertyModifierSummary(Strength::STRENGTH);
     }
 
     /**
@@ -439,7 +426,20 @@ class ProfessionLevels extends StrictObject
      *
      * @return int
      */
-    private function getLevelsPropertyIncrementSummary($propertyName)
+    private function getPropertyModifierSummary($propertyName)
+    {
+        // like getStrengthFirstLevelModifier
+        $propertyFirstLevelModifierGetter = 'get' . ucfirst($propertyName) . 'ModifierForFirstLevel';
+
+        return $this->$propertyFirstLevelModifierGetter() + $this->getLevelsPropertyModifierSummary($propertyName);
+    }
+
+    /**
+     * @param string $propertyName
+     *
+     * @return int
+     */
+    private function getLevelsPropertyModifierSummary($propertyName)
     {
         return array_sum($this->getLevelsPropertyModifiers($propertyName));
     }
@@ -450,67 +450,67 @@ class ProfessionLevels extends StrictObject
      */
     private function getLevelsPropertyModifiers($propertyName)
     {
-        /** like strength = getStrengthIncrement, @see ProfessionLevel::getStrengthIncrement() */
-        $getPropertyIncrement = 'get' . ucfirst($propertyName) . 'Increment';
+        /** like strength = getStrengthModifier, @see ProfessionLevel::getStrengthModifier() */
+        $getPropertyModifier = 'get' . ucfirst($propertyName) . 'Modifier';
 
         return array_map(
-            function (ProfessionLevel $professionLevel) use ($getPropertyIncrement) {
-                /** @var BaseProperty $propertyIncrement */
-                $propertyIncrement = $professionLevel->$getPropertyIncrement();
+            function (ProfessionLevel $professionLevel) use ($getPropertyModifier) {
+                /** @var BaseProperty $propertyModifier */
+                $propertyModifier = $professionLevel->$getPropertyModifier();
 
-                return $propertyIncrement->getValue();
+                return $propertyModifier->getValue();
             },
             $this->getLevels()
         );
     }
 
     /**
-     * Get agility increment
+     * Get agility modifier
      *
      * @return int
      */
-    public function getAgilityIncrementSummary()
+    public function getAgilityModifierSummary()
     {
-        return $this->getPropertyIncrementSummary(Agility::AGILITY);
+        return $this->getPropertyModifierSummary(Agility::AGILITY);
     }
 
     /**
-     * Get agility increment
+     * Get agility modifier
      *
      * @return int
      */
-    public function getKnackIncrementSummary()
+    public function getKnackModifierSummary()
     {
-        return $this->getPropertyIncrementSummary(Knack::KNACK);
+        return $this->getPropertyModifierSummary(Knack::KNACK);
     }
 
     /**
-     * Get will increment
+     * Get will modifier
      *
      * @return int
      */
-    public function getWillIncrementSummary()
+    public function getWillModifierSummary()
     {
-        return $this->getPropertyIncrementSummary(Will::WILL);
+        return $this->getPropertyModifierSummary(Will::WILL);
     }
 
     /**
-     * Get intelligence increment
+     * Get intelligence modifier
      *
      * @return int
      */
-    public function getIntelligenceIncrementSummary()
+    public function getIntelligenceModifierSummary()
     {
-        return $this->getPropertyIncrementSummary(Intelligence::INTELLIGENCE);
+        return $this->getPropertyModifierSummary(Intelligence::INTELLIGENCE);
     }
 
     /**
-     * Get charisma increment
+     * Get charisma modifier
      *
      * @return int
      */
-    public function getCharismaIncrementSummary()
+    public function getCharismaModifierSummary()
     {
-        return $this->getPropertyIncrementSummary(Charisma::CHARISMA);
+        return $this->getPropertyModifierSummary(Charisma::CHARISMA);
     }
 }
