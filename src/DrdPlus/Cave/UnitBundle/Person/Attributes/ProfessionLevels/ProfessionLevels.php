@@ -19,7 +19,7 @@ use Granam\Strict\Object\StrictObject;
  * @ORM\Table()
  * @ORM\Entity()
  */
-class ProfessionLevels extends StrictObject
+class ProfessionLevels extends StrictObject implements \IteratorAggregate
 {
     const PROPERTY_FIRST_LEVEL_MODIFIER = +1;
 
@@ -179,7 +179,7 @@ class ProfessionLevels extends StrictObject
     /**
      * All levels, achieved at any profession
      *
-     * @return ProfessionLevel[]|array
+     * @return ProfessionLevel[]
      */
     public function getLevels()
     {
@@ -191,6 +191,14 @@ class ProfessionLevels extends StrictObject
             $this->getThiefLevels()->toArray(),
             $this->getWizardLevels()->toArray()
         );
+    }
+
+    /**
+     * @return ProfessionLevel[]
+     */
+    public function getIterator()
+    {
+        return new \ArrayObject($this->getLevels());
     }
 
     /**
@@ -229,6 +237,14 @@ class ProfessionLevels extends StrictObject
         });
 
         return $professionLevels;
+    }
+
+    public function getNextLevels()
+    {
+        $levels = $this->getLevels();
+        array_shift($levels); // remote the fist level
+
+        return $levels;
     }
 
     /**
@@ -346,18 +362,8 @@ class ProfessionLevels extends StrictObject
      */
     public function getStrengthModifierForFirstLevel()
     {
-        return $this->getPropertyModifierForFirstLevel(Strength::STRENGTH);
-    }
-
-    /**
-     * @param string $propertyCode
-     *
-     * @return int
-     */
-    private function getPropertyModifierForFirstLevel($propertyCode)
-    {
-        return $this->getFirstLevel() && $this->getFirstLevel()->isPrimaryProperty($propertyCode)
-            ? self::PROPERTY_FIRST_LEVEL_MODIFIER
+        return (bool)$this->getFirstLevel()
+            ? $this->getFirstLevel()->getStrengthFirstLevelModifier()
             : 0;
     }
 
@@ -368,7 +374,9 @@ class ProfessionLevels extends StrictObject
      */
     public function getAgilityModifierForFirstLevel()
     {
-        return $this->getPropertyModifierForFirstLevel(Agility::AGILITY);
+        return (bool)$this->getFirstLevel()
+            ? $this->getFirstLevel()->getAgilityFirstLevelModifier()
+            : 0;
     }
 
     /**
@@ -378,7 +386,9 @@ class ProfessionLevels extends StrictObject
      */
     public function getKnackModifierForFirstLevel()
     {
-        return $this->getPropertyModifierForFirstLevel(Knack::KNACK);
+        return (bool)$this->getFirstLevel()
+            ? $this->getFirstLevel()->getKnackFirstLevelModifier()
+            : 0;
     }
 
     /**
@@ -388,7 +398,9 @@ class ProfessionLevels extends StrictObject
      */
     public function getWillModifierForFirstLevel()
     {
-        return $this->getPropertyModifierForFirstLevel(Will::WILL);
+        return (bool)$this->getFirstLevel()
+            ? $this->getFirstLevel()->getWillFirstLevelModifier()
+            : 0;
     }
 
     /**
@@ -398,7 +410,9 @@ class ProfessionLevels extends StrictObject
      */
     public function getIntelligenceModifierForFirstLevel()
     {
-        return $this->getPropertyModifierForFirstLevel(Intelligence::INTELLIGENCE);
+        return (bool)$this->getFirstLevel()
+            ? $this->getFirstLevel()->getIntelligenceFirstLevelModifier()
+            : 0;
     }
 
     /**
@@ -408,7 +422,9 @@ class ProfessionLevels extends StrictObject
      */
     public function getCharismaModifierForFirstLevel()
     {
-        return $this->getPropertyModifierForFirstLevel(Charisma::CHARISMA);
+        return (bool)$this->getFirstLevel()
+            ? $this->getFirstLevel()->getCharismaFirstLevelModifier()
+            : 0;
     }
 
     /**
@@ -431,7 +447,7 @@ class ProfessionLevels extends StrictObject
         // like getStrengthFirstLevelModifier
         $propertyFirstLevelModifierGetter = 'get' . ucfirst($propertyName) . 'ModifierForFirstLevel';
 
-        return $this->$propertyFirstLevelModifierGetter() + $this->getLevelsPropertyModifierSummary($propertyName);
+        return $this->$propertyFirstLevelModifierGetter() + $this->getNextLevelsPropertyModifierSummary($propertyName);
     }
 
     /**
@@ -439,28 +455,28 @@ class ProfessionLevels extends StrictObject
      *
      * @return int
      */
-    private function getLevelsPropertyModifierSummary($propertyName)
+    private function getNextLevelsPropertyModifierSummary($propertyName)
     {
-        return array_sum($this->getLevelsPropertyModifiers($propertyName));
+        return array_sum($this->getNextLevelsPropertyModifiers($propertyName));
     }
 
     /**
      * @param $propertyName
      * @return array|int[]
      */
-    private function getLevelsPropertyModifiers($propertyName)
+    private function getNextLevelsPropertyModifiers($propertyName)
     {
         /** like strength = getStrengthModifier, @see ProfessionLevel::getStrengthModifier() */
-        $getPropertyModifier = 'get' . ucfirst($propertyName) . 'Modifier';
+        $getPropertyIncrement = 'get' . ucfirst($propertyName) . 'Increment';
 
         return array_map(
-            function (ProfessionLevel $professionLevel) use ($getPropertyModifier) {
-                /** @var BaseProperty $propertyModifier */
-                $propertyModifier = $professionLevel->$getPropertyModifier();
+            function (ProfessionLevel $professionLevel) use ($getPropertyIncrement) {
+                /** @var BaseProperty $propertyIncrement */
+                $propertyIncrement = $professionLevel->$getPropertyIncrement();
 
-                return $propertyModifier->getValue();
+                return $propertyIncrement->getValue();
             },
-            $this->getLevels()
+            $this->getNextLevels()
         );
     }
 
