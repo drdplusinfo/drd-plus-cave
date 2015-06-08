@@ -1,12 +1,12 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Person\Attributes\GameCharacteristics\Combat;
 
-use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\FighterLevel;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\PriestLevel;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\RangerLevel;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\TheurgistLevel;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\ThiefLevel;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\WizardLevel;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Professions\Fighter;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Professions\Priest;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Professions\Ranger;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Professions\Theurgist;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Professions\Thief;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Professions\Wizard;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Agility;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Body\Size;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Charisma;
@@ -33,21 +33,21 @@ class Fight extends StrictObject
      */
     public function getValue()
     {
-        switch ($this->person->getProfessionLevels()->getFirstLevel()->getProfessionCode()) {
-            case FighterLevel::FIGHTER :
+        switch ($this->person->getProfessionLevels()->getFirstLevel()->getProfession()->getName()) {
+            case Fighter::FIGHTER :
                 return $this->getFighterFightValue($this->person->getCurrentAgility(), $this->person->getSize());
-            case ThiefLevel::THIEF :
+            case Thief::THIEF :
                 return $this->getThiefFightValue($this->person->getCurrentAgility(), $this->person->getCurrentKnack(), $this->person->getSize());
-            case RangerLevel::RANGER :
+            case Ranger::RANGER :
                 return $this->getRangerFightValue($this->person->getCurrentAgility(), $this->person->getCurrentKnack(), $this->person->getSize());
-            case WizardLevel::WIZARD :
+            case Wizard::WIZARD :
                 return $this->getWizardFightValue($this->person->getCurrentAgility(), $this->person->getCurrentIntelligence(), $this->person->getSize());
-            case TheurgistLevel::THEURGIST :
+            case Theurgist::THEURGIST :
                 return $this->geTheurgistFightValue($this->person->getCurrentAgility(), $this->person->getCurrentIntelligence(), $this->person->getSize());
-            case PriestLevel::PRIEST :
+            case Priest::PRIEST :
                 return $this->getPriestFightValue($this->person->getCurrentAgility(), $this->person->getCurrentCharisma(), $this->person->getSize());
             default :
-                throw new \LogicException('Unknown profession of code ' . $this->person->getProfessionLevels()->getFirstLevel()->getProfessionCode());
+                throw new \LogicException('Unknown profession of code ' . $this->person->getProfessionLevels()->getFirstLevel()->getProfession()->getName());
         }
     }
 

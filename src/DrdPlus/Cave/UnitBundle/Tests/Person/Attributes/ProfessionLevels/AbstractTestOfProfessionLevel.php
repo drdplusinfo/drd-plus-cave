@@ -114,11 +114,12 @@ class AbstractTestOfProfessionLevel extends TestWithMockery
     public function gives_expected_profession_code(ProfessionLevel $professionLevel)
     {
         $class = $this->getProfessionLevelClass();
-        $baseName = preg_replace('~(\w+\\\)*(\w+)~', '$2', $class);
+        // like /projects/drd/plus/cave/src/DrdPlus/Cave/UnitBundle/Person/Attributes/ProfessionLevels/FighterLevel.php = Fighter
+        $baseName = preg_replace('~(\w+\\\)*(\w+)Level~', '$2', $class);
         $underscored = preg_replace('~(\w)([A-Z])~', '$1_$2', $baseName);
         $lowered = strtolower($underscored);
 
-        $this->assertSame($lowered, $professionLevel->getProfessionCode());
+        $this->assertSame($lowered, $professionLevel->getProfession()->getName());
     }
 
     /**

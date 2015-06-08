@@ -2,8 +2,7 @@
 namespace DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels;
 
 use Doctrine\ORM\Mapping as ORM;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Knack;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Strength;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Professions\Ranger;
 
 /**
  * Ranger
@@ -13,8 +12,6 @@ use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Strength;
  */
 class RangerLevel extends ProfessionLevel
 {
-    const RANGER = 'ranger';
-
     /**
      * Inner link, used by Doctrine only
      * @var ProfessionLevels
@@ -24,13 +21,12 @@ class RangerLevel extends ProfessionLevel
     protected $professionLevels;
 
     /**
-     * @return string[]
+     * @return Ranger
      */
-    public function getPrimaryPropertyCodes()
+    protected function createProfession()
     {
-        return [
-            Knack::getTypeName(),
-            Strength::getTypeName()
-        ];
+        return new Ranger();
     }
+
+
 }

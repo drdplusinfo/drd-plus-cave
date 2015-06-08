@@ -2,8 +2,7 @@
 namespace DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels;
 
 use Doctrine\ORM\Mapping as ORM;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Charisma;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Will;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Professions\Priest;
 
 /**
  * Priest
@@ -13,7 +12,6 @@ use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Will;
  */
 class PriestLevel extends ProfessionLevel
 {
-    const PRIEST = 'priest';
     /**
      * Inner link, used by Doctrine only
      * @var ProfessionLevels
@@ -23,13 +21,12 @@ class PriestLevel extends ProfessionLevel
     protected $professionLevels;
 
     /**
-     * @return string[]
+     * @return Priest
      */
-    public function getPrimaryPropertyCodes()
+    protected function createProfession()
     {
-        return [
-            Charisma::getTypeName(),
-            Will::getTypeName()
-        ];
+        return new Priest();
     }
+
+
 }

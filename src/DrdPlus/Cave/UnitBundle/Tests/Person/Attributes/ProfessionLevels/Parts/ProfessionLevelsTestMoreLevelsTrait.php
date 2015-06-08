@@ -3,15 +3,23 @@ namespace DrdPlus\Cave\UnitBundle\Tests\Person\Attributes\ProfessionLevels\Parts
 
 use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\FighterLevel;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\LevelValue;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\PriestLevel;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\ProfessionLevel;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\ProfessionLevels;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\ProfessionLevelsTest;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\RangerLevel;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\TheurgistLevel;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\ThiefLevel;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\WizardLevel;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Professions\Fighter;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Professions\Priest;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Professions\Profession;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Professions\Ranger;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Professions\Theurgist;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Professions\Thief;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Professions\Wizard;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Agility;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\BaseProperty;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Charisma;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Intelligence;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Knack;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Strength;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Will;
 
 trait ProfessionLevelsTestMoreLevelsTrait
 {
@@ -26,7 +34,7 @@ trait ProfessionLevelsTestMoreLevelsTrait
      */
     public function more_fighter_levels_can_be_added(ProfessionLevels $professionLevels)
     {
-        $professionLevels = $this->moreLevelsCanBeAdded('fighter', $professionLevels);
+        $professionLevels = $this->moreLevelsCanBeAdded(Fighter::FIGHTER, $professionLevels);
 
         return $professionLevels;
     }
@@ -51,7 +59,9 @@ trait ProfessionLevelsTestMoreLevelsTrait
             ->andReturn(true);
         /** @var FighterLevel|\Mockery\MockInterface $nextLevel */
         $nextLevel = \Mockery::mock($this->geProfessionLevelClass($professionName));
-        $nextLevel->shouldReceive('getProfessionCode')
+        $nextLevel->shouldReceive('getProfession')
+            ->andReturn($profession = \Mockery::mock(Profession::class));
+        $profession->shouldReceive('getName')
             ->atLeast()->once()
             ->andReturn($professionName);
         $nextLevel->shouldReceive('getLevelValue')
@@ -89,12 +99,12 @@ trait ProfessionLevelsTestMoreLevelsTrait
      */
     public function fighter_has_properties_increment_summary_as_expected(ProfessionLevels $professionLevels)
     {
-        $this->professionHasPropertiesModifierSummaryAsExpected('fighter', $professionLevels);
+        $this->professionHasPropertiesModifierSummaryAsExpected(Fighter::FIGHTER, $professionLevels);
     }
 
     private function professionHasPropertiesModifierSummaryAsExpected($professionName, ProfessionLevels $professionLevels)
     {
-        foreach (['strength', 'agility', 'knack', 'will', 'intelligence', 'charisma'] as $propertyName) {
+        foreach ([Strength::STRENGTH, Agility::AGILITY, Knack::KNACK, Will::WILL, Intelligence::INTELLIGENCE, Charisma::CHARISMA] as $propertyName) {
             $this->professionHasPropertyModifierSummaryAsExpected($professionName, $propertyName, $professionLevels);
         }
     }
@@ -121,36 +131,39 @@ trait ProfessionLevelsTestMoreLevelsTrait
         /** @var ProfessionLevelsTest|ProfessionLevelsTestMoreLevelsTrait $this */
         $getPropertyModifierSummary = 'get' . ucfirst($propertyName) . 'ModifierSummary';
         $this->assertSame(
-            ($this->isPrimaryProperty($propertyName, $professionName) ? 1 : 0) + $propertySummary,
-            $professionLevels->$getPropertyModifierSummary()
+            ($this->isPrimaryProperty_MoreLevels($propertyName, $professionName) ? 1 : 0) + $propertySummary,
+            $professionLevels->$getPropertyModifierSummary(),
+            "The modifier summary of property $propertyName should be " . (($this->isPrimaryProperty_MoreLevels($propertyName, $professionName) ? 1 : 0) + $propertySummary) .
+            " for $professionName, got " . $professionLevels->$getPropertyModifierSummary()
         );
     }
 
     /**
      * @param string $propertyName
      * @param string $professionName
+     *
      * @return bool
      */
-    private function isPrimaryProperty($propertyName, $professionName)
+    private function isPrimaryProperty_MoreLevels($propertyName, $professionName)
     {
-        return in_array($propertyName, $this->getPrimaryProperties($professionName));
+        return in_array($propertyName, $this->getPrimaryProperties_MoreLevels($professionName));
     }
 
-    private function getPrimaryProperties($professionName)
+    private function getPrimaryProperties_MoreLevels($professionName)
     {
         switch ($professionName) {
-            case FighterLevel::FIGHTER :
-                return ['strength', 'agility'];
-            case PriestLevel::PRIEST :
-                return ['will', 'charisma'];
-            case RangerLevel::RANGER :
-                return ['strength', 'knack'];
-            case TheurgistLevel::THEURGIST :
-                return ['intelligence', 'charisma'];
-            case ThiefLevel::THIEF :
-                return ['knack', 'agility'];
-            case WizardLevel::WIZARD :
-                return ['will', 'intelligence'];
+            case Fighter::FIGHTER :
+                return [Strength::STRENGTH, Agility::AGILITY];
+            case Priest::PRIEST :
+                return [Will::WILL, Charisma::CHARISMA];
+            case Ranger::RANGER :
+                return [Strength::STRENGTH, Knack::KNACK];
+            case Theurgist::THEURGIST :
+                return [Intelligence::INTELLIGENCE, Charisma::CHARISMA];
+            case Thief::THIEF :
+                return [Knack::KNACK, Agility::AGILITY];
+            case Wizard::WIZARD :
+                return [Will::WILL, Intelligence::INTELLIGENCE];
             default :
                 throw new \RuntimeException('Unknown profession name ' . var_export($professionName, true));
         }
@@ -165,7 +178,7 @@ trait ProfessionLevelsTestMoreLevelsTrait
      */
     public function adding_fighter_level_with_occupied_sequence_cause_exception(ProfessionLevels $professionLevels)
     {
-        $this->addingLevelWithOccupiedSequenceCauseException('fighter', $professionLevels);
+        $this->addingLevelWithOccupiedSequenceCauseException(Fighter::FIGHTER, $professionLevels);
     }
 
     private function addingLevelWithOccupiedSequenceCauseException(
@@ -178,7 +191,9 @@ trait ProfessionLevelsTestMoreLevelsTrait
         /** @var FighterLevel|\Mockery\MockInterface $anotherLevel */
 
         $anotherLevel = \Mockery::mock($this->geProfessionLevelClass($professionName));
-        $anotherLevel->shouldReceive('getProfessionCode')
+        $anotherLevel->shouldReceive('getProfession')
+            ->andReturn($profession = \Mockery::mock(Profession::class));
+        $profession->shouldReceive('getName')
             ->andReturn($professionName);
         $anotherLevel->shouldReceive('getLevelValue')
             ->andReturn($anotherLevelValue = \Mockery::mock(LevelValue::class));
@@ -198,7 +213,7 @@ trait ProfessionLevelsTestMoreLevelsTrait
      */
     public function adding_fighter_level_with_too_high_sequence_cause_exception(ProfessionLevels $professionLevels)
     {
-        $this->addingLevelWithTooHighSequenceCauseException('fighter', $professionLevels);
+        $this->addingLevelWithTooHighSequenceCauseException(Fighter::FIGHTER, $professionLevels);
     }
 
     private function addingLevelWithTooHighSequenceCauseException(
@@ -211,7 +226,9 @@ trait ProfessionLevelsTestMoreLevelsTrait
 
         /** @var FighterLevel|\Mockery\MockInterface $anotherLevel */
         $anotherLevel = \Mockery::mock($this->geProfessionLevelClass($professionName));
-        $anotherLevel->shouldReceive('getProfessionCode')
+        $anotherLevel->shouldReceive('getProfession')
+            ->andReturn($profession = \Mockery::mock(Profession::class));
+        $profession->shouldReceive('getName')
             ->andReturn($professionName);
         $anotherLevel->shouldReceive('getLevelValue')
             ->andReturn($anotherLevelValue = \Mockery::mock(LevelValue::class));
@@ -231,7 +248,7 @@ trait ProfessionLevelsTestMoreLevelsTrait
      */
     public function changed_fighter_level_during_usage_cause_exception(ProfessionLevels $professionLevels)
     {
-        $this->changedLevelDuringUsageCauseException('fighter', $professionLevels);
+        $this->changedLevelDuringUsageCauseException(Fighter::FIGHTER, $professionLevels);
     }
 
     private function changedLevelDuringUsageCauseException(
@@ -243,8 +260,10 @@ trait ProfessionLevelsTestMoreLevelsTrait
         $this->assertSame(2, count($professionLevels->getLevels()));
         /** @var FighterLevel|\Mockery\MockInterface $anotherLevel */
         $anotherLevel = \Mockery::mock($this->geProfessionLevelClass($professionName));
-        $anotherLevel->shouldReceive('getProfessionCode')
-            ->andReturn('fighter');
+        $anotherLevel->shouldReceive('getProfession')
+            ->andReturn($profession = \Mockery::mock(Profession::class));
+        $profession->shouldReceive('getName')
+            ->andReturn(Fighter::FIGHTER);
         $anotherLevel->shouldReceive('getLevelValue')
             ->andReturn($anotherLevelValue = \Mockery::mock(LevelValue::class));
         $rank = 3;

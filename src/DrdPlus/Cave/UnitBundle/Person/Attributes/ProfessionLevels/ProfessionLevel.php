@@ -2,6 +2,7 @@
 namespace DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels;
 
 use Doctrine\ORM\Mapping as ORM;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Professions\Profession;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Agility;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Charisma;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Intelligence;
@@ -85,6 +86,11 @@ abstract class ProfessionLevel extends StrictObject
     private $charismaIncrement;
 
     /**
+     * @var Profession
+     */
+    private $profession;
+
+    /**
      * TODO what about first level and these properties? should be the first level* getters static?
      */
     public function __construct(
@@ -106,7 +112,13 @@ abstract class ProfessionLevel extends StrictObject
         $this->charismaIncrement = $charismaIncrement;
         $this->willIncrement = $willIncrement;
         $this->levelUpAt = $levelUpAt ?: new \DateTimeImmutable();
+        $this->profession = $this->createProfession();
     }
+
+    /**
+     * @return Profession
+     */
+    abstract protected function createProfession();
 
     /**
      * Get id
@@ -137,7 +149,10 @@ abstract class ProfessionLevel extends StrictObject
     /**
      * @return string[]
      */
-    abstract public function getPrimaryPropertyCodes();
+    public function getPrimaryPropertyCodes()
+    {
+        return $this->getProfession()->getPrimaryPropertyCodes();
+    }
 
     /**
      * Get strength modifier
@@ -292,20 +307,10 @@ abstract class ProfessionLevel extends StrictObject
     }
 
     /**
-     * @return string
+     * @return Profession
      */
-    public function getProfessionCode()
+    public function getProfession()
     {
-        $underScoredProfessionName = preg_replace('~(\w)([A-Z])~', '$1_$2', $this->getProfessionBaseName());
-
-        return strtolower($underScoredProfessionName);
-    }
-
-    /**
-     * @return string
-     */
-    private function getProfessionBaseName()
-    {
-        return preg_replace('~(\w+\\\)*(\w+)~', '$2', static::class);
+        return $this->profession;
     }
 }

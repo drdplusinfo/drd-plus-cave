@@ -2,8 +2,7 @@
 namespace DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels;
 
 use Doctrine\ORM\Mapping as ORM;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Intelligence;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Will;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Professions\Wizard;
 
 /**
  * Wizard
@@ -13,8 +12,6 @@ use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Will;
  */
 class WizardLevel extends ProfessionLevel
 {
-    const WIZARD = 'wizard';
-
     /**
      * Inner link, used by Doctrine only
      * @var ProfessionLevels
@@ -24,13 +21,12 @@ class WizardLevel extends ProfessionLevel
     protected $professionLevels;
 
     /**
-     * @return string[]
+     * @return Wizard
      */
-    public function getPrimaryPropertyCodes()
+    protected function createProfession()
     {
-        return [
-            Will::getTypeName(),
-            Intelligence::getTypeName()
-        ];
+        return new Wizard();
     }
+
+
 }

@@ -2,8 +2,7 @@
 namespace DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels;
 
 use Doctrine\ORM\Mapping as ORM;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Agility;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Knack;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Professions\Thief;
 
 /**
  * Thief
@@ -13,8 +12,6 @@ use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Knack;
  */
 class ThiefLevel extends ProfessionLevel
 {
-    const THIEF = 'thief';
-
     /**
      * Inner link, used by Doctrine only
      * @var ProfessionLevels
@@ -24,13 +21,11 @@ class ThiefLevel extends ProfessionLevel
     protected $professionLevels;
 
     /**
-     * @return string[]
+     * @return Thief
      */
-    public function getPrimaryPropertyCodes()
+    protected function createProfession()
     {
-        return [
-            Agility::getTypeName(),
-            Knack::getTypeName()
-        ];
+        return new Thief();
     }
+
 }

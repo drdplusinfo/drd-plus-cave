@@ -60,7 +60,7 @@ class ExceptionalityPropertiesFactory extends StrictObject
     {
         if ($property->getValue() > $fate->getUpToSingleProperty()) {
             throw new \LogicException(
-                ucfirst($property->getName()) . " bonus on fortune should be at most {$fate->getUpToSingleProperty()} for profession {$profession->getProfessionCode()}, is $property"
+                ucfirst($property->getName()) . " bonus on fortune should be at most {$fate->getUpToSingleProperty()} for profession {$profession->getProfession()->getName()}, is $property"
             );
         }
     }
@@ -158,9 +158,9 @@ class ExceptionalityPropertiesFactory extends StrictObject
     private function checkChosenProperty(ProfessionLevel $profession, AbstractFate $fate, BaseProperty $chosenProperty)
     {
         if ($profession->isPrimaryProperty($chosenProperty->getName())) {
-            $maximalValue = $fate->getPrimaryPropertiesBonusOnConservative();
+            $maximalValue = $fate->getPrimaryPropertiesBonusOnChoice();
         } else {
-            $maximalValue = $fate->getSecondaryPropertiesBonusOnConservative();
+            $maximalValue = $fate->getSecondaryPropertiesBonusOnChoice();
         }
 
         $this->checkChosenPropertyValue($maximalValue, $chosenProperty, $fate, $profession);
@@ -171,7 +171,7 @@ class ExceptionalityPropertiesFactory extends StrictObject
         if ($chosenProperty->getValue() > $maximalValue) {
             throw new \LogicException(
                 "Required {$chosenProperty->getName()} of value {$chosenProperty->getValue()} is higher then allowed"
-                . " maximum $maximalValue for profession {$professionLevel->getProfessionCode()} and fate {$fate->getName()}"
+                . " maximum $maximalValue for profession {$professionLevel->getProfession()->getName()} and fate {$fate->getName()}"
             );
         }
     }
@@ -198,15 +198,15 @@ class ExceptionalityPropertiesFactory extends StrictObject
             }
         }
 
-        if ($primaryPropertySum !== $fate->getPrimaryPropertiesBonusOnConservative()) {
+        if ($primaryPropertySum !== $fate->getPrimaryPropertiesBonusOnChoice()) {
             throw new \LogicException(
-                "Expected sum of primary properties is {$fate->getPrimaryPropertiesBonusOnConservative()}, got $primaryPropertySum"
+                "Expected sum of primary properties is {$fate->getPrimaryPropertiesBonusOnChoice()}, got $primaryPropertySum"
             );
         }
 
-        if ($secondaryPropertySum !== $fate->getSecondaryPropertiesBonusOnConservative()) {
+        if ($secondaryPropertySum !== $fate->getSecondaryPropertiesBonusOnChoice()) {
             throw new \LogicException(
-                "Expected sum of secondary properties is {$fate->getSecondaryPropertiesBonusOnConservative()}, got $secondaryPropertySum"
+                "Expected sum of secondary properties is {$fate->getSecondaryPropertiesBonusOnChoice()}, got $secondaryPropertySum"
             );
         }
     }

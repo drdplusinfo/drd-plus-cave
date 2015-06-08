@@ -2,8 +2,7 @@
 namespace DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels;
 
 use Doctrine\ORM\Mapping as ORM;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Charisma;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Intelligence;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Professions\Theurgist;
 
 /**
  * Theurgist
@@ -13,7 +12,6 @@ use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Intelligence;
  */
 class TheurgistLevel extends ProfessionLevel
 {
-    const THEURGIST = 'theurgist';
 
     /**
      * Inner link, used by Doctrine only
@@ -24,13 +22,11 @@ class TheurgistLevel extends ProfessionLevel
     protected $professionLevels;
 
     /**
-     * @return string[]
+     * @return Theurgist
      */
-    public function getPrimaryPropertyCodes()
+    protected function createProfession()
     {
-        return [
-            Intelligence::getTypeName(),
-            Charisma::getTypeName()
-        ];
+        return new Theurgist();
     }
+
 }

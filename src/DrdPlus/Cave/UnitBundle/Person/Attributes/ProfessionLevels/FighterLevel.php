@@ -2,8 +2,7 @@
 namespace DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels;
 
 use Doctrine\ORM\Mapping as ORM;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Agility;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Strength;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Professions\Fighter;
 
 /**
  * Fighter
@@ -13,7 +12,6 @@ use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Strength;
  */
 class FighterLevel extends ProfessionLevel
 {
-    const FIGHTER = 'fighter';
     /**
      * Inner link, used by Doctrine only
      * @var ProfessionLevels
@@ -23,13 +21,11 @@ class FighterLevel extends ProfessionLevel
     protected $professionLevels;
 
     /**
-     * @return string[]
+     * @return Fighter
      */
-    public function getPrimaryPropertyCodes()
+    protected function createProfession()
     {
-        return [
-            Strength::getTypeName(),
-            Agility::getTypeName()
-        ];
+        return new Fighter();
     }
+
 }

@@ -6,6 +6,19 @@ use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\LevelValue;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\ProfessionLevel;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\ProfessionLevels;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\ProfessionLevelsTest;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Professions\Fighter;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Professions\Priest;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Professions\Profession;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Professions\Ranger;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Professions\Theurgist;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Professions\Thief;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Professions\Wizard;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Agility;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Charisma;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Intelligence;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Knack;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Strength;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Will;
 
 trait ProfessionLevelsTestFirstLevelsTrait
 {
@@ -30,7 +43,9 @@ trait ProfessionLevelsTestFirstLevelsTrait
         $professionLevels = new ProfessionLevels();
         /** @var \Mockery\MockInterface|ProfessionLevel $professionLevel */
         $professionLevel = \Mockery::mock($this->getFirstLevelsProfessionLevelClass($professionName));
-        $professionLevel->shouldReceive('getProfessionCode')
+        $professionLevel->shouldReceive('getProfession')
+            ->andReturn($profession = \Mockery::mock(Profession::class));
+        $profession->shouldReceive('getName')
             ->andReturn($professionName);
         $professionLevel->shouldReceive('getLevelValue')
             ->atLeast()->once()
@@ -62,64 +77,59 @@ trait ProfessionLevelsTestFirstLevelsTrait
      */
     public function fighter_at_first_level_has_strength_and_agility_increment(ProfessionLevels $professionLevels)
     {
-        $this->atFirstLevelHasIncrementOfPrimaryProperties('fighter', $professionLevels);
+        $this->askFirstLevelForPrimaryPropertiesIncrement('fighter', $professionLevels);
     }
 
-    private function atFirstLevelHasIncrementOfPrimaryProperties(
+    private function askFirstLevelForPrimaryPropertiesIncrement(
         $professionName,
         ProfessionLevels $professionLevels
     )
     {
-        $primaryProperties = $this->getFirstLevelsPrimaryPropertiesToProfession($professionName);
         /** @var ProfessionLevelsTest|ProfessionLevelsTestFirstLevelsTrait $this */
-        /** @var FighterLevel|\Mockery\MockInterface $professionLevel */
-        $professionLevel = $professionLevels->getFirstLevel();
-        $this->assertInstanceOf($this->getFirstLevelsProfessionLevelClass($professionName), $professionLevel);
-        // non-mocked methods are propagated to originals
-        $professionLevel->shouldDeferMissing();
-        $this->assertSame(
-            in_array('strength', $primaryProperties) ? 1 : 0,
-            $professionLevels->getStrengthModifierForFirstLevel()
-        );
-        $this->assertSame(
-            in_array('agility', $primaryProperties) ? 1 : 0,
-            $professionLevels->getAgilityModifierForFirstLevel()
-        );
-        $this->assertSame(
-            in_array('knack', $primaryProperties) ? 1 : 0,
-            $professionLevels->getKnackModifierForFirstLevel()
-        );
-        $this->assertSame(
-            in_array('will', $primaryProperties) ? 1 : 0,
-            $professionLevels->getWillModifierForFirstLevel()
-        );
-        $this->assertSame(
-            in_array('intelligence', $primaryProperties) ? 1 : 0,
-            $professionLevels->getIntelligenceModifierForFirstLevel()
-        );
-        $this->assertSame(
-            in_array('charisma', $primaryProperties) ? 1 : 0,
-            $professionLevels->getCharismaModifierForFirstLevel()
-        );
+        /** @var FighterLevel|\Mockery\MockInterface $firstLevel */
+        $firstLevel = $professionLevels->getFirstLevel();
+        $this->assertInstanceOf($this->getFirstLevelsProfessionLevelClass($professionName), $firstLevel);
+        foreach ([Strength::STRENGTH, Agility::AGILITY, Knack::KNACK, Will::WILL, Intelligence::INTELLIGENCE, Charisma::CHARISMA] as $propertyName) {
+            $firstLevel->shouldReceive('get' . ucfirst($propertyName) . 'FirstLevelModifier')
+                ->andReturn($this->isPrimaryProperty_FirstLevels($propertyName, $professionName) ? ProfessionLevel::PROPERTY_FIRST_LEVEL_MODIFIER : 0)
+                ->atLeast()->once();
+        }
+        $professionLevels->getStrengthModifierForFirstLevel();
+        $professionLevels->getAgilityModifierForFirstLevel();
+        $professionLevels->getKnackModifierForFirstLevel();
+        $professionLevels->getWillModifierForFirstLevel();
+        $professionLevels->getIntelligenceModifierForFirstLevel();
+        $professionLevels->getCharismaModifierForFirstLevel();
     }
 
-    private function getFirstLevelsPrimaryPropertiesToProfession($professionName)
+    /**
+     * @param string $propertyName
+     * @param string $professionName
+     *
+     * @return bool
+     */
+    private function isPrimaryProperty_FirstLevels($propertyName, $professionName)
+    {
+        return in_array($propertyName, $this->getPrimaryProperties_FirstLevels($professionName));
+    }
+
+    private function getPrimaryProperties_FirstLevels($professionName)
     {
         switch ($professionName) {
-            case 'fighter' :
-                return ['strength', 'agility'];
-            case 'priest' :
-                return ['will', 'charisma'];
-            case 'ranger' :
-                return ['strength', 'knack'];
-            case 'theurgist' :
-                return ['intelligence', 'charisma'];
-            case 'thief' :
-                return ['knack', 'agility'];
-            case 'wizard' :
-                return ['will', 'intelligence'];
+            case Fighter::FIGHTER :
+                return [Strength::STRENGTH, Agility::AGILITY];
+            case Priest::PRIEST :
+                return [Will::WILL, Charisma::CHARISMA];
+            case Ranger::RANGER :
+                return [Strength::STRENGTH, Knack::KNACK];
+            case Theurgist::THEURGIST :
+                return [Intelligence::INTELLIGENCE, Charisma::CHARISMA];
+            case Thief::THIEF :
+                return [Knack::KNACK, Agility::AGILITY];
+            case Wizard::WIZARD :
+                return [Will::WILL, Intelligence::INTELLIGENCE];
             default :
-                throw new \RuntimeException("Unknown profession name " . var_export($professionName, true));
+                throw new \RuntimeException('Unknown profession name ' . var_export($professionName, true));
         }
     }
 
@@ -146,7 +156,9 @@ trait ProfessionLevelsTestFirstLevelsTrait
         /** @var ProfessionLevelsTest|ProfessionLevelsTestFirstLevelsTrait $this */
         /** @var \Mockery\MockInterface|ProfessionLevel $professionLevel */
         $professionLevel = \Mockery::mock($this->getFirstLevelsProfessionLevelClass($professionName));
-        $professionLevel->shouldReceive('getProfessionCode')
+        $professionLevel->shouldReceive('getProfession')
+            ->andReturn($profession = \Mockery::mock(Profession::class));
+        $profession->shouldReceive('getName')
             ->andReturn($professionName);
         $professionLevel->shouldReceive('getLevelValue')
             ->atLeast()->once()
@@ -177,7 +189,7 @@ trait ProfessionLevelsTestFirstLevelsTrait
      */
     public function priest_at_first_level_has_will_and_charisma_increment(ProfessionLevels $professionLevels)
     {
-        $this->atFirstLevelHasIncrementOfPrimaryProperties('priest', $professionLevels);
+        $this->askFirstLevelForPrimaryPropertiesIncrement('priest', $professionLevels);
     }
 
     /**
@@ -209,7 +221,7 @@ trait ProfessionLevelsTestFirstLevelsTrait
      */
     public function ranger_at_first_level_has_strength_and_knack_increment(ProfessionLevels $professionLevels)
     {
-        $this->atFirstLevelHasIncrementOfPrimaryProperties('ranger', $professionLevels);
+        $this->askFirstLevelForPrimaryPropertiesIncrement('ranger', $professionLevels);
     }
 
     /**
@@ -241,7 +253,7 @@ trait ProfessionLevelsTestFirstLevelsTrait
      */
     public function theurgist_at_first_level_has_intelligence_and_charisma_increment(ProfessionLevels $professionLevels)
     {
-        $this->atFirstLevelHasIncrementOfPrimaryProperties('theurgist', $professionLevels);
+        $this->askFirstLevelForPrimaryPropertiesIncrement('theurgist', $professionLevels);
     }
 
     /**
@@ -273,7 +285,7 @@ trait ProfessionLevelsTestFirstLevelsTrait
      */
     public function thief_at_first_level_has_agility_and_knack_increment(ProfessionLevels $professionLevels)
     {
-        $this->atFirstLevelHasIncrementOfPrimaryProperties('thief', $professionLevels);
+        $this->askFirstLevelForPrimaryPropertiesIncrement('thief', $professionLevels);
     }
 
     /**
@@ -305,7 +317,7 @@ trait ProfessionLevelsTestFirstLevelsTrait
      */
     public function wizard_at_first_level_has_will_and_intelligence_increment(ProfessionLevels $professionLevels)
     {
-        $this->atFirstLevelHasIncrementOfPrimaryProperties('wizard', $professionLevels);
+        $this->askFirstLevelForPrimaryPropertiesIncrement('wizard', $professionLevels);
     }
 
     /**

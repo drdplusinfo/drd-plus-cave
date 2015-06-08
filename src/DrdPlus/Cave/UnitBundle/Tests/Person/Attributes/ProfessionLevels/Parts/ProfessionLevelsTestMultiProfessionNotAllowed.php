@@ -10,6 +10,7 @@ use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\RangerLevel;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\TheurgistLevel;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\ThiefLevel;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\WizardLevel;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Professions\Profession;
 
 trait ProfessionLevelsTestMultiProfessionNotAllowed
 {
@@ -41,12 +42,12 @@ trait ProfessionLevelsTestMultiProfessionNotAllowed
         $firstLevel = $professionLevels->getFirstLevel();
         $this->assertInstanceOf($this->getMultiProfessionTestLevelClass($professionName), $firstLevel);
 
-        $exception = new \Exception('No other professions than ' . $firstLevel->getProfessionCode() . '?');
+        $exception = new \Exception('No other professions than ' . $firstLevel->getProfession()->getName() . '?');
         foreach ($this->getLevelsExcept($firstLevel) as $professionCode => $otherProfessionLevel) {
             $adder = 'add' . ucfirst($professionCode) . 'Level';
             try {
                 $professionLevels->$adder($otherProfessionLevel);
-                $this->fail("Adding $professionCode to levels already set to {$firstLevel->getProfessionCode()} should throw exception.");
+                $this->fail("Adding $professionCode to levels already set to {$firstLevel->getProfession()->getName()} should throw exception.");
             } catch (\LogicException $exception) {
                 $this->assertNotNull($exception);
             }
@@ -75,7 +76,7 @@ trait ProfessionLevelsTestMultiProfessionNotAllowed
         return array_filter(
             $this->professionLevels,
             function (ProfessionLevel $level) use ($excludedProfession) {
-                return $level->getProfessionCode() !== $excludedProfession->getProfessionCode();
+                return $level->getProfession()->getName() !== $excludedProfession->getProfession()->getName();
             }
         );
     }
@@ -89,7 +90,9 @@ trait ProfessionLevelsTestMultiProfessionNotAllowed
         $this->professionLevels['thief'] = \Mockery::mock(ThiefLevel::class);
         $this->professionLevels['wizard'] = \Mockery::mock(WizardLevel::class);
         foreach ($this->professionLevels as $professionCode => $level) {
-            $level->shouldReceive('getProfessionCode')
+            $level->shouldReceive('getProfession')
+                ->andReturn($profession = \Mockery::mock(Profession::class));
+            $profession->shouldReceive('getName')
                 ->andReturn($professionCode);
         }
     }
