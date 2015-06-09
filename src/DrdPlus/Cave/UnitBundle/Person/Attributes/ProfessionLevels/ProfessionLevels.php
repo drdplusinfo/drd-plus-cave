@@ -363,7 +363,7 @@ class ProfessionLevels extends StrictObject implements \IteratorAggregate
     public function getStrengthModifierForFirstLevel()
     {
         return $this->hasFirstLevel()
-            ? $this->getFirstLevel()->getStrengthFirstLevelModifier()
+            ? $this->getFirstLevel()->getStrengthIncrement()->getValue()
             : 0;
     }
 
@@ -383,7 +383,7 @@ class ProfessionLevels extends StrictObject implements \IteratorAggregate
     public function getAgilityModifierForFirstLevel()
     {
         return $this->hasFirstLevel()
-            ? $this->getFirstLevel()->getAgilityFirstLevelModifier()
+            ? $this->getFirstLevel()->getAgilityIncrement()->getValue()
             : 0;
     }
 
@@ -395,7 +395,7 @@ class ProfessionLevels extends StrictObject implements \IteratorAggregate
     public function getKnackModifierForFirstLevel()
     {
         return $this->hasFirstLevel()
-            ? $this->getFirstLevel()->getKnackFirstLevelModifier()
+            ? $this->getFirstLevel()->getKnackIncrement()->getValue()
             : 0;
     }
 
@@ -407,7 +407,7 @@ class ProfessionLevels extends StrictObject implements \IteratorAggregate
     public function getWillModifierForFirstLevel()
     {
         return $this->hasFirstLevel()
-            ? $this->getFirstLevel()->getWillFirstLevelModifier()
+            ? $this->getFirstLevel()->getWillIncrement()->getValue()
             : 0;
     }
 
@@ -419,7 +419,7 @@ class ProfessionLevels extends StrictObject implements \IteratorAggregate
     public function getIntelligenceModifierForFirstLevel()
     {
         return $this->hasFirstLevel()
-            ? $this->getFirstLevel()->getIntelligenceFirstLevelModifier()
+            ? $this->getFirstLevel()->getIntelligenceIncrement()->getValue()
             : 0;
     }
 
@@ -431,7 +431,7 @@ class ProfessionLevels extends StrictObject implements \IteratorAggregate
     public function getCharismaModifierForFirstLevel()
     {
         return $this->hasFirstLevel()
-            ? $this->getFirstLevel()->getCharismaFirstLevelModifier()
+            ? $this->getFirstLevel()->getCharismaIncrement()->getValue()
             : 0;
     }
 
@@ -452,7 +452,7 @@ class ProfessionLevels extends StrictObject implements \IteratorAggregate
      */
     private function getPropertyModifierSummary($propertyName)
     {
-        // like getStrengthFirstLevelModifier
+        // like getStrengthIncrement()->getValue
         $propertyFirstLevelModifierGetter = 'get' . ucfirst($propertyName) . 'ModifierForFirstLevel';
 
         return $this->$propertyFirstLevelModifierGetter() + $this->getNextLevelsPropertyModifierSummary($propertyName);

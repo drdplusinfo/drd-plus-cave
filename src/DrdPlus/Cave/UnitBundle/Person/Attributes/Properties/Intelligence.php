@@ -9,4 +9,13 @@ class Intelligence extends BaseProperty
 {
     const INTELLIGENCE = 'intelligence';
 
+    /**
+     * @return string
+     */
+    public function getCode()
+    {
+        return self::INTELLIGENCE;
+    }
+
+
 }

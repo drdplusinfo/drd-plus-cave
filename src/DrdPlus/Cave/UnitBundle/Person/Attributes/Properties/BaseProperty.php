@@ -51,4 +51,9 @@ abstract class BaseProperty extends SelfTypedIntegerEnum
         return $this->getEnumValue();
     }
 
+    /**
+     * @return string
+     */
+    abstract public function getCode();
+
 }

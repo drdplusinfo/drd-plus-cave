@@ -9,4 +9,13 @@ class Knack extends BaseProperty
 {
     const KNACK = 'knack';
 
+    /**
+     * @return string
+     */
+    public function getCode()
+    {
+        return self::KNACK;
+    }
+
+
 }

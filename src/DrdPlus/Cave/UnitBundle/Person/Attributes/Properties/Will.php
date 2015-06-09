@@ -9,4 +9,13 @@ class Will extends BaseProperty
 {
     const WILL = 'will';
 
+    /**
+     * @return string
+     */
+    public function getCode()
+    {
+        return self::WILL;
+    }
+
+
 }

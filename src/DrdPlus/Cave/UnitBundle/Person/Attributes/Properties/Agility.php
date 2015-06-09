@@ -9,4 +9,13 @@ class Agility extends BaseProperty
 {
     const AGILITY = 'agility';
 
+    /**
+     * @return string
+     */
+    public function getCode()
+    {
+        return self::AGILITY;
+    }
+
+
 }

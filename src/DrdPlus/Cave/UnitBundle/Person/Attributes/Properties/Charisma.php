@@ -9,4 +9,13 @@ class Charisma extends BaseProperty
 {
     const CHARISMA = 'charisma';
 
+    /**
+     * @return string
+     */
+    public function getCode()
+    {
+        return self::CHARISMA;
+    }
+
+
 }

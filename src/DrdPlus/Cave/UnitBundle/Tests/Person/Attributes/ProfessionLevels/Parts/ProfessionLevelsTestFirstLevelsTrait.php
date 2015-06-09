@@ -14,6 +14,7 @@ use DrdPlus\Cave\UnitBundle\Person\Attributes\Professions\Theurgist;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Professions\Thief;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Professions\Wizard;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Agility;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\BaseProperty;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Charisma;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Intelligence;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Knack;
@@ -77,7 +78,7 @@ trait ProfessionLevelsTestFirstLevelsTrait
      */
     public function fighter_at_first_level_has_strength_and_agility_increment(ProfessionLevels $professionLevels)
     {
-        $this->askFirstLevelForPrimaryPropertiesIncrement('fighter', $professionLevels);
+        $this->askFirstLevelForPrimaryPropertiesIncrement(Fighter::FIGHTER, $professionLevels);
     }
 
     private function askFirstLevelForPrimaryPropertiesIncrement(
@@ -90,9 +91,12 @@ trait ProfessionLevelsTestFirstLevelsTrait
         $firstLevel = $professionLevels->getFirstLevel();
         $this->assertInstanceOf($this->getFirstLevelsProfessionLevelClass($professionName), $firstLevel);
         foreach ([Strength::STRENGTH, Agility::AGILITY, Knack::KNACK, Will::WILL, Intelligence::INTELLIGENCE, Charisma::CHARISMA] as $propertyName) {
-            $firstLevel->shouldReceive('get' . ucfirst($propertyName) . 'FirstLevelModifier')
-                ->andReturn($this->isPrimaryProperty_FirstLevels($propertyName, $professionName) ? ProfessionLevel::PROPERTY_FIRST_LEVEL_MODIFIER : 0)
-                ->atLeast()->once();
+            $firstLevel->shouldReceive('get' . ucfirst($propertyName) . 'Increment')
+                ->atLeast()->once()
+                ->andReturn($increment = \Mockery::mock(BaseProperty::class));
+            $increment->shouldReceive('getValue')
+                ->atLeast()->once()
+                ->andReturn($this->isPrimaryProperty_FirstLevels($propertyName, $professionName) ? ProfessionLevel::PROPERTY_FIRST_LEVEL_MODIFIER : 0);
         }
         $professionLevels->getStrengthModifierForFirstLevel();
         $professionLevels->getAgilityModifierForFirstLevel();

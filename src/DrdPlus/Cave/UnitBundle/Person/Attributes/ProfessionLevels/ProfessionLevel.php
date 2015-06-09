@@ -4,6 +4,7 @@ namespace DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels;
 use Doctrine\ORM\Mapping as ORM;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Professions\Profession;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Agility;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\BaseProperty;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Charisma;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Intelligence;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Knack;
@@ -18,6 +19,8 @@ abstract class ProfessionLevel extends StrictObject
 {
 
     const PROPERTY_FIRST_LEVEL_MODIFIER = +1;
+    const MINIMUM_LEVEL = 1;
+    const MAXIMUM_LEVEL = 20;
 
     /**
      * Have to be protected to allow Doctrine to access it on children
@@ -98,21 +101,65 @@ abstract class ProfessionLevel extends StrictObject
         Strength $strengthIncrement,
         Agility $agilityIncrement,
         Knack $knackIncrement,
+        Will $willIncrement,
         Intelligence $intelligenceIncrement,
         Charisma $charismaIncrement,
-        Will $willIncrement,
         \DateTimeImmutable $levelUpAt = null
     )
     {
+        $this->checkLevelValue($levelValue);
         $this->levelValue = $levelValue;
-        $this->strengthIncrement = $strengthIncrement;
-        $this->agilityIncrement = $agilityIncrement;
-        $this->knackIncrement = $knackIncrement;
-        $this->intelligenceIncrement = $intelligenceIncrement;
-        $this->charismaIncrement = $charismaIncrement;
-        $this->willIncrement = $willIncrement;
-        $this->levelUpAt = $levelUpAt ?: new \DateTimeImmutable();
         $this->profession = $this->createProfession();
+        $this->checkPropertyIncrement($strengthIncrement, $levelValue);
+        $this->strengthIncrement = $strengthIncrement;
+        $this->checkPropertyIncrement($agilityIncrement, $levelValue);
+        $this->agilityIncrement = $agilityIncrement;
+        $this->checkPropertyIncrement($knackIncrement, $levelValue);
+        $this->knackIncrement = $knackIncrement;
+        $this->checkPropertyIncrement($willIncrement, $levelValue);
+        $this->willIncrement = $willIncrement;
+        $this->checkPropertyIncrement($intelligenceIncrement, $levelValue);
+        $this->intelligenceIncrement = $intelligenceIncrement;
+        $this->checkPropertyIncrement($charismaIncrement, $levelValue);
+        $this->charismaIncrement = $charismaIncrement;
+        $this->levelUpAt = $levelUpAt ?: new \DateTimeImmutable();
+    }
+
+    private function checkLevelValue(LevelValue $levelValue)
+    {
+        if ($levelValue->getValue() < self::MINIMUM_LEVEL) {
+            throw new \LogicException(
+                "Level value can not be lower than " . self::MINIMUM_LEVEL . ", got {$levelValue->getValue()}"
+            );
+        }
+        if ($levelValue->getValue() > self::MAXIMUM_LEVEL) {
+            throw new \LogicException(
+                "Level value can not be greater than " . self::MAXIMUM_LEVEL . ", got {$levelValue->getValue()}"
+            );
+        }
+    }
+
+    private function checkPropertyIncrement(BaseProperty $property, LevelValue $levelValue)
+    {
+        if ($levelValue->getValue() === 1) {
+            $this->checkPropertyFirstLevelIncrement($property);
+        } else {
+            $this->checkNextLevelPropertyIncrement($property);
+        }
+    }
+
+    private function checkPropertyFirstLevelIncrement(BaseProperty $property)
+    {
+        if ($property->getValue() !== $this->getPropertyFirstLevelModifier($property->getCode())) {
+            throw new \LogicException(
+                "On first level has to be the property {$property->getCode()} of value {$this->getPropertyFirstLevelModifier($property->getCode())}"
+            );
+        }
+    }
+
+    private function checkNextLevelPropertyIncrement(BaseProperty $property)
+    {
+        // TODO - see PPH, page 44
     }
 
     /**
@@ -155,26 +202,12 @@ abstract class ProfessionLevel extends StrictObject
     }
 
     /**
-     * Get strength modifier
-     *
-     * @return int
-     */
-    public function getStrengthFirstLevelModifier()
-    {
-        return $this->getPropertyFirstLevelModifier(Strength::STRENGTH);
-    }
-
-    /**
      * @param string $propertyCode
      *
      * @return int
      */
     private function getPropertyFirstLevelModifier($propertyCode)
     {
-        if (!$this->isFirstLevel()) {
-            return 0;
-        }
-
         return $this->isPrimaryProperty($propertyCode)
             ? self::PROPERTY_FIRST_LEVEL_MODIFIER
             : 0;
@@ -194,56 +227,6 @@ abstract class ProfessionLevel extends StrictObject
     public function isPrimaryProperty($propertyCode)
     {
         return in_array($propertyCode, $this->getPrimaryPropertyCodes());
-    }
-
-    /**
-     * Get agility modifier
-     *
-     * @return int
-     */
-    public function getAgilityFirstLevelModifier()
-    {
-        return $this->getPropertyFirstLevelModifier(Agility::AGILITY);
-    }
-
-    /**
-     * Get knack modifier
-     *
-     * @return int
-     */
-    public function getKnackFirstLevelModifier()
-    {
-        return $this->getPropertyFirstLevelModifier(Knack::KNACK);
-    }
-
-    /**
-     * Get will modifier
-     *
-     * @return int
-     */
-    public function getWillFirstLevelModifier()
-    {
-        return $this->getPropertyFirstLevelModifier(Will::WILL);
-    }
-
-    /**
-     * Get intelligence modifier
-     *
-     * @return int
-     */
-    public function getIntelligenceFirstLevelModifier()
-    {
-        return $this->getPropertyFirstLevelModifier(Intelligence::INTELLIGENCE);
-    }
-
-    /**
-     * Get charisma modifier
-     *
-     * @return int
-     */
-    public function getCharismaFirstLevelModifier()
-    {
-        return $this->getPropertyFirstLevelModifier(Charisma::CHARISMA);
     }
 
     /**

@@ -68,5 +68,13 @@ class BasePropertyTest extends \PHPUnit_Framework_TestCase
 /** inner */
 class TestSomeSpecificBaseProperty extends BaseProperty
 {
+    /**
+     * @return string
+     */
+    public function getCode()
+    {
+        return 'foo';
+    }
+
 
 }

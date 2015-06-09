@@ -1,6 +1,8 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels;
 
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Agility;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Knack;
 use DrdPlus\Cave\UnitBundle\Tests\Person\Attributes\ProfessionLevels\AbstractTestOfProfessionLevel;
 
 class ThiefLevelTest extends AbstractTestOfProfessionLevel
@@ -15,5 +17,16 @@ class ThiefLevelTest extends AbstractTestOfProfessionLevel
     {
         return 1;
     }
+
+    /**
+     * @param string $propertyName
+     *
+     * @return bool
+     */
+    protected function isPrimaryProperty($propertyName)
+    {
+        return in_array($propertyName, [Agility::AGILITY, Knack::KNACK]);
+    }
+
 
 }

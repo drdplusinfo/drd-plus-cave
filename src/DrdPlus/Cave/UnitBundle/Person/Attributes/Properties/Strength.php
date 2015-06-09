@@ -9,4 +9,12 @@ class Strength extends BaseProperty
 {
     const STRENGTH = 'strength';
 
+    /**
+     * @return string
+     */
+    public function getCode()
+    {
+        return self::STRENGTH;
+    }
+
 }
