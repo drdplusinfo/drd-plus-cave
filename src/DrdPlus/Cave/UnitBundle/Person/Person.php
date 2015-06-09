@@ -68,9 +68,9 @@ class Person extends StrictObject
     /**
      * @var PersonProperties
      *
-     * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\BaseProperties")
+     * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\PersonProperties")
      */
-    private $baseProperties;
+    private $personProperties;
 
     /**
      * @var ProfessionLevels
@@ -111,7 +111,7 @@ class Person extends StrictObject
         $this->professionLevels = $professionLevels;
 
         // helpers - every value is recalculated on each request
-        $this->baseProperties = new PersonProperties($this);
+        $this->personProperties = new PersonProperties($this);
         $this->fight = new Fight($this);
         $this->attack = new Attack($this->getCurrentAgility());
         $this->defense = new Defense($this->getCurrentAgility());
@@ -167,9 +167,9 @@ class Person extends StrictObject
     /**
      * @return PersonProperties
      */
-    public function getBaseProperties()
+    public function getPersonProperties()
     {
-        return $this->baseProperties;
+        return $this->personProperties;
     }
 
     /**
@@ -226,14 +226,14 @@ class Person extends StrictObject
     {
         $getProperty = 'get' . ucfirst($propertyName);
         $getPropertyModifier = 'get' . ucfirst($propertyName) . 'Modifier';
-        $getPropertyModifierSummary = 'get' . ucfirst($propertyName) . 'ModifierSummary';
+        $getNextLevelsPropertySummary = 'getNextLevels' . ucfirst($propertyName) . 'Summary';
 
+        // TODO compare this with PersonProperties; should PersonProperties be responsible for all of this?
         return
-            $this->getBaseProperties()->$getProperty()->getValue()
+            $this->getPersonProperties()->$getProperty()->getValue()
             + $this->getRace()->$getPropertyModifier($this->getGender())
             + $this->getExceptionality()->getExceptionalityProperties()->$getProperty()->getValue()
-            // TODO check if first level is NOT counted
-            + $this->getProfessionLevels()->$getPropertyModifierSummary();
+            + $this->getProfessionLevels()->$getNextLevelsPropertySummary();
     }
 
     /**
@@ -274,7 +274,7 @@ class Person extends StrictObject
     public function getSize()
     {
         // there is no other size modifier then the base size
-        return $this->getBaseProperties()->getSize();
+        return $this->getPersonProperties()->getSize();
     }
 
     /**

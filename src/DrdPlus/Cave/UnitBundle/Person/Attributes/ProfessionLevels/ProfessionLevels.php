@@ -531,9 +531,9 @@ class ProfessionLevels extends StrictObject implements \IteratorAggregate
     private function getPropertyModifierSummary($propertyName)
     {
         // like getStrengthIncrement()->getValue
-        $propertyFirstLevelModifierGetter = 'get' . ucfirst($propertyName) . 'ModifierForFirstLevel';
+        $getPropertyModifierForFirstLevel = 'get' . ucfirst($propertyName) . 'ModifierForFirstLevel';
 
-        return $this->$propertyFirstLevelModifierGetter() + $this->getNextLevelsPropertyModifierSummary($propertyName);
+        return $this->$getPropertyModifierForFirstLevel() + $this->getNextLevelsPropertyModifierSummary($propertyName);
     }
 
     /**
@@ -615,5 +615,53 @@ class ProfessionLevels extends StrictObject implements \IteratorAggregate
     public function getCharismaModifierSummary()
     {
         return $this->getPropertyModifierSummary(Charisma::CHARISMA);
+    }
+
+    /**
+     * @return int
+     */
+    public function getNextLevelsStrengthSummary()
+    {
+        return $this->getNextLevelsPropertyModifierSummary(Strength::STRENGTH);
+    }
+
+    /**
+     * @return int
+     */
+    public function getNextLevelsAgilitySummary()
+    {
+        return $this->getNextLevelsPropertyModifierSummary(Agility::AGILITY);
+    }
+
+    /**
+     * @return int
+     */
+    public function getNextLevelsKnackSummary()
+    {
+        return $this->getNextLevelsPropertyModifierSummary(Knack::KNACK);
+    }
+
+    /**
+     * @return int
+     */
+    public function getNextLevelsWillSummary()
+    {
+        return $this->getNextLevelsPropertyModifierSummary(Will::WILL);
+    }
+
+    /**
+     * @return int
+     */
+    public function getNextLevelsIntelligenceSummary()
+    {
+        return $this->getNextLevelsPropertyModifierSummary(Intelligence::INTELLIGENCE);
+    }
+
+    /**
+     * @return int
+     */
+    public function getNextLevelsCharismaSummary()
+    {
+        return $this->getNextLevelsPropertyModifierSummary(Charisma::CHARISMA);
     }
 }

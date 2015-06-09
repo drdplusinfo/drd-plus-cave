@@ -17,7 +17,7 @@ use DrdPlus\Cave\UnitBundle\Person\Person;
 use DrdPlus\Cave\UnitBundle\Tests\TestWithMockery;
 use Granam\Strict\Object\StrictObject;
 
-class BasePropertiesTest extends TestWithMockery
+class PersonPropertiesTest extends TestWithMockery
 {
 
     // TODO negative tests with exceeding values
@@ -178,14 +178,14 @@ class BasePropertiesTest extends TestWithMockery
     }
 
     /**
-     * @param PersonProperties $baseProperties
+     * @param PersonProperties $personProperties
      *
      * @test
      * @depends properties_are_calculated_properly
      */
-    public function is_a_strict_object(PersonProperties $baseProperties)
+    public function is_a_strict_object(PersonProperties $personProperties)
     {
-        $this->assertInstanceOf(StrictObject::class, $baseProperties);
+        $this->assertInstanceOf(StrictObject::class, $personProperties);
     }
 
 }
