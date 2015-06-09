@@ -6,9 +6,9 @@ use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\ExceptionalityPro
 use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\ProfessionLevels;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Agility;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Charisma;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\PersonProperties;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Intelligence;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Knack;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\PersonProperties;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Strength;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Will;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Gender;
@@ -30,33 +30,82 @@ class BasePropertiesTest extends TestWithMockery
     public function properties_are_calculated_properly()
     {
         $personProperties = new PersonProperties($this->createPersonMock(
-            $raceStrengthModifier = 3, $exceptionalStrength = 2, $firstLevelStrength = 1,
-            $raceAgilityModifier = 2, $exceptionalAgility = 3, $firstLevelAgility = 0,
-            $raceKnackModifier = 1, $exceptionalKnack = 2, $firstLevelKnack = 1
-            // TODO other properties
+            $raceStrengthModifier = 3, $exceptionalStrength = 2, $firstLevelStrength = 1, $nextLevelsStrength = 5,
+            $raceAgilityModifier = 2, $exceptionalAgility = 3, $firstLevelAgility = 0, $nextLevelAgility = 8,
+            $raceKnackModifier = 1, $exceptionalKnack = 2, $firstLevelKnack = 1, $nextLevelKnack = 4,
+            $raceWillModifier = 1, $exceptionalWill = 2, $firstLevelWill = 1, $nextLevelWill = 4,
+            $raceIntelligenceModifier = 1, $exceptionalIntelligence = 2, $firstLevelIntelligence = 1, $nextLevelIntelligence = 4,
+            $raceCharismaModifier = 1, $exceptionalCharisma = 2, $firstLevelCharisma = 1, $nextLevelCharisma = 4,
+            $sizeModifier = 1, $toughnessModifier = 2, $sensesModifier = 3
         ));
         $strength = $personProperties->getStrength();
         $this->assertInstanceOf(Strength::class, $strength);
-        $this->assertSame($raceStrengthModifier + $exceptionalStrength + $firstLevelStrength, $strength->getValue());
+        $this->assertSame($raceStrengthModifier + $exceptionalStrength + $firstLevelStrength + $nextLevelsStrength, $strength->getValue());
 
         $agility = $personProperties->getAgility();
         $this->assertInstanceOf(Agility::class, $agility);
-        $this->assertSame($raceAgilityModifier + $exceptionalAgility + $firstLevelAgility, $agility->getValue());
+        $this->assertSame($raceAgilityModifier + $exceptionalAgility + $firstLevelAgility + $nextLevelAgility, $agility->getValue());
 
         $knack = $personProperties->getKnack();
         $this->assertInstanceOf(Knack::class, $knack);
-        $this->assertSame($raceKnackModifier + $exceptionalKnack + $firstLevelKnack, $knack->getValue());
+        $this->assertSame($raceKnackModifier + $exceptionalKnack + $firstLevelKnack + $nextLevelKnack, $knack->getValue());
+
+        $will = $personProperties->getWill();
+        $this->assertInstanceOf(Will::class, $will);
+        $this->assertSame($raceWillModifier + $exceptionalWill + $firstLevelWill + $nextLevelWill, $will->getValue());
+
+        $intelligence = $personProperties->getIntelligence();
+        $this->assertInstanceOf(Intelligence::class, $intelligence);
+        $this->assertSame($raceIntelligenceModifier + $exceptionalIntelligence + $firstLevelIntelligence + $nextLevelIntelligence, $intelligence->getValue());
+
+        $charisma = $personProperties->getCharisma();
+        $this->assertInstanceOf(Charisma::class, $charisma);
+        $this->assertSame($raceCharismaModifier + $exceptionalCharisma + $firstLevelCharisma + $nextLevelCharisma, $charisma->getValue());
+
+        // TODO add derived properties tests
 
         return $personProperties;
     }
 
     /**
+     * @param $raceStrengthModifier
+     * @param $exceptionalStrength
+     * @param $firstLevelStrength
+     * @param $nextLevelStrength
+     * @param $raceAgilityModifier
+     * @param $exceptionalAgility
+     * @param $firstLevelAgility
+     * @param $nextLevelAgility
+     * @param $raceKnackModifier
+     * @param $exceptionalKnack
+     * @param $firstLevelKnack
+     * @param $nextLevelKnack
+     * @param $raceWillModifier
+     * @param $exceptionalWill
+     * @param $firstLevelWill
+     * @param $nextLevelWill
+     * @param $raceIntelligenceModifier
+     * @param $exceptionalIntelligence
+     * @param $firstLevelIntelligence
+     * @param $nextLevelIntelligence
+     * @param $raceCharismaModifier
+     * @param $exceptionalCharisma
+     * @param $firstLevelCharisma
+     * @param $nextLevelCharisma
+     * @param $sizeModifier
+     * @param $toughnessModifier
+     * @param $sensesModifier
+     *
      * @return \Mockery\MockInterface|Person
      */
     private function createPersonMock(
-        $raceStrengthModifier, $exceptionalStrength, $firstLevelStrength,
-        $raceAgilityModifier, $exceptionalAgility, $firstLevelAgility,
-        $raceKnackModifier, $exceptionalKnack, $firstLevelKnack
+        $raceStrengthModifier, $exceptionalStrength, $firstLevelStrength, $nextLevelStrength,
+        $raceAgilityModifier, $exceptionalAgility, $firstLevelAgility, $nextLevelAgility,
+        $raceKnackModifier, $exceptionalKnack, $firstLevelKnack, $nextLevelKnack,
+        $raceWillModifier, $exceptionalWill, $firstLevelWill, $nextLevelWill,
+        $raceIntelligenceModifier, $exceptionalIntelligence, $firstLevelIntelligence, $nextLevelIntelligence,
+        $raceCharismaModifier, $exceptionalCharisma, $firstLevelCharisma, $nextLevelCharisma,
+        $sizeModifier, $toughnessModifier, $sensesModifier
     )
     {
         $person = \Mockery::mock(Person::class);
@@ -66,12 +115,12 @@ class BasePropertiesTest extends TestWithMockery
         $this->addGetter($race, 'getStrengthModifier', $raceStrengthModifier);
         $this->addGetter($race, 'getAgilityModifier', $raceAgilityModifier);
         $this->addGetter($race, 'getKnackModifier', $raceKnackModifier);
-        $this->addGetter($race, 'getWillModifier');
-        $this->addGetter($race, 'getIntelligenceModifier');
-        $this->addGetter($race, 'getCharismaModifier');
-        $this->addGetter($race, 'getSizeModifier');
-        $this->addGetter($race, 'getToughnessModifier');
-        $this->addGetter($race, 'getSensesModifier');
+        $this->addGetter($race, 'getWillModifier', $raceWillModifier);
+        $this->addGetter($race, 'getIntelligenceModifier', $raceIntelligenceModifier);
+        $this->addGetter($race, 'getCharismaModifier', $raceCharismaModifier);
+        $this->addGetter($race, 'getSizeModifier', $sizeModifier);
+        $this->addGetter($race, 'getToughnessModifier', $toughnessModifier);
+        $this->addGetter($race, 'getSensesModifier', $sensesModifier);
 
         $person->shouldReceive('getGender')
             ->atLeast()->once()
@@ -90,11 +139,11 @@ class BasePropertiesTest extends TestWithMockery
         $this->addGetter($exceptionalityProperties, 'getKnack', $knack = \Mockery::mock(Knack::class));
         $this->addGetter($knack, 'getValue', $exceptionalKnack);
         $this->addGetter($exceptionalityProperties, 'getWill', $will = \Mockery::mock(Will::class));
-        $this->addGetter($will);
+        $this->addGetter($will, 'getValue', $exceptionalWill);
         $this->addGetter($exceptionalityProperties, 'getIntelligence', $intelligence = \Mockery::mock(Intelligence::class));
-        $this->addGetter($intelligence);
+        $this->addGetter($intelligence, 'getValue', $exceptionalIntelligence);
         $this->addGetter($exceptionalityProperties, 'getCharisma', $charisma = \Mockery::mock(Charisma::class));
-        $this->addGetter($charisma);
+        $this->addGetter($charisma, 'getValue', $exceptionalCharisma);
 
         $person->shouldReceive('getProfessionLevels')
             ->atLeast()->once()
@@ -102,10 +151,16 @@ class BasePropertiesTest extends TestWithMockery
         $this->addGetter($professionLevels, 'getStrengthModifierForFirstLevel', $firstLevelStrength);
         $this->addGetter($professionLevels, 'getAgilityModifierForFirstLevel', $firstLevelAgility);
         $this->addGetter($professionLevels, 'getKnackModifierForFirstLevel', $firstLevelKnack);
-        $this->addGetter($professionLevels, 'getWillModifierForFirstLevel');
-        $this->addGetter($professionLevels, 'getIntelligenceModifierForFirstLevel');
-        $this->addGetter($professionLevels, 'getCharismaModifierForFirstLevel');
-        $this->addGetter($professionLevels, 'getLevels', []);
+        $this->addGetter($professionLevels, 'getWillModifierForFirstLevel', $firstLevelWill);
+        $this->addGetter($professionLevels, 'getIntelligenceModifierForFirstLevel', $firstLevelIntelligence);
+        $this->addGetter($professionLevels, 'getCharismaModifierForFirstLevel', $firstLevelCharisma);
+
+        $this->addGetter($professionLevels, 'getNextLevelsStrengthModifier', $nextLevelStrength);
+        $this->addGetter($professionLevels, 'getNextLevelsAgilityModifier', $nextLevelAgility);
+        $this->addGetter($professionLevels, 'getNextLevelsKnackModifier', $nextLevelKnack);
+        $this->addGetter($professionLevels, 'getNextLevelsWillModifier', $nextLevelWill);
+        $this->addGetter($professionLevels, 'getNextLevelsIntelligenceModifier', $nextLevelIntelligence);
+        $this->addGetter($professionLevels, 'getNextLevelsCharismaModifier', $nextLevelCharisma);
 
         return $person;
     }

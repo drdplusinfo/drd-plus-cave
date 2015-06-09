@@ -183,14 +183,14 @@ class ProfessionLevels extends StrictObject implements \IteratorAggregate
      */
     public function getLevels()
     {
-        return array_merge(
+        return $this->sortByLevelRank(array_merge(
             $this->getFighterLevels()->toArray(),
             $this->getPriestLevels()->toArray(),
             $this->getRangerLevels()->toArray(),
             $this->getTheurgistLevels()->toArray(),
             $this->getThiefLevels()->toArray(),
             $this->getWizardLevels()->toArray()
-        );
+        ));
     }
 
     /**
@@ -239,12 +239,90 @@ class ProfessionLevels extends StrictObject implements \IteratorAggregate
         return $professionLevels;
     }
 
+    /**
+     * Sorted by level ascending
+     *
+     * @return ProfessionLevel[]
+     */
     public function getNextLevels()
     {
         $levels = $this->getLevels();
-        array_shift($levels); // remote the fist level
+        $firstLevel = array_shift($levels); // remote the fist level
+        /** @var ProfessionLevel $firstLevel */
+        if ($firstLevel && !$firstLevel->isFirstLevel()) {
+            throw new \LogicException("The removed level should be the first one, removed {$firstLevel->getLevelValue()->getValue()}");
+        }
 
         return $levels;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNextLevelsStrengthModifier()
+    {
+        return $this->sumNextLevelsProperty(Strength::STRENGTH);
+    }
+
+    /**
+     * @param string $propertyName
+     *
+     * @return int
+     */
+    private function sumNextLevelsProperty($propertyName)
+    {
+        $propertyName = ucfirst($propertyName);
+        $getPropertyIncrement = "get{$propertyName}Increment";
+
+        return (int)array_sum(
+            array_map(
+                function (ProfessionLevel $professionLevel) use ($getPropertyIncrement) {
+                    // each level has its own property increment
+                    return $professionLevel->$getPropertyIncrement();
+                },
+                $this->getNextLevels()
+            )
+        );
+    }
+
+    /**
+     * @return int
+     */
+    public function getNextLevelsAgilityModifier()
+    {
+        return $this->sumNextLevelsProperty(Agility::AGILITY);
+    }
+
+    /**
+     * @return int
+     */
+    public function getNextLevelsKnackModifier()
+    {
+        return $this->sumNextLevelsProperty(Knack::KNACK);
+    }
+
+    /**
+     * @return int
+     */
+    public function getNextLevelsWillModifier()
+    {
+        return $this->sumNextLevelsProperty(Will::WILL);
+    }
+
+    /**
+     * @return int
+     */
+    public function getNextLevelsIntelligenceModifier()
+    {
+        return $this->sumNextLevelsProperty(Intelligence::INTELLIGENCE);
+    }
+
+    /**
+     * @return int
+     */
+    public function getNextLevelsCharismaModifier()
+    {
+        return $this->sumNextLevelsProperty(Charisma::CHARISMA);
     }
 
     /**

@@ -1,7 +1,6 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Properties;
 
-use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\ProfessionLevel;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\ProfessionLevels;
 use Granam\Strict\Object\StrictObject;
 
@@ -43,26 +42,7 @@ class NextLevelsProperties extends StrictObject
 
     private function createNextLevelsStrength(ProfessionLevels $professionLevels)
     {
-        return Strength::getIt($this->calculateNextLevelsProperty(Strength::STRENGTH, $professionLevels));
-    }
-
-    private function calculateNextLevelsProperty($propertyName, ProfessionLevels $professionLevels)
-    {
-        $propertyName = ucfirst($propertyName);
-        $getPropertyIncrement = "get{$propertyName}Increment";
-        // TODO next level property summary should be responsibility of the ProfessionLevels aggregate
-
-        return array_sum(
-            array_map(
-                function (ProfessionLevel $professionLevel) use ($getPropertyIncrement) {
-                    if ($professionLevel->getLevelValue()->getValue() === 1) {
-                        return 0; // first level is not count there
-                    }
-                    return $professionLevel->$getPropertyIncrement(); // each level has its own property increment
-                },
-                $professionLevels->getLevels()
-            )
-        );
+        return Strength::getIt($professionLevels->getNextLevelsStrengthModifier());
     }
 
     /**
@@ -89,27 +69,27 @@ class NextLevelsProperties extends StrictObject
 
     private function createNextLevelsAgility(ProfessionLevels $professionLevels)
     {
-        return Agility::getIt($this->calculateNextLevelsProperty(Agility::AGILITY, $professionLevels));
+        return Agility::getIt($professionLevels->getNextLevelsAgilityModifier());
     }
 
     private function createNextLevelsKnack(ProfessionLevels $professionLevels)
     {
-        return Knack::getIt($this->calculateNextLevelsProperty(Knack::KNACK, $professionLevels));
+        return Knack::getIt($professionLevels->getNextLevelsKnackModifier());
     }
 
     private function createNextLevelsWill(ProfessionLevels $professionLevels)
     {
-        return Will::getIt($this->calculateNextLevelsProperty(Will::WILL, $professionLevels));
+        return Will::getIt($professionLevels->getNextLevelsWillModifier());
     }
 
     private function createNextLevelsIntelligence(ProfessionLevels $professionLevels)
     {
-        return Intelligence::getIt($this->calculateNextLevelsProperty(Intelligence::INTELLIGENCE, $professionLevels));
+        return Intelligence::getIt($professionLevels->getNextLevelsIntelligenceModifier());
     }
 
     private function createNextLevelsCharisma(ProfessionLevels $professionLevels)
     {
-        return Charisma::getIt($this->calculateNextLevelsProperty(Charisma::CHARISMA, $professionLevels));
+        return Charisma::getIt($professionLevels->getNextLevelsCharismaModifier());
     }
 
     /**
