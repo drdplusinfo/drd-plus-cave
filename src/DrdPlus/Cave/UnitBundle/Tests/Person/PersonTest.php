@@ -242,7 +242,6 @@ class PersonTest extends TestWithMockery
 
         $professionLevels->shouldReceive('getAgilityModifierForFirstLevel')->once()->andReturn(0);
         $professionLevels->shouldReceive('getNextLevelsAgilityModifier')->once()->andReturn(0);
-        $professionLevels->shouldReceive('getAgilityModifierSummary')->atLeast()->once()->andReturn(0);
 
         $professionLevels->shouldReceive('getKnackModifierForFirstLevel')->once()->andReturn(0);
         $professionLevels->shouldReceive('getNextLevelsKnackModifier')->once()->andReturn(0);
@@ -255,8 +254,6 @@ class PersonTest extends TestWithMockery
 
         $professionLevels->shouldReceive('getCharismaModifierForFirstLevel')->once()->andReturn(0);
         $professionLevels->shouldReceive('getNextLevelsCharismaModifier')->once()->andReturn(0);
-
-        $professionLevels->shouldReceive('getKnackModifierSummary')->once()->andReturn(0);
 
         return $professionLevels;
     }

@@ -16,6 +16,7 @@ use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Derived\Toughness;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Intelligence;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Knack;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Strength;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Will;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Gender;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Race;
 use Granam\Strict\Object\StrictObject;
@@ -79,21 +80,6 @@ class Person extends StrictObject
      */
     private $professionLevels;
 
-    /** @var Toughness */
-    private $toughness;
-
-    /** @var Fight */
-    private $fight;
-
-    /** @var Attack */
-    private $attack;
-
-    /** @var Defense */
-    private $defense;
-
-    /** @var Shooting */
-    private $shooting;
-
     public function __construct(
         Race $race, // enum
         Gender $gender, // enum
@@ -109,13 +95,7 @@ class Person extends StrictObject
         $this->exceptionality = $exceptionality;
         $professionLevels->setPerson($this);
         $this->professionLevels = $professionLevels;
-
-        // helpers - every value is recalculated on each request
         $this->personProperties = new PersonProperties($this);
-        $this->fight = new Fight($this);
-        $this->attack = new Attack($this->getCurrentAgility());
-        $this->defense = new Defense($this->getCurrentAgility());
-        $this->shooting = new Shooting($this->getCurrentKnack());
     }
 
     /**
@@ -189,51 +169,11 @@ class Person extends StrictObject
     }
 
     /**
-     * @return Toughness
-     */
-    public function getToughness()
-    {
-        if (!isset($this->toughness)) {
-            $this->toughness = Toughness::getIt($this->calculateCurrentToughness());
-        }
-
-        return $this->toughness;
-    }
-
-    /**
-     * @return int
-     */
-    private function calculateCurrentToughness()
-    {
-        return $this->getCurrentStrength()->getValue()
-        + $this->getRace()->getToughnessModifier();
-    }
-
-    /**
      * @return Strength
      */
     public function getCurrentStrength()
     {
-        return Strength::getIt($this->calculateCurrentProperty(Strength::STRENGTH));
-    }
-
-    /**
-     * @param $propertyName
-     *
-     * @return int
-     */
-    private function calculateCurrentProperty($propertyName)
-    {
-        $getProperty = 'get' . ucfirst($propertyName);
-        $getPropertyModifier = 'get' . ucfirst($propertyName) . 'Modifier';
-        $getNextLevelsPropertySummary = 'getNextLevels' . ucfirst($propertyName) . 'Summary';
-
-        // TODO compare this with PersonProperties; should PersonProperties be responsible for all of this?
-        return
-            $this->getPersonProperties()->$getProperty()->getValue()
-            + $this->getRace()->$getPropertyModifier($this->getGender())
-            + $this->getExceptionality()->getExceptionalityProperties()->$getProperty()->getValue()
-            + $this->getProfessionLevels()->$getNextLevelsPropertySummary();
+        return $this->getPersonProperties()->getStrength();
     }
 
     /**
@@ -241,7 +181,7 @@ class Person extends StrictObject
      */
     public function getCurrentAgility()
     {
-        return Agility::getIt($this->calculateCurrentProperty(Agility::AGILITY));
+        return $this->getPersonProperties()->getAgility();
     }
 
     /**
@@ -249,7 +189,15 @@ class Person extends StrictObject
      */
     public function getCurrentKnack()
     {
-        return Knack::getIt($this->calculateCurrentProperty(Knack::KNACK));
+        return $this->getPersonProperties()->getKnack();
+    }
+
+    /**
+     * @return Will
+     */
+    public function getCurrentWill()
+    {
+        return $this->getPersonProperties()->getWill();
     }
 
     /**
@@ -257,7 +205,7 @@ class Person extends StrictObject
      */
     public function getCurrentIntelligence()
     {
-        return Intelligence::getIt($this->calculateCurrentProperty(Intelligence::INTELLIGENCE));
+        return $this->getPersonProperties()->getIntelligence();
     }
 
     /**
@@ -265,7 +213,7 @@ class Person extends StrictObject
      */
     public function getCurrentCharisma()
     {
-        return Charisma::getIt($this->calculateCurrentProperty(Charisma::CHARISMA));
+        return $this->getPersonProperties()->getCharisma();
     }
 
     /**
@@ -273,8 +221,15 @@ class Person extends StrictObject
      */
     public function getSize()
     {
-        // there is no other size modifier then the base size
         return $this->getPersonProperties()->getSize();
+    }
+
+    /**
+     * @return Toughness
+     */
+    public function getToughness()
+    {
+        return $this->getPersonProperties()->getToughness();
     }
 
     /**
@@ -282,7 +237,7 @@ class Person extends StrictObject
      */
     public function getFight()
     {
-        return $this->fight;
+        return $this->getPersonProperties()->getFight();
     }
 
     /**
@@ -290,7 +245,7 @@ class Person extends StrictObject
      */
     public function getDefense()
     {
-        return $this->defense;
+        return $this->getPersonProperties()->getDefense();
     }
 
     /**
@@ -298,7 +253,7 @@ class Person extends StrictObject
      */
     public function getShooting()
     {
-        return $this->shooting;
+        return $this->getPersonProperties()->getShooting();
     }
 
     /**
@@ -306,7 +261,7 @@ class Person extends StrictObject
      */
     public function getAttack()
     {
-        return $this->attack;
+        return $this->getPersonProperties()->getAttack();
     }
 
 }

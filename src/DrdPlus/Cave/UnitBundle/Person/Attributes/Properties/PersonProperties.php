@@ -1,23 +1,26 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Properties;
 
+use DrdPlus\Cave\UnitBundle\Person\Attributes\GameCharacteristics\Combat\Attack;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\GameCharacteristics\Combat\Defense;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\GameCharacteristics\Combat\Fight;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\GameCharacteristics\Combat\Shooting;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Body\Size;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Derived\DerivedProperty;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Derived\Endurance;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Derived\Senses;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Derived\Speed;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Derived\Toughness;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Gender;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Race;
 use DrdPlus\Cave\UnitBundle\Person\Person;
 use Granam\Strict\Object\StrictObject;
 
 class PersonProperties extends StrictObject
 {
-    const INITIAL_PROPERTY_INCREASE_LIMIT = 3;
 
-    /** @var Person */
-    private $person;
+    /** @var FirstLevelProperties */
+    private $firstLevelProperties;
+
+    /** @var NextLevelsProperties */
+    private $nextLevelsProperties;
 
     /** @var Strength */
     private $strength;
@@ -49,19 +52,23 @@ class PersonProperties extends StrictObject
     /** @var Senses */
     private $senses;
 
-    /** @var FirstLevelProperties */
-    private $firstLevelProperties;
+    /** @var Fight */
+    private $fight;
 
-    /** @var NextLevelsProperties */
-    private $nextLevelsProperties;
+    /** @var Attack */
+    private $attack;
+
+    /** @var Defense */
+    private $defense;
+
+    /** @var Shooting */
+    private $shooting;
 
     /**
      * @param Person $person
      */
     public function __construct(Person $person)
     {
-        $this->person = $person;
-
         $this->firstLevelProperties = new FirstLevelProperties(
             $person->getRace(),
             $person->getGender(),
@@ -70,83 +77,40 @@ class PersonProperties extends StrictObject
         );
         $this->nextLevelsProperties = new NextLevelsProperties($person->getProfessionLevels());
 
-        $this->strength = $this->createStrength(
-            $this->firstLevelProperties->getFirstLevelStrength(),
-            $this->nextLevelsProperties->getNextLevelsStrength()
+        $this->strength = Strength::getIt(
+            $this->firstLevelProperties->getFirstLevelStrength()->getValue()
+            + $this->nextLevelsProperties->getNextLevelsStrength()->getValue()
         );
-        $this->agility = $this->createAgility(
-            $this->firstLevelProperties->getFirstLevelAgility(),
-            $this->nextLevelsProperties->getNextLevelsAgility()
+        $this->agility = Agility::getIt(
+            $this->firstLevelProperties->getFirstLevelAgility()->getValue()
+            + $this->nextLevelsProperties->getNextLevelsAgility()->getValue()
         );
-        $this->knack = $this->createKnack(
-            $this->firstLevelProperties->getFirstLevelKnack(),
-            $this->nextLevelsProperties->getNextLevelsKnack()
+        $this->knack = Knack::getIt(
+            $this->firstLevelProperties->getFirstLevelKnack()->getValue()
+            + $this->nextLevelsProperties->getNextLevelsKnack()->getValue()
         );
-        $this->will = $this->createWill(
-            $this->firstLevelProperties->getFirstLevelWill(),
-            $this->nextLevelsProperties->getNextLevelsWill()
+        $this->will = Will::getIt(
+            $this->firstLevelProperties->getFirstLevelWill()->getValue()
+            + $this->nextLevelsProperties->getNextLevelsWill()->getValue()
         );
-        $this->intelligence = $this->createIntelligence(
-            $this->firstLevelProperties->getFirstLevelIntelligence(),
-            $this->nextLevelsProperties->getNextLevelsIntelligence()
+        $this->intelligence = Intelligence::getIt(
+            $this->firstLevelProperties->getFirstLevelIntelligence()->getValue()
+            + $this->nextLevelsProperties->getNextLevelsIntelligence()->getValue()
         );
-        $this->charisma = $this->createCharisma(
-            $this->firstLevelProperties->getFirstLevelCharisma(),
-            $this->nextLevelsProperties->getNextLevelsCharisma()
+        $this->charisma = Charisma::getIt(
+            $this->firstLevelProperties->getFirstLevelCharisma()->getValue()
+            + $this->nextLevelsProperties->getNextLevelsCharisma()->getValue()
         );
 
-        $this->setUpDerivedProperty($this->createToughness($this->getStrength(), $person->getRace()));
-        $this->setUpDerivedProperty($this->createEndurance($this->getStrength(), $this->getWill()));
-        $this->setUpDerivedProperty($this->createSpeed($this->getStrength(), $this->getAgility()));
-        $this->setUpDerivedProperty($this->createSenses($this->getKnack(), $person->getRace(), $person->getGender()));
-    }
-
-    private function createStrength(Strength $firstLevelStrength, Strength $nextLevelsStrength)
-    {
-        return Strength::getIt($firstLevelStrength->getValue() + $nextLevelsStrength->getValue());
-    }
-
-    private function createAgility(Agility $firstLevelAgility, Agility $nextLevelsAgility)
-    {
-        return Agility::getIt($firstLevelAgility->getValue() + $nextLevelsAgility->getValue());
-    }
-
-    private function createKnack(Knack $firstLevelKnack, Knack $nextLevelsKnack)
-    {
-        return Knack::getIt($firstLevelKnack->getValue() + $nextLevelsKnack->getValue());
-    }
-
-    private function createWill(Will $firstLevelWill, Will $nextLevelsWill)
-    {
-        return Will::getIt($firstLevelWill->getValue() + $nextLevelsWill->getValue());
-    }
-
-    private function createIntelligence(Intelligence $firstLevelIntelligence, Intelligence $nextLevelsIntelligence)
-    {
-        return Intelligence::getIt($firstLevelIntelligence->getValue() + $nextLevelsIntelligence->getValue());
-    }
-
-    private function createCharisma(Charisma $firstLevelCharisma, Charisma $nextLevelsCharisma)
-    {
-        return Charisma::getIt($firstLevelCharisma->getValue() + $nextLevelsCharisma->getValue());
-    }
-
-    private function createToughness(Strength $strength, Race $race)
-    {
-        return new Toughness(
-            $strength->getValue()
-            + $race->getToughnessModifier()
-        );
-    }
-
-    private function createEndurance(Strength $strength, Will $will)
-    {
-        return new Endurance((int)round($strength->getValue() + $will->getValue()));
-    }
-
-    private function createSpeed(Strength $strength, Agility $agility)
-    {
-        return new Speed($this->calculateSpeed($strength, $agility));
+        // delivered properties
+        $this->toughness = Toughness::getIt($this->getStrength()->getValue() + $person->getRace()->getToughnessModifier());
+        $this->endurance = Endurance::getIt((int)round($this->getStrength()->getValue() + $this->getWill()->getValue()));
+        $this->speed = Speed::getIt($this->calculateSpeed($this->getStrength(), $this->getAgility()));
+        $this->senses = Senses::getIt($this->getKnack()->getValue() + $person->getRace()->getSensesModifier($person->getGender()));
+        $this->fight = new Fight($person);
+        $this->attack = new Attack($this->getAgility());
+        $this->defense = new Defense($this->getAgility());
+        $this->shooting = new Shooting($this->getKnack());
     }
 
     private function calculateSpeed(Strength $strength, Agility $agility)
@@ -167,47 +131,12 @@ class PersonProperties extends StrictObject
         return floor(($size->getValue() - 1) / 3) - 1;
     }
 
-    private function createSenses(Knack $knack, Race $race, Gender $gender)
-    {
-        return new Senses($this->calculateSenses($knack, $race, $gender));
-    }
-
-    private function calculateSenses(Knack $knack, Race $race, Gender $gender)
-    {
-        return $knack->getValue() + $race->getSensesModifier($gender);
-    }
-
-    /**
-     * @return Person
-     */
-    public function getPerson()
-    {
-        return $this->person;
-    }
-
     /**
      * @return Strength
      */
     public function getStrength()
     {
         return $this->strength;
-    }
-
-    /**
-     * @param DerivedProperty $derivedProperty
-     *
-     * @throws Exceptions\PropertyIsAlreadySet
-     */
-    private function setUpDerivedProperty(DerivedProperty $derivedProperty)
-    {
-        $derivedPropertyName = $derivedProperty->getName();
-        if (isset($this->$derivedPropertyName)) {
-            throw new Exceptions\PropertyIsAlreadySet(
-                'The property ' . $derivedPropertyName . ' is already set by value ' . var_export($this->$derivedPropertyName->getValue(), true)
-            );
-        }
-
-        $this->$derivedPropertyName = $derivedProperty;
     }
 
     /**
@@ -289,6 +218,38 @@ class PersonProperties extends StrictObject
     public function getSenses()
     {
         return $this->senses;
+    }
+
+    /**
+     * @return Attack
+     */
+    public function getAttack()
+    {
+        return $this->attack;
+    }
+
+    /**
+     * @return Defense
+     */
+    public function getDefense()
+    {
+        return $this->defense;
+    }
+
+    /**
+     * @return Fight
+     */
+    public function getFight()
+    {
+        return $this->fight;
+    }
+
+    /**
+     * @return Shooting
+     */
+    public function getShooting()
+    {
+        return $this->shooting;
     }
 
 }
