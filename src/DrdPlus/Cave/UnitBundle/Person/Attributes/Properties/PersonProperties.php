@@ -49,6 +49,9 @@ class PersonProperties extends StrictObject
     /** @var Speed */
     private $speed;
 
+    /** @var Size */
+    private $size;
+
     /** @var Senses */
     private $senses;
 
@@ -106,6 +109,7 @@ class PersonProperties extends StrictObject
         $this->toughness = Toughness::getIt($this->getStrength()->getValue() + $person->getRace()->getToughnessModifier());
         $this->endurance = Endurance::getIt((int)round($this->getStrength()->getValue() + $this->getWill()->getValue()));
         $this->speed = Speed::getIt($this->calculateSpeed($this->getStrength(), $this->getAgility()));
+        $this->size = $this->firstLevelProperties->getFirstLevelSize(); // there is no more size increment than the first level one
         $this->senses = Senses::getIt($this->getKnack()->getValue() + $person->getRace()->getSensesModifier($person->getGender()));
         $this->fight = new Fight($person);
         $this->attack = new Attack($this->getAgility());
@@ -208,8 +212,7 @@ class PersonProperties extends StrictObject
      */
     public function getSize()
     {
-        // there is no more size increment than the first level one
-        return $this->firstLevelProperties->getFirstLevelSize();
+        return $this->size;
     }
 
     /**
