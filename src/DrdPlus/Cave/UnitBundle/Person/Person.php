@@ -84,7 +84,7 @@ class Person extends StrictObject
         $this->exceptionality = $exceptionality;
         $professionLevels->setPerson($this);
         $this->professionLevels = $professionLevels;
-        $this->personProperties = new PersonProperties($this);
+        $this->personProperties = new PersonProperties($this); // enums aggregate
     }
 
     /**

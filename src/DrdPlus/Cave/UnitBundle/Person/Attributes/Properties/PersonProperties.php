@@ -111,6 +111,7 @@ class PersonProperties extends StrictObject
         $this->size = $this->firstLevelProperties->getFirstLevelSize(); // there is no more size increment than the first level one
         $this->speed = Speed::getIt($this->calculateSpeed($this->getStrength(), $this->getAgility(), $this->getSize()));
         $this->senses = Senses::getIt($this->getKnack()->getValue() + $person->getRace()->getSensesModifier($person->getGender()));
+
         $this->fight = new Fight($person);
         $this->attack = new Attack($this->getAgility());
         $this->defense = new Defense($this->getAgility());
@@ -125,12 +126,10 @@ class PersonProperties extends StrictObject
     private function getSpeedBonusBySize(Size $size)
     {
         if ($size->getValue() > 0) {
-            // 1 - 3 = -1; 4 - 6 = 0; 7 - 9 = +1 ...
-            return ceil($size->getValue() / 3) - 2;
+            return ceil($size->getValue() / 3) - 2; // 1 - 3 = -1; 4 - 6 = 0; 7 - 9 = +1 ...
         }
 
-        // -2 - 0 = -2 ...
-        return floor(($size->getValue() - 1) / 3) - 1;
+        return floor(($size->getValue() - 1) / 3) - 1; // -2 - 0 = -2 ...
     }
 
     /**
