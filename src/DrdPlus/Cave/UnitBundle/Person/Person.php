@@ -3,20 +3,9 @@ namespace DrdPlus\Cave\UnitBundle\Person;
 
 use Doctrine\ORM\Mapping as ORM;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Exceptionality;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\GameCharacteristics\Combat\Attack;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\GameCharacteristics\Combat\Defense;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\GameCharacteristics\Combat\Fight;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\GameCharacteristics\Combat\Shooting;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Name;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\ProfessionLevels;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Agility;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\PersonProperties;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Charisma;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Derived\Toughness;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Intelligence;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Knack;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Strength;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Will;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Gender;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Race;
 use Granam\Strict\Object\StrictObject;
@@ -166,102 +155,6 @@ class Person extends StrictObject
     public function getProfessionLevels()
     {
         return $this->professionLevels;
-    }
-
-    /**
-     * @return Strength
-     */
-    public function getCurrentStrength()
-    {
-        return $this->getPersonProperties()->getStrength();
-    }
-
-    /**
-     * @return Agility
-     */
-    public function getCurrentAgility()
-    {
-        return $this->getPersonProperties()->getAgility();
-    }
-
-    /**
-     * @return Knack
-     */
-    public function getCurrentKnack()
-    {
-        return $this->getPersonProperties()->getKnack();
-    }
-
-    /**
-     * @return Will
-     */
-    public function getCurrentWill()
-    {
-        return $this->getPersonProperties()->getWill();
-    }
-
-    /**
-     * @return Intelligence
-     */
-    public function getCurrentIntelligence()
-    {
-        return $this->getPersonProperties()->getIntelligence();
-    }
-
-    /**
-     * @return Charisma
-     */
-    public function getCurrentCharisma()
-    {
-        return $this->getPersonProperties()->getCharisma();
-    }
-
-    /**
-     * @return Attributes\Properties\Body\Size
-     */
-    public function getSize()
-    {
-        return $this->getPersonProperties()->getSize();
-    }
-
-    /**
-     * @return Toughness
-     */
-    public function getToughness()
-    {
-        return $this->getPersonProperties()->getToughness();
-    }
-
-    /**
-     * @return Fight
-     */
-    public function getFight()
-    {
-        return $this->getPersonProperties()->getFight();
-    }
-
-    /**
-     * @return Defense
-     */
-    public function getDefense()
-    {
-        return $this->getPersonProperties()->getDefense();
-    }
-
-    /**
-     * @return Shooting
-     */
-    public function getShooting()
-    {
-        return $this->getPersonProperties()->getShooting();
-    }
-
-    /**
-     * @return Attack
-     */
-    public function getAttack()
-    {
-        return $this->getPersonProperties()->getAttack();
     }
 
 }

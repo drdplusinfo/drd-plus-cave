@@ -46,7 +46,7 @@ class FirstLevelProperties extends StrictObject
         $this->setUpBaseProperty($this->createFirstLevelWill($race, $gender, $exceptionalityProperties, $professionLevels), $race, $gender);
         $this->setUpBaseProperty($this->createFirstLevelIntelligence($race, $gender, $exceptionalityProperties, $professionLevels), $race, $gender);
         $this->setUpBaseProperty($this->createFirstLevelCharisma($race, $gender, $exceptionalityProperties, $professionLevels), $race, $gender);
-        $this->setUpSize($this->createFirstLevelSize($race, $gender, $exceptionalityProperties, $professionLevels));
+        $this->firstLevelSize = $this->createFirstLevelSize($race, $gender, $exceptionalityProperties, $professionLevels);
     }
 
     private function createFirstLevelStrength(
@@ -160,22 +160,6 @@ class FirstLevelProperties extends StrictObject
     private function createFirstLevelCharisma(Race $race, Gender $gender, ExceptionalityProperties $exceptionalityProperties, ProfessionLevels $professionLevels)
     {
         return Charisma::getIt($this->calculateFirstLevelBaseProperty(Charisma::CHARISMA, $race, $gender, $exceptionalityProperties, $professionLevels));
-    }
-
-    /**
-     * @param Size $size
-     *
-     * @throws Exceptions\PropertyIsAlreadySet
-     */
-    private function setUpSize(Size $size)
-    {
-        if (isset($this->firstLevelSize)) {
-            throw new Exceptions\PropertyIsAlreadySet(
-                'The size property is already set by value ' . var_export($this->firstLevelSize->getValue(), true)
-            );
-        }
-
-        $this->firstLevelSize = $size;
     }
 
     private function createFirstLevelSize(Race $race, Gender $gender, ExceptionalityProperties $exceptionalityProperties, ProfessionLevels $professionLevels)
