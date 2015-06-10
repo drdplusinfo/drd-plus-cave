@@ -12,84 +12,33 @@ class NextLevelsProperties extends StrictObject
     private $professionLevels;
 
     /** @var Strength */
-    private $nextLevelsStrength;
+    private $strength;
 
     /** @var Agility */
-    private $nextLevelsAgility;
+    private $agility;
 
     /** @var Knack */
-    private $nextLevelsKnack;
+    private $knack;
 
     /** @var Will */
-    private $nextLevelsWill;
+    private $will;
 
     /** @var Intelligence */
-    private $nextLevelsIntelligence;
+    private $intelligence;
 
     /** @var Charisma */
-    private $nextLevelsCharisma;
+    private $charisma;
 
     public function __construct(ProfessionLevels $professionLevels)
     {
         $this->professionLevels = $professionLevels;
-        $this->setUpProperty($this->createNextLevelsStrength($professionLevels));
-        $this->setUpProperty($this->createNextLevelsAgility($professionLevels));
-        $this->setUpProperty($this->createNextLevelsKnack($professionLevels));
-        $this->setUpProperty($this->createNextLevelsWill($professionLevels));
-        $this->setUpProperty($this->createNextLevelsIntelligence($professionLevels));
-        $this->setUpProperty($this->createNextLevelsCharisma($professionLevels));
-    }
-
-    private function createNextLevelsStrength(ProfessionLevels $professionLevels)
-    {
-        return Strength::getIt($professionLevels->getNextLevelsStrengthModifier());
-    }
-
-    /**
-     * @param BaseProperty $baseProperty
-     *
-     * @throws Exceptions\PropertyIsAlreadySet
-     * @throws Exceptions\BasePropertyValueExceeded
-     */
-    private function setUpProperty(BaseProperty $baseProperty)
-    {
-        /** @var string|BaseProperty $localPropertyName */
-        $propertyName = ucfirst($baseProperty->getName());
-        $localPropertyName = "nextLevels{$propertyName}";
-        if (isset($this->$localPropertyName)) {
-            throw new Exceptions\PropertyIsAlreadySet(
-                'The property ' . $localPropertyName . ' is already set by value ' . var_export($this->$localPropertyName->getValue(), true)
-            );
-        }
-
-        // TODO new, non-first level has no property increase limit?
-
-        $this->$localPropertyName = $baseProperty;
-    }
-
-    private function createNextLevelsAgility(ProfessionLevels $professionLevels)
-    {
-        return Agility::getIt($professionLevels->getNextLevelsAgilityModifier());
-    }
-
-    private function createNextLevelsKnack(ProfessionLevels $professionLevels)
-    {
-        return Knack::getIt($professionLevels->getNextLevelsKnackModifier());
-    }
-
-    private function createNextLevelsWill(ProfessionLevels $professionLevels)
-    {
-        return Will::getIt($professionLevels->getNextLevelsWillModifier());
-    }
-
-    private function createNextLevelsIntelligence(ProfessionLevels $professionLevels)
-    {
-        return Intelligence::getIt($professionLevels->getNextLevelsIntelligenceModifier());
-    }
-
-    private function createNextLevelsCharisma(ProfessionLevels $professionLevels)
-    {
-        return Charisma::getIt($professionLevels->getNextLevelsCharismaModifier());
+        // TODO what about property value check? Or new, non-first level has no property increase limit?
+        $this->strength = Strength::getIt($professionLevels->getNextLevelsStrengthModifier());
+        $this->agility = Agility::getIt($professionLevels->getNextLevelsAgilityModifier());
+        $this->knack = Knack::getIt($professionLevels->getNextLevelsKnackModifier());
+        $this->will = Will::getIt($professionLevels->getNextLevelsWillModifier());
+        $this->intelligence = Intelligence::getIt($professionLevels->getNextLevelsIntelligenceModifier());
+        $this->charisma = Charisma::getIt($professionLevels->getNextLevelsCharismaModifier());
     }
 
     /**
@@ -103,49 +52,49 @@ class NextLevelsProperties extends StrictObject
     /**
      * @return Strength
      */
-    public function getNextLevelsStrength()
+    public function getStrength()
     {
-        return $this->nextLevelsStrength;
+        return $this->strength;
     }
 
     /**
      * @return Agility
      */
-    public function getNextLevelsAgility()
+    public function getAgility()
     {
-        return $this->nextLevelsAgility;
+        return $this->agility;
     }
 
     /**
      * @return Knack
      */
-    public function getNextLevelsKnack()
+    public function getKnack()
     {
-        return $this->nextLevelsKnack;
+        return $this->knack;
     }
 
     /**
      * @return Will
      */
-    public function getNextLevelsWill()
+    public function getWill()
     {
-        return $this->nextLevelsWill;
+        return $this->will;
     }
 
     /**
      * @return Intelligence
      */
-    public function getNextLevelsIntelligence()
+    public function getIntelligence()
     {
-        return $this->nextLevelsIntelligence;
+        return $this->intelligence;
     }
 
     /**
      * @return Charisma
      */
-    public function getNextLevelsCharisma()
+    public function getCharisma()
     {
-        return $this->nextLevelsCharisma;
+        return $this->charisma;
     }
 
 }

@@ -79,27 +79,27 @@ class PersonProperties extends StrictObject
 
         $this->strength = Strength::getIt(
             $this->firstLevelProperties->getFirstLevelStrength()->getValue()
-            + $this->nextLevelsProperties->getNextLevelsStrength()->getValue()
+            + $this->nextLevelsProperties->getStrength()->getValue()
         );
         $this->agility = Agility::getIt(
             $this->firstLevelProperties->getFirstLevelAgility()->getValue()
-            + $this->nextLevelsProperties->getNextLevelsAgility()->getValue()
+            + $this->nextLevelsProperties->getAgility()->getValue()
         );
         $this->knack = Knack::getIt(
             $this->firstLevelProperties->getFirstLevelKnack()->getValue()
-            + $this->nextLevelsProperties->getNextLevelsKnack()->getValue()
+            + $this->nextLevelsProperties->getKnack()->getValue()
         );
         $this->will = Will::getIt(
             $this->firstLevelProperties->getFirstLevelWill()->getValue()
-            + $this->nextLevelsProperties->getNextLevelsWill()->getValue()
+            + $this->nextLevelsProperties->getWill()->getValue()
         );
         $this->intelligence = Intelligence::getIt(
             $this->firstLevelProperties->getFirstLevelIntelligence()->getValue()
-            + $this->nextLevelsProperties->getNextLevelsIntelligence()->getValue()
+            + $this->nextLevelsProperties->getIntelligence()->getValue()
         );
         $this->charisma = Charisma::getIt(
             $this->firstLevelProperties->getFirstLevelCharisma()->getValue()
-            + $this->nextLevelsProperties->getNextLevelsCharisma()->getValue()
+            + $this->nextLevelsProperties->getCharisma()->getValue()
         );
 
         // delivered properties

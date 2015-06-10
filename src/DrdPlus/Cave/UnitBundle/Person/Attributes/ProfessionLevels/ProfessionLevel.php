@@ -93,9 +93,6 @@ abstract class ProfessionLevel extends StrictObject
      */
     private $profession;
 
-    /**
-     * TODO what about first level and these properties? should be the first level* getters static?
-     */
     public function __construct(
         LevelValue $levelValue,
         Strength $strengthIncrement,
