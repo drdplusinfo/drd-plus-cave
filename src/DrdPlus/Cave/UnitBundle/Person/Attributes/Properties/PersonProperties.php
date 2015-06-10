@@ -108,8 +108,8 @@ class PersonProperties extends StrictObject
         // delivered properties
         $this->toughness = Toughness::getIt($this->getStrength()->getValue() + $person->getRace()->getToughnessModifier());
         $this->endurance = Endurance::getIt((int)round($this->getStrength()->getValue() + $this->getWill()->getValue()));
-        $this->speed = Speed::getIt($this->calculateSpeed($this->getStrength(), $this->getAgility()));
         $this->size = $this->firstLevelProperties->getFirstLevelSize(); // there is no more size increment than the first level one
+        $this->speed = Speed::getIt($this->calculateSpeed($this->getStrength(), $this->getAgility(), $this->getSize()));
         $this->senses = Senses::getIt($this->getKnack()->getValue() + $person->getRace()->getSensesModifier($person->getGender()));
         $this->fight = new Fight($person);
         $this->attack = new Attack($this->getAgility());
@@ -117,11 +117,9 @@ class PersonProperties extends StrictObject
         $this->shooting = new Shooting($this->getKnack());
     }
 
-    private function calculateSpeed(Strength $strength, Agility $agility)
+    private function calculateSpeed(Strength $strength, Agility $agility, Size $size)
     {
-        return
-            round(($strength->getValue() + $agility->getValue()) / 2)
-            + $this->getSpeedBonusBySize($this->getSize());
+        return intval(round(($strength->getValue() + $agility->getValue()) / 2) + $this->getSpeedBonusBySize($size));
     }
 
     private function getSpeedBonusBySize(Size $size)
