@@ -355,6 +355,7 @@ class Race extends SelfTypedStrictStringEnum
 
     /**
      * @param Gender $gender
+     *
      * @return int
      */
     public function getSizeModifier(Gender $gender)
@@ -365,24 +366,28 @@ class Race extends SelfTypedStrictStringEnum
     /**
      * @param Gender $gender
      * @param WeightTable $weightTable
+     *
      * @return int
      */
     public function getWeightModifier(Gender $gender, WeightTable $weightTable)
     {
-        return $this->getRaceBaseWeightModifier($weightTable) + $gender->getWeightModifier();
+        return $weightTable->toBonus($this->getBaseWeightInKg()) + $gender->getWeightModifier();
     }
 
-    protected function getRaceBaseWeightModifier(WeightTable $weightTable)
+    protected function getBaseWeightInKg()
     {
-        return $weightTable->toBonus($this->getWeightInKg());
+        return static::BASE_WEIGHT_IN_KG;
     }
 
     /**
+     * @param Gender $gender
+     * @param WeightTable $weightTable
+     *
      * @return float
      */
-    public function getWeightInKg()
+    public function getWeightInKg(Gender $gender, WeightTable $weightTable)
     {
-        return static::BASE_WEIGHT_IN_KG;
+        return $weightTable->toKg($this->getWeightModifier($gender, $weightTable));
     }
 
     /**
