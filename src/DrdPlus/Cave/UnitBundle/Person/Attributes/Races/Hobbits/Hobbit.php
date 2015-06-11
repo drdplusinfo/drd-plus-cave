@@ -1,6 +1,7 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Hobbits;
 
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\RemarkableSenses\Taste;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Race;
 
 /**
@@ -32,8 +33,8 @@ abstract class Hobbit extends Race
     const BASE_INTELLIGENCE = -1;
     const BASE_CHARISMA = +2;
 
-    public function getSalientSense()
+    public function getRemarkableSense()
     {
-        return self::SALIENT_TASTE;
+        return Taste::getIt();
     }
 }

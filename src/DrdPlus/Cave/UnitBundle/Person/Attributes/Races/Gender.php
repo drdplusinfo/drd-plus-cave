@@ -35,7 +35,8 @@ class Gender extends SelfTypedStrictStringEnum
 
     const RESISTANCE_MODIFIER = 0;
     const SENSES_MODIFIER = 0;
-    const SIZE_MODIFIER = 0;
+    const MALE_SIZE_MODIFIER = 0;
+    const MALE_WEIGHT_MODIFIER = 0;
 
     /**
      * @return Gender
@@ -274,7 +275,25 @@ class Gender extends SelfTypedStrictStringEnum
      */
     public function getSizeModifier()
     {
-        return static::SIZE_MODIFIER;
+        /** @see PPH page 33, left column */
+        if ($this->isFemale()) {
+            return $this->getStrengthModifier();
+        }
+
+        return static::MALE_SIZE_MODIFIER;
+    }
+
+    /**
+     * @return int
+     */
+    public function getWeightModifier()
+    {
+        /** @see PPH page 33, left column */
+        if ($this->isFemale()) {
+            return $this->getStrengthModifier();
+        }
+
+        return static::MALE_WEIGHT_MODIFIER;
     }
 
 }

@@ -3,9 +3,9 @@ namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Krolls;
 
 use Doctrine\DBAL\Types\Type;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Race;
-use DrdPlus\Cave\UnitBundle\Tests\Person\Attributes\Races\AbstractTestOfRace;
+use DrdPlus\Cave\UnitBundle\Tests\Person\Attributes\Races\Krolls\AbstractTestOfKroll;
 
-class CommonKrollTest extends AbstractTestOfRace
+class CommonKrollTest extends AbstractTestOfKroll
 {
 
     /**

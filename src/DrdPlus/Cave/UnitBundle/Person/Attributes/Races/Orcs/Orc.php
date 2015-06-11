@@ -1,6 +1,7 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Orcs;
 
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\RemarkableSenses\Smell;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Orcs\Genders\OrcGender;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Race;
 
@@ -49,8 +50,8 @@ abstract class Orc extends Race
         return true;
     }
 
-    public function getSalientSense()
+    public function getRemarkableSense()
     {
-        return self::SALIENT_SMELL;
+        return Smell::getIt();
     }
 }

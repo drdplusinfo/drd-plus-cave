@@ -3,9 +3,9 @@ namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Hobbits;
 
 use Doctrine\DBAL\Types\Type;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Race;
-use DrdPlus\Cave\UnitBundle\Tests\Person\Attributes\Races\AbstractTestOfRace;
+use DrdPlus\Cave\UnitBundle\Tests\Person\Attributes\Races\Hobbits\AbstractTestOfHobbit;
 
-class CommonHobbitTest extends AbstractTestOfRace
+class CommonHobbitTest extends AbstractTestOfHobbit
 {
 
     /**

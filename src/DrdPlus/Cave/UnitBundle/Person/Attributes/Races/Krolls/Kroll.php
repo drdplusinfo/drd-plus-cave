@@ -1,6 +1,7 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Krolls;
 
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\RemarkableSenses\Hearing;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Krolls\Genders\KrollGender;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Race;
 
@@ -43,8 +44,8 @@ abstract class Kroll extends Race
         return true;
     }
 
-    public function getSalientSense()
+    public function getRemarkableSense()
     {
-        return self::SALIENT_HEARING;
+        return Hearing::getIt();
     }
 }

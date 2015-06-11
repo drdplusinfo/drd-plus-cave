@@ -30,9 +30,4 @@ class CommonDwarfFemale extends CommonDwarfGender
         return +1;
     }
 
-    public function getSizeModifier()
-    {
-        return +0;
-    }
-
 }

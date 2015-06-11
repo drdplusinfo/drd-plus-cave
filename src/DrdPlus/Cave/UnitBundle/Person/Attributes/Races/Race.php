@@ -2,6 +2,7 @@
 namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Races;
 
 use Doctrineum\Strict\String\SelfTypedStrictStringEnum;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\RemarkableSenses\SenseInterface;
 
 /**
  * Race
@@ -28,12 +29,6 @@ class Race extends SelfTypedStrictStringEnum
     const BASE_SIZE = +0;
     const BASE_WEIGHT = +6; // 80 kg, see table of weight -> to bonus
     const BASE_WEIGHT_IN_KG = 80.0;
-
-    const SALIENT_SIGHT = 'sight';
-    const SALIENT_TOUCH = 'touch';
-    const SALIENT_TASTE = 'taste';
-    const SALIENT_HEARING = 'hearing';
-    const SALIENT_SMELL = 'smell';
 
     /**
      * @return Race
@@ -372,11 +367,12 @@ class Race extends SelfTypedStrictStringEnum
     }
 
     /**
+     * @param Gender $gender
      * @return int
      */
-    public function getWeightModifier()
+    public function getWeightModifier(Gender $gender)
     {
-        return static::BASE_WEIGHT;
+        return static::BASE_WEIGHT + $gender->getWeightModifier();
     }
 
     /**
@@ -419,9 +415,9 @@ class Race extends SelfTypedStrictStringEnum
     }
 
     /**
-     * @return false|string
+     * @return false|SenseInterface
      */
-    public function getSalientSense()
+    public function getRemarkableSense()
     {
         return false;
     }

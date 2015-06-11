@@ -3,9 +3,9 @@ namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Dwarfs;
 
 use Doctrine\DBAL\Types\Type;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Race;
-use DrdPlus\Cave\UnitBundle\Tests\Person\Attributes\Races\AbstractTestOfRace;
+use DrdPlus\Cave\UnitBundle\Tests\Person\Attributes\Races\Dwarfs\AbstractTestOfDwarf;
 
-class CommonDwarfTest extends AbstractTestOfRace
+class CommonDwarfTest extends AbstractTestOfDwarf
 {
 
     /**

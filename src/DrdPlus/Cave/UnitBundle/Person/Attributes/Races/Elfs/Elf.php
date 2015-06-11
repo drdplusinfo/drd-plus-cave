@@ -1,6 +1,7 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Elfs;
 
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\RemarkableSenses\Sight;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Elfs\Genders\ElfGender;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Race;
 
@@ -37,8 +38,8 @@ abstract class Elf extends Race
     const BASE_RESISTANCE = -1;
     const BASE_TOUGHNESS = -1;
 
-    public function getSalientSense()
+    public function getRemarkableSense()
     {
-        return self::SALIENT_SIGHT;
+        return Sight::getIt();
     }
 }

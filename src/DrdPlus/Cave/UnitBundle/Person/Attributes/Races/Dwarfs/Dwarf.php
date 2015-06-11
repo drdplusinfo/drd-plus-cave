@@ -1,6 +1,7 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Dwarfs;
 
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\RemarkableSenses\Touch;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Dwarfs\Genders\DwarfGender;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Race;
 
@@ -49,8 +50,8 @@ abstract class Dwarf extends Race
         return true;
     }
 
-    public function getSalientSense()
+    public function getRemarkableSense()
     {
-        return self::SALIENT_TOUCH;
+        return Touch::getIt();
     }
 }
