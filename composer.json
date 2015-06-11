@@ -30,7 +30,9 @@
     "granam/exception-hierarchy": "dev-master",
     "granam/strict-scalar": "dev-master",
     "granam/strict-integer": "dev-master",
-    "drd/dice-roll": "dev-master"
+    "drd/dice-roll": "dev-master",
+    "granam/strict-float": "dev-master",
+    "doctrineum/float": "dev-master"
   },
   "require-dev": {
     "sensio/generator-bundle": "~2.3",

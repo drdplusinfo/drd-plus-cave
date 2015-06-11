@@ -38,8 +38,6 @@ abstract class Dwarf extends Race
     const BASE_SENSES = -1;
     const BASE_TOUGHNESS = +1;
     const BASE_HEIGHT_IN_CM = 140.0;
-    const BASE_HEIGHT = 3; // 140 cm, see table of distance -> to bonus
-    const BASE_WEIGHT = +5;
     const BASE_WEIGHT_IN_KG = 70.0;
 
     /**

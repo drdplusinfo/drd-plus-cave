@@ -4,6 +4,7 @@ namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Properties;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\ExceptionalityProperties;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\ProfessionLevels;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Body\Size;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Body\WeightInKg;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Gender;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Race;
 use Granam\Strict\Object\StrictObject;
@@ -30,6 +31,9 @@ class FirstLevelProperties extends StrictObject
     /** @var Charisma */
     private $firstLevelCharisma;
 
+    /** @var WeightInKg */
+    private $firstLevelWeightInKg;
+
     /** @var Size */
     private $firstLevelSize;
 
@@ -46,6 +50,7 @@ class FirstLevelProperties extends StrictObject
         $this->setUpBaseProperty($this->createFirstLevelWill($race, $gender, $exceptionalityProperties, $professionLevels), $race, $gender);
         $this->setUpBaseProperty($this->createFirstLevelIntelligence($race, $gender, $exceptionalityProperties, $professionLevels), $race, $gender);
         $this->setUpBaseProperty($this->createFirstLevelCharisma($race, $gender, $exceptionalityProperties, $professionLevels), $race, $gender);
+        $this->firstLevelWeightInKg = $this->createFirstLevelWeightInKg($race, $professionLevels);
         $this->firstLevelSize = $this->createFirstLevelSize($race, $gender, $exceptionalityProperties, $professionLevels);
     }
 
@@ -162,6 +167,11 @@ class FirstLevelProperties extends StrictObject
         return Charisma::getIt($this->calculateFirstLevelBaseProperty(Charisma::CHARISMA, $race, $gender, $exceptionalityProperties, $professionLevels));
     }
 
+    private function createFirstLevelWeightInKg(Race $race, ProfessionLevels $professionLevels)
+    {
+        return WeightInKg::getIt($race->getWeightInKg() + $professionLevels->getWeighKgModifierForFirstLevel());
+    }
+
     private function createFirstLevelSize(Race $race, Gender $gender, ExceptionalityProperties $exceptionalityProperties, ProfessionLevels $professionLevels)
     {
         return new Size($this->calculateFirstLevelSize($race, $gender, $exceptionalityProperties, $professionLevels));
@@ -243,6 +253,14 @@ class FirstLevelProperties extends StrictObject
     public function getFirstLevelCharisma()
     {
         return $this->firstLevelCharisma;
+    }
+
+    /**
+     * @return WeightInKg
+     */
+    public function getFirstLevelWeightInKg()
+    {
+        return $this->firstLevelWeightInKg;
     }
 
     /**

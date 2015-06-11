@@ -1,11 +1,13 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Properties;
 
+use DrdPlus\Cave\TablesBundle\Tables\Tables;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\GameCharacteristics\Combat\Attack;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\GameCharacteristics\Combat\Defense;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\GameCharacteristics\Combat\Fight;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\GameCharacteristics\Combat\Shooting;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Body\Size;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Body\WeightInKg;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Derived\Endurance;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Derived\Senses;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Derived\Speed;
@@ -69,8 +71,9 @@ class PersonProperties extends StrictObject
 
     /**
      * @param Person $person
+     * @param Tables $tables
      */
-    public function __construct(Person $person)
+    public function __construct(Person $person, Tables $tables)
     {
         $this->firstLevelProperties = new FirstLevelProperties(
             $person->getRace(),
@@ -104,13 +107,17 @@ class PersonProperties extends StrictObject
             $this->firstLevelProperties->getFirstLevelCharisma()->getValue()
             + $this->nextLevelsProperties->getCharisma()->getValue()
         );
+        $this->weight = WeightInKg::getIt(
+            $this->firstLevelProperties->getFirstLevelWeightInKg()->getValue()
+            + $this->nextLevelsProperties->getWeightInKg()->getValue()
+        );
 
         // delivered properties
-        $this->toughness = Toughness::getIt($this->getStrength()->getValue() + $person->getRace()->getToughnessModifier());
-        $this->endurance = Endurance::getIt((int)round($this->getStrength()->getValue() + $this->getWill()->getValue()));
+        $this->toughness = new Toughness($this->getStrength()->getValue() + $person->getRace()->getToughnessModifier());
+        $this->endurance = new Endurance((int)round($this->getStrength()->getValue() + $this->getWill()->getValue()));
         $this->size = $this->firstLevelProperties->getFirstLevelSize(); // there is no more size increment than the first level one
-        $this->speed = Speed::getIt($this->calculateSpeed($this->getStrength(), $this->getAgility(), $this->getSize()));
-        $this->senses = Senses::getIt($this->getKnack()->getValue() + $person->getRace()->getSensesModifier($person->getGender()));
+        $this->speed = new Speed($this->calculateSpeed($this->getStrength(), $this->getAgility(), $this->getSize()));
+        $this->senses = new Senses($this->getKnack()->getValue() + $person->getRace()->getSensesModifier($person->getGender()));
 
         $this->fight = new Fight($person);
         $this->attack = new Attack($this->getAgility());

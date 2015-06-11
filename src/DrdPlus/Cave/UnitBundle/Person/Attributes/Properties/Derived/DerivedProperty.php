@@ -1,30 +1,8 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Derived;
 
-use Doctrineum\Integer\IntegerEnum;
+use Granam\Strict\Integer\StrictInteger;
 
-abstract class DerivedProperty extends IntegerEnum
+abstract class DerivedProperty extends StrictInteger
 {
-
-    /**
-     * @param int $value
-     *
-     * @return \Doctrineum\Scalar\Enum
-     */
-    public static function getIt($value)
-    {
-        return self::getEnum($value);
-    }
-
-    /**
-     * @return int
-     */
-    public function getValue() {
-        return $this->getEnumValue();
-    }
-
-    /**
-     * @return string
-     */
-    abstract public function getName();
 }

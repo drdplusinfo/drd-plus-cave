@@ -5,6 +5,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Agility;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\BaseProperty;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Body\WeightInKg;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Charisma;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Intelligence;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Knack;
@@ -271,7 +272,7 @@ class ProfessionLevels extends StrictObject implements \IteratorAggregate
      */
     private function sumNextLevelsProperty($propertyName)
     {
-        $propertyName = ucfirst($propertyName);
+        $propertyName = implode(array_map(function($part) { return ucfirst($part);}, explode('_', $propertyName)));
         $getPropertyIncrement = "get{$propertyName}Increment";
 
         return (int)array_sum(
@@ -323,6 +324,14 @@ class ProfessionLevels extends StrictObject implements \IteratorAggregate
     public function getNextLevelsCharismaModifier()
     {
         return $this->sumNextLevelsProperty(Charisma::CHARISMA);
+    }
+
+    /**
+     * @return int
+     */
+    public function getNextLevelsWeightModifier()
+    {
+        return $this->sumNextLevelsProperty(WeightInKg::WEIGHT_IN_KG);
     }
 
     /**
@@ -510,6 +519,18 @@ class ProfessionLevels extends StrictObject implements \IteratorAggregate
     {
         return $this->hasFirstLevel()
             ? $this->getFirstLevel()->getCharismaIncrement()->getValue()
+            : 0;
+    }
+
+    /**
+     * Get weight modifier in kg
+     *
+     * @return int
+     */
+    public function getWeighKgModifierForFirstLevel()
+    {
+        return $this->hasFirstLevel()
+            ? $this->getFirstLevel()->getWeightInKgIncrement()->getValue()
             : 0;
     }
 

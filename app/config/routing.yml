@@ -1,3 +1,7 @@
+drd_plus_cave_tables:
+    resource: "@DrdPlusCaveTablesBundle/Resources/config/routing.yml"
+    prefix:   /
+
 drd_plus_cave_tools:
     resource: "@DrdPlusCaveToolsBundle/Controller/"
     type:     annotation

@@ -2,6 +2,7 @@
 namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Properties;
 
 use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\ProfessionLevels;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Body\WeightInKg;
 use Granam\Strict\Object\StrictObject;
 
 class NextLevelsProperties extends StrictObject
@@ -29,6 +30,9 @@ class NextLevelsProperties extends StrictObject
     /** @var Charisma */
     private $charisma;
 
+    /** @var WeightInKg */
+    private $weightInKg;
+
     public function __construct(ProfessionLevels $professionLevels)
     {
         $this->professionLevels = $professionLevels;
@@ -39,6 +43,7 @@ class NextLevelsProperties extends StrictObject
         $this->will = Will::getIt($professionLevels->getNextLevelsWillModifier());
         $this->intelligence = Intelligence::getIt($professionLevels->getNextLevelsIntelligenceModifier());
         $this->charisma = Charisma::getIt($professionLevels->getNextLevelsCharismaModifier());
+        $this->weightInKg = WeightInKg::getIt($professionLevels->getNextLevelsWeightModifier());
     }
 
     /**
@@ -97,4 +102,11 @@ class NextLevelsProperties extends StrictObject
         return $this->charisma;
     }
 
+    /**
+     * @return WeightInKg
+     */
+    public function getWeightInKg()
+    {
+        return $this->weightInKg;
+    }
 }

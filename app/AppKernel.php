@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new DrdPlus\Cave\UnitBundle\DrdPlusCaveUnitBundle(),
             new DrdPlus\Cave\ToolsBundle\DrdPlusCaveToolsBundle(),
+            new DrdPlus\Cave\TablesBundle\DrdPlusCaveTablesBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

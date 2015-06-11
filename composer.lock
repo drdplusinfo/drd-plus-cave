@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2e9f27715b138c727fe68e761892fd24",
+    "hash": "eb56d8f0187cda8412b13028dc6c8845",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -518,7 +518,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineMigrationsBundle/zipball/6a1bd731dbdd4ad952a3b246a8f38c9c12f52e62",
+                "url": "https://api.github.com/repos/doctrine/DoctrineMigrationsBundle/zipball/eaa9eb5ea101dc494d7f57d1a86905e56a211d49",
                 "reference": "6a1bd731dbdd4ad952a3b246a8f38c9c12f52e62",
                 "shasum": ""
             },
@@ -697,7 +697,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/migrations/zipball/a4f14d3a3d397104e557ec65d1a4e43bb86e4ddf",
+                "url": "https://api.github.com/repos/doctrine/migrations/zipball/67f02686c6c779ae50489728b91026bc8199720c",
                 "reference": "a4f14d3a3d397104e557ec65d1a4e43bb86e4ddf",
                 "shasum": ""
             },
@@ -821,6 +821,45 @@
             "time": "2014-12-16 13:45:01"
         },
         {
+            "name": "doctrineum/float",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jaroslavtyc/doctrineum-float.git",
+                "reference": "c054afe3aaababe0cd04536417be0b90bf8c0e83"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jaroslavtyc/doctrineum-float/zipball/c054afe3aaababe0cd04536417be0b90bf8c0e83",
+                "reference": "c054afe3aaababe0cd04536417be0b90bf8c0e83",
+                "shasum": ""
+            },
+            "require": {
+                "doctrineum/scalar": "dev-master",
+                "granam/exception-hierarchy": "dev-master",
+                "granam/strict-float": "dev-master",
+                "granam/strict-object": "dev-master",
+                "granam/strict-scalar": "dev-master",
+                "php": ">=5.5"
+            },
+            "require-dev": {
+                "mockery/mockery": "0.9.*",
+                "phpunit/phpunit": "~4.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Doctrineum\\": "Doctrineum/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Enumeration type for Doctrine - floats only",
+            "time": "2015-05-20 12:31:35"
+        },
+        {
             "name": "doctrineum/integer",
             "version": "dev-master",
             "source": {
@@ -869,7 +908,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/doctrineum-scalar/zipball/a7cd317bca2255b23c659a03e0f3e12095d6b59f",
+                "url": "https://api.github.com/repos/jaroslavtyc/doctrineum-scalar/zipball/9beb5fb27487f37e219837b06620a69ea83a1d3e",
                 "reference": "a7cd317bca2255b23c659a03e0f3e12095d6b59f",
                 "shasum": ""
             },
@@ -921,7 +960,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/doctrineum-strict-string/zipball/22c6da373bbb12af116ed45391c3932c4cce6813",
+                "url": "https://api.github.com/repos/jaroslavtyc/doctrineum-strict-string/zipball/65e4277abc36ac19e4e97c438a5d32b54de2df9f",
                 "reference": "22c6da373bbb12af116ed45391c3932c4cce6813",
                 "shasum": ""
             },
@@ -1045,6 +1084,56 @@
                 "runtime"
             ],
             "time": "2015-05-12 12:44:29"
+        },
+        {
+            "name": "granam/strict-float",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jaroslavtyc/granam-strict-float.git",
+                "reference": "e3efa7b9ce8c87d00932acb2b526fb61280dd309"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jaroslavtyc/granam-strict-float/zipball/e3efa7b9ce8c87d00932acb2b526fb61280dd309",
+                "reference": "e3efa7b9ce8c87d00932acb2b526fb61280dd309",
+                "shasum": ""
+            },
+            "require": {
+                "granam/exception-hierarchy": "dev-master",
+                "granam/strict-object": "dev-master",
+                "granam/strict-scalar": "dev-master",
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "mockery/mockery": ">=0.9",
+                "phpunit/phpunit": "~4.4"
+            },
+            "type": "project",
+            "autoload": {
+                "psr-4": {
+                    "Granam\\": "Granam/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jaroslav Týc",
+                    "homepage": "http://jaroslav.com",
+                    "role": "Original author"
+                }
+            ],
+            "description": "Base for lightweight float containers with strict checks",
+            "homepage": "https://github.com/jaroslavtyc/granam-strict-float",
+            "keywords": [
+                "float",
+                "php",
+                "strict"
+            ],
+            "time": "2015-05-19 09:10:58"
         },
         {
             "name": "granam/strict-integer",
@@ -3175,7 +3264,9 @@
         "granam/exception-hierarchy": 20,
         "granam/strict-scalar": 20,
         "granam/strict-integer": 20,
-        "drd/dice-roll": 20
+        "drd/dice-roll": 20,
+        "granam/strict-float": 20,
+        "doctrineum/float": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

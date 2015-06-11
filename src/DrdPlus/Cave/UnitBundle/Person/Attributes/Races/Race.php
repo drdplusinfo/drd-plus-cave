@@ -2,6 +2,7 @@
 namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Races;
 
 use Doctrineum\Strict\String\SelfTypedStrictStringEnum;
+use DrdPlus\Cave\TablesBundle\Tables\WeightTable;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\RemarkableSenses\SenseInterface;
 
 /**
@@ -24,10 +25,8 @@ class Race extends SelfTypedStrictStringEnum
     const BASE_RESISTANCE = +0;
     const BASE_SENSES = +0;
     const BASE_TOUGHNESS = +0;
-    const BASE_HEIGHT = +5; // TODO is it needed? 180 cm, see table of distance -> to bonus
     const BASE_HEIGHT_IN_CM = 180.0;
     const BASE_SIZE = +0;
-    const BASE_WEIGHT = +6; // 80 kg, see table of weight -> to bonus
     const BASE_WEIGHT_IN_KG = 80.0;
 
     /**
@@ -350,14 +349,6 @@ class Race extends SelfTypedStrictStringEnum
     }
 
     /**
-     * @return int
-     */
-    public function getHeightModifier()
-    {
-        return static::BASE_HEIGHT;
-    }
-
-    /**
      * @param Gender $gender
      * @return int
      */
@@ -368,11 +359,17 @@ class Race extends SelfTypedStrictStringEnum
 
     /**
      * @param Gender $gender
+     * @param WeightTable $weightTable
      * @return int
      */
-    public function getWeightModifier(Gender $gender)
+    public function getWeightModifier(Gender $gender, WeightTable $weightTable)
     {
-        return static::BASE_WEIGHT + $gender->getWeightModifier();
+        return $this->getRaceBaseWeightModifier($weightTable) + $gender->getWeightModifier();
+    }
+
+    protected function getRaceBaseWeightModifier(WeightTable $weightTable)
+    {
+        return $weightTable->toBonus($this->getWeightInKg());
     }
 
     /**

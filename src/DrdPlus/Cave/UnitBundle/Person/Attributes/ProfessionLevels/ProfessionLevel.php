@@ -5,6 +5,7 @@ use Doctrine\ORM\Mapping as ORM;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Professions\Profession;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Agility;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\BaseProperty;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Body\WeightInKg;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Charisma;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Intelligence;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Knack;
@@ -89,6 +90,13 @@ abstract class ProfessionLevel extends StrictObject
     private $charismaIncrement;
 
     /**
+     * @var WeightInKg
+     *
+     * @ORM\Column(type="weight_in_kg")
+     */
+    private $weightInKgIncrement;
+
+    /**
      * @var Profession
      */
     private $profession;
@@ -101,6 +109,7 @@ abstract class ProfessionLevel extends StrictObject
         Will $willIncrement,
         Intelligence $intelligenceIncrement,
         Charisma $charismaIncrement,
+        WeightInKg $weightInKgIncrement,
         \DateTimeImmutable $levelUpAt = null
     )
     {
@@ -119,6 +128,8 @@ abstract class ProfessionLevel extends StrictObject
         $this->intelligenceIncrement = $intelligenceIncrement;
         $this->checkPropertyIncrement($charismaIncrement, $levelValue);
         $this->charismaIncrement = $charismaIncrement;
+        $this->checkWeightIncrement($weightInKgIncrement, $levelValue);
+        $this->weightInKgIncrement = $weightInKgIncrement;
         $this->levelUpAt = $levelUpAt ?: new \DateTimeImmutable();
     }
 
@@ -157,6 +168,15 @@ abstract class ProfessionLevel extends StrictObject
     private function checkNextLevelPropertyIncrement(BaseProperty $property)
     {
         // TODO - see PPH, page 44
+    }
+
+    private function checkWeightIncrement(WeightInKg $weightInKg, LevelValue $levelValue)
+    {
+        if ($levelValue->getValue() > 1 && $weightInKg->getValue() !== 0) {
+            throw new \LogicException(
+                "Only first level can change weight. Given {$weightInKg->getValue()} kg weight change on level {$levelValue->getValue()}"
+            );
+        }
     }
 
     /**
@@ -284,6 +304,16 @@ abstract class ProfessionLevel extends StrictObject
     public function getWillIncrement()
     {
         return $this->willIncrement;
+    }
+
+    /**
+     * Get will increment
+     *
+     * @return WeightInKg
+     */
+    public function getWeightInKgIncrement()
+    {
+        return $this->weightInKgIncrement;
     }
 
     /**

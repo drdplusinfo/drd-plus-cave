@@ -2,6 +2,7 @@
 namespace DrdPlus\Cave\UnitBundle\Person;
 
 use Doctrine\ORM\Mapping as ORM;
+use DrdPlus\Cave\TablesBundle\Tables\Tables;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Exceptionality;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Name;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\ProfessionLevels;
@@ -74,7 +75,8 @@ class Person extends StrictObject
         Gender $gender, // enum
         Name $name, // enum
         Exceptionality $exceptionality, // entity
-        ProfessionLevels $professionLevels // entity
+        ProfessionLevels $professionLevels, // entity
+        Tables $tables
     )
     {
         $this->race = $race;
@@ -84,7 +86,7 @@ class Person extends StrictObject
         $this->exceptionality = $exceptionality;
         $professionLevels->setPerson($this);
         $this->professionLevels = $professionLevels;
-        $this->personProperties = new PersonProperties($this); // enums aggregate
+        $this->personProperties = new PersonProperties($this, $tables); // enums aggregate
     }
 
     /**
