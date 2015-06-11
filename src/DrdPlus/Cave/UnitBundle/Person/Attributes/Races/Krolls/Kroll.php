@@ -29,12 +29,18 @@ abstract class Kroll extends Race
 {
     const RACE_CODE = 'kroll';
 
+    // base properties
     const BASE_STRENGTH = +3;
     const BASE_AGILITY = -2;
     const BASE_KNACK = -1;
     const BASE_WILL = +1;
     const BASE_INTELLIGENCE = -3;
     const BASE_CHARISMA = -1;
+
+    // body
+    const BASE_SIZE = +3;
+    const BASE_HEIGHT_IN_CM = 220.0;
+    const BASE_WEIGHT_IN_KG = 120.0;
 
     /**
      * @return bool

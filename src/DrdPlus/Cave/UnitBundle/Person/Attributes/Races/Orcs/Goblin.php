@@ -27,9 +27,15 @@ class Goblin extends Orc
 {
     const SUBRACE_CODE = 'goblin';
 
+    // base properties
     const BASE_STRENGTH = -1;
     const BASE_KNACK = +1;
     const BASE_WILL = -2;
     const BASE_CHARISMA = -1;
+
+    // body
+    const BASE_SIZE = -1;
+    const BASE_HEIGHT_IN_CM = 150.0;
+    const BASE_WEIGHT_IN_KG = 55.0;
 
 }

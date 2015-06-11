@@ -1,6 +1,10 @@
 <?php
 namespace DrdPlus\Cave\TablesBundle\Tables;
 
+/**
+ * PPH page 164, bottom
+ * TODO
+ */
 class WeightTable implements Table
 {
     /**

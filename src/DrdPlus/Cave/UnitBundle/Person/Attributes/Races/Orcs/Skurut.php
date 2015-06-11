@@ -27,9 +27,15 @@ class Skurut extends Orc
 {
     const SUBRACE_CODE = 'skurut';
 
+    // base
     const BASE_STRENGTH = +1;
     const BASE_AGILITY = +1;
     const BASE_KNACK = -1;
     const BASE_WILL = 0;
+
+    // body
+    const BASE_SIZE = +1;
+    const BASE_HEIGHT_IN_CM = 180.0;
+    const BASE_WEIGHT_IN_KG = 90.0;
 
 }

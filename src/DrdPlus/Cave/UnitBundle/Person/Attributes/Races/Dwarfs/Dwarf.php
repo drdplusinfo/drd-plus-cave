@@ -29,14 +29,19 @@ abstract class Dwarf extends Race
 {
     const RACE_CODE = 'dwarf';
 
+    // base properties
     const BASE_STRENGTH = +1;
     const BASE_AGILITY = -1;
     const BASE_WILL = +2;
     const BASE_INTELLIGENCE = -1;
     const BASE_CHARISMA = -2;
+
+    // derived
     const BASE_RESISTANCE = +1;
     const BASE_SENSES = -1;
     const BASE_TOUGHNESS = +1;
+
+    // body
     const BASE_HEIGHT_IN_CM = 140.0;
     const BASE_WEIGHT_IN_KG = 70.0;
 

@@ -29,10 +29,18 @@ abstract class Orc extends Race
 {
     const RACE_CODE = 'orc';
 
+    // base
     const BASE_AGILITY = +2;
     const BASE_WILL = -1;
     const BASE_CHARISMA = -2;
+
+    // derived
     const BASE_SENSES = +1;
+
+    // body
+    const BASE_SIZE = -1;
+    const BASE_HEIGHT_IN_CM = 160.0;
+    const BASE_WEIGHT_IN_KG = 60.0;
 
     /**
      * @return bool

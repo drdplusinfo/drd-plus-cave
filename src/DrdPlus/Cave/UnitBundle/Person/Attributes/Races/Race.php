@@ -16,18 +16,23 @@ class Race extends SelfTypedStrictStringEnum
     const RACE_CODE = 'race';
     const SUBRACE_CODE = 'race';
 
+    // base properties
     const BASE_STRENGTH = +0;
     const BASE_AGILITY = +0;
     const BASE_KNACK = +0;
     const BASE_WILL = +0;
     const BASE_INTELLIGENCE = +0;
     const BASE_CHARISMA = +0;
+
+    // derived
     const BASE_RESISTANCE = +0;
     const BASE_SENSES = +0;
     const BASE_TOUGHNESS = +0;
-    const BASE_HEIGHT_IN_CM = 180.0;
+
+    // body
     const BASE_SIZE = +0;
-    const BASE_WEIGHT_IN_KG = 80.0;
+    const BASE_HEIGHT_IN_CM = 0.0;
+    const BASE_WEIGHT_IN_KG = 0.0;
 
     /**
      * @return Race

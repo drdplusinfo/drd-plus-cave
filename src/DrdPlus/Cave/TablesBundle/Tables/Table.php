@@ -4,7 +4,7 @@ namespace DrdPlus\Cave\TablesBundle\Tables;
 interface Table
 {
     /**
-     * @param int
+     * @param int $bonus
      * @return float
      */
     public function toValue($bonus);

@@ -28,4 +28,8 @@ abstract class Human extends Race
 {
     const RACE_CODE = 'human';
 
+    // body
+    const BASE_WEIGHT_IN_KG = 80.0;
+    const BASE_HEIGHT_IN_CM = 180.0;
+
 }
