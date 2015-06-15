@@ -8,9 +8,15 @@ class Tables
      */
     private $weightTable;
 
+    /**
+     * @var DistanceTable
+     */
+    private $distanceTable;
+
     public function __construct()
     {
         $this->weightTable = new WeightTable();
+        $this->distanceTable = new DistanceTable();
     }
 
     /**
@@ -19,5 +25,13 @@ class Tables
     public function getWeightTable()
     {
         return $this->weightTable;
+    }
+
+    /**
+     * @return DistanceTable
+     */
+    public function getDistanceTable()
+    {
+        return $this->distanceTable;
     }
 }
