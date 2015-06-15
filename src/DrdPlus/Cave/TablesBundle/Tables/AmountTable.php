@@ -2,24 +2,25 @@
 namespace DrdPlus\Cave\TablesBundle\Tables;
 
 /**
- * PPH page 164, bottom
- * @method WeightMeasurement toMeasurement(int $bonus)
+ * PPH page 164, top
+ * @method AmountMeasurement toMeasurement(int $bonus)
  */
-class WeightTable extends  AbstractTable
+class AmountTable extends  AbstractTable
 {
+
     protected function getDataFileName()
     {
-        return __DIR__ . '/data/weight.csv';
+        return __DIR__ . '/data/amount.csv';
     }
 
     protected function getExpectedDataHeader()
     {
-        return [WeightMeasurement::KG];
+        return [AmountMeasurement::AMOUNT];
     }
 
     protected function getExpectedDataRowsCount()
     {
-        return 100;
+        return 120;
     }
 
     /**
@@ -27,26 +28,30 @@ class WeightTable extends  AbstractTable
      *
      * @return float
      */
-    public function toKg($bonus)
+    public function toAmount($bonus)
     {
         return $this->toMeasurement($bonus)->getValue();
     }
 
-    public function kgToBonus($kg)
+    /**
+     * @param float $amount
+     *
+     * @return int
+     */
+    public function amountToBonus($amount)
     {
-        return $this->toBonus(new WeightMeasurement($kg));
+        return $this->toBonus(new AmountMeasurement($amount));
     }
 
     /**
      * @param float $value
      * @param string $unit
      *
-     * @return WeightMeasurement
+     * @return AmountMeasurement
      */
     protected function convertToMeasurement($value, $unit)
     {
-        return new WeightMeasurement($value, $unit);
+        return new AmountMeasurement($value, $unit);
     }
-
 
 }

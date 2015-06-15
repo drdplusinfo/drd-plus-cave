@@ -3,6 +3,8 @@ namespace DrdPlus\Cave\TablesBundle\Tables;
 
 class WeightMeasurement implements MeasurementInterface
 {
+    const KG = 'kg';
+
     /**
      * @var float
      */
@@ -12,7 +14,7 @@ class WeightMeasurement implements MeasurementInterface
      */
     private $unit;
 
-    public function __constructor($value, $unit = WeightTable::KG)
+    public function __constructor($value, $unit = self::KG)
     {
         $this->value = $value;
         $this->checkUnit($unit);
@@ -21,7 +23,7 @@ class WeightMeasurement implements MeasurementInterface
 
     private function checkUnit($unit)
     {
-        if ($unit !== WeightTable::KG) {
+        if ($unit !== self::KG) {
             throw new \LogicException('Unknown unit ' . var_export($unit, true));
         }
     }
