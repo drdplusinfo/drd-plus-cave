@@ -1,5 +1,6 @@
 <?php
 namespace DrdPlus\Cave\TablesBundle\Tables;
+use Drd\DiceRoll\Templates\Rolls\Roll1d6;
 
 /**
  * PPH page 164, top
@@ -9,7 +10,7 @@ class AmountTable extends AbstractTable
 {
     public function __construct()
     {
-        parent::__construct(new DummyEvaluator());
+        parent::__construct(new DiceChanceEvaluator(new Roll1d6()));
     }
 
     protected function getDataFileName()
@@ -34,7 +35,7 @@ class AmountTable extends AbstractTable
      */
     public function toAmount($bonus)
     {
-        return $this->toMeasurement($bonus, $this->dummyEvaluator)->getValue();
+        return $this->toMeasurement($bonus)->getValue();
     }
 
     /**
