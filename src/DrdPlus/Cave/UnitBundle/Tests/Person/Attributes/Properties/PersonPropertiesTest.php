@@ -5,10 +5,19 @@ use DrdPlus\Cave\TablesBundle\Tables\Tables;
 use DrdPlus\Cave\TablesBundle\Tables\WeightTable;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Exceptionality;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\ExceptionalityProperties;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\GameCharacteristics\Combat\Attack;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\GameCharacteristics\Combat\Defense;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\GameCharacteristics\Combat\Fight;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\GameCharacteristics\Combat\Shooting;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\ProfessionLevels;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Agility;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Body\Size;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Body\WeightInKg;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Charisma;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Derived\Endurance;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Derived\Senses;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Derived\Speed;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Derived\Toughness;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Intelligence;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Knack;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\PersonProperties;
@@ -71,9 +80,60 @@ class PersonPropertiesTest extends TestWithMockery
 
         $weightInKg = $personProperties->getWeightInKg();
         $this->assertInstanceOf(WeightInKg::class, $weightInKg);
-        $this->assertSame($raceWeightInKgModifier + $firstLevelWeightInKg+ $nextLevelsWeightInKg, $weightInKg->getValue());
+        $this->assertSame($raceWeightInKgModifier + $firstLevelWeightInKg + $nextLevelsWeightInKg, $weightInKg->getValue());
 
-        // TODO add derived properties tests
+        // DERIVED
+
+        $toughness = $personProperties->getToughness();
+        $this->assertInstanceOf(Toughness::class, $toughness);
+        $this->assertSame($personProperties->getStrength()->getValue() + $toughnessModifier, $toughness->getValue());
+
+        $endurance = $personProperties->getEndurance();
+        $this->assertInstanceOf(Endurance::class, $endurance);
+        $this->assertSame((int)round($personProperties->getStrength()->getValue() + $personProperties->getWill()->getValue()), $endurance->getValue());
+
+        $speed = $personProperties->getSpeed();
+        $this->assertInstanceOf(Speed::class, $speed);
+        $this->assertSame(
+            (int)(round(($personProperties->getStrength()->getValue() + $personProperties->getAgility()->getValue()) / 2)
+                + (ceil($personProperties->getSize()->getValue() / 3) - 2)),
+            $speed->getValue()
+        );
+        
+        $size = $personProperties->getSize();
+        $this->assertInstanceOf(Size::class, $size);
+        $firstLevelStrengthSummary = $firstLevelStrength + $exceptionalStrength;
+        $this->assertSame(
+            $sizeModifier + ($firstLevelStrengthSummary === 0
+                ? -1
+                : ($firstLevelStrengthSummary === 1
+                    ? 0
+                    : 1
+                )
+            ),
+            $size->getValue()
+        );
+
+        $senses = $personProperties->getSenses();
+        $this->assertInstanceOf(Senses::class, $senses);
+        $this->assertSame($personProperties->getKnack()->getValue() + $sensesModifier, $senses->getValue());
+
+        // BATTLE
+
+        $fight = $personProperties->getFight();
+        $this->assertInstanceOf(Fight::class, $fight);
+
+        $attack = $personProperties->getAttack();
+        $this->assertInstanceOf(Attack::class, $attack);
+        $this->assertSame((int)floor($personProperties->getAgility()->getValue()/2), $attack->getValue());
+
+        $defense = $personProperties->getDefense();
+        $this->assertInstanceOf(Defense::class, $defense);
+        $this->assertSame((int)round($personProperties->getAgility()->getValue()/2), $defense->getValue());
+
+        $shooting = $personProperties->getShooting();
+        $this->assertInstanceOf(Shooting::class, $shooting);
+        $this->assertSame((int)floor($personProperties->getKnack()->getValue()/2), $shooting->getValue());
 
         return $personProperties;
     }
