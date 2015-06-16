@@ -11,10 +11,33 @@ class AmountMeasurement extends StrictObject implements MeasurementInterface
      * @var float
      */
     private $value;
+    /**
+     * @var string
+     */
+    private $unit;
 
-    public function __constructor($value)
+    /**
+     * @param float $value
+     * @param string $unit
+     */
+    public function __construct($value, $unit = self::AMOUNT)
     {
-        $this->value = $value;
+        $this->value = floatval($value);
+        $this->checkUnit($unit);
+        $this->unit = $unit;
+    }
+
+    /**
+     * @param string $unit
+     */
+    private function checkUnit($unit)
+    {
+        switch ($unit) {
+            case self::AMOUNT :
+                return;
+            default :
+                throw new \LogicException('Unknown unit ' . var_export($unit, true));
+        }
     }
 
     /**
