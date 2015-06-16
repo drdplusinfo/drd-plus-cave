@@ -192,6 +192,14 @@ class PersonProperties extends StrictObject
     }
 
     /**
+     * @return WeightInKg
+     */
+    public function getWeightInKg()
+    {
+        return $this->weightInKg;
+    }
+
+    /**
      * @return Toughness
      */
     public function getToughness()

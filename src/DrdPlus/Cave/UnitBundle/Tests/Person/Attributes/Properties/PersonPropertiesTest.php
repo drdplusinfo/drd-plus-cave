@@ -7,6 +7,7 @@ use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Exceptionality;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\ExceptionalityProperties;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\ProfessionLevels;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Agility;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Body\WeightInKg;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Charisma;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Intelligence;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Knack;
@@ -40,7 +41,7 @@ class PersonPropertiesTest extends TestWithMockery
                 $raceIntelligenceModifier = 1, $exceptionalIntelligence = 2, $firstLevelIntelligence = 1, $nextLevelIntelligence = 4,
                 $raceCharismaModifier = 1, $exceptionalCharisma = 2, $firstLevelCharisma = 1, $nextLevelCharisma = 4,
                 $sizeModifier = 1, $toughnessModifier = 2, $sensesModifier = 3,
-                $weightInKg = 50, $firstLevelWeightModifier = 1, $nextLevelsWeight = 0
+                $raceWeightInKgModifier = 50.0, $firstLevelWeightInKg = 1.0, $nextLevelsWeightInKg = 0.0
             ),
             $this->createTablesMock()
         );
@@ -67,6 +68,10 @@ class PersonPropertiesTest extends TestWithMockery
         $charisma = $personProperties->getCharisma();
         $this->assertInstanceOf(Charisma::class, $charisma);
         $this->assertSame($raceCharismaModifier + $exceptionalCharisma + $firstLevelCharisma + $nextLevelCharisma, $charisma->getValue());
+
+        $weightInKg = $personProperties->getWeightInKg();
+        $this->assertInstanceOf(WeightInKg::class, $weightInKg);
+        $this->assertSame($raceWeightInKgModifier + $firstLevelWeightInKg+ $nextLevelsWeightInKg, $weightInKg->getValue());
 
         // TODO add derived properties tests
 
