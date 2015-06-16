@@ -58,6 +58,7 @@ class WeightTableTest extends TestWithMockery
 
     /**
      * @test
+     * @expectedException \OutOfRangeException
      */
     public function too_low_value_to_bonus_cause_exception()
     {
@@ -67,6 +68,7 @@ class WeightTableTest extends TestWithMockery
 
     /**
      * @test
+     * @expectedException \OutOfRangeException
      */
     public function too_high_value_to_bonus_cause_exception()
     {
