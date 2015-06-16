@@ -15,9 +15,9 @@ class DistanceMeasurement implements MeasurementInterface
      */
     private $unit;
 
-    public function __constructor($value, $unit)
+    public function __construct($value, $unit)
     {
-        $this->value = $value;
+        $this->value = floatval($value);
         $this->checkUnit($unit);
         $this->unit = $unit;
     }

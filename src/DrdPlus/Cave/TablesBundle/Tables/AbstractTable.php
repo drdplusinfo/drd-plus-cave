@@ -81,18 +81,17 @@ abstract class AbstractTable extends StrictObject
         $indexedValues = array_combine($expectedHeader, $row);
         $bonus = intval($indexedValues['bonus']);
         unset($indexedValues['bonus']); // left values only
-        $indexedRow = [];
-        $indexedRow[$bonus] = array_map( // every value convert from string to float
-            function ($value) {
-                $value = trim($value);
-                if (preg_match('~^\d+/\d+$~', $value)) { // dice chance bonus, like 1/6
-                    return $value;
-                }
-
-                return floatval($value);
-            },
-            $indexedValues
-        );
+        $indexedRow = [$bonus => []];
+        foreach ($indexedValues as $index => $value) {
+            $value = trim($value);
+            if ($value === '') { // skipping empty value
+                continue;
+            }
+            if (!preg_match('~^\d+/\d+$~', $value)) { // except dice chance bonus, like 1/6 - that remains string
+                $value = floatval($value);
+            }
+            $indexedRow[$bonus][$index] = $value;
+        }
 
         return $indexedRow;
     }
@@ -211,6 +210,10 @@ abstract class AbstractTable extends StrictObject
                     $closest['higher'][$relatedValue][] = $bonus; // adding bonus for same value
                 }
             }
+        }
+
+        if (count($closest['lower']) === 0 || count($closest['higher']) === 0) {
+            throw new \OutOfRangeException("Value $searchedValue($searchedUnit) is out of table values.");
         }
 
         return $closest;
