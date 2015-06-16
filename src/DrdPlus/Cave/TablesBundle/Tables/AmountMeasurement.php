@@ -1,7 +1,9 @@
 <?php
 namespace DrdPlus\Cave\TablesBundle\Tables;
 
-class AmountMeasurement implements MeasurementInterface
+use Granam\Strict\Object\StrictObject;
+
+class AmountMeasurement extends StrictObject implements MeasurementInterface
 {
     const AMOUNT = 'amount';
 

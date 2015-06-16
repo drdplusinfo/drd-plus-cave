@@ -1,7 +1,7 @@
 <?php
 namespace DrdPlus\Cave\TablesBundle\Tables;
 
-interface MeasurementInterface extends StrictFloatInterface
+interface MeasurementInterface
 {
 
     /**

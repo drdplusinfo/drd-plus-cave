@@ -1,6 +1,8 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Person;
 
+use DrdPlus\Cave\TablesBundle\Tables\Tables;
+use DrdPlus\Cave\TablesBundle\Tables\WeightTable;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Exceptionality;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\ExceptionalityProperties;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Name;
@@ -26,7 +28,8 @@ class PersonTest extends TestWithMockery
             $this->getGenderMock(),
             $this->getNameMock(),
             $this->getExceptionalityMock(),
-            $this->getProfessionLevelsMock()
+            $this->getProfessionLevelsMock(),
+            $this->getTablesMock()
         );
         $this->assertNotNull($instance);
     }
@@ -39,7 +42,8 @@ class PersonTest extends TestWithMockery
             $this->getGenderMock(),
             $this->getNameMock(),
             $this->getExceptionalityMock(),
-            $this->getProfessionLevelsMock()
+            $this->getProfessionLevelsMock(),
+            $this->getTablesMock()
         );
         $this->assertNull($person->getId());
     }
@@ -52,7 +56,8 @@ class PersonTest extends TestWithMockery
             $this->getGenderMock(),
             $this->getNameMock(),
             $this->getExceptionalityMock(),
-            $this->getProfessionLevelsMock()
+            $this->getProfessionLevelsMock(),
+            $this->getTablesMock()
         );
         $this->assertSame($race, $person->getRace());
     }
@@ -65,7 +70,8 @@ class PersonTest extends TestWithMockery
             $gender = $this->getGenderMock(),
             $this->getNameMock(),
             $this->getExceptionalityMock(),
-            $this->getProfessionLevelsMock()
+            $this->getProfessionLevelsMock(),
+            $this->getTablesMock()
         );
         $this->assertSame($gender, $person->getGender());
     }
@@ -78,7 +84,8 @@ class PersonTest extends TestWithMockery
             $this->getGenderMock(),
             $this->getNameMock(),
             $exceptionality = $this->getExceptionalityMock(),
-            $this->getProfessionLevelsMock()
+            $this->getProfessionLevelsMock(),
+            $this->getTablesMock()
         );
         $this->assertSame($exceptionality, $person->getExceptionality());
     }
@@ -91,7 +98,8 @@ class PersonTest extends TestWithMockery
             $this->getGenderMock(),
             $this->getNameMock(),
             $this->getExceptionalityMock(),
-            $professionLevels = $this->getProfessionLevelsMock()
+            $professionLevels = $this->getProfessionLevelsMock(),
+            $this->getTablesMock()
         );
         $this->assertSame($professionLevels, $person->getProfessionLevels());
     }
@@ -104,7 +112,8 @@ class PersonTest extends TestWithMockery
             $this->getGenderMock(),
             $name = $this->getNameMock(),
             $this->getExceptionalityMock(),
-            $this->getProfessionLevelsMock()
+            $this->getProfessionLevelsMock(),
+            $this->getTablesMock()
         );
         $this->assertSame($name, $person->getName());
     }
@@ -117,7 +126,8 @@ class PersonTest extends TestWithMockery
             $this->getGenderMock(),
             $this->getNameMock(),
             $this->getExceptionalityMock(),
-            $this->getProfessionLevelsMock()
+            $this->getProfessionLevelsMock(),
+            $this->getTablesMock()
         );
         Name::registerSelf();
         $person->setName($name = Name::getEnum($nameString = 'foo'));
@@ -165,6 +175,9 @@ class PersonTest extends TestWithMockery
             ->once()
             ->andReturn(0);
         $race->shouldReceive('getSensesModifier')
+            ->once()
+            ->andReturn(0);
+        $race->shouldReceive('getWeightInKg')
             ->once()
             ->andReturn(0);
 
@@ -255,7 +268,24 @@ class PersonTest extends TestWithMockery
         $professionLevels->shouldReceive('getCharismaModifierForFirstLevel')->once()->andReturn(0);
         $professionLevels->shouldReceive('getNextLevelsCharismaModifier')->once()->andReturn(0);
 
+        $professionLevels->shouldReceive('getWeightKgModifierForFirstLevel')->once()->andReturn(0);
+        $professionLevels->shouldReceive('getNextLevelsWeightModifier')->once()->andReturn(0);
+
         return $professionLevels;
+    }
+
+    /**
+     * @return Tables
+     */
+    private function getTablesMock()
+    {
+        $tables = \Mockery::mock(Tables::class);
+
+        $tables->shouldReceive('getWeightTable')
+            ->once()
+            ->andReturn($weightTable = \Mockery::mock(WeightTable::class));
+
+        return $tables;
     }
 
     /**

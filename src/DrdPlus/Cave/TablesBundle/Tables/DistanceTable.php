@@ -1,5 +1,6 @@
 <?php
 namespace DrdPlus\Cave\TablesBundle\Tables;
+use Drd\DiceRoll\Templates\Rolls\Roll1d6;
 
 /**
  * PPH page 162, top
@@ -7,6 +8,10 @@ namespace DrdPlus\Cave\TablesBundle\Tables;
  */
 class DistanceTable extends AbstractTable
 {
+    public function __construct()
+    {
+        parent::__construct(new DiceChanceEvaluator(new Roll1d6()));
+    }
 
     protected function getDataFileName()
     {

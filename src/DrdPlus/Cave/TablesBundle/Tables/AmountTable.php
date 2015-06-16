@@ -5,8 +5,12 @@ namespace DrdPlus\Cave\TablesBundle\Tables;
  * PPH page 164, top
  * @method AmountMeasurement toMeasurement(int $bonus)
  */
-class AmountTable extends  AbstractTable
+class AmountTable extends AbstractTable
 {
+    public function __construct()
+    {
+        parent::__construct(new DummyEvaluator());
+    }
 
     protected function getDataFileName()
     {
@@ -30,7 +34,7 @@ class AmountTable extends  AbstractTable
      */
     public function toAmount($bonus)
     {
-        return $this->toMeasurement($bonus)->getValue();
+        return $this->toMeasurement($bonus, $this->dummyEvaluator)->getValue();
     }
 
     /**
@@ -51,7 +55,7 @@ class AmountTable extends  AbstractTable
      */
     protected function convertToMeasurement($value, $unit)
     {
-        return new AmountMeasurement($value, $unit);
+        return new AmountMeasurement($value);
     }
 
 }

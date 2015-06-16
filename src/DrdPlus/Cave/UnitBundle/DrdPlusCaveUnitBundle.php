@@ -6,6 +6,7 @@ use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Fates\Exceptional
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Name;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\LevelValue;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Agility;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Body\WeightInKg;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Charisma;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Intelligence;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Knack;
@@ -40,6 +41,7 @@ class DrdPlusCaveUnitBundle extends Bundle
         Will::registerSelf();
         Intelligence::registerSelf();
         Charisma::registerSelf();
+        WeightInKg::registerSelf();
 
         LevelValue::registerSelf();
     }

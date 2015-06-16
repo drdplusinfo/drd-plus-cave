@@ -42,6 +42,9 @@ class PersonProperties extends StrictObject
     /** @var Charisma */
     private $charisma;
 
+    /** @var WeightInKg */
+    private $weightInKg;
+
     /** @var Toughness */
     private $toughness;
 
@@ -79,7 +82,8 @@ class PersonProperties extends StrictObject
             $person->getRace(),
             $person->getGender(),
             $person->getExceptionality()->getExceptionalityProperties(),
-            $person->getProfessionLevels()
+            $person->getProfessionLevels(),
+            $tables
         );
         $this->nextLevelsProperties = new NextLevelsProperties($person->getProfessionLevels());
 
@@ -107,7 +111,7 @@ class PersonProperties extends StrictObject
             $this->firstLevelProperties->getFirstLevelCharisma()->getValue()
             + $this->nextLevelsProperties->getCharisma()->getValue()
         );
-        $this->weight = WeightInKg::getIt(
+        $this->weightInKg = WeightInKg::getIt(
             $this->firstLevelProperties->getFirstLevelWeightInKg()->getValue()
             + $this->nextLevelsProperties->getWeightInKg()->getValue()
         );

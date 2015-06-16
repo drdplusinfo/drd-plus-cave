@@ -527,7 +527,7 @@ class ProfessionLevels extends StrictObject implements \IteratorAggregate
      *
      * @return int
      */
-    public function getWeighKgModifierForFirstLevel()
+    public function getWeightKgModifierForFirstLevel()
     {
         return $this->hasFirstLevel()
             ? $this->getFirstLevel()->getWeightInKgIncrement()->getValue()

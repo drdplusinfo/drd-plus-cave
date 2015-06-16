@@ -14,9 +14,9 @@ class WeightMeasurement implements MeasurementInterface
      */
     private $unit;
 
-    public function __constructor($value, $unit = self::KG)
+    public function __construct($value, $unit = self::KG)
     {
-        $this->value = $value;
+        $this->value = floatval($value);
         $this->checkUnit($unit);
         $this->unit = $unit;
     }

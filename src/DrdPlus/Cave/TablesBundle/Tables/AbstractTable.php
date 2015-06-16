@@ -1,17 +1,24 @@
 <?php
 namespace DrdPlus\Cave\TablesBundle\Tables;
 
-abstract class AbstractTable
+use Granam\Strict\Object\StrictObject;
+
+abstract class AbstractTable extends StrictObject
 {
 
     /**
      * @var string[]
      */
     private $data;
+    /**
+     * @var EvaluatorInterface
+     */
+    private $evaluator;
 
-    public function __construct()
+    public function __construct(EvaluatorInterface $evaluator)
     {
         $this->data = $this->loadData();
+        $this->evaluator = $evaluator;
     }
 
     /**
@@ -72,10 +79,16 @@ abstract class AbstractTable
     private function indexRow(array $row, array $expectedHeader)
     {
         $indexedValues = array_combine($expectedHeader, $row);
-        $bonus = $indexedValues['bonus'];
+        $bonus = intval($indexedValues['bonus']);
         unset($indexedValues['bonus']); // left values only
+        $indexedRow = [];
         $indexedRow[$bonus] = array_map( // every value convert from string to float
             function ($value) {
+                $value = trim($value);
+                if (preg_match('~^\d+/\d+$~', $value)) { // dice chance bonus, like 1/6
+                    return $value;
+                }
+
                 return floatval($value);
             },
             $indexedValues
@@ -112,7 +125,8 @@ abstract class AbstractTable
 
         foreach ($this->getExpectedDataHeader() as $unit) {
             if (isset($this->data[$bonus][$unit])) {
-                $value = $this->data[$bonus][$unit];
+                $rawValue = $this->data[$bonus][$unit];
+                $value = $this->evaluate($rawValue);
 
                 return $this->convertToMeasurement($value, $unit);
             }
@@ -121,6 +135,30 @@ abstract class AbstractTable
         throw new \LogicException(
             "Missing data for bonus $bonus and expected data columns " . implode(',', $this->getExpectedDataHeader())
         );
+    }
+
+    /**
+     * @param $rawValue
+     *
+     * @return int
+     */
+    private function evaluate($rawValue)
+    {
+        if (is_float($rawValue)) {
+            return $rawValue;
+        }
+
+        return $this->evaluator->evaluate($this->parseMaxRollToGetValue($rawValue));
+    }
+
+    /**
+     * @param string $chance
+     *
+     * @return int
+     */
+    private function parseMaxRollToGetValue($chance)
+    {
+        return intval(explode('/', $chance)[0]);
     }
 
     /**
@@ -139,9 +177,9 @@ abstract class AbstractTable
     public function toBonus(MeasurementInterface $measurement)
     {
         $searchedUnit = $measurement->getUnit();
-        $searchedValue = $measurement->getValue();
+        $searchedValue = floatval($measurement->getValue());
         $finds = $this->findBonusMatchingTo($searchedValue, $searchedUnit);
-        if (is_float($finds)) {
+        if (is_int($finds)) {
             return $finds; // we found the bonus by value exact match
         }
 
@@ -152,7 +190,7 @@ abstract class AbstractTable
     {
         $closest = ['lower' => [], 'higher' => []];
         foreach ($this->getData() as $bonus => $relatedValues) {
-            if (!isset($relatedValues[$searchedUnit])) {
+            if (!isset($relatedValues[$searchedUnit])) { // current row doesn't have required unit
                 continue;
             }
             $relatedValue = $relatedValues[$searchedUnit];
@@ -192,7 +230,15 @@ abstract class AbstractTable
             return min($bonuses); // PPH page 11, right column
         } else {
             // both table border-values are equally close to the value, we will choose from bonuses of both borders
-            $bonuses = array_merge($closestLower, $closestHigher);
+            $bonuses = array_merge(
+                count($closestLower) > 0
+                    ? current($closestLower)
+                    : []
+                ,
+                count($closestHigher) > 0
+                    ? current($closestHigher)
+                    : []
+            );
 
             // matched two table-values, more bonuses for sure, the highest bonus should be taken
             return max($bonuses); // PPH page 11, right column

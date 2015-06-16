@@ -46,8 +46,11 @@ class WeightTableTest extends TestWithMockery
         $this->assertSame(-40, $weightTable->toBonus(new WeightMeasurement(0.1)));
         $this->assertSame(-40, $weightTable->kgToBonus(0.1));
 
-        $this->assertSame(10, $weightTable->toBonus(new WeightMeasurement(10)));
-        $this->assertSame(10, $weightTable->kgToBonus(10));
+        $this->assertSame(0, $weightTable->toBonus(new WeightMeasurement(10)));
+        $this->assertSame(0, $weightTable->kgToBonus(10));
+
+        $this->assertSame(20, $weightTable->kgToBonus(104)); // 20 is the closest bonus
+        $this->assertSame(21, $weightTable->kgToBonus(105)); // 20 and 21 are closest bonuses, 21 is taken because higher
 
         $this->assertSame(59, $weightTable->toBonus(new WeightMeasurement(9000)));
         $this->assertSame(59, $weightTable->kgToBonus(9000));

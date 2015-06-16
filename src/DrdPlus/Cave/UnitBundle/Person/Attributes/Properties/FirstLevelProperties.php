@@ -1,6 +1,8 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Properties;
 
+use DrdPlus\Cave\TablesBundle\Tables\Tables;
+use DrdPlus\Cave\TablesBundle\Tables\WeightTable;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\ExceptionalityProperties;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\ProfessionLevels;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Body\Size;
@@ -41,7 +43,8 @@ class FirstLevelProperties extends StrictObject
         Race $race,
         Gender $gender,
         ExceptionalityProperties $exceptionalityProperties,
-        ProfessionLevels $professionLevels
+        ProfessionLevels $professionLevels,
+        Tables $tables
     )
     {
         $this->setUpBaseProperty($this->createFirstLevelStrength($race, $gender, $exceptionalityProperties, $professionLevels), $race, $gender);
@@ -50,7 +53,7 @@ class FirstLevelProperties extends StrictObject
         $this->setUpBaseProperty($this->createFirstLevelWill($race, $gender, $exceptionalityProperties, $professionLevels), $race, $gender);
         $this->setUpBaseProperty($this->createFirstLevelIntelligence($race, $gender, $exceptionalityProperties, $professionLevels), $race, $gender);
         $this->setUpBaseProperty($this->createFirstLevelCharisma($race, $gender, $exceptionalityProperties, $professionLevels), $race, $gender);
-        $this->firstLevelWeightInKg = $this->createFirstLevelWeightInKg($race, $professionLevels);
+        $this->firstLevelWeightInKg = $this->createFirstLevelWeightInKg($race, $gender, $tables->getWeightTable(), $professionLevels);
         $this->firstLevelSize = $this->createFirstLevelSize($race, $gender, $exceptionalityProperties, $professionLevels);
     }
 
@@ -167,9 +170,9 @@ class FirstLevelProperties extends StrictObject
         return Charisma::getIt($this->calculateFirstLevelBaseProperty(Charisma::CHARISMA, $race, $gender, $exceptionalityProperties, $professionLevels));
     }
 
-    private function createFirstLevelWeightInKg(Race $race, ProfessionLevels $professionLevels)
+    private function createFirstLevelWeightInKg(Race $race, Gender $gender, WeightTable $weightTable, ProfessionLevels $professionLevels)
     {
-        return WeightInKg::getIt($race->getWeightInKg() + $professionLevels->getWeighKgModifierForFirstLevel());
+        return WeightInKg::getIt($race->getWeightInKg($gender, $weightTable) + $professionLevels->getWeightKgModifierForFirstLevel());
     }
 
     private function createFirstLevelSize(Race $race, Gender $gender, ExceptionalityProperties $exceptionalityProperties, ProfessionLevels $professionLevels)

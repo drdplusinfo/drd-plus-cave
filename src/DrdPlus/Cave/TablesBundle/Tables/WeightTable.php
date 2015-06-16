@@ -5,8 +5,13 @@ namespace DrdPlus\Cave\TablesBundle\Tables;
  * PPH page 164, bottom
  * @method WeightMeasurement toMeasurement(int $bonus)
  */
-class WeightTable extends  AbstractTable
+class WeightTable extends AbstractTable
 {
+    public function __construct()
+    {
+        parent::__construct(new DummyEvaluator());
+    }
+
     protected function getDataFileName()
     {
         return __DIR__ . '/data/weight.csv';
@@ -47,6 +52,5 @@ class WeightTable extends  AbstractTable
     {
         return new WeightMeasurement($value, $unit);
     }
-
 
 }

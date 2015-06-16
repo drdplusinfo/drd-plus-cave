@@ -4,6 +4,7 @@ namespace DrdPlus\Cave\UnitBundle\Tests\Person\Attributes\ProfessionLevels;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\LevelValue;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\ProfessionLevel;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Agility;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Body\WeightInKg;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Charisma;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Intelligence;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Knack;
@@ -35,15 +36,17 @@ abstract class AbstractTestOfProfessionLevel extends TestWithMockery
         /** @var Knack|\Mockery\MockInterface $knackIncrement */
         $knackIncrement = \Mockery::mock(Knack::class);
         $this->addPropertyFirstLevelExpectation($knackIncrement, Knack::KNACK);
+        /** @var Will|\Mockery\MockInterface $willIncrement */
+        $willIncrement = \Mockery::mock(Will::class);
+        $this->addPropertyFirstLevelExpectation($willIncrement, Will::WILL);
         /** @var Intelligence|\Mockery\MockInterface $intelligenceIncrement */
         $intelligenceIncrement = \Mockery::mock(Intelligence::class);
         $this->addPropertyFirstLevelExpectation($intelligenceIncrement, Intelligence::INTELLIGENCE);
         /** @var Charisma|\Mockery\MockInterface $charismaIncrement */
         $charismaIncrement = \Mockery::mock(Charisma::class);
         $this->addPropertyFirstLevelExpectation($charismaIncrement, Charisma::CHARISMA);
-        /** @var Will|\Mockery\MockInterface $willIncrement */
-        $willIncrement = \Mockery::mock(Will::class);
-        $this->addPropertyFirstLevelExpectation($willIncrement, Will::WILL);
+        /** @var WeightInKg|\Mockery\MockInterface $weightInKg */
+        $weightInKg = \Mockery::mock(WeightInKg::class);
         $professionLevelClass = $this->getProfessionLevelClass();
         $instance = new $professionLevelClass(
             $levelValue,
@@ -52,7 +55,8 @@ abstract class AbstractTestOfProfessionLevel extends TestWithMockery
             $knackIncrement,
             $willIncrement,
             $intelligenceIncrement,
-            $charismaIncrement
+            $charismaIncrement,
+            $weightInKg
         );
         $this->assertInstanceOf($this->getProfessionLevelClass(), $instance);
 
@@ -114,15 +118,17 @@ abstract class AbstractTestOfProfessionLevel extends TestWithMockery
         /** @var Knack|\Mockery\MockInterface $knackIncrement */
         $knackIncrement = \Mockery::mock(Knack::class);
         $this->addPropertyFirstLevelExpectation($knackIncrement, Knack::KNACK);
+        /** @var Will|\Mockery\MockInterface $willIncrement */
+        $willIncrement = \Mockery::mock(Will::class);
+        $this->addPropertyFirstLevelExpectation($willIncrement, Will::WILL);
         /** @var Intelligence|\Mockery\MockInterface $intelligenceIncrement */
         $intelligenceIncrement = \Mockery::mock(Intelligence::class);
         $this->addPropertyFirstLevelExpectation($intelligenceIncrement, Intelligence::INTELLIGENCE);
         /** @var Charisma|\Mockery\MockInterface $charismaIncrement */
         $charismaIncrement = \Mockery::mock(Charisma::class);
         $this->addPropertyFirstLevelExpectation($charismaIncrement, Charisma::CHARISMA);
-        /** @var Will|\Mockery\MockInterface $willIncrement */
-        $willIncrement = \Mockery::mock(Will::class);
-        $this->addPropertyFirstLevelExpectation($willIncrement, Will::WILL);
+        /** @var WeightInKg|\Mockery\MockInterface $weightInKg */
+        $weightInKg = \Mockery::mock(WeightInKg::class);
         $professionLevelClass = $this->getProfessionLevelClass();
         /** @var ProfessionLevel $professionLevel */
         $professionLevel = new $professionLevelClass(
@@ -132,7 +138,8 @@ abstract class AbstractTestOfProfessionLevel extends TestWithMockery
             $knackIncrement,
             $willIncrement,
             $intelligenceIncrement,
-            $charismaIncrement
+            $charismaIncrement,
+            $weightInKg
         );
         $this->assertEquals(time(), $professionLevel->getLevelUpAt()->getTimestamp());
     }
@@ -173,15 +180,17 @@ abstract class AbstractTestOfProfessionLevel extends TestWithMockery
         /** @var Knack|\Mockery\MockInterface $knackIncrement */
         $knackIncrement = \Mockery::mock(Knack::class);
         $this->addPropertyFirstLevelExpectation($knackIncrement, Knack::KNACK);
+        /** @var Will|\Mockery\MockInterface $willIncrement */
+        $willIncrement = \Mockery::mock(Will::class);
+        $this->addPropertyFirstLevelExpectation($willIncrement, Will::WILL);
         /** @var Intelligence|\Mockery\MockInterface $intelligenceIncrement */
         $intelligenceIncrement = \Mockery::mock(Intelligence::class);
         $this->addPropertyFirstLevelExpectation($intelligenceIncrement, Intelligence::INTELLIGENCE);
         /** @var Charisma|\Mockery\MockInterface $charismaIncrement */
         $charismaIncrement = \Mockery::mock(Charisma::class);
         $this->addPropertyFirstLevelExpectation($charismaIncrement, Charisma::CHARISMA);
-        /** @var Will|\Mockery\MockInterface $willIncrement */
-        $willIncrement = \Mockery::mock(Will::class);
-        $this->addPropertyFirstLevelExpectation($willIncrement, Will::WILL);
+        /** @var WeightInKg|\Mockery\MockInterface $weightInKg */
+        $weightInKg = \Mockery::mock(WeightInKg::class);
         $professionLevelClass = $this->getProfessionLevelClass();
         /** @var ProfessionLevel $professionLevel */
         $professionLevel = new $professionLevelClass(
@@ -192,6 +201,7 @@ abstract class AbstractTestOfProfessionLevel extends TestWithMockery
             $willIncrement,
             $intelligenceIncrement,
             $charismaIncrement,
+            $weightInKg,
             $levelUpAt = new \DateTimeImmutable()
         );
         $this->assertSame($levelValue, $professionLevel->getLevelValue());
