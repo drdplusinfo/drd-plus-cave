@@ -1,6 +1,7 @@
 <?php
 namespace DrdPlus\Cave\TablesBundle\Tables;
 
+use Granam\Strict\Integer\StrictInteger;
 use Granam\Strict\Object\StrictObject;
 
 abstract class AbstractTable extends StrictObject
@@ -79,21 +80,41 @@ abstract class AbstractTable extends StrictObject
     private function indexRow(array $row, array $expectedHeader)
     {
         $indexedValues = array_combine($expectedHeader, $row);
-        $bonus = intval($indexedValues['bonus']);
+        $bonus = $this->parseBonus($indexedValues['bonus']);
         unset($indexedValues['bonus']); // left values only
         $indexedRow = [$bonus => []];
         foreach ($indexedValues as $index => $value) {
-            $value = trim($value);
+            $value = $this->parseValue($value);
             if ($value === '') { // skipping empty value
                 continue;
-            }
-            if (!preg_match('~^\d+/\d+$~', $value)) { // except dice chance bonus, like 1/6 - that remains string
-                $value = floatval($value);
             }
             $indexedRow[$bonus][$index] = $value;
         }
 
         return $indexedRow;
+    }
+
+    private function parseBonus($value)
+    {
+        return intval($this->parseNumber($value));
+    }
+
+    private function parseNumber($value)
+    {
+        return str_replace('−' /* ASCII 226 */, '-' /* ASCII 45 */, $value);
+    }
+
+    private function parseValue($value)
+    {
+        $value = trim($value);
+        if ($value === '') {
+            return $value;
+        }
+        if (preg_match('~^\d+/\d+$~', $value)) { // dice chance bonus, like 1/6
+            return $value;
+        }
+
+        return floatval($this->parseNumber($value));
     }
 
     /**
@@ -118,9 +139,12 @@ abstract class AbstractTable extends StrictObject
      */
     public function toMeasurement($bonus)
     {
+        $bonus = (new StrictInteger($bonus, false))->getValue();
         if (!isset($this->data[$bonus])) {
             throw new \OutOfRangeException("Value to bonus $bonus is not defined.");
         }
+
+        //TODO solve X/6 amount
 
         foreach ($this->getExpectedDataHeader() as $unit) {
             if (isset($this->data[$bonus][$unit])) {
