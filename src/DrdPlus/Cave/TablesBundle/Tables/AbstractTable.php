@@ -4,7 +4,7 @@ namespace DrdPlus\Cave\TablesBundle\Tables;
 use Granam\Strict\Integer\StrictInteger;
 use Granam\Strict\Object\StrictObject;
 
-abstract class AbstractTable extends StrictObject
+abstract class AbstractTable extends StrictObject implements TableInterface
 {
 
     /**
@@ -145,7 +145,7 @@ abstract class AbstractTable extends StrictObject
     /**
      * @param int $bonus
      *
-     * @return float
+     * @return MeasurementInterface
      */
     public function toMeasurement($bonus)
     {
