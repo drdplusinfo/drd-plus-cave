@@ -67,7 +67,7 @@ class AmountTableTest extends TestWithMockery
     public function too_low_value_to_bonus_cause_exception()
     {
         $amountTable = new AmountTable();
-        $amountTable->toAmount(-1);
+        $amountTable->amountToBonus(0);
     }
 
     /**
