@@ -110,11 +110,21 @@ abstract class AbstractTable extends StrictObject
         if ($value === '') {
             return $value;
         }
-        if (preg_match('~^\d+/\d+$~', $value)) { // dice chance bonus, like 1/6
+        if ($this->isDiceRollChance($value)) { // dice chance bonus, like 1/6
             return $value;
         }
 
         return floatval($this->parseNumber($value));
+    }
+
+    /**
+     * @param $value
+     *
+     * @return int
+     */
+    private function isDiceRollChance($value)
+    {
+        return preg_match('~^\d+/\d+$~', $value);
     }
 
     /**
@@ -143,8 +153,6 @@ abstract class AbstractTable extends StrictObject
         if (!isset($this->data[$bonus])) {
             throw new \OutOfRangeException("Value to bonus $bonus is not defined.");
         }
-
-        //TODO solve X/6 amount
 
         foreach ($this->getExpectedDataHeader() as $unit) {
             if (isset($this->data[$bonus][$unit])) {
