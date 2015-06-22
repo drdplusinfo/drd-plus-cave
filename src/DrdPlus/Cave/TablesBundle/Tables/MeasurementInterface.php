@@ -13,4 +13,15 @@ interface MeasurementInterface
      * @return string
      */
     public function getUnit();
+
+    /**
+     * @return string[]
+     */
+    public function getPossibleUnits();
+
+    /**
+     * @param float $value
+     * @param string $unit
+     */
+    public function addInDifferentUnit($value, $unit);
 }

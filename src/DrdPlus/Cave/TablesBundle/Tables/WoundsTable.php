@@ -1,9 +1,11 @@
 <?php
 namespace DrdPlus\Cave\TablesBundle\Tables;
+
 use Drd\DiceRoll\Templates\Rolls\Roll1d6;
 
 /**
  * PPH page 165, top
+ * @method WoundsMeasurement toMeasurement($bonus, $unit)
  */
 class WoundsTable extends AbstractTable
 {
@@ -34,7 +36,7 @@ class WoundsTable extends AbstractTable
      */
     public function toWounds($bonus)
     {
-        return $this->toMeasurement($bonus)->getValue();
+        return $this->toMeasurement($bonus, WoundsMeasurement::WOUNDS)->getValue();
     }
 
     /**
@@ -44,7 +46,7 @@ class WoundsTable extends AbstractTable
      */
     public function woundsToBonus($amount)
     {
-        return $this->toBonus(new WoundsMeasurement($amount));
+        return $this->toBonus(new WoundsMeasurement($amount, WoundsMeasurement::WOUNDS));
     }
 
     /**

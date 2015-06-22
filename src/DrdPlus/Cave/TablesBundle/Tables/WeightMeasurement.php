@@ -1,47 +1,34 @@
 <?php
 namespace DrdPlus\Cave\TablesBundle\Tables;
 
-class WeightMeasurement implements MeasurementInterface
+use Granam\Strict\Float\StrictFloat;
+
+class WeightMeasurement extends AbstractMeasurement
 {
     const KG = 'kg';
 
-    /**
-     * @var float
-     */
-    private $value;
-    /**
-     * @var string
-     */
-    private $unit;
-
     public function __construct($value, $unit = self::KG)
     {
-        $this->value = floatval($value);
-        $this->checkUnit($unit);
-        $this->unit = $unit;
+        parent::__construct($value, $unit);
     }
 
-    private function checkUnit($unit)
+    /**
+     * @return string[]
+     */
+    public function getPossibleUnits()
     {
-        if ($unit !== self::KG) {
-            throw new \LogicException('Unknown unit ' . var_export($unit, true));
+        return [self::KG];
+    }
+
+    /**
+     * @param float $value
+     * @param string $unit
+     */
+    public function addInDifferentUnit($value, $unit)
+    {
+        $this->checkUnit($unit);
+        if ($this->getValue() !== (new StrictFloat($value, false))->getValue()) {
+            throw new \LogicException("Weight already have a value {$this->getValue()} and can not be replaced by $value");
         }
     }
-
-    /**
-     * @return string
-     */
-    public function getUnit()
-    {
-        return $this->unit;
-    }
-
-    /**
-     * @return float
-     */
-    public function getValue()
-    {
-        return $this->value;
-    }
-
 }

@@ -31,14 +31,15 @@ class FatigueTable extends StrictObject implements TableInterface
 
     /**
      * @param int $bonus
+     * @param string $unit
      *
      * @return FatigueMeasurement
      */
-    public function toMeasurement($bonus)
+    public function toMeasurement($bonus, $unit = FatigueMeasurement::FATIGUE)
     {
-        $wounds = $this->woundsTable->toMeasurement($bonus);
+        $wounds = $this->woundsTable->toMeasurement($bonus, WoundsMeasurement::WOUNDS);
 
-        return new FatigueMeasurement($wounds->getValue(), FatigueMeasurement::FATIGUE);
+        return new FatigueMeasurement($wounds->getValue(), $unit);
     }
 
     /**
@@ -58,7 +59,7 @@ class FatigueTable extends StrictObject implements TableInterface
      */
     public function toFatigue($bonus)
     {
-        return $this->toMeasurement($bonus)->getValue();
+        return $this->toMeasurement($bonus, FatigueMeasurement::FATIGUE)->getValue();
     }
 
 }

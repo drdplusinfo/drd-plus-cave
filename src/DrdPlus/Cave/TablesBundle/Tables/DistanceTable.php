@@ -3,7 +3,7 @@ namespace DrdPlus\Cave\TablesBundle\Tables;
 
 /**
  * PPH page 162, top
- * @method DistanceMeasurement toMeasurement(int $bonus)
+ * @method DistanceMeasurement toMeasurement($bonus, $unit = null)
  */
 class DistanceTable extends AbstractTable
 {

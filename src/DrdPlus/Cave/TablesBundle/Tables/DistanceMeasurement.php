@@ -1,69 +1,60 @@
 <?php
 namespace DrdPlus\Cave\TablesBundle\Tables;
 
-class DistanceMeasurement implements MeasurementInterface
+use Granam\Strict\Float\StrictFloat;
+
+class DistanceMeasurement extends AbstractMeasurement
 {
     const M = 'm';
     const KM = 'km';
 
     /**
-     * @var float
+     * @return string[]
      */
-    private $value;
-    /**
-     * @var string
-     */
-    private $unit;
-
-    public function __construct($value, $unit)
+    public function getPossibleUnits()
     {
-        $this->value = floatval($value);
+        return [self::M, self::KM];
+    }
+
+    /**
+     * @param float $value
+     * @param string $unit
+     */
+    public function addInDifferentUnit($value, $unit)
+    {
         $this->checkUnit($unit);
-        $this->unit = $unit;
-    }
-
-    private function checkUnit($unit)
-    {
-        switch ($unit) {
-            case self::M :
-            case self::KM :
-                return;
-            default :
-                throw new \LogicException('Unknown unit ' . var_export($unit, true));
+        $inOriginalUnit = $this->toDifferentUnit($value, $unit, $this->getUnit());
+        if ($inOriginalUnit !== $this->getValue()) {
+            throw new \LogicException(
+                "Every another expression in another unit has to equal to original measure after conversion."
+                . " Expected equation to {$this->getValue()}({$this->getUnit()}), got $value($unit) converted into"
+                . " $inOriginalUnit({$this->getUnit()})"
+            );
         }
-    }
-
-    /**
-     * @return string
-     */
-    public function getUnit()
-    {
-        return $this->unit;
-    }
-
-    /**
-     * @return float
-     */
-    public function getValue()
-    {
-        return $this->value;
+        // distance conversion is always known, there is no reason to keep the "another" measure
     }
 
     public function toMeters()
     {
-        if ($this->unit === self::M) {
-            return $this->value;
-        }
+        return $this->toDifferentUnit($this->getValue(), $this->getUnit(), self::M);
+    }
 
-        return $this->value * 1000;
+    private function toDifferentUnit($value, $fromUnit, $toUnit)
+    {
+        if ($fromUnit === $toUnit) {
+            return (new StrictFloat($value, false))->getValue();
+        }
+        if ($fromUnit === self::M && $toUnit === self::KM) {
+            return $value / 1000;
+        }
+        if ($fromUnit === self::KM && $toUnit === self::M) {
+            return $value * 1000;
+        }
+        throw new \LogicException("Unknown from / to units ($fromUnit / $toUnit)");
     }
 
     public function toKilometers()
     {
-        if ($this->unit === self::KM) {
-            return $this->value;
-        }
-
-        return $this->value / 1000;
+        return $this->toDifferentUnit($this->getValue(), $this->getUnit(), self::KM);
     }
 }

@@ -3,7 +3,7 @@ namespace DrdPlus\Cave\TablesBundle\Tables;
 
 /**
  * PPH page 164, bottom
- * @method WeightMeasurement toMeasurement(int $bonus)
+ * @method WeightMeasurement toMeasurement($bonus, $unit)
  */
 class WeightTable extends AbstractTable
 {
@@ -34,12 +34,12 @@ class WeightTable extends AbstractTable
      */
     public function toKg($bonus)
     {
-        return $this->toMeasurement($bonus)->getValue();
+        return $this->toMeasurement($bonus, WeightMeasurement::KG)->getValue();
     }
 
     public function kgToBonus($kg)
     {
-        return $this->toBonus(new WeightMeasurement($kg));
+        return $this->toBonus(new WeightMeasurement($kg, WeightMeasurement::KG));
     }
 
     /**

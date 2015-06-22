@@ -1,59 +1,32 @@
 <?php
 namespace DrdPlus\Cave\TablesBundle\Tables;
 
-use Granam\Strict\Object\StrictObject;
+use Granam\Strict\Float\StrictFloat;
 
-class FatigueMeasurement extends StrictObject implements MeasurementInterface
+class FatigueMeasurement extends AbstractMeasurement
 {
     const FATIGUE = 'fatigue';
 
-    /**
-     * @var float
-     */
-    private $value;
-    /**
-     * @var string
-     */
-    private $unit;
+    public function __construct($value, $unit = self::FATIGUE)
+    {
+        parent::__construct($value, $unit);
+    }
+
+    public function getPossibleUnits()
+    {
+        return [self::FATIGUE];
+    }
 
     /**
      * @param float $value
      * @param string $unit
      */
-    public function __construct($value, $unit = self::FATIGUE)
+    public function addInDifferentUnit($value, $unit)
     {
-        $this->value = floatval($value);
         $this->checkUnit($unit);
-        $this->unit = $unit;
-    }
-
-    /**
-     * @param string $unit
-     */
-    private function checkUnit($unit)
-    {
-        switch ($unit) {
-            case self::FATIGUE :
-                return;
-            default :
-                throw new \LogicException('Unknown unit ' . var_export($unit, true));
+        if ($this->getValue() !== (new StrictFloat($value, false))->getValue()) {
+            throw new \LogicException("Fatigue already has a value {$this->getValue()} and can not be replaced by $value");
         }
-    }
-
-    /**
-     * @return string
-     */
-    public function getUnit()
-    {
-        return self::FATIGUE;
-    }
-
-    /**
-     * @return float
-     */
-    public function getValue()
-    {
-        return $this->value;
     }
 
 }

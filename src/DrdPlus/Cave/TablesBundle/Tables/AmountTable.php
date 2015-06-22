@@ -4,7 +4,7 @@ use Drd\DiceRoll\Templates\Rolls\Roll1d6;
 
 /**
  * PPH page 164, top
- * @method AmountMeasurement toMeasurement(int $bonus)
+ * @method AmountMeasurement toMeasurement($bonus, $unit)
  */
 class AmountTable extends AbstractTable
 {
@@ -35,7 +35,7 @@ class AmountTable extends AbstractTable
      */
     public function toAmount($bonus)
     {
-        return $this->toMeasurement($bonus)->getValue();
+        return $this->toMeasurement($bonus, AmountMeasurement::AMOUNT)->getValue();
     }
 
     /**
@@ -45,7 +45,7 @@ class AmountTable extends AbstractTable
      */
     public function amountToBonus($amount)
     {
-        return $this->toBonus(new AmountMeasurement($amount));
+        return $this->toBonus(new AmountMeasurement($amount, AmountMeasurement::AMOUNT));
     }
 
     /**
@@ -56,7 +56,7 @@ class AmountTable extends AbstractTable
      */
     protected function convertToMeasurement($value, $unit)
     {
-        return new AmountMeasurement($value);
+        return new AmountMeasurement($value, $unit);
     }
 
 }

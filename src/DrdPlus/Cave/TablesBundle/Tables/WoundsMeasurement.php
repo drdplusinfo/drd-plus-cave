@@ -1,59 +1,35 @@
 <?php
 namespace DrdPlus\Cave\TablesBundle\Tables;
 
-use Granam\Strict\Object\StrictObject;
+use Granam\Strict\Float\StrictFloat;
 
-class WoundsMeasurement extends StrictObject implements MeasurementInterface
+class WoundsMeasurement extends AbstractMeasurement
 {
     const WOUNDS = 'wounds';
 
+    public function __construct($value, $unit = self::WOUNDS)
+    {
+        parent::__construct($value, $unit);
+    }
+
     /**
-     * @var float
+     * @return string[]
      */
-    private $value;
-    /**
-     * @var string
-     */
-    private $unit;
+    public function getPossibleUnits()
+    {
+        return [self::WOUNDS];
+    }
 
     /**
      * @param float $value
      * @param string $unit
      */
-    public function __construct($value, $unit = self::WOUNDS)
+    public function addInDifferentUnit($value, $unit)
     {
-        $this->value = floatval($value);
         $this->checkUnit($unit);
-        $this->unit = $unit;
-    }
-
-    /**
-     * @param string $unit
-     */
-    private function checkUnit($unit)
-    {
-        switch ($unit) {
-            case self::WOUNDS :
-                return;
-            default :
-                throw new \LogicException('Unknown unit ' . var_export($unit, true));
+        if ($this->getValue() !== (new StrictFloat($value, false))->getValue()) {
+            throw new \LogicException("Wounds already have a value {$this->getValue()} and can not be replaced by $value");
         }
-    }
-
-    /**
-     * @return string
-     */
-    public function getUnit()
-    {
-        return self::WOUNDS;
-    }
-
-    /**
-     * @return float
-     */
-    public function getValue()
-    {
-        return $this->value;
     }
 
 }

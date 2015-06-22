@@ -13,8 +13,9 @@ interface TableInterface
 
     /**
      * @param int $bonus
+     * @param string $unit
      *
      * @return MeasurementInterface
      */
-    public function toMeasurement($bonus);
+    public function toMeasurement($bonus, $unit);
 }

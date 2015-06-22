@@ -1,59 +1,34 @@
 <?php
 namespace DrdPlus\Cave\TablesBundle\Tables;
 
-use Granam\Strict\Object\StrictObject;
+use Granam\Strict\Float\StrictFloat;
 
-class AmountMeasurement extends StrictObject implements MeasurementInterface
+class AmountMeasurement extends AbstractMeasurement
 {
     const AMOUNT = 'amount';
 
-    /**
-     * @var float
-     */
-    private $value;
-    /**
-     * @var string
-     */
-    private $unit;
+    public function __construct($value, $unit = self::AMOUNT)
+    {
+        parent::__construct($value, $unit);
+    }
+
+    public function getPossibleUnits()
+    {
+        return [self::AMOUNT];
+    }
 
     /**
      * @param float $value
      * @param string $unit
      */
-    public function __construct($value, $unit = self::AMOUNT)
+    public function addInDifferentUnit($value, $unit)
     {
-        $this->value = floatval($value);
         $this->checkUnit($unit);
-        $this->unit = $unit;
-    }
-
-    /**
-     * @param string $unit
-     */
-    private function checkUnit($unit)
-    {
-        switch ($unit) {
-            case self::AMOUNT :
-                return;
-            default :
-                throw new \LogicException('Unknown unit ' . var_export($unit, true));
+        if ($this->getValue() !== (new StrictFloat($value, false))->getValue()) {
+            throw new \LogicException(
+                "The amount measurement accepts only {$this->getUnit()} and is already set to value of {$this->getValue()}"
+            );
         }
-    }
-
-    /**
-     * @return string
-     */
-    public function getUnit()
-    {
-        return self::AMOUNT;
-    }
-
-    /**
-     * @return float
-     */
-    public function getValue()
-    {
-        return $this->value;
     }
 
 }

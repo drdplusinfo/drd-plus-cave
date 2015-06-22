@@ -1,6 +1,7 @@
 <?php
 namespace DrdPlus\Cave\TablesBundle\Tables;
 
+use Granam\Strict\Float\StrictFloat;
 use Granam\Strict\Integer\StrictInteger;
 use Granam\Strict\Object\StrictObject;
 
@@ -8,7 +9,7 @@ abstract class AbstractTable extends StrictObject implements TableInterface
 {
 
     /**
-     * @var string[]
+     * @var string[][]
      */
     private $data;
     /**
@@ -114,7 +115,7 @@ abstract class AbstractTable extends StrictObject implements TableInterface
             return $value;
         }
 
-        return floatval($this->parseNumber($value));
+        return (new StrictFloat($this->parseNumber($value), false))->getValue();
     }
 
     /**
@@ -144,28 +145,60 @@ abstract class AbstractTable extends StrictObject implements TableInterface
 
     /**
      * @param int $bonus
+     * @param string $wantedUnit
      *
      * @return MeasurementInterface
      */
-    public function toMeasurement($bonus)
+    public function toMeasurement($bonus, $wantedUnit = null)
     {
-        $bonus = (new StrictInteger($bonus, false))->getValue();
-        if (!isset($this->data[$bonus])) {
-            throw new \OutOfRangeException("Value to bonus $bonus is not defined.");
+        $bonus = $this->convertToInteger($bonus);
+        $this->checkBonus($bonus);
+        if (is_null($wantedUnit) && isset($this->data[$bonus])) {
+            $wantedUnit = key($this->data[$bonus]);
+        } else {
+            $this->checkUnit($wantedUnit);
         }
 
-        foreach ($this->getExpectedDataHeader() as $unit) {
-            if (isset($this->data[$bonus][$unit])) {
-                $rawValue = $this->data[$bonus][$unit];
-                $value = $this->evaluate($rawValue);
-
-                return $this->convertToMeasurement($value, $unit);
+        if (isset($this->data[$bonus][$wantedUnit])) {
+            $rawValues = $this->data[$bonus];
+            $values = [];
+            foreach ($rawValues as $unit => $rawValue) {
+                $values[$unit] = $this->evaluate($rawValue);
             }
+            $wantedValue = $values[$wantedUnit];
+            $measurement = $this->convertToMeasurement($wantedValue, $wantedUnit);
+            unset($values[$wantedUnit]);
+            foreach ($values as $anotherUnit => $anotherValue) {
+                $measurement->addInDifferentUnit($anotherValue, $anotherUnit);
+            }
+
+            return $measurement;
         }
 
         throw new \LogicException(
             "Missing data for bonus $bonus and expected data columns " . implode(',', $this->getExpectedDataHeader())
         );
+    }
+
+    protected function convertToInteger($value)
+    {
+        return (new StrictInteger($value, false))->getValue();
+    }
+
+    private function checkBonus($bonus)
+    {
+        if (!isset($this->data[$bonus])) {
+            throw new \OutOfRangeException("Value to bonus $bonus is not defined.");
+        }
+    }
+
+    private function checkUnit($unit)
+    {
+        if (!in_array($unit, $this->getExpectedDataHeader())) {
+            throw new \LogicException(
+                "Expected unit " . implode(',', $this->getExpectedDataHeader()) . ", got $unit"
+            );
+        }
     }
 
     /**
@@ -208,7 +241,7 @@ abstract class AbstractTable extends StrictObject implements TableInterface
     public function toBonus(MeasurementInterface $measurement)
     {
         $searchedUnit = $measurement->getUnit();
-        $searchedValue = floatval($measurement->getValue());
+        $searchedValue = (new StrictFloat($this->parseNumber($measurement->getValue()), false))->getValue();
         $finds = $this->findBonusMatchingTo($searchedValue, $searchedUnit);
         if (is_int($finds)) {
             return $finds; // we found the bonus by value exact match
