@@ -2,7 +2,7 @@
 namespace DrdPlus\Cave\TablesBundle\Tables;
 
 use Granam\Float\Tools\ToFloat;
-use Granam\Strict\Integer\StrictInteger;
+use Granam\Integer\Tools\ToInteger;
 use Granam\Strict\Object\StrictObject;
 
 abstract class AbstractTable extends StrictObject implements TableInterface
@@ -182,7 +182,7 @@ abstract class AbstractTable extends StrictObject implements TableInterface
 
     protected function convertToInteger($value)
     {
-        return (new StrictInteger($value, false))->getValue();
+        return ToInteger::toInteger($value);
     }
 
     private function checkBonus($bonus)

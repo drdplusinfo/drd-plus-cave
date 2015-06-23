@@ -3,7 +3,7 @@ namespace DrdPlus\Cave\ToolsBundle\Enum;
 
 use Drd\DiceRoll\DiceInterface;
 use DrdPlus\Cave\ToolsBundle\Dices\Dice;
-use Granam\Strict\Integer\StrictInteger;
+use Granam\Integer\Integer;
 
 class DiceTest extends \PHPUnit_Framework_TestCase
 {
@@ -23,12 +23,12 @@ class DiceTest extends \PHPUnit_Framework_TestCase
         $drdDice = \Mockery::mock(DiceInterface::class);
         $drdDice->shouldReceive('getMinimum')
             ->once()
-            ->andReturn($minimum = \Mockery::mock(StrictInteger::class));
+            ->andReturn($minimum = \Mockery::mock(Integer::class));
         $minimum->shouldReceive('getValue')
             ->andReturn(1);
         $drdDice->shouldReceive('getMaximum')
             ->once()
-            ->andReturn($maximum = \Mockery::mock(StrictInteger::class));
+            ->andReturn($maximum = \Mockery::mock(Integer::class));
         $maximum->shouldReceive('getValue')
             ->andReturn(2);
         /** @var DiceInterface $drdDice */
@@ -45,12 +45,12 @@ class DiceTest extends \PHPUnit_Framework_TestCase
         $drdDice = \Mockery::mock(DiceInterface::class);
         $drdDice->shouldReceive('getMinimum')
             ->once()
-            ->andReturn($minimum = \Mockery::mock(StrictInteger::class));
+            ->andReturn($minimum = \Mockery::mock(Integer::class));
         $minimum->shouldReceive('getValue')
             ->andReturn($minimumValue = 1);
         $drdDice->shouldReceive('getMaximum')
             ->once()
-            ->andReturn($maximum = \Mockery::mock(StrictInteger::class));
+            ->andReturn($maximum = \Mockery::mock(Integer::class));
         $maximum->shouldReceive('getValue')
             ->andReturn(2);
         /** @var DiceInterface $drdDice */
@@ -67,12 +67,12 @@ class DiceTest extends \PHPUnit_Framework_TestCase
         $drdDice = \Mockery::mock(DiceInterface::class);
         $drdDice->shouldReceive('getMinimum')
             ->once()
-            ->andReturn($minimum = \Mockery::mock(StrictInteger::class));
+            ->andReturn($minimum = \Mockery::mock(Integer::class));
         $minimum->shouldReceive('getValue')
             ->andReturn(1);
         $drdDice->shouldReceive('getMaximum')
             ->once()
-            ->andReturn($maximum = \Mockery::mock(StrictInteger::class));
+            ->andReturn($maximum = \Mockery::mock(Integer::class));
         $maximum->shouldReceive('getValue')
             ->andReturn($maximumValue = 2);
         /** @var DiceInterface $drdDice */

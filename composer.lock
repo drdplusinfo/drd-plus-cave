@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "04c30820defe3e92ca68eeac16a9f6a8",
+    "hash": "a42cb2d07533757ac050a0050a968dfe",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1206,6 +1206,56 @@
                 "strict"
             ],
             "time": "2015-06-23 13:16:41"
+        },
+        {
+            "name": "granam/integer",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jaroslavtyc/granam-integer.git",
+                "reference": "0b276b6e5b18df7494374145b0211a422e5ed466"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jaroslavtyc/granam-integer/zipball/0b276b6e5b18df7494374145b0211a422e5ed466",
+                "reference": "0b276b6e5b18df7494374145b0211a422e5ed466",
+                "shasum": ""
+            },
+            "require": {
+                "granam/exception-hierarchy": "dev-master",
+                "granam/scalar": "dev-master",
+                "granam/strict-object": "dev-master",
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "mockery/mockery": ">=0.9",
+                "phpunit/phpunit": "~4.4"
+            },
+            "type": "project",
+            "autoload": {
+                "psr-4": {
+                    "Granam\\": "Granam/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jaroslav Týc",
+                    "homepage": "http://jaroslav.com",
+                    "role": "Original author"
+                }
+            ],
+            "description": "Lightweight integer container with stand-alone converter",
+            "homepage": "https://github.com/jaroslavtyc/granam-integer",
+            "keywords": [
+                "converter",
+                "integer",
+                "php"
+            ],
+            "time": "2015-06-23 13:20:34"
         },
         {
             "name": "granam/scalar",
@@ -3372,16 +3422,17 @@
         "doctrine/doctrine-migrations-bundle": 20,
         "doctrineum/scalar": 20,
         "doctrineum/integer": 20,
+        "doctrineum/float": 20,
         "doctrineum/strict-string": 20,
-        "granam/strict-object": 20,
         "granam/exception-hierarchy": 20,
+        "granam/strict-object": 20,
         "granam/strict-scalar": 20,
         "granam/strict-integer": 20,
-        "drd/dice-roll": 20,
         "granam/strict-float": 20,
         "granam/scalar": 20,
         "granam/float": 20,
-        "doctrineum/float": 20
+        "granam/integer": 20,
+        "drd/dice-roll": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

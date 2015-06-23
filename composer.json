@@ -31,9 +31,9 @@
     "granam/strict-object": "dev-master",
     "granam/strict-scalar": "dev-master",
     "granam/strict-integer": "dev-master",
-    "granam/strict-float": "dev-master",
     "granam/scalar": "dev-master",
     "granam/float": "dev-master",
+    "granam/integer": "dev-master",
     "drd/dice-roll": "dev-master"
   },
   "require-dev": {

@@ -1,9 +1,9 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Body;
 
-use Granam\Strict\Integer\StrictInteger;
+use Granam\Integer\Integer;
 
-class Size extends StrictInteger
+class Size extends Integer
 {
     const SIZE = 'size';
 
