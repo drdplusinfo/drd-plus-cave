@@ -1,6 +1,9 @@
 <?php
 namespace DrdPlus\Cave\TablesBundle\Tables;
 
+use DrdPlus\Cave\TablesBundle\Tables\Distance\DistanceTable;
+use DrdPlus\Cave\TablesBundle\Tables\Weight\WeightTable;
+
 class Tables
 {
     /**

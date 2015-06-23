@@ -1065,19 +1065,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-dice-roll.git",
-                "reference": "a1dc34c75d3b5b151d168375be1bec410af760f0"
+                "reference": "f0d34d2bff914c4b7f11b69e53caa6f856f48144"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-dice-roll/zipball/a1dc34c75d3b5b151d168375be1bec410af760f0",
-                "reference": "a1dc34c75d3b5b151d168375be1bec410af760f0",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-dice-roll/zipball/f0d34d2bff914c4b7f11b69e53caa6f856f48144",
+                "reference": "f0d34d2bff914c4b7f11b69e53caa6f856f48144",
                 "shasum": ""
             },
             "require": {
                 "granam/exception-hierarchy": "dev-master",
-                "granam/strict-integer": "dev-master",
+                "granam/integer": "dev-master",
+                "granam/scalar": "dev-master",
                 "granam/strict-object": "dev-master",
-                "granam/strict-scalar": "dev-master",
                 "php": ">=5.5"
             },
             "require-dev": {
@@ -1114,7 +1114,7 @@
                 "php",
                 "roll"
             ],
-            "time": "2015-05-09 19:10:31"
+            "time": "2015-06-23 15:24:12"
         },
         {
             "name": "granam/exception-hierarchy",
@@ -1163,12 +1163,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/granam-float.git",
-                "reference": "fb8753b0a1793d3039fbc482d6bfcdddc886f6ed"
+                "reference": "44c3a639145240e771671cd4e92ac18aa75c6f41"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/granam-float/zipball/fb8753b0a1793d3039fbc482d6bfcdddc886f6ed",
-                "reference": "fb8753b0a1793d3039fbc482d6bfcdddc886f6ed",
+                "url": "https://api.github.com/repos/jaroslavtyc/granam-float/zipball/44c3a639145240e771671cd4e92ac18aa75c6f41",
+                "reference": "44c3a639145240e771671cd4e92ac18aa75c6f41",
                 "shasum": ""
             },
             "require": {
@@ -1205,7 +1205,7 @@
                 "php",
                 "strict"
             ],
-            "time": "2015-06-23 13:16:41"
+            "time": "2015-06-23 15:18:50"
         },
         {
             "name": "granam/integer",
@@ -1213,12 +1213,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/granam-integer.git",
-                "reference": "0b276b6e5b18df7494374145b0211a422e5ed466"
+                "reference": "6c39601c183847352d73a83255bcac9b2d4c9b39"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/granam-integer/zipball/0b276b6e5b18df7494374145b0211a422e5ed466",
-                "reference": "0b276b6e5b18df7494374145b0211a422e5ed466",
+                "url": "https://api.github.com/repos/jaroslavtyc/granam-integer/zipball/6c39601c183847352d73a83255bcac9b2d4c9b39",
+                "reference": "6c39601c183847352d73a83255bcac9b2d4c9b39",
                 "shasum": ""
             },
             "require": {
@@ -1255,7 +1255,7 @@
                 "integer",
                 "php"
             ],
-            "time": "2015-06-23 13:20:34"
+            "time": "2015-06-23 15:15:34"
         },
         {
             "name": "granam/scalar",

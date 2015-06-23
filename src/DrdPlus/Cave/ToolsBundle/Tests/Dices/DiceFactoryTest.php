@@ -4,7 +4,7 @@ namespace DrdPlus\Cave\ToolsBundle\Tests\Dices;
 use DrdPlus\Cave\ToolsBundle\Dices\Dice;
 use DrdPlus\Cave\ToolsBundle\Dices\DiceFactory;
 use DrdPlus\Cave\ToolsBundle\Tests\TestWithMockery;
-use Granam\Integer\Integer;
+use Granam\Integer\IntegerObject;
 
 class DiceFactoryTest extends TestWithMockery
 {
@@ -28,13 +28,13 @@ class DiceFactoryTest extends TestWithMockery
         $drdDice = $this->mockery(\Drd\DiceRoll\Dice::class);
         $drdDice->shouldReceive('getMinimum')
             ->once()
-            ->andReturn($minimum = $this->mockery(Integer::class));
+            ->andReturn($minimum = $this->mockery(IntegerObject::class));
         $minimum->shouldReceive('getValue')
             ->once()
             ->andReturn(1);
         $drdDice->shouldReceive('getMaximum')
             ->once()
-            ->andReturn($maximum = $this->mockery(Integer::class));
+            ->andReturn($maximum = $this->mockery(IntegerObject::class));
         $maximum->shouldReceive('getValue')
             ->once()
             ->andReturn(2);

@@ -4,7 +4,7 @@ namespace DrdPlus\Cave\ToolsBundle\Tests\Dices;
 use Drd\DiceRoll\Dice;
 use DrdPlus\Cave\ToolsBundle\Dices\DiceRoll;
 use DrdPlus\Cave\ToolsBundle\Tests\TestWithMockery;
-use Granam\Integer\Integer;
+use Granam\Integer\IntegerObject;
 
 class DiceRollTest extends TestWithMockery
 {
@@ -29,31 +29,31 @@ class DiceRollTest extends TestWithMockery
             ->andReturn($evaluatedValue = $this->mockery(Dice::class));
         $evaluatedValue->shouldReceive('getMinimum')
             ->atLeast()->once()
-            ->andReturn($minimum = $this->mockery(Integer::class));
+            ->andReturn($minimum = $this->mockery(IntegerObject::class));
         $minimum->shouldReceive('getValue')
             ->atLeast()->once()
             ->andReturn(1);
         $evaluatedValue->shouldReceive('getMaximum')
             ->atLeast()->once()
-            ->andReturn($maximum = $this->mockery(Integer::class));
+            ->andReturn($maximum = $this->mockery(IntegerObject::class));
         $maximum->shouldReceive('getValue')
             ->atLeast()->once()
             ->andReturn(2);
         $drdDiceRoll->shouldReceive('getEvaluatedValue')
             ->atLeast()->once()
-            ->andReturn($evaluatedValue = $this->mockery(Integer::class));
+            ->andReturn($evaluatedValue = $this->mockery(IntegerObject::class));
         $evaluatedValue->shouldReceive('getValue')
             ->atLeast()->once()
             ->andReturn(1);
         $drdDiceRoll->shouldReceive('getRolledNumber')
             ->atLeast()->once()
-            ->andReturn($rolledNumber = $this->mockery(Integer::class));
+            ->andReturn($rolledNumber = $this->mockery(IntegerObject::class));
         $rolledNumber->shouldReceive('getValue')
             ->atLeast()->once()
             ->andReturn(1);
         $drdDiceRoll->shouldReceive('getRollSequence')
             ->atLeast()->once()
-            ->andReturn($rollSequence = $this->mockery(Integer::class));
+            ->andReturn($rollSequence = $this->mockery(IntegerObject::class));
         $rollSequence->shouldReceive('getValue')
             ->atLeast()->once()
             ->andReturn(1);

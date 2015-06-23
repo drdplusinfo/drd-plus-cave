@@ -2,7 +2,7 @@
 namespace DrdPlus\Cave\UnitBundle\Person;
 
 use DrdPlus\Cave\TablesBundle\Tables\Tables;
-use DrdPlus\Cave\TablesBundle\Tables\WeightTable;
+use DrdPlus\Cave\TablesBundle\Tables\Weight\WeightTable;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Exceptionality;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\ExceptionalityProperties;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Name;

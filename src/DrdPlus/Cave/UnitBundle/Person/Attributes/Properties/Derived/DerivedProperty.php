@@ -1,8 +1,8 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Derived;
 
-use Granam\Integer\Integer;
+use Granam\Integer\IntegerObject;
 
-abstract class DerivedProperty extends Integer
+abstract class DerivedProperty extends IntegerObject
 {
 }

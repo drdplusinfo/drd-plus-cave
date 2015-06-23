@@ -2,7 +2,7 @@
 namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Races;
 
 use Doctrineum\Strict\String\SelfTypedStrictStringEnum;
-use DrdPlus\Cave\TablesBundle\Tables\WeightTable;
+use DrdPlus\Cave\TablesBundle\Tables\Weight\WeightTable;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\RemarkableSenses\SenseInterface;
 
 /**
