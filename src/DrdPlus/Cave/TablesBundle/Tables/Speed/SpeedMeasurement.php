@@ -46,31 +46,25 @@ class SpeedMeasurement extends AbstractMeasurement
 
     public function toMetersPerRound()
     {
-        if ($this->getUnit() !== self::M_PER_ROUND) {
-            if (isset($this->inDifferentUnits[self::M_PER_ROUND])) {
-                // conversion has been set already
-                return $this->inDifferentUnits[self::M_PER_ROUND];
-            }
-            throw new \LogicException(
-                "Can not convert {$this->getValue()}({$this->getUnit()}) into " . self::M_PER_ROUND
-            );
-        }
+        return $this->convertTo(self::M_PER_ROUND);
+    }
 
-        return $this->getValue();
+    private function convertTo($wantedUnit)
+    {
+        if ($this->getUnit() === $wantedUnit) {
+            return $this->getValue();
+        }
+        if (isset($this->inDifferentUnits[$wantedUnit])) {
+            // conversion has been set already
+            return $this->inDifferentUnits[$wantedUnit];
+        }
+        throw new \LogicException(
+            "Can not convert {$this->getValue()}({$this->getUnit()}) into $wantedUnit"
+        );
     }
 
     public function toKilometersPerHour()
     {
-        if ($this->getUnit() !== self::KM_PER_HOUR) {
-            if (isset($this->inDifferentUnits[self::KM_PER_HOUR])) {
-                // conversion has been set already
-                return $this->inDifferentUnits[self::KM_PER_HOUR];
-            }
-            throw new \LogicException(
-                "Can not convert {$this->getValue()}({$this->getUnit()}) into " . self::KM_PER_HOUR
-            );
-        }
-
-        return $this->getValue();
+        return $this->convertTo(self::KM_PER_HOUR);
     }
 }
