@@ -1,6 +1,7 @@
 <?php
-namespace DrdPlus\Cave\TablesBundle\Tables;
+namespace DrdPlus\Cave\TablesBundle\Tables\Amount;
 
+use DrdPlus\Cave\TablesBundle\Tables\AbstractMeasurement;
 use Granam\Strict\Float\StrictFloat;
 
 class AmountMeasurement extends AbstractMeasurement

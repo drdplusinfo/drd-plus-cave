@@ -1,5 +1,5 @@
 <?php
-namespace DrdPlus\Cave\TablesBundle\Tables;
+namespace DrdPlus\Cave\TablesBundle\Tables\Amount;
 
 use DrdPlus\Cave\TablesBundle\Tests\TestWithMockery;
 

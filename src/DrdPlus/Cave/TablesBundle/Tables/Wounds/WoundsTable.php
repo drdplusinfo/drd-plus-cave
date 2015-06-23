@@ -1,7 +1,9 @@
 <?php
-namespace DrdPlus\Cave\TablesBundle\Tables;
+namespace DrdPlus\Cave\TablesBundle\Tables\Wounds;
 
 use Drd\DiceRoll\Templates\Rolls\Roll1d6;
+use DrdPlus\Cave\TablesBundle\Tables\AbstractTable;
+use DrdPlus\Cave\TablesBundle\Tables\DiceChanceEvaluator;
 
 /**
  * PPH page 165, top

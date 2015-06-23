@@ -1,5 +1,7 @@
 <?php
-namespace DrdPlus\Cave\TablesBundle\Tables;
+namespace DrdPlus\Cave\TablesBundle\Tables\Weight;
+use DrdPlus\Cave\TablesBundle\Tables\AbstractTable;
+use DrdPlus\Cave\TablesBundle\Tables\DummyEvaluator;
 
 /**
  * PPH page 164, bottom

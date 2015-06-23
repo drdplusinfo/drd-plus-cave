@@ -1,6 +1,7 @@
 <?php
-namespace DrdPlus\Cave\TablesBundle\Tables;
+namespace DrdPlus\Cave\TablesBundle\Tables\Distance;
 
+use DrdPlus\Cave\TablesBundle\Tables\AbstractMeasurement;
 use Granam\Strict\Float\StrictFloat;
 
 class DistanceMeasurement extends AbstractMeasurement

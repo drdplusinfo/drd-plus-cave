@@ -1,6 +1,10 @@
 <?php
-namespace DrdPlus\Cave\TablesBundle\Tables;
+namespace DrdPlus\Cave\TablesBundle\Tables\Fatigue;
 
+use DrdPlus\Cave\TablesBundle\Tables\MeasurementInterface;
+use DrdPlus\Cave\TablesBundle\Tables\TableInterface;
+use DrdPlus\Cave\TablesBundle\Tables\Wounds\WoundsMeasurement;
+use DrdPlus\Cave\TablesBundle\Tables\Wounds\WoundsTable;
 use Granam\Strict\Object\StrictObject;
 
 /**
@@ -9,7 +13,7 @@ use Granam\Strict\Object\StrictObject;
 class FatigueTable extends StrictObject implements TableInterface
 {
     /**
-     * @var WoundsTable
+     * @var \DrdPlus\Cave\TablesBundle\Tables\Wounds\WoundsTable
      */
     private $woundsTable;
 
