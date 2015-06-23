@@ -1,7 +1,7 @@
 <?php
 namespace DrdPlus\Cave\TablesBundle\Tables;
 
-use Granam\Strict\Float\StrictFloat;
+use Granam\Float\Tools\ToFloat;
 use Granam\Strict\Integer\StrictInteger;
 use Granam\Strict\Object\StrictObject;
 
@@ -115,7 +115,7 @@ abstract class AbstractTable extends StrictObject implements TableInterface
             return $value;
         }
 
-        return (new StrictFloat($this->parseNumber($value), false))->getValue();
+        return ToFloat::toFloat($this->parseNumber($value));
     }
 
     /**
@@ -241,7 +241,7 @@ abstract class AbstractTable extends StrictObject implements TableInterface
     public function toBonus(MeasurementInterface $measurement)
     {
         $searchedUnit = $measurement->getUnit();
-        $searchedValue = (new StrictFloat($this->parseNumber($measurement->getValue()), false))->getValue();
+        $searchedValue = ToFloat::toFloat($this->parseNumber($measurement->getValue()));
         $finds = $this->findBonusMatchingTo($searchedValue, $searchedUnit);
         if (is_int($finds)) {
             return $finds; // we found the bonus by value exact match

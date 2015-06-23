@@ -2,7 +2,7 @@
 namespace DrdPlus\Cave\TablesBundle\Tables\Weight;
 
 use DrdPlus\Cave\TablesBundle\Tables\AbstractMeasurement;
-use Granam\Strict\Float\StrictFloat;
+use Granam\Float\Tools\ToFloat;
 
 class WeightMeasurement extends AbstractMeasurement
 {
@@ -28,7 +28,7 @@ class WeightMeasurement extends AbstractMeasurement
     public function addInDifferentUnit($value, $unit)
     {
         $this->checkUnit($unit);
-        if ($this->getValue() !== (new StrictFloat($value, false))->getValue()) {
+        if ($this->getValue() !== ToFloat::toFloat($value)) {
             throw new \LogicException("Weight already have a value {$this->getValue()} and can not be replaced by $value");
         }
     }

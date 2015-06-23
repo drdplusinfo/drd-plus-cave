@@ -2,7 +2,7 @@
 namespace DrdPlus\Cave\TablesBundle\Tables\Amount;
 
 use DrdPlus\Cave\TablesBundle\Tables\AbstractMeasurement;
-use Granam\Strict\Float\StrictFloat;
+use Granam\Float\Tools\ToFloat;
 
 class AmountMeasurement extends AbstractMeasurement
 {
@@ -25,7 +25,7 @@ class AmountMeasurement extends AbstractMeasurement
     public function addInDifferentUnit($value, $unit)
     {
         $this->checkUnit($unit);
-        if ($this->getValue() !== (new StrictFloat($value, false))->getValue()) {
+        if ($this->getValue() !== ToFloat::toFloat($value)) {
             throw new \LogicException(
                 "The amount measurement accepts only {$this->getUnit()} and is already set to value of {$this->getValue()}"
             );

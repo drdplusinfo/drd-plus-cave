@@ -2,7 +2,7 @@
 namespace DrdPlus\Cave\TablesBundle\Tables\Speed;
 
 use DrdPlus\Cave\TablesBundle\Tables\AbstractMeasurement;
-use Granam\Strict\Float\StrictFloat;
+use Granam\Float\Tools\ToFloat;
 
 class SpeedMeasurement extends AbstractMeasurement
 {
@@ -24,7 +24,7 @@ class SpeedMeasurement extends AbstractMeasurement
     {
         $this->checkUnit($unit);
         $this->checkProportion($value, $unit, $this->getValue(), $this->getUnit());
-        $this->inDifferentUnits[$unit] = (new StrictFloat($value, false))->getValue();
+        $this->inDifferentUnits[$unit] = ToFloat::toFloat($value);
     }
 
     private function checkProportion($value, $unit, $originalValue, $originalUnit)

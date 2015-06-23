@@ -2,7 +2,7 @@
 namespace DrdPlus\Cave\TablesBundle\Tables\Distance;
 
 use DrdPlus\Cave\TablesBundle\Tables\AbstractMeasurement;
-use Granam\Strict\Float\StrictFloat;
+use Granam\Float\Tools\ToFloat;
 
 class DistanceMeasurement extends AbstractMeasurement
 {
@@ -43,7 +43,7 @@ class DistanceMeasurement extends AbstractMeasurement
     private function toDifferentUnit($value, $fromUnit, $toUnit)
     {
         if ($fromUnit === $toUnit) {
-            return (new StrictFloat($value, false))->getValue();
+            return ToFloat::toFloat($value);
         }
         if ($fromUnit === self::M && $toUnit === self::KM) {
             return $value / 1000;

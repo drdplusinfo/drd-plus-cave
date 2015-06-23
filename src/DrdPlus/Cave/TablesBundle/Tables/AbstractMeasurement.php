@@ -1,7 +1,7 @@
 <?php
 namespace DrdPlus\Cave\TablesBundle\Tables;
 
-use Granam\Strict\Float\StrictFloat;
+use Granam\Float\Tools\ToFloat;
 use Granam\Strict\Object\StrictObject;
 
 abstract class AbstractMeasurement extends StrictObject implements MeasurementInterface
@@ -19,7 +19,7 @@ abstract class AbstractMeasurement extends StrictObject implements MeasurementIn
     public function __construct($value, $unit)
     {
         $this->checkUnit($unit);
-        $this->value = (new StrictFloat($value, false))->getValue();
+        $this->value = ToFloat::toFloat($value);
         $this->unit = $unit;
     }
 
