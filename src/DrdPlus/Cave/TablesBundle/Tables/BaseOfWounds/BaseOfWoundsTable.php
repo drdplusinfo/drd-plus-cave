@@ -1,6 +1,8 @@
 <?php
 namespace DrdPlus\Cave\TablesBundle\Tables\BaseOfWounds;
 
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Strength;
+
 class BaseOfWoundsTable
 {
 
@@ -34,6 +36,7 @@ class BaseOfWoundsTable
             $data[] = array_map(
                 function ($value) {
                     $number = str_replace('−' /* ASCII 226 */, '-' /* ASCII 45 */, $value);
+
                     return intval($number);
                 },
                 $row
@@ -89,11 +92,25 @@ class BaseOfWoundsTable
         return $rankedBonuses; // indexed as row index => column index => bonus
     }
 
+    public function sumBonuses(array $bonuses)
+    {
+        while (!is_null($firstBonus = array_shift($bonuses)) && !is_null($secondBonus = array_shift($bonuses))) {
+            $intersection = $this->getBonusesIntersection([$firstBonus, $secondBonus]);
+            $sum = $intersection + 5; // see note on PPH page 164, bottom
+            if (count($bonuses) === 0) {
+                return $sum;
+            }
+            array_unshift($bonuses, $sum);
+        }
+
+        return $firstBonus; // the first if single bonus, or null, if no given
+    }
+
     /**
      * @param array|int[] $bonuses
      * @return int|null summarized bonuses, or null if no given (single bonus results into the same bonus)
      */
-    public function sumBonuses(array $bonuses)
+    public function getBonusesIntersection(array $bonuses)
     {
         while (!is_null($firstBonus = array_shift($bonuses)) && !is_null($secondBonus = array_shift($bonuses))) {
             $columnRank = $this->getColumnRank($firstBonus);
@@ -125,13 +142,54 @@ class BaseOfWoundsTable
     }
 
     /**
-     * @param int $firstBonus
-     * @param int $secondBonus
+     * @param Strength $strength
+     * @param int $weaponBaseOfWounds
      *
      * @return int
      */
-    public function sumTwoBonuses($firstBonus, $secondBonus)
+    public function calculateBaseOfWounds(Strength $strength, $weaponBaseOfWounds)
     {
-        return $this->sumBonuses([$firstBonus, $secondBonus]);
+        return $this->getBonusesIntersection([$strength->getValue(), $weaponBaseOfWounds]);
     }
+
+    /**
+     * @param int $bonus
+     * @return mixed
+     */
+    public function halfBonus($bonus)
+    {
+        // see PPH page 72, left column
+        return $bonus - 6;
+    }
+
+    /**
+     * @param int $bonus
+     * @return mixed
+     */
+    public function doubleBonus($bonus)
+    {
+        // see PPH page 72, left column
+        return $bonus + 6;
+    }
+
+    /**
+     * @param int $bonus
+     * @return mixed
+     */
+    public function tenMultipleBonus($bonus)
+    {
+        // see PPH page 72, left column
+        return $bonus + 20;
+    }
+
+    /**
+     * @param int $bonus
+     * @return mixed
+     */
+    public function tenMinifyBonus($bonus)
+    {
+        // see PPH page 72, left column
+        return $bonus - 20;
+    }
+
 }
