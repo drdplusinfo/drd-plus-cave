@@ -1,6 +1,7 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Person\Attributes\GameCharacteristics\Combat;
 
+use DrdPlus\Cave\ToolsBundle\Numbers\SumAndRound;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Professions\Fighter;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Professions\Priest;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Professions\Ranger;
@@ -69,28 +70,28 @@ class Fight extends StrictObject
 
     private function getThiefFightValue(Agility $agility, Knack $knack, Size $size)
     {
-        return intval(round($agility->getValue() + $knack->getValue()) + $this->getModifierBySize($size));
+        return SumAndRound::round($agility->getValue() + $knack->getValue()) + $this->getModifierBySize($size);
     }
 
     private function getRangerFightValue(Agility $agility, Knack $knack, Size $size)
     {
         // same as a thief
-        return intval(round($agility->getValue() + $knack->getValue()) + $this->getModifierBySize($size));
+        return SumAndRound::round($agility->getValue() + $knack->getValue()) + $this->getModifierBySize($size);
     }
 
     private function getWizardFightValue(Agility $agility, Intelligence $intelligence, Size $size)
     {
-        return intval(round($agility->getValue() + $intelligence->getValue()) + $this->getModifierBySize($size));
+        return SumAndRound::round($agility->getValue() + $intelligence->getValue()) + $this->getModifierBySize($size);
     }
 
     private function geTheurgistFightValue(Agility $agility, Intelligence $intelligence, Size $size)
     {
         // same as a wizard
-        return intval(round($agility->getValue() + $intelligence->getValue()) + $this->getModifierBySize($size));
+        return SumAndRound::round($agility->getValue() + $intelligence->getValue()) + $this->getModifierBySize($size);
     }
 
     private function getPriestFightValue(Agility $agility, Charisma $charisma, Size $size)
     {
-        return intval(round($agility->getValue() + $charisma->getValue()) + $this->getModifierBySize($size));
+        return SumAndRound::round($agility->getValue() + $charisma->getValue()) + $this->getModifierBySize($size);
     }
 }

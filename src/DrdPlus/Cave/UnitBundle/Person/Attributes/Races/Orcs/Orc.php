@@ -57,6 +57,13 @@ abstract class Orc extends Race
     {
         return true;
     }
+    /**
+     * @return int
+     */
+    protected function getBaseSenses()
+    {
+        return static::BASE_SENSES;
+    }
 
     public function getRemarkableSense()
     {

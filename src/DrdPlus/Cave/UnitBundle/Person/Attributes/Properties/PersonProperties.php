@@ -2,6 +2,7 @@
 namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Properties;
 
 use DrdPlus\Cave\TablesBundle\Tables\Tables;
+use DrdPlus\Cave\ToolsBundle\Numbers\SumAndRound;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\GameCharacteristics\Combat\Attack;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\GameCharacteristics\Combat\Defense;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\GameCharacteristics\Combat\Fight;
@@ -9,9 +10,11 @@ use DrdPlus\Cave\UnitBundle\Person\Attributes\GameCharacteristics\Combat\Shootin
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Body\Size;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Body\WeightInKg;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Derived\Endurance;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Derived\FatigueLimit;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Derived\Senses;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Derived\Speed;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Derived\Toughness;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Derived\WoundsLimit;
 use DrdPlus\Cave\UnitBundle\Person\Person;
 use Granam\Strict\Object\StrictObject;
 
@@ -72,6 +75,12 @@ class PersonProperties extends StrictObject
     /** @var Shooting */
     private $shooting;
 
+    /** @var WoundsLimit */
+    private $woundsLimit;
+
+    /** @var FatigueLimit */
+    private $fatigueLimit;
+
     /**
      * @param Person $person
      * @param Tables $tables
@@ -118,7 +127,7 @@ class PersonProperties extends StrictObject
 
         // delivered properties
         $this->toughness = new Toughness($this->getStrength()->getValue() + $person->getRace()->getToughnessModifier());
-        $this->endurance = new Endurance((int)round($this->getStrength()->getValue() + $this->getWill()->getValue()));
+        $this->endurance = new Endurance(SumAndRound::round($this->getStrength()->getValue() + $this->getWill()->getValue()));
         $this->size = $this->firstLevelProperties->getFirstLevelSize(); // there is no more size increment than the first level one
         $this->speed = new Speed($this->calculateSpeed($this->getStrength(), $this->getAgility(), $this->getSize()));
         $this->senses = new Senses($this->getKnack()->getValue() + $person->getRace()->getSensesModifier($person->getGender()));
@@ -127,11 +136,14 @@ class PersonProperties extends StrictObject
         $this->attack = new Attack($this->getAgility());
         $this->defense = new Defense($this->getAgility());
         $this->shooting = new Shooting($this->getKnack());
+        
+        $this->woundsLimit = new WoundsLimit($this->getToughness(), $tables->getWoundsTable());
+        $this->fatigueLimit = new FatigueLimit($this->getEndurance(), $tables->getFatigueTable());
     }
 
     private function calculateSpeed(Strength $strength, Agility $agility, Size $size)
     {
-        return intval(round(($strength->getValue() + $agility->getValue()) / 2) + $this->getSpeedBonusBySize($size));
+        return SumAndRound::average($strength->getValue(), $agility->getValue()) + $this->getSpeedBonusBySize($size);
     }
 
     private function getSpeedBonusBySize(Size $size)
@@ -269,6 +281,22 @@ class PersonProperties extends StrictObject
     public function getShooting()
     {
         return $this->shooting;
+    }
+
+    /**
+     * @return WoundsLimit
+     */
+    public function getWoundsLimit()
+    {
+        return $this->woundsLimit;
+    }
+
+    /**
+     * @return FatigueLimit
+     */
+    public function getFatigueLimit()
+    {
+        return $this->fatigueLimit;
     }
 
 }
