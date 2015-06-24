@@ -26,11 +26,6 @@ class WoundsTable extends AbstractTable
         return [WoundsMeasurement::WOUNDS];
     }
 
-    protected function getExpectedDataRowsCount()
-    {
-        return 100;
-    }
-
     /**
      * @param int $bonus
      *

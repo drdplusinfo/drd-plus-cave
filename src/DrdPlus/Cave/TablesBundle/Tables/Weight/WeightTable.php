@@ -24,11 +24,6 @@ class WeightTable extends AbstractTable
         return [WeightMeasurement::KG];
     }
 
-    protected function getExpectedDataRowsCount()
-    {
-        return 100;
-    }
-
     /**
      * @param int $bonus
      *

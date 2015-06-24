@@ -21,11 +21,6 @@ class TimeTable extends AbstractTable
         return [TimeMeasurement::ROUND, TimeMeasurement::MINUTE, TimeMeasurement::HOUR, TimeMeasurement::DAY, TimeMeasurement::MONTH, TimeMeasurement::YEAR];
     }
 
-    protected function getExpectedDataRowsCount()
-    {
-        return 100;
-    }
-
     /**
      * @param int $bonus
      *

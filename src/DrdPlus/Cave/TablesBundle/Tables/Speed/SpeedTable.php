@@ -24,11 +24,6 @@ class SpeedTable extends AbstractTable
         return [SpeedMeasurement::M_PER_ROUND, SpeedMeasurement::KM_PER_HOUR];
     }
 
-    protected function getExpectedDataRowsCount()
-    {
-        return 120;
-    }
-
     public function kmPerHourToBonus($kmPerHour)
     {
         return $this->toBonus(new SpeedMeasurement($kmPerHour, SpeedMeasurement::KM_PER_HOUR));

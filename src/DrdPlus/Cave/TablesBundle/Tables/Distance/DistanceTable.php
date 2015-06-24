@@ -21,12 +21,7 @@ class DistanceTable extends AbstractTable
 
     protected function getExpectedDataHeader()
     {
-        return [DistanceMeasurement::M, DistanceMeasurement::KM];
-    }
-
-    protected function getExpectedDataRowsCount()
-    {
-        return 160;
+        return [DistanceMeasurement::M, DistanceMeasurement::KM, DistanceMeasurement::LIGHT_YEAR];
     }
 
     /**

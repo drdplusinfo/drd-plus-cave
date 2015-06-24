@@ -69,9 +69,9 @@ abstract class AbstractTable extends StrictObject implements TableInterface
                 $indexed[key($indexedRow)] = current($indexedRow);
             }
         }
-        if (count($indexed) !== $this->getExpectedDataRowsCount()) {
+        if (count($indexed) === 0) {
             throw new \RuntimeException(
-                "Data file is corrupted. Expected {$this->getExpectedDataRowsCount()} rows with data (header excluded), fetched " . count($indexed)
+                "Data file is empty. Expected at least single row with values (header excluded)"
             );
         }
 
@@ -132,11 +132,6 @@ abstract class AbstractTable extends StrictObject implements TableInterface
      * @return \string[]
      */
     abstract protected function getExpectedDataHeader();
-
-    /**
-     * @return int
-     */
-    abstract protected function getExpectedDataRowsCount();
 
     /**
      * @return string
@@ -222,7 +217,12 @@ abstract class AbstractTable extends StrictObject implements TableInterface
      */
     private function parseMaxRollToGetValue($chance)
     {
-        return intval(explode('/', $chance)[0]);
+        $chanceParts = explode('/', $chance);
+        if (!isset($chanceParts[1]) || intval($chanceParts[1]) !== 6) {
+            throw new \LogicException("Expected only x/6 chance, got $chance");
+        }
+
+        return intval([0]);
     }
 
     /**

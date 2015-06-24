@@ -25,11 +25,6 @@ class AmountTable extends AbstractTable
         return [AmountMeasurement::AMOUNT];
     }
 
-    protected function getExpectedDataRowsCount()
-    {
-        return 120;
-    }
-
     /**
      * @param int $bonus
      *

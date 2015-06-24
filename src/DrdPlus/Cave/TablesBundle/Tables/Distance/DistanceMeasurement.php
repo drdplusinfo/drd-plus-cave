@@ -8,13 +8,14 @@ class DistanceMeasurement extends AbstractMeasurement
 {
     const M = 'm';
     const KM = 'km';
+    const LIGHT_YEAR = 'light_year';
 
     /**
      * @return string[]
      */
     public function getPossibleUnits()
     {
-        return [self::M, self::KM];
+        return [self::M, self::KM, self::LIGHT_YEAR];
     }
 
     /**
