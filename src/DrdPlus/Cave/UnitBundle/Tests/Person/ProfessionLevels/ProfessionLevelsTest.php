@@ -1,5 +1,5 @@
 <?php
-namespace DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels;
+namespace DrdPlus\Cave\UnitBundle\Person\ProfessionLevels;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use DrdPlus\Cave\UnitBundle\Person\Professions\Fighter;
@@ -451,7 +451,7 @@ class ProfessionLevelsTest extends TestWithMockery
 
     private function getFirstLevelsProfessionLevelClass($professionName)
     {
-        return '\DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\\'
+        return '\DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\\'
         . ucfirst($professionName) . 'Level';
     }
 
@@ -1291,7 +1291,7 @@ class ProfessionLevelsTest extends TestWithMockery
 
     private function getMultiProfessionTestLevelClass($professionName)
     {
-        return '\DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\\'
+        return '\DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\\'
         . ucfirst($professionName) . 'Level';
     }
 

@@ -1,5 +1,5 @@
 <?php
-namespace DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\Exceptions;
+namespace DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\Exceptions;
 
 class RuntimeTest extends \PHPUnit_Framework_TestCase
 {
@@ -32,7 +32,7 @@ class RuntimeTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException \DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\Exceptions\TestRuntimeInterface
+     * @expectedException \DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\Exceptions\TestRuntimeInterface
      */
     public function is_not_logic_exception_interface()
     {

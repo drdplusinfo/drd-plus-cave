@@ -1,7 +1,7 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Properties;
 
-use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\ProfessionLevels;
+use DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\ProfessionLevels;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Body\WeightInKg;
 use Granam\Strict\Object\StrictObject;
 

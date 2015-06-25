@@ -4,7 +4,7 @@ namespace DrdPlus\Cave\UnitBundle;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Choices\ExceptionalityChoice;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Fates\ExceptionalityFate;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Name;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\LevelValue;
+use DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\LevelValue;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Agility;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Body\WeightInKg;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Charisma;

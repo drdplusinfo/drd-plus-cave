@@ -3,7 +3,7 @@ namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities;
 
 use DrdPlus\Cave\ToolsBundle\Dices\Roll;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Fates\AbstractFate;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\ProfessionLevel;
+use DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\ProfessionLevel;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Agility;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Charisma;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Intelligence;

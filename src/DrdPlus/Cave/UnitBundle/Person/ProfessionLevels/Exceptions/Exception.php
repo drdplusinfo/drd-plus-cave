@@ -1,5 +1,5 @@
 <?php
-namespace DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\Exceptions;
+namespace DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\Exceptions;
 
 interface Exception extends \DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptions\Exception {
 

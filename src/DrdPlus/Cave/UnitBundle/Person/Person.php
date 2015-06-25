@@ -5,7 +5,7 @@ use Doctrine\ORM\Mapping as ORM;
 use DrdPlus\Cave\TablesBundle\Tables\Tables;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Exceptionality;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Name;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\ProfessionLevels;
+use DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\ProfessionLevels;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\PersonProperties;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Gender;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Race;
@@ -66,7 +66,7 @@ class Person extends StrictObject
     /**
      * @var ProfessionLevels
      *
-     * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\ProfessionLevels")
+     * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\ProfessionLevels")
      */
     private $professionLevels;
 

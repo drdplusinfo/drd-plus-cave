@@ -1,8 +1,8 @@
 <?php
-namespace DrdPlus\Cave\UnitBundle\Tests\Person\Attributes\ProfessionLevels;
+namespace DrdPlus\Cave\UnitBundle\Tests\Person\ProfessionLevels;
 
-use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\LevelValue;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels\ProfessionLevel;
+use DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\LevelValue;
+use DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\ProfessionLevel;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Agility;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Body\WeightInKg;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Charisma;
