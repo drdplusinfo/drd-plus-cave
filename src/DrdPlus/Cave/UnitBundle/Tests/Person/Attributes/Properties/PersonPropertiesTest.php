@@ -1,8 +1,10 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Tests\Person\Attributes\Properties;
 
+use DrdPlus\Cave\TablesBundle\Tables\Fatigue\FatigueTable;
 use DrdPlus\Cave\TablesBundle\Tables\Tables;
 use DrdPlus\Cave\TablesBundle\Tables\Weight\WeightTable;
+use DrdPlus\Cave\TablesBundle\Tables\Wounds\WoundsTable;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Exceptionality;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\ExceptionalityProperties;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\GameCharacteristics\Combat\Attack;
@@ -99,7 +101,7 @@ class PersonPropertiesTest extends TestWithMockery
                 + (ceil($personProperties->getSize()->getValue() / 3) - 2)),
             $speed->getValue()
         );
-        
+
         $size = $personProperties->getSize();
         $this->assertInstanceOf(Size::class, $size);
         $firstLevelStrengthSummary = $firstLevelStrength + $exceptionalStrength;
@@ -125,15 +127,15 @@ class PersonPropertiesTest extends TestWithMockery
 
         $attack = $personProperties->getAttack();
         $this->assertInstanceOf(Attack::class, $attack);
-        $this->assertSame((int)floor($personProperties->getAgility()->getValue()/2), $attack->getValue());
+        $this->assertSame((int)floor($personProperties->getAgility()->getValue() / 2), $attack->getValue());
 
         $defense = $personProperties->getDefense();
         $this->assertInstanceOf(Defense::class, $defense);
-        $this->assertSame((int)round($personProperties->getAgility()->getValue()/2), $defense->getValue());
+        $this->assertSame((int)round($personProperties->getAgility()->getValue() / 2), $defense->getValue());
 
         $shooting = $personProperties->getShooting();
         $this->assertInstanceOf(Shooting::class, $shooting);
-        $this->assertSame((int)floor($personProperties->getKnack()->getValue()/2), $shooting->getValue());
+        $this->assertSame((int)floor($personProperties->getKnack()->getValue() / 2), $shooting->getValue());
 
         return $personProperties;
     }
@@ -264,6 +266,20 @@ class PersonPropertiesTest extends TestWithMockery
         $tablesMock->shouldReceive('getWeightTable')
             ->atLeast()->once()
             ->andReturn($weightTable = \Mockery::mock(WeightTable::class));
+        $tablesMock->shouldReceive('getWoundsTable')
+            ->atLeast()->once()
+            ->andReturn($fatigueTable = \Mockery::mock(WoundsTable::class));
+        $fatigueTable->shouldReceive('toWounds')
+            ->with(\Mockery::type('int'))
+            ->atLeast()->once()
+            ->andReturn(10);
+        $tablesMock->shouldReceive('getFatigueTable')
+            ->atLeast()->once()
+            ->andReturn($fatigueTable = \Mockery::mock(FatigueTable::class));
+        $fatigueTable->shouldReceive('toFatigue')
+            ->with(\Mockery::type('int'))
+            ->atLeast()->once()
+            ->andReturn(10);
 
         return $tablesMock;
     }

@@ -66,6 +66,15 @@ class PersonProperties extends StrictObject
     /** @var Senses */
     private $senses;
 
+    /** @var Beauty */
+    private $beauty;
+
+    /** @var Dangerousness */
+    private $dangerousness;
+
+    /** @var Dignity */
+    private $dignity;
+
     /** @var Fight */
     private $fight;
 
@@ -143,7 +152,7 @@ class PersonProperties extends StrictObject
         $this->attack = new Attack($this->getAgility());
         $this->defense = new Defense($this->getAgility());
         $this->shooting = new Shooting($this->getKnack());
-        
+
         $this->woundsLimit = new WoundsLimit($tables->getWoundsTable()->toWounds($this->getToughness()->getValue() + 10));
         $this->fatigueLimit = new FatigueLimit($tables->getFatigueTable()->toFatigue($this->getEndurance()->getValue() + 10));
     }

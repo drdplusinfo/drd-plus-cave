@@ -1,8 +1,10 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Person;
 
+use DrdPlus\Cave\TablesBundle\Tables\Fatigue\FatigueTable;
 use DrdPlus\Cave\TablesBundle\Tables\Tables;
 use DrdPlus\Cave\TablesBundle\Tables\Weight\WeightTable;
+use DrdPlus\Cave\TablesBundle\Tables\Wounds\WoundsTable;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Exceptionality;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\ExceptionalityProperties;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Name;
@@ -284,6 +286,20 @@ class PersonTest extends TestWithMockery
         $tables->shouldReceive('getWeightTable')
             ->once()
             ->andReturn($weightTable = \Mockery::mock(WeightTable::class));
+        $tables->shouldReceive('getWoundsTable')
+            ->atLeast()->once()
+            ->andReturn($fatigueTable = \Mockery::mock(WoundsTable::class));
+        $fatigueTable->shouldReceive('toWounds')
+            ->with(\Mockery::type('int'))
+            ->atLeast()->once()
+            ->andReturn(10);
+        $tables->shouldReceive('getFatigueTable')
+            ->atLeast()->once()
+            ->andReturn($fatigueTable = \Mockery::mock(FatigueTable::class));
+        $fatigueTable->shouldReceive('toFatigue')
+            ->with(\Mockery::type('int'))
+            ->atLeast()->once()
+            ->andReturn(10);
 
         return $tables;
     }

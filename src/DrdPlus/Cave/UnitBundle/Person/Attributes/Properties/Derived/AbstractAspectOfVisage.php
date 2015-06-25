@@ -18,6 +18,6 @@ abstract class AbstractAspectOfVisage extends StrictObject implements DerivedPro
      */
     protected function calculateValue(BaseProperty $firstProperty, BaseProperty $secondProperty, Charisma $charisma)
     {
-        return SumAndRound::average($firstProperty->getValue(), $secondProperty->getValue()) + SumAndRound::half($charisma / 2);
+        return SumAndRound::average($firstProperty->getValue(), $secondProperty->getValue()) + SumAndRound::half($charisma->getValue() / 2);
     }
 }
