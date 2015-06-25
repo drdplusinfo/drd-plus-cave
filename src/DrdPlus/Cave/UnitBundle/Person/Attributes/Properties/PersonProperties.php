@@ -9,6 +9,9 @@ use DrdPlus\Cave\UnitBundle\Person\Attributes\GameCharacteristics\Combat\Fight;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\GameCharacteristics\Combat\Shooting;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Body\Size;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Body\WeightInKg;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Derived\Beauty;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Derived\Dangerousness;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Derived\Dignity;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Derived\Endurance;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Derived\FatigueLimit;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Derived\Senses;
@@ -131,14 +134,18 @@ class PersonProperties extends StrictObject
         $this->size = $this->firstLevelProperties->getFirstLevelSize(); // there is no more size increment than the first level one
         $this->speed = new Speed($this->calculateSpeed($this->getStrength(), $this->getAgility(), $this->getSize()));
         $this->senses = new Senses($this->getKnack()->getValue() + $person->getRace()->getSensesModifier($person->getGender()));
+        // aspects of visage
+        $this->beauty = new Beauty($this->getAgility(), $this->getKnack(), $this->getCharisma());
+        $this->dangerousness = new Dangerousness($this->getStrength(), $this->getWill(), $this->getCharisma());
+        $this->dignity = new Dignity($this->getIntelligence(), $this->getWill(), $this->getCharisma());
 
         $this->fight = new Fight($person);
         $this->attack = new Attack($this->getAgility());
         $this->defense = new Defense($this->getAgility());
         $this->shooting = new Shooting($this->getKnack());
         
-        $this->woundsLimit = new WoundsLimit($this->getToughness(), $tables->getWoundsTable());
-        $this->fatigueLimit = new FatigueLimit($this->getEndurance(), $tables->getFatigueTable());
+        $this->woundsLimit = new WoundsLimit($tables->getWoundsTable()->toWounds($this->getToughness()->getValue() + 10));
+        $this->fatigueLimit = new FatigueLimit($tables->getFatigueTable()->toFatigue($this->getEndurance()->getValue() + 10));
     }
 
     private function calculateSpeed(Strength $strength, Agility $agility, Size $size)
@@ -249,6 +256,30 @@ class PersonProperties extends StrictObject
     public function getSenses()
     {
         return $this->senses;
+    }
+
+    /**
+     * @return Beauty
+     */
+    public function getBeauty()
+    {
+        return $this->beauty;
+    }
+
+    /**
+     * @return Dangerousness
+     */
+    public function getDangerousness()
+    {
+        return $this->dangerousness;
+    }
+
+    /**
+     * @return Dignity
+     */
+    public function getDignity()
+    {
+        return $this->dignity;
     }
 
     /**

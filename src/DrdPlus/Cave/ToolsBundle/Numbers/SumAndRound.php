@@ -24,8 +24,24 @@ class SumAndRound
         return intval(floor($number));
     }
 
+    /**
+     * @param int $firstNumber
+     * @param int $secondNumber
+     *
+     * @return int
+     */
     public static function average($firstNumber, $secondNumber)
     {
         return self::round(($firstNumber + $secondNumber) / 2);
+    }
+
+    /**
+     * @param int $number
+     *
+     * @return int
+     */
+    public static function half($number)
+    {
+        return self::round($number / 2);
     }
 }
