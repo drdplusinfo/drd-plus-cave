@@ -2,7 +2,7 @@
 namespace DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels;
 
 use Doctrine\ORM\Mapping as ORM;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Professions\Profession;
+use DrdPlus\Cave\UnitBundle\Person\Professions\Profession;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Agility;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\BaseProperty;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Body\WeightInKg;

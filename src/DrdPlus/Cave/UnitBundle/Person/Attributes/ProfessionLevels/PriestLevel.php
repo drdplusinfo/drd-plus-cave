@@ -2,7 +2,7 @@
 namespace DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels;
 
 use Doctrine\ORM\Mapping as ORM;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Professions\Priest;
+use DrdPlus\Cave\UnitBundle\Person\Professions\Priest;
 
 /**
  * Priest

@@ -2,13 +2,13 @@
 namespace DrdPlus\Cave\UnitBundle\Person\Attributes\ProfessionLevels;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Professions\Fighter;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Professions\Priest;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Professions\Profession;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Professions\Ranger;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Professions\Theurgist;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Professions\Thief;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Professions\Wizard;
+use DrdPlus\Cave\UnitBundle\Person\Professions\Fighter;
+use DrdPlus\Cave\UnitBundle\Person\Professions\Priest;
+use DrdPlus\Cave\UnitBundle\Person\Professions\Profession;
+use DrdPlus\Cave\UnitBundle\Person\Professions\Ranger;
+use DrdPlus\Cave\UnitBundle\Person\Professions\Theurgist;
+use DrdPlus\Cave\UnitBundle\Person\Professions\Thief;
+use DrdPlus\Cave\UnitBundle\Person\Professions\Wizard;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Agility;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\BaseProperty;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Charisma;

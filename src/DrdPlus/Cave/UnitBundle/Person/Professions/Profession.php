@@ -1,5 +1,5 @@
 <?php
-namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Professions;
+namespace DrdPlus\Cave\UnitBundle\Person\Professions;
 
 use Granam\Strict\Object\StrictObject;
 
