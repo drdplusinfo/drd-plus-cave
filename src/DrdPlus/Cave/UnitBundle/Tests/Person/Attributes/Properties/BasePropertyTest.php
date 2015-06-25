@@ -1,5 +1,5 @@
 <?php
-namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Races;
+namespace DrdPlus\Cave\UnitBundle\Person\Races;
 
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\BaseProperty;
 

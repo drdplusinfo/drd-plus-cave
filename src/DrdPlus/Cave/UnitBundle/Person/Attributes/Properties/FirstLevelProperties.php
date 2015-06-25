@@ -7,8 +7,8 @@ use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\ExceptionalityPro
 use DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\ProfessionLevels;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Body\Size;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Body\WeightInKg;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Gender;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Races\Race;
+use DrdPlus\Cave\UnitBundle\Person\Races\Gender;
+use DrdPlus\Cave\UnitBundle\Person\Races\Race;
 use Granam\Strict\Object\StrictObject;
 
 class FirstLevelProperties extends StrictObject
