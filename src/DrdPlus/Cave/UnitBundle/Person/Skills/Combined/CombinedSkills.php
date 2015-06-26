@@ -1,6 +1,8 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Person\Skills\Physical;
 
+use DrdPlus\Cave\UnitBundle\Person\Skills\AbstractSkillsGroup;
+use DrdPlus\Cave\UnitBundle\Person\Skills\Combined\AbstractCombinedSkill;
 use DrdPlus\Cave\UnitBundle\Person\Skills\Combined\BigHandwork;
 use DrdPlus\Cave\UnitBundle\Person\Skills\Combined\Cooking;
 use DrdPlus\Cave\UnitBundle\Person\Skills\Combined\Dancing;
@@ -20,7 +22,6 @@ use DrdPlus\Cave\UnitBundle\Person\Skills\Combined\Seduction;
 use DrdPlus\Cave\UnitBundle\Person\Skills\Combined\Showmanship;
 use DrdPlus\Cave\UnitBundle\Person\Skills\Combined\Singing;
 use DrdPlus\Cave\UnitBundle\Person\Skills\Combined\Statuary;
-use Granam\Strict\Object\StrictObject;
 
 /**
  * CombinedSkills
@@ -28,7 +29,7 @@ use Granam\Strict\Object\StrictObject;
  * @ORM\Table()
  * @ORM\Entity()
  */
-class CombinedSkills extends StrictObject
+class CombinedSkills extends AbstractSkillsGroup
 {
 
     /**
@@ -70,7 +71,7 @@ class CombinedSkills extends StrictObject
     /**
      * @var Gambling
      */
-    private $hazardGames;
+    private $gambling;
     /**
      * @var Herbalism
      */
@@ -122,7 +123,7 @@ class CombinedSkills extends StrictObject
         $this->firstAid = new FirstAid();
         $this->handingWithAnimals = new HandingWithAnimals();
         $this->handwork = new Handwork();
-        $this->hazardGames = new Gambling();
+        $this->gambling = new Gambling();
         $this->herbalism = new Herbalism();
         $this->huntingAndFishing = new HuntingAndFishing();
         $this->knotting = new Knotting();
@@ -210,9 +211,9 @@ class CombinedSkills extends StrictObject
     /**
      * @return Gambling
      */
-    public function getHazardGames()
+    public function getGambling()
     {
-        return $this->hazardGames;
+        return $this->gambling;
     }
 
     /**
@@ -294,4 +295,40 @@ class CombinedSkills extends StrictObject
     {
         return $this->statuary;
     }
+
+    /**
+     * @return int
+     */
+    public function getSkillRankSummary()
+    {
+        return (int)array_sum(
+            array_map(
+                function (AbstractCombinedSkill $skill) {
+                    return $skill->getSkillRank()->getValue();
+                },
+                [
+                    $this->getBigHandwork(),
+                    $this->getCooking(),
+                    $this->getDancing(),
+                    $this->getDuskSight(),
+                    $this->getFightWithShootingWeapons(),
+                    $this->getFirstAid(),
+                    $this->getGambling(),
+                    $this->getHandingWithAnimals(),
+                    $this->getHandwork(),
+                    $this->getHerbalism(),
+                    $this->getHuntingAndFishing(),
+                    $this->getKnotting(),
+                    $this->getPainting(),
+                    $this->getPedagogy(),
+                    $this->getPlayingOnMusicInstrument(),
+                    $this->getSeduction(),
+                    $this->getShowmanship(),
+                    $this->getSinging(),
+                    $this->getStatuary(),
+                ]
+            )
+        );
+    }
+
 }

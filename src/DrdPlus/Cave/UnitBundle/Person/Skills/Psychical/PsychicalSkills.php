@@ -1,6 +1,8 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Person\Skills\Physical;
 
+use DrdPlus\Cave\UnitBundle\Person\Skills\AbstractSkillsGroup;
+use DrdPlus\Cave\UnitBundle\Person\Skills\Psychical\AbstractPsychicalSkill;
 use DrdPlus\Cave\UnitBundle\Person\Skills\Psychical\Astronomy;
 use DrdPlus\Cave\UnitBundle\Person\Skills\Psychical\Botany;
 use DrdPlus\Cave\UnitBundle\Person\Skills\Psychical\EtiquetteOfUnderworld;
@@ -17,7 +19,6 @@ use DrdPlus\Cave\UnitBundle\Person\Skills\Psychical\SocialEtiquette;
 use DrdPlus\Cave\UnitBundle\Person\Skills\Psychical\Technology;
 use DrdPlus\Cave\UnitBundle\Person\Skills\Psychical\Theology;
 use DrdPlus\Cave\UnitBundle\Person\Skills\Psychical\Zoology;
-use Granam\Strict\Object\StrictObject;
 
 /**
  * PsychicalSkills
@@ -25,7 +26,7 @@ use Granam\Strict\Object\StrictObject;
  * @ORM\Table()
  * @ORM\Entity()
  */
-class PsychicalSkills extends StrictObject
+class PsychicalSkills extends AbstractSkillsGroup
 {
 
     /**
@@ -157,7 +158,7 @@ class PsychicalSkills extends StrictObject
     /**
      * @return KnowledgeOfACity
      */
-    public function getKnowlegdeOfACity()
+    public function getKnowledgeOfACity()
     {
         return $this->knowledgeOfACity;
     }
@@ -165,7 +166,7 @@ class PsychicalSkills extends StrictObject
     /**
      * @return KnowledgeOfWorld
      */
-    public function getKnowlegdeOfWorld()
+    public function getKnowledgeOfWorld()
     {
         return $this->knowledgeOfWorld;
     }
@@ -225,5 +226,35 @@ class PsychicalSkills extends StrictObject
     {
         return $this->zoology;
     }
-
+    /**
+     * @return int
+     */
+    public function getSkillRankSummary()
+    {
+        return (int)array_sum(
+            array_map(
+                function (AbstractPsychicalSkill $skill) {
+                    return $skill->getSkillRank()->getValue();
+                },
+                [
+                    $this->getAstronomy(),
+                    $this->getBotany(),
+                    $this->getEtiquetteOfUnderworld(),
+                    $this->getForeignLanguage(),
+                    $this->getGeographyOfACountry(),
+                    $this->getHandlingWithMagicalItems(),
+                    $this->getHistoriography(),
+                    $this->getKnowledgeOfACity(),
+                    $this->getKnowledgeOfWorld(),
+                    $this->getMapsDrawing(),
+                    $this->getMythology(),
+                    $this->getReadingAndWriting(),
+                    $this->getSocialEtiquette(),
+                    $this->getTechnology(),
+                    $this->getTheology(),
+                    $this->getZoology(),
+                ]
+            )
+        );
+    }
 }

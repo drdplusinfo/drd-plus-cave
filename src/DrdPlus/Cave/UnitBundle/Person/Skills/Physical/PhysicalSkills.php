@@ -1,7 +1,8 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Person\Skills\Physical;
 
-use Granam\Strict\Object\StrictObject;
+use DrdPlus\Cave\UnitBundle\Person\Skills\AbstractSkillsGroup;
+use DrdPlus\Cave\UnitBundle\Person\Skills\Psychical\AbstractPsychicalSkill;
 
 /**
  * PhysicalSkills
@@ -9,7 +10,7 @@ use Granam\Strict\Object\StrictObject;
  * @ORM\Table()
  * @ORM\Entity()
  */
-class PhysicalSkills extends StrictObject
+class PhysicalSkills extends AbstractSkillsGroup
 {
 
     /**
@@ -37,10 +38,14 @@ class PhysicalSkills extends StrictObject
     private $climbingAndHillwalking;
     /** @var FastMarsh */
     private $fastMarsh;
+    /** @var FightWithWeapon */
+    private $fightWithWeapon;
+    /** @var Flying */
+    private $flying;
     /** @var ForestMoving */
     private $forestMoving;
-    /** @var MountainMoving */
-    private $mountainMoving;
+    /** @var MovingInMountain */
+    private $movingInMountain;
     /** @var Riding */
     private $riding;
     /** @var Sailing */
@@ -60,8 +65,10 @@ class PhysicalSkills extends StrictObject
         $this->cityMoving = new CityMoving();
         $this->climbingAndHillwalking = new ClimbingAndHillwalking();
         $this->fastMarsh = new FastMarsh();
+        $this->fightWithWeapon = new FightWithWeapon();
+        $this->flying = new Flying();
         $this->forestMoving = new ForestMoving();
-        $this->mountainMoving = new MountainMoving();
+        $this->movingInMountain = new MovingInMountain();
         $this->riding = new Riding();
         $this->sailing = new Sailing();
         $this->shieldUsage = new ShieldUsage();
@@ -141,6 +148,22 @@ class PhysicalSkills extends StrictObject
     }
 
     /**
+     * @return FightWithWeapon
+     */
+    public function getFightWithWeapon()
+    {
+        return $this->fightWithWeapon;
+    }
+
+    /**
+     * @return Flying
+     */
+    public function getFlying()
+    {
+        return $this->flying;
+    }
+
+    /**
      * @return ForestMoving
      */
     public function getForestMoving()
@@ -149,11 +172,11 @@ class PhysicalSkills extends StrictObject
     }
 
     /**
-     * @return MountainMoving
+     * @return MovingInMountain
      */
-    public function getMountainMoving()
+    public function getMovingInMountains()
     {
-        return $this->mountainMoving;
+        return $this->movingInMountain;
     }
 
     /**
@@ -188,4 +211,35 @@ class PhysicalSkills extends StrictObject
         return $this->swimming;
     }
 
+    /**
+     * @return int
+     */
+    public function getSkillRankSummary()
+    {
+        return (int)array_sum(
+            array_map(
+                function (AbstractPsychicalSkill $skill) {
+                    return $skill->getSkillRank()->getValue();
+                },
+                [
+                    $this->getArmorWearing(),
+                    $this->getAthletics(),
+                    $this->getBlacksmithing(),
+                    $this->getBoatDriving(),
+                    $this->getCartDriving(),
+                    $this->getCityMoving(),
+                    $this->getClimbingAndHillwalking(),
+                    $this->getFastMarsh(),
+                    $this->getFightWithWeapon(),
+                    $this->getFlying(),
+                    $this->getForestMoving(),
+                    $this->getMovingInMountains(),
+                    $this->getRiding(),
+                    $this->getSailing(),
+                    $this->getShieldUsage(),
+                    $this->getSwimming(),
+                ]
+            )
+        );
+    }
 }
