@@ -9,7 +9,7 @@ use DrdPlus\Cave\UnitBundle\Person\Skills\Combined\FightWithShootingWeapons;
 use DrdPlus\Cave\UnitBundle\Person\Skills\Combined\FirstAid;
 use DrdPlus\Cave\UnitBundle\Person\Skills\Combined\HandingWithAnimals;
 use DrdPlus\Cave\UnitBundle\Person\Skills\Combined\Handwork;
-use DrdPlus\Cave\UnitBundle\Person\Skills\Combined\HazardGames;
+use DrdPlus\Cave\UnitBundle\Person\Skills\Combined\Gambling;
 use DrdPlus\Cave\UnitBundle\Person\Skills\Combined\Herbalism;
 use DrdPlus\Cave\UnitBundle\Person\Skills\Combined\HuntingAndFishing;
 use DrdPlus\Cave\UnitBundle\Person\Skills\Combined\Knotting;
@@ -68,7 +68,7 @@ class CombinedSkills extends StrictObject
      */
     private $handwork;
     /**
-     * @var HazardGames
+     * @var Gambling
      */
     private $hazardGames;
     /**
@@ -122,7 +122,7 @@ class CombinedSkills extends StrictObject
         $this->firstAid = new FirstAid();
         $this->handingWithAnimals = new HandingWithAnimals();
         $this->handwork = new Handwork();
-        $this->hazardGames = new HazardGames();
+        $this->hazardGames = new Gambling();
         $this->herbalism = new Herbalism();
         $this->huntingAndFishing = new HuntingAndFishing();
         $this->knotting = new Knotting();
@@ -208,7 +208,7 @@ class CombinedSkills extends StrictObject
     }
 
     /**
-     * @return HazardGames
+     * @return Gambling
      */
     public function getHazardGames()
     {

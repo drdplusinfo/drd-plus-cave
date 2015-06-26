@@ -14,6 +14,7 @@ use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Strength;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Will;
 use DrdPlus\Cave\UnitBundle\Person\Races\Gender;
 use DrdPlus\Cave\UnitBundle\Person\Races\Race;
+use DrdPlus\Cave\UnitBundle\Person\Skills\SkillRank;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class DrdPlusCaveUnitBundle extends Bundle
@@ -44,5 +45,6 @@ class DrdPlusCaveUnitBundle extends Bundle
         WeightInKg::registerSelf();
 
         LevelValue::registerSelf();
+        SkillRank::registerSelf();
     }
 }
