@@ -9,4 +9,9 @@ abstract class AbstractSkill extends StrictObject
      * @return string[]
      */
     abstract public function getRelatedProperties();
+
+    /**
+     * @return mixed
+     */
+    abstract public function getTier();
 }
