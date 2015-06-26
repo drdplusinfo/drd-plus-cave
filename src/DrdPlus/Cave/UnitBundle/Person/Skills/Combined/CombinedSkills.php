@@ -30,6 +30,15 @@ use Granam\Strict\Object\StrictObject;
  */
 class CombinedSkills extends StrictObject
 {
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
     /**
      * @var Cooking
      */
@@ -103,23 +112,6 @@ class CombinedSkills extends StrictObject
      */
     private $statuary;
 
-    /**
-     * @var integer
-     *
-     * @ORM\Column(type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
-
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
     public function __construct()
     {
         $this->bigHandwork = new BigHandwork();
@@ -141,6 +133,14 @@ class CombinedSkills extends StrictObject
         $this->showmanship = new Showmanship();
         $this->singing = new Singing();
         $this->statuary = new Statuary();
+    }
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 
     /**
