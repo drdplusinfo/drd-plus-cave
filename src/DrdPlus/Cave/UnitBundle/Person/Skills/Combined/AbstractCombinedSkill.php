@@ -14,4 +14,29 @@ abstract class AbstractCombinedSkill extends AbstractSkill
     {
         return [Knack::KNACK, Charisma::CHARISMA];
     }
+
+    /**
+     * @return bool
+     */
+    public function isPhysical()
+    {
+        return false;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isPsychical()
+    {
+        return false;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isCombined()
+    {
+        return true;
+    }
+
 }

@@ -31,7 +31,7 @@ class ProfessionLevels extends StrictObject implements \IteratorAggregate
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $id;
+    private $id;
 
     /**
      * @var Person

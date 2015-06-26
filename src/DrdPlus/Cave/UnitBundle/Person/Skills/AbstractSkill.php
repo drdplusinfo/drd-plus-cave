@@ -14,4 +14,20 @@ abstract class AbstractSkill extends StrictObject
      * @return mixed
      */
     abstract public function getTier();
+
+    /**
+     * @return bool
+     */
+    abstract public function isPhysical();
+
+    /**
+     * @return bool
+     */
+    abstract public function isPsychical();
+
+    /**
+     * @return bool
+     */
+    abstract public function isCombined();
+
 }

@@ -14,4 +14,28 @@ abstract class AbstractPsychicalSkill extends AbstractSkill
     {
         return [Intelligence::INTELLIGENCE, Will::WILL];
     }
+
+    /**
+     * @return bool
+     */
+    public function isPhysical()
+    {
+        return false;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isPsychical()
+    {
+        return true;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isCombined()
+    {
+        return false;
+    }
 }
