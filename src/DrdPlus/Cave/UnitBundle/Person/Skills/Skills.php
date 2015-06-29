@@ -2,6 +2,7 @@
 namespace DrdPlus\Cave\UnitBundle\Person\Skills;
 
 use DrdPlus\Cave\UnitBundle\Person\Person;
+use DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\ProfessionLevels;
 use DrdPlus\Cave\UnitBundle\Person\Skills\Physical\CombinedSkills;
 use DrdPlus\Cave\UnitBundle\Person\Skills\Physical\PhysicalSkills;
 use DrdPlus\Cave\UnitBundle\Person\Skills\Physical\PsychicalSkills;
@@ -115,4 +116,42 @@ class Skills extends StrictObject
         return $this->combinedSkills;
     }
 
+    public function getFreePhysicalSkillPoints()
+    {
+        $incrementCount = $this->getNextLevelsPhysicalPropertiesCount($this->getPerson()->getProfessionLevels());
+
+        // TODO first level skill ranks
+        return $incrementCount - $this->getPhysicalSkills()->getSkillRankSummary();
+    }
+
+    private function getNextLevelsPhysicalPropertiesCount(ProfessionLevels $professionLevels)
+    {
+        return $professionLevels->getNextLevelsAgilityModifier() + $professionLevels->getNextLevelsStrengthModifier();
+    }
+
+    public function getFreePsychicalSkillPoints()
+    {
+        $incrementCount = $this->getNextLevelsPsychicalPropertiesCount($this->getPerson()->getProfessionLevels());
+
+        // TODO first level skill ranks
+        return $incrementCount - $this->getPsychicalSkills()->getSkillRankSummary();
+    }
+
+    private function getNextLevelsPsychicalPropertiesCount(ProfessionLevels $professionLevels)
+    {
+        return $professionLevels->getNextLevelsIntelligenceModifier() + $professionLevels->getNextLevelsWillModifier();
+    }
+
+    public function getFreeCombinedSkillPoints()
+    {
+        $incrementCount = $this->getNextLevelsCombinedPropertiesCount($this->getPerson()->getProfessionLevels());
+
+        // TODO first level skill ranks
+        return $incrementCount - $this->getCombinedSkills()->getSkillRankSummary();
+    }
+
+    private function getNextLevelsCombinedPropertiesCount(ProfessionLevels $professionLevels)
+    {
+        return $professionLevels->getNextLevelsKnackModifier() + $professionLevels->getNextLevelsCharismaModifier();
+    }
 }
