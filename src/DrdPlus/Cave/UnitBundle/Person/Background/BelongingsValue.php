@@ -1,9 +1,23 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Person\Background;
 
-class InitialPropertyInGoldCoins
+use DrdPlus\Cave\TablesBundle\Tables\Fatigue\PriceMeasurement;
+use Granam\Strict\Object\StrictObject;
+
+class BelongingsValue extends StrictObject
 {
-    public static function getInitialPropertyInGoldCoins(BackgroundPoints $backgroundPoints)
+    /**
+     * @var PriceMeasurement
+     */
+    private $measurement;
+
+    public function __construct(BackgroundPoints $backgroundPoints)
+    {
+        $value = $this->calculateValue($backgroundPoints);
+        $this->measurement = new PriceMeasurement($value, PriceMeasurement::GOLD_COIN);
+    }
+
+    private function calculateValue(BackgroundPoints $backgroundPoints)
     {
         switch ($backgroundPoints->getValue()) {
             case 0 :
@@ -27,5 +41,13 @@ class InitialPropertyInGoldCoins
             default :
                 throw new \LogicException("Unexpected background points {$backgroundPoints->getValue()}");
         }
+    }
+
+    /**
+     * @return PriceMeasurement
+     */
+    public function getMeasurement()
+    {
+        return $this->measurement;
     }
 }
