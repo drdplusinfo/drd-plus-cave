@@ -8,5 +8,5 @@ use DrdPlus\Cave\UnitBundle\Person\Background\Parts\AbstractHeritageDependentBac
  */
 class BackgroundSkills extends AbstractHeritageDependentBackground
 {
-
+// TODO
 }

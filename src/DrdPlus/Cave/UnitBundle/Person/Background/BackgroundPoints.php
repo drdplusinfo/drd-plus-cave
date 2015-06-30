@@ -1,6 +1,7 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Person\Background;
 
+use Doctrineum\Scalar\EnumInterface;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Fates\AbstractFate;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Fates\FateOfCombination;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Fates\FateOfExceptionalProperties;
@@ -8,10 +9,13 @@ use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Fates\FateOfGoodR
 use Granam\Integer\IntegerInterface;
 
 /**
+ * For Doctrine type
+ * @see \DrdPlus\Cave\UnitBundle\Person\Background\Parts\BackgroundPointsType
+ *
  * @method static BackgroundPoints getEnum($backgroundPoints)
  * @method static BackgroundPoints getIt($backgroundPoints)
  */
-class BackgroundPoints implements IntegerInterface
+class BackgroundPoints implements EnumInterface, IntegerInterface
 {
     /** @var int */
     private $pointsValue;
@@ -38,6 +42,11 @@ class BackgroundPoints implements IntegerInterface
     public function getValue()
     {
         return $this->pointsValue;
+    }
+
+    public function getEnumValue()
+    {
+        return $this->getValue();
     }
 
     public function __toString()

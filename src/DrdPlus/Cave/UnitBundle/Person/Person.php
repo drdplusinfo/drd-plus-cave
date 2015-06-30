@@ -5,6 +5,7 @@ use Doctrine\ORM\Mapping as ORM;
 use DrdPlus\Cave\TablesBundle\Tables\Tables;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Exceptionality;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Name;
+use DrdPlus\Cave\UnitBundle\Person\Background\Background;
 use DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\ProfessionLevels;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\PersonProperties;
 use DrdPlus\Cave\UnitBundle\Person\Races\Gender;
@@ -12,8 +13,6 @@ use DrdPlus\Cave\UnitBundle\Person\Races\Race;
 use Granam\Strict\Object\StrictObject;
 
 /**
- * Person
- *
  * @ORM\Table()
  * @ORM\Entity()
  */
@@ -76,6 +75,7 @@ class Person extends StrictObject
         Name $name, // enum
         Exceptionality $exceptionality, // entity
         ProfessionLevels $professionLevels, // entity
+        Background $background, // entity
         Tables $tables
     )
     {
