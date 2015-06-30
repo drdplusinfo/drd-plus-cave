@@ -756,17 +756,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/migrations.git",
-                "reference": "43619782df4e9ae6be6b24557f0429471eeee848"
+                "reference": "70c580174e4e16a79296a02256fb40a34192731c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/migrations/zipball/43619782df4e9ae6be6b24557f0429471eeee848",
-                "reference": "43619782df4e9ae6be6b24557f0429471eeee848",
+                "url": "https://api.github.com/repos/doctrine/migrations/zipball/70c580174e4e16a79296a02256fb40a34192731c",
+                "reference": "70c580174e4e16a79296a02256fb40a34192731c",
                 "shasum": ""
             },
             "require": {
-                "doctrine/dbal": "~2.0",
-                "php": ">=5.3.2",
+                "doctrine/dbal": "~2.2",
+                "php": ">=5.4.0",
                 "symfony/console": "~2.3",
                 "symfony/yaml": "~2.3"
             },
@@ -776,7 +776,9 @@
             "require-dev": {
                 "doctrine/coding-standard": "dev-master",
                 "doctrine/orm": "2.*",
-                "phpunit/phpunit": "~4.0",
+                "johnkary/phpunit-speedtrap": "~1.0@dev",
+                "mockery/mockery": "^0.9.4",
+                "phpunit/phpunit": "~4.7",
                 "satooshi/php-coveralls": "0.6.*"
             },
             "suggest": {
@@ -813,7 +815,7 @@
                 "database",
                 "migrations"
             ],
-            "time": "2015-06-20 21:00:20"
+            "time": "2015-06-29 10:57:05"
         },
         {
             "name": "doctrine/orm",
@@ -1213,12 +1215,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/granam-integer.git",
-                "reference": "6c39601c183847352d73a83255bcac9b2d4c9b39"
+                "reference": "1edc112083e70b14d01fec8ffc2eabb40dfa4318"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/granam-integer/zipball/6c39601c183847352d73a83255bcac9b2d4c9b39",
-                "reference": "6c39601c183847352d73a83255bcac9b2d4c9b39",
+                "url": "https://api.github.com/repos/jaroslavtyc/granam-integer/zipball/1edc112083e70b14d01fec8ffc2eabb40dfa4318",
+                "reference": "1edc112083e70b14d01fec8ffc2eabb40dfa4318",
                 "shasum": ""
             },
             "require": {
@@ -1255,7 +1257,7 @@
                 "integer",
                 "php"
             ],
-            "time": "2015-06-23 15:15:34"
+            "time": "2015-06-25 07:02:28"
         },
         {
             "name": "granam/scalar",
@@ -1311,16 +1313,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/granam-strict-float.git",
-                "reference": "e3efa7b9ce8c87d00932acb2b526fb61280dd309"
+                "reference": "7e40771899b2f3d69508c3f12e26a365656014f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/granam-strict-float/zipball/e3efa7b9ce8c87d00932acb2b526fb61280dd309",
-                "reference": "e3efa7b9ce8c87d00932acb2b526fb61280dd309",
+                "url": "https://api.github.com/repos/jaroslavtyc/granam-strict-float/zipball/7e40771899b2f3d69508c3f12e26a365656014f5",
+                "reference": "7e40771899b2f3d69508c3f12e26a365656014f5",
                 "shasum": ""
             },
             "require": {
                 "granam/exception-hierarchy": "dev-master",
+                "granam/float": "dev-master",
+                "granam/scalar": "dev-master",
                 "granam/strict-object": "dev-master",
                 "granam/strict-scalar": "dev-master",
                 "php": ">=5.4"
@@ -1353,7 +1357,7 @@
                 "php",
                 "strict"
             ],
-            "time": "2015-05-19 09:10:58"
+            "time": "2015-06-30 11:20:58"
         },
         {
             "name": "granam/strict-integer",
@@ -1361,16 +1365,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/granam-strict-integer.git",
-                "reference": "8547a306c13af89f790fe45425af6be00d3dfae9"
+                "reference": "7b70fae044d76955100cdc81c00906cf0d907db2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/granam-strict-integer/zipball/8547a306c13af89f790fe45425af6be00d3dfae9",
-                "reference": "8547a306c13af89f790fe45425af6be00d3dfae9",
+                "url": "https://api.github.com/repos/jaroslavtyc/granam-strict-integer/zipball/7b70fae044d76955100cdc81c00906cf0d907db2",
+                "reference": "7b70fae044d76955100cdc81c00906cf0d907db2",
                 "shasum": ""
             },
             "require": {
                 "granam/exception-hierarchy": "dev-master",
+                "granam/integer": "dev-master",
+                "granam/scalar": "dev-master",
                 "granam/strict-object": "dev-master",
                 "granam/strict-scalar": "dev-master",
                 "php": ">=5.4"
@@ -1403,7 +1409,7 @@
                 "php",
                 "strict"
             ],
-            "time": "2015-05-21 06:34:20"
+            "time": "2015-06-30 11:04:44"
         },
         {
             "name": "granam/strict-object",
@@ -1459,16 +1465,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/granam-strict-scalar.git",
-                "reference": "59b7bcae39c8a8b5ac47206908a7ebca375566c9"
+                "reference": "7be72eb3a8c7fcfa1e37a0bc9a1a6ba0559ff210"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/granam-strict-scalar/zipball/59b7bcae39c8a8b5ac47206908a7ebca375566c9",
-                "reference": "59b7bcae39c8a8b5ac47206908a7ebca375566c9",
+                "url": "https://api.github.com/repos/jaroslavtyc/granam-strict-scalar/zipball/7be72eb3a8c7fcfa1e37a0bc9a1a6ba0559ff210",
+                "reference": "7be72eb3a8c7fcfa1e37a0bc9a1a6ba0559ff210",
                 "shasum": ""
             },
             "require": {
                 "granam/exception-hierarchy": "dev-master",
+                "granam/scalar": "dev-master",
                 "granam/strict-object": "dev-master",
                 "php": ">=5.4"
             },
@@ -1500,7 +1507,7 @@
                 "scalar",
                 "strict"
             ],
-            "time": "2015-05-19 06:04:52"
+            "time": "2015-06-30 11:29:39"
         },
         {
             "name": "incenteev/composer-parameter-handler",
@@ -2630,16 +2637,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "2.1.6",
+            "version": "2.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "631e365cf26bb2c078683e8d9bcf8bc631ac4d44"
+                "reference": "07e27765596d72c378a6103e80da5d84e802f1e4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/631e365cf26bb2c078683e8d9bcf8bc631ac4d44",
-                "reference": "631e365cf26bb2c078683e8d9bcf8bc631ac4d44",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/07e27765596d72c378a6103e80da5d84e802f1e4",
+                "reference": "07e27765596d72c378a6103e80da5d84e802f1e4",
                 "shasum": ""
             },
             "require": {
@@ -2688,7 +2695,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2015-06-19 07:11:55"
+            "time": "2015-06-30 06:52:35"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -2870,16 +2877,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "4.7.5",
+            "version": "4.7.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "f6701ef3faea759acd1910a7751d8d102a7fd5bc"
+                "reference": "0ebabb4cda7d066be8391dfdbaf57fe70ac9a99b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/f6701ef3faea759acd1910a7751d8d102a7fd5bc",
-                "reference": "f6701ef3faea759acd1910a7751d8d102a7fd5bc",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/0ebabb4cda7d066be8391dfdbaf57fe70ac9a99b",
+                "reference": "0ebabb4cda7d066be8391dfdbaf57fe70ac9a99b",
                 "shasum": ""
             },
             "require": {
@@ -2938,7 +2945,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2015-06-21 07:23:36"
+            "time": "2015-06-30 06:53:57"
         },
         {
             "name": "phpunit/phpunit-mock-objects",

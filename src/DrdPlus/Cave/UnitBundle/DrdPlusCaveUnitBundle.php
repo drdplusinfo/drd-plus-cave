@@ -4,6 +4,9 @@ namespace DrdPlus\Cave\UnitBundle;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Choices\ExceptionalityChoice;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Fates\AbstractFateEntity;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Name;
+use DrdPlus\Cave\UnitBundle\Person\Background\BackgroundSkills;
+use DrdPlus\Cave\UnitBundle\Person\Background\BelongingsValue;
+use DrdPlus\Cave\UnitBundle\Person\Background\Heritage;
 use DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\LevelValue;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Agility;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Body\WeightInKg;
@@ -46,5 +49,9 @@ class DrdPlusCaveUnitBundle extends Bundle
 
         LevelValue::registerSelf();
         SkillRank::registerSelf();
+
+        BackgroundSkills::registerSelf();
+        BelongingsValue::registerSelf();
+        Heritage::registerSelf();
     }
 }

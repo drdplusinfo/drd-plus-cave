@@ -1,12 +1,11 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Person\Background;
-
-use Doctrineum\Integer\SelfTypedIntegerEnum;
+use DrdPlus\Cave\UnitBundle\Person\Background\Parts\AbstractBackground;
 
 /**
- * @method static Heritage getEnum($value)
+ * @method static Heritage getEnum($backgroundPoints).
  */
-class Heritage extends SelfTypedIntegerEnum
+class Heritage extends AbstractBackground
 {
     const FOUNDLING = 'foundling';
     const ORPHAN = 'orphan';
@@ -18,40 +17,32 @@ class Heritage extends SelfTypedIntegerEnum
     const NOBLE = 'noble';
     const NOBLE_FROM_POWERFUL_FAMILY = 'noble_from_powerful_family';
 
-    /** @var  BackgroundPoints */
-    private $backgroundPoints;
-
     /**
-     * @param BackgroundPoints $backgroundPoints
+     * @param int $backgroundPoints
      *
-     * @return Heritage
+     * @return static
      */
-    public static function getIt(BackgroundPoints $backgroundPoints)
+    public static function getIt($backgroundPoints)
     {
-        $heritage = self::getEnum($backgroundPoints->getValue());
-        $heritage->backgroundPoints = $backgroundPoints;
+        self::checkBackgroundPointsLimits($backgroundPoints);
 
-        return $heritage;
+        return self::getEnum($backgroundPoints);
     }
 
     /**
-     * @return BackgroundPoints
+     * @return int
      */
     public function getBackgroundPoints()
     {
-        if (!isset($this->backgroundPoints)) {
-            $this->backgroundPoints = new BackgroundPoints($this->getEnumValue());
-        }
-
         return $this->getEnumValue();
     }
 
     /**
      * @return string
      */
-    public function getName()
+    public function getHeritageName()
     {
-        switch ($this->getBackgroundPoints()->getValue()) {
+        switch ($this->getBackgroundPoints()) {
             case 0 :
                 return self::FOUNDLING;
             case 1 :
@@ -71,7 +62,7 @@ class Heritage extends SelfTypedIntegerEnum
             case 8:
                 return self::NOBLE_FROM_POWERFUL_FAMILY;
             default :
-                throw new \LogicException("Unexpected heritage points: {$this->getBackgroundPoints()->getValue()}");
+                throw new \LogicException("Unexpected heritage points: {$this->getBackgroundPoints()}");
         }
     }
 }

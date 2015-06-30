@@ -1,25 +1,48 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Person\Background;
 
-use Granam\Integer\IntegerObject;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Fates\AbstractFate;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Fates\FateOfCombination;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Fates\FateOfExceptionalProperties;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Fates\FateOfGoodRear;
+use Granam\Integer\IntegerInterface;
 
-class BackgroundPoints extends IntegerObject
+/**
+ * @method static BackgroundPoints getEnum($backgroundPoints)
+ * @method static BackgroundPoints getIt($backgroundPoints)
+ */
+class BackgroundPoints implements IntegerInterface
 {
-    const MIN_BACKGROUND_POINTS = 0;
-    const MAX_BACKGROUND_POINTS = 8;
+    /** @var int */
+    private $pointsValue;
 
-    public function __construct($value)
+    public function __construct(AbstractFate $fate)
     {
-        parent::__construct($value);
-        $this->checkPoints($this->getValue());
+        $this->pointsValue = $this->determinePoints($fate);
     }
 
-    private function checkPoints($value)
+    private function determinePoints(AbstractFate $fate)
     {
-        if ($value < self::MIN_BACKGROUND_POINTS || $value > self::MAX_BACKGROUND_POINTS) {
-            throw new \LogicException(
-                'Background points has to be between ' . self::MIN_BACKGROUND_POINTS . ' and ' . self::MIN_BACKGROUND_POINTS. ", got $value"
-            );
+        switch ($fate->getFateName()) {
+            case FateOfExceptionalProperties::FATE_OF_EXCEPTIONAL_PROPERTIES :
+                return 5;
+            case FateOfCombination::FATE_OF_COMBINATION :
+                return 10;
+            case FateOfGoodRear::FATE_OF_GOOD_REAR :
+                return 15;
+            default :
+                throw new \LogicException("Unknown fate {$fate->getName()}");
         }
     }
+
+    public function getValue()
+    {
+        return $this->pointsValue;
+    }
+
+    public function __toString()
+    {
+        return (string)$this->getValue();
+    }
+
 }
