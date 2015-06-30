@@ -3,12 +3,12 @@ namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Fates;
 
 use Doctrineum\Strict\String\SelfTypedStrictStringEnum;
 
-/* abstract */ class ExceptionalityFate extends SelfTypedStrictStringEnum
+/* abstract */ class AbstractFateEntity extends SelfTypedStrictStringEnum
 {
     const EXCEPTIONALITY_FATE = 'exceptionality_fate';
 
     /**
-     * @return ExceptionalityFate
+     * @return AbstractFateEntity
      */
     public static function getIt()
     {
@@ -32,12 +32,12 @@ use Doctrineum\Strict\String\SelfTypedStrictStringEnum;
     /**
      * @param string $fateName
      *
-     * @return ExceptionalityFate
+     * @return AbstractFateEntity
      */
     protected static function createByValue($fateName)
     {
         $exceptionality = parent::createByValue($fateName);
-        /** @var $exceptionality ExceptionalityFate */
+        /** @var $exceptionality AbstractFateEntity */
         if ($exceptionality::getFateName() !== $fateName) {
             throw new \LogicException(
                 'Given exceptionality type ' . var_export($fateName, true) .

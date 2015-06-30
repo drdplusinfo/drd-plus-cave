@@ -3,7 +3,7 @@ namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Fates;
 
 use DrdPlus\Cave\ToolsBundle\Dices\Roll;
 
-abstract class AbstractFate extends ExceptionalityFate
+abstract class AbstractFate extends AbstractFateEntity
 {
 
     /**

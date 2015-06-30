@@ -5,6 +5,7 @@ use DrdPlus\Cave\ToolsBundle\Dices\Roll;
 
 class FateOfGoodRear extends AbstractFate
 {
+    const FATE_OF_GOOD_REAR = 'fate_of_good_rear';
     /**
      * @return int
      */

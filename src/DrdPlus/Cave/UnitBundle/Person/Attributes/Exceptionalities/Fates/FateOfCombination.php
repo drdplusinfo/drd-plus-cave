@@ -5,6 +5,8 @@ use DrdPlus\Cave\ToolsBundle\Dices\Roll;
 
 class FateOfCombination extends AbstractFate
 {
+    const FATE_OF_COMBINATION = 'fate_of_combination';
+
     /**
      * @return int
      */

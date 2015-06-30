@@ -2,7 +2,7 @@
 namespace DrdPlus\Cave\UnitBundle;
 
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Choices\ExceptionalityChoice;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Fates\ExceptionalityFate;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Fates\AbstractFateEntity;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Name;
 use DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\LevelValue;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Agility;
@@ -34,7 +34,7 @@ class DrdPlusCaveUnitBundle extends Bundle
         // only the generic choice has to be registered, specific choices are registered automatically
         ExceptionalityChoice::registerSelf();
         // only the generic kind has to be registered, specific kinds are registered automatically
-        ExceptionalityFate::registerSelf();
+        AbstractFateEntity::registerSelf();
 
         Strength::registerSelf();
         Agility::registerSelf();

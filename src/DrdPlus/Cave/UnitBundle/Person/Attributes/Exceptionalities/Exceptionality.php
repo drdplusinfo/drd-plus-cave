@@ -2,7 +2,7 @@
 namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities;
 
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Choices\ExceptionalityChoice;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Fates\ExceptionalityFate;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Fates\AbstractFateEntity;
 use DrdPlus\Cave\UnitBundle\Person\Person;
 use Granam\Strict\Object\StrictObject;
 
@@ -51,7 +51,7 @@ class Exceptionality extends StrictObject
 
     public function __construct(
         ExceptionalityChoice $exceptionalityChoice,
-        ExceptionalityFate $exceptionalityKind,
+        AbstractFateEntity $exceptionalityKind,
         ExceptionalityProperties $exceptionalityProperties
     )
     {
@@ -105,7 +105,7 @@ class Exceptionality extends StrictObject
     }
 
     /**
-     * @return ExceptionalityFate
+     * @return AbstractFateEntity
      */
     public function getExceptionalityFate()
     {

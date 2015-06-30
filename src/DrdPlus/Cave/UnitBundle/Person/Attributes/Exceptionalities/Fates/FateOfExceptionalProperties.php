@@ -5,6 +5,7 @@ use DrdPlus\Cave\ToolsBundle\Dices\Roll;
 
 class FateOfExceptionalProperties extends AbstractFate
 {
+    const FATE_OF_EXCEPTIONAL_PROPERTIES = 'fate_of_exceptional_properties';
     /**
      * @return int
      */
