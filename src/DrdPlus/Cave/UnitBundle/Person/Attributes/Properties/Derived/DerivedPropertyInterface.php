@@ -1,9 +1,9 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Derived;
 
-use Granam\Integer\IntegerInterface;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\PropertyInterface;
 
-interface DerivedPropertyInterface extends IntegerInterface
+interface DerivedPropertyInterface extends PropertyInterface
 {
 
 }

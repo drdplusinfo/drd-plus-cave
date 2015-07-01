@@ -30,4 +30,12 @@ abstract class AbstractHeritageDependentBackground extends AbstractBackground
             );
         }
     }
+
+    /**
+     * @return int
+     */
+    public function getBackgroundPointsValue()
+    {
+        return $this->getEnumValue();
+    }
 }

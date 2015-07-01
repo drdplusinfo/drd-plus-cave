@@ -6,7 +6,7 @@ use Doctrineum\Integer\SelfTypedIntegerEnum;
 /**
  * @method static BaseProperty getType()
  */
-abstract class BaseProperty extends SelfTypedIntegerEnum
+abstract class BaseProperty extends SelfTypedIntegerEnum implements PropertyInterface
 {
 
     /**

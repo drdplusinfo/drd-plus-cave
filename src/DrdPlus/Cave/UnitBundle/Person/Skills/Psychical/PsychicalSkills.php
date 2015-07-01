@@ -28,7 +28,6 @@ use DrdPlus\Cave\UnitBundle\Person\Skills\Psychical\Zoology;
  */
 class PsychicalSkills extends AbstractSkillsGroup
 {
-
     /**
      * @var integer
      *
