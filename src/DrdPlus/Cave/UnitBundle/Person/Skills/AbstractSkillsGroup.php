@@ -8,5 +8,10 @@ abstract class AbstractSkillsGroup extends StrictObject
     /**
      * @return int
      */
-    abstract public function getSkillRankSummary();
+    abstract public function getNextLevelsSkillRankSummary();
+
+    /**
+     * @return int
+     */
+    abstract public function getFirstLevelsSkillRankSummary();
 }

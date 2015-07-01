@@ -69,6 +69,13 @@ class Person extends StrictObject
      */
     private $professionLevels;
 
+    /**
+     * @var Background
+     *
+     * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Person\Background\Background")
+     */
+    private $background;
+
     public function __construct(
         Race $race, // enum
         Gender $gender, // enum
@@ -76,7 +83,7 @@ class Person extends StrictObject
         Exceptionality $exceptionality, // entity
         ProfessionLevels $professionLevels, // entity
         Background $background, // entity
-        Tables $tables
+        Tables $tables // data helper
     )
     {
         $this->race = $race;
@@ -86,6 +93,7 @@ class Person extends StrictObject
         $this->exceptionality = $exceptionality;
         $professionLevels->setPerson($this);
         $this->professionLevels = $professionLevels;
+        $this->background = $background;
         $this->personProperties = new PersonProperties($this, $tables); // enums aggregate
     }
 
@@ -157,6 +165,14 @@ class Person extends StrictObject
     public function getProfessionLevels()
     {
         return $this->professionLevels;
+    }
+
+    /**
+     * @return Background
+     */
+    public function getBackground()
+    {
+        return $this->background;
     }
 
 }

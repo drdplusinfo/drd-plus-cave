@@ -1,5 +1,5 @@
 <?php
-namespace DrdPlus\Cave\UnitBundle\Person\Skills\Physical;
+namespace DrdPlus\Cave\UnitBundle\Person\Skills\Combined;
 
 use DrdPlus\Cave\UnitBundle\Person\Skills\AbstractSkillsGroup;
 use DrdPlus\Cave\UnitBundle\Person\Skills\Psychical\AbstractPsychicalSkill;
@@ -228,8 +228,9 @@ class PsychicalSkills extends AbstractSkillsGroup
     /**
      * @return int
      */
-    public function getSkillRankSummary()
+    public function getNextLevelsSkillRankSummary()
     {
+        // TODO next levels only
         return (int)array_sum(
             array_map(
                 function (AbstractPsychicalSkill $skill) {
@@ -256,4 +257,13 @@ class PsychicalSkills extends AbstractSkillsGroup
             )
         );
     }
+
+    /**
+     * @return int
+     */
+    public function getFirstLevelsSkillRankSummary()
+    {
+        // TODO: Implement getFirstLevelsSkillRankSummary() method.
+    }
+
 }

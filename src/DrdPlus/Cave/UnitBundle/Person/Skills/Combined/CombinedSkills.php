@@ -1,27 +1,7 @@
 <?php
-namespace DrdPlus\Cave\UnitBundle\Person\Skills\Physical;
+namespace DrdPlus\Cave\UnitBundle\Person\Skills\Combined;
 
 use DrdPlus\Cave\UnitBundle\Person\Skills\AbstractSkillsGroup;
-use DrdPlus\Cave\UnitBundle\Person\Skills\Combined\AbstractCombinedSkill;
-use DrdPlus\Cave\UnitBundle\Person\Skills\Combined\BigHandwork;
-use DrdPlus\Cave\UnitBundle\Person\Skills\Combined\Cooking;
-use DrdPlus\Cave\UnitBundle\Person\Skills\Combined\Dancing;
-use DrdPlus\Cave\UnitBundle\Person\Skills\Combined\DuskSight;
-use DrdPlus\Cave\UnitBundle\Person\Skills\Combined\FightWithShootingWeapons;
-use DrdPlus\Cave\UnitBundle\Person\Skills\Combined\FirstAid;
-use DrdPlus\Cave\UnitBundle\Person\Skills\Combined\HandingWithAnimals;
-use DrdPlus\Cave\UnitBundle\Person\Skills\Combined\Handwork;
-use DrdPlus\Cave\UnitBundle\Person\Skills\Combined\Gambling;
-use DrdPlus\Cave\UnitBundle\Person\Skills\Combined\Herbalism;
-use DrdPlus\Cave\UnitBundle\Person\Skills\Combined\HuntingAndFishing;
-use DrdPlus\Cave\UnitBundle\Person\Skills\Combined\Knotting;
-use DrdPlus\Cave\UnitBundle\Person\Skills\Combined\Painting;
-use DrdPlus\Cave\UnitBundle\Person\Skills\Combined\Pedagogy;
-use DrdPlus\Cave\UnitBundle\Person\Skills\Combined\PlayingOnMusicInstrument;
-use DrdPlus\Cave\UnitBundle\Person\Skills\Combined\Seduction;
-use DrdPlus\Cave\UnitBundle\Person\Skills\Combined\Showmanship;
-use DrdPlus\Cave\UnitBundle\Person\Skills\Combined\Singing;
-use DrdPlus\Cave\UnitBundle\Person\Skills\Combined\Statuary;
 
 /**
  * CombinedSkills
@@ -299,8 +279,9 @@ class CombinedSkills extends AbstractSkillsGroup
     /**
      * @return int
      */
-    public function getSkillRankSummary()
+    public function getNextLevelsSkillRankSummary()
     {
+        // TODO next levels only
         return (int)array_sum(
             array_map(
                 function (AbstractCombinedSkill $skill) {
@@ -329,6 +310,14 @@ class CombinedSkills extends AbstractSkillsGroup
                 ]
             )
         );
+    }
+
+    /**
+     * @return int
+     */
+    public function getFirstLevelsSkillRankSummary()
+    {
+        // TODO: Implement getFirstLevelsSkillRankSummary() method.
     }
 
 }

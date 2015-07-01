@@ -214,8 +214,9 @@ class PhysicalSkills extends AbstractSkillsGroup
     /**
      * @return int
      */
-    public function getSkillRankSummary()
+    public function getNextLevelsSkillRankSummary()
     {
+        // TODO next levels only
         return (int)array_sum(
             array_map(
                 function (AbstractPsychicalSkill $skill) {
@@ -242,4 +243,13 @@ class PhysicalSkills extends AbstractSkillsGroup
             )
         );
     }
+
+    /**
+     * @return int
+     */
+    public function getFirstLevelsSkillRankSummary()
+    {
+        // TODO: Implement getFirstLevelsSkillRankSummary() method.
+    }
+
 }
