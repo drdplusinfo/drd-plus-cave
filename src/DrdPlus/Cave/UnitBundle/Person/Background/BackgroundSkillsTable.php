@@ -7,13 +7,11 @@ use DrdPlus\Cave\UnitBundle\Person\Professions\Ranger;
 use DrdPlus\Cave\UnitBundle\Person\Professions\Theurgist;
 use DrdPlus\Cave\UnitBundle\Person\Professions\Thief;
 use DrdPlus\Cave\UnitBundle\Person\Professions\Wizard;
+use DrdPlus\Cave\UnitBundle\Person\Skills\Skills;
 use DrdPlus\Cave\UnitBundle\Tools\AbstractTable;
 
 class BackgroundSkillsTable extends AbstractTable
 {
-    const PHYSICAL = 'physical';
-    const PSYCHICAL = 'psychical';
-    const COMBINED = 'combined';
 
     /**
      * @return array
@@ -31,12 +29,12 @@ class BackgroundSkillsTable extends AbstractTable
                 Priest::PRIEST, Priest::PRIEST, Priest::PRIEST
             ],
             [ // axis X second row header
-                self::PHYSICAL, self::PSYCHICAL, self::COMBINED, // fighter
-                self::PHYSICAL, self::PSYCHICAL, self::COMBINED, // thief
-                self::PHYSICAL, self::PSYCHICAL, self::COMBINED, // ranger
-                self::PHYSICAL, self::PSYCHICAL, self::COMBINED, // wizard
-                self::PHYSICAL, self::PSYCHICAL, self::COMBINED, // theurgist
-                self::PHYSICAL, self::PSYCHICAL, self::COMBINED, // priest
+                Skills::PHYSICAL, Skills::PSYCHICAL, Skills::COMBINED, // fighter
+                Skills::PHYSICAL, Skills::PSYCHICAL, Skills::COMBINED, // thief
+                Skills::PHYSICAL, Skills::PSYCHICAL, Skills::COMBINED, // ranger
+                Skills::PHYSICAL, Skills::PSYCHICAL, Skills::COMBINED, // wizard
+                Skills::PHYSICAL, Skills::PSYCHICAL, Skills::COMBINED, // theurgist
+                Skills::PHYSICAL, Skills::PSYCHICAL, Skills::COMBINED, // priest
             ]
         ];
     }
@@ -75,7 +73,7 @@ class BackgroundSkillsTable extends AbstractTable
      */
     private function getPhysicalSkillPoints($backgroundPoints, $professionName)
     {
-        return $this->getSkillPoints($backgroundPoints, $professionName, self::PHYSICAL);
+        return $this->getSkillPoints($backgroundPoints, $professionName, Skills::PHYSICAL);
     }
 
     /**
@@ -110,7 +108,7 @@ class BackgroundSkillsTable extends AbstractTable
      */
     private function getPsychicalSkillPoints($backgroundPoints, $professionName)
     {
-        return $this->getSkillPoints($backgroundPoints, $professionName, self::PSYCHICAL);
+        return $this->getSkillPoints($backgroundPoints, $professionName, Skills::PSYCHICAL);
     }
 
     /**
@@ -129,7 +127,7 @@ class BackgroundSkillsTable extends AbstractTable
      */
     private function getCombinedSkillPoints($backgroundPoints, $professionName)
     {
-        return $this->getSkillPoints($backgroundPoints, $professionName, self::COMBINED);
+        return $this->getSkillPoints($backgroundPoints, $professionName, Skills::COMBINED);
     }
 
     /**

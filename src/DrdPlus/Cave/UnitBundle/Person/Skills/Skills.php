@@ -16,6 +16,9 @@ use Granam\Strict\Object\StrictObject;
  */
 class Skills extends StrictObject
 {
+    const PHYSICAL = 'physical';
+    const PSYCHICAL = 'psychical';
+    const COMBINED = 'combined';
 
     /**
      * @var integer
