@@ -19,14 +19,14 @@ abstract class AbstractTable extends StrictObject implements TableInterface
 
     public function __construct(EvaluatorInterface $evaluator)
     {
-        $this->data = $this->loadData();
+        $this->data = $this->fetchData();
         $this->evaluator = $evaluator;
     }
 
     /**
      * @return array
      */
-    private function loadData()
+    private function fetchData()
     {
         $rawData = $this->fetchFromFile($this->getDataFileName());
         $indexed = $this->indexData($rawData);
@@ -38,18 +38,18 @@ abstract class AbstractTable extends StrictObject implements TableInterface
     {
         $resource = fopen($dataSourceFile, 'r');
         if (!$resource) {
-            throw new \RuntimeException("File with weight table data could not be read from $dataSourceFile");
+            throw new \RuntimeException("File with table data could not be read from $dataSourceFile");
         }
         $data = [];
         do {
             $row = fgetcsv($resource);
-            if (count($row) > 0) { // otherwise skipp empty row
+            if (count($row) > 0 && $row !== false) { // otherwise skipp empty row
                 $data[] = $row;
             }
         } while (is_array($row));
 
         if (!$data) {
-            throw new \RuntimeException("No weight data have been read from $dataSourceFile");
+            throw new \RuntimeException("No data have been read from $dataSourceFile");
         }
 
         return $data;
@@ -65,8 +65,8 @@ abstract class AbstractTable extends StrictObject implements TableInterface
         unset($data[0]); // removing human header
         foreach ($data as $row) {
             if (!empty($row)) {
-                $indexedRow = $this->indexRow($row, $expectedHeader);
-                $indexed[key($indexedRow)] = current($indexedRow);
+                $formattedRow = $this->formatRow($row, $expectedHeader);
+                $indexed[key($formattedRow)] = current($formattedRow);
             }
         }
         if (count($indexed) === 0) {
@@ -78,7 +78,7 @@ abstract class AbstractTable extends StrictObject implements TableInterface
         return $indexed;
     }
 
-    private function indexRow(array $row, array $expectedHeader)
+    private function formatRow(array $row, array $expectedHeader)
     {
         $indexedValues = array_combine($expectedHeader, $row);
         $bonus = $this->parseBonus($indexedValues['bonus']);
