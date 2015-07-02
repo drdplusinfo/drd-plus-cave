@@ -97,7 +97,7 @@ class FirstLevelProperties extends StrictObject
         return
             $this->getRacePropertyModifier($race, $gender, $propertyName)
             + $this->getExceptionalPropertyIncrement($propertyName, $exceptionalityProperties)->getValue()
-            + $this->getPropertyModifierForFirstLevel($professionLevels, $propertyName);
+            + $this->getPropertyModifierForFirstProfession($professionLevels, $propertyName);
     }
 
     private function getRacePropertyModifier(Race $race, Gender $gender, $propertyName)
@@ -120,21 +120,21 @@ class FirstLevelProperties extends StrictObject
         }
     }
 
-    private function getPropertyModifierForFirstLevel(ProfessionLevels $professionLevels, $propertyName)
+    private function getPropertyModifierForFirstProfession(ProfessionLevels $professionLevels, $propertyName)
     {
         switch ($propertyName) {
             case Strength::STRENGTH :
-                return $professionLevels->getStrengthModifierForFirstLevel();
+                return $professionLevels->getStrengthModifierForFirstProfession();
             case Agility::AGILITY :
-                return $professionLevels->getAgilityModifierForFirstLevel();
+                return $professionLevels->getAgilityModifierForFirstProfession();
             case Knack::KNACK :
-                return $professionLevels->getKnackModifierForFirstLevel();
+                return $professionLevels->getKnackModifierForFirstProfession();
             case Will::WILL :
-                return $professionLevels->getWillModifierForFirstLevel();
+                return $professionLevels->getWillModifierForFirstProfession();
             case Intelligence::INTELLIGENCE :
-                return $professionLevels->getIntelligenceModifierForFirstLevel();
+                return $professionLevels->getIntelligenceModifierForFirstProfession();
             case Charisma::CHARISMA :
-                return $professionLevels->getCharismaModifierForFirstLevel();
+                return $professionLevels->getCharismaModifierForFirstProfession();
             default :
                 throw new \LogicException;
         }
@@ -172,7 +172,6 @@ class FirstLevelProperties extends StrictObject
      * @param Gender $gender
      *
      * @throws Exceptions\PropertyIsAlreadySet
-     * @throws Exceptions\BasePropertyValueExceeded
      */
     private function setUpBaseProperty(BaseProperty $firstLevelUnlimitedProperty, Race $race, Gender $gender)
     {
@@ -180,13 +179,6 @@ class FirstLevelProperties extends StrictObject
         if (!is_null($this->getFirstLevelProperty($propertyName))) {
             throw new Exceptions\PropertyIsAlreadySet(
                 'The property "firstLevel' . ucfirst($propertyName) . '"" is already set by value ' . var_export($this->getFirstLevelProperty($propertyName), true)
-            );
-        }
-
-        if ($firstLevelUnlimitedProperty->getValue() > $this->calculateMaximalBasePropertyValue($propertyName, $race, $gender)) {
-            throw new Exceptions\BasePropertyValueExceeded(
-                'The first level ' . $propertyName . ' can not exceed ' .
-                $this->calculateMaximalBasePropertyValue($propertyName, $race, $gender) . ', got ' . $firstLevelUnlimitedProperty->getValue()
             );
         }
 
@@ -393,7 +385,7 @@ class FirstLevelProperties extends StrictObject
     {
         return // the race bonus is NOT count for incrementation, doesn't count to size respectively
             $exceptionalityProperties->getStrength()->getValue()
-            + $professionLevels->getStrengthModifierForFirstLevel();
+            + $professionLevels->getStrengthModifierForFirstProfession();
     }
 
     /**

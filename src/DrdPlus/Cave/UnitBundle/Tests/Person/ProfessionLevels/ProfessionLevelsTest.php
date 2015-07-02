@@ -48,7 +48,7 @@ class ProfessionLevelsTest extends TestWithMockery
     public function new_levels_gives_zero_first_level_strength_increment(ProfessionLevels $professionLevels)
     {
         /** @var ProfessionLevelsTest $this */
-        $this->assertSame(0, $professionLevels->getStrengthModifierForFirstLevel());
+        $this->assertSame(0, $professionLevels->getStrengthModifierForFirstProfession());
     }
 
     /**
@@ -72,7 +72,7 @@ class ProfessionLevelsTest extends TestWithMockery
     public function new_levels_gives_zero_first_level_agility_increment(ProfessionLevels $professionLevels)
     {
         /** @var ProfessionLevelsTest $this */
-        $this->assertSame(0, $professionLevels->getAgilityModifierForFirstLevel());
+        $this->assertSame(0, $professionLevels->getAgilityModifierForFirstProfession());
     }
 
     /**
@@ -96,7 +96,7 @@ class ProfessionLevelsTest extends TestWithMockery
     public function new_levels_gives_zero_first_level_knack_increment(ProfessionLevels $professionLevels)
     {
         /** @var ProfessionLevelsTest $this */
-        $this->assertSame(0, $professionLevels->getKnackModifierForFirstLevel());
+        $this->assertSame(0, $professionLevels->getKnackModifierForFirstProfession());
     }
 
     /**
@@ -120,7 +120,7 @@ class ProfessionLevelsTest extends TestWithMockery
     public function new_levels_gives_zero_first_level_will_increment(ProfessionLevels $professionLevels)
     {
         /** @var ProfessionLevelsTest $this */
-        $this->assertSame(0, $professionLevels->getWillModifierForFirstLevel());
+        $this->assertSame(0, $professionLevels->getWillModifierForFirstProfession());
     }
 
     /**
@@ -144,7 +144,7 @@ class ProfessionLevelsTest extends TestWithMockery
     public function new_levels_gives_zero_first_level_intelligence_increment(ProfessionLevels $professionLevels)
     {
         /** @var ProfessionLevelsTest $this */
-        $this->assertSame(0, $professionLevels->getIntelligenceModifierForFirstLevel());
+        $this->assertSame(0, $professionLevels->getIntelligenceModifierForFirstProfession());
     }
 
     /**
@@ -168,7 +168,7 @@ class ProfessionLevelsTest extends TestWithMockery
     public function new_levels_gives_zero_first_level_charisma_increment(ProfessionLevels $professionLevels)
     {
         /** @var ProfessionLevelsTest $this */
-        $this->assertSame(0, $professionLevels->getCharismaModifierForFirstLevel());
+        $this->assertSame(0, $professionLevels->getCharismaModifierForFirstProfession());
     }
 
     /**
@@ -482,12 +482,12 @@ class ProfessionLevelsTest extends TestWithMockery
                 ->atLeast()->once()
                 ->andReturn($this->isPrimaryProperty($propertyName, $professionName) ? ProfessionLevel::PROPERTY_FIRST_LEVEL_MODIFIER : 0);
         }
-        $professionLevels->getStrengthModifierForFirstLevel();
-        $professionLevels->getAgilityModifierForFirstLevel();
-        $professionLevels->getKnackModifierForFirstLevel();
-        $professionLevels->getWillModifierForFirstLevel();
-        $professionLevels->getIntelligenceModifierForFirstLevel();
-        $professionLevels->getCharismaModifierForFirstLevel();
+        $professionLevels->getStrengthModifierForFirstProfession();
+        $professionLevels->getAgilityModifierForFirstProfession();
+        $professionLevels->getKnackModifierForFirstProfession();
+        $professionLevels->getWillModifierForFirstProfession();
+        $professionLevels->getIntelligenceModifierForFirstProfession();
+        $professionLevels->getCharismaModifierForFirstProfession();
     }
 
     /**

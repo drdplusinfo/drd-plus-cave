@@ -266,22 +266,22 @@ class PersonTest extends TestWithMockery
         $professionLevels->shouldReceive('getFirstLevel')->once()->andReturn($firstLevel = \Mockery::mock(ProfessionLevel::class));
         $firstLevel->shouldReceive('getProfession')->once()->andReturn(\Mockery::mock(Profession::class));
 
-        $professionLevels->shouldReceive('getStrengthModifierForFirstLevel')->atLeast()->once()->andReturn(0);
+        $professionLevels->shouldReceive('getStrengthModifierForFirstProfession')->atLeast()->once()->andReturn(0);
         $professionLevels->shouldReceive('getNextLevelsStrengthModifier')->atLeast()->once()->andReturn(0);
 
-        $professionLevels->shouldReceive('getAgilityModifierForFirstLevel')->once()->andReturn(0);
+        $professionLevels->shouldReceive('getAgilityModifierForFirstProfession')->once()->andReturn(0);
         $professionLevels->shouldReceive('getNextLevelsAgilityModifier')->once()->andReturn(0);
 
-        $professionLevels->shouldReceive('getKnackModifierForFirstLevel')->once()->andReturn(0);
+        $professionLevels->shouldReceive('getKnackModifierForFirstProfession')->once()->andReturn(0);
         $professionLevels->shouldReceive('getNextLevelsKnackModifier')->once()->andReturn(0);
 
-        $professionLevels->shouldReceive('getWillModifierForFirstLevel')->once()->andReturn(0);
+        $professionLevels->shouldReceive('getWillModifierForFirstProfession')->once()->andReturn(0);
         $professionLevels->shouldReceive('getNextLevelsWillModifier')->once()->andReturn(0);
 
-        $professionLevels->shouldReceive('getIntelligenceModifierForFirstLevel')->once()->andReturn(0);
+        $professionLevels->shouldReceive('getIntelligenceModifierForFirstProfession')->once()->andReturn(0);
         $professionLevels->shouldReceive('getNextLevelsIntelligenceModifier')->once()->andReturn(0);
 
-        $professionLevels->shouldReceive('getCharismaModifierForFirstLevel')->once()->andReturn(0);
+        $professionLevels->shouldReceive('getCharismaModifierForFirstProfession')->once()->andReturn(0);
         $professionLevels->shouldReceive('getNextLevelsCharismaModifier')->once()->andReturn(0);
 
         $professionLevels->shouldReceive('getWeightKgModifierForFirstLevel')->once()->andReturn(0);

@@ -339,4 +339,12 @@ class PersonProperties extends StrictObject
         return $this->fatigueLimit;
     }
 
+    /**
+     * @return FirstLevelProperties
+     */
+    public function getFirstLevelProperties()
+    {
+        return $this->firstLevelProperties;
+    }
+
 }
