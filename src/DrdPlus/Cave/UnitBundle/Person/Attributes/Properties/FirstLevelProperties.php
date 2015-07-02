@@ -4,9 +4,9 @@ namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Properties;
 use DrdPlus\Cave\TablesBundle\Tables\Tables;
 use DrdPlus\Cave\TablesBundle\Tables\Weight\WeightTable;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\ExceptionalityProperties;
-use DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\ProfessionLevels;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Body\Size;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Body\WeightInKg;
+use DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\ProfessionLevels;
 use DrdPlus\Cave\UnitBundle\Person\Races\Gender;
 use DrdPlus\Cave\UnitBundle\Person\Races\Race;
 use Granam\Strict\Object\StrictObject;
@@ -77,15 +77,50 @@ class FirstLevelProperties extends StrictObject
         ProfessionLevels $professionLevels
     )
     {
-        /** @var string|BaseProperty $propertyName */
-        $propertyName = ucfirst($propertyName);
-        $getPropertyModifier = "get{$propertyName}Modifier";
-        $getPropertyModifierForFirstLevel = "get{$propertyName}ModifierForFirstLevel";
-
         return
-            $race->$getPropertyModifier($gender)
+            $this->getRacePropertyModifier($race, $gender, $propertyName)
             + $this->getExceptionalPropertyIncrement($propertyName, $exceptionalityProperties)->getValue()
-            + $professionLevels->$getPropertyModifierForFirstLevel();
+            + $this->getPropertyModifierForFirstLevel($professionLevels, $propertyName);
+    }
+
+    private function getRacePropertyModifier(Race $race, Gender $gender, $propertyName)
+    {
+        switch ($propertyName) {
+            case Strength::STRENGTH :
+                return $race->getStrengthModifier($gender);
+            case Agility::AGILITY :
+                return $race->getAgilityModifier($gender);
+            case Knack::KNACK :
+                return $race->getKnackModifier($gender);
+            case Will::WILL :
+                return $race->getWillModifier($gender);
+            case Intelligence::INTELLIGENCE :
+                return $race->getIntelligenceModifier($gender);
+            case Charisma::CHARISMA :
+                return $race->getCharismaModifier($gender);
+            default :
+                throw new \LogicException;
+        }
+    }
+
+    private function getPropertyModifierForFirstLevel(ProfessionLevels $professionLevels, $propertyName)
+    {
+        switch ($propertyName) {
+            case Strength::STRENGTH :
+                return $professionLevels->getStrengthModifierForFirstLevel();
+            case Agility::AGILITY :
+                return $professionLevels->getAgilityModifierForFirstLevel();
+            case Knack::KNACK :
+                return $professionLevels->getKnackModifierForFirstLevel();
+            case Will::WILL :
+                return $professionLevels->getWillModifierForFirstLevel();
+            case Intelligence::INTELLIGENCE :
+                return $professionLevels->getIntelligenceModifierForFirstLevel();
+            case Charisma::CHARISMA :
+                return $professionLevels->getCharismaModifierForFirstLevel();
+            default :
+                throw new \LogicException;
+        }
     }
 
     /**
@@ -96,9 +131,22 @@ class FirstLevelProperties extends StrictObject
      */
     private function getExceptionalPropertyIncrement($propertyName, ExceptionalityProperties $exceptionalityProperties)
     {
-        $getProperty = "get{$propertyName}";
-
-        return $exceptionalityProperties->$getProperty();
+        switch ($propertyName) {
+            case Strength::STRENGTH :
+                return $exceptionalityProperties->getStrength();
+            case Agility::AGILITY :
+                return $exceptionalityProperties->getAgility();
+            case Knack::KNACK :
+                return $exceptionalityProperties->getKnack();
+            case Will::WILL :
+                return $exceptionalityProperties->getWill();
+            case Intelligence::INTELLIGENCE :
+                return $exceptionalityProperties->getIntelligence();
+            case Charisma::CHARISMA :
+                return $exceptionalityProperties->getCharisma();
+            default :
+                throw new \LogicException;
+        }
     }
 
     /**
@@ -139,10 +187,7 @@ class FirstLevelProperties extends StrictObject
      */
     private function calculateMaximalBaseProperty($propertyName, Race $race, Gender $gender)
     {
-        // like getStrengthModifier()
-        $getPropertyModifier = 'get' . ucfirst($propertyName) . 'Modifier';
-
-        return self::INITIAL_PROPERTY_INCREASE_LIMIT + $race->$getPropertyModifier($gender);
+        return $this->getRacePropertyModifier($race, $gender, $propertyName) + self::INITIAL_PROPERTY_INCREASE_LIMIT;
     }
 
     private function createFirstLevelAgility(Race $race, Gender $gender, ExceptionalityProperties $exceptionalityProperties, ProfessionLevels $professionLevels)
@@ -185,7 +230,7 @@ class FirstLevelProperties extends StrictObject
         return
             $race->getSizeModifier($gender)
             + $this->getFirstLevelSizeBonusByStrengthIncrement(
-                $this->getFirstLevelStrengthIncrement($exceptionalityProperties, $professionLevels)
+                $this->getFirstLevelStrengthIncrementSummary($exceptionalityProperties, $professionLevels)
             );
     }
 
@@ -203,10 +248,10 @@ class FirstLevelProperties extends StrictObject
         throw new \LogicException('FirstLevel strength increment can not be lesser than zero. Given ' . $firstLevelStrengthIncrement);
     }
 
-    private function getFirstLevelStrengthIncrement(ExceptionalityProperties $exceptionalityProperties, ProfessionLevels $professionLevels)
+    private function getFirstLevelStrengthIncrementSummary(ExceptionalityProperties $exceptionalityProperties, ProfessionLevels $professionLevels)
     {
         return // the race bonus is NOT count for incrementation, doesn't count to size respectively
-            $this->getExceptionalPropertyIncrement(Strength::STRENGTH, $exceptionalityProperties)->getValue()
+            $exceptionalityProperties->getStrength()->getValue()
             + $professionLevels->getStrengthModifierForFirstLevel();
     }
 
