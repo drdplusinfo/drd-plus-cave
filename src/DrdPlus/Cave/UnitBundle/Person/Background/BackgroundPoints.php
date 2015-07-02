@@ -11,9 +11,6 @@ use Granam\Integer\IntegerInterface;
 /**
  * For Doctrine type
  * @see \DrdPlus\Cave\UnitBundle\Person\Background\Parts\BackgroundPointsType
- *
- * @method static BackgroundPoints getEnum($backgroundPoints)
- * @method static BackgroundPoints getIt($backgroundPoints)
  */
 class BackgroundPoints implements EnumInterface, IntegerInterface
 {

@@ -12,8 +12,8 @@ class BackgroundPointsType extends IntegerEnumType
     public static function registerSelf()
     {
         if (!Type::hasType(self::BACKGROUND_POINTS)) {
-            Type::addType(self::BACKGROUND_POINTS, self::getDefaultEnumClass());
-        } else if (Type::getTypesMap()[self::BACKGROUND_POINTS] !== self::getDefaultEnumClass()) {
+            Type::addType(self::BACKGROUND_POINTS, static::class);
+        } else if (Type::getTypesMap()[self::BACKGROUND_POINTS] !== static::class) {
             throw new \LogicException();
         }
     }
