@@ -16,20 +16,37 @@ class FirstLevelProperties extends StrictObject
     const INITIAL_PROPERTY_INCREASE_LIMIT = 3;
 
     /** @var Strength */
+    private $firstLevelUnlimitedStrength;
+
+    /** @var Strength */
     private $firstLevelStrength;
+
+    /** @var Agility */
+    private $firstLevelUnlimitedAgility;
 
     /** @var Agility */
     private $firstLevelAgility;
 
     /** @var Knack */
+    private $firstLevelUnlimitedKnack;
+
+    /** @var Knack */
     private $firstLevelKnack;
+
+    /** @var Will */
+    private $firstLevelUnlimitedWill;
 
     /** @var Will */
     private $firstLevelWill;
 
     /** @var Intelligence */
+    private $firstLevelUnlimitedIntelligence;
+
+    /** @var Intelligence */
     private $firstLevelIntelligence;
 
+    /** @var Charisma */
+    private $firstLevelUnlimitedCharisma;
     /** @var Charisma */
     private $firstLevelCharisma;
 
@@ -150,32 +167,108 @@ class FirstLevelProperties extends StrictObject
     }
 
     /**
-     * @param BaseProperty $firstLevelProperty
+     * @param BaseProperty $firstLevelUnlimitedProperty
      * @param Race $race
      * @param Gender $gender
      *
      * @throws Exceptions\PropertyIsAlreadySet
      * @throws Exceptions\BasePropertyValueExceeded
      */
-    private function setUpBaseProperty(BaseProperty $firstLevelProperty, Race $race, Gender $gender)
+    private function setUpBaseProperty(BaseProperty $firstLevelUnlimitedProperty, Race $race, Gender $gender)
     {
-        $propertyName = $firstLevelProperty->getName();
-        // like firstLevelStrength
-        $firstLevelPropertyName = 'firstLevel' . ucfirst($propertyName);
-        if (isset($this->$firstLevelPropertyName)) {
+        $propertyName = $firstLevelUnlimitedProperty->getName();
+        if (!is_null($this->getFirstLevelProperty($propertyName))) {
             throw new Exceptions\PropertyIsAlreadySet(
-                'The property ' . $firstLevelPropertyName . ' is already set by value ' . var_export($this->$firstLevelPropertyName->getValue(), true)
+                'The property "firstLevel' . ucfirst($propertyName) . '"" is already set by value ' . var_export($this->getFirstLevelProperty($propertyName), true)
             );
         }
 
-        if ($firstLevelProperty->getValue() > $this->calculateMaximalBaseProperty($propertyName, $race, $gender)) {
+        if ($firstLevelUnlimitedProperty->getValue() > $this->calculateMaximalBasePropertyValue($propertyName, $race, $gender)) {
             throw new Exceptions\BasePropertyValueExceeded(
-                'The firstLevel ' . $propertyName . ' can not exceed ' .
-                $this->calculateMaximalBaseProperty($propertyName, $race, $gender) . '. Got ' . $firstLevelProperty->getValue() . '.'
+                'The first level ' . $propertyName . ' can not exceed ' .
+                $this->calculateMaximalBasePropertyValue($propertyName, $race, $gender) . ', got ' . $firstLevelUnlimitedProperty->getValue()
             );
         }
 
-        $this->$firstLevelPropertyName = $firstLevelProperty;
+        switch ($propertyName) {
+            case Strength::STRENGTH :
+                $this->firstLevelUnlimitedStrength = $firstLevelUnlimitedProperty;
+                $this->firstLevelStrength = $this->getLimitedProperty($firstLevelUnlimitedProperty, $race, $gender);
+                break;
+            case Agility::AGILITY :
+                $this->firstLevelUnlimitedAgility = $firstLevelUnlimitedProperty;
+                $this->firstLevelAgility = $this->getLimitedProperty($firstLevelUnlimitedProperty, $race, $gender);
+                break;
+            case Knack::KNACK :
+                $this->firstLevelUnlimitedKnack = $firstLevelUnlimitedProperty;
+                $this->firstLevelKnack = $this->getLimitedProperty($firstLevelUnlimitedProperty, $race, $gender);
+                break;
+            case Will::WILL :
+                $this->firstLevelUnlimitedWill = $firstLevelUnlimitedProperty;
+                $this->firstLevelWill = $this->getLimitedProperty($firstLevelUnlimitedProperty, $race, $gender);
+                break;
+            case Intelligence::INTELLIGENCE :
+                $this->firstLevelUnlimitedIntelligence = $firstLevelUnlimitedProperty;
+                $this->firstLevelIntelligence = $this->getLimitedProperty($firstLevelUnlimitedProperty, $race, $gender);
+                break;
+            case Charisma::CHARISMA :
+                $this->firstLevelUnlimitedCharisma = $firstLevelUnlimitedProperty;
+                $this->firstLevelCharisma = $this->getLimitedProperty($firstLevelUnlimitedProperty, $race, $gender);
+                break;
+            default :
+                throw new \LogicException;
+        }
+    }
+
+    /**
+     * @param BaseProperty $baseProperty
+     * @param Race $race
+     * @param Gender $gender
+     * @return Agility|Charisma|Intelligence|Knack|Strength|Will
+     */
+    private function getLimitedProperty(BaseProperty $baseProperty, Race $race, Gender $gender)
+    {
+        $limit = $this->calculateMaximalBasePropertyValue($baseProperty->getName(), $race, $gender);
+        if ($baseProperty->getValue() <= $limit) {
+            return $baseProperty;
+        }
+
+        switch ($baseProperty->getName()) {
+            case Strength::STRENGTH :
+                return Strength::getIt($limit);
+            case Agility::AGILITY :
+                return Agility::getIt($limit);
+            case Knack::KNACK :
+                return Knack::getIt($limit);
+            case Will::WILL :
+                return Will::getIt($limit);
+            case Intelligence::INTELLIGENCE :
+                return Intelligence::getIt($limit);
+            case Charisma::CHARISMA :
+                return Charisma::getIt($limit);
+            default :
+                throw new \LogicException;
+        }
+    }
+
+    private function getFirstLevelProperty($propertyName)
+    {
+        switch ($propertyName) {
+            case Strength::STRENGTH :
+                return $this->firstLevelStrength;
+            case Agility::AGILITY :
+                return $this->firstLevelAgility;
+            case Knack::KNACK :
+                return $this->firstLevelKnack;
+            case Will::WILL :
+                return $this->firstLevelWill;
+            case Intelligence::INTELLIGENCE :
+                return $this->firstLevelIntelligence;
+            case Charisma::CHARISMA :
+                return $this->firstLevelCharisma;
+            default :
+                throw new \LogicException;
+        }
     }
 
     /**
@@ -185,9 +278,57 @@ class FirstLevelProperties extends StrictObject
      *
      * @return int
      */
-    private function calculateMaximalBaseProperty($propertyName, Race $race, Gender $gender)
+    private function calculateMaximalBasePropertyValue($propertyName, Race $race, Gender $gender)
     {
         return $this->getRacePropertyModifier($race, $gender, $propertyName) + self::INITIAL_PROPERTY_INCREASE_LIMIT;
+    }
+
+    /**
+     * @return int 0+
+     */
+    public function getStrengthLossBecauseOfLimit()
+    {
+        return $this->firstLevelUnlimitedStrength->getValue() - $this->getFirstLevelStrength()->getValue();
+    }
+
+    /**
+     * @return int 0+
+     */
+    public function getAgilityLossBecauseOfLimit()
+    {
+        return $this->firstLevelUnlimitedAgility->getValue() - $this->getFirstLevelAgility()->getValue();
+    }
+
+    /**
+     * @return int 0+
+     */
+    public function getKnackLossBecauseOfLimit()
+    {
+        return $this->firstLevelUnlimitedKnack->getValue() - $this->getFirstLevelKnack()->getValue();
+    }
+
+    /**
+     * @return int 0+
+     */
+    public function getWillLossBecauseOfLimit()
+    {
+        return $this->firstLevelUnlimitedWill->getValue() - $this->getFirstLevelWill()->getValue();
+    }
+
+    /**
+     * @return int 0+
+     */
+    public function getIntelligenceLossBecauseOfLimit()
+    {
+        return $this->firstLevelUnlimitedIntelligence->getValue() - $this->getFirstLevelIntelligence()->getValue();
+    }
+
+    /**
+     * @return int 0+
+     */
+    public function getCharismaLossBecauseOfLimit()
+    {
+        return $this->firstLevelUnlimitedCharisma->getValue() - $this->getFirstLevelCharisma()->getValue();
     }
 
     private function createFirstLevelAgility(Race $race, Gender $gender, ExceptionalityProperties $exceptionalityProperties, ProfessionLevels $professionLevels)
