@@ -1,14 +1,12 @@
 <?php
-namespace DrdPlus\Cave\UnitBundle\Person\Races;
-
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\BaseProperty;
+namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Parts;
 
 class BasePropertyTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
      * @test
-     * @expectedException \DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Exceptions\AbstractPropertyDoesNotHaveTypeName
+     * @expectedException \DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Parts\Exceptions\AbstractPropertyDoesNotHaveTypeName
      */
     public function requesting_property_name_on_abstract_property_cause_exception()
     {
@@ -17,7 +15,7 @@ class BasePropertyTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException \DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Exceptions\CanNotRegisterAbstractProperty
+     * @expectedException \DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Parts\Exceptions\CanNotRegisterAbstractProperty
      */
     public function registering_abstract_property_by_itself_cause_exception()
     {

@@ -1,5 +1,6 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Properties;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Parts\BaseProperty;
 
 /**
  * @method static Charisma getIt(int $value)

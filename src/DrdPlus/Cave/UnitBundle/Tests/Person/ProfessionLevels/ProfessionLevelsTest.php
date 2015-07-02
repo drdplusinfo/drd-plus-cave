@@ -10,7 +10,7 @@ use DrdPlus\Cave\UnitBundle\Person\Professions\Theurgist;
 use DrdPlus\Cave\UnitBundle\Person\Professions\Thief;
 use DrdPlus\Cave\UnitBundle\Person\Professions\Wizard;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Agility;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\BaseProperty;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Parts\BaseProperty;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Charisma;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Intelligence;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Knack;

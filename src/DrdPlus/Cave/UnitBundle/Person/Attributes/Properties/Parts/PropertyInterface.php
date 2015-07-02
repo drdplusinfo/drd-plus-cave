@@ -1,5 +1,5 @@
 <?php
-namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Properties;
+namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Parts;
 
 use Granam\Integer\IntegerInterface;
 
