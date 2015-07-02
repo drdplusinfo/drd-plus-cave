@@ -66,6 +66,12 @@ class Skills extends StrictObject
 
     public function setPerson(Person $person)
     {
+        $this->checkPersonToSet($person);
+        $this->person = $person; // even same person is re-set (to replace "old" instance by new one)
+    }
+
+    private function checkPersonToSet(Person $person)
+    {
         if (is_null($this->getId()) && is_null($person->getProfessionLevels()->getId())
             && $this !== $person->getProfessionLevels()
         ) {
@@ -76,9 +82,7 @@ class Skills extends StrictObject
             throw new Exceptions\PersonIsAlreadySet();
         }
 
-        if (!$this->getPerson()) {
-            $this->person = $person;
-        } elseif ($person->getId() !== $this->getPerson()->getId()) {
+        if ($this->getPerson() && $this->getPerson()->getId() !== $person->getId()) {
             throw new \LogicException();
         }
     }
