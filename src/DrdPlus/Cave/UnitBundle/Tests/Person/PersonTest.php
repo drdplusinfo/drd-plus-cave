@@ -9,6 +9,7 @@ use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Exceptionality;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\ExceptionalityProperties;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Name;
 use DrdPlus\Cave\UnitBundle\Person\Background\Background;
+use DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\ProfessionLevel;
 use DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\ProfessionLevels;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Agility;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Charisma;
@@ -16,6 +17,7 @@ use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Intelligence;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Knack;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Strength;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Will;
+use DrdPlus\Cave\UnitBundle\Person\Professions\Profession;
 use DrdPlus\Cave\UnitBundle\Person\Races\Gender;
 use DrdPlus\Cave\UnitBundle\Person\Races\Race;
 use DrdPlus\Cave\UnitBundle\Tests\TestWithMockery;
@@ -260,6 +262,9 @@ class PersonTest extends TestWithMockery
     {
         $professionLevels = \Mockery::mock(ProfessionLevels::class);
         $professionLevels->shouldReceive('setPerson')->with(\Mockery::type(Person::class))->atLeast()->once()->once();
+
+        $professionLevels->shouldReceive('getFirstLevel')->once()->andReturn($firstLevel = \Mockery::mock(ProfessionLevel::class));
+        $firstLevel->shouldReceive('getProfession')->once()->andReturn(\Mockery::mock(Profession::class));
 
         $professionLevels->shouldReceive('getStrengthModifierForFirstLevel')->atLeast()->once()->andReturn(0);
         $professionLevels->shouldReceive('getNextLevelsStrengthModifier')->atLeast()->once()->andReturn(0);

@@ -11,6 +11,7 @@ use DrdPlus\Cave\UnitBundle\Person\Attributes\GameCharacteristics\Combat\Attack;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\GameCharacteristics\Combat\Defense;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\GameCharacteristics\Combat\Fight;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\GameCharacteristics\Combat\Shooting;
+use DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\ProfessionLevel;
 use DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\ProfessionLevels;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Agility;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Body\Size;
@@ -25,6 +26,7 @@ use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Knack;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\PersonProperties;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Strength;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Will;
+use DrdPlus\Cave\UnitBundle\Person\Professions\Profession;
 use DrdPlus\Cave\UnitBundle\Person\Races\Gender;
 use DrdPlus\Cave\UnitBundle\Person\Races\Race;
 use DrdPlus\Cave\UnitBundle\Person\Person;
@@ -226,6 +228,10 @@ class PersonPropertiesTest extends TestWithMockery
         $person->shouldReceive('getProfessionLevels')
             ->atLeast()->once()
             ->andReturn($professionLevels = \Mockery::mock(ProfessionLevels::class));
+
+        $this->addGetter($professionLevels, 'getFirstLevel', $firstLevel = \Mockery::mock(ProfessionLevel::class));
+        $this->addGetter($firstLevel, 'getProfession', \Mockery::mock(Profession::class));
+
         $this->addGetter($professionLevels, 'getStrengthModifierForFirstLevel', $firstLevelStrength);
         $this->addGetter($professionLevels, 'getAgilityModifierForFirstLevel', $firstLevelAgility);
         $this->addGetter($professionLevels, 'getKnackModifierForFirstLevel', $firstLevelKnack);

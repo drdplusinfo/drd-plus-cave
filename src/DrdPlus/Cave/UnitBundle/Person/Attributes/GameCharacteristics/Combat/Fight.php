@@ -2,31 +2,34 @@
 namespace DrdPlus\Cave\UnitBundle\Person\Attributes\GameCharacteristics\Combat;
 
 use DrdPlus\Cave\ToolsBundle\Numbers\SumAndRound;
-use DrdPlus\Cave\UnitBundle\Person\Professions\Fighter;
-use DrdPlus\Cave\UnitBundle\Person\Professions\Priest;
-use DrdPlus\Cave\UnitBundle\Person\Professions\Ranger;
-use DrdPlus\Cave\UnitBundle\Person\Professions\Theurgist;
-use DrdPlus\Cave\UnitBundle\Person\Professions\Thief;
-use DrdPlus\Cave\UnitBundle\Person\Professions\Wizard;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Agility;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Body\Size;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Charisma;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Intelligence;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Knack;
-use DrdPlus\Cave\UnitBundle\Person\Person;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\PersonProperties;
+use DrdPlus\Cave\UnitBundle\Person\Professions\Fighter;
+use DrdPlus\Cave\UnitBundle\Person\Professions\Priest;
+use DrdPlus\Cave\UnitBundle\Person\Professions\Profession;
+use DrdPlus\Cave\UnitBundle\Person\Professions\Ranger;
+use DrdPlus\Cave\UnitBundle\Person\Professions\Theurgist;
+use DrdPlus\Cave\UnitBundle\Person\Professions\Thief;
+use DrdPlus\Cave\UnitBundle\Person\Professions\Wizard;
 use Granam\Strict\Object\StrictObject;
 
 class Fight extends StrictObject
 {
 
-    /**
-     * @var Person
-     */
-    private $person;
+    /** @var Profession */
+    private $profession;
 
-    public function __construct(Person $person)
+    /** @var PersonProperties */
+    private $personProperties;
+
+    public function __construct(Profession $profession, PersonProperties $personProperties)
     {
-        $this->person = $person;
+        $this->profession = $profession;
+        $this->personProperties = $personProperties;
     }
 
     /**
@@ -34,21 +37,21 @@ class Fight extends StrictObject
      */
     public function getValue()
     {
-        switch ($this->person->getProfessionLevels()->getFirstLevel()->getProfession()->getName()) {
+        switch ($this->profession->getName()) {
             case Fighter::FIGHTER :
-                return $this->getFighterFightValue($this->person->getPersonProperties()->getAgility(), $this->person->getPersonProperties()->getSize());
+                return $this->getFighterFightValue($this->personProperties->getAgility(), $this->personProperties->getSize());
             case Thief::THIEF :
-                return $this->getThiefFightValue($this->person->getPersonProperties()->getAgility(), $this->person->getPersonProperties()->getKnack(), $this->person->getPersonProperties()->getSize());
+                return $this->getThiefFightValue($this->personProperties->getAgility(), $this->personProperties->getKnack(), $this->personProperties->getSize());
             case Ranger::RANGER :
-                return $this->getRangerFightValue($this->person->getPersonProperties()->getAgility(), $this->person->getPersonProperties()->getKnack(), $this->person->getPersonProperties()->getSize());
+                return $this->getRangerFightValue($this->personProperties->getAgility(), $this->personProperties->getKnack(), $this->personProperties->getSize());
             case Wizard::WIZARD :
-                return $this->getWizardFightValue($this->person->getPersonProperties()->getAgility(), $this->person->getPersonProperties()->getIntelligence(), $this->person->getPersonProperties()->getSize());
+                return $this->getWizardFightValue($this->personProperties->getAgility(), $this->personProperties->getIntelligence(), $this->personProperties->getSize());
             case Theurgist::THEURGIST :
-                return $this->geTheurgistFightValue($this->person->getPersonProperties()->getAgility(), $this->person->getPersonProperties()->getIntelligence(), $this->person->getPersonProperties()->getSize());
+                return $this->geTheurgistFightValue($this->personProperties->getAgility(), $this->personProperties->getIntelligence(), $this->personProperties->getSize());
             case Priest::PRIEST :
-                return $this->getPriestFightValue($this->person->getPersonProperties()->getAgility(), $this->person->getPersonProperties()->getCharisma(), $this->person->getPersonProperties()->getSize());
+                return $this->getPriestFightValue($this->personProperties->getAgility(), $this->personProperties->getCharisma(), $this->personProperties->getSize());
             default :
-                throw new \LogicException('Unknown profession of code ' . $this->person->getProfessionLevels()->getFirstLevel()->getProfession()->getName());
+                throw new \LogicException('Unknown profession of code ' . $this->profession->getName());
         }
     }
 

@@ -148,7 +148,7 @@ class PersonProperties extends StrictObject
         $this->dangerousness = new Dangerousness($this->getStrength(), $this->getWill(), $this->getCharisma());
         $this->dignity = new Dignity($this->getIntelligence(), $this->getWill(), $this->getCharisma());
 
-        $this->fight = new Fight($person);
+        $this->fight = new Fight($person->getProfessionLevels()->getFirstLevel()->getProfession(), $this);
         $this->attack = new Attack($this->getAgility());
         $this->defense = new Defense($this->getAgility());
         $this->shooting = new Shooting($this->getKnack());
