@@ -4,6 +4,7 @@ namespace DrdPlus\Cave\UnitBundle\Person\Skills\Psychical;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Intelligence;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Will;
 use DrdPlus\Cave\UnitBundle\Person\Skills\AbstractSkill;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity()

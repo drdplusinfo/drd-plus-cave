@@ -1,6 +1,8 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Person\Skills\Physical;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
  * @ORM\Table()
  * @ORM\Entity()

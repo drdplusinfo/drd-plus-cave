@@ -2,6 +2,7 @@
 namespace DrdPlus\Cave\UnitBundle\Person\Skills;
 
 use Granam\Strict\Object\StrictObject;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity()

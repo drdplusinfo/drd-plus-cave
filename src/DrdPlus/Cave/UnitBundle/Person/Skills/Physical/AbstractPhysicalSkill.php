@@ -4,6 +4,7 @@ namespace DrdPlus\Cave\UnitBundle\Person\Skills\Physical;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Agility;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Strength;
 use DrdPlus\Cave\UnitBundle\Person\Skills\AbstractSkill;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity()

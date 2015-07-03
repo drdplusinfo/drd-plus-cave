@@ -4,6 +4,7 @@ namespace DrdPlus\Cave\UnitBundle\Person\Skills\Combined;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Charisma;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Knack;
 use DrdPlus\Cave\UnitBundle\Person\Skills\AbstractSkill;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity()
