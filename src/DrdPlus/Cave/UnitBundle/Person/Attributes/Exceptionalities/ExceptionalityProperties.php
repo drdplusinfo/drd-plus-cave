@@ -24,47 +24,47 @@ abstract class ExceptionalityProperties extends StrictObject
     /**
      * @var Exceptionality|null
      *
-     * @ORM\Column(type="exceptionality")
+     * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Exceptionality")
      */
     protected $exceptionality;
 
     /**
-     * @var
+     * @var Strength
      *
      * @ORM\Column(type="strength")
      */
     protected $strength;
 
     /**
-     * @var
+     * @var Agility
      *
      * @ORM\Column(type="agility")
      */
     protected $agility;
 
     /**
-     * @var
+     * @var Knack
      *
      * @ORM\Column(type="knack")
      */
     protected $knack;
 
     /**
-     * @var
+     * @var Will
      *
      * @ORM\Column(type="will")
      */
     protected $will;
 
     /**
-     * @var
+     * @var Intelligence
      *
      * @ORM\Column(type="intelligence")
      */
     protected $intelligence;
 
     /**
-     * @var
+     * @var Charisma
      *
      * @ORM\Column(type="charisma")
      */
@@ -97,6 +97,12 @@ abstract class ExceptionalityProperties extends StrictObject
 
     public function setExceptionality(Exceptionality $exceptionality)
     {
+        $this->checkExceptionalityToSet($exceptionality);
+        $this->exceptionality = $exceptionality; // instance of same ID is replaced anyway
+    }
+
+    private function checkExceptionalityToSet(Exceptionality $exceptionality)
+    {
         if (is_null($this->getId()) && is_null($exceptionality->getExceptionalityProperties()->getId())
             && $this !== $exceptionality->getExceptionalityProperties()
         ) {
@@ -107,9 +113,7 @@ abstract class ExceptionalityProperties extends StrictObject
             throw new \LogicException;
         }
 
-        if (!$this->getExceptionality()) {
-            $this->exceptionality = $exceptionality;
-        } elseif ($exceptionality->getId() !== $this->getExceptionality()->getId()) {
+        if ($this->getExceptionality() && $this->getExceptionality()->getId() !== $exceptionality->getId()) {
             throw new \LogicException;
         }
     }

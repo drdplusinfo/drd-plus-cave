@@ -49,9 +49,9 @@ class Person extends StrictObject
     private $gender;
 
     /**
-     * @var PersonProperties
+     * @var Exceptionality
      *
-     * @ORM\Column(type="exceptionality")
+     * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Exceptionality")
      */
     private $exceptionality;
 
