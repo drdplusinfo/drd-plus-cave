@@ -3,12 +3,21 @@ namespace DrdPlus\Cave\UnitBundle\Person\Skills;
 
 use Granam\Strict\Object\StrictObject;
 
+/**
+ * @ORM\Entity()
+ * @ORM\Table()
+ * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\DiscriminatorColumn(name="discr", type="string")
+ * @ORM\DiscriminatorMap({"physical" = "AbstractPhysicalSkill", "psychical" = "AbstractPsychicalSkill", "combined" = "AbstractCombinedSkill"})
+ */
 abstract class AbstractSkill extends StrictObject
 {
     const MAX_SKILL_RANK = 3;
 
     /**
      * @var SkillRank
+     *
+     * @ORM\Column(type="skill_rank")
      */
     protected $skillRank;
 
@@ -28,7 +37,7 @@ abstract class AbstractSkill extends StrictObject
             throw new \LogicException("Higher skill rank is already set. Got {$skillRank->getValue()}, current is  {$this->getSkillRank()->getValue()}");
         }
         if ($this->getSkillRank()->getValue() === static::MAX_SKILL_RANK) {
-            throw new \LogicException("Max rank already set");
+            throw new \LogicException('Max rank (' . static::MAX_SKILL_RANK . ') already set');
         }
         $this->skillRank = $skillRank;
     }
