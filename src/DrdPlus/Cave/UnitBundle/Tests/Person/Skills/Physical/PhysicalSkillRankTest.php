@@ -1,13 +1,13 @@
 <?php
-namespace DrdPlus\Cave\UnitBundle\Tests\Person\Skills\Combined;
+namespace DrdPlus\Cave\UnitBundle\Tests\Person\Skills\Physical;
 
 use DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\ProfessionLevel;
-use DrdPlus\Cave\UnitBundle\Person\Skills\Combined\CombinedSkillPoint;
-use DrdPlus\Cave\UnitBundle\Person\Skills\Combined\CombinedSkillRank;
+use DrdPlus\Cave\UnitBundle\Person\Skills\Physical\PhysicalSkillPoint;
+use DrdPlus\Cave\UnitBundle\Person\Skills\Physical\PhysicalSkillRank;
 use DrdPlus\Cave\UnitBundle\Tests\TestWithMockery;
 use Granam\Integer\IntegerObject;
 
-class CombinedSkillRankTest extends TestWithMockery
+class PhysicalSkillRankTest extends TestWithMockery
 {
 
     /**
@@ -18,9 +18,9 @@ class CombinedSkillRankTest extends TestWithMockery
      */
     public function I_can_create_skill_rank($skillRankValue)
     {
-        $zeroSkillRank = new CombinedSkillRank(
+        $zeroSkillRank = new PhysicalSkillRank(
             $this->createProfessionLevel(),
-            $this->createCombinedSkillPoint(),
+            $this->createPhysicalSkillPoint(),
             $this->createRequiredRankValue($skillRankValue)
         );
 
@@ -38,9 +38,9 @@ class CombinedSkillRankTest extends TestWithMockery
      */
     public function I_can_not_create_negative_skill_rank()
     {
-        new CombinedSkillRank(
+        new PhysicalSkillRank(
             $this->createProfessionLevel(),
-            $this->createCombinedSkillPoint(),
+            $this->createPhysicalSkillPoint(),
             $this->createRequiredRankValue(-1)
         );
     }
@@ -51,9 +51,9 @@ class CombinedSkillRankTest extends TestWithMockery
      */
     public function I_can_not_create_skill_rank_with_value_of_four()
     {
-        new CombinedSkillRank(
+        new PhysicalSkillRank(
             $this->createProfessionLevel(),
-            $this->createCombinedSkillPoint(),
+            $this->createPhysicalSkillPoint(),
             $this->createRequiredRankValue(4)
         );
     }
@@ -69,11 +69,11 @@ class CombinedSkillRankTest extends TestWithMockery
     }
 
     /**
-     * @return \Mockery\MockInterface|CombinedSkillPoint
+     * @return \Mockery\MockInterface|PhysicalSkillPoint
      */
-    private function createCombinedSkillPoint()
+    private function createPhysicalSkillPoint()
     {
-        $combinedSkillPoint = $this->mockery(CombinedSkillPoint::class);
+        $combinedSkillPoint = $this->mockery(PhysicalSkillPoint::class);
 
         return $combinedSkillPoint;
     }
