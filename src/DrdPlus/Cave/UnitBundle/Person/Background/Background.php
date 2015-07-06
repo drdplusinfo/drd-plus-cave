@@ -36,9 +36,9 @@ class Background extends StrictObject
 
     public function __construct(
         BackgroundPoints $backgroundPoints,
-        Heritage $heritage, // requires background points to be created
-        BackgroundSkills $backgroundSkills, // requires heritage to be created
-        BelongingsValue $belongingsValue // requires heritage to be created
+        Heritage $heritage,
+        BackgroundSkills $backgroundSkills,
+        BelongingsValue $belongingsValue
     )
     {
         $this->backgroundPoints = $backgroundPoints;

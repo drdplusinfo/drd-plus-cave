@@ -8,6 +8,7 @@ use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Intelligence;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Knack;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Strength;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Will;
+use DrdPlus\Cave\UnitBundle\Person\Background\BackgroundSkills;
 use DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\ProfessionLevel;
 use Granam\Integer\IntegerInterface;
 use Granam\Strict\Object\StrictObject;
@@ -57,21 +58,28 @@ abstract class AbstractSkillPoint extends StrictObject implements IntegerInterfa
     private $secondPaidSkillPoint;
 
     /**
+     * You can pay by a level (by its property increment respectively) or by two another skill points (as combined and psychical for a new physical)
+     *
      * @param ProfessionLevel $professionLevel
+     * @param BackgroundSkills $backgroundSkills
      * @param AbstractSkillPoint $firstPaidSkillPoint = null
      * @param AbstractSkillPoint $secondPaidSkillPoint = null
      */
-    protected function __construct(ProfessionLevel $professionLevel, AbstractSkillPoint $firstPaidSkillPoint = null, AbstractSkillPoint $secondPaidSkillPoint = null)
+    protected function __construct(ProfessionLevel $professionLevel, BackgroundSkills $backgroundSkills, AbstractSkillPoint $firstPaidSkillPoint = null, AbstractSkillPoint $secondPaidSkillPoint = null)
     {
-        $this->checkPayBySkillPoints($firstPaidSkillPoint, $firstPaidSkillPoint);
-        $this->checkPayByLevelPropertiesIncrease($professionLevel, $firstPaidSkillPoint, $secondPaidSkillPoint);
+        if (!$this->isPaidBySkillPoints($firstPaidSkillPoint, $secondPaidSkillPoint) || !$this->isPaidByFirstLevelBackground($professionLevel, $backgroundSkills)) {
+            $this->checkPayByLevelPropertiesIncrease($professionLevel);
+        }
         $this->professionLevel = $professionLevel;
         $this->firstPaidSkillPoint = $firstPaidSkillPoint;
         $this->secondPaidSkillPoint = $secondPaidSkillPoint;
     }
 
-    protected function checkPayBySkillPoints(AbstractSkillPoint $firstPaidSkillPoint = null, AbstractSkillPoint $secondPaidSkillPoint = null)
+    protected function isPaidBySkillPoints(AbstractSkillPoint $firstPaidSkillPoint = null, AbstractSkillPoint $secondPaidSkillPoint = null)
     {
+        if (!$firstPaidSkillPoint && !$secondPaidSkillPoint) {
+            return false;
+        }
         if ((!$firstPaidSkillPoint && $secondPaidSkillPoint) || ($firstPaidSkillPoint && !$secondPaidSkillPoint)) {
             throw new \LogicException(
                 'You can not pay by just a single skill point, the price is two skill points'
@@ -79,6 +87,8 @@ abstract class AbstractSkillPoint extends StrictObject implements IntegerInterfa
         }
         $this->checkPaidSkillPoint($firstPaidSkillPoint);
         $this->checkPaidSkillPoint($secondPaidSkillPoint);
+
+        return true;
     }
 
     protected function checkPaidSkillPoint(AbstractSkillPoint $skillPoint)
@@ -90,12 +100,46 @@ abstract class AbstractSkillPoint extends StrictObject implements IntegerInterfa
         }
     }
 
-    protected function checkPayByLevelPropertiesIncrease(ProfessionLevel $professionLevel, AbstractSkillPoint $firstPaidSkillPoint = null, AbstractSkillPoint $secondPaidSkillPoint = null)
+    /**
+     * @param ProfessionLevel $professionLevel
+     * @param BackgroundSkills $backgroundSkills
+     *
+     * @return bool
+     */
+    protected function isPaidByFirstLevelBackground(ProfessionLevel $professionLevel, BackgroundSkills $backgroundSkills = null)
     {
-        if ($firstPaidSkillPoint && $secondPaidSkillPoint) {
-            return true; // the skill point has been paid by another skill points
+        if (!$professionLevel->isFirstLevel()) {
+            return false;
+        }
+        if (!$backgroundSkills) {
+            throw new \LogicException(
+                "For first level are required background skills"
+            );
+        }
+        $relatedProperties = $this->sortAlphabetically($this->getRelatedProperties());
+        $firstLevelSkillPoints = 0;
+        switch ($relatedProperties) {
+            case $this->sortAlphabetically([Strength::STRENGTH, Agility::AGILITY]) :
+                $firstLevelSkillPoints = $backgroundSkills->getPhysicalSkillPoints($professionLevel->getProfession());
+                break;
+            case $this->sortAlphabetically([Will::WILL, Intelligence::INTELLIGENCE]) :
+                $firstLevelSkillPoints = $backgroundSkills->getPsychicalSkillPoints($professionLevel->getProfession());
+                break;
+            case $this->sortAlphabetically([Knack::KNACK, Charisma::CHARISMA]) :
+                $firstLevelSkillPoints = $backgroundSkills->getCombinedSkillPoints($professionLevel->getProfession());
+                break;
+        }
+        if ($firstLevelSkillPoints < 1) {
+            throw new \LogicException(
+                "First level skill point has to come from the background. No skill point for properties " . implode(',', $relatedProperties) . " is available"
+            );
         }
 
+        return true;
+    }
+
+    protected function checkPayByLevelPropertiesIncrease(ProfessionLevel $professionLevel)
+    {
         $relatedProperties = $this->sortAlphabetically($this->getRelatedProperties());
         $missingPropertyIncrement = false;
         switch ($relatedProperties) {
@@ -115,8 +159,6 @@ abstract class AbstractSkillPoint extends StrictObject implements IntegerInterfa
                 'The profession level of ID ' . $professionLevel->getId() . ' has to have incremented either ' . implode(' or ', $this->getRelatedProperties())
             );
         }
-
-        return true;
     }
 
     /**
