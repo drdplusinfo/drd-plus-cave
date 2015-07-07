@@ -107,7 +107,7 @@ abstract class AbstractSkillPoint extends StrictObject implements IntegerInterfa
      */
     protected function __construct(ProfessionLevel $professionLevel, BackgroundSkills $backgroundSkills = null, AbstractSkillPoint $firstPaidSkillPoint = null, AbstractSkillPoint $secondPaidSkillPoint = null)
     {
-        if ($professionLevel->isFirstLevel()) {
+        if ($professionLevel->isFirstLevel() && $backgroundSkills) {
             $this->checkPayByFirstLevelBackground($professionLevel, $backgroundSkills);
         } else if ($firstPaidSkillPoint || $secondPaidSkillPoint) {
             $this->checkPayBySkillPoints($firstPaidSkillPoint, $secondPaidSkillPoint);
@@ -126,11 +126,8 @@ abstract class AbstractSkillPoint extends StrictObject implements IntegerInterfa
      *
      * @return bool
      */
-    protected function checkPayByFirstLevelBackground(ProfessionLevel $professionLevel, BackgroundSkills $backgroundSkills = null)
+    protected function checkPayByFirstLevelBackground(ProfessionLevel $professionLevel, BackgroundSkills $backgroundSkills)
     {
-        if (!$backgroundSkills) {
-            throw new \LogicException("Background skills are needed for first level skill point");
-        }
         $relatedProperties = $this->sortAlphabetically($this->getRelatedProperties());
         $firstLevelSkillPoints = 0;
         switch ($relatedProperties) {
