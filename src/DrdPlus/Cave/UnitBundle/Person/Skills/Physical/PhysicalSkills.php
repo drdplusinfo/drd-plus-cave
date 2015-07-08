@@ -3,7 +3,6 @@ namespace DrdPlus\Cave\UnitBundle\Person\Skills\Physical;
 
 use DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\ProfessionLevel;
 use DrdPlus\Cave\UnitBundle\Person\Skills\AbstractSkillsGroup;
-use DrdPlus\Cave\UnitBundle\Person\Skills\Psychical\AbstractPsychicalSkill;
 
 /**
  * PhysicalSkills
@@ -13,6 +12,7 @@ use DrdPlus\Cave\UnitBundle\Person\Skills\Psychical\AbstractPsychicalSkill;
  */
 class PhysicalSkills extends AbstractSkillsGroup
 {
+    const PHYSICAL = 'physical';
 
     /**
      * @var integer
@@ -56,6 +56,9 @@ class PhysicalSkills extends AbstractSkillsGroup
     /** @var Swimming */
     private $swimming;
 
+    /** @var \ArrayIterator */
+    private $skillsIterator;
+
     public function __construct(ProfessionLevel $professionLevel)
     {
         $this->armorWearing = new ArmorWearing($this->createZeroSkillRank($professionLevel));
@@ -74,7 +77,47 @@ class PhysicalSkills extends AbstractSkillsGroup
         $this->sailing = new Sailing($this->createZeroSkillRank($professionLevel));
         $this->shieldUsage = new ShieldUsage($this->createZeroSkillRank($professionLevel));
         $this->swimming = new Swimming($this->createZeroSkillRank($professionLevel));
+
+        $this->skillsIterator = $this->createSkillsIterator();
     }
+
+    private function createSkillsIterator()
+    {
+        return new \ArrayIterator([
+            $this->getArmorWearing(),
+            $this->getAthletics(),
+            $this->getBlacksmithing(),
+            $this->getBoatDriving(),
+            $this->getCartDriving(),
+            $this->getCityMoving(),
+            $this->getClimbingAndHillwalking(),
+            $this->getFastMarsh(),
+            $this->getFightWithWeapon(),
+            $this->getFlying(),
+            $this->getForestMoving(),
+            $this->getMovingInMountains(),
+            $this->getRiding(),
+            $this->getSailing(),
+            $this->getShieldUsage(),
+            $this->getSwimming(),
+        ]);
+    }
+
+    /** @return \ArrayIterator */
+    protected function getSkillsIterator()
+    {
+        return $this->skillsIterator;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getSkillsGroupName()
+    {
+        self::PHYSICAL;
+    }
+
 
     /**
      * @return int
@@ -211,46 +254,4 @@ class PhysicalSkills extends AbstractSkillsGroup
     {
         return $this->swimming;
     }
-
-    /**
-     * @return int
-     */
-    public function getNextLevelsSkillRankSummary()
-    {
-        // TODO next levels only
-        return (int)array_sum(
-            array_map(
-                function (AbstractPsychicalSkill $skill) {
-                    return $skill->getSkillRanks()->getValue();
-                },
-                [
-                    $this->getArmorWearing(),
-                    $this->getAthletics(),
-                    $this->getBlacksmithing(),
-                    $this->getBoatDriving(),
-                    $this->getCartDriving(),
-                    $this->getCityMoving(),
-                    $this->getClimbingAndHillwalking(),
-                    $this->getFastMarsh(),
-                    $this->getFightWithWeapon(),
-                    $this->getFlying(),
-                    $this->getForestMoving(),
-                    $this->getMovingInMountains(),
-                    $this->getRiding(),
-                    $this->getSailing(),
-                    $this->getShieldUsage(),
-                    $this->getSwimming(),
-                ]
-            )
-        );
-    }
-
-    /**
-     * @return int
-     */
-    public function getFirstLevelsSkillRankSummary()
-    {
-        // TODO: Implement getFirstLevelsSkillRankSummary() method.
-    }
-
 }

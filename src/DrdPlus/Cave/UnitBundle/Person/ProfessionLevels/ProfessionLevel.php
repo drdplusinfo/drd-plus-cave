@@ -14,7 +14,7 @@ use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Will;
 use Granam\Strict\Object\StrictObject;
 
 /**
- * ProfessionLevel
+ * TODO what about classes ProfessionFirstLevel and ProfessionNextLevel ?
  */
 abstract class ProfessionLevel extends StrictObject
 {
@@ -234,6 +234,11 @@ abstract class ProfessionLevel extends StrictObject
     public function isFirstLevel()
     {
         return $this->getLevelValue()->getValue() === 1;
+    }
+
+    public function isNextLevel()
+    {
+        return $this->getLevelValue()->getValue() > 1;
     }
 
     /**

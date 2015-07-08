@@ -4,8 +4,8 @@ namespace DrdPlus\Cave\UnitBundle\Tests\Person\Skills\Physical;
 use DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\ProfessionLevel;
 use DrdPlus\Cave\UnitBundle\Person\Skills\Physical\PhysicalSkillPoint;
 use DrdPlus\Cave\UnitBundle\Person\Skills\Physical\PhysicalSkillRank;
+use DrdPlus\Cave\UnitBundle\Person\Skills\RequiredRankValue;
 use DrdPlus\Cave\UnitBundle\Tests\TestWithMockery;
-use Granam\Integer\IntegerObject;
 
 class PhysicalSkillRankTest extends TestWithMockery
 {
@@ -80,11 +80,11 @@ class PhysicalSkillRankTest extends TestWithMockery
 
     /**
      * @param int $value
-     * @return \Mockery\MockInterface|IntegerObject
+     * @return \Mockery\MockInterface|RequiredRankValue
      */
     private function createRequiredRankValue($value)
     {
-        $requiredRankValue = $this->mockery(IntegerObject::class);
+        $requiredRankValue = $this->mockery(RequiredRankValue::class);
         $requiredRankValue->shouldReceive('getValue')
             ->atLeast()->once()
             ->andReturn($value);

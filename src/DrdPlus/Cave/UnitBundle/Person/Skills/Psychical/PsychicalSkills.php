@@ -12,6 +12,9 @@ use DrdPlus\Cave\UnitBundle\Person\Skills\AbstractSkillsGroup;
  */
 class PsychicalSkills extends AbstractSkillsGroup
 {
+
+    const PSYCHICAL = 'psychical';
+
     /**
      * @var integer
      *
@@ -54,6 +57,9 @@ class PsychicalSkills extends AbstractSkillsGroup
     /** @var Zoology */
     private $zoology;
 
+    /** @var \ArrayIterator */
+    private $skillsIterator;
+
     public function __construct(ProfessionLevel $professionLevel)
     {
         $this->astronomy = new Astronomy($this->createZeroSkillRank($professionLevel));
@@ -72,6 +78,44 @@ class PsychicalSkills extends AbstractSkillsGroup
         $this->technology = new Technology($this->createZeroSkillRank($professionLevel));
         $this->theology = new Theology($this->createZeroSkillRank($professionLevel));
         $this->zoology = new Zoology($this->createZeroSkillRank($professionLevel));
+
+        $this->skillsIterator = $this->createSkillsIterator();
+    }
+
+    private function createSkillsIterator()
+    {
+        return new \ArrayIterator([
+            $this->getAstronomy(),
+            $this->getBotany(),
+            $this->getEtiquetteOfUnderworld(),
+            $this->getForeignLanguage(),
+            $this->getGeographyOfACountry(),
+            $this->getHandlingWithMagicalItems(),
+            $this->getHistoriography(),
+            $this->getKnowledgeOfACity(),
+            $this->getKnowledgeOfWorld(),
+            $this->getMapsDrawing(),
+            $this->getMythology(),
+            $this->getReadingAndWriting(),
+            $this->getSocialEtiquette(),
+            $this->getTechnology(),
+            $this->getTheology(),
+            $this->getZoology()
+        ]);
+    }
+
+    /** @return \ArrayIterator */
+    protected function getSkillsIterator()
+    {
+        return $this->skillsIterator;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSkillsGroupName()
+    {
+        return self::PSYCHICAL;
     }
 
     /**
@@ -208,47 +252,6 @@ class PsychicalSkills extends AbstractSkillsGroup
     public function getZoology()
     {
         return $this->zoology;
-    }
-
-    /**
-     * @return int
-     */
-    public function getNextLevelsSkillRankSummary()
-    {
-        // TODO next levels only
-        return (int)array_sum(
-            array_map(
-                function (AbstractPsychicalSkill $skill) {
-                    return $skill->getSkillRanks()->getValue();
-                },
-                [
-                    $this->getAstronomy(),
-                    $this->getBotany(),
-                    $this->getEtiquetteOfUnderworld(),
-                    $this->getForeignLanguage(),
-                    $this->getGeographyOfACountry(),
-                    $this->getHandlingWithMagicalItems(),
-                    $this->getHistoriography(),
-                    $this->getKnowledgeOfACity(),
-                    $this->getKnowledgeOfWorld(),
-                    $this->getMapsDrawing(),
-                    $this->getMythology(),
-                    $this->getReadingAndWriting(),
-                    $this->getSocialEtiquette(),
-                    $this->getTechnology(),
-                    $this->getTheology(),
-                    $this->getZoology(),
-                ]
-            )
-        );
-    }
-
-    /**
-     * @return int
-     */
-    public function getFirstLevelsSkillRankSummary()
-    {
-        // TODO: Implement getFirstLevelsSkillRankSummary() method.
     }
 
 }

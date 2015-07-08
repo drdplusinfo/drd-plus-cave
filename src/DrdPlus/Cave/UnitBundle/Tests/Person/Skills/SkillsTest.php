@@ -1,5 +1,4 @@
 <?php
-
 namespace DrdPlus\Cave\UnitBundle\Person\Skills;
 
 use DrdPlus\Cave\UnitBundle\Person\Person;

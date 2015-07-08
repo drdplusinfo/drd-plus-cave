@@ -4,8 +4,8 @@ namespace DrdPlus\Cave\UnitBundle\Tests\Person\Skills\Psychical;
 use DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\ProfessionLevel;
 use DrdPlus\Cave\UnitBundle\Person\Skills\Psychical\PsychicalSkillPoint;
 use DrdPlus\Cave\UnitBundle\Person\Skills\Psychical\PsychicalSkillRank;
+use DrdPlus\Cave\UnitBundle\Person\Skills\RequiredRankValue;
 use DrdPlus\Cave\UnitBundle\Tests\TestWithMockery;
-use Granam\Integer\IntegerObject;
 
 class PsychicalSkillRankTest extends TestWithMockery
 {
@@ -80,11 +80,11 @@ class PsychicalSkillRankTest extends TestWithMockery
 
     /**
      * @param int $value
-     * @return \Mockery\MockInterface|IntegerObject
+     * @return \Mockery\MockInterface|RequiredRankValue
      */
     private function createRequiredRankValue($value)
     {
-        $requiredRankValue = $this->mockery(IntegerObject::class);
+        $requiredRankValue = $this->mockery(RequiredRankValue::class);
         $requiredRankValue->shouldReceive('getValue')
             ->atLeast()->once()
             ->andReturn($value);

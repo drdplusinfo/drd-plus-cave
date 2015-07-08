@@ -12,6 +12,7 @@ use DrdPlus\Cave\UnitBundle\Person\Skills\AbstractSkillsGroup;
  */
 class CombinedSkills extends AbstractSkillsGroup
 {
+    const COMBINED = 'combined';
 
     /**
      * @var integer
@@ -21,82 +22,47 @@ class CombinedSkills extends AbstractSkillsGroup
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-    /**
-     * @var BigHandwork
-     */
+    /** @var BigHandwork */
     private $bigHandwork;
-    /**
-     * @var Cooking
-     */
+    /** @var Cooking */
     private $cooking;
-    /**
-     * @var Dancing
-     */
+    /** @var Dancing */
     private $dancing;
-    /**
-     * @var DuskSight
-     */
+    /** @var DuskSight */
     private $duskSight;
-    /**
-     * @var FightWithShootingWeapons
-     */
+    /** @var FightWithShootingWeapons */
     private $fightWithShootingWeapons;
-    /**
-     * @var FirstAid
-     */
+    /** @var FirstAid */
     private $firstAid;
-    /**
-     * @var HandingWithAnimals
-     */
+    /** @var HandingWithAnimals */
     private $handingWithAnimals;
-    /**
-     * @var Handwork
-     */
+    /** @var Handwork */
     private $handwork;
-    /**
-     * @var Gambling
-     */
+    /** @var Gambling */
     private $gambling;
-    /**
-     * @var Herbalism
-     */
+    /** @var Herbalism */
     private $herbalism;
-    /**
-     * @var HuntingAndFishing
-     */
+    /** @var HuntingAndFishing */
     private $huntingAndFishing;
-    /**
-     * @var Knotting
-     */
+    /** @var Knotting */
     private $knotting;
-    /**
-     * @var Painting
-     */
+    /** @var Painting */
     private $painting;
-    /**
-     * @var Pedagogy
-     */
+    /** @var Pedagogy */
     private $pedagogy;
-    /**
-     * @var PlayingOnMusicInstrument
-     */
+    /** @var PlayingOnMusicInstrument */
     private $playingOnMusicInstrument;
-    /**
-     * @var Seduction
-     */
+    /** @var Seduction */
     private $seduction;
-    /**
-     * @var Showmanship
-     */
+    /** @var Showmanship */
     private $showmanship;
-    /**
-     * @var Singing
-     */
+    /** @var Singing */
     private $singing;
-    /**
-     * @var Statuary
-     */
+    /** @var Statuary */
     private $statuary;
+
+    /** @var \ArrayIterator */
+    private $skillsIterator;
 
     public function __construct(ProfessionLevel $professionLevel)
     {
@@ -119,6 +85,49 @@ class CombinedSkills extends AbstractSkillsGroup
         $this->showmanship = new Showmanship($this->createZeroSkillRank($professionLevel));
         $this->singing = new Singing($this->createZeroSkillRank($professionLevel));
         $this->statuary = new Statuary($this->createZeroSkillRank($professionLevel));
+
+        $this->skillsIterator = $this->createSkillsIterator();
+    }
+
+    private function createSkillsIterator()
+    {
+        return new \ArrayIterator([
+            $this->getBigHandwork(),
+            $this->getCooking(),
+            $this->getDancing(),
+            $this->getDuskSight(),
+            $this->getFightWithShootingWeapons(),
+            $this->getFirstAid(),
+            $this->getGambling(),
+            $this->getHandingWithAnimals(),
+            $this->getHandwork(),
+            $this->getHerbalism(),
+            $this->getHuntingAndFishing(),
+            $this->getKnotting(),
+            $this->getPainting(),
+            $this->getPedagogy(),
+            $this->getPlayingOnMusicInstrument(),
+            $this->getSeduction(),
+            $this->getShowmanship(),
+            $this->getSinging(),
+            $this->getStatuary()
+        ]);
+    }
+
+    /**
+     * @return \ArrayIterator
+     */
+    protected function getSkillsIterator()
+    {
+        return $this->skillsIterator;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSkillsGroupName()
+    {
+        return self::COMBINED;
     }
 
     /**
@@ -279,50 +288,6 @@ class CombinedSkills extends AbstractSkillsGroup
     public function getStatuary()
     {
         return $this->statuary;
-    }
-
-    /**
-     * @return int
-     */
-    public function getNextLevelsSkillRankSummary()
-    {
-        // TODO next levels only
-        return (int)array_sum(
-            array_map(
-                function (AbstractCombinedSkill $skill) {
-                    return $skill->getSkillRanks()->getValue();
-                },
-                [
-                    $this->getBigHandwork(),
-                    $this->getCooking(),
-                    $this->getDancing(),
-                    $this->getDuskSight(),
-                    $this->getFightWithShootingWeapons(),
-                    $this->getFirstAid(),
-                    $this->getGambling(),
-                    $this->getHandingWithAnimals(),
-                    $this->getHandwork(),
-                    $this->getHerbalism(),
-                    $this->getHuntingAndFishing(),
-                    $this->getKnotting(),
-                    $this->getPainting(),
-                    $this->getPedagogy(),
-                    $this->getPlayingOnMusicInstrument(),
-                    $this->getSeduction(),
-                    $this->getShowmanship(),
-                    $this->getSinging(),
-                    $this->getStatuary(),
-                ]
-            )
-        );
-    }
-
-    /**
-     * @return int
-     */
-    public function getFirstLevelsSkillRankSummary()
-    {
-        // TODO: Implement getFirstLevelsSkillRankSummary() method.
     }
 
 }
