@@ -2,10 +2,11 @@
 namespace DrdPlus\Cave\UnitBundle\Person\Skills;
 
 use DrdPlus\Cave\UnitBundle\Person\Person;
+use DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\ProfessionLevel;
 use DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\ProfessionLevels;
-use DrdPlus\Cave\UnitBundle\Person\Skills\COmbined\CombinedSkills;
+use DrdPlus\Cave\UnitBundle\Person\Skills\Combined\CombinedSkills;
 use DrdPlus\Cave\UnitBundle\Person\Skills\Physical\PhysicalSkills;
-use DrdPlus\Cave\UnitBundle\Person\Skills\Combined\PsychicalSkills;
+use DrdPlus\Cave\UnitBundle\Person\Skills\Psychical\PsychicalSkills;
 use Granam\Strict\Object\StrictObject;
 
 /**
@@ -57,11 +58,11 @@ class Skills extends StrictObject
      */
     private $combinedSkills;
 
-    public function __construct()
+    public function __construct(ProfessionLevel $professionLevel)
     {
-        $this->physicalSkills = new PhysicalSkills();
-        $this->psychicalSkills = new PsychicalSkills();
-        $this->combinedSkills = new CombinedSkills();
+        $this->physicalSkills = new PhysicalSkills($professionLevel);
+        $this->psychicalSkills = new PsychicalSkills($professionLevel);
+        $this->combinedSkills = new CombinedSkills($professionLevel);
     }
 
     public function setPerson(Person $person)

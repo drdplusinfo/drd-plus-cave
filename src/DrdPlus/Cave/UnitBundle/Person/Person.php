@@ -10,6 +10,7 @@ use DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\ProfessionLevels;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\PersonProperties;
 use DrdPlus\Cave\UnitBundle\Person\Races\Gender;
 use DrdPlus\Cave\UnitBundle\Person\Races\Race;
+use DrdPlus\Cave\UnitBundle\Person\Skills\Skills;
 use Granam\Strict\Object\StrictObject;
 
 /**
@@ -76,6 +77,13 @@ class Person extends StrictObject
      */
     private $background;
 
+    /**
+     * @var Skills
+     *
+     * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Person\Skills\Skills")
+     */
+    private $skills;
+
     public function __construct(
         Race $race, // enum
         Gender $gender, // enum
@@ -83,17 +91,18 @@ class Person extends StrictObject
         Exceptionality $exceptionality, // entity
         ProfessionLevels $professionLevels, // entity
         Background $background, // entity
+        Skills $skills, // entity
         Tables $tables // data helper
     )
     {
         $this->race = $race;
         $this->gender = $gender;
         $this->name = $name;
-        $exceptionality->setPerson($this);
         $this->exceptionality = $exceptionality;
-        $professionLevels->setPerson($this);
         $this->professionLevels = $professionLevels;
         $this->background = $background;
+        $skills->setPerson($this);
+        $this->skills = $skills;
         $this->personProperties = new PersonProperties($this, $tables); // enums aggregate
     }
 

@@ -1,6 +1,7 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Person\Skills\Combined;
 
+use DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\ProfessionLevel;
 use DrdPlus\Cave\UnitBundle\Person\Skills\AbstractSkillsGroup;
 
 /**
@@ -20,6 +21,10 @@ class CombinedSkills extends AbstractSkillsGroup
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+    /**
+     * @var BigHandwork
+     */
+    private $bigHandwork;
     /**
      * @var Cooking
      */
@@ -93,27 +98,27 @@ class CombinedSkills extends AbstractSkillsGroup
      */
     private $statuary;
 
-    public function __construct()
+    public function __construct(ProfessionLevel $professionLevel)
     {
-        $this->bigHandwork = new BigHandwork();
-        $this->cooking = new Cooking();
-        $this->dancing = new Dancing();
-        $this->duskSight = new DuskSight();
-        $this->fightWithShootingWeapons = new FightWithShootingWeapons();
-        $this->firstAid = new FirstAid();
-        $this->handingWithAnimals = new HandingWithAnimals();
-        $this->handwork = new Handwork();
-        $this->gambling = new Gambling();
-        $this->herbalism = new Herbalism();
-        $this->huntingAndFishing = new HuntingAndFishing();
-        $this->knotting = new Knotting();
-        $this->painting = new Painting();
-        $this->pedagogy = new Pedagogy();
-        $this->playingOnMusicInstrument = new PlayingOnMusicInstrument();
-        $this->seduction = new Seduction();
-        $this->showmanship = new Showmanship();
-        $this->singing = new Singing();
-        $this->statuary = new Statuary();
+        $this->bigHandwork = new BigHandwork($this->createZeroSkillRank($professionLevel));
+        $this->cooking = new Cooking($this->createZeroSkillRank($professionLevel));
+        $this->dancing = new Dancing($this->createZeroSkillRank($professionLevel));
+        $this->duskSight = new DuskSight($this->createZeroSkillRank($professionLevel));
+        $this->fightWithShootingWeapons = new FightWithShootingWeapons($this->createZeroSkillRank($professionLevel));
+        $this->firstAid = new FirstAid($this->createZeroSkillRank($professionLevel));
+        $this->handingWithAnimals = new HandingWithAnimals($this->createZeroSkillRank($professionLevel));
+        $this->handwork = new Handwork($this->createZeroSkillRank($professionLevel));
+        $this->gambling = new Gambling($this->createZeroSkillRank($professionLevel));
+        $this->herbalism = new Herbalism($this->createZeroSkillRank($professionLevel));
+        $this->huntingAndFishing = new HuntingAndFishing($this->createZeroSkillRank($professionLevel));
+        $this->knotting = new Knotting($this->createZeroSkillRank($professionLevel));
+        $this->painting = new Painting($this->createZeroSkillRank($professionLevel));
+        $this->pedagogy = new Pedagogy($this->createZeroSkillRank($professionLevel));
+        $this->playingOnMusicInstrument = new PlayingOnMusicInstrument($this->createZeroSkillRank($professionLevel));
+        $this->seduction = new Seduction($this->createZeroSkillRank($professionLevel));
+        $this->showmanship = new Showmanship($this->createZeroSkillRank($professionLevel));
+        $this->singing = new Singing($this->createZeroSkillRank($professionLevel));
+        $this->statuary = new Statuary($this->createZeroSkillRank($professionLevel));
     }
 
     /**
@@ -285,7 +290,7 @@ class CombinedSkills extends AbstractSkillsGroup
         return (int)array_sum(
             array_map(
                 function (AbstractCombinedSkill $skill) {
-                    return $skill->getSkillRank()->getValue();
+                    return $skill->getSkillRanks()->getValue();
                 },
                 [
                     $this->getBigHandwork(),

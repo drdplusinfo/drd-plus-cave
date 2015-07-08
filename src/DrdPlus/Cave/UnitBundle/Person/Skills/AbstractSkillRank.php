@@ -3,13 +3,13 @@ namespace DrdPlus\Cave\UnitBundle\Person\Skills;
 
 use DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\ProfessionLevel;
 use Granam\Integer\IntegerInterface;
-use Granam\Integer\IntegerObject;
 use Granam\Strict\Object\StrictObject;
 
 abstract class AbstractSkillRank extends StrictObject implements IntegerInterface
 {
     const MIN_RANK_VALUE = 0;
     const MAX_RANK_VALUE = 3;
+
     /**
      * @var integer
      *
@@ -40,9 +40,9 @@ abstract class AbstractSkillRank extends StrictObject implements IntegerInterfac
     /**
      * @param ProfessionLevel $professionLevel
      * @param AbstractSkillPoint $skillPoint
-     * @param IntegerObject $requiredRankValue
+     * @param RequiredRankValue $requiredRankValue
      */
-    protected function __construct(ProfessionLevel $professionLevel, AbstractSkillPoint $skillPoint, IntegerObject $requiredRankValue)
+    protected function __construct(ProfessionLevel $professionLevel, AbstractSkillPoint $skillPoint, RequiredRankValue $requiredRankValue)
     {
         $this->professionLevel = $professionLevel; // skill rank has been achieved on this profession level
         $this->skillPoint = $skillPoint; // this skill point has been consumed to achieve this rank
@@ -50,11 +50,11 @@ abstract class AbstractSkillRank extends StrictObject implements IntegerInterfac
         $this->value = $requiredRankValue->getValue();
     }
 
-    private function checkRequiredRankValue(IntegerObject $requiredRankValue)
+    private function checkRequiredRankValue(RequiredRankValue $requiredRankValue)
     {
-        if ($requiredRankValue->getValue() < static::MIN_RANK_VALUE || $requiredRankValue->getValue() > static::MAX_RANK_VALUE) {
+        if ($requiredRankValue->getValue() < self::MIN_RANK_VALUE || $requiredRankValue->getValue() > self::MAX_RANK_VALUE) {
             throw new \LogicException(
-                'Rank value can not be lower then ' . static::MIN_RANK_VALUE . ' and greater then ' . static::MAX_RANK_VALUE
+                'Rank value can not be lower then ' . self::MIN_RANK_VALUE . ' and greater then ' . self::MAX_RANK_VALUE
             );
         }
     }

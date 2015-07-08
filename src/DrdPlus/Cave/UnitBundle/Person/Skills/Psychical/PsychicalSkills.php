@@ -1,24 +1,8 @@
 <?php
-namespace DrdPlus\Cave\UnitBundle\Person\Skills\Combined;
+namespace DrdPlus\Cave\UnitBundle\Person\Skills\Psychical;
 
+use DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\ProfessionLevel;
 use DrdPlus\Cave\UnitBundle\Person\Skills\AbstractSkillsGroup;
-use DrdPlus\Cave\UnitBundle\Person\Skills\Psychical\AbstractPsychicalSkill;
-use DrdPlus\Cave\UnitBundle\Person\Skills\Psychical\Astronomy;
-use DrdPlus\Cave\UnitBundle\Person\Skills\Psychical\Botany;
-use DrdPlus\Cave\UnitBundle\Person\Skills\Psychical\EtiquetteOfUnderworld;
-use DrdPlus\Cave\UnitBundle\Person\Skills\Psychical\ForeignLanguage;
-use DrdPlus\Cave\UnitBundle\Person\Skills\Psychical\GeographyOfACountry;
-use DrdPlus\Cave\UnitBundle\Person\Skills\Psychical\HandlingOfMagicalItems;
-use DrdPlus\Cave\UnitBundle\Person\Skills\Psychical\Historiography;
-use DrdPlus\Cave\UnitBundle\Person\Skills\Psychical\KnowledgeOfACity;
-use DrdPlus\Cave\UnitBundle\Person\Skills\Psychical\KnowledgeOfWorld;
-use DrdPlus\Cave\UnitBundle\Person\Skills\Psychical\MapsDrawing;
-use DrdPlus\Cave\UnitBundle\Person\Skills\Psychical\Mythology;
-use DrdPlus\Cave\UnitBundle\Person\Skills\Psychical\ReadingAndWriting;
-use DrdPlus\Cave\UnitBundle\Person\Skills\Psychical\SocialEtiquette;
-use DrdPlus\Cave\UnitBundle\Person\Skills\Psychical\Technology;
-use DrdPlus\Cave\UnitBundle\Person\Skills\Psychical\Theology;
-use DrdPlus\Cave\UnitBundle\Person\Skills\Psychical\Zoology;
 
 /**
  * PsychicalSkills
@@ -70,24 +54,24 @@ class PsychicalSkills extends AbstractSkillsGroup
     /** @var Zoology */
     private $zoology;
 
-    public function __construct()
+    public function __construct(ProfessionLevel $professionLevel)
     {
-        $this->astronomy = new Astronomy();
-        $this->botany = new Botany();
-        $this->etiquetteOfUnderworld = new EtiquetteOfUnderworld();
-        $this->foreignLanguage = new ForeignLanguage();
-        $this->geographyOfACountry = new GeographyOfACountry();
-        $this->handlingWithMagicalItems = new HandlingOfMagicalItems();
-        $this->historiography = new Historiography();
-        $this->knowledgeOfACity = new KnowledgeOfACity();
-        $this->knowledgeOfWorld = new KnowledgeOfWorld();
-        $this->mapsDrawing = new MapsDrawing();
-        $this->mythology = new Mythology();
-        $this->readingAndWriting = new ReadingAndWriting();
-        $this->socialEtiquette = new SocialEtiquette();
-        $this->technology = new Technology();
-        $this->theology = new Theology();
-        $this->zoology = new Zoology();
+        $this->astronomy = new Astronomy($this->createZeroSkillRank($professionLevel));
+        $this->botany = new Botany($this->createZeroSkillRank($professionLevel));
+        $this->etiquetteOfUnderworld = new EtiquetteOfUnderworld($this->createZeroSkillRank($professionLevel));
+        $this->foreignLanguage = new ForeignLanguage($this->createZeroSkillRank($professionLevel));
+        $this->geographyOfACountry = new GeographyOfACountry($this->createZeroSkillRank($professionLevel));
+        $this->handlingWithMagicalItems = new HandlingOfMagicalItems($this->createZeroSkillRank($professionLevel));
+        $this->historiography = new Historiography($this->createZeroSkillRank($professionLevel));
+        $this->knowledgeOfACity = new KnowledgeOfACity($this->createZeroSkillRank($professionLevel));
+        $this->knowledgeOfWorld = new KnowledgeOfWorld($this->createZeroSkillRank($professionLevel));
+        $this->mapsDrawing = new MapsDrawing($this->createZeroSkillRank($professionLevel));
+        $this->mythology = new Mythology($this->createZeroSkillRank($professionLevel));
+        $this->readingAndWriting = new ReadingAndWriting($this->createZeroSkillRank($professionLevel));
+        $this->socialEtiquette = new SocialEtiquette($this->createZeroSkillRank($professionLevel));
+        $this->technology = new Technology($this->createZeroSkillRank($professionLevel));
+        $this->theology = new Theology($this->createZeroSkillRank($professionLevel));
+        $this->zoology = new Zoology($this->createZeroSkillRank($professionLevel));
     }
 
     /**
@@ -225,6 +209,7 @@ class PsychicalSkills extends AbstractSkillsGroup
     {
         return $this->zoology;
     }
+
     /**
      * @return int
      */
@@ -234,7 +219,7 @@ class PsychicalSkills extends AbstractSkillsGroup
         return (int)array_sum(
             array_map(
                 function (AbstractPsychicalSkill $skill) {
-                    return $skill->getSkillRank()->getValue();
+                    return $skill->getSkillRanks()->getValue();
                 },
                 [
                     $this->getAstronomy(),

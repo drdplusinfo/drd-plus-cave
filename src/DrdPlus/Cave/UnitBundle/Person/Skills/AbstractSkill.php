@@ -1,54 +1,79 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Person\Skills;
 
-use Granam\Strict\Object\StrictObject;
 use Doctrine\ORM\Mapping as ORM;
+use Granam\Strict\Object\StrictObject;
 
 /**
  * @ORM\Entity()
  * @ORM\Table()
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="discr", type="string")
- * @ORM\DiscriminatorMap({"physical" = "AbstractPhysicalSkill", "psychical" = "AbstractPsychicalSkill", "combined" = "AbstractCombinedSkill"})
+ * @ORM\DiscriminatorMap({
+ *  "physical" = "AbstractPhysicalSkill",
+ *  "psychical" = "AbstractPsychicalSkill",
+ *  "combined" = "AbstractCombinedSkill",
+ * })
  */
 abstract class AbstractSkill extends StrictObject
 {
-    const MAX_SKILL_RANK = 3;
-
     /**
-     * @var SkillRank
+     * @var AbstractSkillRank[]
      *
-     * @ORM\Column(type="skill_rank")
+     * @ORM\OneToMany(targetEntity="DrdPlus\Cave\UnitBundle\Person\Skills\AbstractSkillRank")
      */
-    protected $skillRank;
+    protected $skillRanks = [];
 
-    public function __construct()
+    public function __construct(ZeroSkillRank $skillRank)
     {
-        $this->skillRank = SkillRank::getIt(0);
+        $this->addSkillRank($skillRank);
     }
 
-    public function increaseSkillRank()
+    public function addSkillRank(AbstractSkillRank $skillRank)
     {
-        $this->setSkillRank(SkillRank::getIt($this->getSkillRank()->getValue() + 1));
-    }
+        if (!(count($this->getSkillRanks()) === 0 && $skillRank->getValue() === 0)
+            && (($this->getMaxSkillRankValue() + 1) !== $skillRank->getValue())
+        ) {
+            throw new \LogicException(
+                "New skill rank has to follow ranks sequence, expected "
+                . (count($this->getSkillRanks()) === 0
+                    ? '0'
+                    : ($this->getMaxSkillRankValue() + 1))
+                . ", got {$skillRank->getValue()}"
+            );
+        }
 
-    public function setSkillRank(SkillRank $skillRank)
-    {
-        if ($this->getSkillRank()->getValue() > $skillRank->getValue()) {
-            throw new \LogicException("Higher skill rank is already set. Got {$skillRank->getValue()}, current is  {$this->getSkillRank()->getValue()}");
-        }
-        if ($this->getSkillRank()->getValue() === static::MAX_SKILL_RANK) {
-            throw new \LogicException('Max rank (' . static::MAX_SKILL_RANK . ') already set');
-        }
-        $this->skillRank = $skillRank;
+        $this->skillRanks[$skillRank->getValue()] = $skillRank;
     }
 
     /**
-     * @return SkillRank
+     * @return int
      */
-    public function getSkillRank()
+    protected function getMaxSkillRankValue()
     {
-        return $this->skillRank;
+        if (!($skillRankValues = $this->getSkillRankValues())) {
+            return 0;
+        }
+
+        return max($skillRankValues);
+    }
+
+    private function getSkillRankValues()
+    {
+        return array_map(
+            function (AbstractSkillRank $skillRank) {
+                return $skillRank->getValue();
+            },
+            $this->getSkillRanks()
+        );
+    }
+
+    /**
+     * @return AbstractSkillRank[]
+     */
+    public function getSkillRanks()
+    {
+        return $this->skillRanks;
     }
 
     /**

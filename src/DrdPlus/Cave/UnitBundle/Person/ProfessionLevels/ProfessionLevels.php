@@ -11,7 +11,6 @@ use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Intelligence;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Knack;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Strength;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Will;
-use DrdPlus\Cave\UnitBundle\Person\Person;
 use Granam\Strict\Object\StrictObject;
 
 /**
@@ -32,13 +31,6 @@ class ProfessionLevels extends StrictObject implements \IteratorAggregate
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
-    /**
-     * @var Person
-     *
-     * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Person\Person")
-     */
-    private $person;
 
     /**
      * @var FighterLevel[]
@@ -92,41 +84,12 @@ class ProfessionLevels extends StrictObject implements \IteratorAggregate
         $this->wizardLevels = new ArrayCollection();
     }
 
-    public function setPerson(Person $person)
-    {
-        if (is_null($this->getId()) && is_null($person->getProfessionLevels()->getId())
-            && $this !== $person->getProfessionLevels()
-        ) {
-            throw new \LogicException;
-        }
-
-        if ($person->getProfessionLevels()->getId() !== $this->getId()) {
-            throw new Exceptions\PersonIsAlreadySet();
-        }
-
-        if (!$this->getPerson()) {
-            $this->person = $person;
-        } elseif ($person->getId() !== $this->getPerson()->getId()) {
-            throw new \LogicException();
-        }
-    }
-
     /**
      * @return int
      */
     protected function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Get person
-     *
-     * @return Person|null
-     */
-    public function getPerson()
-    {
-        return $this->person;
     }
 
     /**

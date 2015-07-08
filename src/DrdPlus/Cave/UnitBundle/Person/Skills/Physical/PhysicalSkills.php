@@ -1,6 +1,7 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Person\Skills\Physical;
 
+use DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\ProfessionLevel;
 use DrdPlus\Cave\UnitBundle\Person\Skills\AbstractSkillsGroup;
 use DrdPlus\Cave\UnitBundle\Person\Skills\Psychical\AbstractPsychicalSkill;
 
@@ -55,24 +56,24 @@ class PhysicalSkills extends AbstractSkillsGroup
     /** @var Swimming */
     private $swimming;
 
-    public function __construct()
+    public function __construct(ProfessionLevel $professionLevel)
     {
-        $this->armorWearing = new ArmorWearing();
-        $this->athletics = new Athletics();
-        $this->blacksmithing = new Blacksmithing();
-        $this->boatDriving = new BoatDriving();
-        $this->cartDriving = new CartDriving();
-        $this->cityMoving = new CityMoving();
-        $this->climbingAndHillwalking = new ClimbingAndHillwalking();
-        $this->fastMarsh = new FastMarsh();
-        $this->fightWithWeapon = new FightWithWeapon();
-        $this->flying = new Flying();
-        $this->forestMoving = new ForestMoving();
-        $this->movingInMountain = new MovingInMountain();
-        $this->riding = new Riding();
-        $this->sailing = new Sailing();
-        $this->shieldUsage = new ShieldUsage();
-        $this->swimming = new Swimming();
+        $this->armorWearing = new ArmorWearing($this->createZeroSkillRank($professionLevel));
+        $this->athletics = new Athletics($this->createZeroSkillRank($professionLevel));
+        $this->blacksmithing = new Blacksmithing($this->createZeroSkillRank($professionLevel));
+        $this->boatDriving = new BoatDriving($this->createZeroSkillRank($professionLevel));
+        $this->cartDriving = new CartDriving($this->createZeroSkillRank($professionLevel));
+        $this->cityMoving = new CityMoving($this->createZeroSkillRank($professionLevel));
+        $this->climbingAndHillwalking = new ClimbingAndHillwalking($this->createZeroSkillRank($professionLevel));
+        $this->fastMarsh = new FastMarsh($this->createZeroSkillRank($professionLevel));
+        $this->fightWithWeapon = new FightWithWeapon($this->createZeroSkillRank($professionLevel));
+        $this->flying = new Flying($this->createZeroSkillRank($professionLevel));
+        $this->forestMoving = new ForestMoving($this->createZeroSkillRank($professionLevel));
+        $this->movingInMountain = new MovingInMountain($this->createZeroSkillRank($professionLevel));
+        $this->riding = new Riding($this->createZeroSkillRank($professionLevel));
+        $this->sailing = new Sailing($this->createZeroSkillRank($professionLevel));
+        $this->shieldUsage = new ShieldUsage($this->createZeroSkillRank($professionLevel));
+        $this->swimming = new Swimming($this->createZeroSkillRank($professionLevel));
     }
 
     /**
@@ -220,7 +221,7 @@ class PhysicalSkills extends AbstractSkillsGroup
         return (int)array_sum(
             array_map(
                 function (AbstractPsychicalSkill $skill) {
-                    return $skill->getSkillRank()->getValue();
+                    return $skill->getSkillRanks()->getValue();
                 },
                 [
                     $this->getArmorWearing(),
