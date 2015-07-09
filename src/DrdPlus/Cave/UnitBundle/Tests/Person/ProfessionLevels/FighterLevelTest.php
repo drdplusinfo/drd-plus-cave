@@ -8,24 +8,12 @@ use DrdPlus\Cave\UnitBundle\Tests\Person\ProfessionLevels\AbstractTestOfProfessi
 class FighterLevelTest extends AbstractTestOfProfessionLevel
 {
 
-    protected function getStrengthFirstLevelModifier()
-    {
-        return 1;
-    }
-
-    protected function getAgilityFirstLevelModifier()
-    {
-        return 1;
-    }
-
     /**
-     * @param string $propertyName
-     *
-     * @return bool
+     * @return string[]
      */
-    protected function isPrimaryProperty($propertyName)
+    protected function getPrimaryProperties()
     {
-        return in_array($propertyName, [Strength::STRENGTH, Agility::AGILITY]);
+        return [Strength::STRENGTH, Agility::AGILITY];
     }
 
 }

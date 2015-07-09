@@ -8,24 +8,12 @@ use DrdPlus\Cave\UnitBundle\Tests\Person\ProfessionLevels\AbstractTestOfProfessi
 class RangerLevelTest extends AbstractTestOfProfessionLevel
 {
 
-    protected function getStrengthFirstLevelModifier()
-    {
-        return 1;
-    }
-
-    protected function getKnackFirstLevelModifier()
-    {
-        return 1;
-    }
-
     /**
-     * @param string $propertyName
-     *
-     * @return bool
+     * @return string[]
      */
-    protected function isPrimaryProperty($propertyName)
+    protected function getPrimaryProperties()
     {
-        return in_array($propertyName, [Strength::STRENGTH, Knack::KNACK]);
+        return [Strength::STRENGTH, Knack::KNACK];
     }
 
 

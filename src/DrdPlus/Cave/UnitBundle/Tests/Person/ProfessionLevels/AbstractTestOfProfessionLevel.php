@@ -1,8 +1,6 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Tests\Person\ProfessionLevels;
 
-use DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\LevelValue;
-use DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\ProfessionLevel;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Agility;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Body\WeightInKg;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Charisma;
@@ -10,6 +8,9 @@ use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Intelligence;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Knack;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Strength;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Will;
+use DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\LevelValue;
+use DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\ProfessionLevel;
+use DrdPlus\Cave\UnitBundle\Person\Professions\Profession;
 use DrdPlus\Cave\UnitBundle\Tests\TestWithMockery;
 use Mockery\MockInterface;
 
@@ -49,6 +50,7 @@ abstract class AbstractTestOfProfessionLevel extends TestWithMockery
         $weightInKg = \Mockery::mock(WeightInKg::class);
         $professionLevelClass = $this->getProfessionLevelClass();
         $instance = new $professionLevelClass(
+            $this->createProfessionMock(),
             $levelValue,
             $strengthIncrement,
             $agilityIncrement,
@@ -78,7 +80,48 @@ abstract class AbstractTestOfProfessionLevel extends TestWithMockery
      *
      * @return bool
      */
-    abstract protected function isPrimaryProperty($propertyName);
+    private function isPrimaryProperty($propertyName)
+    {
+        return in_array($propertyName, $this->getPrimaryProperties());
+    }
+
+    /**
+     * @return string[]
+     */
+    abstract protected function getPrimaryProperties();
+
+    /**
+     * @return MockInterface|Profession
+     */
+    private function createProfessionMock()
+    {
+        $profession = \Mockery::mock($this->getProfessionClass());
+        $profession->shouldReceive('getPrimaryPropertyCodes')
+            ->atLeast()->once()
+            ->andReturn($this->getPrimaryProperties());
+        $profession->shouldReceive('getName')
+            ->andReturn($this->getProfessionCode());
+
+        return $profession;
+    }
+
+    /**
+     * @return string
+     */
+    private function getProfessionCode()
+    {
+        return strtolower(preg_replace('~^.+\\\~', '', $this->getProfessionClass()));
+    }
+
+    /**
+     * @return string|Profession
+     */
+    private function getProfessionClass()
+    {
+        $withProperNamespace = preg_replace('~LevelTest$~', '', static::class);
+
+        return preg_replace('~ProfessionLevels~', 'Professions', $withProperNamespace);
+    }
 
     /**
      * @return string|ProfessionLevel
@@ -132,6 +175,7 @@ abstract class AbstractTestOfProfessionLevel extends TestWithMockery
         $professionLevelClass = $this->getProfessionLevelClass();
         /** @var ProfessionLevel $professionLevel */
         $professionLevel = new $professionLevelClass(
+            $this->createProfessionMock(),
             $levelValue,
             $strengthIncrement,
             $agilityIncrement,
@@ -194,6 +238,7 @@ abstract class AbstractTestOfProfessionLevel extends TestWithMockery
         $professionLevelClass = $this->getProfessionLevelClass();
         /** @var ProfessionLevel $professionLevel */
         $professionLevel = new $professionLevelClass(
+            $this->createProfessionMock(),
             $levelValue,
             $strengthIncrement,
             $agilityIncrement,
@@ -227,7 +272,14 @@ abstract class AbstractTestOfProfessionLevel extends TestWithMockery
 
     protected function getStrengthFirstLevelModifier()
     {
-        return 0;
+        return $this->getPropertyFirstLevelModifier(Strength::STRENGTH);
+    }
+
+    private function getPropertyFirstLevelModifier($propertyName)
+    {
+        return $this->isPrimaryProperty($propertyName)
+            ? 1
+            : 0;
     }
 
     /**
@@ -243,7 +295,7 @@ abstract class AbstractTestOfProfessionLevel extends TestWithMockery
 
     protected function getAgilityFirstLevelModifier()
     {
-        return 0;
+        return $this->getPropertyFirstLevelModifier(Agility::AGILITY);
     }
 
     /**
@@ -259,7 +311,7 @@ abstract class AbstractTestOfProfessionLevel extends TestWithMockery
 
     protected function getKnackFirstLevelModifier()
     {
-        return 0;
+        return $this->getPropertyFirstLevelModifier(Knack::KNACK);
     }
 
     /**
@@ -275,7 +327,7 @@ abstract class AbstractTestOfProfessionLevel extends TestWithMockery
 
     protected function getCharismaFirstLevelModifier()
     {
-        return 0;
+        return $this->getPropertyFirstLevelModifier(Charisma::CHARISMA);
     }
 
     /**
@@ -291,7 +343,7 @@ abstract class AbstractTestOfProfessionLevel extends TestWithMockery
 
     protected function getIntelligenceFirstLevelModifier()
     {
-        return 0;
+        return $this->getPropertyFirstLevelModifier(Intelligence::INTELLIGENCE);
     }
 
     /**
@@ -307,7 +359,7 @@ abstract class AbstractTestOfProfessionLevel extends TestWithMockery
 
     protected function getWillFirstLevelModifier()
     {
-        return 0;
+        return $this->getPropertyFirstLevelModifier(Will::WILL);
     }
 
 }

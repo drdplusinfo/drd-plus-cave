@@ -8,24 +8,12 @@ use DrdPlus\Cave\UnitBundle\Tests\Person\ProfessionLevels\AbstractTestOfProfessi
 class WizardLevelTest extends AbstractTestOfProfessionLevel
 {
 
-    protected function getIntelligenceFirstLevelModifier()
-    {
-        return 1;
-    }
-
-    protected function getWillFirstLevelModifier()
-    {
-        return 1;
-    }
-
     /**
-     * @param string $propertyName
-     *
-     * @return bool
+     * @return string[]
      */
-    protected function isPrimaryProperty($propertyName)
+    protected function getPrimaryProperties()
     {
-        return in_array($propertyName, [Will::WILL, Intelligence::INTELLIGENCE]);
+        return [Will::WILL, Intelligence::INTELLIGENCE];
     }
 
 }

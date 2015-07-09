@@ -8,25 +8,12 @@ use DrdPlus\Cave\UnitBundle\Tests\Person\ProfessionLevels\AbstractTestOfProfessi
 class ThiefLevelTest extends AbstractTestOfProfessionLevel
 {
 
-    protected function getAgilityFirstLevelModifier()
-    {
-        return 1;
-    }
-
-    protected function getKnackFirstLevelModifier()
-    {
-        return 1;
-    }
-
     /**
-     * @param string $propertyName
-     *
-     * @return bool
+     * @return string[]
      */
-    protected function isPrimaryProperty($propertyName)
+    protected function getPrimaryProperties()
     {
-        return in_array($propertyName, [Agility::AGILITY, Knack::KNACK]);
+        return [Agility::AGILITY, Knack::KNACK];
     }
-
 
 }

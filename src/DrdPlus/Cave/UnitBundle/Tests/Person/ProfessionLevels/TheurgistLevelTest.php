@@ -8,25 +8,12 @@ use DrdPlus\Cave\UnitBundle\Tests\Person\ProfessionLevels\AbstractTestOfProfessi
 class TheurgistLevelTest extends AbstractTestOfProfessionLevel
 {
 
-    protected function getCharismaFirstLevelModifier()
-    {
-        return 1;
-    }
-
-    protected function getIntelligenceFirstLevelModifier()
-    {
-        return 1;
-    }
-
     /**
-     * @param string $propertyName
-     *
-     * @return bool
+     * @return string[]
      */
-    protected function isPrimaryProperty($propertyName)
+    protected function getPrimaryProperties()
     {
-        return in_array($propertyName, [Intelligence::INTELLIGENCE, Charisma::CHARISMA]);
+        return [Intelligence::INTELLIGENCE, Charisma::CHARISMA];
     }
-
 
 }
