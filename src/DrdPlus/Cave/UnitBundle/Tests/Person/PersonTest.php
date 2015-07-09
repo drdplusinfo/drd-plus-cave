@@ -311,9 +311,6 @@ class PersonTest extends TestWithMockery
     private function getSkillsMock()
     {
         $skills = \Mockery::mock(Skills::class);
-        $skills->shouldReceive('setPerson')
-            ->atLeast()->once()
-            ->with(\Mockery::type(Person::class));
 
         return $skills;
     }

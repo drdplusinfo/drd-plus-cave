@@ -1,7 +1,6 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Person\Skills\Psychical;
 
-use DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\ProfessionLevel;
 use DrdPlus\Cave\UnitBundle\Person\Skills\AbstractSkillsGroup;
 
 /**
@@ -60,24 +59,41 @@ class PsychicalSkills extends AbstractSkillsGroup
     /** @var \ArrayIterator */
     private $skillsIterator;
 
-    public function __construct(ProfessionLevel $professionLevel)
+    public function __construct(
+        Astronomy $astronomy,
+        Botany $botany,
+        EtiquetteOfUnderworld $etiquetteOfUnderworld,
+        ForeignLanguage $foreignLanguage,
+        GeographyOfACountry $geographyOfACountry,
+        HandlingOfMagicalItems $handlingWithMagicalItems,
+        Historiography $historiography,
+        KnowledgeOfACity $knowledgeOfACity,
+        KnowledgeOfWorld $knowledgeOfWorld,
+        MapsDrawing $mapsDrawing,
+        Mythology $mythology,
+        ReadingAndWriting $readingAndWriting,
+        SocialEtiquette $socialEtiquette,
+        Technology $technology,
+        Theology $theology,
+        Zoology $zoology
+    )
     {
-        $this->astronomy = new Astronomy($this->createZeroSkillRank($professionLevel));
-        $this->botany = new Botany($this->createZeroSkillRank($professionLevel));
-        $this->etiquetteOfUnderworld = new EtiquetteOfUnderworld($this->createZeroSkillRank($professionLevel));
-        $this->foreignLanguage = new ForeignLanguage($this->createZeroSkillRank($professionLevel));
-        $this->geographyOfACountry = new GeographyOfACountry($this->createZeroSkillRank($professionLevel));
-        $this->handlingWithMagicalItems = new HandlingOfMagicalItems($this->createZeroSkillRank($professionLevel));
-        $this->historiography = new Historiography($this->createZeroSkillRank($professionLevel));
-        $this->knowledgeOfACity = new KnowledgeOfACity($this->createZeroSkillRank($professionLevel));
-        $this->knowledgeOfWorld = new KnowledgeOfWorld($this->createZeroSkillRank($professionLevel));
-        $this->mapsDrawing = new MapsDrawing($this->createZeroSkillRank($professionLevel));
-        $this->mythology = new Mythology($this->createZeroSkillRank($professionLevel));
-        $this->readingAndWriting = new ReadingAndWriting($this->createZeroSkillRank($professionLevel));
-        $this->socialEtiquette = new SocialEtiquette($this->createZeroSkillRank($professionLevel));
-        $this->technology = new Technology($this->createZeroSkillRank($professionLevel));
-        $this->theology = new Theology($this->createZeroSkillRank($professionLevel));
-        $this->zoology = new Zoology($this->createZeroSkillRank($professionLevel));
+        $this->astronomy = $astronomy;
+        $this->botany = $botany;
+        $this->etiquetteOfUnderworld = $etiquetteOfUnderworld;
+        $this->foreignLanguage = $foreignLanguage;
+        $this->geographyOfACountry = $geographyOfACountry;
+        $this->handlingWithMagicalItems = $handlingWithMagicalItems;
+        $this->historiography = $historiography;
+        $this->knowledgeOfACity = $knowledgeOfACity;
+        $this->knowledgeOfWorld = $knowledgeOfWorld;
+        $this->mapsDrawing = $mapsDrawing;
+        $this->mythology = $mythology;
+        $this->readingAndWriting = $readingAndWriting;
+        $this->socialEtiquette = $socialEtiquette;
+        $this->technology = $technology;
+        $this->theology = $theology;
+        $this->zoology = $zoology;
 
         $this->skillsIterator = $this->createSkillsIterator();
     }

@@ -1,7 +1,6 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Person\Skills\Combined;
 
-use DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\ProfessionLevel;
 use DrdPlus\Cave\UnitBundle\Person\Skills\AbstractSkillsGroup;
 
 /**
@@ -64,27 +63,47 @@ class CombinedSkills extends AbstractSkillsGroup
     /** @var \ArrayIterator */
     private $skillsIterator;
 
-    public function __construct(ProfessionLevel $professionLevel)
+    public function __construct(
+        BigHandwork $bigHandwork,
+        Cooking $cooking,
+        Dancing $dancing,
+        DuskSight $duskSight,
+        FightWithShootingWeapons $fightWithShootingWeapons,
+        FirstAid $firstAid,
+        HandingWithAnimals $handingWithAnimals,
+        Handwork $handwork,
+        Gambling $gambling,
+        Herbalism $herbalism,
+        HuntingAndFishing $huntingAndFishing,
+        Knotting $knotting,
+        Painting $painting,
+        Pedagogy $pedagogy,
+        PlayingOnMusicInstrument $playingOnMusicInstrument,
+        Seduction $seduction,
+        Showmanship $showmanship,
+        Singing $singing,
+        Statuary $statuary
+    )
     {
-        $this->bigHandwork = new BigHandwork($this->createZeroSkillRank($professionLevel));
-        $this->cooking = new Cooking($this->createZeroSkillRank($professionLevel));
-        $this->dancing = new Dancing($this->createZeroSkillRank($professionLevel));
-        $this->duskSight = new DuskSight($this->createZeroSkillRank($professionLevel));
-        $this->fightWithShootingWeapons = new FightWithShootingWeapons($this->createZeroSkillRank($professionLevel));
-        $this->firstAid = new FirstAid($this->createZeroSkillRank($professionLevel));
-        $this->handingWithAnimals = new HandingWithAnimals($this->createZeroSkillRank($professionLevel));
-        $this->handwork = new Handwork($this->createZeroSkillRank($professionLevel));
-        $this->gambling = new Gambling($this->createZeroSkillRank($professionLevel));
-        $this->herbalism = new Herbalism($this->createZeroSkillRank($professionLevel));
-        $this->huntingAndFishing = new HuntingAndFishing($this->createZeroSkillRank($professionLevel));
-        $this->knotting = new Knotting($this->createZeroSkillRank($professionLevel));
-        $this->painting = new Painting($this->createZeroSkillRank($professionLevel));
-        $this->pedagogy = new Pedagogy($this->createZeroSkillRank($professionLevel));
-        $this->playingOnMusicInstrument = new PlayingOnMusicInstrument($this->createZeroSkillRank($professionLevel));
-        $this->seduction = new Seduction($this->createZeroSkillRank($professionLevel));
-        $this->showmanship = new Showmanship($this->createZeroSkillRank($professionLevel));
-        $this->singing = new Singing($this->createZeroSkillRank($professionLevel));
-        $this->statuary = new Statuary($this->createZeroSkillRank($professionLevel));
+        $this->bigHandwork = $bigHandwork;
+        $this->cooking = $cooking;
+        $this->dancing = $dancing;
+        $this->duskSight = $duskSight;
+        $this->fightWithShootingWeapons = $fightWithShootingWeapons;
+        $this->firstAid = $firstAid;
+        $this->handingWithAnimals = $handingWithAnimals;
+        $this->handwork = $handwork;
+        $this->gambling = $gambling;
+        $this->herbalism = $herbalism;
+        $this->huntingAndFishing = $huntingAndFishing;
+        $this->knotting = $knotting;
+        $this->painting = $painting;
+        $this->pedagogy = $pedagogy;
+        $this->playingOnMusicInstrument = $playingOnMusicInstrument;
+        $this->seduction = $seduction;
+        $this->showmanship = $showmanship;
+        $this->singing = $singing;
+        $this->statuary = $statuary;
 
         $this->skillsIterator = $this->createSkillsIterator();
     }

@@ -91,7 +91,7 @@ class Person extends StrictObject
         Exceptionality $exceptionality, // entity
         ProfessionLevels $professionLevels, // entity
         Background $background, // entity
-        Skills $skills,
+        Skills $skills, // entity
         Tables $tables // data helper
     )
     {

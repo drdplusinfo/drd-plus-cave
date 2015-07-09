@@ -1,7 +1,6 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Person\Skills\Physical;
 
-use DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\ProfessionLevel;
 use DrdPlus\Cave\UnitBundle\Person\Skills\AbstractSkillsGroup;
 
 /**
@@ -59,24 +58,41 @@ class PhysicalSkills extends AbstractSkillsGroup
     /** @var \ArrayIterator */
     private $skillsIterator;
 
-    public function __construct(ProfessionLevel $professionLevel)
+    public function __construct(
+        ArmorWearing $armorWearing,
+        Athletics $athletics,
+        Blacksmithing $blacksmithing,
+        BoatDriving $boatDriving,
+        CartDriving $cartDriving,
+        CityMoving $cityMoving,
+        ClimbingAndHillwalking $climbingAndHillwalking,
+        FastMarsh $fastMarsh,
+        FightWithWeapon $fightWithWeapon,
+        Flying $flying,
+        ForestMoving $forestMoving,
+        MovingInMountain $movingInMountain,
+        Riding $riding,
+        Sailing $sailing,
+        ShieldUsage $shieldUsage,
+        Swimming $swimming
+    )
     {
-        $this->armorWearing = new ArmorWearing($this->createZeroSkillRank($professionLevel));
-        $this->athletics = new Athletics($this->createZeroSkillRank($professionLevel));
-        $this->blacksmithing = new Blacksmithing($this->createZeroSkillRank($professionLevel));
-        $this->boatDriving = new BoatDriving($this->createZeroSkillRank($professionLevel));
-        $this->cartDriving = new CartDriving($this->createZeroSkillRank($professionLevel));
-        $this->cityMoving = new CityMoving($this->createZeroSkillRank($professionLevel));
-        $this->climbingAndHillwalking = new ClimbingAndHillwalking($this->createZeroSkillRank($professionLevel));
-        $this->fastMarsh = new FastMarsh($this->createZeroSkillRank($professionLevel));
-        $this->fightWithWeapon = new FightWithWeapon($this->createZeroSkillRank($professionLevel));
-        $this->flying = new Flying($this->createZeroSkillRank($professionLevel));
-        $this->forestMoving = new ForestMoving($this->createZeroSkillRank($professionLevel));
-        $this->movingInMountain = new MovingInMountain($this->createZeroSkillRank($professionLevel));
-        $this->riding = new Riding($this->createZeroSkillRank($professionLevel));
-        $this->sailing = new Sailing($this->createZeroSkillRank($professionLevel));
-        $this->shieldUsage = new ShieldUsage($this->createZeroSkillRank($professionLevel));
-        $this->swimming = new Swimming($this->createZeroSkillRank($professionLevel));
+        $this->armorWearing = $armorWearing;
+        $this->athletics = $athletics;
+        $this->blacksmithing = $blacksmithing;
+        $this->boatDriving = $boatDriving;
+        $this->cartDriving = $cartDriving;
+        $this->cityMoving = $cityMoving;
+        $this->climbingAndHillwalking = $climbingAndHillwalking;
+        $this->fastMarsh = $fastMarsh;
+        $this->fightWithWeapon = $fightWithWeapon;
+        $this->flying = $flying;
+        $this->forestMoving = $forestMoving;
+        $this->movingInMountain = $movingInMountain;
+        $this->riding = $riding;
+        $this->sailing = $sailing;
+        $this->shieldUsage = $shieldUsage;
+        $this->swimming = $swimming;
 
         $this->skillsIterator = $this->createSkillsIterator();
     }
