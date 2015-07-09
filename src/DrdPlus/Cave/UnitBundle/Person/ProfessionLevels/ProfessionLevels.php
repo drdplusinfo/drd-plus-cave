@@ -4,11 +4,11 @@ namespace DrdPlus\Cave\UnitBundle\Person\ProfessionLevels;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Agility;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Parts\BaseProperty;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Body\WeightInKg;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Charisma;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Intelligence;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Knack;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Parts\BaseProperty;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Strength;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Will;
 use Granam\Strict\Object\StrictObject;
@@ -358,9 +358,14 @@ class ProfessionLevels extends StrictObject implements \IteratorAggregate
 
     private function composePropertyIncrementGetter($propertyName)
     {
-        $propertyName = implode(array_map(function ($part) {
-            return ucfirst($part);
-        }, explode('_', $propertyName)));
+        $propertyName = implode(
+            array_map(
+                function ($part) {
+                    return ucfirst($part);
+                },
+                explode('_', $propertyName)
+            )
+        );
 
         // like "weight_in_kg" = getWeightInKg
         return "get{$propertyName}Increment";
@@ -473,7 +478,7 @@ class ProfessionLevels extends StrictObject implements \IteratorAggregate
      */
     private function getNextLevelsPropertyModifiers($propertyName)
     {
-        /** like strength = getStrengthModifier, @see ProfessionLevel::getStrengthModifier() */
+        /** like strength = getStrengthIncrement, @see ProfessionLevel::getStrengthIncrement() */
         $getPropertyIncrement = $this->composePropertyIncrementGetter($propertyName);
 
         return array_map(

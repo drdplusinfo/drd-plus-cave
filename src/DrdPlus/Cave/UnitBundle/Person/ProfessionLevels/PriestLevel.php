@@ -2,6 +2,13 @@
 namespace DrdPlus\Cave\UnitBundle\Person\ProfessionLevels;
 
 use Doctrine\ORM\Mapping as ORM;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Agility;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Body\WeightInKg;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Charisma;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Intelligence;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Knack;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Strength;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Will;
 use DrdPlus\Cave\UnitBundle\Person\Professions\Priest;
 
 /**
@@ -20,13 +27,31 @@ class PriestLevel extends ProfessionLevel
      */
     protected $professionLevels;
 
-    /**
-     * @return Priest
-     */
-    protected function createProfession()
+    public function __construct(
+        Priest $priest,
+        LevelValue $levelValue,
+        Strength $strengthIncrement,
+        Agility $agilityIncrement,
+        Knack $knackIncrement,
+        Will $willIncrement,
+        Intelligence $intelligenceIncrement,
+        Charisma $charismaIncrement,
+        WeightInKg $weightInKgIncrement,
+        \DateTimeImmutable $levelUpAt = null
+    )
     {
-        return new Priest();
+        parent::__construct(
+            $priest,
+            $levelValue,
+            $strengthIncrement,
+            $agilityIncrement,
+            $knackIncrement,
+            $willIncrement,
+            $intelligenceIncrement,
+            $charismaIncrement,
+            $weightInKgIncrement,
+            $levelUpAt
+        );
     }
-
 
 }

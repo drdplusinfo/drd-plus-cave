@@ -2,15 +2,15 @@
 namespace DrdPlus\Cave\UnitBundle\Person\ProfessionLevels;
 
 use Doctrine\ORM\Mapping as ORM;
-use DrdPlus\Cave\UnitBundle\Person\Professions\Profession;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Agility;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Parts\BaseProperty;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Body\WeightInKg;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Charisma;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Intelligence;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Knack;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Parts\BaseProperty;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Strength;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Will;
+use DrdPlus\Cave\UnitBundle\Person\Professions\Profession;
 use Granam\Strict\Object\StrictObject;
 
 /**
@@ -22,6 +22,8 @@ abstract class ProfessionLevel extends StrictObject
     const PROPERTY_FIRST_LEVEL_MODIFIER = +1;
     const MINIMUM_LEVEL = 1;
     const MAXIMUM_LEVEL = 20;
+    const MIN_NEXT_LEVEL_PROPERTY_MODIFIER = 0;
+    const MAX_NEXT_LEVEL_PROPERTY_MODIFIER = 1;
 
     /**
      * Have to be protected to allow Doctrine to access it on children
@@ -101,7 +103,8 @@ abstract class ProfessionLevel extends StrictObject
      */
     private $profession;
 
-    public function __construct(
+    protected function __construct(
+        Profession $profession,
         LevelValue $levelValue,
         Strength $strengthIncrement,
         Agility $agilityIncrement,
@@ -113,9 +116,9 @@ abstract class ProfessionLevel extends StrictObject
         \DateTimeImmutable $levelUpAt = null
     )
     {
+        $this->profession = $profession;
         $this->checkLevelValue($levelValue);
         $this->levelValue = $levelValue;
-        $this->profession = $this->createProfession();
         $this->checkPropertyIncrement($strengthIncrement, $levelValue);
         $this->strengthIncrement = $strengthIncrement;
         $this->checkPropertyIncrement($agilityIncrement, $levelValue);
@@ -156,6 +159,13 @@ abstract class ProfessionLevel extends StrictObject
         }
     }
 
+    /**
+     * Its only the increment based on first level of specific profession.
+     * There are other increments like race, size etc., solved in
+     * @see \DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\FirstLevelProperties
+     *
+     * @param BaseProperty $property
+     */
     private function checkPropertyFirstLevelIncrement(BaseProperty $property)
     {
         if ($property->getValue() !== $this->getPropertyFirstLevelModifier($property->getCode())) {
@@ -167,7 +177,15 @@ abstract class ProfessionLevel extends StrictObject
 
     private function checkNextLevelPropertyIncrement(BaseProperty $property)
     {
-        // TODO - see PPH, page 44
+        if ($property->getValue() < self::MIN_NEXT_LEVEL_PROPERTY_MODIFIER
+            || $property->getValue() > self::MAX_NEXT_LEVEL_PROPERTY_MODIFIER
+        ) {
+            throw new \LogicException(
+                'Next level property change has to be between '
+                . self::MIN_NEXT_LEVEL_PROPERTY_MODIFIER . ' and '
+                . self::MAX_NEXT_LEVEL_PROPERTY_MODIFIER . ", got {$property->getValue()}"
+            );
+        }
     }
 
     private function checkWeightIncrement(WeightInKg $weightInKg, LevelValue $levelValue)
@@ -178,11 +196,6 @@ abstract class ProfessionLevel extends StrictObject
             );
         }
     }
-
-    /**
-     * @return Profession
-     */
-    abstract protected function createProfession();
 
     /**
      * Get id
