@@ -130,12 +130,11 @@ class Skills extends StrictObject
         return $this->combinedSkills;
     }
 
-    public function getFreePhysicalSkillPoints()
+    public function getFreeNextLevelsPhysicalSkillPoints()
     {
         $nextLevelsPhysicalPropertiesSum = $this->getNextLevelsPhysicalPropertiesSum($this->getPerson()->getProfessionLevels());
-        $firstLevelPotentialPsychicalSkillPoints = $this->getFirstLevelPotentialPhysicalSkillPoints($this->getPerson()->getProfessionLevels());
 
-        return $this->getFreeSkillPoints($nextLevelsPhysicalPropertiesSum, $firstLevelPotentialPsychicalSkillPoints, $this->getPhysicalSkills());
+        return $this->getFreeNextLevelsSkillPoints($nextLevelsPhysicalPropertiesSum, $this->getPhysicalSkills());
     }
 
     /**
@@ -149,44 +148,27 @@ class Skills extends StrictObject
     }
 
     /**
-     * @param ProfessionLevels $professionLevels
-     *
-     * @return int
-     */
-    private function getFirstLevelPotentialPhysicalSkillPoints(ProfessionLevels $professionLevels)
-    {
-        return $this->getPerson()->getBackground()->getBackgroundSkills()->getPhysicalSkillPoints(
-            $professionLevels->getFirstLevel()->getProfession()
-        );
-    }
-
-    /**
-     * @param int $nextLevelsPropertiesSum
-     * @param int $potentialFirstLevelSkillPoints
+     * @param int $nextLevelsPropertiesSum as potential of skill points
      * @param AbstractSkillsGroup $skillsGroup
      *
      * @return int
      */
-    private function getFreeSkillPoints(
+    private function getFreeNextLevelsSkillPoints(
         $nextLevelsPropertiesSum,
-        $potentialFirstLevelSkillPoints,
         AbstractSkillsGroup $skillsGroup
     )
     {
-        return
-            ($nextLevelsPropertiesSum /* = potential of skill points */ - $skillsGroup->getNextLevelsSkillRankSummary())
-            + ($potentialFirstLevelSkillPoints - $skillsGroup->getFirstLevelsSkillRankSummary());
+        return $nextLevelsPropertiesSum - $skillsGroup->getNextLevelsSkillRankSummary();
     }
 
     /**
      * @return int
      */
-    public function getFreePsychicalSkillPoints()
+    public function getFreeNextLevelsPsychicalSkillPoints()
     {
         $nextLevelsPsychicalPropertiesSum = $this->getNextLevelsPsychicalPropertiesSum($this->getPerson()->getProfessionLevels());
-        $firstLevelPotentialPsychicalSkillPoints = $this->getFirstLevelPotentialPsychicalSkillPoints($this->getPerson()->getProfessionLevels());
 
-        return $this->getFreeSkillPoints($nextLevelsPsychicalPropertiesSum, $firstLevelPotentialPsychicalSkillPoints, $this->getPsychicalSkills());
+        return $this->getFreeNextLevelsSkillPoints($nextLevelsPsychicalPropertiesSum, $this->getPsychicalSkills());
     }
 
     /**
@@ -200,23 +182,13 @@ class Skills extends StrictObject
     }
 
     /**
-     * @param ProfessionLevels $professionLevels
-     *
      * @return int
      */
-    private function getFirstLevelPotentialPsychicalSkillPoints(ProfessionLevels $professionLevels)
-    {
-        return $this->getPerson()->getBackground()->getBackgroundSkills()->getPsychicalSkillPoints(
-            $professionLevels->getFirstLevel()->getProfession()
-        );
-    }
-
-    public function getFreeCombinedSkillPoints()
+    public function getFreeNextLevelsCombinedSkillPoints()
     {
         $nextLevelsCombinedPropertiesSum = $this->getNextLevelsCombinedPropertiesSum($this->getPerson()->getProfessionLevels());
-        $firstLevelPotentialCombinedSkillPoints = $this->getFirstLevelPotentialCombinedSkillPoints($this->getPerson()->getProfessionLevels());
 
-        return $this->getFreeSkillPoints($nextLevelsCombinedPropertiesSum, $firstLevelPotentialCombinedSkillPoints, $this->getCombinedSkills());
+        return $this->getFreeNextLevelsSkillPoints($nextLevelsCombinedPropertiesSum, $this->getCombinedSkills());
     }
 
     private function getNextLevelsCombinedPropertiesSum(ProfessionLevels $professionLevels)
@@ -224,15 +196,4 @@ class Skills extends StrictObject
         return $professionLevels->getNextLevelsKnackModifier() + $professionLevels->getNextLevelsCharismaModifier();
     }
 
-    /**
-     * @param ProfessionLevels $professionLevels
-     *
-     * @return int
-     */
-    private function getFirstLevelPotentialCombinedSkillPoints(ProfessionLevels $professionLevels)
-    {
-        return $this->getPerson()->getBackground()->getBackgroundSkills()->getCombinedSkillPoints(
-            $professionLevels->getFirstLevel()->getProfession()
-        );
-    }
 }
