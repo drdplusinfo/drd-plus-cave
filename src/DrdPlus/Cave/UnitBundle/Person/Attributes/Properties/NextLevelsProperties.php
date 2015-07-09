@@ -36,7 +36,10 @@ class NextLevelsProperties extends StrictObject
     public function __construct(ProfessionLevels $professionLevels)
     {
         $this->professionLevels = $professionLevels;
-        // TODO what about property value check? Or new, non-first level has no property increase limit?
+        /**
+         * for check of next level property increment
+         * @see \DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\ProfessionLevel::checkNextLevelPropertyIncrement
+         */
         $this->strength = Strength::getIt($professionLevels->getNextLevelsStrengthModifier());
         $this->agility = Agility::getIt($professionLevels->getNextLevelsAgilityModifier());
         $this->knack = Knack::getIt($professionLevels->getNextLevelsKnackModifier());

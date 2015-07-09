@@ -18,42 +18,30 @@ class FirstLevelProperties extends StrictObject
 
     /** @var Strength */
     private $firstLevelUnlimitedStrength;
-
     /** @var Strength */
     private $firstLevelStrength;
-
     /** @var Agility */
     private $firstLevelUnlimitedAgility;
-
     /** @var Agility */
     private $firstLevelAgility;
-
     /** @var Knack */
     private $firstLevelUnlimitedKnack;
-
     /** @var Knack */
     private $firstLevelKnack;
-
     /** @var Will */
     private $firstLevelUnlimitedWill;
-
     /** @var Will */
     private $firstLevelWill;
-
     /** @var Intelligence */
     private $firstLevelUnlimitedIntelligence;
-
     /** @var Intelligence */
     private $firstLevelIntelligence;
-
     /** @var Charisma */
     private $firstLevelUnlimitedCharisma;
     /** @var Charisma */
     private $firstLevelCharisma;
-
     /** @var WeightInKg */
     private $firstLevelWeightInKg;
-
     /** @var Size */
     private $firstLevelSize;
 
