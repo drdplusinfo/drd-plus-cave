@@ -49,33 +49,6 @@ abstract class AbstractSkillsGroup extends StrictObject implements \Iterator, \C
         );
     }
 
-    /**
-     * TODO find usage for this
-     *
-     * @return int
-     */
-    public function getFirstLevelsSkillRankSummary()
-    {
-        return (int)array_sum(
-            array_map(
-                function (AbstractSkillRank $skillRank) {
-                    return $skillRank->getValue();
-                },
-                $this->findFirstLevelSkillRanks($this->getSkillsIterator()->getArrayCopy())
-            )
-        );
-    }
-
-    protected function findFirstLevelSkillRanks(array $skillRanks)
-    {
-        return array_filter(
-            $skillRanks,
-            function (AbstractSkillRank $skillRank) {
-                return $skillRank->getProfessionLevel()->isFirstLevel();
-            }
-        );
-    }
-
     public function current()
     {
         return $this->getSkillsIterator()->current();
