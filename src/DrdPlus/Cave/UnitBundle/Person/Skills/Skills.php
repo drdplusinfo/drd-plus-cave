@@ -2,7 +2,6 @@
 namespace DrdPlus\Cave\UnitBundle\Person\Skills;
 
 use DrdPlus\Cave\UnitBundle\Person\Person;
-use DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\ProfessionLevel;
 use DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\ProfessionLevels;
 use DrdPlus\Cave\UnitBundle\Person\Skills\Combined\CombinedSkills;
 use DrdPlus\Cave\UnitBundle\Person\Skills\Physical\PhysicalSkills;
@@ -58,34 +57,17 @@ class Skills extends StrictObject
      */
     private $combinedSkills;
 
-    public function __construct(ProfessionLevel $professionLevel)
+    public function __construct(
+        Person $person,
+        PhysicalSkills $physicalSkills,
+        PsychicalSkills $psychicalSkills,
+        CombinedSkills $combinedSkills
+    )
     {
-        $this->physicalSkills = new PhysicalSkills($professionLevel);
-        $this->psychicalSkills = new PsychicalSkills($professionLevel);
-        $this->combinedSkills = new CombinedSkills($professionLevel);
-    }
-
-    public function setPerson(Person $person)
-    {
-        $this->checkPersonToSet($person);
-        $this->person = $person; // even same person is re-set (to replace "old" instance by new one)
-    }
-
-    private function checkPersonToSet(Person $person)
-    {
-        if (is_null($this->getId()) && is_null($person->getProfessionLevels()->getId())
-            && $this !== $person->getProfessionLevels()
-        ) {
-            throw new \LogicException;
-        }
-
-        if ($person->getProfessionLevels()->getId() !== $this->getId()) {
-            throw new Exceptions\PersonIsAlreadySet();
-        }
-
-        if ($this->getPerson() && $this->getPerson()->getId() !== $person->getId()) {
-            throw new \LogicException();
-        }
+        $this->person = $person;
+        $this->physicalSkills = $physicalSkills;
+        $this->psychicalSkills = $psychicalSkills;
+        $this->combinedSkills = $combinedSkills;
     }
 
     /**
