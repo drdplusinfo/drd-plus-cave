@@ -1,7 +1,6 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Person\Skills;
 
-use DrdPlus\Cave\UnitBundle\Person\Person;
 use DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\ProfessionLevels;
 use DrdPlus\Cave\UnitBundle\Person\Skills\Combined\CombinedSkills;
 use DrdPlus\Cave\UnitBundle\Person\Skills\Physical\PhysicalSkills;
@@ -30,13 +29,6 @@ class Skills extends StrictObject
     private $id;
 
     /**
-     * @var Person
-     *
-     * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Person\Person")
-     */
-    private $person;
-
-    /**
      * @var PhysicalSkills
      *
      * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Person\Skills\Physical\PhysicalSkills")
@@ -58,13 +50,11 @@ class Skills extends StrictObject
     private $combinedSkills;
 
     public function __construct(
-        Person $person,
         PhysicalSkills $physicalSkills,
         PsychicalSkills $psychicalSkills,
         CombinedSkills $combinedSkills
     )
     {
-        $this->person = $person;
         $this->physicalSkills = $physicalSkills;
         $this->psychicalSkills = $psychicalSkills;
         $this->combinedSkills = $combinedSkills;
@@ -76,16 +66,6 @@ class Skills extends StrictObject
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Get person
-     *
-     * @return Person|null
-     */
-    public function getPerson()
-    {
-        return $this->person;
     }
 
     /**
@@ -112,18 +92,17 @@ class Skills extends StrictObject
         return $this->combinedSkills;
     }
 
-    public function getFreeNextLevelsPhysicalSkillPoints()
+    /**
+     * @param ProfessionLevels $professionLevels
+     * @return int
+     */
+    public function getFreeNextLevelsPhysicalSkillPoints(ProfessionLevels $professionLevels)
     {
-        $nextLevelsPhysicalPropertiesSum = $this->getNextLevelsPhysicalPropertiesSum($this->getPerson()->getProfessionLevels());
+        $nextLevelsPhysicalPropertiesSum = $this->getNextLevelsPhysicalPropertiesSum($professionLevels);
 
         return $this->getFreeNextLevelsSkillPoints($nextLevelsPhysicalPropertiesSum, $this->getPhysicalSkills());
     }
 
-    /**
-     * @param ProfessionLevels $professionLevels
-     *
-     * @return int
-     */
     private function getNextLevelsPhysicalPropertiesSum(ProfessionLevels $professionLevels)
     {
         return $professionLevels->getNextLevelsAgilityModifier() + $professionLevels->getNextLevelsStrengthModifier();
@@ -132,7 +111,6 @@ class Skills extends StrictObject
     /**
      * @param int $nextLevelsPropertiesSum as potential of skill points
      * @param AbstractSkillsGroup $skillsGroup
-     *
      * @return int
      */
     private function getFreeNextLevelsSkillPoints(
@@ -144,31 +122,28 @@ class Skills extends StrictObject
     }
 
     /**
+     * @param ProfessionLevels $professionLevels
      * @return int
      */
-    public function getFreeNextLevelsPsychicalSkillPoints()
+    public function getFreeNextLevelsPsychicalSkillPoints(ProfessionLevels $professionLevels)
     {
-        $nextLevelsPsychicalPropertiesSum = $this->getNextLevelsPsychicalPropertiesSum($this->getPerson()->getProfessionLevels());
+        $nextLevelsPsychicalPropertiesSum = $this->getNextLevelsPsychicalPropertiesSum($professionLevels);
 
         return $this->getFreeNextLevelsSkillPoints($nextLevelsPsychicalPropertiesSum, $this->getPsychicalSkills());
     }
 
-    /**
-     * @param ProfessionLevels $professionLevels
-     *
-     * @return int
-     */
     private function getNextLevelsPsychicalPropertiesSum(ProfessionLevels $professionLevels)
     {
         return $professionLevels->getNextLevelsIntelligenceModifier() + $professionLevels->getNextLevelsWillModifier();
     }
 
     /**
+     * @param ProfessionLevels $professionLevels
      * @return int
      */
-    public function getFreeNextLevelsCombinedSkillPoints()
+    public function getFreeNextLevelsCombinedSkillPoints(ProfessionLevels $professionLevels)
     {
-        $nextLevelsCombinedPropertiesSum = $this->getNextLevelsCombinedPropertiesSum($this->getPerson()->getProfessionLevels());
+        $nextLevelsCombinedPropertiesSum = $this->getNextLevelsCombinedPropertiesSum($professionLevels);
 
         return $this->getFreeNextLevelsSkillPoints($nextLevelsCombinedPropertiesSum, $this->getCombinedSkills());
     }

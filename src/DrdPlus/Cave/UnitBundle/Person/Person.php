@@ -91,6 +91,7 @@ class Person extends StrictObject
         Exceptionality $exceptionality, // entity
         ProfessionLevels $professionLevels, // entity
         Background $background, // entity
+        Skills $skills,
         Tables $tables // data helper
     )
     {
@@ -100,16 +101,8 @@ class Person extends StrictObject
         $this->exceptionality = $exceptionality;
         $this->professionLevels = $professionLevels;
         $this->background = $background;
-        $this->personProperties = new PersonProperties($this, $tables); // enums aggregate
-    }
-
-    public function setSkills(Skills $skills)
-    {
-        if ($this->getSkills() && $this->getSkills()->getId() !== $skills->getId()) {
-            throw new \LogicException();
-        }
-
         $this->skills = $skills;
+        $this->personProperties = new PersonProperties($this, $tables); // enums aggregate
     }
 
     /**

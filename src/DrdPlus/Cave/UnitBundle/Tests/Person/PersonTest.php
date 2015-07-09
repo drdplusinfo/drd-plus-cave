@@ -20,6 +20,7 @@ use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Will;
 use DrdPlus\Cave\UnitBundle\Person\Professions\Profession;
 use DrdPlus\Cave\UnitBundle\Person\Races\Gender;
 use DrdPlus\Cave\UnitBundle\Person\Races\Race;
+use DrdPlus\Cave\UnitBundle\Person\Skills\Skills;
 use DrdPlus\Cave\UnitBundle\Tests\TestWithMockery;
 
 class PersonTest extends TestWithMockery
@@ -35,7 +36,8 @@ class PersonTest extends TestWithMockery
             $this->getExceptionalityMock(),
             $this->getProfessionLevelsMock(),
             $this->getBackgroundMock(),
-			$this->getTablesMock()
+            $this->getSkillsMock(),
+            $this->getTablesMock()
         );
         $this->assertNotNull($instance);
     }
@@ -50,7 +52,8 @@ class PersonTest extends TestWithMockery
             $this->getExceptionalityMock(),
             $this->getProfessionLevelsMock(),
             $this->getBackgroundMock(),
-			$this->getTablesMock()
+            $this->getSkillsMock(),
+            $this->getTablesMock()
         );
         $this->assertNull($person->getId());
     }
@@ -65,7 +68,8 @@ class PersonTest extends TestWithMockery
             $this->getExceptionalityMock(),
             $this->getProfessionLevelsMock(),
             $this->getBackgroundMock(),
-			$this->getTablesMock()
+            $this->getSkillsMock(),
+            $this->getTablesMock()
         );
         $this->assertSame($race, $person->getRace());
     }
@@ -80,7 +84,8 @@ class PersonTest extends TestWithMockery
             $this->getExceptionalityMock(),
             $this->getProfessionLevelsMock(),
             $this->getBackgroundMock(),
-			$this->getTablesMock()
+            $this->getSkillsMock(),
+            $this->getTablesMock()
         );
         $this->assertSame($gender, $person->getGender());
     }
@@ -95,7 +100,8 @@ class PersonTest extends TestWithMockery
             $exceptionality = $this->getExceptionalityMock(),
             $this->getProfessionLevelsMock(),
             $this->getBackgroundMock(),
-			$this->getTablesMock()
+            $this->getSkillsMock(),
+            $this->getTablesMock()
         );
         $this->assertSame($exceptionality, $person->getExceptionality());
     }
@@ -110,7 +116,8 @@ class PersonTest extends TestWithMockery
             $this->getExceptionalityMock(),
             $professionLevels = $this->getProfessionLevelsMock(),
             $this->getBackgroundMock(),
-			$this->getTablesMock()
+            $this->getSkillsMock(),
+            $this->getTablesMock()
         );
         $this->assertSame($professionLevels, $person->getProfessionLevels());
     }
@@ -125,7 +132,8 @@ class PersonTest extends TestWithMockery
             $this->getExceptionalityMock(),
             $this->getProfessionLevelsMock(),
             $this->getBackgroundMock(),
-			$this->getTablesMock()
+            $this->getSkillsMock(),
+            $this->getTablesMock()
         );
         $this->assertSame($name, $person->getName());
     }
@@ -140,7 +148,8 @@ class PersonTest extends TestWithMockery
             $this->getExceptionalityMock(),
             $this->getProfessionLevelsMock(),
             $this->getBackgroundMock(),
-			$this->getTablesMock()
+            $this->getSkillsMock(),
+            $this->getTablesMock()
         );
         Name::registerSelf();
         $person->setName($name = Name::getEnum($nameString = 'foo'));
@@ -294,6 +303,19 @@ class PersonTest extends TestWithMockery
         $background = \Mockery::mock(Background::class);
 
         return $background;
+    }
+
+    /**
+     * @return \Mockery\MockInterface|Skills
+     */
+    private function getSkillsMock()
+    {
+        $skills = \Mockery::mock(Skills::class);
+        $skills->shouldReceive('setPerson')
+            ->atLeast()->once()
+            ->with(\Mockery::type(Person::class));
+
+        return $skills;
     }
 
     /**
