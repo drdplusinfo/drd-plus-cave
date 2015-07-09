@@ -64,6 +64,13 @@ abstract class AbstractSkillPoint extends StrictObject implements IntegerInterfa
      */
     private $secondPaidSkillPoint;
 
+    /** @var bool */
+    private $paidByFirstLevelBackgroundSkills = false;
+    /** @var bool */
+    private $paidByOtherSkillPoints = false;
+    /** @var bool */
+    private $paidByNextLevelPropertyIncrease = false;
+
     /**
      * @param ProfessionLevel $professionLevel
      * @param BackgroundSkills $backgroundSkills
@@ -117,11 +124,16 @@ abstract class AbstractSkillPoint extends StrictObject implements IntegerInterfa
     protected function checkPaidProperties(ProfessionLevel $professionLevel, BackgroundSkills $backgroundSkills = null, AbstractSkillPoint $firstPaidSkillPoint = null, AbstractSkillPoint $secondPaidSkillPoint = null)
     {
         if ($professionLevel->isFirstLevel() && $backgroundSkills) {
-            $this->checkPayByFirstLevelBackground($professionLevel, $backgroundSkills);
-        } else if ($firstPaidSkillPoint || $secondPaidSkillPoint) {
-            $this->checkPayBySkillPoints($firstPaidSkillPoint, $secondPaidSkillPoint);
+            $this->checkPayByFirstLevelBackgroundSkills($professionLevel, $backgroundSkills);
+            $this->paidByFirstLevelBackgroundSkills = true;
+        } else if ($professionLevel->isFirstLevel() && ($firstPaidSkillPoint || $secondPaidSkillPoint)) {
+            $this->checkPayByOtherSkillPoints($firstPaidSkillPoint, $secondPaidSkillPoint);
+            $this->paidByOtherSkillPoints = true;
+        } else if ($professionLevel->isNextLevel()) {
+            $this->checkPayByLevelPropertyIncrease($professionLevel);
+            $this->paidByNextLevelPropertyIncrease = true;
         } else {
-            $this->checkPayByLevelPropertiesIncrease($professionLevel);
+            throw new \LogicException('Unknown payment for skill point of profession level with ID ' . $professionLevel->getId());
         }
     }
 
@@ -131,7 +143,7 @@ abstract class AbstractSkillPoint extends StrictObject implements IntegerInterfa
      *
      * @return bool
      */
-    protected function checkPayByFirstLevelBackground(ProfessionLevel $professionLevel, BackgroundSkills $backgroundSkills)
+    protected function checkPayByFirstLevelBackgroundSkills(ProfessionLevel $professionLevel, BackgroundSkills $backgroundSkills)
     {
         $relatedProperties = $this->sortAlphabetically($this->getRelatedProperties());
         $firstLevelSkillPoints = 0;
@@ -155,7 +167,7 @@ abstract class AbstractSkillPoint extends StrictObject implements IntegerInterfa
         return true;
     }
 
-    protected function checkPayBySkillPoints(AbstractSkillPoint $firstPaidSkillPoint = null, AbstractSkillPoint $secondPaidSkillPoint = null)
+    protected function checkPayByOtherSkillPoints(AbstractSkillPoint $firstPaidSkillPoint = null, AbstractSkillPoint $secondPaidSkillPoint = null)
     {
         if (!($firstPaidSkillPoint && $secondPaidSkillPoint)) {
             throw new \LogicException(
@@ -175,7 +187,7 @@ abstract class AbstractSkillPoint extends StrictObject implements IntegerInterfa
         }
     }
 
-    protected function checkPayByLevelPropertiesIncrease(ProfessionLevel $professionLevel)
+    protected function checkPayByLevelPropertyIncrease(ProfessionLevel $professionLevel)
     {
         if ($professionLevel->isFirstLevel()) {
             throw new \LogicException(
@@ -270,6 +282,30 @@ abstract class AbstractSkillPoint extends StrictObject implements IntegerInterfa
     public function getSecondPaidSkillPoint()
     {
         return $this->secondPaidSkillPoint;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isPaidByFirstLevelBackgroundSkills()
+    {
+        return $this->paidByFirstLevelBackgroundSkills;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isPaidByOtherSkillPoints()
+    {
+        return $this->paidByOtherSkillPoints;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isPaidByNextLevelPropertyIncrease()
+    {
+        return $this->paidByNextLevelPropertyIncrease;
     }
 
 }

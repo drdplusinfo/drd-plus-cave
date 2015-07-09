@@ -5,11 +5,22 @@ use Doctrine\ORM\Mapping as ORM;
 use DrdPlus\Cave\TablesBundle\Tables\Tables;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Exceptionality;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Name;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Agility;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Charisma;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Intelligence;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Knack;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Strength;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Will;
 use DrdPlus\Cave\UnitBundle\Person\Background\Background;
 use DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\ProfessionLevels;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\PersonProperties;
 use DrdPlus\Cave\UnitBundle\Person\Races\Gender;
 use DrdPlus\Cave\UnitBundle\Person\Races\Race;
+use DrdPlus\Cave\UnitBundle\Person\Skills\AbstractSkill;
+use DrdPlus\Cave\UnitBundle\Person\Skills\AbstractSkillRank;
+use DrdPlus\Cave\UnitBundle\Person\Skills\Combined\CombinedSkillPoint;
+use DrdPlus\Cave\UnitBundle\Person\Skills\Physical\PhysicalSkillPoint;
+use DrdPlus\Cave\UnitBundle\Person\Skills\Psychical\PsychicalSkillPoint;
 use DrdPlus\Cave\UnitBundle\Person\Skills\Skills;
 use Granam\Strict\Object\StrictObject;
 
@@ -102,7 +113,80 @@ class Person extends StrictObject
         $this->professionLevels = $professionLevels;
         $this->background = $background;
         $this->skills = $skills;
+        $this->checkPaymentOfSkillPoints($skills);
         $this->personProperties = new PersonProperties($this, $tables); // enums aggregate
+    }
+
+    private function checkPaymentOfSkillPoints(Skills $skills)
+    {
+        $nextLevelsPropertyIncreasePayment = [
+            PhysicalSkillPoint::PHYSICAL => ['paymentSum' => 0, 'relatedProperties' => []],
+            PsychicalSkillPoint::PSYCHICAL => ['paymentSum' => 0, 'relatedProperties' => []],
+            CombinedSkillPoint::COMBINED => ['paymentSum' => 0, 'relatedProperties' => []],
+        ];
+        /** @var AbstractSkill $skill */
+        foreach ($skills->getSkills() as $skill) {
+            /** @var AbstractSkillRank $skillRank */
+            foreach ($skill->getSkillRanks() as $skillRank) {
+                $skillPoint = $skillRank->getSkillPoint();
+                if ($skillPoint->isPaidByFirstLevelBackgroundSkills()) {
+                    // TODO
+                    /**
+                     * there are limited first level background skills,
+                     * @see \DrdPlus\Cave\UnitBundle\Person\Background\BackgroundSkills
+                     * and @see \DrdPlus\Cave\UnitBundle\Person\Background\Heritage
+                     * check their sum
+                     */
+                } else if ($skillPoint->isPaidByOtherSkillPoints()) {
+                    // TODO
+                    /**
+                     * the other skill points have to be extracted to first level background skills, see upper
+                     */
+                } else if ($skillPoint->isPaidByNextLevelPropertyIncrease()) {
+                    /**
+                     * for every skill point of this type has to exists level property increase
+                     */
+                    $nextLevelsPropertyIncreasePayment[$skillPoint->getGroupName()]['paymentSum']++;
+                    if (empty($nextLevelsPropertyIncreasePayment[$skillPoint->getGroupName()]['relatedProperties'])) {
+                        $nextLevelsPropertyIncreasePayment[$skillPoint->getGroupName()]['relatedProperties'] = $skillPoint->getRelatedProperties();
+                    }
+                } else {
+                    throw new \LogicException("Unknown payment for skill point of ID {$skillPoint->getId()}");
+                }
+            }
+        }
+        foreach ($nextLevelsPropertyIncreasePayment as $type => &$payment) {
+            $increasedPropertySum = 0;
+            $nextLevelsProperties = $this->getPersonProperties()->getNextLevelsProperties();
+            foreach ($payment['relatedProperties'] as $relatedProperty) {
+                switch ($relatedProperty) {
+                    case Strength::STRENGTH :
+                        $increasedPropertySum += $nextLevelsProperties->getStrength()->getValue();
+                        break;
+                    case Agility::AGILITY :
+                        $increasedPropertySum += $nextLevelsProperties->getAgility()->getValue();
+                        break;
+                    case Knack::KNACK :
+                        $increasedPropertySum += $nextLevelsProperties->getKnack()->getValue();
+                        break;
+                    case Will::WILL :
+                        $increasedPropertySum += $nextLevelsProperties->getWill()->getValue();
+                        break;
+                    case Intelligence::INTELLIGENCE :
+                        $increasedPropertySum += $nextLevelsProperties->getIntelligence()->getValue();
+                        break;
+                    case Charisma::CHARISMA :
+                        $increasedPropertySum += $nextLevelsProperties->getCharisma()->getValue();
+                        break;
+                }
+            }
+            if ($payment['paymentSum'] > $increasedPropertySum) {
+                throw new \LogicException(
+                    "Skills from next levels of type $type have higher ranks then possible."
+                    . " Max increase by next levels could be $increasedPropertySum, got " . $payment['paymentSum']
+                );
+            }
+        }
     }
 
     /**

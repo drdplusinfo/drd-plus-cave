@@ -93,6 +93,18 @@ class Skills extends StrictObject
     }
 
     /**
+     * @return array|AbstractSkill[]
+     */
+    public function getSkills()
+    {
+        return array_merge(
+            $this->getPhysicalSkills()->getSkills(),
+            $this->getPsychicalSkills()->getSkills(),
+            $this->getCombinedSkills()->getSkills()
+        );
+    }
+
+    /**
      * @param ProfessionLevels $professionLevels
      * @return int
      */

@@ -38,6 +38,14 @@ abstract class AbstractSkillsGroup extends StrictObject implements \Iterator, \C
         );
     }
 
+    /**
+     * @return AbstractSkill[]|array
+     */
+    public function getSkills()
+    {
+        return $this->getSkillsIterator()->getArrayCopy();
+    }
+
     public function current()
     {
         return $this->getSkillsIterator()->current();

@@ -49,7 +49,7 @@ abstract class AbstractSkill extends StrictObject
     /**
      * @return int
      */
-    protected function getMaxSkillRankValue()
+    private function getMaxSkillRankValue()
     {
         if (!($skillRankValues = $this->getSkillRankValues())) {
             return 0;

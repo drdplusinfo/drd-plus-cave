@@ -347,4 +347,12 @@ class PersonProperties extends StrictObject
         return $this->firstLevelProperties;
     }
 
+    /**
+     * @return NextLevelsProperties
+     */
+    public function getNextLevelsProperties()
+    {
+        return $this->nextLevelsProperties;
+    }
+
 }
