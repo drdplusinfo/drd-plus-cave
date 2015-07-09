@@ -7,7 +7,6 @@ use Granam\Strict\Object\StrictObject;
  * @ORM\Table
  * @ORM\Entity
  */
-// TODO switch entity type to value object from Doctrine 2.5
 class Dice extends StrictObject implements DiceInterface
 {
     /**
