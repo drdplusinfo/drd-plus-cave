@@ -311,6 +311,9 @@ class PersonTest extends TestWithMockery
     private function getSkillsMock()
     {
         $skills = \Mockery::mock(Skills::class);
+        $skills->shouldReceive('checkPaymentOfSkillPoints')
+            ->with(\Mockery::type(Person::class))
+            ->atLeast()->once();
 
         return $skills;
     }

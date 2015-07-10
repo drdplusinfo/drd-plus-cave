@@ -18,7 +18,7 @@ class PsychicalSkillPoint extends AbstractSkillPoint
     /**
      * return @string
      */
-    public function getGroupName()
+    public function getTypeName()
     {
         return static::PSYCHICAL;
     }

@@ -29,7 +29,7 @@ abstract class AbstractSkillPoint extends StrictObject implements IntegerInterfa
     /**
      * @return string
      */
-    abstract public function getGroupName();
+    abstract public function getTypeName();
 
     /**
      * @return string[]
@@ -55,14 +55,14 @@ abstract class AbstractSkillPoint extends StrictObject implements IntegerInterfa
      *
      * @ORM\OneToOne(targetEntity="\DrdPlus\Cave\UnitBundle\Person\Skills\AbstractSkillPoint")
      */
-    private $firstPaidSkillPoint;
+    private $firstPaidOtherSkillPoint;
 
     /**
      * @var AbstractSkillPoint|null
      *
      * @ORM\OneToOne(targetEntity="\DrdPlus\Cave\UnitBundle\Person\Skills\AbstractSkillPoint")
      */
-    private $secondPaidSkillPoint;
+    private $secondPaidOtherSkillPoint;
 
     /** @var bool */
     private $paidByFirstLevelBackgroundSkills = false;
@@ -109,16 +109,16 @@ abstract class AbstractSkillPoint extends StrictObject implements IntegerInterfa
      *
      * @param ProfessionLevel $professionLevel
      * @param BackgroundSkills $backgroundSkills = null
-     * @param AbstractSkillPoint $firstPaidSkillPoint = null
-     * @param AbstractSkillPoint $secondPaidSkillPoint = null
+     * @param AbstractSkillPoint $firstPaidOtherSkillPoint = null
+     * @param AbstractSkillPoint $secondPaidOtherSkillPoint = null
      */
-    protected function __construct(ProfessionLevel $professionLevel, BackgroundSkills $backgroundSkills = null, AbstractSkillPoint $firstPaidSkillPoint = null, AbstractSkillPoint $secondPaidSkillPoint = null)
+    protected function __construct(ProfessionLevel $professionLevel, BackgroundSkills $backgroundSkills = null, AbstractSkillPoint $firstPaidOtherSkillPoint = null, AbstractSkillPoint $secondPaidOtherSkillPoint = null)
     {
-        $this->checkPaidProperties($professionLevel, $backgroundSkills, $firstPaidSkillPoint, $secondPaidSkillPoint);
+        $this->checkPaidProperties($professionLevel, $backgroundSkills, $firstPaidOtherSkillPoint, $secondPaidOtherSkillPoint);
         $this->professionLevel = $professionLevel;
         $this->backgroundSkills = $backgroundSkills;
-        $this->firstPaidSkillPoint = $firstPaidSkillPoint;
-        $this->secondPaidSkillPoint = $secondPaidSkillPoint;
+        $this->firstPaidOtherSkillPoint = $firstPaidOtherSkillPoint;
+        $this->secondPaidOtherSkillPoint = $secondPaidOtherSkillPoint;
     }
 
     protected function checkPaidProperties(ProfessionLevel $professionLevel, BackgroundSkills $backgroundSkills = null, AbstractSkillPoint $firstPaidSkillPoint = null, AbstractSkillPoint $secondPaidSkillPoint = null)
@@ -178,11 +178,21 @@ abstract class AbstractSkillPoint extends StrictObject implements IntegerInterfa
         $this->checkPaidSkillPoint($secondPaidSkillPoint);
     }
 
-    protected function checkPaidSkillPoint(AbstractSkillPoint $skillPoint)
+    protected function checkPaidSkillPoint(AbstractSkillPoint $paidSkillPoint)
     {
-        if ($skillPoint->getGroupName() === $this->getGroupName()) {
+        if (!$paidSkillPoint->isPaidByFirstLevelBackgroundSkills()) {
+            $message = 'Skill points to pay with has to origin from first level background skills.';
+            if ($paidSkillPoint->isPaidByNextLevelPropertyIncrease()) {
+                $message .= ' Next level skill point is not allowed to trade.';
+            }
+            if ($paidSkillPoint->isPaidByOtherSkillPoints()) {
+                $message .= ' There is no sense to trade first level skill point multiple times.';
+            }
+            throw new \LogicException($message);
+        }
+        if ($paidSkillPoint->getTypeName() === $this->getTypeName()) {
             throw new \LogicException(
-                'There is no sense to pay for skill point by another one of the very same type. Got paid skill point of ID ' . $skillPoint->getId()
+                'There is no sense to pay for skill point by another one of the very same type. Got paid skill point of ID ' . $paidSkillPoint->getId()
             );
         }
     }
@@ -271,17 +281,17 @@ abstract class AbstractSkillPoint extends StrictObject implements IntegerInterfa
     /**
      * @return AbstractSkillPoint|null
      */
-    public function getFirstPaidSkillPoint()
+    public function getFirstPaidOtherSkillPoint()
     {
-        return $this->firstPaidSkillPoint;
+        return $this->firstPaidOtherSkillPoint;
     }
 
     /**
      * @return AbstractSkillPoint|null
      */
-    public function getSecondPaidSkillPoint()
+    public function getSecondPaidOtherSkillPoint()
     {
-        return $this->secondPaidSkillPoint;
+        return $this->secondPaidOtherSkillPoint;
     }
 
     /**

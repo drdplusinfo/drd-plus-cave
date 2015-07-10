@@ -17,7 +17,7 @@ class CombinedSkillPoint extends AbstractSkillPoint
     /**
      * return @string
      */
-    public function getGroupName()
+    public function getTypeName()
     {
         return static::COMBINED;
     }

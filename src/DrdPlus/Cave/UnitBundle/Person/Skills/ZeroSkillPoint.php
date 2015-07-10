@@ -54,7 +54,7 @@ class ZeroSkillPoint extends AbstractSkillPoint
     /**
      * return @string
      */
-    public function getGroupName()
+    public function getTypeName()
     {
         return static::ZERO;
     }

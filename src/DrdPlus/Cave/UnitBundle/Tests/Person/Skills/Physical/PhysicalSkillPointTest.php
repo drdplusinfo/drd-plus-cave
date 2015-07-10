@@ -20,11 +20,11 @@ class PhysicalSkillPointTest extends AbstractTestOfSkillPoint
         );
         $this->assertInstanceOf(PhysicalSkillPoint::class, $physicalSkillPoint);
         $this->assertSame(1, $physicalSkillPoint->getValue());
-        $this->assertSame('physical', $physicalSkillPoint->getGroupName());
+        $this->assertSame('physical', $physicalSkillPoint->getTypeName());
         $this->assertSame([Strength::STRENGTH, Agility::AGILITY], $physicalSkillPoint->getRelatedProperties());
         $this->assertSame($backgroundSkills, $physicalSkillPoint->getBackgroundSkills());
-        $this->assertNull($physicalSkillPoint->getFirstPaidSkillPoint());
-        $this->assertNull($physicalSkillPoint->getSecondPaidSkillPoint());
+        $this->assertNull($physicalSkillPoint->getFirstPaidOtherSkillPoint());
+        $this->assertNull($physicalSkillPoint->getSecondPaidOtherSkillPoint());
     }
 
     /**
@@ -39,8 +39,8 @@ class PhysicalSkillPointTest extends AbstractTestOfSkillPoint
         );
         $this->assertInstanceOf(PhysicalSkillPoint::class, $physicalSkillPoint);
         $this->assertNull($physicalSkillPoint->getBackgroundSkills());
-        $this->assertSame($firstPaidSkillPoint, $physicalSkillPoint->getFirstPaidSkillPoint());
-        $this->assertSame($secondPaidSkillPoint, $physicalSkillPoint->getSecondPaidSkillPoint());
+        $this->assertSame($firstPaidSkillPoint, $physicalSkillPoint->getFirstPaidOtherSkillPoint());
+        $this->assertSame($secondPaidSkillPoint, $physicalSkillPoint->getSecondPaidOtherSkillPoint());
     }
 
     /**
@@ -55,8 +55,8 @@ class PhysicalSkillPointTest extends AbstractTestOfSkillPoint
         );
         $this->assertInstanceOf(PhysicalSkillPoint::class, $physicalSkillPoint);
         $this->assertNull($physicalSkillPoint->getBackgroundSkills());
-        $this->assertSame($firstPaidSkillPoint, $physicalSkillPoint->getFirstPaidSkillPoint());
-        $this->assertSame($secondPaidSkillPoint, $physicalSkillPoint->getSecondPaidSkillPoint());
+        $this->assertSame($firstPaidSkillPoint, $physicalSkillPoint->getFirstPaidOtherSkillPoint());
+        $this->assertSame($secondPaidSkillPoint, $physicalSkillPoint->getSecondPaidOtherSkillPoint());
     }
 
     /**
@@ -71,8 +71,8 @@ class PhysicalSkillPointTest extends AbstractTestOfSkillPoint
         );
         $this->assertInstanceOf(PhysicalSkillPoint::class, $physicalSkillPoint);
         $this->assertNull($physicalSkillPoint->getBackgroundSkills());
-        $this->assertSame($firstPaidSkillPoint, $physicalSkillPoint->getFirstPaidSkillPoint());
-        $this->assertSame($secondPaidSkillPoint, $physicalSkillPoint->getSecondPaidSkillPoint());
+        $this->assertSame($firstPaidSkillPoint, $physicalSkillPoint->getFirstPaidOtherSkillPoint());
+        $this->assertSame($secondPaidSkillPoint, $physicalSkillPoint->getSecondPaidOtherSkillPoint());
     }
 
     /**
@@ -85,8 +85,8 @@ class PhysicalSkillPointTest extends AbstractTestOfSkillPoint
         );
         $this->assertInstanceOf(PhysicalSkillPoint::class, $physicalSkillPoint);
         $this->assertNull($physicalSkillPoint->getBackgroundSkills());
-        $this->assertNull($physicalSkillPoint->getFirstPaidSkillPoint());
-        $this->assertNull($physicalSkillPoint->getSecondPaidSkillPoint());
+        $this->assertNull($physicalSkillPoint->getFirstPaidOtherSkillPoint());
+        $this->assertNull($physicalSkillPoint->getSecondPaidOtherSkillPoint());
     }
 
     /**
@@ -99,8 +99,8 @@ class PhysicalSkillPointTest extends AbstractTestOfSkillPoint
         );
         $this->assertInstanceOf(PhysicalSkillPoint::class, $physicalSkillPoint);
         $this->assertNull($physicalSkillPoint->getBackgroundSkills());
-        $this->assertNull($physicalSkillPoint->getFirstPaidSkillPoint());
-        $this->assertNull($physicalSkillPoint->getSecondPaidSkillPoint());
+        $this->assertNull($physicalSkillPoint->getFirstPaidOtherSkillPoint());
+        $this->assertNull($physicalSkillPoint->getSecondPaidOtherSkillPoint());
     }
 
     /**

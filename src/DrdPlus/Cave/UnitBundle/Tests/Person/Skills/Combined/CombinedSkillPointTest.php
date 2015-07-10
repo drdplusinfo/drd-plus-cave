@@ -20,11 +20,11 @@ class CombinedSkillPointTest extends AbstractTestOfSkillPoint
         );
         $this->assertInstanceOf(CombinedSkillPoint::class, $combinedSkillPoint);
         $this->assertSame(1, $combinedSkillPoint->getValue());
-        $this->assertSame('combined', $combinedSkillPoint->getGroupName());
+        $this->assertSame('combined', $combinedSkillPoint->getTypeName());
         $this->assertSame([Knack::KNACK, Charisma::CHARISMA], $combinedSkillPoint->getRelatedProperties());
         $this->assertSame($backgroundSkills, $combinedSkillPoint->getBackgroundSkills());
-        $this->assertNull($combinedSkillPoint->getFirstPaidSkillPoint());
-        $this->assertNull($combinedSkillPoint->getSecondPaidSkillPoint());
+        $this->assertNull($combinedSkillPoint->getFirstPaidOtherSkillPoint());
+        $this->assertNull($combinedSkillPoint->getSecondPaidOtherSkillPoint());
     }
 
     /**
@@ -39,8 +39,8 @@ class CombinedSkillPointTest extends AbstractTestOfSkillPoint
         );
         $this->assertInstanceOf(CombinedSkillPoint::class, $combinedSkillPoint);
         $this->assertNull($combinedSkillPoint->getBackgroundSkills());
-        $this->assertSame($firstPaidSkillPoint, $combinedSkillPoint->getFirstPaidSkillPoint());
-        $this->assertSame($secondPaidSkillPoint, $combinedSkillPoint->getSecondPaidSkillPoint());
+        $this->assertSame($firstPaidSkillPoint, $combinedSkillPoint->getFirstPaidOtherSkillPoint());
+        $this->assertSame($secondPaidSkillPoint, $combinedSkillPoint->getSecondPaidOtherSkillPoint());
     }
 
     /**
@@ -55,8 +55,8 @@ class CombinedSkillPointTest extends AbstractTestOfSkillPoint
         );
         $this->assertInstanceOf(CombinedSkillPoint::class, $combinedSkillPoint);
         $this->assertNull($combinedSkillPoint->getBackgroundSkills());
-        $this->assertSame($firstPaidSkillPoint, $combinedSkillPoint->getFirstPaidSkillPoint());
-        $this->assertSame($secondPaidSkillPoint, $combinedSkillPoint->getSecondPaidSkillPoint());
+        $this->assertSame($firstPaidSkillPoint, $combinedSkillPoint->getFirstPaidOtherSkillPoint());
+        $this->assertSame($secondPaidSkillPoint, $combinedSkillPoint->getSecondPaidOtherSkillPoint());
     }
 
     /**
@@ -71,8 +71,8 @@ class CombinedSkillPointTest extends AbstractTestOfSkillPoint
         );
         $this->assertInstanceOf(CombinedSkillPoint::class, $combinedSkillPoint);
         $this->assertNull($combinedSkillPoint->getBackgroundSkills());
-        $this->assertSame($firstPaidSkillPoint, $combinedSkillPoint->getFirstPaidSkillPoint());
-        $this->assertSame($secondPaidSkillPoint, $combinedSkillPoint->getSecondPaidSkillPoint());
+        $this->assertSame($firstPaidSkillPoint, $combinedSkillPoint->getFirstPaidOtherSkillPoint());
+        $this->assertSame($secondPaidSkillPoint, $combinedSkillPoint->getSecondPaidOtherSkillPoint());
     }
 
     /**
@@ -85,8 +85,8 @@ class CombinedSkillPointTest extends AbstractTestOfSkillPoint
         );
         $this->assertInstanceOf(CombinedSkillPoint::class, $combinedSkillPoint);
         $this->assertNull($combinedSkillPoint->getBackgroundSkills());
-        $this->assertNull($combinedSkillPoint->getFirstPaidSkillPoint());
-        $this->assertNull($combinedSkillPoint->getSecondPaidSkillPoint());
+        $this->assertNull($combinedSkillPoint->getFirstPaidOtherSkillPoint());
+        $this->assertNull($combinedSkillPoint->getSecondPaidOtherSkillPoint());
     }
 
     /**
@@ -99,8 +99,8 @@ class CombinedSkillPointTest extends AbstractTestOfSkillPoint
         );
         $this->assertInstanceOf(CombinedSkillPoint::class, $combinedSkillPoint);
         $this->assertNull($combinedSkillPoint->getBackgroundSkills());
-        $this->assertNull($combinedSkillPoint->getFirstPaidSkillPoint());
-        $this->assertNull($combinedSkillPoint->getSecondPaidSkillPoint());
+        $this->assertNull($combinedSkillPoint->getFirstPaidOtherSkillPoint());
+        $this->assertNull($combinedSkillPoint->getSecondPaidOtherSkillPoint());
     }
 
     /**

@@ -324,6 +324,7 @@ class ProfessionLevelsTest extends TestWithMockery
         $levelValue->shouldReceive('getValue')
             ->atLeast()->once()
             ->andReturn(1);
+        $this->addPropertyIncrementGetters($professionLevel);
         $adder = 'add' . ucfirst($professionName) . 'Level';
         $professionLevels->$adder($professionLevel);
         $this->assertSame($professionLevel, $professionLevels->getFirstLevel());
@@ -338,6 +339,46 @@ class ProfessionLevelsTest extends TestWithMockery
     {
         return '\DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\\'
         . ucfirst($professionName) . 'Level';
+    }
+
+    private function addPropertyIncrementGetters(\Mockery\MockInterface $professionLevel)
+    {
+        $professionLevel->shouldReceive('getStrengthIncrement')
+            ->atLeast()->once()
+            ->andReturn($strength = $this->mockery(Strength::class));
+        $strength->shouldReceive('getValue')
+            ->atLeast()->once()
+            ->andReturn(0);
+        $professionLevel->shouldReceive('getAgilityIncrement')
+            ->atLeast()->once()
+            ->andReturn($strength = $this->mockery(Agility::class));
+        $strength->shouldReceive('getValue')
+            ->atLeast()->once()
+            ->andReturn(0);
+        $professionLevel->shouldReceive('getKnackIncrement')
+            ->atLeast()->once()
+            ->andReturn($strength = $this->mockery(Knack::class));
+        $strength->shouldReceive('getValue')
+            ->atLeast()->once()
+            ->andReturn(0);
+        $professionLevel->shouldReceive('getWillIncrement')
+            ->atLeast()->once()
+            ->andReturn($strength = $this->mockery(Will::class));
+        $strength->shouldReceive('getValue')
+            ->atLeast()->once()
+            ->andReturn(0);
+        $professionLevel->shouldReceive('getIntelligenceIncrement')
+            ->atLeast()->once()
+            ->andReturn($strength = $this->mockery(Intelligence::class));
+        $strength->shouldReceive('getValue')
+            ->atLeast()->once()
+            ->andReturn(0);
+        $professionLevel->shouldReceive('getCharismaIncrement')
+            ->atLeast()->once()
+            ->andReturn($strength = $this->mockery(Charisma::class));
+        $strength->shouldReceive('getValue')
+            ->atLeast()->once()
+            ->andReturn(0);
     }
 
     /**

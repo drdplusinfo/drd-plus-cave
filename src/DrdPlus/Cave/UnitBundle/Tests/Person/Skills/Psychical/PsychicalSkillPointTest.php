@@ -20,11 +20,11 @@ class PsychicalSkillPointTest extends AbstractTestOfSkillPoint
         );
         $this->assertInstanceOf(PsychicalSkillPoint::class, $psychicalSkillPoint);
         $this->assertSame(1, $psychicalSkillPoint->getValue());
-        $this->assertSame('psychical', $psychicalSkillPoint->getGroupName());
+        $this->assertSame('psychical', $psychicalSkillPoint->getTypeName());
         $this->assertSame([Will::WILL, Intelligence::INTELLIGENCE], $psychicalSkillPoint->getRelatedProperties());
         $this->assertSame($backgroundSkills, $psychicalSkillPoint->getBackgroundSkills());
-        $this->assertNull($psychicalSkillPoint->getFirstPaidSkillPoint());
-        $this->assertNull($psychicalSkillPoint->getSecondPaidSkillPoint());
+        $this->assertNull($psychicalSkillPoint->getFirstPaidOtherSkillPoint());
+        $this->assertNull($psychicalSkillPoint->getSecondPaidOtherSkillPoint());
     }
 
     /**
@@ -39,8 +39,8 @@ class PsychicalSkillPointTest extends AbstractTestOfSkillPoint
         );
         $this->assertInstanceOf(PsychicalSkillPoint::class, $psychicalSkillPoint);
         $this->assertNull($psychicalSkillPoint->getBackgroundSkills());
-        $this->assertSame($firstPaidSkillPoint, $psychicalSkillPoint->getFirstPaidSkillPoint());
-        $this->assertSame($secondPaidSkillPoint, $psychicalSkillPoint->getSecondPaidSkillPoint());
+        $this->assertSame($firstPaidSkillPoint, $psychicalSkillPoint->getFirstPaidOtherSkillPoint());
+        $this->assertSame($secondPaidSkillPoint, $psychicalSkillPoint->getSecondPaidOtherSkillPoint());
     }
 
     /**
@@ -55,8 +55,8 @@ class PsychicalSkillPointTest extends AbstractTestOfSkillPoint
         );
         $this->assertInstanceOf(PsychicalSkillPoint::class, $psychicalSkillPoint);
         $this->assertNull($psychicalSkillPoint->getBackgroundSkills());
-        $this->assertSame($firstPaidSkillPoint, $psychicalSkillPoint->getFirstPaidSkillPoint());
-        $this->assertSame($secondPaidSkillPoint, $psychicalSkillPoint->getSecondPaidSkillPoint());
+        $this->assertSame($firstPaidSkillPoint, $psychicalSkillPoint->getFirstPaidOtherSkillPoint());
+        $this->assertSame($secondPaidSkillPoint, $psychicalSkillPoint->getSecondPaidOtherSkillPoint());
     }
 
     /**
@@ -71,8 +71,8 @@ class PsychicalSkillPointTest extends AbstractTestOfSkillPoint
         );
         $this->assertInstanceOf(PsychicalSkillPoint::class, $psychicalSkillPoint);
         $this->assertNull($psychicalSkillPoint->getBackgroundSkills());
-        $this->assertSame($firstPaidSkillPoint, $psychicalSkillPoint->getFirstPaidSkillPoint());
-        $this->assertSame($secondPaidSkillPoint, $psychicalSkillPoint->getSecondPaidSkillPoint());
+        $this->assertSame($firstPaidSkillPoint, $psychicalSkillPoint->getFirstPaidOtherSkillPoint());
+        $this->assertSame($secondPaidSkillPoint, $psychicalSkillPoint->getSecondPaidOtherSkillPoint());
     }
 
     /**
@@ -85,8 +85,8 @@ class PsychicalSkillPointTest extends AbstractTestOfSkillPoint
         );
         $this->assertInstanceOf(PsychicalSkillPoint::class, $psychicalSkillPoint);
         $this->assertNull($psychicalSkillPoint->getBackgroundSkills());
-        $this->assertNull($psychicalSkillPoint->getFirstPaidSkillPoint());
-        $this->assertNull($psychicalSkillPoint->getSecondPaidSkillPoint());
+        $this->assertNull($psychicalSkillPoint->getFirstPaidOtherSkillPoint());
+        $this->assertNull($psychicalSkillPoint->getSecondPaidOtherSkillPoint());
     }
 
     /**
@@ -99,8 +99,8 @@ class PsychicalSkillPointTest extends AbstractTestOfSkillPoint
         );
         $this->assertInstanceOf(PsychicalSkillPoint::class, $psychicalSkillPoint);
         $this->assertNull($psychicalSkillPoint->getBackgroundSkills());
-        $this->assertNull($psychicalSkillPoint->getFirstPaidSkillPoint());
-        $this->assertNull($psychicalSkillPoint->getSecondPaidSkillPoint());
+        $this->assertNull($psychicalSkillPoint->getFirstPaidOtherSkillPoint());
+        $this->assertNull($psychicalSkillPoint->getSecondPaidOtherSkillPoint());
     }
 
     /**

@@ -321,7 +321,7 @@ class ProfessionLevels extends StrictObject implements \IteratorAggregate
     {
         $this->checkPropertyIncrementSequence($previousLevels, $newLevel, $newLevel->getStrengthIncrement());
         $this->checkPropertyIncrementSequence($previousLevels, $newLevel, $newLevel->getAgilityIncrement());
-        $this->checkPropertyIncrementSequence($previousLevels, $newLevel, $newLevel->getCharismaIncrement());
+        $this->checkPropertyIncrementSequence($previousLevels, $newLevel, $newLevel->getKnackIncrement());
         $this->checkPropertyIncrementSequence($previousLevels, $newLevel, $newLevel->getWillIncrement());
         $this->checkPropertyIncrementSequence($previousLevels, $newLevel, $newLevel->getIntelligenceIncrement());
         $this->checkPropertyIncrementSequence($previousLevels, $newLevel, $newLevel->getCharismaIncrement());
