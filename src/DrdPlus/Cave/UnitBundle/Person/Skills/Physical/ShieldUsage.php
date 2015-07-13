@@ -8,4 +8,12 @@ namespace DrdPlus\Cave\UnitBundle\Person\Skills\Physical;
 class ShieldUsage extends AbstractPhysicalSkill
 {
     const SHIELD_USAGE = 'shield_usage';
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return self::SHIELD_USAGE;
+    }
 }

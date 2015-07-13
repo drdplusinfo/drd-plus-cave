@@ -10,4 +10,12 @@ use Doctrine\ORM\Mapping as ORM;
 class Astronomy extends AbstractPsychicalSkill
 {
     const ASTRONOMY = 'astronomy';
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return self::ASTRONOMY;
+    }
 }

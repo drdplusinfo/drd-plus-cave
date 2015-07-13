@@ -8,4 +8,12 @@ namespace DrdPlus\Cave\UnitBundle\Person\Skills\Physical;
 class CityMoving extends AbstractPhysicalSkill
 {
     const CITY_MOVING = 'city_moving';
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return self::CITY_MOVING;
+    }
 }

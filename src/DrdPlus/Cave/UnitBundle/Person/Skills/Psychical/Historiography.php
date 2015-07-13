@@ -8,4 +8,12 @@ namespace DrdPlus\Cave\UnitBundle\Person\Skills\Psychical;
 class Historiography extends AbstractPsychicalSkill
 {
     const HISTORIOGRAPHY = 'historiography';
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return self::HISTORIOGRAPHY;
+    }
 }

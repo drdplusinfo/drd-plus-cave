@@ -8,4 +8,12 @@ namespace DrdPlus\Cave\UnitBundle\Person\Skills\Psychical;
 class Zoology extends AbstractPsychicalSkill
 {
     const ZOOLOGY = 'zoology';
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return self::ZOOLOGY;
+    }
 }

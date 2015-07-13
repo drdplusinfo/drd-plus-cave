@@ -10,4 +10,12 @@ use Doctrine\ORM\Mapping as ORM;
 class ArmorWearing extends AbstractPhysicalSkill
 {
     const ARMOR_WEARING = 'armor_wearing';
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return self::ARMOR_WEARING;
+    }
 }

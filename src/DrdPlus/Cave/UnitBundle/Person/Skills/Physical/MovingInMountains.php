@@ -5,15 +5,15 @@ namespace DrdPlus\Cave\UnitBundle\Person\Skills\Physical;
  * @ORM\Table()
  * @ORM\Entity()
  */
-class Blacksmithing extends AbstractPhysicalSkill
+class MovingInMountains extends AbstractPhysicalSkill
 {
-    const BLACKSMITHING = 'blacksmithing';
+    const MOVING_IN_MOUNTAINS = 'moving_in_mountains';
 
     /**
      * @return string
      */
     public function getName()
     {
-        return self::BLACKSMITHING;
+        return self::MOVING_IN_MOUNTAINS;
     }
 }

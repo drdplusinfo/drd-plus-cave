@@ -8,4 +8,12 @@ namespace DrdPlus\Cave\UnitBundle\Person\Skills\Physical;
 class BoatDriving extends AbstractPhysicalSkill
 {
     const BOAT_DRIVING = 'boat_driving';
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return self::BOAT_DRIVING;
+    }
 }

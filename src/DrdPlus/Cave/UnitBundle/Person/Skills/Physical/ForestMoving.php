@@ -8,4 +8,12 @@ namespace DrdPlus\Cave\UnitBundle\Person\Skills\Physical;
 class ForestMoving extends AbstractPhysicalSkill
 {
     const FOREST_MOVING = 'forest_moving';
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return self::FOREST_MOVING;
+    }
 }

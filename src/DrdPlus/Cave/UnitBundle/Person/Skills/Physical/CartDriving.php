@@ -8,4 +8,12 @@ namespace DrdPlus\Cave\UnitBundle\Person\Skills\Physical;
 class CartDriving extends AbstractPhysicalSkill
 {
     const CART_DRIVING = 'cart_driving';
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return self::CART_DRIVING;
+    }
 }

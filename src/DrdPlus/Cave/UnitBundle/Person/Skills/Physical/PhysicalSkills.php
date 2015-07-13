@@ -44,7 +44,7 @@ class PhysicalSkills extends AbstractSkillsGroup
     private $flying;
     /** @var ForestMoving */
     private $forestMoving;
-    /** @var MovingInMountain */
+    /** @var MovingInMountains */
     private $movingInMountain;
     /** @var Riding */
     private $riding;
@@ -70,7 +70,7 @@ class PhysicalSkills extends AbstractSkillsGroup
         FightWithWeapon $fightWithWeapon,
         Flying $flying,
         ForestMoving $forestMoving,
-        MovingInMountain $movingInMountain,
+        MovingInMountains $movingInMountain,
         Riding $riding,
         Sailing $sailing,
         ShieldUsage $shieldUsage,
@@ -232,7 +232,7 @@ class PhysicalSkills extends AbstractSkillsGroup
     }
 
     /**
-     * @return MovingInMountain
+     * @return MovingInMountains
      */
     public function getMovingInMountains()
     {

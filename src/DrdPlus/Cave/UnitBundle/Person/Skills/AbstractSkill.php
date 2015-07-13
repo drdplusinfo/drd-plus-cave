@@ -77,6 +77,11 @@ abstract class AbstractSkill extends StrictObject
     }
 
     /**
+     * @return string
+     */
+    abstract public function getName();
+
+    /**
      * @return string[]
      */
     abstract public function getRelatedProperties();
