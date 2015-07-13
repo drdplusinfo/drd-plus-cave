@@ -16,7 +16,11 @@ abstract class AbstractMeasurement extends StrictObject implements MeasurementIn
      */
     private $unit;
 
-    public function __construct($value, $unit)
+    /**
+     * @param float $value
+     * @param string $unit
+     */
+    protected function __construct($value, $unit)
     {
         $this->checkUnit($unit);
         $this->value = ToFloat::toFloat($value);

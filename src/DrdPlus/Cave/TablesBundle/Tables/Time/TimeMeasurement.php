@@ -16,6 +16,15 @@ class TimeMeasurement extends AbstractMeasurement
     const YEAR = 'year';
 
     /**
+     * @param float $value
+     * @param string $unit
+     */
+    public function __construct($value, $unit)
+    {
+        parent::__construct($value, $unit);
+    }
+
+    /**
      * @return string[]
      */
     public function getPossibleUnits()

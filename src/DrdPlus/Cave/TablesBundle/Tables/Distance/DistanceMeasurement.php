@@ -11,6 +11,15 @@ class DistanceMeasurement extends AbstractMeasurement
     const LIGHT_YEAR = 'light_year';
 
     /**
+     * @param float $value
+     * @param string $unit
+     */
+    public function __construct($value, $unit)
+    {
+        parent::__construct($value, $unit);
+    }
+
+    /**
      * @return string[]
      */
     public function getPossibleUnits()

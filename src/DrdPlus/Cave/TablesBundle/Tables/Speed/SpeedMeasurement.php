@@ -11,6 +11,15 @@ class SpeedMeasurement extends AbstractMeasurement
     const M_PER_ROUND = 'm/round';
     const KM_PER_HOUR = 'km/h';
 
+    /**
+     * @param float $value
+     * @param string $unit
+     */
+    public function __construct($value, $unit)
+    {
+        parent::__construct($value, $unit);
+    }
+
     public function getPossibleUnits()
     {
         return [self::M_PER_ROUND, self::KM_PER_HOUR];

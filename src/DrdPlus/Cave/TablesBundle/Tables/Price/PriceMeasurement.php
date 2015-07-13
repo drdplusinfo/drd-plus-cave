@@ -11,6 +11,15 @@ class PriceMeasurement extends AbstractMeasurement
 
     private $inDifferentUnit = [];
 
+    /**
+     * @param float $value
+     * @param string $unit
+     */
+    public function __construct($value, $unit)
+    {
+        parent::__construct($value, $unit);
+    }
+
     public function getPossibleUnits()
     {
         return array_merge([self::COPPER_COIN, self::SILVER_COIN, self::GOLD_COIN], array_keys($this->inDifferentUnit));
