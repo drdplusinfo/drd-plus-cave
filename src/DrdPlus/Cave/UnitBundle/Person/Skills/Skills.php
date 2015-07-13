@@ -32,6 +32,7 @@ class Skills extends StrictObject
     const COMBINED = CombinedSkills::COMBINED;
 
     const PROPERTY_TO_SKILL_POINT_MULTIPLIER = 1; // each point of property gives one skill point
+    const MAX_SKILL_RANK_INCREASE_PER_NEXT_LEVEL = 1;
 
     /**
      * @var integer
@@ -207,13 +208,74 @@ class Skills extends StrictObject
         return $professionLevels->getNextLevelsKnackModifier() + $professionLevels->getNextLevelsCharismaModifier();
     }
 
-    public function checkPaymentOfSkillPoints(Person $person)
+    public function checkSkillPoints(Person $person)
     {
-        $propertyPayments = $this->getPaymentSkeleton();
+        $this->checkSkillRanks();
+        $this->checkPaymentOfSkillPoints($person);
+    }
 
-        /** @var AbstractSkill $skill */
+    private function checkSkillRanks()
+    {
+        $nextLevelSkills = [];
         foreach ($this->getSkills() as $skill) {
-            /** @var AbstractSkillRank $skillRank */
+            foreach ($skill->getSkillRanks() as $skillRank) {
+                $nextLevelSkills[$skill->getName()] = [];
+                if ($skillRank->getProfessionLevel()->isNextLevel()) {
+                    $levelValue = $skillRank->getProfessionLevel()->getLevelRank()->getValue();
+                    if (!$nextLevelSkills[$skill->getName()][$levelValue]) {
+                        $nextLevelSkills[$skill->getName()][$levelValue] = [];
+                    }
+                    $nextLevelSkills[$skill->getName()][$levelValue][] = $skillRank;
+                }
+            }
+        }
+        $tooHighRankIncrements = [];
+        foreach ($nextLevelSkills as $skillName => $ranksPerLevel) {
+            foreach ($ranksPerLevel as $levelValue => $skillRanks) {
+                if (count($skillRanks) > self::MAX_SKILL_RANK_INCREASE_PER_NEXT_LEVEL) {
+                    if (!isset($tooHighRankIncrements[$skillName][$levelValue])) {
+                        $tooHighRankIncrements[$levelValue] = $skillRanks;
+                    }
+                }
+            }
+        }
+        if ($tooHighRankIncrements) {
+            throw new \LogicException(
+                'Only on first level can be skill ranks increased more then ' . self::MAX_SKILL_RANK_INCREASE_PER_NEXT_LEVEL . '.'
+                . ' Got ' . count($tooHighRankIncrements) . ' skills with too high rank-per-level increment'
+                . ' (' . $this->getTooHighRankIncrementsDescription($tooHighRankIncrements) . ')'
+            );
+        }
+    }
+
+    private function getTooHighRankIncrementsDescription(array $tooHighRankIncrements)
+    {
+        $description = [];
+        foreach ($tooHighRankIncrements as $skillName => $ranksPerLevel) {
+            $skillDescription = "skill $skillName over-increased on";
+            $levelsDescription = [];
+            foreach ($ranksPerLevel as $levelValue => $ranks) {
+                $levelDescription = " level $levelValue to ranks";
+                /** @var AbstractSkillRank $rank */
+                $rankValues = [];
+                foreach ($ranks as $rank) {
+                    $rankValues[] = $rank->getValue();
+                }
+                $levelDescription .= implode(',', $rankValues);
+                $levelsDescription[] = $levelDescription;
+            }
+            $skillDescription .= ' ' . implode(',', $levelsDescription);
+            $description[] = $skillDescription;
+        }
+
+        return implode(';', $description);
+    }
+
+    private function checkPaymentOfSkillPoints(Person $person)
+    {
+        $propertyPayments = $this->getPaymentsSkeleton();
+
+        foreach ($this->getSkills() as $skill) {
             foreach ($skill->getSkillRanks() as $skillRank) {
                 $paymentDetails = $this->extractPaymentDetails($skillRank->getSkillPoint());
                 $propertyPayments = $this->sumPayments([$propertyPayments, $paymentDetails]);
@@ -224,7 +286,7 @@ class Skills extends StrictObject
         $this->checkNextLevelsPayment($propertyPayments['nextLevels'], $person->getPersonProperties()->getNextLevelsProperties());
     }
 
-    private function getPaymentSkeleton()
+    private function getPaymentsSkeleton()
     {
         return [
             'firstLevel' => $this->getFirstLevelPaymentSkeleton(),
@@ -252,7 +314,7 @@ class Skills extends StrictObject
 
     private function extractPaymentDetails(AbstractSkillPoint $skillPoint)
     {
-        $propertyPayment = $this->getPaymentSkeleton();
+        $propertyPayment = $this->getPaymentsSkeleton();
 
         $type = $skillPoint->getTypeName();
         if ($skillPoint->isPaidByFirstLevelBackgroundSkills()) {
@@ -289,11 +351,12 @@ class Skills extends StrictObject
 
     /**
      * @param array $skillPointPayments
+     *
      * @return array
      */
     private function sumPayments(array $skillPointPayments)
     {
-        $sumPayment = $this->getPaymentSkeleton();
+        $sumPayment = $this->getPaymentsSkeleton();
 
         foreach ($skillPointPayments as $skillPointPayment) {
             foreach ([PhysicalSkillPoint::PHYSICAL, PsychicalSkillPoint::PSYCHICAL, CombinedSkillPoint::COMBINED] as $type) {
@@ -309,6 +372,7 @@ class Skills extends StrictObject
      * @param array $sumPayment
      * @param array $skillPointPayment
      * @param string $type
+     *
      * @return array
      */
     private function sumFirstLevelPaymentForType(array $sumPayment, array $skillPointPayment, $type)
@@ -436,6 +500,7 @@ class Skills extends StrictObject
 
     /**
      * @param int $propertyIncrease
+     *
      * @return int
      */
     public function getSkillPointValueByPropertyIncrease($propertyIncrease)

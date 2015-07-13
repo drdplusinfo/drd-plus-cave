@@ -101,7 +101,7 @@ class Person extends StrictObject
         $this->exceptionality = $exceptionality;
         $this->professionLevels = $professionLevels;
         $this->background = $background;
-        $skills->checkPaymentOfSkillPoints($this);
+        $skills->checkSkillPoints($this);
         $this->skills = $skills;
         $this->personProperties = new PersonProperties($this, $tables); // enums aggregate
     }
