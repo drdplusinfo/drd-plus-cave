@@ -20,7 +20,6 @@ abstract class ProfessionLevel extends StrictObject
 {
 
     const PROPERTY_FIRST_LEVEL_MODIFIER = +1;
-    const MINIMUM_LEVEL = 1;
     const MAXIMUM_LEVEL = 20;
     const MIN_NEXT_LEVEL_PROPERTY_MODIFIER = 0;
     const MAX_NEXT_LEVEL_PROPERTY_MODIFIER = 1;
@@ -46,13 +45,6 @@ abstract class ProfessionLevel extends StrictObject
      * @ORM\Column(type="levelValue")
      */
     private $levelRank;
-
-    /**
-     * @var Experiences
-     *
-     * @ORM\Column(type="experiences")
-     */
-    private $experiences;
 
     /**
      * @var \DateTimeImmutable
@@ -113,7 +105,6 @@ abstract class ProfessionLevel extends StrictObject
     protected function __construct(
         Profession $profession,
         LevelRank $levelRank,
-        Experiences $experiences,
         Strength $strengthIncrement,
         Agility $agilityIncrement,
         Knack $knackIncrement,
@@ -125,9 +116,8 @@ abstract class ProfessionLevel extends StrictObject
     )
     {
         $this->profession = $profession;
-        $this->checkLevelRank($levelRank, $experiences);
+        $this->checkLevelRank($levelRank);
         $this->levelRank = $levelRank;
-        $this->experiences = $experiences;
         $this->checkPropertyIncrement($strengthIncrement, $levelRank);
         $this->strengthIncrement = $strengthIncrement;
         $this->checkPropertyIncrement($agilityIncrement, $levelRank);
@@ -147,16 +137,12 @@ abstract class ProfessionLevel extends StrictObject
 
     private function checkLevelRank(LevelRank $levelRank)
     {
-        if ($levelRank->getValue() < self::MINIMUM_LEVEL) {
-            throw new \LogicException(
-                "Level value can not be lower than " . self::MINIMUM_LEVEL . ", got {$levelRank->getValue()}"
-            );
-        }
         if ($levelRank->getValue() > self::MAXIMUM_LEVEL) {
             throw new \LogicException(
-                "Level value can not be greater than " . self::MAXIMUM_LEVEL . ", got {$levelRank->getValue()}"
+                "Level can not be greater than " . self::MAXIMUM_LEVEL . ", got {$levelRank->getValue()}"
             );
         }
+
     }
 
     private function checkPropertyIncrement(BaseProperty $property, LevelRank $levelRank)
