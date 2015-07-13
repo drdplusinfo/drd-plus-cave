@@ -3,6 +3,7 @@ namespace DrdPlus\Cave\UnitBundle;
 
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Choices\ExceptionalityChoice;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Fates\AbstractFateEntity;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Experiences\ExperiencesType;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Name;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Agility;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Body\WeightInKg;
@@ -48,6 +49,7 @@ class DrdPlusCaveUnitBundle extends Bundle
         WeightInKg::registerSelf();
 
         LevelRank::registerSelf();
+        ExperiencesType::registerSelf();
 
         BackgroundPointsType::registerSelf();
         BackgroundSkills::registerSelf();
