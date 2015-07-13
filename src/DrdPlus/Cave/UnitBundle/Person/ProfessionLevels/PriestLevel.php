@@ -29,7 +29,7 @@ class PriestLevel extends ProfessionLevel
 
     public function __construct(
         Priest $priest,
-        LevelValue $levelValue,
+        LevelRank $levelRank,
         Strength $strengthIncrement,
         Agility $agilityIncrement,
         Knack $knackIncrement,
@@ -42,7 +42,7 @@ class PriestLevel extends ProfessionLevel
     {
         parent::__construct(
             $priest,
-            $levelValue,
+            $levelRank,
             $strengthIncrement,
             $agilityIncrement,
             $knackIncrement,

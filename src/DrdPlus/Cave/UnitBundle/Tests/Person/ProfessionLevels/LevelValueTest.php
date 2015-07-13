@@ -14,8 +14,8 @@ class LevelValueTest extends \PHPUnit_Framework_TestCase
      */
     public function type_is_as_expected()
     {
-        $this->assertSame('level_value', LevelValue::LEVEL_VALUE);
-        $this->assertSame('level_value', LevelValue::getTypeName());
+        $this->assertSame('level_value', LevelRank::LEVEL_VALUE);
+        $this->assertSame('level_value', LevelRank::getTypeName());
     }
 
     /**
@@ -24,50 +24,50 @@ class LevelValueTest extends \PHPUnit_Framework_TestCase
      */
     public function can_be_registered()
     {
-        LevelValue::registerSelf();
-        $this->assertTrue(Type::hasType(LevelValue::getTypeName()));
+        LevelRank::registerSelf();
+        $this->assertTrue(Type::hasType(LevelRank::getTypeName()));
     }
 
     /**
-     * @return LevelValue
+     * @return LevelRank
      *
      * @test
      * @depends can_be_registered
      */
     public function can_be_created()
     {
-        $instance = LevelValue::getEnum($value = 12345);
-        $this->assertInstanceOf(LevelValue::class, $instance);
+        $instance = LevelRank::getEnum($value = 12345);
+        $this->assertInstanceOf(LevelRank::class, $instance);
         $this->assertSame($value, $instance->getEnumValue());
-        $sameInstance = LevelValue::getIt($value);
+        $sameInstance = LevelRank::getIt($value);
         $this->assertSame($instance, $sameInstance);
-        $differentInstance = LevelValue::getIt($value + 1);
-        $this->assertInstanceOf(LevelValue::class, $instance);
+        $differentInstance = LevelRank::getIt($value + 1);
+        $this->assertInstanceOf(LevelRank::class, $instance);
         $this->assertNotSame($instance, $differentInstance);
 
         return $instance;
     }
 
     /**
-     * @param LevelValue $levelValue
+     * @param LevelRank $levelRank
      *
      * @test
      * @depends can_be_created
      */
-    public function is_a_doctrineum_enum(LevelValue $levelValue)
+    public function is_a_doctrineum_enum(LevelRank $levelRank)
     {
-        $this->assertInstanceOf(EnumInterface::class, $levelValue);
+        $this->assertInstanceOf(EnumInterface::class, $levelRank);
     }
 
     /**
-     * @param LevelValue $levelValue
+     * @param LevelRank $levelRank
      *
      * @test
      * @depends can_be_created
      */
-    public function is_an_doctrineum_self_typed_integer_enum(LevelValue $levelValue)
+    public function is_an_doctrineum_self_typed_integer_enum(LevelRank $levelRank)
     {
-        $this->assertInstanceOf(SelfTypedIntegerEnum::class, $levelValue);
+        $this->assertInstanceOf(SelfTypedIntegerEnum::class, $levelRank);
     }
 
     /**
@@ -76,28 +76,28 @@ class LevelValueTest extends \PHPUnit_Framework_TestCase
      */
     public function works_in_separate_enum_namespace()
     {
-        $levelValue = LevelValue::getEnum($value = 12345);
+        $levelRank = LevelRank::getEnum($value = 12345);
         $integerEnum = IntegerEnum::getEnum($value);
-        $this->assertNotSame($levelValue, $integerEnum);
-        $this->assertSame((string)$levelValue, (string)$integerEnum);
+        $this->assertNotSame($levelRank, $integerEnum);
+        $this->assertSame((string)$levelRank, (string)$integerEnum);
         SelfTypedIntegerEnum::registerSelf();
         $selfTypedIntegerEnum = SelfTypedIntegerEnum::getEnum($value);
-        $this->assertNotSame($levelValue, $selfTypedIntegerEnum);
-        $this->assertSame((string)$levelValue, (string)$selfTypedIntegerEnum);
+        $this->assertNotSame($levelRank, $selfTypedIntegerEnum);
+        $this->assertSame((string)$levelRank, (string)$selfTypedIntegerEnum);
     }
 
     /**
-     * @param LevelValue $levelValue
+     * @param LevelRank $levelRank
      *
      * @test
      * @depends can_be_created
      */
-    public function conversion_to_php_gives_property(LevelValue $levelValue)
+    public function conversion_to_php_gives_property(LevelRank $levelRank)
     {
         $platform = \Mockery::mock(AbstractPlatform::class);
         /** @var AbstractPlatform $platform */
-        $phpValue = $levelValue->convertToPHPValue($value = 12345, $platform);
-        $this->assertInstanceOf(LevelValue::class, $phpValue);
+        $phpValue = $levelRank->convertToPHPValue($value = 12345, $platform);
+        $this->assertInstanceOf(LevelRank::class, $phpValue);
         $this->assertEquals($value, $phpValue->__toString());
     }
 
@@ -107,9 +107,9 @@ class LevelValueTest extends \PHPUnit_Framework_TestCase
      * @depends works_in_separate_enum_namespace
      */
     public function gives_proper_value(){
-        $levelValue = LevelValue::getEnum($value = 12345);
-        $this->assertSame($value, $levelValue->getEnumValue());
-        $this->assertSame($value, $levelValue->getValue());
-        $this->assertSame("$value", $levelValue->__toString());
+        $levelRank = LevelRank::getEnum($value = 12345);
+        $this->assertSame($value, $levelRank->getEnumValue());
+        $this->assertSame($value, $levelRank->getValue());
+        $this->assertSame("$value", $levelRank->__toString());
     }
 }

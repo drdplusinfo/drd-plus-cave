@@ -192,7 +192,7 @@ class ProfessionLevels extends StrictObject implements \IteratorAggregate
     private function sortByLevelRank(array $professionLevels)
     {
         usort($professionLevels, function (ProfessionLevel $aLevel, ProfessionLevel $anotherLevel) {
-            $difference = $aLevel->getLevelValue()->getValue() - $anotherLevel->getLevelValue()->getValue();
+            $difference = $aLevel->getLevelRank()->getValue() - $anotherLevel->getLevelRank()->getValue();
             if ($difference === 0) {
                 throw new \LogicException(
                     'Two profession levels of IDs' .
@@ -220,7 +220,7 @@ class ProfessionLevels extends StrictObject implements \IteratorAggregate
         $firstLevel = array_shift($levels); // remote the fist level
         /** @var ProfessionLevel $firstLevel */
         if ($firstLevel && !$firstLevel->isFirstLevel()) {
-            throw new \LogicException("The removed level should be the first one, removed {$firstLevel->getLevelValue()->getValue()}");
+            throw new \LogicException("The removed level should be the first one, removed {$firstLevel->getLevelRank()->getValue()}");
         }
 
         return $levels;
@@ -304,15 +304,15 @@ class ProfessionLevels extends StrictObject implements \IteratorAggregate
 
     private function checkNewLevelSequence(ProfessionLevel $newLevel, ArrayCollection $previousProfessionLevels)
     {
-        if (!$newLevel->getLevelValue()->getValue()) {
+        if (!$newLevel->getLevelRank()->getValue()) {
             throw new \LogicException(
                 'Missing level value of given level of profession ' . $newLevel->getProfession()->getName() . ' with ID ' . var_export($newLevel->getId(), true)
             );
         }
 
-        if ($newLevel->getLevelValue()->getValue() !== ($previousProfessionLevels->count() + 1)) {
+        if ($newLevel->getLevelRank()->getValue() !== ($previousProfessionLevels->count() + 1)) {
             throw new \LogicException(
-                'Unexpected level of given profession level. Expected ' . ($previousProfessionLevels->count() + 1) . ', got ' . $newLevel->getLevelValue()->getValue()
+                'Unexpected level of given profession level. Expected ' . ($previousProfessionLevels->count() + 1) . ', got ' . $newLevel->getLevelRank()->getValue()
             );
         }
     }

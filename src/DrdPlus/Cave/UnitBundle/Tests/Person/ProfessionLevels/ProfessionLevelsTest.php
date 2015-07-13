@@ -318,10 +318,10 @@ class ProfessionLevelsTest extends TestWithMockery
             ->andReturn($profession = \Mockery::mock(Profession::class));
         $profession->shouldReceive('getName')
             ->andReturn($professionName);
-        $professionLevel->shouldReceive('getLevelValue')
+        $professionLevel->shouldReceive('getLevelRank')
             ->atLeast()->once()
-            ->andReturn($levelValue = \Mockery::mock(LevelValue::class));
-        $levelValue->shouldReceive('getValue')
+            ->andReturn($levelRank = \Mockery::mock(LevelRank::class));
+        $levelRank->shouldReceive('getValue')
             ->atLeast()->once()
             ->andReturn(1);
         $this->addPropertyIncrementGetters($professionLevel);
@@ -473,10 +473,10 @@ class ProfessionLevelsTest extends TestWithMockery
             ->andReturn($profession = \Mockery::mock(Profession::class));
         $profession->shouldReceive('getName')
             ->andReturn($professionName);
-        $professionLevel->shouldReceive('getLevelValue')
+        $professionLevel->shouldReceive('getLevelRank')
             ->atLeast()->once()
-            ->andReturn($levelValue = \Mockery::mock(LevelValue::class));
-        $levelValue->shouldReceive('getValue')
+            ->andReturn($levelRank = \Mockery::mock(LevelRank::class));
+        $levelRank->shouldReceive('getValue')
             ->atLeast()->once()
             ->andReturn(0);
         $professionLevel->shouldReceive('getId')
@@ -675,8 +675,8 @@ class ProfessionLevelsTest extends TestWithMockery
         $this->assertInstanceOf($this->geProfessionLevelClass($professionName), $firstLevel);
         $this->assertSame(1, count($professionLevels->getLevels()));
 
-        /** @var LevelValue|\Mockery\MockInterface $firstLevelValue */
-        $firstLevelValue = $firstLevel->getLevelValue();
+        /** @var LevelRank|\Mockery\MockInterface $firstLevelValue */
+        $firstLevelValue = $firstLevel->getLevelRank();
         $firstLevelValue->shouldReceive('getValue')
             ->atLeast()->once()
             ->andReturn(1);
@@ -689,9 +689,9 @@ class ProfessionLevelsTest extends TestWithMockery
         $profession->shouldReceive('getName')
             ->atLeast()->once()
             ->andReturn($professionName);
-        $nextLevel->shouldReceive('getLevelValue')
+        $nextLevel->shouldReceive('getLevelRank')
             ->atLeast()->once()
-            ->andReturn($nextLevelValue = \Mockery::mock(LevelValue::class));
+            ->andReturn($nextLevelValue = \Mockery::mock(LevelRank::class));
         $nextLevelValue->shouldReceive('getValue')
             ->atLeast()->once()
             ->andReturn(2);
@@ -787,8 +787,8 @@ class ProfessionLevelsTest extends TestWithMockery
             ->andReturn($profession = \Mockery::mock(Profession::class));
         $profession->shouldReceive('getName')
             ->andReturn($professionName);
-        $anotherLevel->shouldReceive('getLevelValue')
-            ->andReturn($anotherLevelValue = \Mockery::mock(LevelValue::class));
+        $anotherLevel->shouldReceive('getLevelRank')
+            ->andReturn($anotherLevelValue = \Mockery::mock(LevelRank::class));
         $anotherLevelValue->shouldReceive('getValue')
             ->andReturn(2 /* already occupied level rank */);
 
@@ -821,8 +821,8 @@ class ProfessionLevelsTest extends TestWithMockery
             ->andReturn($profession = \Mockery::mock(Profession::class));
         $profession->shouldReceive('getName')
             ->andReturn($professionName);
-        $anotherLevel->shouldReceive('getLevelValue')
-            ->andReturn($anotherLevelValue = \Mockery::mock(LevelValue::class));
+        $anotherLevel->shouldReceive('getLevelRank')
+            ->andReturn($anotherLevelValue = \Mockery::mock(LevelRank::class));
         $anotherLevelValue->shouldReceive('getValue')
             ->andReturn(4 /* skipped rank 3 */);
 
@@ -854,8 +854,8 @@ class ProfessionLevelsTest extends TestWithMockery
             ->andReturn($profession = \Mockery::mock(Profession::class));
         $profession->shouldReceive('getName')
             ->andReturn(Fighter::FIGHTER);
-        $anotherLevel->shouldReceive('getLevelValue')
-            ->andReturn($anotherLevelValue = \Mockery::mock(LevelValue::class));
+        $anotherLevel->shouldReceive('getLevelRank')
+            ->andReturn($anotherLevelValue = \Mockery::mock(LevelRank::class));
         $rank = 3;
         $anotherLevelValue->shouldReceive('getValue')
             ->andReturnUsing($rankGetter = function () use (&$rank) {

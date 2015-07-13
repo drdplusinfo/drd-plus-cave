@@ -29,7 +29,7 @@ class WizardLevel extends ProfessionLevel
 
     public function __construct(
         Wizard $wizard,
-        LevelValue $levelValue,
+        LevelRank $levelRank,
         Strength $strengthIncrement,
         Agility $agilityIncrement,
         Knack $knackIncrement,
@@ -42,7 +42,7 @@ class WizardLevel extends ProfessionLevel
     {
         parent::__construct(
             $wizard,
-            $levelValue,
+            $levelRank,
             $strengthIncrement,
             $agilityIncrement,
             $knackIncrement,

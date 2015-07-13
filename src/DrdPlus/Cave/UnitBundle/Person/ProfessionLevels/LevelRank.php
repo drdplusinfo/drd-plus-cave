@@ -4,16 +4,17 @@ namespace DrdPlus\Cave\UnitBundle\Person\ProfessionLevels;
 use Doctrineum\Integer\SelfTypedIntegerEnum;
 
 /**
- * @method static LevelValue getEnum($value)
+ * @method static LevelRank getEnum($value)
  * @see  SelfTypedIntegerEnum::getEnum
  */
-class LevelValue extends SelfTypedIntegerEnum
+class LevelRank extends SelfTypedIntegerEnum
 {
     const LEVEL_VALUE = 'level_value';
 
     /**
      * @param int $value
-     * @return LevelValue
+     *
+*@return LevelRank
      */
     public static function getIt($value)
     {

@@ -47,7 +47,7 @@ class ZeroSkillPoint extends AbstractSkillPoint
     {
         // zero skill level has just a single condition
         if (!$professionLevel->isFirstLevel()) {
-            throw new \LogicException("zero skill point has sense only for first level, got {$professionLevel->getLevelValue()->getValue()}");
+            throw new \LogicException("zero skill point has sense only for first level, got {$professionLevel->getLevelRank()->getValue()}");
         }
     }
 

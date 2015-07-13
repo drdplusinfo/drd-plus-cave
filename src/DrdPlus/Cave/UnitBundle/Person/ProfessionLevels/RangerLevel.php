@@ -29,7 +29,7 @@ class RangerLevel extends ProfessionLevel
 
     public function __construct(
         Ranger $ranger,
-        LevelValue $levelValue,
+        LevelRank $levelRank,
         Strength $strengthIncrement,
         Agility $agilityIncrement,
         Knack $knackIncrement,
@@ -42,7 +42,7 @@ class RangerLevel extends ProfessionLevel
     {
         parent::__construct(
             $ranger,
-            $levelValue,
+            $levelRank,
             $strengthIncrement,
             $agilityIncrement,
             $knackIncrement,

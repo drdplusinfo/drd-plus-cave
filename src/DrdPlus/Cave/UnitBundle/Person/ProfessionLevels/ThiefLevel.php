@@ -29,7 +29,7 @@ class ThiefLevel extends ProfessionLevel
 
     public function __construct(
         Thief $thief,
-        LevelValue $levelValue,
+        LevelRank $levelRank,
         Strength $strengthIncrement,
         Agility $agilityIncrement,
         Knack $knackIncrement,
@@ -42,7 +42,7 @@ class ThiefLevel extends ProfessionLevel
     {
         parent::__construct(
             $thief,
-            $levelValue,
+            $levelRank,
             $strengthIncrement,
             $agilityIncrement,
             $knackIncrement,

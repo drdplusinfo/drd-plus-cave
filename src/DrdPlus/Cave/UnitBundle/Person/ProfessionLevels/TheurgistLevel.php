@@ -31,7 +31,7 @@ class TheurgistLevel extends ProfessionLevel
 
     public function __construct(
         Theurgist $theurgist,
-        LevelValue $levelValue,
+        LevelRank $levelRank,
         Strength $strengthIncrement,
         Agility $agilityIncrement,
         Knack $knackIncrement,
@@ -44,7 +44,7 @@ class TheurgistLevel extends ProfessionLevel
     {
         parent::__construct(
             $theurgist,
-            $levelValue,
+            $levelRank,
             $strengthIncrement,
             $agilityIncrement,
             $knackIncrement,

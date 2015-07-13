@@ -36,11 +36,23 @@ abstract class ProfessionLevel extends StrictObject
     protected $id;
 
     /**
-     * @var LevelValue
+     * @var Profession
+     */
+    private $profession;
+
+    /**
+     * @var LevelRank
      *
      * @ORM\Column(type="levelValue")
      */
-    private $levelValue;
+    private $levelRank;
+
+    /**
+     * @var Experiences
+     *
+     * @ORM\Column(type="experiences")
+     */
+    private $experiences;
 
     /**
      * @var \DateTimeImmutable
@@ -98,14 +110,10 @@ abstract class ProfessionLevel extends StrictObject
      */
     private $weightInKgIncrement;
 
-    /**
-     * @var Profession
-     */
-    private $profession;
-
     protected function __construct(
         Profession $profession,
-        LevelValue $levelValue,
+        LevelRank $levelRank,
+        Experiences $experiences,
         Strength $strengthIncrement,
         Agility $agilityIncrement,
         Knack $knackIncrement,
@@ -117,42 +125,43 @@ abstract class ProfessionLevel extends StrictObject
     )
     {
         $this->profession = $profession;
-        $this->checkLevelValue($levelValue);
-        $this->levelValue = $levelValue;
-        $this->checkPropertyIncrement($strengthIncrement, $levelValue);
+        $this->checkLevelRank($levelRank, $experiences);
+        $this->levelRank = $levelRank;
+        $this->experiences = $experiences;
+        $this->checkPropertyIncrement($strengthIncrement, $levelRank);
         $this->strengthIncrement = $strengthIncrement;
-        $this->checkPropertyIncrement($agilityIncrement, $levelValue);
+        $this->checkPropertyIncrement($agilityIncrement, $levelRank);
         $this->agilityIncrement = $agilityIncrement;
-        $this->checkPropertyIncrement($knackIncrement, $levelValue);
+        $this->checkPropertyIncrement($knackIncrement, $levelRank);
         $this->knackIncrement = $knackIncrement;
-        $this->checkPropertyIncrement($willIncrement, $levelValue);
+        $this->checkPropertyIncrement($willIncrement, $levelRank);
         $this->willIncrement = $willIncrement;
-        $this->checkPropertyIncrement($intelligenceIncrement, $levelValue);
+        $this->checkPropertyIncrement($intelligenceIncrement, $levelRank);
         $this->intelligenceIncrement = $intelligenceIncrement;
-        $this->checkPropertyIncrement($charismaIncrement, $levelValue);
+        $this->checkPropertyIncrement($charismaIncrement, $levelRank);
         $this->charismaIncrement = $charismaIncrement;
-        $this->checkWeightIncrement($weightInKgIncrement, $levelValue);
+        $this->checkWeightIncrement($weightInKgIncrement, $levelRank);
         $this->weightInKgIncrement = $weightInKgIncrement;
         $this->levelUpAt = $levelUpAt ?: new \DateTimeImmutable();
     }
 
-    private function checkLevelValue(LevelValue $levelValue)
+    private function checkLevelRank(LevelRank $levelRank)
     {
-        if ($levelValue->getValue() < self::MINIMUM_LEVEL) {
+        if ($levelRank->getValue() < self::MINIMUM_LEVEL) {
             throw new \LogicException(
-                "Level value can not be lower than " . self::MINIMUM_LEVEL . ", got {$levelValue->getValue()}"
+                "Level value can not be lower than " . self::MINIMUM_LEVEL . ", got {$levelRank->getValue()}"
             );
         }
-        if ($levelValue->getValue() > self::MAXIMUM_LEVEL) {
+        if ($levelRank->getValue() > self::MAXIMUM_LEVEL) {
             throw new \LogicException(
-                "Level value can not be greater than " . self::MAXIMUM_LEVEL . ", got {$levelValue->getValue()}"
+                "Level value can not be greater than " . self::MAXIMUM_LEVEL . ", got {$levelRank->getValue()}"
             );
         }
     }
 
-    private function checkPropertyIncrement(BaseProperty $property, LevelValue $levelValue)
+    private function checkPropertyIncrement(BaseProperty $property, LevelRank $levelRank)
     {
-        if ($levelValue->getValue() === 1) {
+        if ($levelRank->getValue() === 1) {
             $this->checkPropertyFirstLevelIncrement($property);
         } else {
             $this->checkNextLevelPropertyIncrement($property);
@@ -188,11 +197,11 @@ abstract class ProfessionLevel extends StrictObject
         }
     }
 
-    private function checkWeightIncrement(WeightInKg $weightInKg, LevelValue $levelValue)
+    private function checkWeightIncrement(WeightInKg $weightInKg, LevelRank $levelRank)
     {
-        if ($levelValue->getValue() > 1 && $weightInKg->getValue() !== 0) {
+        if ($levelRank->getValue() > 1 && $weightInKg->getValue() !== 0) {
             throw new \LogicException(
-                "Only first level can change weight. Given {$weightInKg->getValue()} kg weight change on level {$levelValue->getValue()}"
+                "Only first level can change weight. Given {$weightInKg->getValue()} kg weight change on level {$levelRank->getValue()}"
             );
         }
     }
@@ -216,11 +225,11 @@ abstract class ProfessionLevel extends StrictObject
     }
 
     /**
-     * @return LevelValue
+     * @return LevelRank
      */
-    public function getLevelValue()
+    public function getLevelRank()
     {
-        return $this->levelValue;
+        return $this->levelRank;
     }
 
     /**
@@ -246,12 +255,12 @@ abstract class ProfessionLevel extends StrictObject
     /** @return bool */
     public function isFirstLevel()
     {
-        return $this->getLevelValue()->getValue() === 1;
+        return $this->getLevelRank()->getValue() === 1;
     }
 
     public function isNextLevel()
     {
-        return $this->getLevelValue()->getValue() > 1;
+        return $this->getLevelRank()->getValue() > 1;
     }
 
     /**

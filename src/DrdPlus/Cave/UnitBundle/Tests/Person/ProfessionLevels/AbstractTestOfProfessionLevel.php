@@ -8,7 +8,7 @@ use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Intelligence;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Knack;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Strength;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Will;
-use DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\LevelValue;
+use DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\LevelRank;
 use DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\ProfessionLevel;
 use DrdPlus\Cave\UnitBundle\Person\Professions\Profession;
 use DrdPlus\Cave\UnitBundle\Tests\TestWithMockery;
@@ -24,9 +24,9 @@ abstract class AbstractTestOfProfessionLevel extends TestWithMockery
      */
     public function can_create_instance()
     {
-        /** @var LevelValue|\Mockery\MockInterface $levelValue */
-        $levelValue = \Mockery::mock(LevelValue::class);
-        $levelValue->shouldReceive('getValue')
+        /** @var LevelRank|\Mockery\MockInterface $levelRank */
+        $levelRank = \Mockery::mock(LevelRank::class);
+        $levelRank->shouldReceive('getValue')
             ->andReturn(1);
         /** @var Strength|\Mockery\MockInterface $strengthIncrement */
         $strengthIncrement = \Mockery::mock(Strength::class);
@@ -51,7 +51,7 @@ abstract class AbstractTestOfProfessionLevel extends TestWithMockery
         $professionLevelClass = $this->getProfessionLevelClass();
         $instance = new $professionLevelClass(
             $this->createProfessionMock(),
-            $levelValue,
+            $levelRank,
             $strengthIncrement,
             $agilityIncrement,
             $knackIncrement,
@@ -148,9 +148,9 @@ abstract class AbstractTestOfProfessionLevel extends TestWithMockery
      */
     public function time_of_level_up_is_creation_time()
     {
-        /** @var LevelValue|\Mockery\MockInterface $levelValue */
-        $levelValue = \Mockery::mock(LevelValue::class);
-        $levelValue->shouldReceive('getValue')
+        /** @var LevelRank|\Mockery\MockInterface $levelRank */
+        $levelRank = \Mockery::mock(LevelRank::class);
+        $levelRank->shouldReceive('getValue')
             ->andReturn(1);
         /** @var Strength|\Mockery\MockInterface $strengthIncrement */
         $strengthIncrement = \Mockery::mock(Strength::class);
@@ -176,7 +176,7 @@ abstract class AbstractTestOfProfessionLevel extends TestWithMockery
         /** @var ProfessionLevel $professionLevel */
         $professionLevel = new $professionLevelClass(
             $this->createProfessionMock(),
-            $levelValue,
+            $levelRank,
             $strengthIncrement,
             $agilityIncrement,
             $knackIncrement,
@@ -211,9 +211,9 @@ abstract class AbstractTestOfProfessionLevel extends TestWithMockery
      */
     public function returns_given_parameters()
     {
-        /** @var LevelValue|\Mockery\MockInterface $levelValue */
-        $levelValue = \Mockery::mock(LevelValue::class);
-        $levelValue->shouldReceive('getValue')
+        /** @var LevelRank|\Mockery\MockInterface $levelRank */
+        $levelRank = \Mockery::mock(LevelRank::class);
+        $levelRank->shouldReceive('getValue')
             ->andReturn(1);
         /** @var Strength|\Mockery\MockInterface $strengthIncrement */
         $strengthIncrement = \Mockery::mock(Strength::class);
@@ -239,7 +239,7 @@ abstract class AbstractTestOfProfessionLevel extends TestWithMockery
         /** @var ProfessionLevel $professionLevel */
         $professionLevel = new $professionLevelClass(
             $this->createProfessionMock(),
-            $levelValue,
+            $levelRank,
             $strengthIncrement,
             $agilityIncrement,
             $knackIncrement,
@@ -249,7 +249,7 @@ abstract class AbstractTestOfProfessionLevel extends TestWithMockery
             $weightInKg,
             $levelUpAt = new \DateTimeImmutable()
         );
-        $this->assertSame($levelValue, $professionLevel->getLevelValue());
+        $this->assertSame($levelRank, $professionLevel->getLevelRank());
         $this->assertSame($strengthIncrement, $professionLevel->getStrengthIncrement());
         $this->assertSame($agilityIncrement, $professionLevel->getAgilityIncrement());
         $this->assertSame($knackIncrement, $professionLevel->getKnackIncrement());

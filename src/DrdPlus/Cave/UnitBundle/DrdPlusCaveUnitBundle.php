@@ -15,7 +15,7 @@ use DrdPlus\Cave\UnitBundle\Person\Background\BackgroundSkills;
 use DrdPlus\Cave\UnitBundle\Person\Background\BelongingsValue;
 use DrdPlus\Cave\UnitBundle\Person\Background\Heritage;
 use DrdPlus\Cave\UnitBundle\Person\Background\Parts\BackgroundPointsType;
-use DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\LevelValue;
+use DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\LevelRank;
 use DrdPlus\Cave\UnitBundle\Person\Races\Gender;
 use DrdPlus\Cave\UnitBundle\Person\Races\Race;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
@@ -47,7 +47,7 @@ class DrdPlusCaveUnitBundle extends Bundle
         Charisma::registerSelf();
         WeightInKg::registerSelf();
 
-        LevelValue::registerSelf();
+        LevelRank::registerSelf();
 
         BackgroundPointsType::registerSelf();
         BackgroundSkills::registerSelf();

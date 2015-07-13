@@ -30,7 +30,8 @@ class FighterLevel extends ProfessionLevel
 
     public function __construct(
         Fighter $fighter,
-        LevelValue $levelValue,
+        LevelRank $levelRank,
+        Experiences $experiences,
         Strength $strengthIncrement,
         Agility $agilityIncrement,
         Knack $knackIncrement,
@@ -43,7 +44,8 @@ class FighterLevel extends ProfessionLevel
     {
         parent::__construct(
             $fighter,
-            $levelValue,
+            $levelRank,
+            $experiences,
             $strengthIncrement,
             $agilityIncrement,
             $knackIncrement,
