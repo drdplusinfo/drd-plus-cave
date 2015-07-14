@@ -1,18 +1,27 @@
 <?php
 namespace DrdPlus\Cave\TablesBundle\Tables\Experiences;
 
-use DrdPlus\Cave\TablesBundle\Tables\AbstractMeasurement;
-use Granam\Integer\Tools\ToInteger;
-
-class ExperiencesMeasurement extends AbstractMeasurement
+class ExperiencesMeasurement extends AbstractExperiencesMeasurement
 {
     const EXPERIENCES = 'experiences';
+
     const EXPERIENCES_TO_LEVEL_BONUS_SHIFT = 15;
 
     /**
      * @var ExperiencesTable
      */
     private $experiencesTable;
+
+    /**
+     * @param int $value
+     * @param ExperiencesTable $experiencesTable
+     *
+     * @return static
+     */
+    public static function getIt($value, ExperiencesTable $experiencesTable)
+    {
+        return new static($value, static::EXPERIENCES, $experiencesTable);
+    }
 
     public function __construct($value, $unit = self::EXPERIENCES, ExperiencesTable $experiencesTable)
     {
@@ -26,23 +35,11 @@ class ExperiencesMeasurement extends AbstractMeasurement
     }
 
     /**
-     * @param float $value
-     * @param string $unit
-     */
-    public function addInDifferentUnit($value, $unit)
-    {
-        $this->checkUnit($unit);
-        if ($this->getValue() !== ToInteger::toInteger($value)) {
-            throw new \LogicException("Experiences already has a value {$this->getValue()} and can not be replaced by $value");
-        }
-    }
-
-    /**
      * @return int
      */
     public function toExperiences()
     {
-        return ToInteger::toInteger($this->getValue());
+        return $this->getValue();
     }
 
     /**
@@ -50,7 +47,7 @@ class ExperiencesMeasurement extends AbstractMeasurement
      */
     public function toLevel()
     {
-        $bonus = $this->experiencesTable->toBonus($this);
+        $bonus = $this->experiencesTable->experiencesToBonus($this->getValue());
 
         return $this->experiencesTable->toExperiences($bonus + self::EXPERIENCES_TO_LEVEL_BONUS_SHIFT);
     }

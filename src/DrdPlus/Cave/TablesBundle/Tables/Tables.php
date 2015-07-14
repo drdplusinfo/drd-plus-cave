@@ -3,6 +3,7 @@ namespace DrdPlus\Cave\TablesBundle\Tables;
 
 use DrdPlus\Cave\TablesBundle\Tables\Amount\AmountTable;
 use DrdPlus\Cave\TablesBundle\Tables\Distance\DistanceTable;
+use DrdPlus\Cave\TablesBundle\Tables\Experiences\ExperiencesTable;
 use DrdPlus\Cave\TablesBundle\Tables\Fatigue\FatigueTable;
 use DrdPlus\Cave\TablesBundle\Tables\Speed\SpeedTable;
 use DrdPlus\Cave\TablesBundle\Tables\Time\TimeTable;
@@ -48,6 +49,11 @@ class Tables extends StrictObject
      */
     private $woundsTable;
 
+    /**
+     * @var ExperiencesTable
+     */
+    private $experiencesTable;
+
     public function __construct()
     {
         $this->amountTable = new AmountTable();
@@ -57,6 +63,7 @@ class Tables extends StrictObject
         $this->timeTable = new TimeTable();
         $this->weightTable = new WeightTable();
         $this->woundsTable = new WoundsTable();
+        $this->experiencesTable = new ExperiencesTable($this->woundsTable);
     }
 
     /**
@@ -113,6 +120,14 @@ class Tables extends StrictObject
     public function getWoundsTable()
     {
         return $this->woundsTable;
+    }
+
+    /**
+     * @return ExperiencesTable
+     */
+    public function getExperiencesTable()
+    {
+        $this->experiencesTable;
     }
 
 }

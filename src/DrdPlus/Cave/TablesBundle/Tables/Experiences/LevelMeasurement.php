@@ -1,14 +1,23 @@
 <?php
 namespace DrdPlus\Cave\TablesBundle\Tables\Experiences;
 
-use DrdPlus\Cave\TablesBundle\Tables\AbstractMeasurement;
 use Granam\Integer\Tools\ToInteger;
 
-class LevelMeasurement extends AbstractMeasurement
+class LevelMeasurement extends AbstractExperiencesMeasurement
 {
     const LEVEL = 'level';
     const LEVEL_TO_EXPERIENCES_BONUS_SHIFT = ExperiencesMeasurement::EXPERIENCES_TO_LEVEL_BONUS_SHIFT;
 
+    /**
+     * @param int $value
+     * @param ExperiencesTable $experiencesTable
+     *
+     * @return static
+     */
+    public static function getIt($value, ExperiencesTable $experiencesTable)
+    {
+        return new static($value, static::LEVEL, $experiencesTable);
+    }
     /**
      * @var ExperiencesTable
      */
@@ -67,7 +76,7 @@ class LevelMeasurement extends AbstractMeasurement
     }
 
     /**
-     * Summary of experiences, need to achieve current level
+     * Summary of experiences, needed to achieve current level
      *
      * @return int
      */

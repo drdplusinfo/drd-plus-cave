@@ -13,9 +13,7 @@ use Granam\Strict\Object\StrictObject;
  */
 class ExperiencesTable extends StrictObject implements TableInterface
 {
-    /**
-     * @var \DrdPlus\Cave\TablesBundle\Tables\Wounds\WoundsTable
-     */
+    /** @var \DrdPlus\Cave\TablesBundle\Tables\Wounds\WoundsTable */
     private $woundsTable;
 
     public function __construct(WoundsTable $woundsTable)
@@ -31,7 +29,35 @@ class ExperiencesTable extends StrictObject implements TableInterface
      */
     public function toBonus(MeasurementInterface $experiencesMeasurement)
     {
-        return $this->woundsTable->woundsToBonus($experiencesMeasurement->getValue());
+        $this->checkUnit($experiencesMeasurement->getUnit());
+        $experiencesValue = null;
+        switch ($experiencesMeasurement->getUnit()) {
+            case ExperiencesMeasurement::EXPERIENCES :
+                $experiencesValue = $experiencesMeasurement->getValue();
+                break;
+            case LevelMeasurement::LEVEL :
+                /** @var LevelMeasurement $experiencesMeasurement */
+                $experiencesValue = $experiencesMeasurement->toExperiences();
+                break;
+            default :
+                throw new \LogicException("Unknown unit {$experiencesMeasurement->getUnit()}");
+        }
+
+        return $this->woundsTable->woundsToBonus($experiencesValue);
+    }
+
+    private function checkUnit($unit)
+    {
+        if (!in_array($unit, $this->getSupportedUnits())) {
+            throw new \LogicException(
+                'Expected one of ' . implode(',', $this->getSupportedUnits()) . ", got $unit"
+            );
+        }
+    }
+
+    private function getSupportedUnits()
+    {
+        return [ExperiencesMeasurement::EXPERIENCES, LevelMeasurement::LEVEL];
     }
 
     /**
@@ -42,6 +68,7 @@ class ExperiencesTable extends StrictObject implements TableInterface
      */
     public function toMeasurement($bonus, $unit = ExperiencesMeasurement::EXPERIENCES)
     {
+        $this->checkUnit($unit);
         $wounds = $this->woundsTable->toMeasurement($bonus, WoundsMeasurement::WOUNDS);
         $experiences = new ExperiencesMeasurement($wounds->getValue(), $unit, $this);
 
@@ -53,16 +80,6 @@ class ExperiencesTable extends StrictObject implements TableInterface
             default :
                 throw new \LogicException("Unknown unit $unit");
         }
-    }
-
-    /**
-     * @param float $amount
-     *
-     * @return int
-     */
-    public function experiencesToBonus($amount)
-    {
-        return $this->woundsTable->woundsToBonus($amount);
     }
 
     /**
@@ -83,5 +100,44 @@ class ExperiencesTable extends StrictObject implements TableInterface
     public function toLevel($bonus)
     {
         return $this->toMeasurement($bonus, LevelMeasurement::LEVEL)->toLevel();
+    }
+
+    /**
+     * @param int $experiencesValue
+     *
+     * @return int
+     */
+    public function experiencesToLevel($experiencesValue)
+    {
+        return $this->toLevel($this->experiencesToBonus($experiencesValue));
+    }
+
+    /**
+     * @param int $amount
+     *
+     * @return int
+     */
+    public function experiencesToBonus($amount)
+    {
+        return $this->woundsTable->woundsToBonus($amount);
+    }
+
+    /**
+     * @param int $levelValue
+     * @return int
+     */
+    public function levelToExperiences($levelValue)
+    {
+        return $this->toExperiences($this->levelToBonus($levelValue));
+    }
+
+    /**
+     * @param int $levelValue
+     *
+     * @return int
+     */
+    public function levelToBonus($levelValue)
+    {
+        return $this->experiencesToBonus(LevelMeasurement::getIt($levelValue, $this)->toExperiences());
     }
 }
