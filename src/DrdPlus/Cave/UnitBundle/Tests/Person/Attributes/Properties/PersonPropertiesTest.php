@@ -5,7 +5,6 @@ use DrdPlus\Cave\TablesBundle\Tables\Fatigue\FatigueTable;
 use DrdPlus\Cave\TablesBundle\Tables\Tables;
 use DrdPlus\Cave\TablesBundle\Tables\Weight\WeightTable;
 use DrdPlus\Cave\TablesBundle\Tables\Wounds\WoundsTable;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Exceptionality;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\ExceptionalityProperties;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\GameCharacteristics\Combat\Attack;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\GameCharacteristics\Combat\Defense;
@@ -29,7 +28,6 @@ use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Will;
 use DrdPlus\Cave\UnitBundle\Person\Professions\Profession;
 use DrdPlus\Cave\UnitBundle\Person\Races\Gender;
 use DrdPlus\Cave\UnitBundle\Person\Races\Race;
-use DrdPlus\Cave\UnitBundle\Person\Person;
 use DrdPlus\Cave\UnitBundle\Tests\TestWithMockery;
 use Granam\Strict\Object\StrictObject;
 use Mockery\MockInterface;
@@ -45,16 +43,53 @@ class PersonPropertiesTest extends TestWithMockery
     public function properties_are_calculated_properly()
     {
         $personProperties = new PersonProperties(
-            $this->createPersonMock(
-                $raceStrengthModifier = 3, $exceptionalStrength = 2, $firstProfessionStrength = 1, $nextLevelsStrength = 5,
-                $raceAgilityModifier = 2, $exceptionalAgility = 3, $firstProfessionAgility = 0, $nextLevelAgility = 8,
-                $raceKnackModifier = 1, $exceptionalKnack = 2, $firstProfessionKnack = 1, $nextLevelKnack = 4,
-                $raceWillModifier = 1, $exceptionalWill = 2, $firstProfessionWill = 1, $nextLevelWill = 4,
-                $raceIntelligenceModifier = 1, $exceptionalIntelligence = 2, $firstProfessionIntelligence = 1, $nextLevelIntelligence = 4,
-                $raceCharismaModifier = 1, $exceptionalCharisma = 2, $firstProfessionCharisma = 1, $nextLevelCharisma = 4,
-                $sizeModifier = 1, $toughnessModifier = 2, $sensesModifier = 3,
-                $raceWeightInKgModifier = 50.0, $firstProfessionWeightInKg = 1.0, $nextLevelsWeightInKg = 0.0
+            $this->createRace(
+                $raceStrengthModifier = 3,
+                $raceAgilityModifier = 2,
+                $raceKnackModifier = 1,
+                $raceWillModifier = 1,
+                $raceIntelligenceModifier = 1,
+                $raceCharismaModifier = 1,
+                $sizeModifier = 1,
+                $toughnessModifier = 2,
+                $sensesModifier = 3,
+                $raceWeightInKgModifier = 50.0
             ),
+            $this->createGender(),
+            $this->createExceptionalityProperties(
+                $exceptionalStrength = 2,
+                $exceptionalAgility = 3,
+                $exceptionalKnack = 2,
+                $exceptionalWill = 2,
+                $exceptionalIntelligence = 2,
+                $exceptionalCharisma = 2
+            ),
+            $this->createProfessionLevels(
+                $firstProfessionStrength = 1,
+                $firstProfessionAgility = 0,
+                $firstProfessionKnack = 1,
+                $firstProfessionWill = 1,
+                $firstProfessionIntelligence = 1,
+                $firstProfessionCharisma = 1,
+                $firstProfessionWeightInKg = 1.0,
+                $nextLevelsStrength = 5,
+                $nextLevelAgility = 8,
+                $nextLevelKnack = 4,
+                $nextLevelWill = 4,
+                $nextLevelIntelligence = 4,
+                $nextLevelCharisma = 4,
+                $nextLevelsWeightInKg = 0.0
+            ),
+            /*            $this->createPersonMock(
+                            $raceStrengthModifier = 3, $exceptionalStrength = 2, $firstProfessionStrength = 1, $nextLevelsStrength = 5,
+                            $raceAgilityModifier = 2, $exceptionalAgility = 3, $firstProfessionAgility = 0, $nextLevelAgility = 8,
+                            $raceKnackModifier = 1, $exceptionalKnack = 2, $firstProfessionKnack = 1, $nextLevelKnack = 4,
+                            $raceWillModifier = 1, $exceptionalWill = 2, $firstProfessionWill = 1, $nextLevelWill = 4,
+                            $raceIntelligenceModifier = 1, $exceptionalIntelligence = 2, $firstProfessionIntelligence = 1, $nextLevelIntelligence = 4,
+                            $raceCharismaModifier = 1, $exceptionalCharisma = 2, $firstProfessionCharisma = 1, $nextLevelCharisma = 4,
+                            $sizeModifier = 1, $toughnessModifier = 2, $sensesModifier = 3,
+                            $raceWeightInKgModifier = 50.0, $firstProfessionWeightInKg = 1.0, $nextLevelsWeightInKg = 0.0
+                        ),*/
             $this->createTablesMock()
         );
         $strength = $personProperties->getStrength();
@@ -143,53 +178,33 @@ class PersonPropertiesTest extends TestWithMockery
 
     /**
      * @param $raceStrengthModifier
-     * @param $exceptionalStrength
-     * @param $firstProfessionStrength
-     * @param $nextLevelsStrength
      * @param $raceAgilityModifier
-     * @param $exceptionalAgility
-     * @param $firstProfessionAgility
-     * @param $nextLevelsAgility
      * @param $raceKnackModifier
-     * @param $exceptionalKnack
-     * @param $firstProfessionKnack
-     * @param $nextLevelsKnack
      * @param $raceWillModifier
-     * @param $exceptionalWill
-     * @param $firstProfessionWill
-     * @param $nextLevelsWill
      * @param $raceIntelligenceModifier
-     * @param $exceptionalIntelligence
-     * @param $firstProfessionIntelligence
-     * @param $nextLevelsIntelligence
      * @param $raceCharismaModifier
-     * @param $exceptionalCharisma
-     * @param $firstProfessionCharisma
-     * @param $nextLevelsCharisma
      * @param $sizeModifier
      * @param $toughnessModifier
      * @param $sensesModifier
      * @param $weightInKg
-     * @param $firstProfessionWeightModifier
-     * @param $nextLevelsWeight
      *
-     * @return MockInterface|Person
+     * @return Race
+     *
      */
-    private function createPersonMock(
-        $raceStrengthModifier, $exceptionalStrength, $firstProfessionStrength, $nextLevelsStrength,
-        $raceAgilityModifier, $exceptionalAgility, $firstProfessionAgility, $nextLevelsAgility,
-        $raceKnackModifier, $exceptionalKnack, $firstProfessionKnack, $nextLevelsKnack,
-        $raceWillModifier, $exceptionalWill, $firstProfessionWill, $nextLevelsWill,
-        $raceIntelligenceModifier, $exceptionalIntelligence, $firstProfessionIntelligence, $nextLevelsIntelligence,
-        $raceCharismaModifier, $exceptionalCharisma, $firstProfessionCharisma, $nextLevelsCharisma,
-        $sizeModifier, $toughnessModifier, $sensesModifier,
-        $weightInKg, $firstProfessionWeightModifier, $nextLevelsWeight
+    private function createRace(
+        $raceStrengthModifier,
+        $raceAgilityModifier,
+        $raceKnackModifier,
+        $raceWillModifier,
+        $raceIntelligenceModifier,
+        $raceCharismaModifier,
+        $sizeModifier,
+        $toughnessModifier,
+        $sensesModifier,
+        $weightInKg
     )
     {
-        $person = \Mockery::mock(Person::class);
-        $person->shouldReceive('getRace')
-            ->atLeast()->once()
-            ->andReturn($race = \Mockery::mock(Race::class));
+        $race = \Mockery::mock(Race::class);
         $this->addGetter($race, 'getStrengthModifier', $raceStrengthModifier);
         $this->addGetter($race, 'getAgilityModifier', $raceAgilityModifier);
         $this->addGetter($race, 'getKnackModifier', $raceKnackModifier);
@@ -201,15 +216,38 @@ class PersonPropertiesTest extends TestWithMockery
         $this->addGetter($race, 'getSensesModifier', $sensesModifier);
         $this->addGetter($race, 'getWeightInKg', $weightInKg);
 
-        $person->shouldReceive('getGender')
-            ->atLeast()->once()
-            ->andReturn($gender = \Mockery::mock(Gender::class));
-        $person->shouldReceive('getExceptionality')
-            ->atLeast()->once()
-            ->andReturn($exceptionality = \Mockery::mock(Exceptionality::class));
-        $exceptionality->shouldReceive('getExceptionalityProperties')
-            ->atLeast()->once()
-            ->andReturn($exceptionalityProperties = \Mockery::mock(ExceptionalityProperties::class));
+        return $race;
+    }
+
+    /**
+     * @return MockInterface|Gender
+     */
+    private function createGender()
+    {
+        $gender = \Mockery::mock(Gender::class);
+
+        return $gender;
+    }
+
+    /**
+     * @param $exceptionalStrength
+     * @param $exceptionalAgility
+     * @param $exceptionalKnack
+     * @param $exceptionalWill
+     * @param $exceptionalIntelligence
+     * @param $exceptionalCharisma
+     * @return MockInterface|ExceptionalityProperties
+     */
+    private function createExceptionalityProperties(
+        $exceptionalStrength,
+        $exceptionalAgility,
+        $exceptionalKnack,
+        $exceptionalWill,
+        $exceptionalIntelligence,
+        $exceptionalCharisma
+    )
+    {
+        $exceptionalityProperties = \Mockery::mock(ExceptionalityProperties::class);
 
         $this->addGetter($exceptionalityProperties, 'getStrength', $strength = \Mockery::mock(Strength::class));
         $this->addGetter($strength, 'getValue', $exceptionalStrength);
@@ -224,9 +262,44 @@ class PersonPropertiesTest extends TestWithMockery
         $this->addGetter($exceptionalityProperties, 'getCharisma', $charisma = \Mockery::mock(Charisma::class));
         $this->addGetter($charisma, 'getValue', $exceptionalCharisma);
 
-        $person->shouldReceive('getProfessionLevels')
-            ->atLeast()->once()
-            ->andReturn($professionLevels = \Mockery::mock(ProfessionLevels::class));
+        return $exceptionalityProperties;
+    }
+
+    /**
+     * @param $firstProfessionStrength
+     * @param $firstProfessionAgility
+     * @param $firstProfessionKnack
+     * @param $firstProfessionWill
+     * @param $firstProfessionIntelligence
+     * @param $firstProfessionCharisma
+     * @param $firstProfessionWeightModifier
+     * @param $nextLevelsStrength
+     * @param $nextLevelsAgility
+     * @param $nextLevelsKnack
+     * @param $nextLevelsWill
+     * @param $nextLevelsIntelligence
+     * @param $nextLevelsCharisma
+     * @param $nextLevelsWeight
+     * @return MockInterface|ProfessionLevels
+     */
+    private function createProfessionLevels(
+        $firstProfessionStrength,
+        $firstProfessionAgility,
+        $firstProfessionKnack,
+        $firstProfessionWill,
+        $firstProfessionIntelligence,
+        $firstProfessionCharisma,
+        $firstProfessionWeightModifier,
+        $nextLevelsStrength,
+        $nextLevelsAgility,
+        $nextLevelsKnack,
+        $nextLevelsWill,
+        $nextLevelsIntelligence,
+        $nextLevelsCharisma,
+        $nextLevelsWeight
+    )
+    {
+        $professionLevels = \Mockery::mock(ProfessionLevels::class);
 
         $this->addGetter($professionLevels, 'getFirstLevel', $firstProfession = \Mockery::mock(ProfessionLevel::class));
         $this->addGetter($firstProfession, 'getProfession', \Mockery::mock(Profession::class));
@@ -247,7 +320,7 @@ class PersonPropertiesTest extends TestWithMockery
         $this->addGetter($professionLevels, 'getNextLevelsCharismaModifier', $nextLevelsCharisma);
         $this->addGetter($professionLevels, 'getNextLevelsWeightModifier', $nextLevelsWeight);
 
-        return $person;
+        return $professionLevels;
     }
 
     /**
@@ -306,15 +379,42 @@ class PersonPropertiesTest extends TestWithMockery
     public function exceeding_base_properties_are_limited()
     {
         $personProperties = new PersonProperties(
-            $this->createPersonMock(
-                $raceStrengthModifier = 3, $exceptionalStrength = 4, $firstProfessionStrength = 1, $nextLevelsStrength = 5,
-                $raceAgilityModifier = 2, $exceptionalAgility = 5, $firstProfessionAgility = 0, $nextLevelAgility = 8,
-                $raceKnackModifier = 1, $exceptionalKnack = 6, $firstProfessionKnack = 1, $nextLevelKnack = 4,
-                $raceWillModifier = 1, $exceptionalWill = 7, $firstProfessionWill = 1, $nextLevelWill = 4,
-                $raceIntelligenceModifier = 1, $exceptionalIntelligence = 8, $firstProfessionIntelligence = 1, $nextLevelIntelligence = 4,
-                $raceCharismaModifier = 1, $exceptionalCharisma = 9, $firstProfessionCharisma = 1, $nextLevelCharisma = 4,
-                $sizeModifier = 1, $toughnessModifier = 2, $sensesModifier = 3,
-                $raceWeightInKgModifier = 50.0, $firstProfessionWeightInKg = 1.0, $nextLevelsWeightInKg = 0.0
+            $this->createRace(
+                $raceStrengthModifier = 3,
+                $raceAgilityModifier = 2,
+                $raceKnackModifier = 1,
+                $raceWillModifier = 1,
+                $raceIntelligenceModifier = 1,
+                $raceCharismaModifier = 1,
+                $sizeModifier = 1,
+                $toughnessModifier = 2,
+                $sensesModifier = 3,
+                $raceWeightInKgModifier = 50.0
+            ),
+            $this->createGender(),
+            $this->createExceptionalityProperties(
+                $exceptionalStrength = 4,
+                $exceptionalAgility = 5,
+                $exceptionalKnack = 6,
+                $exceptionalWill = 7,
+                $exceptionalIntelligence = 8,
+                $exceptionalCharisma = 9
+            ),
+            $this->createProfessionLevels(
+                $firstProfessionStrength = 1,
+                $firstProfessionAgility = 0,
+                $firstProfessionKnack = 1,
+                $firstProfessionWill = 1,
+                $firstProfessionIntelligence = 1,
+                $firstProfessionCharisma = 1,
+                $firstProfessionWeightInKg = 1.0,
+                $nextLevelsStrength = 5,
+                $nextLevelAgility = 8,
+                $nextLevelKnack = 4,
+                $nextLevelWill = 4,
+                $nextLevelIntelligence = 4,
+                $nextLevelCharisma = 4,
+                $nextLevelsWeightInKg = 0.0
             ),
             $this->createTablesMock()
         );
