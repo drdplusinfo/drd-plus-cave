@@ -206,6 +206,14 @@ class Person extends StrictObject
     }
 
     /**
+     * @return Experiences
+     */
+    public function getExperiences()
+    {
+        return $this->experiences;
+    }
+
+    /**
      * @return ProfessionLevels
      */
     public function getProfessionLevels()

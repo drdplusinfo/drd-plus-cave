@@ -1,14 +1,19 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Person;
 
+use DrdPlus\Cave\TablesBundle\Tables\Experiences\ExperiencesTable;
 use DrdPlus\Cave\TablesBundle\Tables\Fatigue\FatigueTable;
 use DrdPlus\Cave\TablesBundle\Tables\Tables;
 use DrdPlus\Cave\TablesBundle\Tables\Weight\WeightTable;
 use DrdPlus\Cave\TablesBundle\Tables\Wounds\WoundsTable;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Exceptionality;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\ExceptionalityProperties;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Experiences;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Name;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\NextLevelsProperties;
 use DrdPlus\Cave\UnitBundle\Person\Background\Background;
+use DrdPlus\Cave\UnitBundle\Person\Background\BackgroundSkills;
+use DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\LevelRank;
 use DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\ProfessionLevel;
 use DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\ProfessionLevels;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Agility;
@@ -30,126 +35,75 @@ class PersonTest extends TestWithMockery
     public function can_create_instance()
     {
         $instance = new Person(
-            $this->getRaceMock(),
-            $this->getGenderMock(),
-            $this->getNameMock(),
-            $this->getExceptionalityMock(),
-            $this->getProfessionLevelsMock(),
-            $this->getBackgroundMock(),
-            $this->getSkillsMock(),
-            $this->getTablesMock()
+            $this->createRace(),
+            $this->createGender(),
+            $this->createName(),
+            $this->createExceptionality(),
+            $this->createExperiences(),
+            $professionLevels = $this->createProfessionLevels(),
+            $this->createBackground(),
+            $this->createSkills(),
+            $this->createTables()
         );
         $this->assertNotNull($instance);
-    }
-
-    /** @test */
-    public function base_id_is_null()
-    {
-        $person = new Person(
-            $this->getRaceMock(),
-            $this->getGenderMock(),
-            $this->getNameMock(),
-            $this->getExceptionalityMock(),
-            $this->getProfessionLevelsMock(),
-            $this->getBackgroundMock(),
-            $this->getSkillsMock(),
-            $this->getTablesMock()
-        );
-        $this->assertNull($person->getId());
+        $this->assertNull($instance->getId());
     }
 
     /** @test */
     public function returns_same_race_as_got()
     {
         $person = new Person(
-            $race = $this->getRaceMock(),
-            $this->getGenderMock(),
-            $this->getNameMock(),
-            $this->getExceptionalityMock(),
-            $this->getProfessionLevelsMock(),
-            $this->getBackgroundMock(),
-            $this->getSkillsMock(),
-            $this->getTablesMock()
+            $race = $this->createRace(),
+            $this->createGender(),
+            $this->createName(),
+            $this->createExceptionality(),
+            $this->createExperiences(),
+            $this->createProfessionLevels(),
+            $this->createBackground(),
+            $this->createSkills(),
+            $this->createTables()
         );
         $this->assertSame($race, $person->getRace());
     }
 
     /** @test */
-    public function returns_same_gender_as_got()
+    public function returns_same_items_as_got()
     {
         $person = new Person(
-            $this->getRaceMock(),
-            $gender = $this->getGenderMock(),
-            $this->getNameMock(),
-            $this->getExceptionalityMock(),
-            $this->getProfessionLevelsMock(),
-            $this->getBackgroundMock(),
-            $this->getSkillsMock(),
-            $this->getTablesMock()
+            $race = $this->createRace(),
+            $gender = $this->createGender(),
+            $name = $this->createName(),
+            $exceptionality = $this->createExceptionality(),
+            $experiences = $this->createExperiences(),
+            $professionLevels = $this->createProfessionLevels(),
+            $background = $this->createBackground(),
+            $skills = $this->createSkills(),
+            $this->createTables()
         );
+        $this->assertSame($race, $person->getRace());
         $this->assertSame($gender, $person->getGender());
-    }
-
-    /** @test */
-    public function returns_same_exceptionality_as_got()
-    {
-        $person = new Person(
-            $this->getRaceMock(),
-            $this->getGenderMock(),
-            $this->getNameMock(),
-            $exceptionality = $this->getExceptionalityMock(),
-            $this->getProfessionLevelsMock(),
-            $this->getBackgroundMock(),
-            $this->getSkillsMock(),
-            $this->getTablesMock()
-        );
-        $this->assertSame($exceptionality, $person->getExceptionality());
-    }
-
-    /** @test */
-    public function returns_same_profession_levels_as_got()
-    {
-        $person = new Person(
-            $this->getRaceMock(),
-            $this->getGenderMock(),
-            $this->getNameMock(),
-            $this->getExceptionalityMock(),
-            $professionLevels = $this->getProfessionLevelsMock(),
-            $this->getBackgroundMock(),
-            $this->getSkillsMock(),
-            $this->getTablesMock()
-        );
-        $this->assertSame($professionLevels, $person->getProfessionLevels());
-    }
-
-    /** @test */
-    public function returns_same_name_as_got()
-    {
-        $person = new Person(
-            $this->getRaceMock(),
-            $this->getGenderMock(),
-            $name = $this->getNameMock(),
-            $this->getExceptionalityMock(),
-            $this->getProfessionLevelsMock(),
-            $this->getBackgroundMock(),
-            $this->getSkillsMock(),
-            $this->getTablesMock()
-        );
         $this->assertSame($name, $person->getName());
+        $this->assertSame($exceptionality, $person->getExceptionality());
+        $this->assertSame($experiences, $person->getExperiences());
+        $this->assertSame($professionLevels, $person->getProfessionLevels());
+        $this->assertSame($background, $person->getBackground());
+        $this->assertSame($skills, $person->getSkills());
+        // note: tables are for inner purpose only, does not have getter
     }
 
     /** @test */
     public function can_change_name()
     {
         $person = new Person(
-            $this->getRaceMock(),
-            $this->getGenderMock(),
-            $this->getNameMock(),
-            $this->getExceptionalityMock(),
-            $this->getProfessionLevelsMock(),
-            $this->getBackgroundMock(),
-            $this->getSkillsMock(),
-            $this->getTablesMock()
+            $this->createRace(),
+            $this->createGender(),
+            $this->createName(),
+            $this->createExceptionality(),
+            $this->createExperiences(),
+            $this->createProfessionLevels(),
+            $this->createBackground(),
+            $this->createSkills(),
+            $this->createTables()
         );
         Name::registerSelf();
         $person->setName($name = Name::getEnum($nameString = 'foo'));
@@ -163,9 +117,9 @@ class PersonTest extends TestWithMockery
     /**
      * @return Race
      */
-    private function getRaceMock()
+    private function createRace()
     {
-        $race = \Mockery::mock(Race::class);
+        $race = $this->mockery(Race::class);
         $race->shouldReceive('getStrengthModifier')
             ->atLeast()
             ->once()
@@ -209,52 +163,52 @@ class PersonTest extends TestWithMockery
     /**
      * @return Gender
      */
-    private function getGenderMock()
+    private function createGender()
     {
-        return \Mockery::mock(Gender::class);
+        return $this->mockery(Gender::class);
     }
 
     /**
      * @return Exceptionality
      */
-    private function getExceptionalityMock()
+    private function createExceptionality()
     {
-        $exceptionality = \Mockery::mock(Exceptionality::class);
+        $exceptionality = $this->mockery(Exceptionality::class);
         $exceptionality->shouldReceive('getExceptionalityProperties')
             ->atLeast()
             ->once()
-            ->andReturn($exceptionalityProperties = \Mockery::mock(ExceptionalityProperties::class));
+            ->andReturn($exceptionalityProperties = $this->mockery(ExceptionalityProperties::class));
         $exceptionalityProperties->shouldReceive('getStrength')
             ->atLeast()
             ->once()
-            ->andReturn($strength = \Mockery::mock(Strength::class));
+            ->andReturn($strength = $this->mockery(Strength::class));
         $strength->shouldReceive('getValue')
             ->andReturn(0);
         $exceptionalityProperties->shouldReceive('getAgility')
             ->atLeast()
             ->once()
-            ->andReturn($agility = \Mockery::mock(Agility::class));
+            ->andReturn($agility = $this->mockery(Agility::class));
         $agility->shouldReceive('getValue')
             ->andReturn(0);
         $exceptionalityProperties->shouldReceive('getKnack')
             ->atLeast()
             ->once()
-            ->andReturn($knack = \Mockery::mock(Knack::class));
+            ->andReturn($knack = $this->mockery(Knack::class));
         $knack->shouldReceive('getValue')
             ->andReturn(0);
         $exceptionalityProperties->shouldReceive('getWill')
             ->once()
-            ->andReturn($will = \Mockery::mock(Will::class));
+            ->andReturn($will = $this->mockery(Will::class));
         $will->shouldReceive('getValue')
             ->andReturn(0);
         $exceptionalityProperties->shouldReceive('getIntelligence')
             ->once()
-            ->andReturn($intelligence = \Mockery::mock(Intelligence::class));
+            ->andReturn($intelligence = $this->mockery(Intelligence::class));
         $intelligence->shouldReceive('getValue')
             ->andReturn(0);
         $exceptionalityProperties->shouldReceive('getCharisma')
             ->once()
-            ->andReturn($charisma = \Mockery::mock(Charisma::class));
+            ->andReturn($charisma = $this->mockery(Charisma::class));
         $charisma->shouldReceive('getValue')
             ->andReturn(0);
 
@@ -262,14 +216,27 @@ class PersonTest extends TestWithMockery
     }
 
     /**
+     * @return Experiences
+     */
+    private function createExperiences()
+    {
+        $experiences = $this->mockery(Experiences::class);
+        $experiences->shouldReceive('getValue')
+            ->atLeast()->once()
+            ->andReturn(0);
+
+        return $experiences;
+    }
+
+    /**
      * @return ProfessionLevels
      */
-    private function getProfessionLevelsMock()
+    private function createProfessionLevels()
     {
-        $professionLevels = \Mockery::mock(ProfessionLevels::class);
+        $professionLevels = $this->mockery(ProfessionLevels::class);
 
-        $professionLevels->shouldReceive('getFirstLevel')->once()->andReturn($firstLevel = \Mockery::mock(ProfessionLevel::class));
-        $firstLevel->shouldReceive('getProfession')->once()->andReturn(\Mockery::mock(Profession::class));
+        $professionLevels->shouldReceive('getFirstLevel')->atLeast()->once()->andReturn($firstLevel = $this->mockery(ProfessionLevel::class));
+        $firstLevel->shouldReceive('getProfession')->once()->andReturn($this->mockery(Profession::class));
 
         $professionLevels->shouldReceive('getStrengthModifierForFirstProfession')->atLeast()->once()->andReturn(0);
         $professionLevels->shouldReceive('getNextLevelsStrengthModifier')->atLeast()->once()->andReturn(0);
@@ -292,15 +259,20 @@ class PersonTest extends TestWithMockery
         $professionLevels->shouldReceive('getWeightKgModifierForFirstLevel')->once()->andReturn(0);
         $professionLevels->shouldReceive('getNextLevelsWeightModifier')->once()->andReturn(0);
 
+        $professionLevels->shouldReceive('getHighestLevelRank')->once()->andReturn($highestLevelRank = $this->mockery(LevelRank::class));
+        $highestLevelRank->shouldReceive('getValue')->atLeast()->once()->andReturn(0);
+
         return $professionLevels;
     }
 
     /**
      * @return \Mockery\MockInterface|Background
      */
-    private function getBackgroundMock()
+    private function createBackground()
     {
-        $background = \Mockery::mock(Background::class);
+        $background = $this->mockery(Background::class);
+        $background->shouldReceive('getBackgroundSkills')
+            ->andReturn($backgroundSkills = $this->mockery(BackgroundSkills::class));
 
         return $background;
     }
@@ -308,11 +280,11 @@ class PersonTest extends TestWithMockery
     /**
      * @return \Mockery\MockInterface|Skills
      */
-    private function getSkillsMock()
+    private function createSkills()
     {
-        $skills = \Mockery::mock(Skills::class);
+        $skills = $this->mockery(Skills::class);
         $skills->shouldReceive('checkSkillPoints')
-            ->with(\Mockery::type(Person::class))
+            ->with(\Mockery::type(ProfessionLevel::class), \Mockery::type(BackgroundSkills::class), \Mockery::type(NextLevelsProperties::class))
             ->atLeast()->once();
 
         return $skills;
@@ -321,27 +293,34 @@ class PersonTest extends TestWithMockery
     /**
      * @return Tables
      */
-    private function getTablesMock()
+    private function createTables()
     {
-        $tables = \Mockery::mock(Tables::class);
+        $tables = $this->mockery(Tables::class);
 
         $tables->shouldReceive('getWeightTable')
             ->once()
-            ->andReturn($weightTable = \Mockery::mock(WeightTable::class));
+            ->andReturn($weightTable = $this->mockery(WeightTable::class));
         $tables->shouldReceive('getWoundsTable')
             ->atLeast()->once()
-            ->andReturn($fatigueTable = \Mockery::mock(WoundsTable::class));
+            ->andReturn($fatigueTable = $this->mockery(WoundsTable::class));
         $fatigueTable->shouldReceive('toWounds')
             ->with(\Mockery::type('int'))
             ->atLeast()->once()
             ->andReturn(10);
         $tables->shouldReceive('getFatigueTable')
             ->atLeast()->once()
-            ->andReturn($fatigueTable = \Mockery::mock(FatigueTable::class));
+            ->andReturn($fatigueTable = $this->mockery(FatigueTable::class));
         $fatigueTable->shouldReceive('toFatigue')
             ->with(\Mockery::type('int'))
             ->atLeast()->once()
             ->andReturn(10);
+        $tables->shouldReceive('getExperiencesTable')
+            ->atLeast()->once()
+            ->andReturn($experiencesTable = $this->mockery(ExperiencesTable::class));
+        $experiencesTable->shouldReceive('levelToTotalExperiences')
+            ->once()
+            ->with(0)
+            ->andReturn(0);
 
         return $tables;
     }
@@ -349,8 +328,8 @@ class PersonTest extends TestWithMockery
     /**
      * @return Name
      */
-    private function getNameMock()
+    private function createName()
     {
-        return \Mockery::mock(Name::class);
+        return $this->mockery(Name::class);
     }
 }
