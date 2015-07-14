@@ -14,7 +14,7 @@ class LevelRank extends SelfTypedIntegerEnum
     /**
      * @param int $value
      *
-*@return LevelRank
+     * @return LevelRank
      */
     public static function getIt($value)
     {

@@ -2,8 +2,10 @@
 namespace DrdPlus\Cave\UnitBundle\Person;
 
 use Doctrine\ORM\Mapping as ORM;
+use DrdPlus\Cave\TablesBundle\Tables\Experiences\ExperiencesTable;
 use DrdPlus\Cave\TablesBundle\Tables\Tables;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Exceptionality;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Experiences;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Name;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\PersonProperties;
 use DrdPlus\Cave\UnitBundle\Person\Background\Background;
@@ -71,6 +73,13 @@ class Person extends StrictObject
     private $professionLevels;
 
     /**
+     * @var Experiences
+     *
+     * @ORM\Column(type="experiences")
+     */
+    private $experiences;
+
+    /**
      * @var Background
      *
      * @ORM\OneToOne(targetEntity="DrdPlus\Cave\UnitBundle\Person\Background\Background")
@@ -89,6 +98,7 @@ class Person extends StrictObject
         Gender $gender, // enum
         Name $name, // enum
         Exceptionality $exceptionality, // entity
+        Experiences $experiences, // enum
         ProfessionLevels $professionLevels, // entity
         Background $background, // entity
         Skills $skills, // entity
@@ -99,11 +109,38 @@ class Person extends StrictObject
         $this->gender = $gender;
         $this->name = $name;
         $this->exceptionality = $exceptionality;
+        $this->checkLevelsAgainstExperiences($professionLevels, $experiences, $tables->getExperiencesTable());
         $this->professionLevels = $professionLevels;
+        $this->experiences = $experiences;
         $this->background = $background;
-        $skills->checkSkillPoints($this);
+        $this->personProperties = new PersonProperties( // enums aggregate
+            $this->getRace(),
+            $this->getGender(),
+            $this->getExceptionality()->getExceptionalityProperties(),
+            $this->getProfessionLevels(),
+            $tables
+        );
+        $skills->checkSkillPoints(
+            $this->getProfessionLevels()->getFirstLevel(),
+            $this->getBackground()->getBackgroundSkills(),
+            $this->getPersonProperties()->getNextLevelsProperties()
+        );
         $this->skills = $skills;
-        $this->personProperties = new PersonProperties($this, $tables); // enums aggregate
+    }
+
+    private function checkLevelsAgainstExperiences(
+        ProfessionLevels $professionLevels,
+        Experiences $experiences,
+        ExperiencesTable $experiencesTable
+    )
+    {
+        $highestLevel = $professionLevels->getHighestLevelRank()->getValue();
+        $requiredExperiences = $experiencesTable->levelToTotalExperiences($highestLevel);
+        if ($experiences->getValue() < $requiredExperiences) {
+            throw new \LogicException(
+                "Given level $highestLevel needs at least $requiredExperiences, got only {$experiences->getValue()}"
+            );
+        }
     }
 
     /**

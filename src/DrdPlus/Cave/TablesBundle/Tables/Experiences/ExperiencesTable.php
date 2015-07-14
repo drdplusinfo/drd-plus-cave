@@ -64,7 +64,7 @@ class ExperiencesTable extends StrictObject implements TableInterface
      * @param int $bonus
      * @param string $unit
      *
-     * @return ExperiencesMeasurement
+     * @return ExperiencesMeasurement|LevelMeasurement
      */
     public function toMeasurement($bonus, $unit = ExperiencesMeasurement::EXPERIENCES)
     {
@@ -129,6 +129,15 @@ class ExperiencesTable extends StrictObject implements TableInterface
     public function levelToExperiences($levelValue)
     {
         return $this->toExperiences($this->levelToBonus($levelValue));
+    }
+
+    /**
+     * @param int $levelValue
+     * @return int
+     */
+    public function levelToTotalExperiences($levelValue)
+    {
+        return $this->toMeasurement($this->levelToBonus($levelValue), LevelMeasurement::LEVEL)->toTotalExperiences();
     }
 
     /**

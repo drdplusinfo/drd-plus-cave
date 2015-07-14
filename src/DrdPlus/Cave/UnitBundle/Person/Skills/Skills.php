@@ -9,7 +9,7 @@ use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\NextLevelsProperties;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Strength;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Will;
 use DrdPlus\Cave\UnitBundle\Person\Background\BackgroundSkills;
-use DrdPlus\Cave\UnitBundle\Person\Person;
+use DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\ProfessionLevel;
 use DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\ProfessionLevels;
 use DrdPlus\Cave\UnitBundle\Person\Skills\Combined\CombinedSkillPoint;
 use DrdPlus\Cave\UnitBundle\Person\Skills\Combined\CombinedSkills;
@@ -208,10 +208,14 @@ class Skills extends StrictObject
         return $professionLevels->getNextLevelsKnackModifier() + $professionLevels->getNextLevelsCharismaModifier();
     }
 
-    public function checkSkillPoints(Person $person)
+    public function checkSkillPoints(
+        ProfessionLevel $firstLevel,
+        BackgroundSkills $backgroundSkills,
+        NextLevelsProperties $nextLevelsProperties
+    )
     {
         $this->checkSkillRanks();
-        $this->checkPaymentOfSkillPoints($person);
+        $this->checkPaymentOfSkillPoints($firstLevel, $backgroundSkills, $nextLevelsProperties);
     }
 
     private function checkSkillRanks()
@@ -271,7 +275,11 @@ class Skills extends StrictObject
         return implode(';', $description);
     }
 
-    private function checkPaymentOfSkillPoints(Person $person)
+    private function checkPaymentOfSkillPoints(
+        ProfessionLevel $firstLevel,
+        BackgroundSkills $backgroundSkills,
+        NextLevelsProperties $nextLevelsProperties
+    )
     {
         $propertyPayments = $this->getPaymentsSkeleton();
 
@@ -282,8 +290,8 @@ class Skills extends StrictObject
             }
         }
 
-        $this->checkFirstLevelPayment($propertyPayments['firstLevel'], $person);
-        $this->checkNextLevelsPayment($propertyPayments['nextLevels'], $person->getPersonProperties()->getNextLevelsProperties());
+        $this->checkFirstLevelPayment($propertyPayments['firstLevel'], $firstLevel, $backgroundSkills);
+        $this->checkNextLevelsPayment($propertyPayments['nextLevels'], $nextLevelsProperties);
     }
 
     private function getPaymentsSkeleton()
@@ -427,9 +435,8 @@ class Skills extends StrictObject
         return $sumPayment;
     }
 
-    private function checkFirstLevelPayment(array $firstLevelPayment, Person $person)
+    private function checkFirstLevelPayment(array $firstLevelPayment, ProfessionLevel $firstLevel, BackgroundSkills $backgroundSkills)
     {
-        $backgroundSkills = $person->getBackground()->getBackgroundSkills();
         foreach ($firstLevelPayment as $type => $payment) {
             if (!$payment['backgroundSkills']) {
                 throw new \LogicException("Background skills are missing for first level payment of type $type");
@@ -445,13 +452,13 @@ class Skills extends StrictObject
             $availableSkillPoints = 0;
             switch ($type) {
                 case self::PHYSICAL :
-                    $availableSkillPoints = $backgroundSkills->getPhysicalSkillPoints($person->getProfessionLevels()->getFirstLevel()->getProfession());
+                    $availableSkillPoints = $backgroundSkills->getPhysicalSkillPoints($firstLevel->getProfession());
                     break;
                 case self::PSYCHICAL :
-                    $availableSkillPoints = $backgroundSkills->getPsychicalSkillPoints($person->getProfessionLevels()->getFirstLevel()->getProfession());
+                    $availableSkillPoints = $backgroundSkills->getPsychicalSkillPoints($firstLevel->getProfession());
                     break;
                 case self::COMBINED :
-                    $availableSkillPoints = $backgroundSkills->getCombinedSkillPoints($person->getProfessionLevels()->getFirstLevel()->getProfession());
+                    $availableSkillPoints = $backgroundSkills->getCombinedSkillPoints($firstLevel->getProfession());
                     break;
             }
             if ($availableSkillPoints < $payment['paymentSum']) {

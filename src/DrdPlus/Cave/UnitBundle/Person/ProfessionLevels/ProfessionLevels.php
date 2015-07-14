@@ -693,4 +693,28 @@ class ProfessionLevels extends StrictObject implements \IteratorAggregate
     {
         return $this->sumNextLevelsProperty(Charisma::CHARISMA);
     }
+
+    /**
+     * @return LevelRank
+     */
+    public function getHighestLevelRank()
+    {
+        $levelRanks = $this->getLevelRanks(); // already sorted by level
+        $highestLevelRank = array_pop($levelRanks);
+
+        return $highestLevelRank;
+    }
+
+    /**
+     * @return array|LevelRank
+     */
+    private function getLevelRanks()
+    {
+        return array_map(
+            function (ProfessionLevel $professionLevel) {
+                return $professionLevel->getLevelRank();
+            },
+            $this->getLevels()
+        );
+    }
 }

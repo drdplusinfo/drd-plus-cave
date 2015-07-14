@@ -3,6 +3,7 @@ namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Properties;
 
 use DrdPlus\Cave\TablesBundle\Tables\Tables;
 use DrdPlus\Cave\ToolsBundle\Numbers\SumAndRound;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\ExceptionalityProperties;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\GameCharacteristics\Combat\Attack;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\GameCharacteristics\Combat\Defense;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\GameCharacteristics\Combat\Fight;
@@ -18,7 +19,9 @@ use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Derived\Senses;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Derived\Speed;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Derived\Toughness;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Derived\WoundsLimit;
-use DrdPlus\Cave\UnitBundle\Person\Person;
+use DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\ProfessionLevels;
+use DrdPlus\Cave\UnitBundle\Person\Races\Gender;
+use DrdPlus\Cave\UnitBundle\Person\Races\Race;
 use Granam\Strict\Object\StrictObject;
 
 class PersonProperties extends StrictObject
@@ -93,20 +96,22 @@ class PersonProperties extends StrictObject
     /** @var FatigueLimit */
     private $fatigueLimit;
 
-    /**
-     * @param Person $person
-     * @param Tables $tables
-     */
-    public function __construct(Person $person, Tables $tables)
+    public function __construct(
+        Race $race,
+        Gender $gender,
+        ExceptionalityProperties $exceptionalityProperties,
+        ProfessionLevels $professionLevels,
+        Tables $tables
+    )
     {
         $this->firstLevelProperties = new FirstLevelProperties(
-            $person->getRace(),
-            $person->getGender(),
-            $person->getExceptionality()->getExceptionalityProperties(),
-            $person->getProfessionLevels(),
+            $race,
+            $gender,
+            $exceptionalityProperties,
+            $professionLevels,
             $tables
         );
-        $this->nextLevelsProperties = new NextLevelsProperties($person->getProfessionLevels());
+        $this->nextLevelsProperties = new NextLevelsProperties($professionLevels);
 
         $this->strength = Strength::getIt(
             $this->firstLevelProperties->getFirstLevelStrength()->getValue()
@@ -138,17 +143,17 @@ class PersonProperties extends StrictObject
         );
 
         // delivered properties
-        $this->toughness = new Toughness($this->getStrength()->getValue() + $person->getRace()->getToughnessModifier());
+        $this->toughness = new Toughness($this->getStrength()->getValue() + $race->getToughnessModifier());
         $this->endurance = new Endurance(SumAndRound::round($this->getStrength()->getValue() + $this->getWill()->getValue()));
         $this->size = $this->firstLevelProperties->getFirstLevelSize(); // there is no more size increment than the first level one
         $this->speed = new Speed($this->calculateSpeed($this->getStrength(), $this->getAgility(), $this->getSize()));
-        $this->senses = new Senses($this->getKnack()->getValue() + $person->getRace()->getSensesModifier($person->getGender()));
+        $this->senses = new Senses($this->getKnack()->getValue() + $race->getSensesModifier($gender));
         // aspects of visage
         $this->beauty = new Beauty($this->getAgility(), $this->getKnack(), $this->getCharisma());
         $this->dangerousness = new Dangerousness($this->getStrength(), $this->getWill(), $this->getCharisma());
         $this->dignity = new Dignity($this->getIntelligence(), $this->getWill(), $this->getCharisma());
 
-        $this->fight = new Fight($person->getProfessionLevels()->getFirstLevel()->getProfession(), $this);
+        $this->fight = new Fight($professionLevels->getFirstLevel()->getProfession(), $this);
         $this->attack = new Attack($this->getAgility());
         $this->defense = new Defense($this->getAgility());
         $this->shooting = new Shooting($this->getKnack());
