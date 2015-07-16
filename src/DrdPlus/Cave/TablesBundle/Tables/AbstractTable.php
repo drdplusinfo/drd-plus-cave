@@ -70,9 +70,7 @@ abstract class AbstractTable extends StrictObject implements TableInterface
             }
         }
         if (count($indexed) === 0) {
-            throw new \RuntimeException(
-                "Data file is empty. Expected at least single row with values (header excluded)"
-            );
+            throw new \RuntimeException("Data file is empty. Expected at least single row with values (header excluded)");
         }
 
         return $indexed;

@@ -53,8 +53,9 @@ class AmountTableTest extends TestWithMockery
         $amountTable = new AmountTable();
         $this->assertSame(0, $amountTable->toBonus(new AmountMeasurement(1)));
 
-        $this->assertSame(40, $amountTable->amountToBonus(104)); // 40 is the closest bonus
+        $this->assertSame(40, $amountTable->amountToBonus(104)); // 40 is the closest bonus (lower in this case)
         $this->assertSame(41, $amountTable->amountToBonus(105)); // 40 and 41 are closest bonuses, 41 is taken because higher
+        $this->assertSame(41, $amountTable->amountToBonus(106)); // 41 is the closest bonus (higher in this case)
 
         $this->assertSame(99, $amountTable->toBonus(new AmountMeasurement(90000)));
         $this->assertSame(99, $amountTable->amountToBonus(90000));

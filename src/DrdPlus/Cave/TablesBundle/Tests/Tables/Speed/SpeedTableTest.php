@@ -55,9 +55,11 @@ class SpeedTableTest extends TestWithMockery
 
         $this->assertSame(40, $speedTable->mPerRoundToBonus(104)); // 40 is the closest bonus
         $this->assertSame(41, $speedTable->mPerRoundToBonus(105)); // 40 and 41 are closest bonuses, 41 is taken because higher
+        $this->assertSame(41, $speedTable->mPerRoundToBonus(106)); // 41 is the closest bonus (higher in this case)
 
         $this->assertSame(40, $speedTable->kmPerHourToBonus(37)); // 40 is the closest bonus
         $this->assertSame(41, $speedTable->kmPerHourToBonus(38)); // 40 and 41 are closest bonuses, 41 is taken because higher
+        $this->assertSame(41, $speedTable->kmPerHourToBonus(38)); // 41 is the closest bonus (higher in this case)
 
         $this->assertSame(59, $speedTable->mPerRoundToBonus(900));
 

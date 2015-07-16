@@ -65,6 +65,7 @@ class FatigueTableTest extends TestWithMockery
 
         $this->assertSame(30, $fatigueTable->fatigueToBonus(104)); // 30 is the closest bonus
         $this->assertSame(31, $fatigueTable->fatigueToBonus(105)); // 30 and 31 are closest bonuses, 31 is taken because higher
+        $this->assertSame(31, $fatigueTable->fatigueToBonus(106)); // 31 is the closest bonus (higher in this case)
 
         $this->assertSame(79, $fatigueTable->toBonus(new FatigueMeasurement(28000)));
         $this->assertSame(79, $fatigueTable->fatigueToBonus(28000));

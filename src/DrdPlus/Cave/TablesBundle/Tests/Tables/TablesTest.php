@@ -3,6 +3,7 @@ namespace DrdPlus\Cave\TablesBundle\Tables;
 
 use DrdPlus\Cave\TablesBundle\Tables\Amount\AmountTable;
 use DrdPlus\Cave\TablesBundle\Tables\Distance\DistanceTable;
+use DrdPlus\Cave\TablesBundle\Tables\Experiences\ExperiencesTable;
 use DrdPlus\Cave\TablesBundle\Tables\Fatigue\FatigueTable;
 use DrdPlus\Cave\TablesBundle\Tables\Speed\SpeedTable;
 use DrdPlus\Cave\TablesBundle\Tables\Time\TimeTable;
@@ -19,12 +20,13 @@ class TablesTest extends TestWithMockery
     public function can_give_any_on_table()
     {
         $tables = new Tables();
-        $this->assertInstanceOf(WeightTable::class, $tables->getWeightTable());
         $this->assertInstanceOf(AmountTable::class, $tables->getAmountTable());
         $this->assertInstanceOf(DistanceTable::class, $tables->getDistanceTable());
+        $this->assertInstanceOf(ExperiencesTable::class, $tables->getExperiencesTable());
         $this->assertInstanceOf(FatigueTable::class, $tables->getFatigueTable());
         $this->assertInstanceOf(SpeedTable::class, $tables->getSpeedTable());
         $this->assertInstanceOf(TimeTable::class, $tables->getTimeTable());
+        $this->assertInstanceOf(WeightTable::class, $tables->getWeightTable());
         $this->assertInstanceOf(WoundsTable::class, $tables->getWoundsTable());
     }
 

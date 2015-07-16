@@ -58,6 +58,7 @@ class DistanceTableTest extends TestWithMockery
 
         $this->assertSame(40, $distanceTable->metersToBonus(104)); // 40 is the closest bonus
         $this->assertSame(41, $distanceTable->metersToBonus(105)); // 40 and 41 are closest bonuses, 41 is taken because higher
+        $this->assertSame(41, $distanceTable->metersToBonus(106)); // 41 is the closest bonus (higher in this case)
 
         $this->assertSame(119, $distanceTable->kilometersToBonus(900));
     }

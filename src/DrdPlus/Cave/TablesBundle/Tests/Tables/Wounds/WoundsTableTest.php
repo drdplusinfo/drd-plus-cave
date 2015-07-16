@@ -65,6 +65,7 @@ class WoundsTableTest extends TestWithMockery
 
         $this->assertSame(30, $woundsTable->woundsToBonus(104)); // 30 is the closest bonus
         $this->assertSame(31, $woundsTable->woundsToBonus(105)); // 30 and 31 are closest bonuses, 31 is taken because higher
+        $this->assertSame(31, $woundsTable->woundsToBonus(106)); // 31 is the closest bonus (higher in this case)
 
         $this->assertSame(79, $woundsTable->toBonus(new WoundsMeasurement(28000)));
         $this->assertSame(79, $woundsTable->woundsToBonus(28000));

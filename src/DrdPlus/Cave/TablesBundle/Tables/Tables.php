@@ -127,7 +127,7 @@ class Tables extends StrictObject
      */
     public function getExperiencesTable()
     {
-        $this->experiencesTable;
+        return $this->experiencesTable;
     }
 
 }
