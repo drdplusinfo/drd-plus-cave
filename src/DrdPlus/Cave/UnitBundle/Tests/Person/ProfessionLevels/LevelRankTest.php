@@ -6,8 +6,9 @@ use Doctrine\DBAL\Types\Type;
 use Doctrineum\Integer\IntegerEnum;
 use Doctrineum\Integer\SelfTypedIntegerEnum;
 use Doctrineum\Scalar\EnumInterface;
+use DrdPlus\Cave\UnitBundle\Tests\TestWithMockery;
 
-class LevelRankTest extends \PHPUnit_Framework_TestCase
+class LevelRankTest extends TestWithMockery
 {
     /**
      * @test

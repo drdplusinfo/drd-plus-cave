@@ -1,7 +1,9 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Parts;
 
-class BasePropertyTest extends \PHPUnit_Framework_TestCase
+use DrdPlus\Cave\UnitBundle\Tests\TestWithMockery;
+
+class BasePropertyTest extends TestWithMockery
 {
 
     /**

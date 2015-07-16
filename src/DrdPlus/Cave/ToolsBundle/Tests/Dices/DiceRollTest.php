@@ -13,9 +13,10 @@ class DiceRollTest extends TestWithMockery
      */
     public function can_be_created()
     {
-        $instance = new DiceRoll($this->createDrdDiceRoll());
+        $diceRoll = new DiceRoll($this->createDrdDiceRoll());
 
-        $this->assertNotNull($instance);
+        $this->assertNotNull($diceRoll);
+        $this->assertNull($diceRoll->getId());
     }
 
     /**

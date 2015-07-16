@@ -6,8 +6,9 @@ use Doctrine\DBAL\Types\Type;
 use Doctrineum\Scalar\EnumInterface;
 use Doctrineum\Strict\String\SelfTypedStrictStringEnum;
 use Doctrineum\Strict\String\StrictStringEnum;
+use DrdPlus\Cave\UnitBundle\Tests\TestWithMockery;
 
-class NameTest extends \PHPUnit_Framework_TestCase
+class NameTest extends TestWithMockery
 {
 
     /**

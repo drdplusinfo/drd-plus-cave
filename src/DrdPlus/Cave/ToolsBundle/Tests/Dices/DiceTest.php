@@ -3,9 +3,10 @@ namespace DrdPlus\Cave\ToolsBundle\Enum;
 
 use Drd\DiceRoll\DiceInterface;
 use DrdPlus\Cave\ToolsBundle\Dices\Dice;
+use DrdPlus\Cave\ToolsBundle\Tests\TestWithMockery;
 use Granam\Integer\IntegerObject;
 
-class DiceTest extends \PHPUnit_Framework_TestCase
+class DiceTest extends TestWithMockery
 {
     /**
      * @test

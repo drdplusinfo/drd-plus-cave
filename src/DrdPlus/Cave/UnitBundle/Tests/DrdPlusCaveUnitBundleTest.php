@@ -12,8 +12,9 @@ use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Strength;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Will;
 use DrdPlus\Cave\UnitBundle\Person\Races\Gender;
 use DrdPlus\Cave\UnitBundle\Person\Races\Race;
+use DrdPlus\Cave\UnitBundle\Tests\TestWithMockery;
 
-class DrdPlusCaveUnitBundleTest extends \PHPUnit_Framework_TestCase
+class DrdPlusCaveUnitBundleTest extends TestWithMockery
 {
     /**
      * @return DrdPlusCaveUnitBundle
