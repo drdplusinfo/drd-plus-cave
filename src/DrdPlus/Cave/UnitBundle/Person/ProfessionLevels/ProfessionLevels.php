@@ -82,6 +82,7 @@ class ProfessionLevels extends StrictObject implements \IteratorAggregate
 
     public function __construct()
     {
+        // same profession levels are kept in collection only internally
         $this->fighterLevels = new ArrayCollection();
         $this->priestLevels = new ArrayCollection();
         $this->rangerLevels = new ArrayCollection();
@@ -99,51 +100,51 @@ class ProfessionLevels extends StrictObject implements \IteratorAggregate
     }
 
     /**
-     * @return FighterLevel[]|ArrayCollection
+     * @return FighterLevel[]|array
      */
     public function getFighterLevels()
     {
-        return $this->fighterLevels;
+        return $this->fighterLevels->toArray();
     }
 
     /**
-     * @return PriestLevel[]|ArrayCollection
+     * @return PriestLevel[]|array
      */
     public function getRangerLevels()
     {
-        return $this->rangerLevels;
+        return $this->rangerLevels->toArray();
     }
 
     /**
-     * @return TheurgistLevel[]|ArrayCollection
+     * @return TheurgistLevel[]|array
      */
     public function getTheurgistLevels()
     {
-        return $this->theurgistLevels;
+        return $this->theurgistLevels->toArray();
     }
 
     /**
-     * @return ThiefLevel[]|ArrayCollection
+     * @return ThiefLevel[]|array
      */
     public function getThiefLevels()
     {
-        return $this->thiefLevels;
+        return $this->thiefLevels->toArray();
     }
 
     /**
-     * @return WizardLevel[]|ArrayCollection
+     * @return WizardLevel[]|array
      */
     public function getWizardLevels()
     {
-        return $this->wizardLevels;
+        return $this->wizardLevels->toArray();
     }
 
     /**
-     * @return PriestLevel[]|ArrayCollection
+     * @return PriestLevel[]|array
      */
     public function getPriestLevels()
     {
-        return $this->priestLevels;
+        return $this->priestLevels->toArray();
     }
 
     /**
@@ -154,12 +155,12 @@ class ProfessionLevels extends StrictObject implements \IteratorAggregate
     public function getLevels()
     {
         return $this->sortByLevelRank(array_merge(
-            $this->getFighterLevels()->toArray(),
-            $this->getPriestLevels()->toArray(),
-            $this->getRangerLevels()->toArray(),
-            $this->getTheurgistLevels()->toArray(),
-            $this->getThiefLevels()->toArray(),
-            $this->getWizardLevels()->toArray()
+            $this->getFighterLevels(),
+            $this->getPriestLevels(),
+            $this->getRangerLevels(),
+            $this->getTheurgistLevels(),
+            $this->getThiefLevels(),
+            $this->getWizardLevels()
         ));
     }
 
@@ -249,8 +250,9 @@ class ProfessionLevels extends StrictObject implements \IteratorAggregate
     {
         $previousLevels = $this->getPreviousProfessionLevels($newLevel);
         $this->checkProhibitedMultiProfession($previousLevels, $newLevel);
-        $this->checkNewLevelSequence($newLevel, $previousLevels);
-        $this->checkPropertiesIncrementSequence($previousLevels, $newLevel);
+        $this->checkNewLevelSequence($previousLevels, $newLevel);
+        $previousNextLevels = $this->filterOuFirstLevel($previousLevels);
+        $this->checkPropertiesIncrementSequence($previousNextLevels, $newLevel);
 
         $previousLevels->add($newLevel);
     }
@@ -264,17 +266,17 @@ class ProfessionLevels extends StrictObject implements \IteratorAggregate
     {
         switch ($professionLevel->getProfession()->getName()) {
             case Fighter::FIGHTER :
-                return $this->getFighterLevels();
+                return $this->fighterLevels;
             case Thief::THIEF :
-                return $this->getThiefLevels();
+                return $this->thiefLevels;
             case Wizard::WIZARD :
-                return $this->getWizardLevels();
+                return $this->wizardLevels;
             case Ranger::RANGER :
-                return $this->getRangerLevels();
+                return $this->rangerLevels;
             case Theurgist::THEURGIST :
-                return $this->getTheurgistLevels();
+                return $this->theurgistLevels;
             case Priest::PRIEST :
-                return $this->getPriestLevels();
+                return $this->priestLevels;
             default :
                 throw new \LogicException;
         }
@@ -302,7 +304,7 @@ class ProfessionLevels extends StrictObject implements \IteratorAggregate
         )[0];
     }
 
-    private function checkNewLevelSequence(ProfessionLevel $newLevel, ArrayCollection $previousProfessionLevels)
+    private function checkNewLevelSequence(ArrayCollection $previousProfessionLevels, ProfessionLevel $newLevel)
     {
         if (!$newLevel->getLevelRank()->getValue()) {
             throw new \LogicException(
@@ -317,37 +319,49 @@ class ProfessionLevels extends StrictObject implements \IteratorAggregate
         }
     }
 
-    private function checkPropertiesIncrementSequence(ArrayCollection $previousLevels, ProfessionLevel $newLevel)
+    /**
+     * @param ArrayCollection $professionLevels
+     *
+     * @return ArrayCollection
+     */
+    private function filterOuFirstLevel(ArrayCollection $professionLevels)
     {
-        $this->checkPropertyIncrementSequence($previousLevels, $newLevel, $newLevel->getStrengthIncrement());
-        $this->checkPropertyIncrementSequence($previousLevels, $newLevel, $newLevel->getAgilityIncrement());
-        $this->checkPropertyIncrementSequence($previousLevels, $newLevel, $newLevel->getKnackIncrement());
-        $this->checkPropertyIncrementSequence($previousLevels, $newLevel, $newLevel->getWillIncrement());
-        $this->checkPropertyIncrementSequence($previousLevels, $newLevel, $newLevel->getIntelligenceIncrement());
-        $this->checkPropertyIncrementSequence($previousLevels, $newLevel, $newLevel->getCharismaIncrement());
+        return $professionLevels->filter(function (ProfessionLevel $level) {
+            return $level->isNextLevel();
+        });
     }
 
-    private function checkPropertyIncrementSequence(ArrayCollection $previousLevels, ProfessionLevel $newLevel, BaseProperty $propertyIncrement)
+    private function checkPropertiesIncrementSequence(ArrayCollection $previousNextLevels, ProfessionLevel $newLevel)
+    {
+        $this->checkPropertyIncrementSequence($previousNextLevels, $newLevel, $newLevel->getStrengthIncrement());
+        $this->checkPropertyIncrementSequence($previousNextLevels, $newLevel, $newLevel->getAgilityIncrement());
+        $this->checkPropertyIncrementSequence($previousNextLevels, $newLevel, $newLevel->getKnackIncrement());
+        $this->checkPropertyIncrementSequence($previousNextLevels, $newLevel, $newLevel->getWillIncrement());
+        $this->checkPropertyIncrementSequence($previousNextLevels, $newLevel, $newLevel->getIntelligenceIncrement());
+        $this->checkPropertyIncrementSequence($previousNextLevels, $newLevel, $newLevel->getCharismaIncrement());
+    }
+
+    private function checkPropertyIncrementSequence(ArrayCollection $previousNextLevels, ProfessionLevel $newLevel, BaseProperty $propertyIncrement)
     {
         if ($propertyIncrement->getValue() > 0) {
             if ($newLevel->isPrimaryProperty($propertyIncrement->getName())) {
-                $this->checkPrimaryPropertyIncrementInARow($previousLevels, $propertyIncrement);
+                $this->checkPrimaryPropertyIncrementInARow($previousNextLevels, $propertyIncrement);
             } else {
-                $this->checkSecondaryPropertyIncrementInARow($previousLevels, $propertyIncrement);
+                $this->checkSecondaryPropertyIncrementInARow($previousNextLevels, $propertyIncrement);
             }
         }
     }
 
-    private function checkPrimaryPropertyIncrementInARow(ArrayCollection $previousLevels, BaseProperty $propertyIncrement)
+    private function checkPrimaryPropertyIncrementInARow(ArrayCollection $previousNextLevels, BaseProperty $propertyIncrement)
     {
         // main property can be increased only twice in sequence
-        if ($previousLevels->count() < 2) {
+        if ($previousNextLevels->count() < 2) {
             return true;
         }
-        if (!$this->hasIncrementSameProperty($previousLevels->last(), $propertyIncrement)) {
+        if (!$this->hasIncrementSameProperty($previousNextLevels->last(), $propertyIncrement)) {
             return true;
         }
-        $lastButOne = $previousLevels[$previousLevels->count() - 2];
+        $lastButOne = $previousNextLevels[$previousNextLevels->count() - 2];
         if (!$this->hasIncrementSameProperty($lastButOne, $propertyIncrement)) {
             return true;
         }
@@ -379,16 +393,16 @@ class ProfessionLevels extends StrictObject implements \IteratorAggregate
         }
     }
 
-    private function checkSecondaryPropertyIncrementInARow(ArrayCollection $previousLevels, BaseProperty $propertyIncrement)
+    private function checkSecondaryPropertyIncrementInARow(ArrayCollection $previousNextLevels, BaseProperty $propertyIncrement)
     {
         // secondary property has to be increased at least alternately
-        if ($previousLevels->count() === 0) {
+        if ($previousNextLevels->count() === 0) {
             return true;
         }
-        if (!$this->hasIncrementSameProperty($previousLevels->last(), $propertyIncrement)) {
+        if (!$this->hasIncrementSameProperty($previousNextLevels->last(), $propertyIncrement)) {
             return true;
         }
-        throw new \LogicException("Secondary property increase has to be at least alternately, got {$propertyIncrement->getName()} to increase.");
+        throw new \LogicException("Secondary property increase has to be at least alternately, got {$propertyIncrement->getName()} again to increase.");
     }
 
     /**

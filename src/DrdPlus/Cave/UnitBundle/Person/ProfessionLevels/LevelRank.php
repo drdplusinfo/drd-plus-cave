@@ -9,7 +9,7 @@ use Doctrineum\Integer\SelfTypedIntegerEnum;
  */
 class LevelRank extends SelfTypedIntegerEnum
 {
-    const LEVEL_VALUE = 'level_value';
+    const LEVEL_RANK = 'level_rank';
 
     /**
      * @param int $value

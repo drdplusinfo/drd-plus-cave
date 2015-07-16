@@ -48,9 +48,10 @@ abstract class AbstractTestOfProfessionLevel extends TestWithMockery
         $this->addPropertyFirstLevelExpectation($charismaIncrement, Charisma::CHARISMA);
         /** @var WeightInKg|\Mockery\MockInterface $weightInKg */
         $weightInKg = \Mockery::mock(WeightInKg::class);
+        /** @var ProfessionLevel|string $professionLevelClass */
         $professionLevelClass = $this->getProfessionLevelClass();
         $instance = new $professionLevelClass(
-            $this->createProfessionMock(),
+            $this->createProfession(),
             $levelRank,
             $strengthIncrement,
             $agilityIncrement,
@@ -93,7 +94,7 @@ abstract class AbstractTestOfProfessionLevel extends TestWithMockery
     /**
      * @return MockInterface|Profession
      */
-    private function createProfessionMock()
+    private function createProfession()
     {
         $profession = \Mockery::mock($this->getProfessionClass());
         $profession->shouldReceive('getPrimaryPropertyCodes')
@@ -175,7 +176,7 @@ abstract class AbstractTestOfProfessionLevel extends TestWithMockery
         $professionLevelClass = $this->getProfessionLevelClass();
         /** @var ProfessionLevel $professionLevel */
         $professionLevel = new $professionLevelClass(
-            $this->createProfessionMock(),
+            $this->createProfession(),
             $levelRank,
             $strengthIncrement,
             $agilityIncrement,
@@ -238,7 +239,7 @@ abstract class AbstractTestOfProfessionLevel extends TestWithMockery
         $professionLevelClass = $this->getProfessionLevelClass();
         /** @var ProfessionLevel $professionLevel */
         $professionLevel = new $professionLevelClass(
-            $this->createProfessionMock(),
+            $this->createProfession(),
             $levelRank,
             $strengthIncrement,
             $agilityIncrement,

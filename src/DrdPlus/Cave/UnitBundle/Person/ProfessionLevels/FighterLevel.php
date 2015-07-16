@@ -2,6 +2,7 @@
 namespace DrdPlus\Cave\UnitBundle\Person\ProfessionLevels;
 
 use Doctrine\ORM\Mapping as ORM;
+use DrdPlus\Cave\UnitBundle\Person\Attributes\Experiences;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Agility;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Body\WeightInKg;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Charisma;
@@ -31,7 +32,6 @@ class FighterLevel extends ProfessionLevel
     public function __construct(
         Fighter $fighter,
         LevelRank $levelRank,
-        Experiences $experiences,
         Strength $strengthIncrement,
         Agility $agilityIncrement,
         Knack $knackIncrement,
@@ -45,7 +45,6 @@ class FighterLevel extends ProfessionLevel
         parent::__construct(
             $fighter,
             $levelRank,
-            $experiences,
             $strengthIncrement,
             $agilityIncrement,
             $knackIncrement,

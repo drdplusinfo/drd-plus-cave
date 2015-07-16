@@ -7,15 +7,15 @@ use Doctrineum\Integer\IntegerEnum;
 use Doctrineum\Integer\SelfTypedIntegerEnum;
 use Doctrineum\Scalar\EnumInterface;
 
-class LevelValueTest extends \PHPUnit_Framework_TestCase
+class LevelRankTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @test
      */
     public function type_is_as_expected()
     {
-        $this->assertSame('level_value', LevelRank::LEVEL_VALUE);
-        $this->assertSame('level_value', LevelRank::getTypeName());
+        $this->assertSame('level_rank', LevelRank::LEVEL_RANK);
+        $this->assertSame('level_rank', LevelRank::getTypeName());
     }
 
     /**
