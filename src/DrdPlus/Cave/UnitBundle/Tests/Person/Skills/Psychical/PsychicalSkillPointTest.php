@@ -3,7 +3,6 @@ namespace DrdPlus\Cave\UnitBundle\Person\Skills\Psychical;
 
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Intelligence;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Will;
-use DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\ProfessionLevel;
 use DrdPlus\Cave\UnitBundle\Person\Professions\Profession;
 use DrdPlus\Cave\UnitBundle\Tests\Person\Skills\AbstractTestOfSkillPoint;
 
@@ -46,12 +45,12 @@ class PsychicalSkillPointTest extends AbstractTestOfSkillPoint
     /**
      * @test
      */
-    public function I_can_create_skill_point_from_two_psychical_skill_points()
+    public function I_can_create_skill_point_from_two_physical_skill_points()
     {
         $psychicalSkillPoint = PsychicalSkillPoint::createFromCrossGroupSkillPoints(
             $this->createProfessionFirstLevelLevelMock(),
-            $firstPaidSkillPoint = $this->createPsychicalSkillPointMock(),
-            $secondPaidSkillPoint = $this->createPsychicalSkillPointMock()
+            $firstPaidSkillPoint = $this->createPhysicalSkillPointMock(),
+            $secondPaidSkillPoint = $this->createPhysicalSkillPointMock()
         );
         $this->assertInstanceOf(PsychicalSkillPoint::class, $psychicalSkillPoint);
         $this->assertNull($psychicalSkillPoint->getBackgroundSkills());
@@ -78,10 +77,10 @@ class PsychicalSkillPointTest extends AbstractTestOfSkillPoint
     /**
      * @test
      */
-    public function I_can_create_skill_point_by_level_with_will_increment()
+    public function I_can_create_skill_point_by_level_by_will_increment()
     {
         $psychicalSkillPoint = PsychicalSkillPoint::createByRelatedPropertyIncrease(
-            $this->createProfessionNextLevelLevelMock(1 /* will */)
+            $this->createProfessionNextLevelLevelMock(Will::class)
         );
         $this->assertInstanceOf(PsychicalSkillPoint::class, $psychicalSkillPoint);
         $this->assertNull($psychicalSkillPoint->getBackgroundSkills());
@@ -92,45 +91,15 @@ class PsychicalSkillPointTest extends AbstractTestOfSkillPoint
     /**
      * @test
      */
-    public function I_can_create_skill_point_by_level_with_intelligence_increment()
+    public function I_can_create_skill_point_by_level_by_intelligence_increment()
     {
         $psychicalSkillPoint = PsychicalSkillPoint::createByRelatedPropertyIncrease(
-            $this->createProfessionNextLevelLevelMock(0 /* will */, 1 /* intelligence */)
+            $this->createProfessionNextLevelLevelMock(Will::class, Intelligence::class)
         );
         $this->assertInstanceOf(PsychicalSkillPoint::class, $psychicalSkillPoint);
         $this->assertNull($psychicalSkillPoint->getBackgroundSkills());
         $this->assertNull($psychicalSkillPoint->getFirstPaidOtherSkillPoint());
         $this->assertNull($psychicalSkillPoint->getSecondPaidOtherSkillPoint());
-    }
-
-    /**
-     * @param int $willIncrementSum = 0
-     * @param int $intelligenceIncrementSum = 0
-     *
-     * @return \Mockery\MockInterface|ProfessionLevel
-     */
-    private function createProfessionNextLevelLevelMock($willIncrementSum = 0, $intelligenceIncrementSum = 0)
-    {
-        $professionLevel = $this->mockery(ProfessionLevel::class);
-        $professionLevel->shouldReceive('isFirstLevel')
-            ->atLeast()->once()
-            ->andReturn(false);
-        $professionLevel->shouldReceive('getWillIncrement')
-            ->atLeast()->once()
-            ->andReturn($willIncrement = $this->mockery(Will::class));
-        $willIncrement->shouldReceive('getValue')
-            ->atLeast()->once()
-            ->andReturn($willIncrementSum);
-        if ($intelligenceIncrementSum) {
-            $professionLevel->shouldReceive('getIntelligenceIncrement')
-                ->atLeast()->once()
-                ->andReturn($intelligenceIncrement = $this->mockery(Intelligence::class));
-            $intelligenceIncrement->shouldReceive('getValue')
-                ->atLeast()->once()
-                ->andReturn($intelligenceIncrementSum);
-        }
-
-        return $professionLevel;
     }
 
 }

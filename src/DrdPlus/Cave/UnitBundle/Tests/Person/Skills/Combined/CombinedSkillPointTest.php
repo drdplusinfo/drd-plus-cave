@@ -3,7 +3,6 @@ namespace DrdPlus\Cave\UnitBundle\Person\Skills\Combined;
 
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Charisma;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Knack;
-use DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\ProfessionLevel;
 use DrdPlus\Cave\UnitBundle\Person\Professions\Profession;
 use DrdPlus\Cave\UnitBundle\Tests\Person\Skills\AbstractTestOfSkillPoint;
 
@@ -78,10 +77,10 @@ class CombinedSkillPointTest extends AbstractTestOfSkillPoint
     /**
      * @test
      */
-    public function I_can_create_skill_point_by_level_with_strength_increment()
+    public function I_can_create_skill_point_by_level_by_knack_increment()
     {
         $combinedSkillPoint = CombinedSkillPoint::createByRelatedPropertyIncrease(
-            $this->createProfessionNextLevelLevelMock(1 /* knack increment */)
+            $this->createProfessionNextLevelLevelMock(Knack::class)
         );
         $this->assertInstanceOf(CombinedSkillPoint::class, $combinedSkillPoint);
         $this->assertNull($combinedSkillPoint->getBackgroundSkills());
@@ -92,10 +91,10 @@ class CombinedSkillPointTest extends AbstractTestOfSkillPoint
     /**
      * @test
      */
-    public function I_can_create_skill_point_by_level_with_agility_increment()
+    public function I_can_create_skill_point_by_level_by_charisma_increment()
     {
         $combinedSkillPoint = CombinedSkillPoint::createByRelatedPropertyIncrease(
-            $this->createProfessionNextLevelLevelMock(0 /* knack increment */, 1 /* charisma increment */)
+            $this->createProfessionNextLevelLevelMock(Knack::class, Charisma::class)
         );
         $this->assertInstanceOf(CombinedSkillPoint::class, $combinedSkillPoint);
         $this->assertNull($combinedSkillPoint->getBackgroundSkills());
@@ -103,33 +102,4 @@ class CombinedSkillPointTest extends AbstractTestOfSkillPoint
         $this->assertNull($combinedSkillPoint->getSecondPaidOtherSkillPoint());
     }
 
-    /**
-     * @param int $knackIncrementSum = 0
-     * @param int $charismaIncrementSum = 0
-     *
-     * @return \Mockery\MockInterface|ProfessionLevel
-     */
-    private function createProfessionNextLevelLevelMock($knackIncrementSum = 0, $charismaIncrementSum = 0)
-    {
-        $professionLevel = $this->mockery(ProfessionLevel::class);
-        $professionLevel->shouldReceive('isFirstLevel')
-            ->atLeast()->once()
-            ->andReturn(false);
-        $professionLevel->shouldReceive('getKnackIncrement')
-            ->atLeast()->once()
-            ->andReturn($knackIncrement = $this->mockery(Knack::class));
-        $knackIncrement->shouldReceive('getValue')
-            ->atLeast()->once()
-            ->andReturn($knackIncrementSum);
-        if ($charismaIncrementSum) {
-            $professionLevel->shouldReceive('getCharismaIncrement')
-                ->atLeast()->once()
-                ->andReturn($charismaIncrement = $this->mockery(Charisma::class));
-            $charismaIncrement->shouldReceive('getValue')
-                ->atLeast()->once()
-                ->andReturn($charismaIncrementSum);
-        }
-
-        return $professionLevel;
-    }
 }

@@ -51,42 +51,88 @@ abstract class AbstractTestOfSkillPoint extends TestWithMockery
     }
 
     /**
+     * @param bool $paidByBackgroundPoints
+     *
      * @return \Mockery\MockInterface|PhysicalSkillPoint
      */
-    protected function createPhysicalSkillPointMock()
+    protected function createPhysicalSkillPointMock($paidByBackgroundPoints = true)
     {
-        $physicalSkillPoint = $this->mockery(PhysicalSkillPoint::class);
-        $physicalSkillPoint->shouldReceive('getGroupName')
-            ->atLeast()->once()
-            ->andReturn('foo physical');
+        return $this->createSkillPointMock(PhysicalSkillPoint::class, 'foo combined', $paidByBackgroundPoints);
+    }
 
-        return $physicalSkillPoint;
+    private function createSkillPointMock(
+        $skillPointClass,
+        $typeName,
+        $paidByBackgroundPoints
+    )
+    {
+        $skillPoint = $this->mockery($skillPointClass);
+        $skillPoint->shouldReceive('isPaidByFirstLevelBackgroundSkills')
+            ->atLeast()->once()
+            ->andReturn($paidByBackgroundPoints);
+        $skillPoint->shouldReceive('getTypeName')
+            ->atLeast()->once()
+            ->andReturn($typeName);
+
+        return $skillPoint;
     }
 
     /**
+     * @param bool $paidByBackgroundPoints
+     *
      * @return \Mockery\MockInterface|CombinedSkillPoint
      */
-    protected function createCombinedSkillPointMock()
+    protected function createCombinedSkillPointMock($paidByBackgroundPoints = true)
     {
-        $combinedSkillPoint = $this->mockery(CombinedSkillPoint::class);
-        $combinedSkillPoint->shouldReceive('getGroupName')
-            ->atLeast()->once()
-            ->andReturn('foo combined');
+        return $this->createSkillPointMock(CombinedSkillPoint::class, 'foo combined', $paidByBackgroundPoints);
+    }
 
-        return $combinedSkillPoint;
+
+    /**
+     * @param bool $paidByBackgroundPoints
+     *
+     * @return \Mockery\MockInterface|PsychicalSkillPoint
+     */
+    protected function createPsychicalSkillPointMock($paidByBackgroundPoints = true)
+    {
+        return $this->createSkillPointMock(PsychicalSkillPoint::class, 'foo combined', $paidByBackgroundPoints);
     }
 
     /**
-     * @return \Mockery\MockInterface|PsychicalSkillPoint
+     * @param $firstPropertyClass
+     * @param bool $secondPropertyClass
+     * @return \Mockery\MockInterface|ProfessionLevel
      */
-    protected function createPsychicalSkillPointMock()
+    protected function createProfessionNextLevelLevelMock($firstPropertyClass, $secondPropertyClass = false)
     {
-        $psychicalSkillPoint = $this->mockery(PsychicalSkillPoint::class);
-        $psychicalSkillPoint->shouldReceive('getGroupName')
+        $professionLevel = $this->mockery(ProfessionLevel::class);
+        $professionLevel->shouldReceive('isFirstLevel')
             ->atLeast()->once()
-            ->andReturn('bar psychical');
+            ->andReturn(false);
+        $professionLevel->shouldReceive('isNextLevel')
+            ->atLeast()->once()
+            ->andReturn(true);
+        $professionLevel->shouldReceive('get' . $this->parsePropertyName($firstPropertyClass) . 'Increment')
+            ->atLeast()->once()
+            ->andReturn($willIncrement = $this->mockery($firstPropertyClass));
+        $willIncrement->shouldReceive('getValue')
+            ->atLeast()->once()
+            ->andReturn($secondPropertyClass ? 0 : 1);
+        if ($secondPropertyClass) {
+            $professionLevel->shouldReceive('get' . $this->parsePropertyName($secondPropertyClass) . 'Increment')
+                ->atLeast()->once()
+                ->andReturn($intelligenceIncrement = $this->mockery($secondPropertyClass));
+            $intelligenceIncrement->shouldReceive('getValue')
+                ->atLeast()->once()
+                ->andReturn(1);
+        }
 
-        return $psychicalSkillPoint;
+        return $professionLevel;
+    }
+
+    private function parsePropertyName($propertyClass)
+    {
+        return basename(str_replace('\\', '/', $propertyClass));
     }
 
 }

@@ -3,7 +3,6 @@ namespace DrdPlus\Cave\UnitBundle\Person\Skills\Physical;
 
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Agility;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Strength;
-use DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\ProfessionLevel;
 use DrdPlus\Cave\UnitBundle\Person\Professions\Profession;
 use DrdPlus\Cave\UnitBundle\Tests\Person\Skills\AbstractTestOfSkillPoint;
 
@@ -78,10 +77,10 @@ class PhysicalSkillPointTest extends AbstractTestOfSkillPoint
     /**
      * @test
      */
-    public function I_can_create_skill_point_by_level_with_strength_increment()
+    public function I_can_create_skill_point_by_level_by_strength_increment()
     {
         $physicalSkillPoint = PhysicalSkillPoint::createByRelatedPropertyIncrease(
-            $this->createProfessionNextLevelLevelMock(1)
+            $this->createProfessionNextLevelLevelMock(Strength::class)
         );
         $this->assertInstanceOf(PhysicalSkillPoint::class, $physicalSkillPoint);
         $this->assertNull($physicalSkillPoint->getBackgroundSkills());
@@ -92,45 +91,15 @@ class PhysicalSkillPointTest extends AbstractTestOfSkillPoint
     /**
      * @test
      */
-    public function I_can_create_skill_point_by_level_with_agility_increment()
+    public function I_can_create_skill_point_by_level_by_agility_increment()
     {
         $physicalSkillPoint = PhysicalSkillPoint::createByRelatedPropertyIncrease(
-            $this->createProfessionNextLevelLevelMock(0 /* strength increment */, 1)
+            $this->createProfessionNextLevelLevelMock(Strength::class, Agility::class)
         );
         $this->assertInstanceOf(PhysicalSkillPoint::class, $physicalSkillPoint);
         $this->assertNull($physicalSkillPoint->getBackgroundSkills());
         $this->assertNull($physicalSkillPoint->getFirstPaidOtherSkillPoint());
         $this->assertNull($physicalSkillPoint->getSecondPaidOtherSkillPoint());
-    }
-
-    /**
-     * @param int $strengthIncrementSum = 0
-     * @param int $agilityIncrementSum = 0
-     *
-     * @return \Mockery\MockInterface|ProfessionLevel
-     */
-    private function createProfessionNextLevelLevelMock($strengthIncrementSum = 0, $agilityIncrementSum = 0)
-    {
-        $professionLevel = $this->mockery(ProfessionLevel::class);
-        $professionLevel->shouldReceive('isFirstLevel')
-            ->atLeast()->once()
-            ->andReturn(false);
-        $professionLevel->shouldReceive('getStrengthIncrement')
-            ->atLeast()->once()
-            ->andReturn($strengthIncrement = $this->mockery(Strength::class));
-        $strengthIncrement->shouldReceive('getValue')
-            ->atLeast()->once()
-            ->andReturn($strengthIncrementSum);
-        if ($agilityIncrementSum) {
-            $professionLevel->shouldReceive('getAgilityIncrement')
-                ->atLeast()->once()
-                ->andReturn($agilityIncrement = $this->mockery(Agility::class));
-            $agilityIncrement->shouldReceive('getValue')
-                ->atLeast()->once()
-                ->andReturn($agilityIncrementSum);
-        }
-
-        return $professionLevel;
     }
 
 }

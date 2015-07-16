@@ -192,7 +192,8 @@ abstract class AbstractSkillPoint extends StrictObject implements IntegerInterfa
         }
         if ($paidSkillPoint->getTypeName() === $this->getTypeName()) {
             throw new \LogicException(
-                'There is no sense to pay for skill point by another one of the very same type. Got paid skill point of ID ' . $paidSkillPoint->getId()
+                "There is no sense to pay for skill point by another one of the very same type ({$this->getTypeName()})."
+                . ' Got paid skill point of ID ' . $paidSkillPoint->getId()
             );
         }
     }
