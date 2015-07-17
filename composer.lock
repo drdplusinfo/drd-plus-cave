@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a42cb2d07533757ac050a0050a968dfe",
+    "hash": "98529910cb713593d733bb1c48eafca0",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -897,17 +897,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/doctrineum-float.git",
-                "reference": "c054afe3aaababe0cd04536417be0b90bf8c0e83"
+                "reference": "eb47b3e2f8655c2c2a20344e175c8e30e57fe9e8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/doctrineum-float/zipball/c054afe3aaababe0cd04536417be0b90bf8c0e83",
-                "reference": "c054afe3aaababe0cd04536417be0b90bf8c0e83",
+                "url": "https://api.github.com/repos/jaroslavtyc/doctrineum-float/zipball/eb47b3e2f8655c2c2a20344e175c8e30e57fe9e8",
+                "reference": "eb47b3e2f8655c2c2a20344e175c8e30e57fe9e8",
                 "shasum": ""
             },
             "require": {
                 "doctrineum/scalar": "dev-master",
                 "granam/exception-hierarchy": "dev-master",
+                "granam/float": "dev-master",
+                "granam/scalar": "dev-master",
                 "granam/strict-float": "dev-master",
                 "granam/strict-object": "dev-master",
                 "granam/strict-scalar": "dev-master",
@@ -928,7 +930,7 @@
                 "MIT"
             ],
             "description": "Enumeration type for Doctrine - floats only",
-            "time": "2015-05-20 12:31:35"
+            "time": "2015-07-16 12:20:39"
         },
         {
             "name": "doctrineum/integer",
@@ -975,12 +977,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/doctrineum-scalar.git",
-                "reference": "9beb5fb27487f37e219837b06620a69ea83a1d3e"
+                "reference": "1ef9ff4249545bff3664d976945eec5046b73d16"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/doctrineum-scalar/zipball/9beb5fb27487f37e219837b06620a69ea83a1d3e",
-                "reference": "9beb5fb27487f37e219837b06620a69ea83a1d3e",
+                "url": "https://api.github.com/repos/jaroslavtyc/doctrineum-scalar/zipball/1ef9ff4249545bff3664d976945eec5046b73d16",
+                "reference": "1ef9ff4249545bff3664d976945eec5046b73d16",
                 "shasum": ""
             },
             "require": {
@@ -1019,7 +1021,7 @@
                 "sub-type",
                 "value-dependent enum"
             ],
-            "time": "2015-05-28 08:32:01"
+            "time": "2015-07-16 11:39:20"
         },
         {
             "name": "doctrineum/strict-string",
@@ -1057,6 +1059,145 @@
             ],
             "description": "Enumeration type for Doctrine - strings only",
             "time": "2015-05-28 08:55:41"
+        },
+        {
+            "name": "drd-plus/properties",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jaroslavtyc/drd-plus-properties.git",
+                "reference": "4d993bf5135d9420aef49e8eb6d9d0464c116611"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-properties/zipball/4d993bf5135d9420aef49e8eb6d9d0464c116611",
+                "reference": "4d993bf5135d9420aef49e8eb6d9d0464c116611",
+                "shasum": ""
+            },
+            "require": {
+                "doctrineum/float": "dev-master",
+                "doctrineum/integer": "dev-master",
+                "doctrineum/scalar": "dev-master",
+                "doctrineum/strict-string": "dev-master",
+                "drd-plus/tools": "dev-master",
+                "drd/dice-roll": "dev-master",
+                "granam/exception-hierarchy": "dev-master",
+                "granam/float": "dev-master",
+                "granam/integer": "dev-master",
+                "granam/scalar": "dev-master",
+                "granam/strict-float": "dev-master",
+                "granam/strict-integer": "dev-master",
+                "granam/strict-object": "dev-master",
+                "granam/strict-scalar": "dev-master",
+                "granam/strict-string": "dev-master",
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "mockery/mockery": ">=0.9",
+                "phpunit/phpunit": "~4.4"
+            },
+            "type": "project",
+            "autoload": {
+                "psr-4": {
+                    "DrdPlus\\": "DrdPlus/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Drd+ properties",
+            "time": "2015-07-17 14:22:11"
+        },
+        {
+            "name": "drd-plus/tables",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jaroslavtyc/drd-plus-tables.git",
+                "reference": "5ff16928b0ed2377edb673ca807e0e0612b90fe4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-tables/zipball/5ff16928b0ed2377edb673ca807e0e0612b90fe4",
+                "reference": "5ff16928b0ed2377edb673ca807e0e0612b90fe4",
+                "shasum": ""
+            },
+            "require": {
+                "doctrineum/float": "dev-master",
+                "doctrineum/integer": "dev-master",
+                "doctrineum/scalar": "dev-master",
+                "doctrineum/strict-string": "dev-master",
+                "drd-plus/properties": "dev-master",
+                "drd-plus/tools": "dev-master",
+                "drd/dice-roll": "dev-master",
+                "granam/exception-hierarchy": "dev-master",
+                "granam/float": "dev-master",
+                "granam/integer": "dev-master",
+                "granam/scalar": "dev-master",
+                "granam/strict-float": "dev-master",
+                "granam/strict-integer": "dev-master",
+                "granam/strict-object": "dev-master",
+                "granam/strict-scalar": "dev-master",
+                "granam/strict-string": "dev-master",
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "mockery/mockery": ">=0.9",
+                "phpunit/phpunit": "~4.4"
+            },
+            "type": "project",
+            "autoload": {
+                "psr-4": {
+                    "DrdPlus\\": "DrdPlus/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Drd+ tables and their units conversion",
+            "time": "2015-07-17 14:34:10"
+        },
+        {
+            "name": "drd-plus/tools",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jaroslavtyc/drd-plus-tools.git",
+                "reference": "ef53202ac9373f70eeebf02ec0b6cb0a224a8bbb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-tools/zipball/ef53202ac9373f70eeebf02ec0b6cb0a224a8bbb",
+                "reference": "ef53202ac9373f70eeebf02ec0b6cb0a224a8bbb",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/orm": "~2.2,>=2.2.3",
+                "drd/dice-roll": "dev-master",
+                "granam/exception-hierarchy": "dev-master",
+                "granam/integer": "dev-master",
+                "granam/scalar": "dev-master",
+                "granam/strict-object": "dev-master",
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "mockery/mockery": ">=0.9",
+                "phpunit/phpunit": "~4.4"
+            },
+            "type": "project",
+            "autoload": {
+                "psr-4": {
+                    "DrdPlus\\": "DrdPlus/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Drd+ tools",
+            "time": "2015-07-17 14:00:50"
         },
         {
             "name": "drd/dice-roll",
@@ -1505,6 +1646,57 @@
                 "strict"
             ],
             "time": "2015-06-30 11:29:39"
+        },
+        {
+            "name": "granam/strict-string",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jaroslavtyc/granam-strict-string.git",
+                "reference": "320979a3bc342c3bd6cd97c632583c5b1b6ed62b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jaroslavtyc/granam-strict-string/zipball/320979a3bc342c3bd6cd97c632583c5b1b6ed62b",
+                "reference": "320979a3bc342c3bd6cd97c632583c5b1b6ed62b",
+                "shasum": ""
+            },
+            "require": {
+                "granam/exception-hierarchy": "dev-master",
+                "granam/scalar": "dev-master",
+                "granam/strict-object": "dev-master",
+                "granam/strict-scalar": "dev-master",
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "mockery/mockery": "0.9.*",
+                "phpunit/phpunit": "~4.4"
+            },
+            "type": "project",
+            "autoload": {
+                "psr-4": {
+                    "Granam\\": "Granam/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jaroslav Týc",
+                    "homepage": "http://jaroslavtyc.com",
+                    "role": "Original author"
+                }
+            ],
+            "description": "Lightweight string container with strict checks",
+            "homepage": "https://github.com/jaroslavtyc/granam-strict-string",
+            "keywords": [
+                "php",
+                "strict",
+                "string"
+            ],
+            "time": "2015-06-30 11:35:29"
         },
         {
             "name": "incenteev/composer-parameter-handler",
@@ -3436,7 +3628,11 @@
         "granam/scalar": 20,
         "granam/float": 20,
         "granam/integer": 20,
-        "drd/dice-roll": 20
+        "drd/dice-roll": 20,
+        "drd-plus/tables": 20,
+        "drd-plus/tools": 20,
+        "drd-plus/properties": 20,
+        "granam/strict-string": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

@@ -5,13 +5,6 @@ use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Choices\Exception
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Fates\AbstractFateEntity;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Experiences\ExperiencesType;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Name;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Agility;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Body\WeightInKg;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Charisma;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Intelligence;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Knack;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Strength;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Will;
 use DrdPlus\Cave\UnitBundle\Person\Background\BackgroundSkills;
 use DrdPlus\Cave\UnitBundle\Person\Background\BelongingsValue;
 use DrdPlus\Cave\UnitBundle\Person\Background\Heritage;
@@ -19,6 +12,13 @@ use DrdPlus\Cave\UnitBundle\Person\Background\Parts\BackgroundPointsType;
 use DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\LevelRank;
 use DrdPlus\Cave\UnitBundle\Person\Races\Gender;
 use DrdPlus\Cave\UnitBundle\Person\Races\Race;
+use DrdPlus\Properties\Agility;
+use DrdPlus\Properties\Body\WeightInKg;
+use DrdPlus\Properties\Charisma;
+use DrdPlus\Properties\Intelligence;
+use DrdPlus\Properties\Knack;
+use DrdPlus\Properties\Strength;
+use DrdPlus\Properties\Will;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class DrdPlusCaveUnitBundle extends Bundle
@@ -46,7 +46,7 @@ class DrdPlusCaveUnitBundle extends Bundle
         Will::registerSelf();
         Intelligence::registerSelf();
         Charisma::registerSelf();
-        WeightInKg::registerSelf();
+//        WeightInKg::registerSelf();
 
         LevelRank::registerSelf();
         ExperiencesType::registerSelf();

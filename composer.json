@@ -1,5 +1,5 @@
 {
-  "name": "jaroslavtyc/drd+cave",
+  "name": "drd/plus/cave",
   "license": "MIT",
   "type": "project",
   "description": "Drd+ logic",
@@ -35,7 +35,11 @@
     "granam/scalar": "dev-master",
     "granam/float": "dev-master",
     "granam/integer": "dev-master",
-    "drd/dice-roll": "dev-master"
+    "drd/dice-roll": "dev-master",
+    "drd-plus/tables": "dev-master",
+    "drd-plus/tools": "dev-master",
+    "drd-plus/properties": "dev-master",
+    "granam/strict-string": "dev-master"
   },
   "require-dev": {
     "sensio/generator-bundle": "~2.3",
