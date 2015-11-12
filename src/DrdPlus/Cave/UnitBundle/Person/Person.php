@@ -2,8 +2,6 @@
 namespace DrdPlus\Cave\UnitBundle\Person;
 
 use Doctrine\ORM\Mapping as ORM;
-use DrdPlus\Cave\TablesBundle\Tables\Experiences\ExperiencesTable;
-use DrdPlus\Cave\TablesBundle\Tables\Tables;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Exceptionalities\Exceptionality;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Experiences;
 use DrdPlus\Cave\UnitBundle\Person\Attributes\Name;
@@ -13,6 +11,10 @@ use DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\ProfessionLevels;
 use DrdPlus\Cave\UnitBundle\Person\Races\Gender;
 use DrdPlus\Cave\UnitBundle\Person\Races\Race;
 use DrdPlus\Cave\UnitBundle\Person\Skills\Skills;
+use DrdPlus\Tables\Measurements\Experiences\ExperiencesTable;
+use DrdPlus\Tables\Measurements\Experiences\Level as LevelBonus;
+use DrdPlus\Tables\Measurements\MeasurementTables;
+use DrdPlus\Tables\Races\RaceTables;
 use Granam\Strict\Object\StrictObject;
 
 /**
@@ -102,14 +104,15 @@ class Person extends StrictObject
         ProfessionLevels $professionLevels, // entity
         Background $background, // entity
         Skills $skills, // entity
-        Tables $tables // data helper
+        RaceTables $raceTables, // data helper
+        MeasurementTables $measurementTables // data helper
     )
     {
         $this->race = $race;
         $this->gender = $gender;
         $this->name = $name;
         $this->exceptionality = $exceptionality;
-        $this->checkLevelsAgainstExperiences($professionLevels, $experiences, $tables->getExperiencesTable());
+        $this->checkLevelsAgainstExperiences($professionLevels, $experiences, $measurementTables->getExperiencesTable());
         $this->professionLevels = $professionLevels;
         $this->experiences = $experiences;
         $this->background = $background;
@@ -118,7 +121,7 @@ class Person extends StrictObject
             $this->getGender(),
             $this->getExceptionality()->getExceptionalityProperties(),
             $this->getProfessionLevels(),
-            $tables
+            $measurementTables
         );
         $skills->checkSkillPoints(
             $this->getProfessionLevels()->getFirstLevel(),
@@ -134,11 +137,14 @@ class Person extends StrictObject
         ExperiencesTable $experiencesTable
     )
     {
-        $highestLevel = $professionLevels->getHighestLevelRank()->getValue();
-        $requiredExperiences = $experiencesTable->levelToTotalExperiences($highestLevel);
-        if ($experiences->getValue() < $requiredExperiences) {
+        $highestLevel = $professionLevels->getHighestLevelRank();
+        $requiredExperiences = $experiencesTable->toTotalExperiences(
+            new LevelBonus($highestLevel->getValue(), $experiencesTable),
+            true /* is main profession */
+        );
+        if ($experiences->getValue() < $requiredExperiences->getValue()) {
             throw new \LogicException(
-                "Given level $highestLevel needs at least $requiredExperiences, got only {$experiences->getValue()}"
+                "Given level {$highestLevel} needs at least {$requiredExperiences}, got only {$experiences}"
             );
         }
     }
