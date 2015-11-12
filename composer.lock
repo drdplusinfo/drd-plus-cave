@@ -4,20 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "98529910cb713593d733bb1c48eafca0",
+    "hash": "6c0c5c936331c2d9f45a0d8c196d7abc",
+    "content-hash": "61628c5708393d7ba76e06e046694ec9",
     "packages": [
         {
             "name": "doctrine/annotations",
-            "version": "v1.2.6",
+            "version": "v1.2.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/annotations.git",
-                "reference": "f4a91702ca3cd2e568c3736aa031ed00c3752af4"
+                "reference": "f25c8aab83e0c3e976fd7d19875f198ccf2f7535"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/annotations/zipball/f4a91702ca3cd2e568c3736aa031ed00c3752af4",
-                "reference": "f4a91702ca3cd2e568c3736aa031ed00c3752af4",
+                "url": "https://api.github.com/repos/doctrine/annotations/zipball/f25c8aab83e0c3e976fd7d19875f198ccf2f7535",
+                "reference": "f25c8aab83e0c3e976fd7d19875f198ccf2f7535",
                 "shasum": ""
             },
             "require": {
@@ -72,20 +73,20 @@
                 "docblock",
                 "parser"
             ],
-            "time": "2015-06-17 12:21:22"
+            "time": "2015-08-31 12:32:49"
         },
         {
             "name": "doctrine/cache",
-            "version": "v1.4.1",
+            "version": "v1.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/cache.git",
-                "reference": "c9eadeb743ac6199f7eec423cb9426bc518b7b03"
+                "reference": "2b9cec5a5e722010cbebc91713d4c11eaa064d5e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/cache/zipball/c9eadeb743ac6199f7eec423cb9426bc518b7b03",
-                "reference": "c9eadeb743ac6199f7eec423cb9426bc518b7b03",
+                "url": "https://api.github.com/repos/doctrine/cache/zipball/2b9cec5a5e722010cbebc91713d4c11eaa064d5e",
+                "reference": "2b9cec5a5e722010cbebc91713d4c11eaa064d5e",
                 "shasum": ""
             },
             "require": {
@@ -106,8 +107,8 @@
                 }
             },
             "autoload": {
-                "psr-0": {
-                    "Doctrine\\Common\\Cache\\": "lib/"
+                "psr-4": {
+                    "Doctrine\\Common\\Cache\\": "lib/Doctrine/Common/Cache"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -142,7 +143,7 @@
                 "cache",
                 "caching"
             ],
-            "time": "2015-04-15 00:11:59"
+            "time": "2015-11-02 18:35:48"
         },
         {
             "name": "doctrine/collections",
@@ -212,16 +213,16 @@
         },
         {
             "name": "doctrine/common",
-            "version": "v2.5.0",
+            "version": "v2.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/common.git",
-                "reference": "cd8daf2501e10c63dced7b8b9b905844316ae9d3"
+                "reference": "0009b8f0d4a917aabc971fb089eba80e872f83f9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/common/zipball/cd8daf2501e10c63dced7b8b9b905844316ae9d3",
-                "reference": "cd8daf2501e10c63dced7b8b9b905844316ae9d3",
+                "url": "https://api.github.com/repos/doctrine/common/zipball/0009b8f0d4a917aabc971fb089eba80e872f83f9",
+                "reference": "0009b8f0d4a917aabc971fb089eba80e872f83f9",
                 "shasum": ""
             },
             "require": {
@@ -281,20 +282,20 @@
                 "persistence",
                 "spl"
             ],
-            "time": "2015-04-02 19:55:44"
+            "time": "2015-08-31 13:00:22"
         },
         {
             "name": "doctrine/dbal",
-            "version": "v2.5.1",
+            "version": "v2.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "628c2256b646ae2417d44e063bce8aec5199d48d"
+                "reference": "01dbcbc5cd0a913d751418e635434a18a2f2a75c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/628c2256b646ae2417d44e063bce8aec5199d48d",
-                "reference": "628c2256b646ae2417d44e063bce8aec5199d48d",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/01dbcbc5cd0a913d751418e635434a18a2f2a75c",
+                "reference": "01dbcbc5cd0a913d751418e635434a18a2f2a75c",
                 "shasum": ""
             },
             "require": {
@@ -352,20 +353,20 @@
                 "persistence",
                 "queryobject"
             ],
-            "time": "2015-01-12 21:52:47"
+            "time": "2015-09-16 16:29:33"
         },
         {
             "name": "doctrine/doctrine-bundle",
-            "version": "v1.5.0",
+            "version": "1.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineBundle.git",
-                "reference": "0b9e27037c4fdbad515ee5ec89842e9091a6480f"
+                "reference": "a5b3ba908ba68f3e14e42762a7b940fde65ed7da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/0b9e27037c4fdbad515ee5ec89842e9091a6480f",
-                "reference": "0b9e27037c4fdbad515ee5ec89842e9091a6480f",
+                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/a5b3ba908ba68f3e14e42762a7b940fde65ed7da",
+                "reference": "a5b3ba908ba68f3e14e42762a7b940fde65ed7da",
                 "shasum": ""
             },
             "require": {
@@ -373,16 +374,16 @@
                 "doctrine/doctrine-cache-bundle": "~1.0",
                 "jdorn/sql-formatter": "~1.1",
                 "php": ">=5.3.2",
-                "symfony/console": "~2.3",
-                "symfony/doctrine-bridge": "~2.2",
-                "symfony/framework-bundle": "~2.3"
+                "symfony/console": "~2.3|~3.0",
+                "symfony/doctrine-bridge": "~2.2|~3.0",
+                "symfony/framework-bundle": "~2.3|~3.0"
             },
             "require-dev": {
                 "doctrine/orm": "~2.3",
                 "phpunit/phpunit": "~4",
                 "satooshi/php-coveralls": "~0.6.1",
-                "symfony/validator": "~2.2",
-                "symfony/yaml": "~2.2",
+                "symfony/validator": "~2.2|~3.0",
+                "symfony/yaml": "~2.2|~3.0",
                 "twig/twig": "~1.10"
             },
             "suggest": {
@@ -392,7 +393,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.5.x-dev"
+                    "dev-master": "1.6.x-dev"
                 }
             },
             "autoload": {
@@ -430,42 +431,42 @@
                 "orm",
                 "persistence"
             ],
-            "time": "2015-05-28 12:27:15"
+            "time": "2015-11-04 21:33:02"
         },
         {
             "name": "doctrine/doctrine-cache-bundle",
-            "version": "v1.0.1",
-            "target-dir": "Doctrine/Bundle/DoctrineCacheBundle",
+            "version": "1.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineCacheBundle.git",
-                "reference": "e4b6f810aa047f9cbfe41c3d6a3d7e83d7477a9d"
+                "reference": "3233bc78e222d528ca89a6a47d48d6f37888e95e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineCacheBundle/zipball/e4b6f810aa047f9cbfe41c3d6a3d7e83d7477a9d",
-                "reference": "e4b6f810aa047f9cbfe41c3d6a3d7e83d7477a9d",
+                "url": "https://api.github.com/repos/doctrine/DoctrineCacheBundle/zipball/3233bc78e222d528ca89a6a47d48d6f37888e95e",
+                "reference": "3233bc78e222d528ca89a6a47d48d6f37888e95e",
                 "shasum": ""
             },
             "require": {
-                "doctrine/cache": "~1.3",
+                "doctrine/cache": "^1.4.2",
                 "doctrine/inflector": "~1.0",
                 "php": ">=5.3.2",
-                "symfony/doctrine-bridge": "~2.2",
-                "symfony/framework-bundle": "~2.2",
-                "symfony/security": "~2.2"
+                "symfony/doctrine-bridge": "~2.2|~3.0",
+                "symfony/security-acl": "~2.3|~3.0"
             },
             "require-dev": {
                 "instaclick/coding-standard": "~1.1",
                 "instaclick/object-calisthenics-sniffs": "dev-master",
                 "instaclick/symfony2-coding-standard": "dev-remaster",
-                "phpunit/phpunit": "~3.7",
+                "phpunit/phpunit": "~4",
                 "satooshi/php-coveralls": "~0.6.1",
-                "squizlabs/php_codesniffer": "dev-master",
-                "symfony/console": "~2.2",
-                "symfony/finder": "~2.2",
-                "symfony/validator": "~2.2",
-                "symfony/yaml": "~2.2"
+                "squizlabs/php_codesniffer": "~1.5",
+                "symfony/console": "~2.2|~3.0",
+                "symfony/finder": "~2.2|~3.0",
+                "symfony/framework-bundle": "~2.2|~3.0",
+                "symfony/phpunit-bridge": "~2.7|~3.0",
+                "symfony/validator": "~2.2|~3.0",
+                "symfony/yaml": "~2.2|~3.0"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -474,8 +475,8 @@
                 }
             },
             "autoload": {
-                "psr-0": {
-                    "Doctrine\\Bundle\\DoctrineCacheBundle": ""
+                "psr-4": {
+                    "Doctrine\\Bundle\\DoctrineCacheBundle\\": ""
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -508,44 +509,43 @@
                     "email": "fabien@symfony.com"
                 }
             ],
-            "description": "Symfony2 Bundle for Doctrine Cache",
+            "description": "Symfony Bundle for Doctrine Cache",
             "homepage": "http://www.doctrine-project.org",
             "keywords": [
                 "cache",
                 "caching"
             ],
-            "time": "2014-11-28 09:43:36"
+            "time": "2015-11-05 13:48:27"
         },
         {
             "name": "doctrine/doctrine-migrations-bundle",
-            "version": "dev-master",
-            "target-dir": "Doctrine/Bundle/MigrationsBundle",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineMigrationsBundle.git",
-                "reference": "861d3564c03b3867845ffd87d9b19f49dc673c69"
+                "reference": "303a576e2124efb07ec215e34ea2480b841cf5e4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineMigrationsBundle/zipball/861d3564c03b3867845ffd87d9b19f49dc673c69",
-                "reference": "861d3564c03b3867845ffd87d9b19f49dc673c69",
+                "url": "https://api.github.com/repos/doctrine/DoctrineMigrationsBundle/zipball/303a576e2124efb07ec215e34ea2480b841cf5e4",
+                "reference": "303a576e2124efb07ec215e34ea2480b841cf5e4",
                 "shasum": ""
             },
             "require": {
                 "doctrine/doctrine-bundle": "~1.0",
-                "doctrine/migrations": "~1.0@dev",
+                "doctrine/migrations": "~1.0",
                 "php": ">=5.3.2",
                 "symfony/framework-bundle": "~2.3|~3.0"
             },
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.1.x-dev"
+                    "dev-master": "1.1-dev"
                 }
             },
             "autoload": {
-                "psr-0": {
-                    "Doctrine\\Bundle\\MigrationsBundle": ""
+                "psr-4": {
+                    "Doctrine\\Bundle\\MigrationsBundle\\": ""
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -573,20 +573,20 @@
                 "migrations",
                 "schema"
             ],
-            "time": "2015-06-16 12:48:54"
+            "time": "2015-11-04 13:45:30"
         },
         {
             "name": "doctrine/inflector",
-            "version": "v1.0.1",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/inflector.git",
-                "reference": "0bcb2e79d8571787f18b7eb036ed3d004908e604"
+                "reference": "90b2128806bfde671b6952ab8bea493942c1fdae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/inflector/zipball/0bcb2e79d8571787f18b7eb036ed3d004908e604",
-                "reference": "0bcb2e79d8571787f18b7eb036ed3d004908e604",
+                "url": "https://api.github.com/repos/doctrine/inflector/zipball/90b2128806bfde671b6952ab8bea493942c1fdae",
+                "reference": "90b2128806bfde671b6952ab8bea493942c1fdae",
                 "shasum": ""
             },
             "require": {
@@ -598,7 +598,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0.x-dev"
+                    "dev-master": "1.1.x-dev"
                 }
             },
             "autoload": {
@@ -640,7 +640,7 @@
                 "singularize",
                 "string"
             ],
-            "time": "2014-12-20 21:24:13"
+            "time": "2015-11-06 14:35:42"
         },
         {
             "name": "doctrine/instantiator",
@@ -752,16 +752,16 @@
         },
         {
             "name": "doctrine/migrations",
-            "version": "dev-master",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/migrations.git",
-                "reference": "78954cce4962a4655ff47c0751eb78021fbaf2cc"
+                "reference": "d196ddc229f50c66c5a015c158adb78a2dfb4351"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/migrations/zipball/78954cce4962a4655ff47c0751eb78021fbaf2cc",
-                "reference": "78954cce4962a4655ff47c0751eb78021fbaf2cc",
+                "url": "https://api.github.com/repos/doctrine/migrations/zipball/d196ddc229f50c66c5a015c158adb78a2dfb4351",
+                "reference": "d196ddc229f50c66c5a015c158adb78a2dfb4351",
                 "shasum": ""
             },
             "require": {
@@ -781,15 +781,18 @@
             "suggest": {
                 "symfony/console": "to run the migration from the console"
             },
+            "bin": [
+                "bin/doctrine-migrations"
+            ],
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0.x-dev"
+                    "dev-master": "v1.1.x-dev"
                 }
             },
             "autoload": {
-                "psr-0": {
-                    "Doctrine\\DBAL\\Migrations": "lib"
+                "psr-4": {
+                    "Doctrine\\DBAL\\Migrations\\": "lib/Doctrine/DBAL/Migrations"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -812,20 +815,20 @@
                 "database",
                 "migrations"
             ],
-            "time": "2015-07-05 21:24:36"
+            "time": "2015-09-29 11:13:06"
         },
         {
             "name": "doctrine/orm",
-            "version": "v2.5.0",
+            "version": "v2.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/doctrine2.git",
-                "reference": "aa80c7d2c55a372f5f9f825f5c66dbda53a6e3fe"
+                "reference": "e6a83bedbe67579cb0bfb688e982e617943a2945"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/aa80c7d2c55a372f5f9f825f5c66dbda53a6e3fe",
-                "reference": "aa80c7d2c55a372f5f9f825f5c66dbda53a6e3fe",
+                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/e6a83bedbe67579cb0bfb688e982e617943a2945",
+                "reference": "e6a83bedbe67579cb0bfb688e982e617943a2945",
                 "shasum": ""
             },
             "require": {
@@ -889,30 +892,26 @@
                 "database",
                 "orm"
             ],
-            "time": "2015-04-02 20:40:18"
+            "time": "2015-08-31 12:59:39"
         },
         {
-            "name": "doctrineum/float",
+            "name": "doctrineum/boolean",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/jaroslavtyc/doctrineum-float.git",
-                "reference": "eb47b3e2f8655c2c2a20344e175c8e30e57fe9e8"
+                "url": "https://github.com/jaroslavtyc/doctrienum-boolean.git",
+                "reference": "f22e89e8a2e129f3dd81c3cb4d6499116d83c4c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/doctrineum-float/zipball/eb47b3e2f8655c2c2a20344e175c8e30e57fe9e8",
-                "reference": "eb47b3e2f8655c2c2a20344e175c8e30e57fe9e8",
+                "url": "https://api.github.com/repos/jaroslavtyc/doctrienum-boolean/zipball/f22e89e8a2e129f3dd81c3cb4d6499116d83c4c2",
+                "reference": "f22e89e8a2e129f3dd81c3cb4d6499116d83c4c2",
                 "shasum": ""
             },
             "require": {
                 "doctrineum/scalar": "dev-master",
-                "granam/exception-hierarchy": "dev-master",
-                "granam/float": "dev-master",
-                "granam/scalar": "dev-master",
-                "granam/strict-float": "dev-master",
+                "granam/boolean": "dev-master",
                 "granam/strict-object": "dev-master",
-                "granam/strict-scalar": "dev-master",
                 "php": ">=5.5"
             },
             "require-dev": {
@@ -929,8 +928,44 @@
             "license": [
                 "MIT"
             ],
+            "description": "Enumeration type for Doctrine - bools only",
+            "time": "2015-11-02 14:10:39"
+        },
+        {
+            "name": "doctrineum/float",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jaroslavtyc/doctrineum-float.git",
+                "reference": "dc6a8f69e037b6e876ab357c3cd4b4d9f0090efc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jaroslavtyc/doctrineum-float/zipball/dc6a8f69e037b6e876ab357c3cd4b4d9f0090efc",
+                "reference": "dc6a8f69e037b6e876ab357c3cd4b4d9f0090efc",
+                "shasum": ""
+            },
+            "require": {
+                "doctrineum/scalar": "dev-master",
+                "granam/float": "dev-master",
+                "php": ">=5.5"
+            },
+            "require-dev": {
+                "mockery/mockery": "0.9.*",
+                "phpunit/phpunit": "4.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Doctrineum\\": "Doctrineum/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
             "description": "Enumeration type for Doctrine - floats only",
-            "time": "2015-07-16 12:20:39"
+            "time": "2015-07-22 10:38:01"
         },
         {
             "name": "doctrineum/integer",
@@ -938,20 +973,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/doctrineum-integer.git",
-                "reference": "087238bde41fa2438b3f43cb3e060b2a29de12a4"
+                "reference": "1f113c52611c4a340e548ff4a4a81fe90a2d199e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/doctrineum-integer/zipball/087238bde41fa2438b3f43cb3e060b2a29de12a4",
-                "reference": "087238bde41fa2438b3f43cb3e060b2a29de12a4",
+                "url": "https://api.github.com/repos/jaroslavtyc/doctrineum-integer/zipball/1f113c52611c4a340e548ff4a4a81fe90a2d199e",
+                "reference": "1f113c52611c4a340e548ff4a4a81fe90a2d199e",
                 "shasum": ""
             },
             "require": {
                 "doctrineum/scalar": "dev-master",
-                "granam/exception-hierarchy": "dev-master",
-                "granam/strict-integer": "dev-master",
+                "granam/integer": "dev-master",
                 "granam/strict-object": "dev-master",
-                "granam/strict-scalar": "dev-master",
                 "php": ">=5.5"
             },
             "require-dev": {
@@ -969,7 +1002,7 @@
                 "MIT"
             ],
             "description": "Enumeration type for Doctrine - integers only",
-            "time": "2015-05-22 06:13:19"
+            "time": "2015-10-30 08:45:46"
         },
         {
             "name": "doctrineum/scalar",
@@ -977,17 +1010,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/doctrineum-scalar.git",
-                "reference": "1ef9ff4249545bff3664d976945eec5046b73d16"
+                "reference": "1e9d5d968d249779dab2f00835f424dfe15b7f8b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/doctrineum-scalar/zipball/1ef9ff4249545bff3664d976945eec5046b73d16",
-                "reference": "1ef9ff4249545bff3664d976945eec5046b73d16",
+                "url": "https://api.github.com/repos/jaroslavtyc/doctrineum-scalar/zipball/1e9d5d968d249779dab2f00835f424dfe15b7f8b",
+                "reference": "1e9d5d968d249779dab2f00835f424dfe15b7f8b",
                 "shasum": ""
             },
             "require": {
                 "doctrine/dbal": "~2.4",
-                "granam/exception-hierarchy": "dev-master",
+                "granam/scalar": "dev-master",
                 "granam/strict-object": "dev-master",
                 "php": ">=5.4"
             },
@@ -1021,7 +1054,7 @@
                 "sub-type",
                 "value-dependent enum"
             ],
-            "time": "2015-07-16 11:39:20"
+            "time": "2015-11-02 13:54:48"
         },
         {
             "name": "doctrineum/strict-string",
@@ -1029,18 +1062,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/doctrineum-strict-string.git",
-                "reference": "65e4277abc36ac19e4e97c438a5d32b54de2df9f"
+                "reference": "8cb83ae31d2e8d89882ff0590da7daf0733d65c9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/doctrineum-strict-string/zipball/65e4277abc36ac19e4e97c438a5d32b54de2df9f",
-                "reference": "65e4277abc36ac19e4e97c438a5d32b54de2df9f",
+                "url": "https://api.github.com/repos/jaroslavtyc/doctrineum-strict-string/zipball/8cb83ae31d2e8d89882ff0590da7daf0733d65c9",
+                "reference": "8cb83ae31d2e8d89882ff0590da7daf0733d65c9",
                 "shasum": ""
             },
             "require": {
                 "doctrineum/scalar": "dev-master",
-                "granam/exception-hierarchy": "dev-master",
-                "granam/strict-object": "dev-master",
+                "granam/string": "dev-master",
                 "php": ">=5.5"
             },
             "require-dev": {
@@ -1058,7 +1090,7 @@
                 "MIT"
             ],
             "description": "Enumeration type for Doctrine - strings only",
-            "time": "2015-05-28 08:55:41"
+            "time": "2015-08-04 15:17:16"
         },
         {
             "name": "drd-plus/properties",
@@ -1066,30 +1098,25 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-properties.git",
-                "reference": "4d993bf5135d9420aef49e8eb6d9d0464c116611"
+                "reference": "4608eb667c0f5a25035ebd98b5761f07f5a9a4a2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-properties/zipball/4d993bf5135d9420aef49e8eb6d9d0464c116611",
-                "reference": "4d993bf5135d9420aef49e8eb6d9d0464c116611",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-properties/zipball/4608eb667c0f5a25035ebd98b5761f07f5a9a4a2",
+                "reference": "4608eb667c0f5a25035ebd98b5761f07f5a9a4a2",
                 "shasum": ""
             },
             "require": {
+                "doctrineum/boolean": "dev-master",
                 "doctrineum/float": "dev-master",
                 "doctrineum/integer": "dev-master",
-                "doctrineum/scalar": "dev-master",
                 "doctrineum/strict-string": "dev-master",
+                "drd-plus/races": "dev-master",
+                "drd-plus/tables": "dev-master",
                 "drd-plus/tools": "dev-master",
                 "drd/dice-roll": "dev-master",
-                "granam/exception-hierarchy": "dev-master",
-                "granam/float": "dev-master",
-                "granam/integer": "dev-master",
-                "granam/scalar": "dev-master",
-                "granam/strict-float": "dev-master",
-                "granam/strict-integer": "dev-master",
                 "granam/strict-object": "dev-master",
-                "granam/strict-scalar": "dev-master",
-                "granam/strict-string": "dev-master",
+                "granam/string": "dev-master",
                 "php": ">=5.5.0"
             },
             "require-dev": {
@@ -1107,39 +1134,25 @@
                 "MIT"
             ],
             "description": "Drd+ properties",
-            "time": "2015-07-17 14:22:11"
+            "time": "2015-11-11 16:35:33"
         },
         {
-            "name": "drd-plus/tables",
+            "name": "drd-plus/races",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/jaroslavtyc/drd-plus-tables.git",
-                "reference": "5ff16928b0ed2377edb673ca807e0e0612b90fe4"
+                "url": "https://github.com/jaroslavtyc/drd-plus-races.git",
+                "reference": "037bf1abc223d4c32d893174ec84c8a23ee17175"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-tables/zipball/5ff16928b0ed2377edb673ca807e0e0612b90fe4",
-                "reference": "5ff16928b0ed2377edb673ca807e0e0612b90fe4",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-races/zipball/037bf1abc223d4c32d893174ec84c8a23ee17175",
+                "reference": "037bf1abc223d4c32d893174ec84c8a23ee17175",
                 "shasum": ""
             },
             "require": {
-                "doctrineum/float": "dev-master",
-                "doctrineum/integer": "dev-master",
                 "doctrineum/scalar": "dev-master",
-                "doctrineum/strict-string": "dev-master",
-                "drd-plus/properties": "dev-master",
-                "drd-plus/tools": "dev-master",
-                "drd/dice-roll": "dev-master",
-                "granam/exception-hierarchy": "dev-master",
-                "granam/float": "dev-master",
-                "granam/integer": "dev-master",
-                "granam/scalar": "dev-master",
-                "granam/strict-float": "dev-master",
-                "granam/strict-integer": "dev-master",
                 "granam/strict-object": "dev-master",
-                "granam/strict-scalar": "dev-master",
-                "granam/strict-string": "dev-master",
                 "php": ">=5.5.0"
             },
             "require-dev": {
@@ -1156,8 +1169,50 @@
             "license": [
                 "MIT"
             ],
+            "description": "Drd+ races",
+            "time": "2015-10-20 10:24:38"
+        },
+        {
+            "name": "drd-plus/tables",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jaroslavtyc/drd-plus-tables.git",
+                "reference": "c40c19001b9d1fb2ffc18ff4e46c193ec27bac67"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-tables/zipball/c40c19001b9d1fb2ffc18ff4e46c193ec27bac67",
+                "reference": "c40c19001b9d1fb2ffc18ff4e46c193ec27bac67",
+                "shasum": ""
+            },
+            "require": {
+                "drd-plus/races": "dev-master",
+                "drd/dice-roll": "dev-master",
+                "granam/boolean": "dev-master",
+                "granam/float": "dev-master",
+                "granam/integer": "dev-master",
+                "granam/number": "dev-master",
+                "granam/strict-object": "dev-master",
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "granam/exception-hierarchy": "dev-master",
+                "mockery/mockery": ">=0.9",
+                "phpunit/phpunit": "~4.4"
+            },
+            "type": "project",
+            "autoload": {
+                "psr-4": {
+                    "DrdPlus\\": "DrdPlus/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
             "description": "Drd+ tables and their units conversion",
-            "time": "2015-07-17 14:34:10"
+            "time": "2015-11-12 09:33:35"
         },
         {
             "name": "drd-plus/tools",
@@ -1165,20 +1220,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-tools.git",
-                "reference": "ef53202ac9373f70eeebf02ec0b6cb0a224a8bbb"
+                "reference": "8bc541dc7b76e0f85cfa939733c5ee317b379402"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-tools/zipball/ef53202ac9373f70eeebf02ec0b6cb0a224a8bbb",
-                "reference": "ef53202ac9373f70eeebf02ec0b6cb0a224a8bbb",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-tools/zipball/8bc541dc7b76e0f85cfa939733c5ee317b379402",
+                "reference": "8bc541dc7b76e0f85cfa939733c5ee317b379402",
                 "shasum": ""
             },
             "require": {
-                "doctrine/orm": "~2.2,>=2.2.3",
+                "doctrine/orm": "~2.0",
                 "drd/dice-roll": "dev-master",
-                "granam/exception-hierarchy": "dev-master",
+                "granam/float": "dev-master",
                 "granam/integer": "dev-master",
-                "granam/scalar": "dev-master",
                 "granam/strict-object": "dev-master",
                 "php": ">=5.5.0"
             },
@@ -1197,7 +1251,7 @@
                 "MIT"
             ],
             "description": "Drd+ tools",
-            "time": "2015-07-17 14:00:50"
+            "time": "2015-11-05 08:02:31"
         },
         {
             "name": "drd/dice-roll",
@@ -1205,18 +1259,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-dice-roll.git",
-                "reference": "f0d34d2bff914c4b7f11b69e53caa6f856f48144"
+                "reference": "412b33706ab88502b995cb07c8e892653b1a67fe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-dice-roll/zipball/f0d34d2bff914c4b7f11b69e53caa6f856f48144",
-                "reference": "f0d34d2bff914c4b7f11b69e53caa6f856f48144",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-dice-roll/zipball/412b33706ab88502b995cb07c8e892653b1a67fe",
+                "reference": "412b33706ab88502b995cb07c8e892653b1a67fe",
                 "shasum": ""
             },
             "require": {
-                "granam/exception-hierarchy": "dev-master",
                 "granam/integer": "dev-master",
-                "granam/scalar": "dev-master",
                 "granam/strict-object": "dev-master",
                 "php": ">=5.5"
             },
@@ -1254,7 +1306,56 @@
                 "php",
                 "roll"
             ],
-            "time": "2015-06-23 15:24:12"
+            "time": "2015-11-04 07:53:13"
+        },
+        {
+            "name": "granam/boolean",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jaroslavtyc/granam-boolean.git",
+                "reference": "ac1c9d873257a86320db87e11fc959194288ada8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jaroslavtyc/granam-boolean/zipball/ac1c9d873257a86320db87e11fc959194288ada8",
+                "reference": "ac1c9d873257a86320db87e11fc959194288ada8",
+                "shasum": ""
+            },
+            "require": {
+                "granam/exception-hierarchy": "dev-master",
+                "granam/scalar": "dev-master",
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "mockery/mockery": ">=0.9",
+                "phpunit/phpunit": "~4.4"
+            },
+            "type": "project",
+            "autoload": {
+                "psr-4": {
+                    "Granam\\": "Granam/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jaroslav Týc",
+                    "homepage": "http://jaroslavtyc.com",
+                    "role": "Original author"
+                }
+            ],
+            "description": "Lightweight boolean container with stand-alone converter",
+            "homepage": "https://github.com/jaroslavtyc/granam-boolean",
+            "keywords": [
+                "boolean",
+                "converter",
+                "php"
+            ],
+            "time": "2015-11-02 14:53:00"
         },
         {
             "name": "granam/exception-hierarchy",
@@ -1262,12 +1363,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/granam-exception-hierarchy.git",
-                "reference": "2910c990a39f3c5aa9149bb3349978840a91bd51"
+                "reference": "bb5a2ae02516512be24614a2c76c01b5482b34a3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/granam-exception-hierarchy/zipball/2910c990a39f3c5aa9149bb3349978840a91bd51",
-                "reference": "2910c990a39f3c5aa9149bb3349978840a91bd51",
+                "url": "https://api.github.com/repos/jaroslavtyc/granam-exception-hierarchy/zipball/bb5a2ae02516512be24614a2c76c01b5482b34a3",
+                "reference": "bb5a2ae02516512be24614a2c76c01b5482b34a3",
                 "shasum": ""
             },
             "require": {
@@ -1295,7 +1396,7 @@
                 "php",
                 "runtime"
             ],
-            "time": "2015-05-12 12:44:29"
+            "time": "2015-09-16 09:41:59"
         },
         {
             "name": "granam/float",
@@ -1303,18 +1404,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/granam-float.git",
-                "reference": "44c3a639145240e771671cd4e92ac18aa75c6f41"
+                "reference": "94b1497dbd2bb57a19043695506b03964366ae5e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/granam-float/zipball/44c3a639145240e771671cd4e92ac18aa75c6f41",
-                "reference": "44c3a639145240e771671cd4e92ac18aa75c6f41",
+                "url": "https://api.github.com/repos/jaroslavtyc/granam-float/zipball/94b1497dbd2bb57a19043695506b03964366ae5e",
+                "reference": "94b1497dbd2bb57a19043695506b03964366ae5e",
                 "shasum": ""
             },
             "require": {
                 "granam/exception-hierarchy": "dev-master",
-                "granam/scalar": "dev-master",
-                "granam/strict-object": "dev-master",
+                "granam/number": "dev-master",
                 "php": ">=5.4"
             },
             "require-dev": {
@@ -1334,7 +1434,7 @@
             "authors": [
                 {
                     "name": "Jaroslav Týc",
-                    "homepage": "http://jaroslav.com",
+                    "homepage": "http://jaroslavtyc.com",
                     "role": "Original author"
                 }
             ],
@@ -1345,7 +1445,7 @@
                 "php",
                 "strict"
             ],
-            "time": "2015-06-23 15:18:50"
+            "time": "2015-09-10 09:32:01"
         },
         {
             "name": "granam/integer",
@@ -1353,18 +1453,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/granam-integer.git",
-                "reference": "1edc112083e70b14d01fec8ffc2eabb40dfa4318"
+                "reference": "9cc4640b765c7b057d03c7d4466af1bd88ba0534"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/granam-integer/zipball/1edc112083e70b14d01fec8ffc2eabb40dfa4318",
-                "reference": "1edc112083e70b14d01fec8ffc2eabb40dfa4318",
+                "url": "https://api.github.com/repos/jaroslavtyc/granam-integer/zipball/9cc4640b765c7b057d03c7d4466af1bd88ba0534",
+                "reference": "9cc4640b765c7b057d03c7d4466af1bd88ba0534",
                 "shasum": ""
             },
             "require": {
                 "granam/exception-hierarchy": "dev-master",
-                "granam/scalar": "dev-master",
-                "granam/strict-object": "dev-master",
+                "granam/number": "dev-master",
                 "php": ">=5.4"
             },
             "require-dev": {
@@ -1384,7 +1483,7 @@
             "authors": [
                 {
                     "name": "Jaroslav Týc",
-                    "homepage": "http://jaroslav.com",
+                    "homepage": "http://jaroslavtyc.com",
                     "role": "Original author"
                 }
             ],
@@ -1395,7 +1494,57 @@
                 "integer",
                 "php"
             ],
-            "time": "2015-06-25 07:02:28"
+            "time": "2015-09-10 09:24:27"
+        },
+        {
+            "name": "granam/number",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jaroslavtyc/granam-number.git",
+                "reference": "2d309b142bf0aba538a00e3f41b0bd237f2b7284"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jaroslavtyc/granam-number/zipball/2d309b142bf0aba538a00e3f41b0bd237f2b7284",
+                "reference": "2d309b142bf0aba538a00e3f41b0bd237f2b7284",
+                "shasum": ""
+            },
+            "require": {
+                "granam/exception-hierarchy": "dev-master",
+                "granam/scalar": "dev-master",
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "mockery/mockery": ">=0.9",
+                "phpunit/phpunit": "~4.4"
+            },
+            "type": "project",
+            "autoload": {
+                "psr-4": {
+                    "Granam\\": "Granam/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jaroslav Týc",
+                    "homepage": "http://jaroslavtyc.com",
+                    "role": "Original author"
+                }
+            ],
+            "description": "Converter and wrapping object for a number (float or integer) value",
+            "homepage": "https://github.com/jaroslavtyc/granam-number",
+            "keywords": [
+                "float",
+                "integer",
+                "number",
+                "php"
+            ],
+            "time": "2015-09-10 09:36:14"
         },
         {
             "name": "granam/scalar",
@@ -1403,12 +1552,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/granam-scalar.git",
-                "reference": "e4d60aff3b62f7d0f04276287ffb7261c0aac5fa"
+                "reference": "d2e8b875115019f03924854ca6f9feb9a7c3e316"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/granam-scalar/zipball/e4d60aff3b62f7d0f04276287ffb7261c0aac5fa",
-                "reference": "e4d60aff3b62f7d0f04276287ffb7261c0aac5fa",
+                "url": "https://api.github.com/repos/jaroslavtyc/granam-scalar/zipball/d2e8b875115019f03924854ca6f9feb9a7c3e316",
+                "reference": "d2e8b875115019f03924854ca6f9feb9a7c3e316",
                 "shasum": ""
             },
             "require": {
@@ -1443,7 +1592,7 @@
                 "php",
                 "scalar"
             ],
-            "time": "2015-06-23 13:22:02"
+            "time": "2015-10-30 14:07:46"
         },
         {
             "name": "granam/strict-float",
@@ -1451,19 +1600,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/granam-strict-float.git",
-                "reference": "7e40771899b2f3d69508c3f12e26a365656014f5"
+                "reference": "b01e9f403a7b8bae8fab6713daab55dc75585f8d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/granam-strict-float/zipball/7e40771899b2f3d69508c3f12e26a365656014f5",
-                "reference": "7e40771899b2f3d69508c3f12e26a365656014f5",
+                "url": "https://api.github.com/repos/jaroslavtyc/granam-strict-float/zipball/b01e9f403a7b8bae8fab6713daab55dc75585f8d",
+                "reference": "b01e9f403a7b8bae8fab6713daab55dc75585f8d",
                 "shasum": ""
             },
             "require": {
                 "granam/exception-hierarchy": "dev-master",
                 "granam/float": "dev-master",
-                "granam/scalar": "dev-master",
-                "granam/strict-object": "dev-master",
                 "granam/strict-scalar": "dev-master",
                 "php": ">=5.4"
             },
@@ -1495,7 +1642,7 @@
                 "php",
                 "strict"
             ],
-            "time": "2015-06-30 11:20:58"
+            "time": "2015-09-15 13:11:52"
         },
         {
             "name": "granam/strict-integer",
@@ -1503,19 +1650,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/granam-strict-integer.git",
-                "reference": "7b70fae044d76955100cdc81c00906cf0d907db2"
+                "reference": "8d6c926dc10bde15aa6a59c80e30febe9308a5eb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/granam-strict-integer/zipball/7b70fae044d76955100cdc81c00906cf0d907db2",
-                "reference": "7b70fae044d76955100cdc81c00906cf0d907db2",
+                "url": "https://api.github.com/repos/jaroslavtyc/granam-strict-integer/zipball/8d6c926dc10bde15aa6a59c80e30febe9308a5eb",
+                "reference": "8d6c926dc10bde15aa6a59c80e30febe9308a5eb",
                 "shasum": ""
             },
             "require": {
                 "granam/exception-hierarchy": "dev-master",
                 "granam/integer": "dev-master",
-                "granam/scalar": "dev-master",
-                "granam/strict-object": "dev-master",
                 "granam/strict-scalar": "dev-master",
                 "php": ">=5.4"
             },
@@ -1547,7 +1692,7 @@
                 "php",
                 "strict"
             ],
-            "time": "2015-06-30 11:04:44"
+            "time": "2015-09-15 13:19:38"
         },
         {
             "name": "granam/strict-object",
@@ -1555,12 +1700,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/granam-strict-object.git",
-                "reference": "3a271c0acec46161787a321cd90c19c5bfd4a7db"
+                "reference": "d2d336aaf62ae7ca0549005d0bc0f5b78d0d5539"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/granam-strict-object/zipball/3a271c0acec46161787a321cd90c19c5bfd4a7db",
-                "reference": "3a271c0acec46161787a321cd90c19c5bfd4a7db",
+                "url": "https://api.github.com/repos/jaroslavtyc/granam-strict-object/zipball/d2d336aaf62ae7ca0549005d0bc0f5b78d0d5539",
+                "reference": "d2d336aaf62ae7ca0549005d0bc0f5b78d0d5539",
                 "shasum": ""
             },
             "require": {
@@ -1591,11 +1736,15 @@
             "description": "Base object, checking access to undefined properties and methods",
             "homepage": "https://github.com/jaroslavtyc/granam-strict-object",
             "keywords": [
+                "access",
                 "object",
+                "permissions",
                 "php",
-                "strict"
+                "read",
+                "strict",
+                "write"
             ],
-            "time": "2015-05-18 05:39:17"
+            "time": "2015-09-16 11:17:55"
         },
         {
             "name": "granam/strict-scalar",
@@ -1603,12 +1752,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/granam-strict-scalar.git",
-                "reference": "7be72eb3a8c7fcfa1e37a0bc9a1a6ba0559ff210"
+                "reference": "f2ce4f466fe572802d0cf3cc6f46680e9bf45a30"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/granam-strict-scalar/zipball/7be72eb3a8c7fcfa1e37a0bc9a1a6ba0559ff210",
-                "reference": "7be72eb3a8c7fcfa1e37a0bc9a1a6ba0559ff210",
+                "url": "https://api.github.com/repos/jaroslavtyc/granam-strict-scalar/zipball/f2ce4f466fe572802d0cf3cc6f46680e9bf45a30",
+                "reference": "f2ce4f466fe572802d0cf3cc6f46680e9bf45a30",
                 "shasum": ""
             },
             "require": {
@@ -1638,14 +1787,15 @@
                     "role": "Original author"
                 }
             ],
-            "description": "Base for lightweight scalar-type containers with strict checks",
+            "description": "Lightweight scalar-type wrapper with strict checks",
             "homepage": "https://github.com/jaroslavtyc/granam-strict-scalar",
             "keywords": [
+                "object",
                 "php",
                 "scalar",
                 "strict"
             ],
-            "time": "2015-06-30 11:29:39"
+            "time": "2015-09-15 05:40:46"
         },
         {
             "name": "granam/strict-string",
@@ -1653,12 +1803,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/granam-strict-string.git",
-                "reference": "320979a3bc342c3bd6cd97c632583c5b1b6ed62b"
+                "reference": "fc8ea0ec255badcbdf31d1c206745bb1319ffd12"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/granam-strict-string/zipball/320979a3bc342c3bd6cd97c632583c5b1b6ed62b",
-                "reference": "320979a3bc342c3bd6cd97c632583c5b1b6ed62b",
+                "url": "https://api.github.com/repos/jaroslavtyc/granam-strict-string/zipball/fc8ea0ec255badcbdf31d1c206745bb1319ffd12",
+                "reference": "fc8ea0ec255badcbdf31d1c206745bb1319ffd12",
                 "shasum": ""
             },
             "require": {
@@ -1666,6 +1816,7 @@
                 "granam/scalar": "dev-master",
                 "granam/strict-object": "dev-master",
                 "granam/strict-scalar": "dev-master",
+                "granam/string": "dev-master",
                 "php": ">=5.4"
             },
             "require-dev": {
@@ -1692,29 +1843,80 @@
             "description": "Lightweight string container with strict checks",
             "homepage": "https://github.com/jaroslavtyc/granam-strict-string",
             "keywords": [
+                "object",
                 "php",
                 "strict",
                 "string"
             ],
-            "time": "2015-06-30 11:35:29"
+            "time": "2015-09-16 14:55:21"
         },
         {
-            "name": "incenteev/composer-parameter-handler",
-            "version": "v2.1.1",
+            "name": "granam/string",
+            "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Incenteev/ParameterHandler.git",
-                "reference": "84a205fe80a46101607bafbc423019527893ddd0"
+                "url": "https://github.com/jaroslavtyc/granam-string.git",
+                "reference": "d629c47bd73bc50753196f5e88a302f02d1311ef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Incenteev/ParameterHandler/zipball/84a205fe80a46101607bafbc423019527893ddd0",
-                "reference": "84a205fe80a46101607bafbc423019527893ddd0",
+                "url": "https://api.github.com/repos/jaroslavtyc/granam-string/zipball/d629c47bd73bc50753196f5e88a302f02d1311ef",
+                "reference": "d629c47bd73bc50753196f5e88a302f02d1311ef",
+                "shasum": ""
+            },
+            "require": {
+                "granam/exception-hierarchy": "dev-master",
+                "granam/scalar": "dev-master",
+                "granam/strict-object": "dev-master",
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "mockery/mockery": "0.9.*",
+                "phpunit/phpunit": "~4.4"
+            },
+            "type": "project",
+            "autoload": {
+                "psr-4": {
+                    "Granam\\": "Granam/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jaroslav Týc",
+                    "homepage": "http://jaroslavtyc.com",
+                    "role": "Original author"
+                }
+            ],
+            "description": "Lightweight string wrapper",
+            "homepage": "https://github.com/jaroslavtyc/granam-string",
+            "keywords": [
+                "object",
+                "php",
+                "string"
+            ],
+            "time": "2015-09-16 11:31:39"
+        },
+        {
+            "name": "incenteev/composer-parameter-handler",
+            "version": "v2.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Incenteev/ParameterHandler.git",
+                "reference": "d7ce7f06136109e81d1cb9d57066c4d4a99cf1cc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Incenteev/ParameterHandler/zipball/d7ce7f06136109e81d1cb9d57066c4d4a99cf1cc",
+                "reference": "d7ce7f06136109e81d1cb9d57066c4d4a99cf1cc",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3",
-                "symfony/yaml": "~2.0"
+                "symfony/yaml": "~2.3|~3.0"
             },
             "require-dev": {
                 "composer/composer": "1.0.*@dev",
@@ -1747,7 +1949,7 @@
             "keywords": [
                 "parameters management"
             ],
-            "time": "2015-06-03 08:27:03"
+            "time": "2015-11-10 17:04:01"
         },
         {
             "name": "jdorn/sql-formatter",
@@ -1801,35 +2003,39 @@
         },
         {
             "name": "kriswallsmith/assetic",
-            "version": "v1.2.1",
+            "version": "v1.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kriswallsmith/assetic.git",
-                "reference": "b20efe38845d20458702f97f3ff625d80805897b"
+                "reference": "cb92b179dddfb8a3f341d53bd27e088f24d9c2e5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kriswallsmith/assetic/zipball/b20efe38845d20458702f97f3ff625d80805897b",
-                "reference": "b20efe38845d20458702f97f3ff625d80805897b",
+                "url": "https://api.github.com/repos/kriswallsmith/assetic/zipball/cb92b179dddfb8a3f341d53bd27e088f24d9c2e5",
+                "reference": "cb92b179dddfb8a3f341d53bd27e088f24d9c2e5",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.1",
                 "symfony/process": "~2.1"
             },
+            "conflict": {
+                "twig/twig": "<1.12"
+            },
             "require-dev": {
                 "cssmin/cssmin": "*",
                 "joliclic/javascript-packer": "*",
                 "kamicane/packager": "*",
-                "leafo/lessphp": "*",
-                "leafo/scssphp": "*",
-                "leafo/scssphp-compass": "*",
+                "leafo/lessphp": "^0.3.7",
+                "leafo/scssphp": "*@dev",
+                "leafo/scssphp-compass": "*@dev",
                 "mrclay/minify": "*",
-                "patchwork/jsqueeze": "~1.0",
-                "phpunit/phpunit": "~4",
+                "patchwork/jsqueeze": "~1.0|~2.0",
+                "phpunit/phpunit": "~4.8",
                 "psr/log": "~1.0",
                 "ptachoire/cssembed": "*",
-                "twig/twig": "~1.6"
+                "symfony/phpunit-bridge": "~2.7",
+                "twig/twig": "~1.8|~2.0"
             },
             "suggest": {
                 "leafo/lessphp": "Assetic provides the integration with the lessphp LESS compiler",
@@ -1842,7 +2048,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.2-dev"
+                    "dev-master": "1.4-dev"
                 }
             },
             "autoload": {
@@ -1871,20 +2077,20 @@
                 "compression",
                 "minification"
             ],
-            "time": "2014-12-12 05:04:05"
+            "time": "2015-10-15 01:33:42"
         },
         {
             "name": "monolog/monolog",
-            "version": "1.15.0",
+            "version": "1.17.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "dc5150cc608f2334c72c3b6a553ec9668a4156b0"
+                "reference": "bee7f0dc9c3e0b69a6039697533dca1e845c8c24"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/dc5150cc608f2334c72c3b6a553ec9668a4156b0",
-                "reference": "dc5150cc608f2334c72c3b6a553ec9668a4156b0",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/bee7f0dc9c3e0b69a6039697533dca1e845c8c24",
+                "reference": "bee7f0dc9c3e0b69a6039697533dca1e845c8c24",
                 "shasum": ""
             },
             "require": {
@@ -1898,10 +2104,11 @@
                 "aws/aws-sdk-php": "^2.4.9",
                 "doctrine/couchdb": "~1.0@dev",
                 "graylog2/gelf-php": "~1.0",
+                "jakub-onderka/php-parallel-lint": "0.9",
                 "php-console/php-console": "^3.1.3",
                 "phpunit/phpunit": "~4.5",
                 "phpunit/phpunit-mock-objects": "2.3.0",
-                "raven/raven": "~0.8",
+                "raven/raven": "^0.13",
                 "ruflin/elastica": ">=0.90 <3.0",
                 "swiftmailer/swiftmailer": "~5.3",
                 "videlalvaro/php-amqplib": "~2.4"
@@ -1921,7 +2128,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.15.x-dev"
+                    "dev-master": "1.16.x-dev"
                 }
             },
             "autoload": {
@@ -1947,7 +2154,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2015-07-12 13:54:09"
+            "time": "2015-10-14 12:51:02"
         },
         {
             "name": "psr/log",
@@ -1989,22 +2196,22 @@
         },
         {
             "name": "sensio/distribution-bundle",
-            "version": "v3.0.30",
+            "version": "v3.0.33",
             "target-dir": "Sensio/Bundle/DistributionBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioDistributionBundle.git",
-                "reference": "f1758b30096202aeede61f79a1dffd69da091517"
+                "reference": "63245e12c948bf50278383e70fd5d6841af17e17"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/f1758b30096202aeede61f79a1dffd69da091517",
-                "reference": "f1758b30096202aeede61f79a1dffd69da091517",
+                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/63245e12c948bf50278383e70fd5d6841af17e17",
+                "reference": "63245e12c948bf50278383e70fd5d6841af17e17",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3",
-                "sensiolabs/security-checker": "~2.0",
+                "sensiolabs/security-checker": "~3.0",
                 "symfony/class-loader": "~2.2",
                 "symfony/framework-bundle": "~2.3",
                 "symfony/process": "~2.2"
@@ -2045,29 +2252,29 @@
                 "configuration",
                 "distribution"
             ],
-            "time": "2015-06-05 22:32:22"
+            "time": "2015-10-27 18:46:42"
         },
         {
             "name": "sensio/framework-extra-bundle",
-            "version": "v3.0.9",
+            "version": "v3.0.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioFrameworkExtraBundle.git",
-                "reference": "0616fd568da051adc19ca63006cc808531ba2da4"
+                "reference": "a79e205737b58d557c05caef6dfa8f94d8084bca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/0616fd568da051adc19ca63006cc808531ba2da4",
-                "reference": "0616fd568da051adc19ca63006cc808531ba2da4",
+                "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/a79e205737b58d557c05caef6dfa8f94d8084bca",
+                "reference": "a79e205737b58d557c05caef6dfa8f94d8084bca",
                 "shasum": ""
             },
             "require": {
                 "doctrine/common": "~2.2",
-                "symfony/framework-bundle": "~2.3"
+                "symfony/framework-bundle": "~2.3|~3.0"
             },
             "require-dev": {
-                "symfony/expression-language": "~2.4",
-                "symfony/security-bundle": "~2.4"
+                "symfony/expression-language": "~2.4|~3.0",
+                "symfony/security-bundle": "~2.4|~3.0"
             },
             "suggest": {
                 "symfony/expression-language": "",
@@ -2100,25 +2307,24 @@
                 "annotations",
                 "controllers"
             ],
-            "time": "2015-06-05 13:59:21"
+            "time": "2015-10-28 15:47:04"
         },
         {
             "name": "sensiolabs/security-checker",
-            "version": "v2.0.5",
+            "version": "v3.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/security-checker.git",
-                "reference": "2c2a71f1c77d9765c12638c4724d9ca23658a810"
+                "reference": "21696b0daa731064c23cfb694c60a2584a7b6e93"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/security-checker/zipball/2c2a71f1c77d9765c12638c4724d9ca23658a810",
-                "reference": "2c2a71f1c77d9765c12638c4724d9ca23658a810",
+                "url": "https://api.github.com/repos/sensiolabs/security-checker/zipball/21696b0daa731064c23cfb694c60a2584a7b6e93",
+                "reference": "21696b0daa731064c23cfb694c60a2584a7b6e93",
                 "shasum": ""
             },
             "require": {
-                "ext-curl": "*",
-                "symfony/console": "~2.0"
+                "symfony/console": "~2.0|~3.0"
             },
             "bin": [
                 "security-checker"
@@ -2126,7 +2332,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0-dev"
+                    "dev-master": "3.0-dev"
                 }
             },
             "autoload": {
@@ -2145,7 +2351,7 @@
                 }
             ],
             "description": "A security checker for your composer.lock",
-            "time": "2015-05-28 14:22:40"
+            "time": "2015-11-07 08:07:40"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -2202,32 +2408,37 @@
         },
         {
             "name": "symfony/assetic-bundle",
-            "version": "v2.6.1",
+            "version": "v2.7.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/AsseticBundle.git",
-                "reference": "422b0add2110f0cf9bc7a873a386ea053f4a89f0"
+                "url": "https://github.com/symfony/assetic-bundle.git",
+                "reference": "3ae5c8ca3079b6e0033cc9fbfb6500e2bc964da5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/AsseticBundle/zipball/422b0add2110f0cf9bc7a873a386ea053f4a89f0",
-                "reference": "422b0add2110f0cf9bc7a873a386ea053f4a89f0",
+                "url": "https://api.github.com/repos/symfony/assetic-bundle/zipball/3ae5c8ca3079b6e0033cc9fbfb6500e2bc964da5",
+                "reference": "3ae5c8ca3079b6e0033cc9fbfb6500e2bc964da5",
                 "shasum": ""
             },
             "require": {
-                "kriswallsmith/assetic": "~1.2",
+                "kriswallsmith/assetic": "~1.3",
                 "php": ">=5.3.0",
                 "symfony/console": "~2.3",
                 "symfony/dependency-injection": "~2.3",
                 "symfony/framework-bundle": "~2.3",
                 "symfony/yaml": "~2.3"
             },
+            "conflict": {
+                "kriswallsmith/spork": "<=0.2",
+                "twig/twig": "<1.20"
+            },
             "require-dev": {
-                "kriswallsmith/spork": "~0.2",
+                "kriswallsmith/spork": "~0.3",
                 "patchwork/jsqueeze": "~1.0",
                 "symfony/class-loader": "~2.3",
                 "symfony/css-selector": "~2.3",
                 "symfony/dom-crawler": "~2.3",
+                "symfony/phpunit-bridge": "~2.7",
                 "symfony/twig-bundle": "~2.3"
             },
             "suggest": {
@@ -2237,7 +2448,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.5-dev"
+                    "dev-master": "2.7-dev"
                 }
             },
             "autoload": {
@@ -2263,38 +2474,38 @@
                 "compression",
                 "minification"
             ],
-            "time": "2015-01-27 12:45:16"
+            "time": "2015-09-01 00:05:29"
         },
         {
             "name": "symfony/monolog-bundle",
-            "version": "v2.7.1",
+            "version": "2.8.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/MonologBundle.git",
-                "reference": "9320b6863404c70ebe111e9040dab96f251de7ac"
+                "url": "https://github.com/symfony/monolog-bundle.git",
+                "reference": "7117b9a145722e3c5768db4585f6ad0643ed5c4a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/MonologBundle/zipball/9320b6863404c70ebe111e9040dab96f251de7ac",
-                "reference": "9320b6863404c70ebe111e9040dab96f251de7ac",
+                "url": "https://api.github.com/repos/symfony/monolog-bundle/zipball/7117b9a145722e3c5768db4585f6ad0643ed5c4a",
+                "reference": "7117b9a145722e3c5768db4585f6ad0643ed5c4a",
                 "shasum": ""
             },
             "require": {
                 "monolog/monolog": "~1.8",
                 "php": ">=5.3.2",
-                "symfony/config": "~2.3",
-                "symfony/dependency-injection": "~2.3",
-                "symfony/http-kernel": "~2.3",
-                "symfony/monolog-bridge": "~2.3"
+                "symfony/config": "~2.3|3.*",
+                "symfony/dependency-injection": "~2.3|3.*",
+                "symfony/http-kernel": "~2.3|3.*",
+                "symfony/monolog-bridge": "~2.3|3.*"
             },
             "require-dev": {
-                "symfony/console": "~2.3",
+                "symfony/console": "~2.3|3.*",
                 "symfony/yaml": "~2.3"
             },
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.7.x-dev"
+                    "dev-master": "2.8.x-dev"
                 }
             },
             "autoload": {
@@ -2322,19 +2533,19 @@
                 "log",
                 "logging"
             ],
-            "time": "2015-01-04 20:21:17"
+            "time": "2015-10-02 11:51:59"
         },
         {
             "name": "symfony/swiftmailer-bundle",
             "version": "v2.3.8",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/SwiftmailerBundle.git",
+                "url": "https://github.com/symfony/swiftmailer-bundle.git",
                 "reference": "970b13d01871207e81d17b17ddda025e7e21e797"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/SwiftmailerBundle/zipball/970b13d01871207e81d17b17ddda025e7e21e797",
+                "url": "https://api.github.com/repos/symfony/swiftmailer-bundle/zipball/970b13d01871207e81d17b17ddda025e7e21e797",
                 "reference": "970b13d01871207e81d17b17ddda025e7e21e797",
                 "shasum": ""
             },
@@ -2496,20 +2707,20 @@
         },
         {
             "name": "twig/extensions",
-            "version": "v1.2.0",
+            "version": "v1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig-extensions.git",
-                "reference": "8cf4b9fe04077bd54fc73f4fde83347040c3b8cd"
+                "reference": "449e3c8a9ffad7c2479c7864557275a32b037499"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig-extensions/zipball/8cf4b9fe04077bd54fc73f4fde83347040c3b8cd",
-                "reference": "8cf4b9fe04077bd54fc73f4fde83347040c3b8cd",
+                "url": "https://api.github.com/repos/twigphp/Twig-extensions/zipball/449e3c8a9ffad7c2479c7864557275a32b037499",
+                "reference": "449e3c8a9ffad7c2479c7864557275a32b037499",
                 "shasum": ""
             },
             "require": {
-                "twig/twig": "~1.12"
+                "twig/twig": "~1.20|~2.0"
             },
             "require-dev": {
                 "symfony/translation": "~2.3"
@@ -2520,7 +2731,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.2.x-dev"
+                    "dev-master": "1.3-dev"
                 }
             },
             "autoload": {
@@ -2544,29 +2755,33 @@
                 "i18n",
                 "text"
             ],
-            "time": "2014-10-30 14:30:03"
+            "time": "2015-08-22 16:38:35"
         },
         {
             "name": "twig/twig",
-            "version": "v1.18.2",
+            "version": "v1.23.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "e8e6575abf6102af53ec283f7f14b89e304fa602"
+                "reference": "d9b6333ae8dd2c8e3fd256e127548def0bc614c6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/e8e6575abf6102af53ec283f7f14b89e304fa602",
-                "reference": "e8e6575abf6102af53ec283f7f14b89e304fa602",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/d9b6333ae8dd2c8e3fd256e127548def0bc614c6",
+                "reference": "d9b6333ae8dd2c8e3fd256e127548def0bc614c6",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.2.7"
             },
+            "require-dev": {
+                "symfony/debug": "~2.7",
+                "symfony/phpunit-bridge": "~2.7"
+            },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.18-dev"
+                    "dev-master": "1.23-dev"
                 }
             },
             "autoload": {
@@ -2601,7 +2816,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2015-06-06 23:31:24"
+            "time": "2015-11-05 12:49:06"
         }
     ],
     "packages-dev": [
@@ -2766,16 +2981,16 @@
         },
         {
             "name": "phpspec/prophecy",
-            "version": "v1.4.1",
+            "version": "v1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/prophecy.git",
-                "reference": "3132b1f44c7bf2ec4c7eb2d3cb78fdeca760d373"
+                "reference": "4745ded9307786b730d7a60df5cb5a6c43cf95f7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/3132b1f44c7bf2ec4c7eb2d3cb78fdeca760d373",
-                "reference": "3132b1f44c7bf2ec4c7eb2d3cb78fdeca760d373",
+                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/4745ded9307786b730d7a60df5cb5a6c43cf95f7",
+                "reference": "4745ded9307786b730d7a60df5cb5a6c43cf95f7",
                 "shasum": ""
             },
             "require": {
@@ -2822,20 +3037,20 @@
                 "spy",
                 "stub"
             ],
-            "time": "2015-04-27 22:15:08"
+            "time": "2015-08-13 10:07:40"
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "2.1.8",
+            "version": "2.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "6044546998c7627ab997501a3d0db972b3db9790"
+                "reference": "eabf68b476ac7d0f73793aada060f1c1a9bf8979"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/6044546998c7627ab997501a3d0db972b3db9790",
-                "reference": "6044546998c7627ab997501a3d0db972b3db9790",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/eabf68b476ac7d0f73793aada060f1c1a9bf8979",
+                "reference": "eabf68b476ac7d0f73793aada060f1c1a9bf8979",
                 "shasum": ""
             },
             "require": {
@@ -2843,7 +3058,7 @@
                 "phpunit/php-file-iterator": "~1.3",
                 "phpunit/php-text-template": "~1.2",
                 "phpunit/php-token-stream": "~1.3",
-                "sebastian/environment": "~1.0",
+                "sebastian/environment": "^1.3.2",
                 "sebastian/version": "~1.0"
             },
             "require-dev": {
@@ -2858,7 +3073,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.1.x-dev"
+                    "dev-master": "2.2.x-dev"
                 }
             },
             "autoload": {
@@ -2884,20 +3099,20 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2015-07-13 11:25:58"
+            "time": "2015-10-06 15:47:00"
         },
         {
             "name": "phpunit/php-file-iterator",
-            "version": "1.4.0",
+            "version": "1.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-file-iterator.git",
-                "reference": "a923bb15680d0089e2316f7a4af8f437046e96bb"
+                "reference": "6150bf2c35d3fc379e50c7602b75caceaa39dbf0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-file-iterator/zipball/a923bb15680d0089e2316f7a4af8f437046e96bb",
-                "reference": "a923bb15680d0089e2316f7a4af8f437046e96bb",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-file-iterator/zipball/6150bf2c35d3fc379e50c7602b75caceaa39dbf0",
+                "reference": "6150bf2c35d3fc379e50c7602b75caceaa39dbf0",
                 "shasum": ""
             },
             "require": {
@@ -2931,7 +3146,7 @@
                 "filesystem",
                 "iterator"
             ],
-            "time": "2015-04-02 05:19:05"
+            "time": "2015-06-21 13:08:43"
         },
         {
             "name": "phpunit/php-text-template",
@@ -2976,16 +3191,16 @@
         },
         {
             "name": "phpunit/php-timer",
-            "version": "1.0.6",
+            "version": "1.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-timer.git",
-                "reference": "83fe1bdc5d47658b727595c14da140da92b3d66d"
+                "reference": "3e82f4e9fc92665fafd9157568e4dcb01d014e5b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-timer/zipball/83fe1bdc5d47658b727595c14da140da92b3d66d",
-                "reference": "83fe1bdc5d47658b727595c14da140da92b3d66d",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-timer/zipball/3e82f4e9fc92665fafd9157568e4dcb01d014e5b",
+                "reference": "3e82f4e9fc92665fafd9157568e4dcb01d014e5b",
                 "shasum": ""
             },
             "require": {
@@ -3013,20 +3228,20 @@
             "keywords": [
                 "timer"
             ],
-            "time": "2015-06-13 07:35:30"
+            "time": "2015-06-21 08:01:12"
         },
         {
             "name": "phpunit/php-token-stream",
-            "version": "1.4.3",
+            "version": "1.4.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-token-stream.git",
-                "reference": "7a9b0969488c3c54fd62b4d504b3ec758fd005d9"
+                "reference": "3144ae21711fb6cac0b1ab4cbe63b75ce3d4e8da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-token-stream/zipball/7a9b0969488c3c54fd62b4d504b3ec758fd005d9",
-                "reference": "7a9b0969488c3c54fd62b4d504b3ec758fd005d9",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-token-stream/zipball/3144ae21711fb6cac0b1ab4cbe63b75ce3d4e8da",
+                "reference": "3144ae21711fb6cac0b1ab4cbe63b75ce3d4e8da",
                 "shasum": ""
             },
             "require": {
@@ -3062,20 +3277,20 @@
             "keywords": [
                 "tokenizer"
             ],
-            "time": "2015-06-19 03:43:16"
+            "time": "2015-09-15 10:49:45"
         },
         {
             "name": "phpunit/phpunit",
-            "version": "4.7.7",
+            "version": "4.8.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "9b97f9d807b862c2de2a36e86690000801c85724"
+                "reference": "fa33d4ad96481b91df343d83e8c8aabed6b1dfd3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/9b97f9d807b862c2de2a36e86690000801c85724",
-                "reference": "9b97f9d807b862c2de2a36e86690000801c85724",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/fa33d4ad96481b91df343d83e8c8aabed6b1dfd3",
+                "reference": "fa33d4ad96481b91df343d83e8c8aabed6b1dfd3",
                 "shasum": ""
             },
             "require": {
@@ -3085,7 +3300,7 @@
                 "ext-reflection": "*",
                 "ext-spl": "*",
                 "php": ">=5.3.3",
-                "phpspec/prophecy": "~1.3,>=1.3.1",
+                "phpspec/prophecy": "^1.3.1",
                 "phpunit/php-code-coverage": "~2.1",
                 "phpunit/php-file-iterator": "~1.4",
                 "phpunit/php-text-template": "~1.2",
@@ -3093,7 +3308,7 @@
                 "phpunit/phpunit-mock-objects": "~2.3",
                 "sebastian/comparator": "~1.1",
                 "sebastian/diff": "~1.2",
-                "sebastian/environment": "~1.2",
+                "sebastian/environment": "~1.3",
                 "sebastian/exporter": "~1.2",
                 "sebastian/global-state": "~1.0",
                 "sebastian/version": "~1.0",
@@ -3108,7 +3323,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.7.x-dev"
+                    "dev-master": "4.8.x-dev"
                 }
             },
             "autoload": {
@@ -3134,26 +3349,27 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2015-07-13 11:28:34"
+            "time": "2015-11-11 11:32:49"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
-            "version": "2.3.5",
+            "version": "2.3.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit-mock-objects.git",
-                "reference": "1c330b1b6e1ea8fd15f2fbea46770576e366855c"
+                "reference": "ac8e7a3db35738d56ee9a76e78a4e03d97628983"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/1c330b1b6e1ea8fd15f2fbea46770576e366855c",
-                "reference": "1c330b1b6e1ea8fd15f2fbea46770576e366855c",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/ac8e7a3db35738d56ee9a76e78a4e03d97628983",
+                "reference": "ac8e7a3db35738d56ee9a76e78a4e03d97628983",
                 "shasum": ""
             },
             "require": {
-                "doctrine/instantiator": "~1.0,>=1.0.2",
+                "doctrine/instantiator": "^1.0.2",
                 "php": ">=5.3.3",
-                "phpunit/php-text-template": "~1.2"
+                "phpunit/php-text-template": "~1.2",
+                "sebastian/exporter": "~1.2"
             },
             "require-dev": {
                 "phpunit/phpunit": "~4.4"
@@ -3189,20 +3405,20 @@
                 "mock",
                 "xunit"
             ],
-            "time": "2015-07-04 05:41:32"
+            "time": "2015-10-02 06:51:40"
         },
         {
             "name": "sebastian/comparator",
-            "version": "1.1.1",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/comparator.git",
-                "reference": "1dd8869519a225f7f2b9eb663e225298fade819e"
+                "reference": "937efb279bd37a375bcadf584dec0726f84dbf22"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/1dd8869519a225f7f2b9eb663e225298fade819e",
-                "reference": "1dd8869519a225f7f2b9eb663e225298fade819e",
+                "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/937efb279bd37a375bcadf584dec0726f84dbf22",
+                "reference": "937efb279bd37a375bcadf584dec0726f84dbf22",
                 "shasum": ""
             },
             "require": {
@@ -3216,7 +3432,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.1.x-dev"
+                    "dev-master": "1.2.x-dev"
                 }
             },
             "autoload": {
@@ -3253,7 +3469,7 @@
                 "compare",
                 "equality"
             ],
-            "time": "2015-01-29 16:28:08"
+            "time": "2015-07-26 15:48:44"
         },
         {
             "name": "sebastian/diff",
@@ -3309,16 +3525,16 @@
         },
         {
             "name": "sebastian/environment",
-            "version": "1.2.2",
+            "version": "1.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/environment.git",
-                "reference": "5a8c7d31914337b69923db26c4221b81ff5a196e"
+                "reference": "6324c907ce7a52478eeeaede764f48733ef5ae44"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/5a8c7d31914337b69923db26c4221b81ff5a196e",
-                "reference": "5a8c7d31914337b69923db26c4221b81ff5a196e",
+                "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/6324c907ce7a52478eeeaede764f48733ef5ae44",
+                "reference": "6324c907ce7a52478eeeaede764f48733ef5ae44",
                 "shasum": ""
             },
             "require": {
@@ -3355,20 +3571,20 @@
                 "environment",
                 "hhvm"
             ],
-            "time": "2015-01-01 10:01:08"
+            "time": "2015-08-03 06:14:51"
         },
         {
             "name": "sebastian/exporter",
-            "version": "1.2.0",
+            "version": "1.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/exporter.git",
-                "reference": "84839970d05254c73cde183a721c7af13aede943"
+                "reference": "7ae5513327cb536431847bcc0c10edba2701064e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/exporter/zipball/84839970d05254c73cde183a721c7af13aede943",
-                "reference": "84839970d05254c73cde183a721c7af13aede943",
+                "url": "https://api.github.com/repos/sebastianbergmann/exporter/zipball/7ae5513327cb536431847bcc0c10edba2701064e",
+                "reference": "7ae5513327cb536431847bcc0c10edba2701064e",
                 "shasum": ""
             },
             "require": {
@@ -3421,20 +3637,20 @@
                 "export",
                 "exporter"
             ],
-            "time": "2015-01-27 07:23:06"
+            "time": "2015-06-21 07:55:53"
         },
         {
             "name": "sebastian/global-state",
-            "version": "1.0.0",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/global-state.git",
-                "reference": "c7428acdb62ece0a45e6306f1ae85e1c05b09c01"
+                "reference": "bc37d50fea7d017d3d340f230811c9f1d7280af4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/global-state/zipball/c7428acdb62ece0a45e6306f1ae85e1c05b09c01",
-                "reference": "c7428acdb62ece0a45e6306f1ae85e1c05b09c01",
+                "url": "https://api.github.com/repos/sebastianbergmann/global-state/zipball/bc37d50fea7d017d3d340f230811c9f1d7280af4",
+                "reference": "bc37d50fea7d017d3d340f230811c9f1d7280af4",
                 "shasum": ""
             },
             "require": {
@@ -3472,20 +3688,20 @@
             "keywords": [
                 "global state"
             ],
-            "time": "2014-10-06 09:23:50"
+            "time": "2015-10-12 03:26:01"
         },
         {
             "name": "sebastian/recursion-context",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/recursion-context.git",
-                "reference": "3989662bbb30a29d20d9faa04a846af79b276252"
+                "reference": "994d4a811bafe801fb06dccbee797863ba2792ba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/recursion-context/zipball/3989662bbb30a29d20d9faa04a846af79b276252",
-                "reference": "3989662bbb30a29d20d9faa04a846af79b276252",
+                "url": "https://api.github.com/repos/sebastianbergmann/recursion-context/zipball/994d4a811bafe801fb06dccbee797863ba2792ba",
+                "reference": "994d4a811bafe801fb06dccbee797863ba2792ba",
                 "shasum": ""
             },
             "require": {
@@ -3525,7 +3741,7 @@
             ],
             "description": "Provides functionality to recursively process PHP variables",
             "homepage": "http://www.github.com/sebastianbergmann/recursion-context",
-            "time": "2015-01-24 09:48:32"
+            "time": "2015-06-21 08:04:50"
         },
         {
             "name": "sebastian/version",
@@ -3612,10 +3828,8 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "stability-flags": {
-        "doctrine/migrations": 20,
-        "doctrine/doctrine-migrations-bundle": 20,
         "doctrineum/scalar": 20,
         "doctrineum/integer": 20,
         "doctrineum/float": 20,
@@ -3634,7 +3848,7 @@
         "drd-plus/properties": 20,
         "granam/strict-string": 20
     },
-    "prefer-stable": false,
+    "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": ">=5.5.0"
