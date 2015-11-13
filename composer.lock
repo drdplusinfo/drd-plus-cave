@@ -1093,17 +1093,50 @@
             "time": "2015-08-04 15:17:16"
         },
         {
+            "name": "drd-plus/codes",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jaroslavtyc/drd-plus-codes.git",
+                "reference": "5842d88e09d6c0f9deb46844be96185cfae67295"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-codes/zipball/5842d88e09d6c0f9deb46844be96185cfae67295",
+                "reference": "5842d88e09d6c0f9deb46844be96185cfae67295",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.4"
+            },
+            "type": "project",
+            "autoload": {
+                "psr-4": {
+                    "DrdPlus\\": "DrdPlus/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Codes of Drd+ races, properties",
+            "time": "2015-11-13 14:59:05"
+        },
+        {
             "name": "drd-plus/properties",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-properties.git",
-                "reference": "4608eb667c0f5a25035ebd98b5761f07f5a9a4a2"
+                "reference": "16459a711a7b372ed796b0119027700b177c2548"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-properties/zipball/4608eb667c0f5a25035ebd98b5761f07f5a9a4a2",
-                "reference": "4608eb667c0f5a25035ebd98b5761f07f5a9a4a2",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-properties/zipball/16459a711a7b372ed796b0119027700b177c2548",
+                "reference": "16459a711a7b372ed796b0119027700b177c2548",
                 "shasum": ""
             },
             "require": {
@@ -1134,7 +1167,7 @@
                 "MIT"
             ],
             "description": "Drd+ properties",
-            "time": "2015-11-11 16:35:33"
+            "time": "2015-11-13 15:34:45"
         },
         {
             "name": "drd-plus/races",
@@ -1142,16 +1175,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-races.git",
-                "reference": "037bf1abc223d4c32d893174ec84c8a23ee17175"
+                "reference": "d8caa2a5845a18bf5b4c8b6e400b75c091d6017e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-races/zipball/037bf1abc223d4c32d893174ec84c8a23ee17175",
-                "reference": "037bf1abc223d4c32d893174ec84c8a23ee17175",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-races/zipball/d8caa2a5845a18bf5b4c8b6e400b75c091d6017e",
+                "reference": "d8caa2a5845a18bf5b4c8b6e400b75c091d6017e",
                 "shasum": ""
             },
             "require": {
                 "doctrineum/scalar": "dev-master",
+                "drd-plus/tables": "dev-master",
+                "drd/genders": "dev-master",
                 "granam/strict-object": "dev-master",
                 "php": ">=5.5.0"
             },
@@ -1170,7 +1205,7 @@
                 "MIT"
             ],
             "description": "Drd+ races",
-            "time": "2015-10-20 10:24:38"
+            "time": "2015-11-13 14:20:48"
         },
         {
             "name": "drd-plus/tables",
@@ -1178,16 +1213,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-tables.git",
-                "reference": "8b1cda5fe25376c859fac069e39add4a12023abd"
+                "reference": "1c97f70c38447c6e551209f7104cb372193b4cf7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-tables/zipball/8b1cda5fe25376c859fac069e39add4a12023abd",
-                "reference": "8b1cda5fe25376c859fac069e39add4a12023abd",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-tables/zipball/1c97f70c38447c6e551209f7104cb372193b4cf7",
+                "reference": "1c97f70c38447c6e551209f7104cb372193b4cf7",
                 "shasum": ""
             },
             "require": {
-                "drd-plus/races": "dev-master",
+                "drd-plus/codes": "dev-master",
                 "drd/dice-roll": "dev-master",
                 "granam/boolean": "dev-master",
                 "granam/float": "dev-master",
@@ -1212,7 +1247,7 @@
                 "MIT"
             ],
             "description": "Drd+ tables and their units conversion",
-            "time": "2015-11-12 13:44:33"
+            "time": "2015-11-12 17:58:16"
         },
         {
             "name": "drd-plus/tools",
@@ -1307,6 +1342,42 @@
                 "roll"
             ],
             "time": "2015-11-04 07:53:13"
+        },
+        {
+            "name": "drd/genders",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jaroslavtyc/drd-genders.git",
+                "reference": "4b7173232b9a59b3b0a5d396b0c57444585c983c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-genders/zipball/4b7173232b9a59b3b0a5d396b0c57444585c983c",
+                "reference": "4b7173232b9a59b3b0a5d396b0c57444585c983c",
+                "shasum": ""
+            },
+            "require": {
+                "doctrineum/scalar": "dev-master",
+                "granam/strict-object": "dev-master",
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "mockery/mockery": ">=0.9",
+                "phpunit/phpunit": "~4.4"
+            },
+            "type": "project",
+            "autoload": {
+                "psr-4": {
+                    "Drd\\": "Drd/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Genders, intentioned for Drd",
+            "time": "2015-10-20 05:53:35"
         },
         {
             "name": "granam/boolean",
