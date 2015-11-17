@@ -39,7 +39,8 @@
     "drd-plus/tables": "dev-master",
     "drd-plus/tools": "dev-master",
     "drd-plus/properties": "dev-master",
-    "granam/strict-string": "dev-master"
+    "granam/strict-string": "dev-master",
+    "drd-plus/professions": "dev-master"
   },
   "require-dev": {
     "sensio/generator-bundle": "~2.3",
