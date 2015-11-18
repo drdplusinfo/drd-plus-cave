@@ -1098,12 +1098,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-codes.git",
-                "reference": "5154ca98beb38159a033415919e5d7c8a2d068b0"
+                "reference": "c3be9fb6c448f39e5123b2295e01a33c8480405a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-codes/zipball/5154ca98beb38159a033415919e5d7c8a2d068b0",
-                "reference": "5154ca98beb38159a033415919e5d7c8a2d068b0",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-codes/zipball/c3be9fb6c448f39e5123b2295e01a33c8480405a",
+                "reference": "c3be9fb6c448f39e5123b2295e01a33c8480405a",
                 "shasum": ""
             },
             "require": {
@@ -1123,7 +1123,7 @@
                 "MIT"
             ],
             "description": "Codes of Drd+ races, properties",
-            "time": "2015-11-16 20:47:03"
+            "time": "2015-11-17 17:54:43"
         },
         {
             "name": "drd-plus/professions",
@@ -1166,12 +1166,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-properties.git",
-                "reference": "18fea34a6b6a47db044c268bba2cf0aab8723c7d"
+                "reference": "26668ffe46e18ee5f551f28b96ce9601bf99e492"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-properties/zipball/18fea34a6b6a47db044c268bba2cf0aab8723c7d",
-                "reference": "18fea34a6b6a47db044c268bba2cf0aab8723c7d",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-properties/zipball/26668ffe46e18ee5f551f28b96ce9601bf99e492",
+                "reference": "26668ffe46e18ee5f551f28b96ce9601bf99e492",
                 "shasum": ""
             },
             "require": {
@@ -1179,10 +1179,8 @@
                 "doctrineum/float": "dev-master",
                 "doctrineum/integer": "dev-master",
                 "doctrineum/strict-string": "dev-master",
-                "drd-plus/races": "dev-master",
                 "drd-plus/tables": "dev-master",
                 "drd-plus/tools": "dev-master",
-                "drd/dice-roll": "dev-master",
                 "granam/strict-object": "dev-master",
                 "granam/string": "dev-master",
                 "php": ">=5.5.0"
@@ -1202,45 +1200,7 @@
                 "MIT"
             ],
             "description": "Drd+ properties",
-            "time": "2015-11-17 07:37:52"
-        },
-        {
-            "name": "drd-plus/races",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/jaroslavtyc/drd-plus-races.git",
-                "reference": "d8caa2a5845a18bf5b4c8b6e400b75c091d6017e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-races/zipball/d8caa2a5845a18bf5b4c8b6e400b75c091d6017e",
-                "reference": "d8caa2a5845a18bf5b4c8b6e400b75c091d6017e",
-                "shasum": ""
-            },
-            "require": {
-                "doctrineum/scalar": "dev-master",
-                "drd-plus/tables": "dev-master",
-                "drd/genders": "dev-master",
-                "granam/strict-object": "dev-master",
-                "php": ">=5.5.0"
-            },
-            "require-dev": {
-                "mockery/mockery": ">=0.9",
-                "phpunit/phpunit": "~4.4"
-            },
-            "type": "project",
-            "autoload": {
-                "psr-4": {
-                    "DrdPlus\\": "DrdPlus/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Drd+ races",
-            "time": "2015-11-13 14:20:48"
+            "time": "2015-11-17 08:06:59"
         },
         {
             "name": "drd-plus/tables",
@@ -1248,12 +1208,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaroslavtyc/drd-plus-tables.git",
-                "reference": "67cd54dfc7360fdb0eb2355d6dee1a07fb69645b"
+                "reference": "a732a259c27cafbf64ba0f25ad9c371065c9b781"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-tables/zipball/67cd54dfc7360fdb0eb2355d6dee1a07fb69645b",
-                "reference": "67cd54dfc7360fdb0eb2355d6dee1a07fb69645b",
+                "url": "https://api.github.com/repos/jaroslavtyc/drd-plus-tables/zipball/a732a259c27cafbf64ba0f25ad9c371065c9b781",
+                "reference": "a732a259c27cafbf64ba0f25ad9c371065c9b781",
                 "shasum": ""
             },
             "require": {
@@ -1282,7 +1242,7 @@
                 "MIT"
             ],
             "description": "Drd+ tables and their units conversion",
-            "time": "2015-11-17 07:22:48"
+            "time": "2015-11-18 09:45:49"
         },
         {
             "name": "drd-plus/tools",
@@ -1377,42 +1337,6 @@
                 "roll"
             ],
             "time": "2015-11-04 07:53:13"
-        },
-        {
-            "name": "drd/genders",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/jaroslavtyc/drd-genders.git",
-                "reference": "4b7173232b9a59b3b0a5d396b0c57444585c983c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/jaroslavtyc/drd-genders/zipball/4b7173232b9a59b3b0a5d396b0c57444585c983c",
-                "reference": "4b7173232b9a59b3b0a5d396b0c57444585c983c",
-                "shasum": ""
-            },
-            "require": {
-                "doctrineum/scalar": "dev-master",
-                "granam/strict-object": "dev-master",
-                "php": ">=5.5.0"
-            },
-            "require-dev": {
-                "mockery/mockery": ">=0.9",
-                "phpunit/phpunit": "~4.4"
-            },
-            "type": "project",
-            "autoload": {
-                "psr-4": {
-                    "Drd\\": "Drd/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Genders, intentioned for Drd",
-            "time": "2015-10-20 05:53:35"
         },
         {
             "name": "granam/boolean",
@@ -2109,38 +2033,37 @@
         },
         {
             "name": "kriswallsmith/assetic",
-            "version": "v1.3.1",
+            "version": "v1.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kriswallsmith/assetic.git",
-                "reference": "cb92b179dddfb8a3f341d53bd27e088f24d9c2e5"
+                "reference": "9928f7c4ad98b234e3559d1049abd13387f86db5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kriswallsmith/assetic/zipball/cb92b179dddfb8a3f341d53bd27e088f24d9c2e5",
-                "reference": "cb92b179dddfb8a3f341d53bd27e088f24d9c2e5",
+                "url": "https://api.github.com/repos/kriswallsmith/assetic/zipball/9928f7c4ad98b234e3559d1049abd13387f86db5",
+                "reference": "9928f7c4ad98b234e3559d1049abd13387f86db5",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.1",
-                "symfony/process": "~2.1"
+                "symfony/process": "~2.1|~3.0"
             },
             "conflict": {
-                "twig/twig": "<1.12"
+                "twig/twig": "<1.23"
             },
             "require-dev": {
-                "cssmin/cssmin": "*",
-                "joliclic/javascript-packer": "*",
-                "kamicane/packager": "*",
+                "cssmin/cssmin": "3.0.1",
+                "joliclic/javascript-packer": "1.1",
+                "kamicane/packager": "1.0",
                 "leafo/lessphp": "^0.3.7",
-                "leafo/scssphp": "*@dev",
-                "leafo/scssphp-compass": "*@dev",
-                "mrclay/minify": "*",
+                "leafo/scssphp": "~0.1",
+                "mrclay/minify": "~2.2",
                 "patchwork/jsqueeze": "~1.0|~2.0",
                 "phpunit/phpunit": "~4.8",
                 "psr/log": "~1.0",
-                "ptachoire/cssembed": "*",
-                "symfony/phpunit-bridge": "~2.7",
+                "ptachoire/cssembed": "~1.0",
+                "symfony/phpunit-bridge": "~2.7|~3.0",
                 "twig/twig": "~1.8|~2.0"
             },
             "suggest": {
@@ -2183,7 +2106,7 @@
                 "compression",
                 "minification"
             ],
-            "time": "2015-10-15 01:33:42"
+            "time": "2015-11-12 13:51:40"
         },
         {
             "name": "monolog/monolog",
@@ -2514,25 +2437,25 @@
         },
         {
             "name": "symfony/assetic-bundle",
-            "version": "v2.7.0",
+            "version": "v2.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/assetic-bundle.git",
-                "reference": "3ae5c8ca3079b6e0033cc9fbfb6500e2bc964da5"
+                "reference": "d885ec8451d5a7b077bda81bb19ac9fbff9cdc76"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/assetic-bundle/zipball/3ae5c8ca3079b6e0033cc9fbfb6500e2bc964da5",
-                "reference": "3ae5c8ca3079b6e0033cc9fbfb6500e2bc964da5",
+                "url": "https://api.github.com/repos/symfony/assetic-bundle/zipball/d885ec8451d5a7b077bda81bb19ac9fbff9cdc76",
+                "reference": "d885ec8451d5a7b077bda81bb19ac9fbff9cdc76",
                 "shasum": ""
             },
             "require": {
                 "kriswallsmith/assetic": "~1.3",
                 "php": ">=5.3.0",
-                "symfony/console": "~2.3",
-                "symfony/dependency-injection": "~2.3",
-                "symfony/framework-bundle": "~2.3",
-                "symfony/yaml": "~2.3"
+                "symfony/console": "~2.3|~3.0",
+                "symfony/dependency-injection": "~2.3|~3.0",
+                "symfony/framework-bundle": "~2.3|~3.0",
+                "symfony/yaml": "~2.3|~3.0"
             },
             "conflict": {
                 "kriswallsmith/spork": "<=0.2",
@@ -2541,11 +2464,11 @@
             "require-dev": {
                 "kriswallsmith/spork": "~0.3",
                 "patchwork/jsqueeze": "~1.0",
-                "symfony/class-loader": "~2.3",
-                "symfony/css-selector": "~2.3",
-                "symfony/dom-crawler": "~2.3",
-                "symfony/phpunit-bridge": "~2.7",
-                "symfony/twig-bundle": "~2.3"
+                "symfony/class-loader": "~2.3|~3.0",
+                "symfony/css-selector": "~2.3|~3.0",
+                "symfony/dom-crawler": "~2.3|~3.0",
+                "symfony/phpunit-bridge": "~2.7|~3.0",
+                "symfony/twig-bundle": "~2.3|~3.0"
             },
             "suggest": {
                 "kriswallsmith/spork": "to be able to dump assets in parallel",
@@ -2580,33 +2503,33 @@
                 "compression",
                 "minification"
             ],
-            "time": "2015-09-01 00:05:29"
+            "time": "2015-11-17 09:45:47"
         },
         {
             "name": "symfony/monolog-bundle",
-            "version": "2.8.1",
+            "version": "v2.8.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/monolog-bundle.git",
-                "reference": "7117b9a145722e3c5768db4585f6ad0643ed5c4a"
+                "reference": "84785c4d44801c4dd82829fa2e1820cacfe2c46f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/monolog-bundle/zipball/7117b9a145722e3c5768db4585f6ad0643ed5c4a",
-                "reference": "7117b9a145722e3c5768db4585f6ad0643ed5c4a",
+                "url": "https://api.github.com/repos/symfony/monolog-bundle/zipball/84785c4d44801c4dd82829fa2e1820cacfe2c46f",
+                "reference": "84785c4d44801c4dd82829fa2e1820cacfe2c46f",
                 "shasum": ""
             },
             "require": {
                 "monolog/monolog": "~1.8",
                 "php": ">=5.3.2",
-                "symfony/config": "~2.3|3.*",
-                "symfony/dependency-injection": "~2.3|3.*",
-                "symfony/http-kernel": "~2.3|3.*",
-                "symfony/monolog-bridge": "~2.3|3.*"
+                "symfony/config": "~2.3|~3.0",
+                "symfony/dependency-injection": "~2.3|~3.0",
+                "symfony/http-kernel": "~2.3|~3.0",
+                "symfony/monolog-bridge": "~2.3|~3.0"
             },
             "require-dev": {
-                "symfony/console": "~2.3|3.*",
-                "symfony/yaml": "~2.3"
+                "symfony/console": "~2.3|~3.0",
+                "symfony/yaml": "~2.3|~3.0"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -2639,7 +2562,7 @@
                 "log",
                 "logging"
             ],
-            "time": "2015-10-02 11:51:59"
+            "time": "2015-11-17 10:02:29"
         },
         {
             "name": "symfony/swiftmailer-bundle",
