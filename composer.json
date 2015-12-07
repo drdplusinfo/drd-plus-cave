@@ -44,7 +44,8 @@
     "drd-plus/profession-levels": "dev-master",
     "drd-plus/exceptionalities": "dev-master",
     "drd-plus/races": "dev-master",
-    "drd-plus/game-characteristics": "dev-master"
+    "drd-plus/game-characteristics": "dev-master",
+    "drd-plus/person-properties": "dev-master"
   },
   "require-dev": {
     "sensio/generator-bundle": "~2.3",
