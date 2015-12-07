@@ -6,12 +6,6 @@ use Granam\Integer\IntegerInterface;
 
 class Experiences extends IntegerEnum implements IntegerInterface
 {
-    /**
-     * @return int
-     */
-    public function getValue()
-    {
-        return $this->getEnumValue();
-    }
+    const EXPERIENCES = 'experiences';
 
 }
