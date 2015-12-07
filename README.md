@@ -9,4 +9,4 @@ Conventions
 
 *Summary* = number, directly usable for counting
 
-*Increment* = StrictInteger or IntegerEnum - wrapper for the value itself
+*Adjustment* = IntegerObject - wrapper for the value itself, increment or decrement 
