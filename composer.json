@@ -26,7 +26,6 @@
     "doctrineum/scalar": "dev-master",
     "doctrineum/integer": "dev-master",
     "doctrineum/float": "dev-master",
-    "doctrineum/strict-string": "dev-master",
     "granam/exception-hierarchy": "dev-master",
     "granam/strict-object": "dev-master",
     "granam/strict-scalar": "dev-master",
@@ -35,15 +34,17 @@
     "granam/scalar": "dev-master",
     "granam/float": "dev-master",
     "granam/integer": "dev-master",
+    "granam/strict-string": "dev-master",
     "drd/dice-roll": "dev-master",
+    "drd/genders": "dev-master",
     "drd-plus/tables": "dev-master",
     "drd-plus/tools": "dev-master",
     "drd-plus/properties": "dev-master",
-    "granam/strict-string": "dev-master",
     "drd-plus/professions": "dev-master",
     "drd-plus/profession-levels": "dev-master",
-    "drd/genders": "dev-master",
-    "drd-plus/races": "dev-master"
+    "drd-plus/exceptionalities": "dev-master",
+    "drd-plus/races": "dev-master",
+    "drd-plus/game-characteristics": "dev-master"
   },
   "require-dev": {
     "sensio/generator-bundle": "~2.3",
