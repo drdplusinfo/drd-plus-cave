@@ -1,18 +1,17 @@
 <?php
-
 namespace DrdPlus\Cave\UnitBundle;
 
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Name;
-use DrdPlus\Cave\UnitBundle\Person\ProfessionLevels\LevelRank;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Agility;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Charisma;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Intelligence;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Knack;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Strength;
-use DrdPlus\Cave\UnitBundle\Person\Attributes\Properties\Will;
-use DrdPlus\Cave\UnitBundle\Person\Races\Gender;
-use DrdPlus\Cave\UnitBundle\Person\Races\Race;
-use DrdPlus\Cave\UnitBundle\Tests\TestWithMockery;
+use Drd\Genders\EnumTypes\GenderType;
+use DrdPlus\Person\Attributes\EnumTypes\NameType;
+use DrdPlus\Person\ProfessionLevels\EnumTypes\LevelRankType;
+use DrdPlus\Properties\Base\EnumTypes\AgilityType;
+use DrdPlus\Properties\Base\EnumTypes\CharismaType;
+use DrdPlus\Properties\Base\EnumTypes\IntelligenceType;
+use DrdPlus\Properties\Base\EnumTypes\KnackType;
+use DrdPlus\Properties\Base\EnumTypes\StrengthType;
+use DrdPlus\Properties\Base\EnumTypes\WillType;
+use DrdPlus\Races\EnumTypes\RaceType;
+use DrdPlus\Tests\Tools\TestWithMockery;
 
 class DrdPlusCaveUnitBundleTest extends TestWithMockery
 {
@@ -39,15 +38,15 @@ class DrdPlusCaveUnitBundleTest extends TestWithMockery
     {
         $bundle->boot();
 
-        $this->assertTrue(Name::isRegistered());
-        $this->assertTrue(Race::isRegistered());
-        $this->assertTrue(Gender::isRegistered());
-        $this->assertTrue(LevelRank::isRegistered());
-        $this->assertTrue(Strength::isRegistered());
-        $this->assertTrue(Agility::isRegistered());
-        $this->assertTrue(Knack::isRegistered());
-        $this->assertTrue(Will::isRegistered());
-        $this->assertTrue(Intelligence::isRegistered());
-        $this->assertTrue(Charisma::isRegistered());
+        $this->assertTrue(NameType::isRegistered());
+        $this->assertTrue(RaceType::isRegistered());
+        $this->assertTrue(GenderType::isRegistered());
+        $this->assertTrue(LevelRankType::isRegistered());
+        $this->assertTrue(StrengthType::isRegistered());
+        $this->assertTrue(AgilityType::isRegistered());
+        $this->assertTrue(KnackType::isRegistered());
+        $this->assertTrue(WillType::isRegistered());
+        $this->assertTrue(IntelligenceType::isRegistered());
+        $this->assertTrue(CharismaType::isRegistered());
     }
 }
