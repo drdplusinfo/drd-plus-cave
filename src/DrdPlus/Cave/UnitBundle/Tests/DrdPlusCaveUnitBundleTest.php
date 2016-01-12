@@ -20,7 +20,7 @@ class DrdPlusCaveUnitBundleTest extends TestWithMockery
      *
      * @test
      */
-    public function can_be_created()
+    public function I_can_create_it()
     {
         $instance = new DrdPlusCaveUnitBundle();
         $this->assertNotNull($instance);
@@ -32,9 +32,9 @@ class DrdPlusCaveUnitBundleTest extends TestWithMockery
      * @param DrdPlusCaveUnitBundle $bundle
      *
      * @test
-     * @depends can_be_created
+     * @depends I_can_create_it
      */
-    public function register_enums_on_boot(DrdPlusCaveUnitBundle $bundle)
+    public function I_can_use_enums_without_explicit_regitering(DrdPlusCaveUnitBundle $bundle)
     {
         $bundle->boot();
 
