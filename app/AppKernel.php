@@ -1,5 +1,4 @@
 <?php
-
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\HttpKernel\Kernel;
 
@@ -18,6 +17,7 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new DrdPlus\Cave\UnitBundle\DrdPlusCaveUnitBundle(),
+            new DrdPlus\Cave\TablesBundle\DrdPlusCaveTablesBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'])) {

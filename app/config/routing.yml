@@ -2,15 +2,6 @@ drd_plus_cave_tables:
     resource: "@DrdPlusCaveTablesBundle/Resources/config/routing.yml"
     prefix:   /
 
-drd_plus_cave_tools:
-    resource: "@DrdPlusCaveToolsBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
-drd_plus_cave_security:
-    resource: "@DrdPlusCaveSecurityBundle/Resources/config/routing.yml"
-    prefix:   /
-
 drd_plus_cave_character:
     resource: "@DrdPlusCaveUnitBundle/Resources/config/routing.yml"
     prefix:   /

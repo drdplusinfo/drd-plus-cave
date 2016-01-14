@@ -1,0 +1,3 @@
+drd_plus_cave_tables_homepage:
+    path:     /tables
+    defaults: { _controller: DrdPlusCaveTablesBundle:Tables:index }
