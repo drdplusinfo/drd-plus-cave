@@ -10,9 +10,6 @@
         backupGlobals="false"
         colors="true"
 >
-    <php>
-        <server name="KERNEL_DIR" value="/home/jaroslav/Dropbox/Projects/drd/plus/cave/app" />
-    </php>
     <testsuites>
         <testsuite name="all">
             <directory>./src</directory>
