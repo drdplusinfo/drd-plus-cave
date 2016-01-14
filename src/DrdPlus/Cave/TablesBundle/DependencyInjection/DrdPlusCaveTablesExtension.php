@@ -1,5 +1,4 @@
 <?php
-
 namespace DrdPlus\Cave\TablesBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;

@@ -1,5 +1,4 @@
 <?php
-
 namespace DrdPlus\Cave\TablesBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
@@ -18,7 +17,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-//        $rootNode = $treeBuilder->root('drd_plus_cave_tables');
+        $treeBuilder->root('drd_plus_cave_tables');
 
         // Here you should define the parameters that are allowed to
         // configure your bundle. See the documentation linked above for
