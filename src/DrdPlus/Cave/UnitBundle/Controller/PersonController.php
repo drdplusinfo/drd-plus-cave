@@ -1,10 +1,9 @@
 <?php
-
 namespace DrdPlus\Cave\UnitBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class DefaultController extends Controller
+class PersonController extends Controller
 {
     public function indexAction($name)
     {
