@@ -35,6 +35,7 @@
     "granam/float": "dev-master",
     "granam/integer": "dev-master",
     "granam/strict-string": "dev-master",
+    "granam/tools": "dev-master",
     "drd/dice-roll": "dev-master",
     "drd/genders": "dev-master",
     "drd-plus/tables": "dev-master",

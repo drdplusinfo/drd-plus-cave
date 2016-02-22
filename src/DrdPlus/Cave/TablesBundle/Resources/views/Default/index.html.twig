@@ -1,3 +1,31 @@
-{% for table in tables %}
-    {{ dump(table) }}
-{% endfor %}
+{% extends "base.html.twig" %}
+{% block title %}
+    Tables
+{% endblock %}
+{% block body %}
+    {% for table in tables %}
+        <table title="{{ table.name }}">
+            <thead>
+            <tr>
+                <th colspan="100%">{{ table.name }}</th>
+            </tr>
+            {% for headerRow in table.header %}
+                <tr>
+                    {% for headerValue in headerRow %}
+                        <th>{{ headerValue }}</th>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+            </thead>
+            <tbody>
+            {% for dataRow in table.values %}
+                <tr>
+                    {% for value in dataRow %}
+                        <td>{{ value }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endfor %}
+{% endblock %}

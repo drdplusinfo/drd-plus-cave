@@ -11,6 +11,6 @@ class TablesControllerTest extends WebTestCase
 
         $crawler = $client->request('GET', '/tables');
 
-        $this->assertTrue($crawler->filter('html:contains("DrdPlus\\Tables")')->count() > 0);
+        $this->assertTrue($crawler->filter('html:contains("table")')->count() > 0);
     }
 }
