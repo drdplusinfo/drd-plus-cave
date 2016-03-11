@@ -2,6 +2,7 @@
 
 {% block body %}
     <h1>Step 3 - Player decision properties</h1>
+    <h3>{{ selected.previous.properties.fate }}</h3>
     <a href="{{ backUrl }}" title="back">< Back</a>
 
     <form method="get" action="">
@@ -25,22 +26,22 @@
             <tbody>
             <tr>
                 <td>
-                    <input name="properties[strength]" type="number" title="Strength" value="0">
+                    <input name="properties[strength]" type="number" title="Strength" value="0" max="{{ maximum }}" min="0">
                 </td>
                 <td>
-                    <input name="properties[agility]" type="number" title="Agility" value="0">
+                    <input name="properties[agility]" type="number" title="Agility" value="0" max="{{ maximum }}" min="0">
                 </td>
                 <td>
-                    <input name="properties[knack]" type="number" title="Knack" value="0">
+                    <input name="properties[knack]" type="number" title="Knack" value="0" max="{{ maximum }}" min="0">
                 </td>
                 <td>
-                    <input name="properties[will]" type="number" title="Will" value="0">
+                    <input name="properties[will]" type="number" title="Will" value="0" max="{{ maximum }}" min="0">
                 </td>
                 <td>
-                    <input name="properties[intelligence]" type="number" title="Intelligence" value="0">
+                    <input name="properties[intelligence]" type="number" title="Intelligence" value="0" max="{{ maximum }}" min="0">
                 </td>
                 <td>
-                    <input name="properties[charisma]" type="number" title="Charisma" value="0">
+                    <input name="properties[charisma]" type="number" title="Charisma" value="0" max="{{ maximum }}" min="0">
                 </td>
             </tr>
             </tbody>

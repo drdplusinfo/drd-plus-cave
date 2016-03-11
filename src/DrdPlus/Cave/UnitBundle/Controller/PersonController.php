@@ -119,9 +119,9 @@ class PersonController extends Controller
 
         switch ($choice::getCode()) {
             case PlayerDecision::PLAYER_DECISION :
-                return $this->playerDecisionProperties($request);
+                return $this->playerDecisionPropertiesAction($request);
             case Fortune::FORTUNE :
-                return $this->fortuneProperties($request);
+                return $this->fortunePropertiesAction($request);
             default :
                 return $this->choiceAndFateAction($request); //step back
         }
@@ -148,7 +148,7 @@ class PersonController extends Controller
         return false;
     }
 
-    private function fortuneProperties(Request $request)
+    private function fortunePropertiesAction(Request $request)
     {
         $fate = $this->findSelectedFate($request);
         $professionLevel = $this->getProfessionLevel($request);
@@ -198,8 +198,10 @@ class PersonController extends Controller
         return ProfessionFirstLevel::createFirstLevel($profession);
     }
 
-    private function playerDecisionProperties(Request $request)
+    private function playerDecisionPropertiesAction(Request $request)
     {
+        $fate = $this->findSelectedFate($request);
+
         return $this->render(
             '@DrdPlusCaveUnit/Person/player-decision-properties.html.twig',
             [
@@ -207,6 +209,7 @@ class PersonController extends Controller
                 'selected' => [
                     'previous' => $request->query->all(),
                 ],
+                'maximum' => $fate->getUpToSingleProperty(),
             ]
         );
     }
