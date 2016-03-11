@@ -1,0 +1,114 @@
+{% extends "base.html.twig" %}
+{% block title %}
+    Person wizard
+{% endblock %}
+{% block body %}
+    <form method="get" action="{{ path('drd_plus_cave_unit_choice_and_fate') }}">
+        <table>
+            <thead>
+            <tr>
+                <th><h1>Step 1 - Person</h1></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <label>Name
+                        <input type="text" name="person[name]"
+                               value="{% if person.name is defined %}{{ person.name }}{% endif %}">
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Race
+                        <select name="person[race]">
+                            {% for race in races %}
+                                <option value="{{ race }}" {% if person.race == race %}selected{% endif %}>
+                                    {{ race }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Sub-race
+                        <select name="person[subRace]">
+                            {% for subRacesOfRace in subRaces %}
+                                {% for subRace in subRacesOfRace %}
+                                    <option value="{{ subRace }}" {% if person.subRace == subRace %}selected{% endif %}>
+                                        {{ subRace }}
+                                    </option>
+                                {% endfor %}
+                            {% endfor %}
+                        </select>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Gender
+                        <select name="person[gender]">
+                            {% for gender in genders %}
+                                <option value="{{ gender }}" {% if person.gender == gender %}selected{% endif %}>
+                                    {{ gender }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Profession
+                        <select name="person[profession]">
+                            {% for profession in professions %}
+                                <option value="{{ profession }}" {% if person.profession == profession %}selected{% endif %}>
+                                    {{ profession }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Experiences
+                        <input name="person[experiences]" type="number" min="0" value="{{ person.experiences }}">
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <hr>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Height
+                        <input name="person[height]" type="number" min="1"
+                               value="{{ person.height }}">
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Weight
+                        <input name="person[weight]" type="number" min="1" value="{{ person.weight }}">
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Age
+                        <input name="person[age]" type="number" min="4" value="{{ person.age }}">
+                    </label>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <input type="submit" value="Confirm">
+    </form>
+{% endblock %}

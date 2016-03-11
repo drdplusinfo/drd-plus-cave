@@ -11,7 +11,7 @@ use DrdPlus\Properties\Base\EnumTypes\KnackType;
 use DrdPlus\Properties\Base\EnumTypes\StrengthType;
 use DrdPlus\Properties\Base\EnumTypes\WillType;
 use DrdPlus\Races\EnumTypes\RaceType;
-use DrdPlus\Tests\Tools\TestWithMockery;
+use Granam\Tests\Tools\TestWithMockery;
 
 class DrdPlusCaveUnitBundleTest extends TestWithMockery
 {
@@ -23,7 +23,7 @@ class DrdPlusCaveUnitBundleTest extends TestWithMockery
     public function I_can_create_it()
     {
         $instance = new DrdPlusCaveUnitBundle();
-        $this->assertNotNull($instance);
+        self::assertNotNull($instance);
 
         return $instance;
     }
@@ -38,15 +38,15 @@ class DrdPlusCaveUnitBundleTest extends TestWithMockery
     {
         $bundle->boot();
 
-        $this->assertTrue(NameType::isRegistered());
-        $this->assertTrue(RaceType::isRegistered());
-        $this->assertTrue(GenderType::isRegistered());
-        $this->assertTrue(LevelRankType::isRegistered());
-        $this->assertTrue(StrengthType::isRegistered());
-        $this->assertTrue(AgilityType::isRegistered());
-        $this->assertTrue(KnackType::isRegistered());
-        $this->assertTrue(WillType::isRegistered());
-        $this->assertTrue(IntelligenceType::isRegistered());
-        $this->assertTrue(CharismaType::isRegistered());
+        self::assertTrue(NameType::isRegistered());
+        self::assertTrue(RaceType::isRegistered());
+        self::assertTrue(GenderType::isRegistered());
+        self::assertTrue(LevelRankType::isRegistered());
+        self::assertTrue(StrengthType::isRegistered());
+        self::assertTrue(AgilityType::isRegistered());
+        self::assertTrue(KnackType::isRegistered());
+        self::assertTrue(WillType::isRegistered());
+        self::assertTrue(IntelligenceType::isRegistered());
+        self::assertTrue(CharismaType::isRegistered());
     }
 }

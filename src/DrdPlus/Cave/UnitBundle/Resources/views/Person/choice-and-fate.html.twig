@@ -1,0 +1,46 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+    <h1>Step 2 - Choice and fate</h1>
+    <a href="{{ backUrl }}" title="back">< Back</a>
+
+    <form method="get" action="{{ nextUrl }}">
+        {% for previousStepKey, previousValues in selected.previous %}
+            {% for previousKey, previousValue in previousValues %}
+                {{ previousStepKey }}.{{ previousKey }} = {{ previousValue }}
+                <input type="hidden" name="{{ previousStepKey }}[{{ previousKey }}]" value="{{ previousValue }}">
+            {% endfor %}
+        {% endfor %}
+        <table>
+            <tbody>
+            <tr>
+                <td>
+                    <label>Choice
+                        <select name="properties[choice]">
+                            {% for choice in choices %}
+                                <option value="{{ choice }}" {% if selected.choice == choice %}selected{% endif %}>
+                                    {{ choice }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Fate
+                        <select name="properties[fate]">
+                            {% for fate in fates %}
+                                <option value="{{ fate }}" {% if selected.fate == fate %}selected{% endif %}>
+                                    {{ fate }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </label>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <input type="submit" value="Confirm">
+    </form>
+{% endblock %}

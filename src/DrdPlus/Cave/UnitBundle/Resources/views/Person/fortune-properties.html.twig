@@ -1,0 +1,57 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+    <h1>Step 3 - Fortune properties</h1>
+    <h3>{{ selected.previous.properties.fate }}</h3>
+    <a href="{{ backUrl }}" title="back">< Back</a>
+
+    <form method="get" action="">
+        {% for previousStepKey, previousValues in selected.previous %}
+            {% for previousKey, previousValue in previousValues %}
+                {{ previousStepKey }}.{{ previousKey }} = {{ previousValue }}
+                <input type="hidden" name="{{ previousStepKey }}[{{ previousKey }}]" value="{{ previousValue }}">
+            {% endfor %}
+        {% endfor %}
+        <table>
+            <thead>
+            <tr>
+                <th>Strength</th>
+                <th>Agility</th>
+                <th>Knack</th>
+                <th>Will</th>
+                <th>Intelligence</th>
+                <th>Charisma</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <input disabled type="number" title="Rolled {{ rolled.strengthRoll }}" value="{{ rolled.strength }}">
+                    <input name="properties[strengthRoll]" type="hidden" value="{{ rolled.strengthRoll }}">
+                </td>
+                <td>
+                    <input disabled type="number" title="Rolled {{ rolled.agilityRoll }}" value="{{ rolled.agility }}">
+                    <input name="properties[agilityRoll]" type="hidden" value="{{ rolled.agilityRoll }}">
+                </td>
+                <td>
+                    <input disabled type="number" title="Rolled {{ rolled.knackRoll }}" value="{{ rolled.knack }}">
+                    <input name="properties[knackRoll]" type="hidden" value="{{ rolled.knackRoll }}">
+                </td>
+                <td>
+                    <input disabled type="number" title="Rolled {{ rolled.willRoll }}" value="{{ rolled.will }}">
+                    <input name="properties[willRoll]" type="hidden" value="{{ rolled.willRoll }}">
+                </td>
+                <td>
+                    <input disabled type="number" title="Rolled {{ rolled.intelligenceRoll }}" value="{{ rolled.intelligence }}">
+                    <input name="properties[intelligence]" type="hidden" value="{{ rolled.intelligenceRoll }}">
+                </td>
+                <td>
+                    <input disabled type="number" title="Rolled {{ rolled.charismaRoll }}" value="{{ rolled.charisma }}">
+                    <input name="properties[charismaRoll]" type="hidden" value="{{ rolled.charismaRoll }}">
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <input type="submit" value="Confirm">
+    </form>
+{% endblock %}

@@ -1,3 +1,9 @@
-drd_plus_cave_unit_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: DrdPlusCaveUnitBundle:Default:index }
+drd_plus_cave_unit_person:
+    path:     /person/
+    defaults: { _controller: DrdPlusCaveUnitBundle:Person:person }
+drd_plus_cave_unit_choice_and_fate:
+    path:     /fate-and-choice/
+    defaults: { _controller: DrdPlusCaveUnitBundle:Person:choiceAndFate }
+drd_plus_cave_unit_exceptionality_properties:
+    path:     /exceptionality-properties/
+    defaults: { _controller: DrdPlusCaveUnitBundle:Person:exceptionalityProperties }

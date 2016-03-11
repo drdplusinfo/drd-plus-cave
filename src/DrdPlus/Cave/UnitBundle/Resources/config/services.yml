@@ -1,1 +1,7 @@
 services:
+  drd_plus_cave_unit.exceptionality_factory:
+    class: DrdPlus\Exceptionalities\ExceptionalityFactory
+  drd_plus_cave_unit.exceptionality_properties_factory:
+    class: DrdPlus\Exceptionalities\Properties\ExceptionalityPropertiesFactory
+  drd_plus_cave_unit.base_properties_factory:
+    class: DrdPlus\Properties\Base\BasePropertiesFactory

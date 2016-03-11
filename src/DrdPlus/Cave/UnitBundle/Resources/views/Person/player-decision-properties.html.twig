@@ -1,0 +1,50 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+    <h1>Step 3 - Player decision properties</h1>
+    <a href="{{ backUrl }}" title="back">< Back</a>
+
+    <form method="get" action="">
+        {% for previousStepKey, previousValues in selected.previous %}
+            {% for previousKey, previousValue in previousValues %}
+                {{ previousStepKey }}.{{ previousKey }} = {{ previousValue }}
+                <input type="hidden" name="{{ previousStepKey }}[{{ previousKey }}]" value="{{ previousValue }}">
+            {% endfor %}
+        {% endfor %}
+        <table>
+            <thead>
+            <tr>
+                <th>Strength</th>
+                <th>Agility</th>
+                <th>Knack</th>
+                <th>Will</th>
+                <th>Intelligence</th>
+                <th>Charisma</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <input name="properties[strength]" type="number" title="Strength" value="0">
+                </td>
+                <td>
+                    <input name="properties[agility]" type="number" title="Agility" value="0">
+                </td>
+                <td>
+                    <input name="properties[knack]" type="number" title="Knack" value="0">
+                </td>
+                <td>
+                    <input name="properties[will]" type="number" title="Will" value="0">
+                </td>
+                <td>
+                    <input name="properties[intelligence]" type="number" title="Intelligence" value="0">
+                </td>
+                <td>
+                    <input name="properties[charisma]" type="number" title="Charisma" value="0">
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <input type="submit" value="Confirm">
+    </form>
+{% endblock %}
