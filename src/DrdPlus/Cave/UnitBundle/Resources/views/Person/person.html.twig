@@ -65,7 +65,8 @@
                     <label>Profession
                         <select name="person[profession]">
                             {% for profession in professions %}
-                                <option value="{{ profession }}" {% if person.profession == profession %}selected{% endif %}>
+                                <option value="{{ profession }}"
+                                        {% if person.profession == profession %}selected{% endif %}>
                                     {{ profession }}
                                 </option>
                             {% endfor %}
@@ -95,9 +96,11 @@
             </tr>
             <tr>
                 <td>
-                    <label>Weight
-                        <input name="person[weight]" type="number" min="1" value="{{ person.weight }}">
+                    <label>Weight adjustment
+                        <input name="person[weightInKgAdjustment]" type="number" min="-100" max="120"
+                               value="{{ person.weightInKgAdjustment }}">
                     </label>
+                    kg
                 </td>
             </tr>
             <tr>

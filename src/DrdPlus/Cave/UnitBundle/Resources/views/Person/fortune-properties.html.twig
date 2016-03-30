@@ -5,7 +5,7 @@
     <h3>{{ selected.previous.properties.fate }}</h3>
     <a href="{{ backUrl }}" title="back">< Back</a>
 
-    <form method="get" action="">
+    <form method="get" action="{{ nextUrl }}">
         {% for previousStepKey, previousValues in selected.previous %}
             {% for previousKey, previousValue in previousValues %}
                 {{ previousStepKey }}.{{ previousKey }} = {{ previousValue }}
@@ -43,7 +43,7 @@
                 </td>
                 <td>
                     <input disabled type="number" title="Rolled {{ rolled.intelligenceRoll }}" value="{{ rolled.intelligence }}">
-                    <input name="properties[intelligence]" type="hidden" value="{{ rolled.intelligenceRoll }}">
+                    <input name="properties[intelligenceRoll]" type="hidden" value="{{ rolled.intelligenceRoll }}">
                 </td>
                 <td>
                     <input disabled type="number" title="Rolled {{ rolled.charismaRoll }}" value="{{ rolled.charisma }}">

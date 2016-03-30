@@ -1,7 +1,11 @@
 services:
-  drd_plus_cave_unit.exceptionality_factory:
-    class: DrdPlus\Exceptionalities\ExceptionalityFactory
+  drd_plus_cave_unit.exceptionalities_factory:
+    class: DrdPlus\Exceptionalities\ExceptionalitiesFactory
   drd_plus_cave_unit.exceptionality_properties_factory:
     class: DrdPlus\Exceptionalities\Properties\ExceptionalityPropertiesFactory
   drd_plus_cave_unit.base_properties_factory:
     class: DrdPlus\Properties\Base\BasePropertiesFactory
+  drd_plus_cave_unit.races_factory:
+    class: DrdPlus\Races\RacesFactory
+  drd_plus_cave_unit.genders_factory:
+    class: Drd\Genders\GendersFactory

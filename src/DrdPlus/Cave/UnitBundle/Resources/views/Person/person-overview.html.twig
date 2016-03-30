@@ -1,0 +1,21 @@
+{% extends "base.html.twig" %}
+{% block title %}
+    Person overview
+{% endblock %}
+
+{% block body %}
+    <h1>Step 4 - Person overview</h1>
+    <a href="{{ backUrl }}" title="back">< Back</a>
+
+    <div>
+        {% for previousStepKey, previousValues in selected.previous %}
+            {% for previousKey, previousValue in previousValues %}
+                {{ previousStepKey }}.{{ previousKey }} = {{ previousValue }}
+                <input type="hidden" name="{{ previousStepKey }}[{{ previousKey }}]" value="{{ previousValue }}">
+            {% endfor %}
+        {% endfor %}
+    </div>
+    <div>
+        {{ dump(person) }}
+    </div>
+{% endblock %}

@@ -5,7 +5,7 @@
     <h3>{{ selected.previous.properties.fate }}</h3>
     <a href="{{ backUrl }}" title="back">< Back</a>
 
-    <form method="get" action="">
+    <form method="get" action="{{ nextUrl }}">
         {% for previousStepKey, previousValues in selected.previous %}
             {% for previousKey, previousValue in previousValues %}
                 {{ previousStepKey }}.{{ previousKey }} = {{ previousValue }}

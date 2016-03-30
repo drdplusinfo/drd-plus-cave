@@ -7,3 +7,6 @@ drd_plus_cave_unit_choice_and_fate:
 drd_plus_cave_unit_exceptionality_properties:
     path:     /exceptionality-properties/
     defaults: { _controller: DrdPlusCaveUnitBundle:Person:exceptionalityProperties }
+drd_plus_cave_unit_person_overview:
+    path:     /person-overview/
+    defaults: { _controller: DrdPlusCaveUnitBundle:Person:personOverview }
