@@ -15,7 +15,47 @@
             {% endfor %}
         {% endfor %}
     </div>
-    <div>
-        {{ dump(person) }}
-    </div>
+    <table>
+        <tbody>
+        <tr>
+            <td>Remaining background points:</td>
+            <td>{{ person.background.remainingBackgroundPoints }}</td>
+        </tr>
+        <tr>
+            <td>Heritage:</td>
+            <td>{{ person.background.heritage.heritageName }}</td>
+        </tr>
+        <tr>
+            <td>Belongings value:</td>
+            <td>{{ person.background.belongingsValue.belongingsPrice.goldCoins }} gold(s)</td>
+        </tr>
+        </tbody>
+    </table>
+    <table>
+        <thead>
+        <tr>
+            <th><H2>Learned skills</H2></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for skill in person.personSkills.skills %}
+            <tr>
+                <td>{{ skill.name }}</td>
+                <td>{{ skill.currentSkillRank }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        <thead>
+        <tr>
+            <th><H3>Not learned skills</H3></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for notLearnedSkill in person.personSkills.codesOfNotLearnedSkills %}
+            <tr>
+                <td>{{ notLearnedSkill }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}

@@ -413,7 +413,6 @@ class PersonController extends Controller
     {
         $fate = $this->findSelectedFate($request);
         $choice = $this->findSelectedChoice($request);
-        // TODO current level instead
         $professionLevel = $this->createFirstProfessionLevel($this->findSelectedProfession($request));
         switch ($choice->getValue()) {
             case Fortune::FORTUNE :
