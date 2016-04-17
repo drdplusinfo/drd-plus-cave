@@ -77,7 +77,8 @@
             <tr>
                 <td>
                     <label>Experiences
-                        <input name="person[experiences]" type="number" min="0" value="{{ person.experiences }}">
+                        <input name="person[experiences]" type="number" min="0" max="{{ maxExperiences }}"
+                               value="{{ person.experiences }}">
                     </label>
                 </td>
             </tr>
@@ -89,8 +90,8 @@
             <tr>
                 <td>
                     <label>Height
-                        <input name="person[height]" type="number" min="1"
-                               value="{{ person.height }}">
+                        <input name="person[heightInCm]" type="number" min="1"
+                               value="{{ person.heightInCm }}">
                     </label>
                 </td>
             </tr>

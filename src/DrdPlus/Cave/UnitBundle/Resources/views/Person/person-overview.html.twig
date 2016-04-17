@@ -18,8 +18,160 @@
     <table>
         <tbody>
         <tr>
+            <td>Name</td>
+            <td>{{ person.name }}</td>
+        </tr>
+        <tr>
+            <td>Race</td>
+            <td>{{ person.race }}</td>
+        </tr>
+        <tr>
+            <td>Gender</td>
+            <td>{{ person.gender }}</td>
+        </tr>
+        <tr>
+            <td>Profession</td>
+            <td>{{ person.profession }}</td>
+        </tr>
+        <tr>
+            <td>Experiences</td>
+            <td>{#{{ person.memories.experiences() }}#}</td>
+        </tr>
+        <tr>
+            <td>Level (avaliable)</td>
+            <td>{{ person.professionLevels.currentLevel.levelRank }} ({{ availableLevel }})</td>
+        </tr>
+        <tr>
+            <td>Weight in kg (adjustment)</td>
+            <td>{{ personProperties.weightInKg }} ({{ personProperties.weightInKgAdjustment }})</td>
+        </tr>
+        <tr>
+            <td>Height in cm</td>
+            <td>{{ personProperties.heightInCm }}</td>
+        </tr>
+        <tr>
+            <td>Age</td>
+            <td>{{ personProperties.age }}</td>
+        </tr>
+        <tr>
+            <td>Choice</td>
+            <td>{{ choice }}</td>
+        </tr>
+        <tr>
+            <td>Fate</td>
+            <td>{{ fate }}</td>
+        </tr>
+        <tr>
+            <td>Size</td>
+            <td>{{ personProperties.size }}</td>
+        </tr>
+        </tbody>
+    </table>
+    <table>
+        <tbody>
+        <tr>
+            <td>Strength (from first level + next levels)</td>
+            <td>{{ personProperties.strength }} ({{ personProperties.firstLevelProperties.firstLevelStrength }}
+                + {{ personProperties.nextLevelsProperties.nextLevelsStrength }})
+            </td>
+        </tr>
+        <tr>
+            <td>Agility (from first level + next levels)</td>
+            <td>{{ personProperties.agility }} ({{ personProperties.firstLevelProperties.firstLevelAgility }}
+                + {{ personProperties.nextLevelsProperties.nextLevelsAgility }})
+            </td>
+        </tr>
+        <tr>
+            <td>Knack (from first level + next levels)</td>
+            <td>{{ personProperties.Knack }} ({{ personProperties.firstLevelProperties.firstLevelKnack }}
+                + {{ personProperties.nextLevelsProperties.nextLevelsKnack }})
+            </td>
+        </tr>
+        <tr>
+            <td>Will (from first level + next levels)</td>
+            <td>{{ personProperties.Will }} ({{ personProperties.firstLevelProperties.firstLevelWill }}
+                + {{ personProperties.nextLevelsProperties.nextLevelsWill }})
+            </td>
+        </tr>
+        <tr>
+            <td>Intelligence (from first level + next levels)</td>
+            <td>{{ personProperties.Intelligence }} ({{ personProperties.firstLevelProperties.firstLevelIntelligence }}
+                + {{ personProperties.nextLevelsProperties.nextLevelsIntelligence }})
+            </td>
+        </tr>
+        <tr>
+            <td>Charisma (from first level + next levels)</td>
+            <td>{{ personProperties.Charisma }} ({{ personProperties.firstLevelProperties.firstLevelCharisma }}
+                + {{ personProperties.nextLevelsProperties.nextLevelsCharisma }})
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <table>
+        <tbody>
+        <tr>
+            <td>Toughness</td>
+            <td>{{ personProperties.toughness }}</td>
+        </tr>
+        <tr>
+            <td>Endurance</td>
+            <td>{{ personProperties.endurance }}</td>
+        </tr>
+        <tr>
+            <td>Speed</td>
+            <td>{{ personProperties.speed }}</td>
+        </tr>
+        <tr>
+            <td>Senses</td>
+            <td>{{ personProperties.senses }}</td>
+        </tr>
+        <tr>
+            <td>Remarkable sense</td>
+            <td>{% if remarkableSense is empty %}—{% else %}{{ remarkableSense }}{% endif %}</td>
+        </tr>
+        <tr>
+            <td>Fatigue limit</td>
+            <td>{{ personProperties.fatigueLimit }}</td>
+        </tr>
+        <tr>
+            <td>Wounds limit</td>
+            <td>{{ personProperties.woundsLimit }}</td>
+        </tr>
+        <tr>
+            <td>Beauty</td>
+            <td>{{ personProperties.beauty }}</td>
+        </tr>
+        <tr>
+            <td>Dangerousness</td>
+            <td>{{ personProperties.dangerousness }}</td>
+        </tr>
+        <tr>
+            <td>Dignity</td>
+            <td>{{ personProperties.dignity }}</td>
+        </tr>
+        </tbody>
+    </table>
+    <table>
+        <tbody>
+        <tr>
             <td>Remaining background points:</td>
             <td>{{ person.background.remainingBackgroundPoints }}</td>
+        </tr>
+        <tr>
+            <td>For skill points spent background points:</td>
+            <td>{{ person.background.backgroundSkillPoints.spentBackgroundPoints }}</td>
+        </tr>
+        <tr>
+            <td>Physical skill points from background:</td>
+            <td>{{ backgroundSkillPoints.physicalSkillPoints }}</td>
+        </tr>
+        <tr>
+            <td>Psychical skill points from background:</td>
+            <td>{{ backgroundSkillPoints.psychicalSkillPoints }}</td>
+        </tr>
+        <tr>
+            <td>Combined skill points from background:</td>
+            <td>{{ backgroundSkillPoints.combinedSkillPoints }}</td>
         </tr>
         <tr>
             <td>Heritage:</td>
@@ -28,6 +180,61 @@
         <tr>
             <td>Belongings value:</td>
             <td>{{ person.background.belongingsValue.belongingsPrice.goldCoins }} gold(s)</td>
+        </tr>
+        </tbody>
+    </table>
+    <table>
+        <thead>
+        <tr>
+            <th colspan="100%">Game characteristics - battle</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Fight
+                <small>(size)</small>
+            </td>
+            <td>{{ personProperties.fight }}
+                <small>({{ personProperties.fight.size }})</small>
+            </td>
+        </tr>
+        <tr>
+            <td>Attack
+                <small>(agility)</small>
+            </td>
+            <td>{{ personProperties.attack }}
+                <small>({{ personProperties.attack.agility }})</small>
+            </td>
+        </tr>
+        <tr>
+            <td>Shooting
+                <small>(knack)</small>
+            </td>
+            <td>{{ personProperties.shooting }}
+                <small>({{ personProperties.shooting.knack }})</small>
+            </td>
+        </tr>
+        <tr>
+            <td>Defense
+                <small>(agility)</small>
+            </td>
+            <td>{{ personProperties.defense }}
+                <small>({{ personProperties.defense.agility }})</small>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div>Defense against shooting</div>
+                <div>
+                    <small>(defense; size)</small>
+                </div>
+            </td>
+            <td>
+                {{ personProperties.defenseAgainstShooting }}
+                <small>({{ personProperties.defenseAgainstShooting.defense }};
+                    {{ personProperties.defenseAgainstShooting.size }})
+                </small>
+            </td>
         </tr>
         </tbody>
     </table>

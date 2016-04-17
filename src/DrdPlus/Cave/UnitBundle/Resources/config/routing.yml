@@ -2,7 +2,7 @@ drd_plus_cave_unit_person:
     path:     /person/
     defaults: { _controller: DrdPlusCaveUnitBundle:Person:person }
 drd_plus_cave_unit_choice_and_fate:
-    path:     /fate-and-choice/
+    path:     /choice-and-fate/
     defaults: { _controller: DrdPlusCaveUnitBundle:Person:choiceAndFate }
 drd_plus_cave_unit_exceptionality_properties:
     path:     /exceptionality-properties/

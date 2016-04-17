@@ -14,11 +14,11 @@ use DrdPlus\Exceptionalities\Fates\FateOfCombination;
 use DrdPlus\Exceptionalities\Fates\FateOfExceptionalProperties;
 use DrdPlus\Exceptionalities\Fates\FateOfGoodRear;
 use DrdPlus\Exceptionalities\Properties\ExceptionalityPropertiesFactory;
-use DrdPlus\Person\Attributes\Experiences;
 use DrdPlus\Person\Attributes\Name;
 use DrdPlus\Person\Background\Background;
 use DrdPlus\Person\Background\BackgroundParts\BackgroundSkillPoints;
 use DrdPlus\Person\Background\BackgroundParts\Heritage;
+use DrdPlus\Person\GamingSession\Memories;
 use DrdPlus\Person\Person;
 use DrdPlus\Person\ProfessionLevels\ProfessionFirstLevel;
 use DrdPlus\Person\ProfessionLevels\ProfessionLevels;
@@ -27,8 +27,11 @@ use DrdPlus\Person\Skills\PersonSkills;
 use DrdPlus\Person\Skills\Physical\PersonPhysicalSkills;
 use DrdPlus\Person\Skills\Psychical\PersonPsychicalSkills;
 use DrdPlus\Professions\Profession;
+use DrdPlus\Properties\Body\Age;
+use DrdPlus\Properties\Body\HeightInCm;
 use DrdPlus\Properties\Body\WeightInKg;
-use DrdPlus\Tables\Measurements\Experiences\Experiences as TableExperiences;
+use DrdPlus\Tables\Measurements\Experiences\Experiences;
+use DrdPlus\Tables\Measurements\Experiences\Level;
 use DrdPlus\Tables\Tables;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -44,7 +47,8 @@ class PersonController extends Controller
                 'subRaces' => RaceCodes::getSubRaceCodes(),
                 'genders' => GenderCodes::getGenderCodes(),
                 'professions' => ProfessionCodes::getProfessionCodes(),
-                'person' => $this->getPersonValues($request)
+                'person' => $this->getPersonValues($request),
+                'maxExperiences' => (new Level(Level::MAX_LEVEL, $this->getTables()->getExperiencesTable()))->getTotalExperiences(),
             ]
         );
     }
@@ -72,7 +76,7 @@ class PersonController extends Controller
             'subRace' => $subrace = current(RaceCodes::getSubRaceCodes()[$race]),
             'gender' => $gender = current(GenderCodes::getGenderCodes()),
             'profession' => current(ProfessionCodes::getProfessionCodes()),
-            'height' => $this->getTables()->getRacesTable()->getHeightInCm($race, $subrace),
+            'heightInCm' => $this->getTables()->getRacesTable()->getHeightInCm($race, $subrace),
             'weightInKgAdjustment' => 0,
             'age' => 15,
             'experiences' => 0,
@@ -103,7 +107,7 @@ class PersonController extends Controller
             [
                 'backUrl' => $this->generateUrl('drd_plus_cave_unit_person', $request->query->all()),
                 'nextUrl' => $this->generateUrl('drd_plus_cave_unit_exceptionality_properties'),
-                'person' => $person,
+//                'person' => $person,
                 'choices' => [
                     $this->getExceptionalitiesFactory()->getFortune(),
                     $this->getExceptionalitiesFactory()->getPlayerDecision()
@@ -296,8 +300,8 @@ class PersonController extends Controller
 
     private function extendPersonByDeterminedValues(array $person)
     {
-        $experiences = new TableExperiences($person['experiences'], $this->getTables()->getExperiencesTable());
-        $person['level'] = $experiences->getLevel()->getValue();
+        $experiences = new Experiences($person['experiences'], $this->getTables()->getExperiencesTable());
+        $person['level'] = $experiences->getTotalLevel()->getValue();
 
         return $person;
     }
@@ -318,7 +322,7 @@ class PersonController extends Controller
 
     /**
      * @param Request $request
-     * @return false|FateOfCombination|FateOfExceptionalProperties|FateOfGoodRear
+     * @return false|ExceptionalityFate|FateOfCombination|FateOfExceptionalProperties|FateOfGoodRear
      */
     private function findSelectedFate(Request $request)
     {
@@ -333,6 +337,8 @@ class PersonController extends Controller
     public function personOverviewAction(Request $request)
     {
         $person = $this->createPersonFromRequest($request);
+        $experiences = new Experiences($person->getMemories()->getExperiences($this->getTables()->getExperiencesTable())->getValue(), $this->getTables()->getExperiencesTable());
+        $availableLevel = $experiences->getTotalLevel();
 
         return $this->render(
             '@DrdPlusCaveUnit/Person/person-overview.html.twig',
@@ -342,6 +348,25 @@ class PersonController extends Controller
                     'previous' => $request->query->all(),
                 ],
                 'person' => $person,
+                'availableLevel' => $availableLevel,
+                'personProperties' => $person->getPersonProperties($this->getTables()),
+                'choice' => $choice = $this->findSelectedChoice($request),
+                'fate' => $this->findSelectedFate($request),
+                'backgroundSkillPoints' => [
+                    'physicalSkillPoints' => $person->getBackground()->getBackgroundSkillPoints()->getPhysicalSkillPoints(
+                        $person->getProfession(),
+                        $this->getTables()
+                    ),
+                    'psychicalSkillPoints' => $person->getBackground()->getBackgroundSkillPoints()->getPsychicalSkillPoints(
+                        $person->getProfession(),
+                        $this->getTables()
+                    ),
+                    'combinedSkillPoints' => $person->getBackground()->getBackgroundSkillPoints()->getCombinedSkillPoints(
+                        $person->getProfession(),
+                        $this->getTables()
+                    ),
+                ],
+                'remarkableSense' => $person->getRace()->getRemarkableSense($this->getTables()->getRacesTable()),
             ]
         );
     }
@@ -353,11 +378,13 @@ class PersonController extends Controller
             $this->findSelectedGender($request),
             $this->findSelectedName($request),
             $this->createExceptionalityFromRequest($request),
-            $this->findSelectedExperiences($request),
+            $this->findSelectedMemories($request),
             $professionLevels = $this->createProfessionLevels($request),
             $this->createBackground($this->findSelectedFate($request)),
             $this->createPersonSkills($professionLevels, $this->createHeritageFromRequest($request), $request),
             $this->findSelectedWeightInKgAdjustment($request),
+            $this->findSelectedHeightInCm($request),
+            $this->findSelectedAge($request),
             $this->getTables()
         );
     }
@@ -384,15 +411,7 @@ class PersonController extends Controller
      */
     private function findSelectedGender(Request $request)
     {
-        return $this->getGendersFactory()->getGenderByCode($this->getSelectedPersonValue($request, 'gender'));
-    }
-
-    /**
-     * @return \Drd\Genders\GendersFactory
-     */
-    private function getGendersFactory()
-    {
-        return $this->container->get('drd_plus_cave_unit.genders_factory');
+        return Gender::getGenderByCode($this->getSelectedPersonValue($request, 'gender'));
     }
 
     private function findSelectedName(Request $request)
@@ -448,11 +467,12 @@ class PersonController extends Controller
         return $request->query->get('properties')[$key];
     }
 
-    private function findSelectedExperiences(Request $request)
+    private function findSelectedMemories(Request $request)
     {
-        return Experiences::getIt(
-            $this->getSelectedPersonValue($request, 'experiences')
-        );
+        $memories = new Memories();
+        $memories->createAdventure('Childhood');
+
+        return $memories;
     }
 
     private function createProfessionLevels(Request $request)
@@ -488,7 +508,7 @@ class PersonController extends Controller
         Request $request
     )
     {
-        return PersonSkills::createIt(
+        return PersonSkills::createPersonSkills(
             $professionLevels,
             BackgroundSkillPoints::getIt(0, $heritage),
             $this->getTables(),
@@ -532,6 +552,24 @@ class PersonController extends Controller
     private function findSelectedWeightInKgAdjustment(Request $request)
     {
         return WeightInKg::getIt($this->getSelectedPersonValue($request, 'weightInKgAdjustment'));
+    }
+
+    /**
+     * @param Request $request
+     * @return HeightInCm
+     */
+    private function findSelectedHeightInCm(Request $request)
+    {
+        return HeightInCm::getIt($this->getSelectedPersonValue($request, 'heightInCm'));
+    }
+
+    /**
+     * @param Request $request
+     * @return Age
+     */
+    private function findSelectedAge(Request $request)
+    {
+        return Age::getIt($this->getSelectedPersonValue($request, 'age'));
     }
 
 }
