@@ -27,9 +27,8 @@ class TablesController extends Controller
         preg_match('~(?<baseName>\w+)$~', get_class($table), $baseNameMatches);
         preg_match_all('~(?<parts>[A-Z][a-z]+)~', $baseNameMatches['baseName'], $partsMatches);
         $concatenated = implode(' ', $partsMatches['parts']);
-        $name = ucfirst(strtolower($concatenated));
 
-        return $name;
+        return ucfirst(strtolower($concatenated));
     }
 
     private function humanize(array $values)

@@ -18,7 +18,7 @@ use DrdPlus\Person\Attributes\Name;
 use DrdPlus\Person\Background\Background;
 use DrdPlus\Person\Background\BackgroundParts\BackgroundSkillPoints;
 use DrdPlus\Person\Background\BackgroundParts\Heritage;
-use DrdPlus\Person\GamingSession\Memories;
+use DrdPlus\GamingSession\Memories;
 use DrdPlus\Person\Person;
 use DrdPlus\Person\ProfessionLevels\ProfessionFirstLevel;
 use DrdPlus\Person\ProfessionLevels\ProfessionLevels;
@@ -349,7 +349,7 @@ class PersonController extends Controller
                 ],
                 'person' => $person,
                 'availableLevel' => $availableLevel,
-                'personProperties' => $person->getPersonProperties($this->getTables()),
+                'personProperties' => $person->getProperties($this->getTables()),
                 'choice' => $choice = $this->findSelectedChoice($request),
                 'fate' => $this->findSelectedFate($request),
                 'backgroundSkillPoints' => [
