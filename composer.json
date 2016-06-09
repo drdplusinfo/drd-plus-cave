@@ -46,7 +46,7 @@
     "drd-plus/profession-levels": "dev-master",
     "drd-plus/exceptionalities": "dev-master",
     "drd-plus/game-characteristics": "dev-master",
-    "drd-plus/person-properties": "dev-master",
+    "drd-plus/properties-by-levels": "dev-master",
     "drd-plus/person-background": "dev-master",
     "drd-plus/person": "dev-master"
   },
