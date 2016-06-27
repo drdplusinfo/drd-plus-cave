@@ -3,9 +3,9 @@ namespace DrdPlus\Cave\UnitBundle\Controller;
 
 use Drd\DiceRoll\Templates\Rollers\Roller1d6;
 use Drd\Genders\Gender;
-use DrdPlus\Codes\GenderCodes;
-use DrdPlus\Codes\ProfessionCodes;
-use DrdPlus\Codes\RaceCodes;
+use DrdPlus\Codes\GenderCode;
+use DrdPlus\Codes\ProfessionCode;
+use DrdPlus\Codes\RaceCode;
 use DrdPlus\Exceptionalities\Choices\Fortune;
 use DrdPlus\Exceptionalities\Choices\PlayerDecision;
 use DrdPlus\Exceptionalities\Exceptionality;
@@ -43,10 +43,10 @@ class PersonController extends Controller
         return $this->render(
             '@DrdPlusCaveUnit/Person/person.html.twig',
             [
-                'races' => RaceCodes::getRaceCodes(),
-                'subRaces' => RaceCodes::getSubRaceCodes(),
-                'genders' => GenderCodes::getGenderCodes(),
-                'professions' => ProfessionCodes::getProfessionCodes(),
+                'races' => RaceCode::getRaceCodes(),
+                'subRaces' => RaceCode::getSubRaceCodes(),
+                'genders' => GenderCode::getGenderCodes(),
+                'professions' => ProfessionCode::getProfessionCodes(),
                 'person' => $this->getPersonValues($request),
                 'maxExperiences' => (new Level(Level::MAX_LEVEL, $this->getTables()->getExperiencesTable()))->getTotalExperiences(),
             ]
@@ -72,10 +72,10 @@ class PersonController extends Controller
     {
         return [
             'name' => 'The Chosen One',
-            'race' => $race = current(RaceCodes::getRaceCodes()),
-            'subRace' => $subrace = current(RaceCodes::getSubRaceCodes()[$race]),
-            'gender' => $gender = current(GenderCodes::getGenderCodes()),
-            'profession' => current(ProfessionCodes::getProfessionCodes()),
+            'race' => $race = current(RaceCode::getRaceCodes()),
+            'subRace' => $subrace = current(RaceCode::getSubRaceCodes()[$race]),
+            'gender' => $gender = current(GenderCode::getGenderCodes()),
+            'profession' => current(ProfessionCode::getProfessionCodes()),
             'heightInCm' => $this->getTables()->getRacesTable()->getHeightInCm($race, $subrace),
             'weightInKgAdjustment' => 0,
             'age' => 15,
