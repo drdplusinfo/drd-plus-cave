@@ -1,23 +1,13 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle;
 
-use Drd\Genders\EnumTypes\GenderType;
-use DrdPlus\Person\Attributes\EnumTypes\NameType;
-use DrdPlus\Person\EnumTypes\PersonEnumRegistrar;
-use DrdPlus\Person\ProfessionLevels\EnumTypes\LevelRankType;
-use DrdPlus\Properties\Base\EnumTypes\AgilityType;
-use DrdPlus\Properties\Base\EnumTypes\CharismaType;
-use DrdPlus\Properties\Base\EnumTypes\IntelligenceType;
-use DrdPlus\Properties\Base\EnumTypes\KnackType;
-use DrdPlus\Properties\Base\EnumTypes\StrengthType;
-use DrdPlus\Properties\Base\EnumTypes\WillType;
-use DrdPlus\Races\EnumTypes\RaceType;
+use DrdPlus\Person\EnumTypes\PersonEnumsRegistrar;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class DrdPlusCaveUnitBundle extends Bundle
 {
     public function boot()
     {
-        PersonEnumRegistrar::registerAll();
+        PersonEnumsRegistrar::registerAll();
     }
 }
