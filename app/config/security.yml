@@ -14,12 +14,6 @@ security:
             form_login:
                 login_path: login
                 check_path: login_check
-                csrf_provider: form.csrf_provider
-            remember_me:
-                key:      "%secret%"
-                lifetime: 31536000 # 365 days in seconds
-                path:     /
-                domain:   ~ # Defaults to the current domain from $_SERVER
             logout:
                 path:   /logout
                 target: /login # after logout go to login page

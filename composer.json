@@ -11,7 +11,8 @@
   },
   "require": {
     "php": ">=5.5.0",
-    "symfony/symfony": "2.5.*",
+    "roave/security-advisories": "dev-master",
+    "symfony/symfony": "~3.0",
     "doctrine/orm": "~2.2,>=2.2.3",
     "doctrine/doctrine-bundle": "~1.2",
     "doctrine/migrations": "~1.1",
@@ -20,7 +21,6 @@
     "symfony/assetic-bundle": "~2.3",
     "symfony/swiftmailer-bundle": "~2.3",
     "symfony/monolog-bundle": "~2.4",
-    "sensio/distribution-bundle": "~3.0",
     "sensio/framework-extra-bundle": "~3.0",
     "incenteev/composer-parameter-handler": "~2.0",
     "drd/dice-roll": "dev-master",
@@ -28,9 +28,9 @@
     "drd-plus/person": "dev-master"
   },
   "require-dev": {
-    "sensio/generator-bundle": "~2.3",
-    "phpunit/phpunit": "~4.4",
-    "mockery/mockery": "dev-master"
+    "phpunit/phpunit": ">=4.4",
+    "mockery/mockery": "dev-master",
+    "sensio/generator-bundle": "^3.1"
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
