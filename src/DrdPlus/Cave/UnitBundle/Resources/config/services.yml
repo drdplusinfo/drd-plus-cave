@@ -1,8 +1,7 @@
 services:
-  drd_plus_cave_unit.exceptionalities_factory:
-    class: DrdPlus\Exceptionalities\ExceptionalitiesFactory
-  drd_plus_cave_unit.exceptionality_properties_factory:
-    class: DrdPlus\Exceptionalities\Properties\ExceptionalityPropertiesFactory
+  drd_plus_cave_unit.tables:
+    class: DrdPlus\Tables\Tables
+    factory: 'DrdPlus\Tables\Tables::getIt'
   drd_plus_cave_unit.base_properties_factory:
     class: DrdPlus\Properties\Base\BasePropertiesFactory
   drd_plus_cave_unit.races_factory:

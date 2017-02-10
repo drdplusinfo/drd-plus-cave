@@ -1,52 +1,65 @@
 <?php
 namespace DrdPlus\Cave\UnitBundle\Controller;
 
+use Drd\DiceRoll\Roll;
+use Drd\DiceRoll\Templates\DiceRolls\Dice1d6Roll;
 use Drd\DiceRoll\Templates\Rollers\Roller1d6;
-use Drd\Genders\Gender;
+use Drd\DiceRoll\Templates\Rolls\Roll1d6;
+use DrdPlus\Background\Background;
+use DrdPlus\Background\BackgroundParts\Ancestry;
+use DrdPlus\Background\BackgroundParts\SkillsFromBackground;
 use DrdPlus\Codes\GenderCode;
+use DrdPlus\Codes\History\ChoiceCode;
+use DrdPlus\Codes\History\FateCode;
 use DrdPlus\Codes\ProfessionCode;
 use DrdPlus\Codes\RaceCode;
-use DrdPlus\Exceptionalities\Choices\Fortune;
-use DrdPlus\Exceptionalities\Choices\PlayerDecision;
-use DrdPlus\Exceptionalities\Exceptionality;
-use DrdPlus\Exceptionalities\Fates\ExceptionalityFate;
-use DrdPlus\Exceptionalities\Fates\FateOfCombination;
-use DrdPlus\Exceptionalities\Fates\FateOfExceptionalProperties;
-use DrdPlus\Exceptionalities\Fates\FateOfGoodRear;
-use DrdPlus\Exceptionalities\Properties\ExceptionalityPropertiesFactory;
+use DrdPlus\Codes\SubRaceCode;
 use DrdPlus\Person\Attributes\Name;
-use DrdPlus\Person\Background\Background;
-use DrdPlus\Person\Background\BackgroundParts\BackgroundSkillPoints;
-use DrdPlus\Person\Background\BackgroundParts\Heritage;
 use DrdPlus\GamingSession\Memories;
 use DrdPlus\Person\Person;
 use DrdPlus\Person\ProfessionLevels\ProfessionFirstLevel;
 use DrdPlus\Person\ProfessionLevels\ProfessionLevels;
-use DrdPlus\Person\Skills\Combined\PersonCombinedSkills;
-use DrdPlus\Person\Skills\PersonSkills;
-use DrdPlus\Person\Skills\Physical\PersonPhysicalSkills;
-use DrdPlus\Person\Skills\Psychical\PersonPsychicalSkills;
+use DrdPlus\Person\ProfessionLevels\ProfessionZeroLevel;
+use DrdPlus\Professions\Commoner;
 use DrdPlus\Professions\Profession;
+use DrdPlus\Properties\Base\Agility;
+use DrdPlus\Properties\Base\Charisma;
+use DrdPlus\Properties\Base\Intelligence;
+use DrdPlus\Properties\Base\Knack;
+use DrdPlus\Properties\Base\Strength;
+use DrdPlus\Properties\Base\Will;
 use DrdPlus\Properties\Body\Age;
 use DrdPlus\Properties\Body\HeightInCm;
 use DrdPlus\Properties\Body\WeightInKg;
+use DrdPlus\PropertiesByFate\ChosenProperties;
+use DrdPlus\PropertiesByFate\FortuneProperties;
+use DrdPlus\Skills\Combined\CombinedSkills;
+use DrdPlus\Skills\Physical\PhysicalSkills;
+use DrdPlus\Skills\Psychical\PsychicalSkills;
+use DrdPlus\Skills\Skills;
 use DrdPlus\Tables\Measurements\Experiences\Experiences;
 use DrdPlus\Tables\Measurements\Experiences\Level;
 use DrdPlus\Tables\Tables;
+use Granam\Integer\IntegerObject;
+use Granam\Integer\PositiveIntegerObject;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 class PersonController extends Controller
 {
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function personAction(Request $request)
     {
         return $this->render(
             '@DrdPlusCaveUnit/Person/person.html.twig',
             [
-                'races' => RaceCode::getRaceCodes(),
-                'subRaces' => RaceCode::getSubRaceCodes(),
-                'genders' => GenderCode::getGenderCodes(),
-                'professions' => ProfessionCode::getProfessionCodes(),
+                'races' => RaceCode::getPossibleValues(),
+                'subRaces' => SubRaceCode::getPossibleValues(),
+                'genders' => GenderCode::getPossibleValues(),
+                'professions' => ProfessionCode::getPossibleValues(),
                 'person' => $this->getPersonValues($request),
                 'maxExperiences' => (new Level(Level::MAX_LEVEL, $this->getTables()->getExperiencesTable()))->getTotalExperiences(),
             ]
@@ -68,15 +81,18 @@ class PersonController extends Controller
         );
     }
 
+    /**
+     * @return array
+     */
     private function getDefaultPersonValues()
     {
         return [
             'name' => 'The Chosen One',
-            'race' => $race = current(RaceCode::getRaceCodes()),
-            'subRace' => $subrace = current(RaceCode::getSubRaceCodes()[$race]),
-            'gender' => $gender = current(GenderCode::getGenderCodes()),
-            'profession' => current(ProfessionCode::getProfessionCodes()),
-            'heightInCm' => $this->getTables()->getRacesTable()->getHeightInCm($race, $subrace),
+            'race' => $race = current(RaceCode::getPossibleValues()),
+            'subRace' => $subrace = current(SubRaceCode::getRaceToSubRaceValues()[$race]),
+            'gender' => $gender = current(GenderCode::getPossibleValues()),
+            'profession' => current(ProfessionCode::getPossibleValues()),
+            'heightInCm' => $this->getTables()->getRacesTable()->getHeightInCm(RaceCode::getIt($race), SubRaceCode::getIt($subrace)),
             'weightInKgAdjustment' => 0,
             'age' => 15,
             'experiences' => 0,
@@ -88,9 +104,13 @@ class PersonController extends Controller
      */
     private function getTables()
     {
-        return $this->container->get('drd_plus_cave_tables.tables');
+        return $this->get('drd_plus_cave_unit.tables');
     }
 
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function choiceAndFateAction(Request $request)
     {
         $person = $request->query->get('person', []);
@@ -99,33 +119,30 @@ class PersonController extends Controller
         }
         $person = $this->extendPersonByDeterminedValues($person);
 
-        $choice = $this->findSelectedChoice($request);
-        $fate = $this->findSelectedFate($request);
+        $choiceCode = $this->findSelectedChoiceCode($request);
+        $fate = $this->findSelectedFateCode($request);
 
         return $this->render(
             '@DrdPlusCaveUnit/Person/choice-and-fate.html.twig',
             [
                 'backUrl' => $this->generateUrl('drd_plus_cave_unit_person', $request->query->all()),
                 'nextUrl' => $this->generateUrl('drd_plus_cave_unit_exceptionality_properties'),
-//                'person' => $person,
-                'choices' => [
-                    $this->getExceptionalitiesFactory()->getFortune(),
-                    $this->getExceptionalitiesFactory()->getPlayerDecision()
-                ],
-                'fates' => [
-                    $this->getExceptionalitiesFactory()->getFateOfGoodRear(),
-                    $this->getExceptionalitiesFactory()->getFateOfCombination(),
-                    $this->getExceptionalitiesFactory()->getFateOfExceptionalProperties(),
-                ],
+                'person' => $person,
+                'choices' => ChoiceCode::getPossibleValues(),
+                'fates' => FateCode::getPossibleValues(),
                 'selected' => [
                     'previous' => $request->query->all(),
-                    'choice' => $choice,
+                    'choice' => $choiceCode,
                     'fate' => $fate,
                 ],
             ]
         );
     }
 
+    /**
+     * @param Request $request
+     * @return bool|\Symfony\Component\HttpFoundation\Response
+     */
     public function exceptionalityPropertiesAction(Request $request)
     {
         $safetyRedirect = $this->getPersonRedirectIfNotValid($request)
@@ -134,12 +151,12 @@ class PersonController extends Controller
             return $safetyRedirect;
         }
 
-        $choice = $this->findSelectedChoice($request);
+        $choice = $this->findSelectedChoiceCode($request);
 
-        switch ($choice::getCode()) {
-            case PlayerDecision::PLAYER_DECISION :
+        switch ($choice->getValue()) {
+            case ChoiceCode::PLAYER_DECISION :
                 return $this->playerDecisionPropertiesAction($request);
-            case Fortune::FORTUNE :
+            case ChoiceCode::FORTUNE :
                 return $this->fortunePropertiesAction($request);
             default :
                 return $this->choiceAndFateAction($request); //step back
@@ -158,8 +175,8 @@ class PersonController extends Controller
 
     private function getChoiceAndFateRedirectIfNotValid(Request $request)
     {
-        $choice = $this->findSelectedChoice($request);
-        $fate = $this->findSelectedFate($request);
+        $choice = $this->findSelectedChoiceCode($request);
+        $fate = $this->findSelectedFateCode($request);
         if (!$this->isChoiceAndFateValid($choice, $fate)) {
             return $this->choiceAndFateAction($request);
         }
@@ -169,31 +186,20 @@ class PersonController extends Controller
 
     private function fortunePropertiesAction(Request $request)
     {
-        $fate = $this->findSelectedFate($request);
-        $professionLevel = $this->createFirstProfessionLevel($this->findSelectedProfession($request));
+        $fateCode = $this->findSelectedFateCode($request);
+        $profession = $this->findSelectedProfession($request);
         $roller1d6 = new Roller1d6();
-        $fortuneProperties = $this->getExceptionalityPropertiesFactory()->createFortuneProperties(
-            $fate,
-            $professionLevel,
-            $this->findSelectedPropertiesValue($request, 'strengthRoll') !== null
-                ? $this->findSelectedPropertiesValue($request, 'strengthRoll')
-                : $roller1d6->roll()->getValue(),
-            $this->findSelectedPropertiesValue($request, 'agilityRoll') !== null
-                ? $this->findSelectedPropertiesValue($request, 'agilityRoll')
-                : $roller1d6->roll()->getValue(),
-            $this->findSelectedPropertiesValue($request, 'knackRoll') !== null
-                ? $this->findSelectedPropertiesValue($request, 'knackRoll')
-                : $roller1d6->roll()->getValue(),
-            $this->findSelectedPropertiesValue($request, 'willRoll') !== null
-                ? $this->findSelectedPropertiesValue($request, 'willRoll')
-                : $roller1d6->roll()->getValue(),
-            $this->findSelectedPropertiesValue($request, 'intelligenceRoll') !== null
-                ? $this->findSelectedPropertiesValue($request, 'intelligenceRoll')
-                : $roller1d6->roll()->getValue(),
-            $this->findSelectedPropertiesValue($request, 'charismaRoll') !== null
-                ? $this->findSelectedPropertiesValue($request, 'charismaRoll')
-                : $roller1d6->roll()->getValue(),
-            $this->container->get('drd_plus_cave_unit.base_properties_factory')
+        $fortuneProperties = new FortuneProperties(
+            $this->getRoll('strengthRoll', $request, $roller1d6),
+            $this->getRoll('agilityRoll', $request, $roller1d6),
+            $this->getRoll('knackRoll', $request, $roller1d6),
+            $this->getRoll('willRoll', $request, $roller1d6),
+            $this->getRoll('intelligenceRoll', $request, $roller1d6),
+            $this->getRoll('charismaRoll', $request, $roller1d6),
+            $fateCode,
+            $profession,
+            $this->getTables(),
+            $this->getBasePropertiesFactory()
         );
 
         return $this->render(
@@ -217,26 +223,71 @@ class PersonController extends Controller
                     'intelligenceRoll' => $fortuneProperties->getIntelligenceRoll(),
                     'charisma' => $fortuneProperties->getCharisma(),
                     'charismaRoll' => $fortuneProperties->getCharismaRoll(),
-                ]
+                ],
             ]
         );
     }
 
+    private function getRoll($rollName, Request $request, Roller1d6 $roller1D6)
+    {
+        if ($this->findSelectedPropertiesValue($request, $rollName) !== null) {
+            $value = $this->findSelectedPropertiesValue($request, $rollName);
+
+            return new Roll([new Roll1d6(new Dice1d6Roll(new IntegerObject($value)))]);
+        }
+
+        return $roller1D6->roll();
+    }
+
+    /**
+     * @return \DrdPlus\Properties\Base\BasePropertiesFactory
+     */
+    private function getBasePropertiesFactory()
+    {
+        return $this->get('drd_plus_cave_unit.base_properties_factory');
+    }
+
+    /**
+     * @return ProfessionZeroLevel
+     */
+    private function createZeroProfessionLevel()
+    {
+        return ProfessionZeroLevel::createZeroLevel(Commoner::getIt());
+    }
+
+    /**
+     * @param Profession $profession
+     * @return ProfessionFirstLevel
+     */
     private function createFirstProfessionLevel(Profession $profession)
     {
         return ProfessionFirstLevel::createFirstLevel($profession);
     }
 
+    /**
+     * @param Request $request
+     * @return Profession
+     */
     private function findSelectedProfession(Request $request)
     {
         return Profession::getItByCode($this->getSelectedPersonValue($request, 'profession'));
     }
 
+    /**
+     * @param Request $request
+     * @param string $key
+     * @return mixed
+     */
     private function getSelectedPersonValue(Request $request, $key)
     {
         return $request->query->get('person')[$key];
     }
 
+    /**
+     * @param Request $request
+     * @param string $key
+     * @return null|string
+     */
     private function findSelectedPropertiesValue(Request $request, $key)
     {
         return array_key_exists($key, $request->query->get('properties'))
@@ -244,9 +295,13 @@ class PersonController extends Controller
             : null;
     }
 
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     private function playerDecisionPropertiesAction(Request $request)
     {
-        $fate = $this->findSelectedFate($request);
+        $fateCode = $this->findSelectedFateCode($request);
 
         return $this->render(
             '@DrdPlusCaveUnit/Person/player-decision-properties.html.twig',
@@ -256,7 +311,7 @@ class PersonController extends Controller
                 'selected' => [
                     'previous' => $request->query->all(),
                 ],
-                'maximum' => $fate->getUpToSingleProperty(),
+                'maximum' => $this->getTables()->getPlayerDecisionsTable()->getMaximumToSingleProperty($fateCode),
             ]
         );
     }
@@ -267,21 +322,9 @@ class PersonController extends Controller
     }
 
     /**
-     * @return \DrdPlus\Exceptionalities\ExceptionalitiesFactory
+     * @param array $person
+     * @return bool
      */
-    private function getExceptionalitiesFactory()
-    {
-        return $this->container->get('drd_plus_cave_unit.exceptionalities_factory');
-    }
-
-    /**
-     * @return ExceptionalityPropertiesFactory
-     */
-    private function getExceptionalityPropertiesFactory()
-    {
-        return $this->container->get('drd_plus_cave_unit.exceptionality_properties_factory');
-    }
-
     private function isPersonValid($person)
     {
         if (!is_array($person)) {
@@ -308,30 +351,30 @@ class PersonController extends Controller
 
     /**
      * @param Request $request
-     * @return false|Fortune|PlayerDecision
+     * @return false|ChoiceCode
      */
-    private function findSelectedChoice(Request $request)
+    private function findSelectedChoiceCode(Request $request)
     {
         $properties = $request->get('properties');
         if (!isset($properties['choice'])) {
             return false;
         }
 
-        return $this->getExceptionalitiesFactory()->getChoice($properties['choice']);
+        return ChoiceCode::getIt($properties['choice']);
     }
 
     /**
      * @param Request $request
-     * @return false|ExceptionalityFate|FateOfCombination|FateOfExceptionalProperties|FateOfGoodRear
+     * @return false|FateCode
      */
-    private function findSelectedFate(Request $request)
+    private function findSelectedFateCode(Request $request)
     {
         $properties = $request->get('properties');
         if (!isset($properties['fate'])) {
             return false;
         }
 
-        return $this->getExceptionalitiesFactory()->getFate($properties['fate']);
+        return FateCode::getIt($properties['fate']);
     }
 
     public function personOverviewAction(Request $request)
@@ -349,39 +392,34 @@ class PersonController extends Controller
                 ],
                 'person' => $person,
                 'availableLevel' => $availableLevel,
-                'personProperties' => $person->getProperties($this->getTables()),
-                'choice' => $choice = $this->findSelectedChoice($request),
-                'fate' => $this->findSelectedFate($request),
-                'backgroundSkillPoints' => [
-                    'physicalSkillPoints' => $person->getBackground()->getBackgroundSkillPoints()->getPhysicalSkillPoints(
-                        $person->getProfession(),
-                        $this->getTables()
-                    ),
-                    'psychicalSkillPoints' => $person->getBackground()->getBackgroundSkillPoints()->getPsychicalSkillPoints(
-                        $person->getProfession(),
-                        $this->getTables()
-                    ),
-                    'combinedSkillPoints' => $person->getBackground()->getBackgroundSkillPoints()->getCombinedSkillPoints(
-                        $person->getProfession(),
-                        $this->getTables()
-                    ),
-                ],
-                'remarkableSense' => $person->getRace()->getRemarkableSense($this->getTables()->getRacesTable()),
+                'personProperties' => $person->getCurrentProperties($this->getTables()),
+                'choice' => $choice = $this->findSelectedChoiceCode($request),
+                'fate' => $this->findSelectedFateCode($request),
+                /*'backgroundSkillPoints' => [
+                    'physicalSkillPoints' => $person->getSkills()->getPhysicalSkills(),
+                    'psychicalSkillPoints' => $person->getSkills()->getPsychicalSkills(),
+                    'combinedSkillPoints' => $person->getSkills()->getCombinedSkills(),
+                ],*/
+                'remarkableSense' => $person->getRace()->getRemarkableSense($this->getTables()),
             ]
         );
     }
 
+    /**
+     * @param Request $request
+     * @return Person
+     */
     private function createPersonFromRequest(Request $request)
     {
         return new Person(
             $this->findSelectedRace($request),
             $this->findSelectedGender($request),
             $this->findSelectedName($request),
-            $this->createExceptionalityFromRequest($request),
-            $this->findSelectedMemories($request),
+            $this->findSelectedExceptionalityProperties($request),
+            $this->findSelectedMemories(),
             $professionLevels = $this->createProfessionLevels($request),
-            $this->createBackground($this->findSelectedFate($request)),
-            $this->createPersonSkills($professionLevels, $this->createHeritageFromRequest($request), $request),
+            $this->createBackground($this->findSelectedFateCode($request)),
+            $this->createPersonSkills($professionLevels, $this->createAncestry()),
             $this->findSelectedWeightInKgAdjustment($request),
             $this->findSelectedHeightInCm($request),
             $this->findSelectedAge($request),
@@ -389,6 +427,10 @@ class PersonController extends Controller
         );
     }
 
+    /**
+     * @param Request $request
+     * @return \DrdPlus\Races\Race
+     */
     private function findSelectedRace(Request $request)
     {
         return $this->getRacesFactory()->getSubRaceByCodes(
@@ -402,72 +444,92 @@ class PersonController extends Controller
      */
     private function getRacesFactory()
     {
-        return $this->container->get('drd_plus_cave_unit.races_factory');
+        return $this->get('drd_plus_cave_unit.races_factory');
     }
 
     /**
      * @param Request $request
-     * @return Gender
+     * @return GenderCode
      */
     private function findSelectedGender(Request $request)
     {
-        return Gender::getGenderByCode($this->getSelectedPersonValue($request, 'gender'));
+        return GenderCode::getIt($this->getSelectedPersonValue($request, 'gender'));
     }
 
+    /**
+     * @param Request $request
+     * @return Name
+     */
     private function findSelectedName(Request $request)
     {
-        return Name::getIt($this->getSelectedPersonValue($request, 'name'));
+        return new Name($this->getSelectedPersonValue($request, 'name'));
     }
 
-    private function createExceptionalityFromRequest(Request $request)
-    {
-        return new Exceptionality(
-            $this->findSelectedChoice($request),
-            $this->findSelectedFate($request),
-            $this->findSelectedExceptionalityProperties($request)
-        );
-    }
-
+    /**
+     * @param Request $request
+     * @return ChosenProperties|FortuneProperties
+     * @throws \RuntimeException
+     */
     private function findSelectedExceptionalityProperties(Request $request)
     {
-        $fate = $this->findSelectedFate($request);
-        $choice = $this->findSelectedChoice($request);
-        $professionLevel = $this->createFirstProfessionLevel($this->findSelectedProfession($request));
+        $fateCode = $this->findSelectedFateCode($request);
+        $choice = $this->findSelectedChoiceCode($request);
+        $profession = $this->findSelectedProfession($request);
         switch ($choice->getValue()) {
-            case Fortune::FORTUNE :
-                return $this->getExceptionalityPropertiesFactory()->createFortuneProperties(
-                    $fate,
-                    $professionLevel,
-                    $this->getSelectedPropertyValue($request, 'strengthRoll'),
-                    $this->getSelectedPropertyValue($request, 'agilityRoll'),
-                    $this->getSelectedPropertyValue($request, 'knackRoll'),
-                    $this->getSelectedPropertyValue($request, 'willRoll'),
-                    $this->getSelectedPropertyValue($request, 'intelligenceRoll'),
-                    $this->getSelectedPropertyValue($request, 'charismaRoll'),
-                    $this->container->get('drd_plus_cave_unit.base_properties_factory')
+            case ChoiceCode::FORTUNE :
+                return new FortuneProperties(
+                    $this->createRoll1d6('strengthRoll', $request),
+                    $this->createRoll1d6('agilityRoll', $request),
+                    $this->createRoll1d6('knackRoll', $request),
+                    $this->createRoll1d6('willRoll', $request),
+                    $this->createRoll1d6('intelligenceRoll', $request),
+                    $this->createRoll1d6('charismaRoll', $request),
+                    $fateCode,
+                    $profession,
+                    $this->getTables(),
+                    $this->get('drd_plus_cave_unit.base_properties_factory')
                 );
-            case PlayerDecision::PLAYER_DECISION :
-                return $this->getExceptionalityPropertiesFactory()->createChosenProperties(
-                    $fate,
-                    $professionLevel,
-                    $this->getSelectedPropertyValue($request, 'strength'),
-                    $this->getSelectedPropertyValue($request, 'agility'),
-                    $this->getSelectedPropertyValue($request, 'knack'),
-                    $this->getSelectedPropertyValue($request, 'will'),
-                    $this->getSelectedPropertyValue($request, 'intelligence'),
-                    $this->getSelectedPropertyValue($request, 'charisma')
+            case ChoiceCode::PLAYER_DECISION :
+                return new ChosenProperties(
+                    Strength::getIt($this->getSelectedPropertyValue($request, 'strength')),
+                    Agility::getIt($this->getSelectedPropertyValue($request, 'agility')),
+                    Knack::getIt($this->getSelectedPropertyValue($request, 'knack')),
+                    Will::getIt($this->getSelectedPropertyValue($request, 'will')),
+                    Intelligence::getIt($this->getSelectedPropertyValue($request, 'intelligence')),
+                    Charisma::getIt($this->getSelectedPropertyValue($request, 'charisma')),
+                    $fateCode,
+                    $profession,
+                    $this->getTables()
                 );
             default :
                 throw new \RuntimeException;
         }
     }
 
+    /**
+     * @param string $rollName
+     * @param Request $request
+     * @return Roll1d6
+     */
+    private function createRoll1d6($rollName, Request $request)
+    {
+        return new Roll1d6(new Dice1d6Roll(new IntegerObject($this->getSelectedPropertyValue($request, $rollName))));
+    }
+
+    /**
+     * @param Request $request
+     * @param string $key
+     * @return string
+     */
     private function getSelectedPropertyValue(Request $request, $key)
     {
         return $request->query->get('properties')[$key];
     }
 
-    private function findSelectedMemories(Request $request)
+    /**
+     * @return Memories
+     */
+    private function findSelectedMemories()
     {
         $memories = new Memories();
         $memories->createAdventure('Childhood');
@@ -475,74 +537,76 @@ class PersonController extends Controller
         return $memories;
     }
 
+    /**
+     * @param Request $request
+     * @return ProfessionLevels
+     */
     private function createProfessionLevels(Request $request)
     {
         return ProfessionLevels::createIt(
+            $this->createZeroProfessionLevel(),
             $this->createFirstProfessionLevel($this->findSelectedProfession($request))
         );
     }
 
     /**
-     * @param ExceptionalityFate $fate
+     * @param FateCode $fateCode
      * @return Background
      */
-    private function createBackground(ExceptionalityFate $fate)
+    private function createBackground(FateCode $fateCode)
     {
-        return Background::createIt($fate, 0, 0, 0);
+        $zero = new PositiveIntegerObject(0);
+
+        return Background::createIt($fateCode, $zero, $zero, $zero, $this->getTables());
     }
 
-    private function createHeritageFromRequest(Request $request)
+    /**
+     * @return Ancestry
+     */
+    private function createAncestry()
     {
-        return Heritage::getIt(0);
+        return Ancestry::getIt(new PositiveIntegerObject(0), $this->getTables());
     }
 
     /**
      * @param ProfessionLevels $professionLevels
-     * @param Heritage $heritage
-     * @param Request $request
-     * @return PersonSkills
+     * @param Ancestry $ancestry
+     * @return Skills
      */
-    private function createPersonSkills(
-        ProfessionLevels $professionLevels,
-        Heritage $heritage,
-        Request $request
-    )
+    private function createPersonSkills(ProfessionLevels $professionLevels, Ancestry $ancestry)
     {
-        return PersonSkills::createPersonSkills(
+        return Skills::createSkills(
             $professionLevels,
-            BackgroundSkillPoints::getIt(0, $heritage),
-            $this->getTables(),
-            $this->createPersonPhysicalSkills($request),
-            $this->createPersonPsychicalSkills($request),
-            $this->createPersonCombinedSkills($request)
+            SkillsFromBackground::getIt(new PositiveIntegerObject(0), $ancestry, $this->getTables()),
+            $this->createPersonPhysicalSkills(),
+            $this->createPersonPsychicalSkills(),
+            $this->createPersonCombinedSkills(),
+            $this->getTables()
         );
     }
 
     /**
-     * @param Request $request
-     * @return PersonPhysicalSkills
+     * @return PhysicalSkills
      */
-    private function createPersonPhysicalSkills(Request $request)
+    private function createPersonPhysicalSkills()
     {
-        return new PersonPhysicalSkills();
+        return new PhysicalSkills($this->createZeroProfessionLevel());
     }
 
     /**
-     * @param Request $request
-     * @return PersonPsychicalSkills
+     * @return PsychicalSkills
      */
-    private function createPersonPsychicalSkills(Request $request)
+    private function createPersonPsychicalSkills()
     {
-        return new PersonPsychicalSkills();
+        return new PsychicalSkills($this->createZeroProfessionLevel());
     }
 
     /**
-     * @param Request $request
-     * @return PersonCombinedSkills
+     * @return CombinedSkills
      */
-    private function createPersonCombinedSkills(Request $request)
+    private function createPersonCombinedSkills()
     {
-        return new PersonCombinedSkills();
+        return new CombinedSkills($this->createZeroProfessionLevel());
     }
 
     /**
