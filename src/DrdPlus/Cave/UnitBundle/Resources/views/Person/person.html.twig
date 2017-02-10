@@ -36,12 +36,11 @@
                 <td>
                     <label>Sub-race
                         <select name="person[subRace]">
-                            {% for subRacesOfRace in subRaces %}
-                                {% for subRace in subRacesOfRace %}
-                                    <option value="{{ subRace }}" {% if person.subRace == subRace %}selected{% endif %}>
-                                        {{ subRace }}
-                                    </option>
-                                {% endfor %}
+                            {% for subRace in subRaces %}
+                                {{ dump(subRace) }}
+                                <option value="{{ subRace }}" {% if person.subRace == subRace %}selected{% endif %}>
+                                    {{ subRace }}
+                                </option>
                             {% endfor %}
                         </select>
                     </label>

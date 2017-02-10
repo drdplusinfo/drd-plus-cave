@@ -8,12 +8,17 @@ use Drd\DiceRoll\Templates\Rolls\Roll1d6;
 use DrdPlus\Background\Background;
 use DrdPlus\Background\BackgroundParts\Ancestry;
 use DrdPlus\Background\BackgroundParts\SkillsFromBackground;
+use DrdPlus\Codes\Armaments\BodyArmorCode;
+use DrdPlus\Codes\Armaments\HelmCode;
+use DrdPlus\Codes\Armaments\MeleeWeaponCode;
 use DrdPlus\Codes\GenderCode;
 use DrdPlus\Codes\History\ChoiceCode;
 use DrdPlus\Codes\History\FateCode;
 use DrdPlus\Codes\ProfessionCode;
 use DrdPlus\Codes\RaceCode;
 use DrdPlus\Codes\SubRaceCode;
+use DrdPlus\Equipment\Belongings;
+use DrdPlus\Equipment\Equipment;
 use DrdPlus\Person\Attributes\Name;
 use DrdPlus\GamingSession\Memories;
 use DrdPlus\Person\Person;
@@ -252,6 +257,7 @@ class PersonController extends Controller
      */
     private function createZeroProfessionLevel()
     {
+        /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
         return ProfessionZeroLevel::createZeroLevel(Commoner::getIt());
     }
 
@@ -270,13 +276,14 @@ class PersonController extends Controller
      */
     private function findSelectedProfession(Request $request)
     {
-        return Profession::getItByCode($this->getSelectedPersonValue($request, 'profession'));
+        /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
+        return Profession::getItByCode(ProfessionCode::getIt($this->getSelectedPersonValue($request, 'profession')));
     }
 
     /**
      * @param Request $request
      * @param string $key
-     * @return mixed
+     * @return string
      */
     private function getSelectedPersonValue(Request $request, $key)
     {
@@ -411,11 +418,12 @@ class PersonController extends Controller
      */
     private function createPersonFromRequest(Request $request)
     {
+        /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
         return new Person(
+            $this->findSelectedName($request),
             $this->findSelectedRace($request),
             $this->findSelectedGender($request),
-            $this->findSelectedName($request),
-            $this->findSelectedExceptionalityProperties($request),
+            $this->findSelectedPropertiesByFate($request),
             $this->findSelectedMemories(),
             $professionLevels = $this->createProfessionLevels($request),
             $this->createBackground($this->findSelectedFateCode($request)),
@@ -423,6 +431,13 @@ class PersonController extends Controller
             $this->findSelectedWeightInKgAdjustment($request),
             $this->findSelectedHeightInCm($request),
             $this->findSelectedAge($request),
+            new Equipment(
+                new Belongings(),
+                BodyArmorCode::getIt(BodyArmorCode::WITHOUT_ARMOR),
+                HelmCode::getIt(HelmCode::WITHOUT_HELM),
+                MeleeWeaponCode::getIt(MeleeWeaponCode::HAND),
+                MeleeWeaponCode::getIt(MeleeWeaponCode::HAND)
+            ),
             $this->getTables()
         );
     }
@@ -434,8 +449,8 @@ class PersonController extends Controller
     private function findSelectedRace(Request $request)
     {
         return $this->getRacesFactory()->getSubRaceByCodes(
-            $this->getSelectedPersonValue($request, 'race'),
-            $this->getSelectedPersonValue($request, 'subRace')
+            RaceCode::getIt($this->getSelectedPersonValue($request, 'race')),
+            SubRaceCode::getIt($this->getSelectedPersonValue($request, 'subRace'))
         );
     }
 
@@ -470,7 +485,7 @@ class PersonController extends Controller
      * @return ChosenProperties|FortuneProperties
      * @throws \RuntimeException
      */
-    private function findSelectedExceptionalityProperties(Request $request)
+    private function findSelectedPropertiesByFate(Request $request)
     {
         $fateCode = $this->findSelectedFateCode($request);
         $choice = $this->findSelectedChoiceCode($request);
