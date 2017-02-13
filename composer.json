@@ -23,7 +23,7 @@
     "symfony/monolog-bundle": "~2.4",
     "sensio/framework-extra-bundle": "~3.0",
     "incenteev/composer-parameter-handler": "~2.0",
-    "drd/dice-roll": "dev-master",
+    "drd/dice-rolls": "dev-master",
     "drd-plus/tables": "dev-master",
     "drd-plus/person": "dev-master",
     "symfony/debug": "^3.2"
